@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using ActivEarth.DAO;
 
 namespace ActivEarth
 {
@@ -11,6 +12,8 @@ namespace ActivEarth
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            var users = TestDAO.GetUserNames();
+            lblMainUserName.Text = users.Rows[1]["user_name"].ToString();
 
         }
     }
