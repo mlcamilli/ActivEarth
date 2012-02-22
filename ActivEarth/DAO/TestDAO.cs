@@ -19,7 +19,7 @@ namespace ActivEarth.DAO
 
         public static DataTable GetUserDetails(string username, string password)
         {
-            var sql = "select * from dbo.users where user_name = '" + username + "' and password = '" + password +
+            var sql = "select * from profile p inner join users u on p.user_id = u.id where user_name = '" + username + "' and password = '" + password +
             "'";
             return GetDataTableFromSql(sql);
         }
