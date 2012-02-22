@@ -16,8 +16,8 @@ namespace ActivEarth.Account
         }
         protected void LoginUser(object sender, EventArgs e)
         {
-            var userDetails = TestDAO.GetUserDetails(tbUserName.Text, tbPassword.Text);
-            if (userDetails.Rows.Count == 0)
+            var userDetails = TestDAO.GetUserFromUserNameAndPassword(tbUserName.Text, tbPassword.Text);
+            if (userDetails == null)
             {
                 Session["userDetails"] = null;
                 lblError.Text = "Invalid Username / Password combination. Please try again.";

@@ -1,0 +1,5 @@
+C:\Users\John\dev\ActivEarth\ActivEarth.Objects\bin\ActivEarth.Objects.dll
+C:\Users\John\dev\ActivEarth\ActivEarth.Objects\bin\ActivEarth.Objects.pdb
+C:\Users\John\dev\ActivEarth\ActivEarth.Objects\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\John\dev\ActivEarth\ActivEarth.Objects\obj\Debug\ActivEarth.Objects.dll
+C:\Users\John\dev\ActivEarth\ActivEarth.Objects\obj\Debug\ActivEarth.Objects.pdb

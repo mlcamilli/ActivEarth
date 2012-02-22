@@ -1,51 +1,44 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Data.SqlClient;
+﻿using System.Data.SqlClient;
 using System.Linq;
-using System.Web;
+using ActivEarth.Objects;
+using ActivEarth.Server.Service;
 
 namespace ActivEarth.DAO
 {
     public class TestDAO
     {
-
-        public static DataTable GetUserNames()
+        public static UserDataProvider GetUserFromUserName(string userName)
         {
-            const string sql = "select * from dbo.users";
-            return GetDataTableFromSql(sql);
-        }
-
-        public static DataTable GetUserDetails(string username, string password)
-        {
-            var sql = "select * from profile p inner join users u on p.user_id = u.id where user_name = '" + username + "' and password = '" + password +
-            "'";
-            return GetDataTableFromSql(sql);
-        }
-
-        private static DataTable GetDataTableFromSql(string sql)
-        {
-            DataTable dt = new DataTable();
-            try
+            using (SqlConnection connection = ConnectionManager.GetConnection())
             {
-                using (
-                    SqlConnection conn =
-                        new SqlConnection(ConfigurationManager.ConnectionStrings["DevDB"].ToString()))
-                {
-                    conn.Open();
-                    using (SqlDataAdapter da = new SqlDataAdapter(sql, conn))
-                    {
-                        da.Fill(dt);
-                    }
-                }
-                return dt;
+                var data = new ActivEarthDataProvidersDataContext(connection);
+                return data.UserDataProviders.FirstOrDefault(u => u.user_name == userName);
             }
-            catch
+        }
+
+        public static User GetUserFromUserNameAndPassword(string userName, string password)
+        {
+            using (SqlConnection connection = ConnectionManager.GetConnection())
             {
-                throw;
+                var data = new ActivEarthDataProvidersDataContext(connection);
+                return
+                    (from u in data.UserDataProviders
+                     join p in data.ProfileDataProviders on u.id equals p.user_id
+                     where u.user_name == userName && u.password == password
+                     select
+                         new User
+                             {
+                                 UserName = u.user_name,
+                                 UserID = u.id,
+                                 Email = p.email,
+                                 FirstName = p.first_name,
+                                 LastName = p.last_name,
+                                 City = p.city,
+                                 State = p.state,
+                                 Gender = p.gender,
+                                 ProfileID = p.id
+                             }).FirstOrDefault();
             }
         }
     }
-
 }

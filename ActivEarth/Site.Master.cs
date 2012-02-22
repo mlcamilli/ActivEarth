@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using ActivEarth.Objects;
 
 namespace ActivEarth
 {
@@ -18,11 +19,11 @@ namespace ActivEarth
                 lblUserLoggedIn.Visible = false;
             }else
             {
-                var userDetails = (DataTable) Session["userDetails"];
+                var userDetails = (User) Session["userDetails"];
                 hlLogin.Visible = false;
                 lbLogOut.Visible = true;
                 lblUserLoggedIn.Visible = true;
-                lblUserLoggedIn.Text = "Logged in as " + userDetails.Rows[0]["user_name"];
+                lblUserLoggedIn.Text = "Logged in as " + userDetails.UserName;
             }
 
         }

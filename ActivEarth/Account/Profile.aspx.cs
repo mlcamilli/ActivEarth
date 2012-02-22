@@ -5,6 +5,8 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using ActivEarth.Objects;
+using ActivEarth.Server.Service;
 
 namespace ActivEarth.Account
 {
@@ -17,13 +19,12 @@ namespace ActivEarth.Account
                 Response.Redirect("Login.aspx");
             }else
             {
-                var userDetails = (DataTable) Session["userDetails"];
-                lblUserName.Text = userDetails.Rows[0]["user_name"].ToString();
-                lblFirstName.Text = userDetails.Rows[0]["first_name"].ToString();
-                lblLastName.Text = userDetails.Rows[0]["last_name"].ToString();
-                lblGender.Text = (userDetails.Rows[0]["gender"].ToString() == "M") ? "Male" : "Female";
-                lblCityState.Text = userDetails.Rows[0]["city"].ToString() + ", " + userDetails.Rows[0]["state"].ToString();
-
+                var userDetails = (User) Session["userDetails"];
+                lblUserName.Text = userDetails.UserName;
+                lblFirstName.Text = userDetails.FirstName;
+                lblLastName.Text = userDetails.LastName;
+                lblGender.Text = (userDetails.Gender == 'M') ? "Male" : "Female";
+                lblCityState.Text = userDetails.City + ", " + userDetails.State;
             }
 
         }
