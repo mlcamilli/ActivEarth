@@ -19,7 +19,7 @@ namespace ActivEarth.Account
             var userDetails = TestDAO.GetUserDetails(tbUserName.Text, tbPassword.Text);
             if (userDetails.Rows.Count == 0)
             {
-                Session["userdetails"] = null;
+                Session["userDetails"] = null;
                 lblError.Text = "Invalid Username / Password combination. Please try again.";
                 tbPassword.Text = "";
             }else

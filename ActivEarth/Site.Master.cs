@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -11,7 +12,25 @@ namespace ActivEarth
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["userDetails"] == null)
+            {
+                lbLogOut.Visible = false;
+                lblUserLoggedIn.Visible = false;
+            }else
+            {
+                var userDetails = (DataTable) Session["userDetails"];
+                hlLogin.Visible = false;
+                lbLogOut.Visible = true;
+                lblUserLoggedIn.Visible = true;
+                lblUserLoggedIn.Text = "Logged in as " + userDetails.Rows[0]["user_name"];
+            }
 
+        }
+        
+        protected void UserLogOut(object sender, EventArgs e)
+        {
+            Session["userDetails"] = null;
+            Response.Redirect("~/Default.aspx");
         }
     }
 }

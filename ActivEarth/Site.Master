@@ -18,21 +18,16 @@
                 </h1>
             </div>
             <div class="loginDisplay">
-                <asp:LoginView ID="HeadLoginView" runat="server" EnableViewState="false">
-                    <AnonymousTemplate>
-                        [ <a href="~/Account/Login.aspx" ID="HeadLoginStatus" runat="server">Log In</a> ]
-                    </AnonymousTemplate>
-                    <LoggedInTemplate>
-                        Welcome <span class="bold"><asp:LoginName ID="HeadLoginName" runat="server" /></span>!
-                        [ <asp:LoginStatus ID="HeadLoginStatus" runat="server" LogoutAction="Redirect" LogoutText="Log Out" LogoutPageUrl="~/"/> ]
-                    </LoggedInTemplate>
-                </asp:LoginView>
+                        <asp:Label runat="server" ID="lblUserLoggedIn"></asp:Label>
+                        <asp:HyperLink runat="server" ID="hlLogin" NavigateUrl="/Account/Login.aspx" Text="Log In"></asp:HyperLink>
+                        <asp:LinkButton runat="server" ID="lbLogOut" OnClick="UserLogOut" Text="Log Out" ></asp:LinkButton>                              
             </div>
             <div class="clear hideSkiplink">
                 <asp:Menu ID="NavigationMenu" runat="server" CssClass="menu" EnableViewState="false" IncludeStyleBlock="false" Orientation="Horizontal">
                     <Items>
                         <asp:MenuItem NavigateUrl="~/Default.aspx" Text="Home"/>
-                        <asp:MenuItem NavigateUrl="~/About.aspx" Text="About"/>
+                        <asp:MenuItem NavigateUrl="/Account/Profile.aspx" Text="Profile"/>
+                        <asp:MenuItem NavigateUrl="About.aspx" Text="About"></asp:MenuItem>
                     </Items>
                 </asp:Menu>
             </div>
