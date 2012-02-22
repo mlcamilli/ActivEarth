@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using ActivEarth.DAO;
 
 namespace ActivEarth.Account
 {
@@ -11,7 +12,21 @@ namespace ActivEarth.Account
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            RegisterHyperLink.NavigateUrl = "Register.aspx?ReturnUrl=" + HttpUtility.UrlEncode(Request.QueryString["ReturnUrl"]);
+         
+        }
+        protected void LoginUser(object sender, EventArgs e)
+        {
+            var userDetails = TestDAO.GetUserDetails(tbUserName.Text, tbPassword.Text);
+            if (userDetails.Rows.Count == 0)
+            {
+                Session["userdetails"] = null;
+                lblError.Text = "Invalid Username / Password combination. Please try again.";
+                tbPassword.Text = "";
+            }else
+            {
+                Session["userDetails"] = userDetails;
+                Response.Redirect("../Default.aspx");
+            }
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -12,8 +13,17 @@ namespace ActivEarth
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            var users = TestDAO.GetUserNames();
-            lblMainUserName.Text = users.Rows[1]["user_name"].ToString();
+            
+            if(Session["userdetails"] == null)
+            {
+                lblMainUserName.Text = "Please Login";
+            }else
+            {
+                var userDetails = (DataTable)Session["userdetails"];
+                lblMainUserName.Text = userDetails.Rows[0]["first_name"].ToString() + " " +
+                                       userDetails.Rows[0]["last_name"];
+            }
+            
 
         }
     }

@@ -13,12 +13,18 @@ namespace ActivEarth.DAO
 
         public static DataTable GetUserNames()
         {
-            var sql = "select * from dbo.users";
+            const string sql = "select * from dbo.users";
             return GetDataTableFromSql(sql);
-
         }
 
-        public static DataTable GetDataTableFromSql(string sql)
+        public static DataTable GetUserDetails(string username, string password)
+        {
+            var sql = "select * from dbo.users where user_name = '" + username + "' and password = '" + password +
+            "'";
+            return GetDataTableFromSql(sql);
+        }
+
+        private static DataTable GetDataTableFromSql(string sql)
         {
             DataTable dt = new DataTable();
             try
