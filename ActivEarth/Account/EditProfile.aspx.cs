@@ -13,22 +13,24 @@ namespace ActivEarth.Account
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["userDetails"] == null)
+            if (!Page.IsPostBack)
             {
-                Response.Redirect("Login.aspx");
+                if (Session["userDetails"] == null)
+                {
+                    Response.Redirect("Login.aspx");
+                }
+                else
+                {
+                    var userDetails = (User) Session["userDetails"];
+                    lblUserName.Text = userDetails.UserName;
+                    tbFirstName.Text = userDetails.FirstName;
+                    tbLastName.Text = userDetails.LastName;
+                    tbEmail.Text = userDetails.Email;
+                    ddlGender.SelectedValue = userDetails.Gender + "";
+                    tbCity.Text = userDetails.City;
+                    tbState.Text = userDetails.State;
+                }
             }
-            else
-            {
-                var userDetails = (User)Session["userDetails"];
-                lblUserName.Text = userDetails.UserName;
-                tbFirstName.Text = userDetails.FirstName;
-                tbLastName.Text = userDetails.LastName;
-                tbEmail.Text = userDetails.Email;
-                ddlGender.SelectedValue = userDetails.Gender + "";
-                tbCity.Text = userDetails.City;
-                tbState.Text = userDetails.State;
-            }
-
         }
         protected void SaveUserProfile(object sender, EventArgs e)
         {
