@@ -16,7 +16,7 @@ namespace ActivEarth.Account
         }
         protected void LoginUser(object sender, EventArgs e)
         {
-            var userDetails = TestDAO.GetUserFromUserNameAndPassword(tbUserName.Text, tbPassword.Text);
+            var userDetails = UserDAO.GetUserFromUserNameAndPassword(tbUserName.Text, tbPassword.Text);
             if (userDetails == null)
             {
                 Session["userDetails"] = null;

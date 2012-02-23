@@ -12,21 +12,14 @@
     <File id="6C3C36E5-CEA9-4C12-B257-2A67B8815DD6/d:Account/f:Login.aspx.cs" caret="487" fromTop="18" />
     <File id="6C3C36E5-CEA9-4C12-B257-2A67B8815DD6/f:Default.aspx" caret="0" fromTop="0" />
     <File id="6C3C36E5-CEA9-4C12-B257-2A67B8815DD6/f:Site.Master" caret="1776" fromTop="19" />
-    <File id="6C3C36E5-CEA9-4C12-B257-2A67B8815DD6/f:Web.config" caret="383" fromTop="11" />
     <File id="6C3C36E5-CEA9-4C12-B257-2A67B8815DD6/d:Account/f:Login.aspx" caret="461" fromTop="12" />
+    <File id="6C3C36E5-CEA9-4C12-B257-2A67B8815DD6/f:Web.config" caret="1403" fromTop="36" />
+    <File id="6C3C36E5-CEA9-4C12-B257-2A67B8815DD6/d:Fitness/f:BMI.aspx" caret="949" fromTop="18" />
+    <File id="6C3C36E5-CEA9-4C12-B257-2A67B8815DD6/d:Fitness/f:BMI.aspx.cs" caret="336" fromTop="13" />
+    <File id="AA6B79F0-72D0-404C-BA16-9573F1710470/f:BMICalculator.cs" caret="239" fromTop="10" />
+    <File id="C555210A-ACD9-4CA6-9355-DCCFA9DF6B31/f:BMICalculatorTest.cs" caret="438" fromTop="17" />
   </RecentFiles>
   <RecentEdits>
-    <File id="6C3C36E5-CEA9-4C12-B257-2A67B8815DD6/d:Account/f:Login.aspx.designer.cs" caret="3832" fromTop="24" />
-    <File id="6C3C36E5-CEA9-4C12-B257-2A67B8815DD6/d:Account/f:Login.aspx.cs" caret="334" fromTop="13" />
-    <File id="6C3C36E5-CEA9-4C12-B257-2A67B8815DD6/d:Account/f:Login.aspx" caret="621" fromTop="20" />
-    <File id="6C3C36E5-CEA9-4C12-B257-2A67B8815DD6/d:Account/f:Login.aspx.cs" caret="201" fromTop="8" />
-    <File id="6C3C36E5-CEA9-4C12-B257-2A67B8815DD6/d:Account/f:Login.aspx" caret="1997" fromTop="32" />
-    <File id="6C3C36E5-CEA9-4C12-B257-2A67B8815DD6/d:Account/f:Login.aspx" caret="2468" fromTop="40" />
-    <File id="6C3C36E5-CEA9-4C12-B257-2A67B8815DD6/d:Account/f:Login.aspx" caret="2584" fromTop="25" />
-    <File id="6C3C36E5-CEA9-4C12-B257-2A67B8815DD6/d:Account/f:Login.aspx" caret="521" fromTop="14" />
-    <File id="6C3C36E5-CEA9-4C12-B257-2A67B8815DD6/d:Account/f:Login.aspx.cs" caret="877" fromTop="26" />
-    <File id="6C3C36E5-CEA9-4C12-B257-2A67B8815DD6/d:DAO/f:TestDAO.cs" caret="751" fromTop="26" />
-    <File id="6C3C36E5-CEA9-4C12-B257-2A67B8815DD6/d:Account/f:Login.aspx" caret="848" fromTop="13" />
     <File id="6C3C36E5-CEA9-4C12-B257-2A67B8815DD6/d:Account/f:Login.aspx" caret="1488" fromTop="20" />
     <File id="6C3C36E5-CEA9-4C12-B257-2A67B8815DD6/d:DAO/f:TestDAO.cs" caret="609" fromTop="15" />
     <File id="6C3C36E5-CEA9-4C12-B257-2A67B8815DD6/f:Site.Master" caret="1134" fromTop="29" />
@@ -46,5 +39,16 @@
     <File id="6C3C36E5-CEA9-4C12-B257-2A67B8815DD6/f:Site.Master.cs" caret="1012" fromTop="32" />
     <File id="6C3C36E5-CEA9-4C12-B257-2A67B8815DD6/f:Site.Master" caret="1613" fromTop="14" />
     <File id="6C3C36E5-CEA9-4C12-B257-2A67B8815DD6/f:Site.Master" caret="928" fromTop="6" />
+    <File id="AA6B79F0-72D0-404C-BA16-9573F1710470/f:BMICalculator.cs" caret="436" fromTop="17" />
+    <File id="AA6B79F0-72D0-404C-BA16-9573F1710470/f:BMICalculator.cs" caret="666" fromTop="27" />
+    <File id="6C3C36E5-CEA9-4C12-B257-2A67B8815DD6/d:Fitness/f:BMI.aspx.cs" caret="998" fromTop="19" />
+    <File id="6C3C36E5-CEA9-4C12-B257-2A67B8815DD6/d:Fitness/f:BMI.aspx" caret="575" fromTop="9" />
+    <File id="6C3C36E5-CEA9-4C12-B257-2A67B8815DD6/f:Web.config" caret="275" fromTop="10" />
+    <File id="AA6B79F0-72D0-404C-BA16-9573F1710470/f:BMICalculator.cs" caret="571" fromTop="24" />
+    <File id="AA6B79F0-72D0-404C-BA16-9573F1710470/f:BMICalculator.cs" caret="480" fromTop="20" />
+    <File id="AA6B79F0-72D0-404C-BA16-9573F1710470/f:BMICalculator.cs" caret="239" fromTop="10" />
+    <File id="C555210A-ACD9-4CA6-9355-DCCFA9DF6B31/f:BMICalculatorTest.cs" caret="250" fromTop="9" />
+    <File id="C555210A-ACD9-4CA6-9355-DCCFA9DF6B31/f:BMICalculatorTest.cs" caret="364" fromTop="15" />
+    <File id="C555210A-ACD9-4CA6-9355-DCCFA9DF6B31/f:BMICalculatorTest.cs" caret="743" fromTop="23" />
   </RecentEdits>
 </RecentFiles>
