@@ -8,8 +8,3 @@ D:\Dev\ActivEarth\ActivEarth.Objects\bin\ActivEarth.Objects.pdb
 D:\Dev\ActivEarth\ActivEarth.Objects\obj\Debug\ResolveAssemblyReference.cache
 D:\Dev\ActivEarth\ActivEarth.Objects\obj\Debug\ActivEarth.Objects.dll
 D:\Dev\ActivEarth\ActivEarth.Objects\obj\Debug\ActivEarth.Objects.pdb
-C:\Users\matt.camilli\dev\ActivEarth\ActivEarth.Objects\bin\ActivEarth.Objects.dll
-C:\Users\matt.camilli\dev\ActivEarth\ActivEarth.Objects\bin\ActivEarth.Objects.pdb
-C:\Users\matt.camilli\dev\ActivEarth\ActivEarth.Objects\obj\Debug\ResolveAssemblyReference.cache
-C:\Users\matt.camilli\dev\ActivEarth\ActivEarth.Objects\obj\Debug\ActivEarth.Objects.dll
-C:\Users\matt.camilli\dev\ActivEarth\ActivEarth.Objects\obj\Debug\ActivEarth.Objects.pdb

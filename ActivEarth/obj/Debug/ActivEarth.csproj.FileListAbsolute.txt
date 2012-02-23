@@ -1,8 +1,3 @@
-C:\Users\matt.camilli\dev\ActivEarth\ActivEarth\bin\ActivEarth.dll
-C:\Users\matt.camilli\dev\ActivEarth\ActivEarth\bin\ActivEarth.pdb
-C:\Users\matt.camilli\dev\ActivEarth\ActivEarth\obj\Debug\ResolveAssemblyReference.cache
-C:\Users\matt.camilli\dev\ActivEarth\ActivEarth\obj\Debug\ActivEarth.dll
-C:\Users\matt.camilli\dev\ActivEarth\ActivEarth\obj\Debug\ActivEarth.pdb
 D:\Dev\ActivEarth\ActivEarth\bin\ActivEarth.dll
 D:\Dev\ActivEarth\ActivEarth\bin\ActivEarth.pdb
 D:\Dev\ActivEarth\ActivEarth\obj\Debug\ResolveAssemblyReference.cache
@@ -21,7 +16,3 @@ D:\Dev\ActivEarth\ActivEarth\bin\ActivEarth.Objects.dll
 D:\Dev\ActivEarth\ActivEarth\bin\ActivEarth.Server.Service.dll
 D:\Dev\ActivEarth\ActivEarth\bin\ActivEarth.Objects.pdb
 D:\Dev\ActivEarth\ActivEarth\bin\ActivEarth.Server.Service.pdb
-C:\Users\matt.camilli\dev\ActivEarth\ActivEarth\bin\ActivEarth.Objects.dll
-C:\Users\matt.camilli\dev\ActivEarth\ActivEarth\bin\ActivEarth.Server.Service.dll
-C:\Users\matt.camilli\dev\ActivEarth\ActivEarth\bin\ActivEarth.Objects.pdb
-C:\Users\matt.camilli\dev\ActivEarth\ActivEarth\bin\ActivEarth.Server.Service.pdb
