@@ -3,3 +3,8 @@ C:\Users\John\dev\ActivEarth\ActivEarth.Server.Service\bin\ActivEarth.Server.Ser
 C:\Users\John\dev\ActivEarth\ActivEarth.Server.Service\obj\Debug\ResolveAssemblyReference.cache
 C:\Users\John\dev\ActivEarth\ActivEarth.Server.Service\obj\Debug\ActivEarth.Server.Service.dll
 C:\Users\John\dev\ActivEarth\ActivEarth.Server.Service\obj\Debug\ActivEarth.Server.Service.pdb
+D:\Dev\ActivEarth\ActivEarth.Server.Service\bin\ActivEarth.Server.Service.dll
+D:\Dev\ActivEarth\ActivEarth.Server.Service\bin\ActivEarth.Server.Service.pdb
+D:\Dev\ActivEarth\ActivEarth.Server.Service\obj\Debug\ResolveAssemblyReference.cache
+D:\Dev\ActivEarth\ActivEarth.Server.Service\obj\Debug\ActivEarth.Server.Service.dll
+D:\Dev\ActivEarth\ActivEarth.Server.Service\obj\Debug\ActivEarth.Server.Service.pdb

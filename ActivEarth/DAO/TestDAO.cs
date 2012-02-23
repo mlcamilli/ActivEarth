@@ -1,4 +1,5 @@
-﻿using System.Data.SqlClient;
+﻿using System;
+using System.Data.SqlClient;
 using System.Linq;
 using ActivEarth.Objects;
 using ActivEarth.Server.Service;
@@ -13,6 +14,29 @@ namespace ActivEarth.DAO
             {
                 var data = new ActivEarthDataProvidersDataContext(connection);
                 return data.UserDataProviders.FirstOrDefault(u => u.user_name == userName);
+            }
+        }
+        public static User GetUserFromUserId(int userId)
+        {
+            using (SqlConnection connection = ConnectionManager.GetConnection())
+            {
+                var data = new ActivEarthDataProvidersDataContext(connection);
+                return (from u in data.UserDataProviders
+                        join p in data.ProfileDataProviders on u.id equals p.user_id
+                        where u.id == userId
+                        select
+                            new User
+                            {
+                                UserName = u.user_name,
+                                UserID = u.id,
+                                Email = p.email,
+                                FirstName = p.first_name,
+                                LastName = p.last_name,
+                                City = p.city,
+                                State = p.state,
+                                Gender = p.gender,
+                                ProfileID = p.id
+                            }).FirstOrDefault();
             }
         }
 
@@ -38,6 +62,39 @@ namespace ActivEarth.DAO
                                  Gender = p.gender,
                                  ProfileID = p.id
                              }).FirstOrDefault();
+            }
+        }
+
+        public static bool UpdateUserProfile(User user)
+        {
+            try
+            {
+
+                using (SqlConnection connection = ConnectionManager.GetConnection())
+                {
+                    var data = new ActivEarthDataProvidersDataContext(connection);
+                    ProfileDataProvider profile =
+                        (from p in data.ProfileDataProviders where p.user_id == user.UserID select p).FirstOrDefault();
+                    if (profile != null)
+                    {
+                        profile.first_name = user.FirstName;
+                        profile.last_name = user.LastName;
+                        profile.gender = user.Gender;
+                        profile.city = user.City;
+                        profile.state = user.State;
+                        profile.email = user.Email;
+                        data.SubmitChanges();
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                return false;
             }
         }
     }
