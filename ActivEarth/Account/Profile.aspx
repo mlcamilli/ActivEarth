@@ -13,5 +13,6 @@
         <b>City, State:</b> <asp:Label runat="server" ID="lblCityState"></asp:Label><br/>
     </p>
     <br/><br/>
-    <asp:HyperLink runat="server" Text="Edit Profile" NavigateUrl="~/Account/EditProfile.aspx"></asp:HyperLink>
+    <asp:HyperLink runat="server" Text="Edit Profile" NavigateUrl="~/Account/EditProfile.aspx"></asp:HyperLink><br/>
+    <asp:HyperLink runat="server" Text="Change Password" NavigateUrl="~/Account/ChangePassword.aspx"></asp:HyperLink>
 </asp:Content>

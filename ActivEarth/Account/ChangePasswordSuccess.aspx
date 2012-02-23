@@ -10,4 +10,6 @@
     <p>
         Your password has been changed successfully.
     </p>
+    
+    <asp:HyperLink runat="server" Text="Return to Profile" NavigateUrl="~/Account/Profile.aspx"></asp:HyperLink>
 </asp:Content>

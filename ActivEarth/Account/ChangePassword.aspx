@@ -11,11 +11,8 @@
         Use the form below to change your password.
     </p>
     <p>
-        New passwords are required to be a minimum of <%= Membership.MinRequiredPasswordLength %> characters in length.
+        New passwords are required to be a minimum of 6 and maximum of 20 characters in length.
     </p>
-    <asp:ChangePassword ID="ChangeUserPassword" runat="server" CancelDestinationPageUrl="~/" EnableViewState="false" RenderOuterTable="false" 
-         SuccessPageUrl="ChangePasswordSuccess.aspx">
-        <ChangePasswordTemplate>
             <span class="failureNotification">
                 <asp:Literal ID="FailureText" runat="server"></asp:Literal>
             </span>
@@ -50,11 +47,9 @@
                     </p>
                 </fieldset>
                 <p class="submitButton">
-                    <asp:Button ID="CancelPushButton" runat="server" CausesValidation="False" CommandName="Cancel" Text="Cancel"/>
-                    <asp:Button ID="ChangePasswordPushButton" runat="server" CommandName="ChangePassword" Text="Change Password" 
+                    <asp:Button ID="CancelPushButton" runat="server" CausesValidation="False" CommandName="Cancel" Text="Cancel" OnClick="BtnCancelClick"/>
+                    <asp:Button ID="ChangePasswordPushButton" runat="server" CommandName="ChangePassword" Text="Change Password" OnClick="BtnSubmitClick"
                          ValidationGroup="ChangeUserPasswordValidationGroup"/>
                 </p>
             </div>
-        </ChangePasswordTemplate>
-    </asp:ChangePassword>
 </asp:Content>

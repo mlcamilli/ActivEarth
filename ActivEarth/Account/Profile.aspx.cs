@@ -17,7 +17,8 @@ namespace ActivEarth.Account
             if (Session["userDetails"] == null)
             {
                 Response.Redirect("Login.aspx");
-            }else
+            }
+            else
             {
                 var userDetails = (User) Session["userDetails"];
                 lblUserName.Text = userDetails.UserName;

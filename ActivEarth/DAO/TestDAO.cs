@@ -69,7 +69,6 @@ namespace ActivEarth.DAO
         {
             try
             {
-
                 using (SqlConnection connection = ConnectionManager.GetConnection())
                 {
                     var data = new ActivEarthDataProvidersDataContext(connection);
@@ -90,6 +89,50 @@ namespace ActivEarth.DAO
                     {
                         return false;
                     }
+                }
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
+
+        public static bool ConfirmPassword(string password, int userId)
+        {
+            try
+            {
+                using (SqlConnection connection = ConnectionManager.GetConnection())
+                {
+                    var data = new ActivEarthDataProvidersDataContext(connection);
+                    string oldPassword = (from u in data.UserDataProviders
+                                          where u.id == userId
+                                          select u.password).FirstOrDefault();
+                    return oldPassword != null && oldPassword == password;
+                }
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
+
+        public static bool UpdatePassword(string password, int userId)
+        {
+            try
+            {
+                using (SqlConnection connection = ConnectionManager.GetConnection())
+                {
+                    var data = new ActivEarthDataProvidersDataContext(connection);
+                    var user = (from u in data.UserDataProviders
+                                where u.id == userId
+                                select u).FirstOrDefault();
+                    if (user != null)
+                    {
+                        user.password = password;
+                        data.SubmitChanges();
+                        return true;
+                    }
+                    return false;
                 }
             }
             catch (Exception e)
