@@ -11,6 +11,9 @@
         <b>Email:</b> <asp:Label runat="server" ID="lblEmail"></asp:Label><br/>
         <b>Gender:</b> <asp:Label runat="server" ID="lblGender"></asp:Label><br/>
         <b>City, State:</b> <asp:Label runat="server" ID="lblCityState"></asp:Label><br/>
+        <b>Age:</b> <asp:Label runat="server" ID="lblAge"></asp:Label><br/>
+        <b>Height</b> <asp:Label runat="server" ID="lblHeight"></asp:Label> inches<br/>
+        <b>Weight</b> <asp:Label runat="server" ID="lblWeight"></asp:Label> lbs<br/>
     </p>
     <br/><br/>
     <asp:HyperLink runat="server" Text="Edit Profile" NavigateUrl="~/Account/EditProfile.aspx"></asp:HyperLink><br/>

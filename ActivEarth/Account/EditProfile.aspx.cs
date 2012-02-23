@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -29,6 +30,10 @@ namespace ActivEarth.Account
                     ddlGender.SelectedValue = userDetails.Gender + "";
                     tbCity.Text = userDetails.City;
                     tbState.Text = userDetails.State;
+                    tbAge.Text = userDetails.Age.ToString();
+                    tbHeight.Text = userDetails.Height.ToString();
+                    tbWeight.Text = userDetails.Weight.ToString();
+
                 }
             }
         }
@@ -42,7 +47,11 @@ namespace ActivEarth.Account
                                Gender = Char.Parse(ddlGender.SelectedValue),
                                Email =  tbEmail.Text,
                                City =  tbCity.Text,
-                               State = tbState.Text
+                               State = tbState.Text,
+                               Age = int.Parse(tbAge.Text),
+                               Height = int.Parse(tbHeight.Text),
+                               Weight = int.Parse(tbWeight.Text)
+
                            };
             if (TestDAO.UpdateUserProfile(user))
             {

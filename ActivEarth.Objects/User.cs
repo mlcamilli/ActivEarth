@@ -16,5 +16,8 @@ namespace ActivEarth.Objects
         public Char Gender { get; set; }
         public String City { get; set; }
         public String State { get; set; }
+        public int? Age { get; set; }
+        public int? Weight { get; set; }
+        public int? Height { get; set; }
     }
 }

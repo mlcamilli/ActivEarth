@@ -35,7 +35,11 @@ namespace ActivEarth.DAO
                                 City = p.city,
                                 State = p.state,
                                 Gender = p.gender,
-                                ProfileID = p.id
+                                ProfileID = p.id,
+                                Age = p.age,
+                                Weight = p.weight,
+                                Height = p.height
+                                
                             }).FirstOrDefault();
             }
         }
@@ -60,7 +64,10 @@ namespace ActivEarth.DAO
                                  City = p.city,
                                  State = p.state,
                                  Gender = p.gender,
-                                 ProfileID = p.id
+                                 ProfileID = p.id,
+                                 Age = p.age,
+                                 Weight = p.weight,
+                                 Height = p.height
                              }).FirstOrDefault();
             }
         }
@@ -82,6 +89,10 @@ namespace ActivEarth.DAO
                         profile.city = user.City;
                         profile.state = user.State;
                         profile.email = user.Email;
+                        profile.age = user.Age;
+                        profile.height = user.Height;
+                        profile.weight = user.Weight;
+                        
                         data.SubmitChanges();
                         return true;
                     }

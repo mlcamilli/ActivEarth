@@ -2,23 +2,23 @@
 <ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="ActivEarthDataProviders">
   <DataContextMoniker Name="/ActivEarthDataProvidersDataContext" />
   <nestedChildShapes>
-    <classShape Id="c4d52061-5056-4069-b8f9-9cbda7885aa1" absoluteBounds="3.5, 1, 2, 2.3478011067708335">
+    <classShape Id="9bb1702d-ae42-4e39-b110-5325cd3e0737" absoluteBounds="3.5, 1, 2, 2.9247054036458326">
       <DataClassMoniker Name="/ActivEarthDataProvidersDataContext/ProfileDataProvider" />
       <nestedChildShapes>
-        <elementListCompartment Id="3545b974-fdb0-4bde-a13f-cd8d390a0a25" absoluteBounds="3.515, 1.46, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="6782f308-3001-417d-ada8-fb14091ed645" absoluteBounds="3.515, 1.46, 1.9700000000000002, 2.364705403645833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="90acbbbf-eb2c-4d77-94f1-3d708b5409bb" absoluteBounds="6.375, 1.5, 2, 1.3862939453125003">
+    <classShape Id="3e8324b9-399b-4069-bdc7-7aded2dfc2e7" absoluteBounds="0.75, 1.75, 2, 1.3862939453125003">
       <DataClassMoniker Name="/ActivEarthDataProvidersDataContext/UserDataProvider" />
       <nestedChildShapes>
-        <elementListCompartment Id="6588724f-b2f6-45b1-ac8a-a1f46aae7822" absoluteBounds="6.39, 1.96, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="78e6d7af-4e77-4492-8b53-07ca5cd3b534" absoluteBounds="0.765, 2.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(6.375 : 2.19314697265625); (5.5 : 2.19314697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(2.75 : 2.44314697265625); (3.5 : 2.44314697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/ActivEarthDataProvidersDataContext/UserDataProvider/user_profile" />
       <nodes>
-        <classShapeMoniker Id="90acbbbf-eb2c-4d77-94f1-3d708b5409bb" />
-        <classShapeMoniker Id="c4d52061-5056-4069-b8f9-9cbda7885aa1" />
+        <classShapeMoniker Id="3e8324b9-399b-4069-bdc7-7aded2dfc2e7" />
+        <classShapeMoniker Id="9bb1702d-ae42-4e39-b110-5325cd3e0737" />
       </nodes>
     </associationConnector>
   </nestedChildShapes>

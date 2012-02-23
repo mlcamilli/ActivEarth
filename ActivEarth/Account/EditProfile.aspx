@@ -14,6 +14,9 @@
                            <asp:ListItem Value="F">Female</asp:ListItem>
                        </asp:DropDownList><br/>
         <b>City, State:</b> <asp:TextBox runat="server" ID="tbCity"></asp:TextBox>, <asp:TextBox runat="server" id="tbState" MaxLength="2" width="30"></asp:TextBox><br/>
+        <b>Age:</b> <asp:TextBox runat="server" ID="tbAge"></asp:TextBox><br/>
+        <b>Height</b> <asp:TextBox runat="server" ID="tbHeight"></asp:TextBox><br/>
+        <b>Weight</b> <asp:TextBox runat="server" ID="tbWeight"></asp:TextBox><br/>
         <br /><br />
         <asp:Button runat="server" id="btnSaveChanges" onclick="SaveUserProfile" Text="Save Changes"/>
     </p>

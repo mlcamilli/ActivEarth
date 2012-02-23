@@ -27,6 +27,9 @@ namespace ActivEarth.Account
                 lblEmail.Text = userDetails.Email;
                 lblGender.Text = (userDetails.Gender == 'M') ? "Male" : "Female";
                 lblCityState.Text = userDetails.City + ", " + userDetails.State;
+                lblAge.Text = userDetails.Age.ToString();
+                lblHeight.Text = userDetails.Height.ToString();
+                lblWeight.Text = userDetails.Weight.ToString();
             }
 
         }
