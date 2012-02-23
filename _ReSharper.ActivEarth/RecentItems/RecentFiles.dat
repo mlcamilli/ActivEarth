@@ -22,7 +22,7 @@
     <File id="6C3C36E5-CEA9-4C12-B257-2A67B8815DD6/f:Web.config" caret="333" fromTop="10" />
     <File id="EA905182-E03B-4A7C-A4C4-84D77BFCEE28/d:DAO/f:UserDAO.cs" caret="4314" fromTop="0" />
     <File id="EA905182-E03B-4A7C-A4C4-84D77BFCEE28/f:ConnectionManager.cs" caret="165" fromTop="0" />
-    <File id="C555210A-ACD9-4CA6-9355-DCCFA9DF6B31/f:UserDAOTest.cs" caret="931" fromTop="13" />
+    <File id="C555210A-ACD9-4CA6-9355-DCCFA9DF6B31/f:UserDAOTest.cs" caret="749" fromTop="23" />
   </RecentFiles>
   <RecentEdits>
     <File id="AA6B79F0-72D0-404C-BA16-9573F1710470/f:BMICalculator.cs" caret="571" fromTop="24" />
@@ -41,19 +41,19 @@
     <File id="EA905182-E03B-4A7C-A4C4-84D77BFCEE28/d:DAO/f:UserDAO.cs" caret="3266" fromTop="17" />
     <File id="EA905182-E03B-4A7C-A4C4-84D77BFCEE28/d:DAO/f:UserDAO.cs" caret="3300" fromTop="20" />
     <File id="EA905182-E03B-4A7C-A4C4-84D77BFCEE28/d:DAO/f:UserDAO.cs" caret="3826" fromTop="31" />
-    <File id="C555210A-ACD9-4CA6-9355-DCCFA9DF6B31/f:UserDAOTest.cs" caret="874" fromTop="20" />
+    <File id="C555210A-ACD9-4CA6-9355-DCCFA9DF6B31/f:UserDAOTest.cs" caret="1749" fromTop="20" />
     <File id="EA905182-E03B-4A7C-A4C4-84D77BFCEE28/d:DAO/f:UserDAO.cs" caret="5713" fromTop="22" />
     <File id="EA905182-E03B-4A7C-A4C4-84D77BFCEE28/d:DAO/f:UserDAO.cs" caret="5696" fromTop="12" />
     <File id="EA905182-E03B-4A7C-A4C4-84D77BFCEE28/d:DAO/f:UserDAO.cs" caret="5297" fromTop="3" />
     <File id="6C3C36E5-CEA9-4C12-B257-2A67B8815DD6/f:Web.config" caret="333" fromTop="10" />
-    <File id="C555210A-ACD9-4CA6-9355-DCCFA9DF6B31/f:UserDAOTest.cs" caret="1072" fromTop="23" />
-    <File id="C555210A-ACD9-4CA6-9355-DCCFA9DF6B31/f:UserDAOTest.cs" caret="1538" fromTop="32" />
-    <File id="C555210A-ACD9-4CA6-9355-DCCFA9DF6B31/f:UserDAOTest.cs" caret="858" fromTop="12" />
-    <File id="C555210A-ACD9-4CA6-9355-DCCFA9DF6B31/f:UserDAOTest.cs" caret="733" fromTop="12" />
+    <File id="C555210A-ACD9-4CA6-9355-DCCFA9DF6B31/f:UserDAOTest.cs" caret="1749" fromTop="23" />
+    <File id="C555210A-ACD9-4CA6-9355-DCCFA9DF6B31/f:UserDAOTest.cs" caret="1749" fromTop="32" />
+    <File id="C555210A-ACD9-4CA6-9355-DCCFA9DF6B31/f:UserDAOTest.cs" caret="1749" fromTop="12" />
+    <File id="C555210A-ACD9-4CA6-9355-DCCFA9DF6B31/f:UserDAOTest.cs" caret="1749" fromTop="12" />
     <File id="EA905182-E03B-4A7C-A4C4-84D77BFCEE28/f:ConnectionManager.cs" caret="333" fromTop="18" />
     <File id="EA905182-E03B-4A7C-A4C4-84D77BFCEE28/f:ConnectionManager.cs" caret="579" fromTop="25" />
     <File id="EA905182-E03B-4A7C-A4C4-84D77BFCEE28/f:ConnectionManager.cs" caret="183" fromTop="12" />
-    <File id="C555210A-ACD9-4CA6-9355-DCCFA9DF6B31/f:UserDAOTest.cs" caret="440" fromTop="13" />
-    <File id="C555210A-ACD9-4CA6-9355-DCCFA9DF6B31/f:UserDAOTest.cs" caret="1223" fromTop="16" />
+    <File id="C555210A-ACD9-4CA6-9355-DCCFA9DF6B31/f:UserDAOTest.cs" caret="1749" fromTop="13" />
+    <File id="C555210A-ACD9-4CA6-9355-DCCFA9DF6B31/f:UserDAOTest.cs" caret="1749" fromTop="40" />
   </RecentEdits>
 </RecentFiles>
