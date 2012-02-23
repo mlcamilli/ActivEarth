@@ -18,11 +18,11 @@ namespace ActivEarth.Objects
             {
                 return "underweight";
             }
-            if (bmi >= 18.5 && bmi < 25)
+            if (bmi < 25)
             {
                 return "normal";
             }
-            if (bmi >= 25 && bmi < 30)
+            if( bmi < 30)
             {
                 return "overweight";
             }
