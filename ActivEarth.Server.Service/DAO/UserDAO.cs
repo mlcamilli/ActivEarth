@@ -46,6 +46,7 @@ namespace ActivEarth.DAO
 
         public static User GetUserFromUserNameAndPassword(string userName, string password)
         {
+
             using (SqlConnection connection = ConnectionManager.GetConnection())
             {
                 var data = new ActivEarthDataProvidersDataContext(connection);
@@ -71,7 +72,28 @@ namespace ActivEarth.DAO
                              }).FirstOrDefault();
             }
         }
+        public static bool CreateNewUser(User user, string password)
+        {
+            try
+            {
 
+            
+            using (SqlConnection connection = ConnectionManager.GetConnection())
+            {
+                var data = new ActivEarthDataProvidersDataContext(connection);
+                var userData = new UserDataProvider {password = password, user_name = user.UserName,};
+                data.UserDataProviders.InsertOnSubmit(userData);
+                data.SubmitChanges();
+                return true;
+
+            }
+            }
+            catch (Exception)
+            {
+
+                return false;
+            }
+        }
         public static bool UpdateUserProfile(User user)
         {
             try
@@ -106,6 +128,20 @@ namespace ActivEarth.DAO
             {
                 return false;
             }
+        }
+        public static int GetUserIdFromUserName(string username)
+        {
+
+            using (SqlConnection connection = ConnectionManager.GetConnection())
+            {
+                var data = new ActivEarthDataProvidersDataContext(connection);
+                return
+                    (from u in data.UserDataProviders
+                     where u.user_name == username
+                     select u.id).FirstOrDefault();
+            }
+
+            
         }
 
         public static bool ConfirmPassword(string password, int userId)
