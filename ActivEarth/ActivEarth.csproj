@@ -59,6 +59,7 @@
     <Content Include="Account\Register.aspx" />
     <Content Include="Account\Profile.aspx" />
     <Content Include="Account\EditProfile.aspx" />
+    <Content Include="Fitness\BMI.aspx" />
     <Content Include="Styles\Site.css" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
@@ -132,6 +133,13 @@
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Fitness\BMI.aspx.cs">
+      <DependentUpon>BMI.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Fitness\BMI.aspx.designer.cs">
+      <DependentUpon>BMI.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
