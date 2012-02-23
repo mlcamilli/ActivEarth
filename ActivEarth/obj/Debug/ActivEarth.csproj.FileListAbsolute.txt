@@ -21,3 +21,7 @@ D:\Dev\ActivEarth\ActivEarth\bin\ActivEarth.Objects.dll
 D:\Dev\ActivEarth\ActivEarth\bin\ActivEarth.Server.Service.dll
 D:\Dev\ActivEarth\ActivEarth\bin\ActivEarth.Objects.pdb
 D:\Dev\ActivEarth\ActivEarth\bin\ActivEarth.Server.Service.pdb
+C:\Users\matt.camilli\dev\ActivEarth\ActivEarth\bin\ActivEarth.Objects.dll
+C:\Users\matt.camilli\dev\ActivEarth\ActivEarth\bin\ActivEarth.Server.Service.dll
+C:\Users\matt.camilli\dev\ActivEarth\ActivEarth\bin\ActivEarth.Objects.pdb
+C:\Users\matt.camilli\dev\ActivEarth\ActivEarth\bin\ActivEarth.Server.Service.pdb
