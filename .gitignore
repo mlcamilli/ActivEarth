@@ -1,1 +1,7 @@
-_ReSharper.ActivEarth/
+_ReSharper.**
+**.suo
+**.user
+**.cvs
+*[Bb]in
+*[Oo]bj
+*[Ll]ogs
