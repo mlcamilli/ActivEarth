@@ -46,6 +46,15 @@ namespace ActivEarth.Competition.Challenges
         }
 
         /// <summary>
+        /// Statistic value required to complete the challenge.
+        /// </summary>
+        public float Requirement
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// True if the challenge resets when its End Time occurs, false
         /// if it simply expires.
         /// </summary>
@@ -64,6 +73,17 @@ namespace ActivEarth.Competition.Challenges
             private set;
         }
 
+        /// <summary>
+        /// Statistic to which the badge is bound.
+        /// 
+        /// DEPENDENCY: Profile.Statistics
+        /// </summary>
+        public Placeholder.Statistics StatisticBinding
+        {
+            get;
+            set;
+        }
+
         #endregion ---------- Public Properties ----------
 
         #region ---------- Constructor ----------
@@ -80,8 +100,9 @@ namespace ActivEarth.Competition.Challenges
         /// <param name="persistent">True if the Challenge is persistent, false otherwise.</param>
         /// <param name="endTime">Time at which the Challenge ends.</param>
         /// <param name="statistic">Statistic to which the Challenge is bound.</param>
+        /// <param name="requirement">Statistic value required to complete the challenge.</param>
         public Challenge(uint id, string name, string description, int points, bool persistent,
-            DateTime endTime, Placeholder.Statistics statistic)
+            DateTime endTime, Placeholder.Statistics statistic, float requirement)
         {
             this.ID = id;
             this.Name = name;
@@ -89,7 +110,8 @@ namespace ActivEarth.Competition.Challenges
             this.Points = points;
             this.IsPersistent = persistent;
             this.EndTime = endTime;
-            this._statisticBinding = statistic;
+            this.StatisticBinding = statistic;
+            this.Requirement = requirement;
         }
 
         #endregion ---------- Constructor ----------
@@ -102,12 +124,15 @@ namespace ActivEarth.Competition.Challenges
         /// DEPENDENCY: Profile.User
         /// </summary>
         /// <param name="user">The user to evaluate.</param>
+        /// <returns>Minimum of the user's progress and the challenge's requirement 
+        /// (for use in a progress bar).</returns>
         public float GetProgress(Placeholder.User user)
         {
             if (user.ChallengeInitialValues.ContainsKey(this.ID))
             {
                 float startingPoint = user.ChallengeInitialValues[this.ID];
-                return user.GetStatistic(this._statisticBinding) - startingPoint;
+                return Math.Min(user.GetStatistic(this.StatisticBinding) - startingPoint,
+                    this.Requirement);
             }
             else
             {
@@ -116,17 +141,17 @@ namespace ActivEarth.Competition.Challenges
             }
         }
 
-        #endregion ---------- Public Methods ----------
-
-        #region ---------- Private Fields ----------
-
         /// <summary>
-        /// Statistic to which the badge is bound.
-        /// 
-        /// DEPENDENCY: Profile.Statistics
+        /// Returns true if the user has met the requirements to complete the challenge,
+        /// false otherwise.
         /// </summary>
-        private Placeholder.Statistics _statisticBinding;
+        /// <param name="user">The user to evaluate.</param>
+        /// <returns>Whether or not the user has completed the challenge.</returns>
+        public bool IsComplete(Placeholder.User user)
+        {
+            return (this.GetProgress(user) == this.Requirement);
+        }
 
-        #endregion ---------- Private Fields ----------
+        #endregion ---------- Public Methods ----------
     }
 }

@@ -67,7 +67,7 @@ namespace ActivEarth.Competition.Badges
 
             this._user = user;
             this._statisticBinding = statistic;
-            this._levelValues = levelValues;
+            this._levelRequirements = levelValues;
             this._levelPoints = levelPoints;
             this._ImagePaths = imagePaths;
         }
@@ -88,10 +88,10 @@ namespace ActivEarth.Competition.Badges
 
             float stat = this._user.GetStatistic(this._statisticBinding);
 
-            int newLevel = BadgeLevels.None;
+            int newLevel = oldLevel;
 
-            while ((newLevel < BadgeLevels.Diamond) && 
-                (stat > this._levelValues[(int)newLevel + 1]))
+            while ((newLevel < BadgeLevels.Max) && 
+                (stat >= this._levelRequirements[(int)newLevel + 1]))
             {
                 newLevel++;
             }
@@ -101,7 +101,39 @@ namespace ActivEarth.Competition.Badges
                 pointsEarned += this._levelPoints[i];
             }
 
+            this.Level = newLevel;
+
             return pointsEarned;
+        }
+
+        /// <summary>
+        /// Returns the image path for the current Badge level's icon.
+        /// </summary>
+        /// <returns>Image path for the current Badge level's icon.</returns>
+        public Uri GetImagePath()
+        {
+            return this._ImagePaths[this.Level];
+        }
+
+        /// <summary>
+        /// Returns the statistic value required to get to the next level
+        /// of the badge.
+        /// </summary>
+        /// <returns>Statistic requirement for the next level of the badge.</returns>
+        public float GetNextLevelRequirement()
+        {
+            return this._levelRequirements[this.Level + 1];
+        }
+
+        /// <summary>
+        /// Returns the number of Activity Points awarded for achieving the
+        /// next level of the badge.
+        /// </summary>
+        /// <returns>Number of Activity Points awarded for achieving the next
+        /// level of the badge.</returns>
+        public int GetNextLevelPoints()
+        {
+            return this._levelPoints[this.Level + 1];
         }
 
         #endregion ---------- Public Methods ----------
@@ -125,7 +157,7 @@ namespace ActivEarth.Competition.Badges
         /// <summary>
         /// Array of the values required to advance to each level of the badge.
         /// </summary>
-        private float[] _levelValues;
+        private float[] _levelRequirements;
 
         /// <summary>
         /// Array of the points awarded for each level of the badge.
