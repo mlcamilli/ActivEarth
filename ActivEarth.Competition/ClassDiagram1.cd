@@ -1,0 +1,156 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="ActivEarth.Competition.ActivityScore">
+    <Position X="6.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAABIAgAAAAAQBAAAAAAAAAAAAAAAAACAAAAAAA=</HashCode>
+      <FileName>ActivityScore.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ActivEarth.Competition.Placeholder" Collapsed="true">
+    <Position X="11.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Placeholder.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ActivEarth.Competition.Badges.Badge">
+    <Position X="8.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAEAAggAIAAAAAQQAAAAAAIABAAAAAACAAAA=</HashCode>
+      <FileName>Badges\Badge.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ActivEarth.Competition.Badges.BadgeConstants">
+    <Position X="10.25" Y="3.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Class Name="ActivEarth.Competition.Badges.BadgeConstants.Steps" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Badges\BadgeConstants.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+      <Class Name="ActivEarth.Competition.Badges.BadgeConstants.WalkingDistance" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Badges\BadgeConstants.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+      <Class Name="ActivEarth.Competition.Badges.BadgeConstants.BikingDistance" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Badges\BadgeConstants.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+      <Class Name="ActivEarth.Competition.Badges.BadgeConstants.RunningDistance" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Badges\BadgeConstants.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+      <Class Name="ActivEarth.Competition.Badges.BadgeConstants.GasMoney" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Badges\BadgeConstants.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+      <Class Name="ActivEarth.Competition.Badges.BadgeConstants.CaloriesBurned" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Badges\BadgeConstants.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+      <Class Name="ActivEarth.Competition.Badges.BadgeConstants.Challenges" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Badges\BadgeConstants.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Badges\BadgeConstants.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ActivEarth.Competition.Challenges.Challenge">
+    <Position X="7" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAEAggAAAAAAAAAQAAAAgAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Challenges\Challenge.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ActivEarth.Competition.Challenges.ChallengeManager">
+    <Position X="8.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAQAAAAAAAAAAAAAAgAACAAAAAAAAAAAA=</HashCode>
+      <FileName>Challenges\ChallengeManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ActivEarth.Competition.Contests.Contest">
+    <Position X="1.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAMAggIAAAAECAAUgIAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Contests\Contest.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ActivEarth.Competition.Contests.ContestManager">
+    <Position X="0.5" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAAAAAAAAAAAAAAAAAACAACAAAACAAAA=</HashCode>
+      <FileName>Contests\ContestManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ActivEarth.Competition.Contests.ContestUser">
+    <Position X="4.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABABAAAAAGAAAQAAAAAAAAAAAAAAAAAIAAAAAAAAAAA=</HashCode>
+      <FileName>Contests\ContestUser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ActivEarth.Competition.Contests.EndCondition">
+    <Position X="4.5" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAQAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Contests\EndCondition.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ActivEarth.Competition.Contests.GroupContest">
+    <Position X="0.5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Contests\GroupContest.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ActivEarth.Competition.Contests.IndividualContest">
+    <Position X="2.75" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>Contests\IndividualContest.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ActivEarth.Competition.Contests.Team">
+    <Position X="2.75" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAAgAAAAABAQgAAAAAAAAAAAEAAAAAAA=</HashCode>
+      <FileName>Contests\Team.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="ActivEarth.Competition.Badges.BadgeLevels">
+    <Position X="12" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgIAAAAAAAEAAAACABAAAAAAAAAAgCAAAAAAAEAAAE=</HashCode>
+      <FileName>Badges\BadgeLevels.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="ActivEarth.Competition.Contests.ContestEndModes">
+    <Position X="4" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAA=</HashCode>
+      <FileName>Contests\ContestEndModes.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="ActivEarth.Competition.Contests.ContestTypes">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Contests\ContestTypes.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
