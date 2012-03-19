@@ -34,7 +34,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <Private>True</Private>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
@@ -48,11 +48,17 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Competition\Badges\BadgeTest.cs" />
+    <Compile Include="Competition\Challenges\ChallengeTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BMICalculatorTest.cs" />
     <Compile Include="UserDAOTest.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ActivEarth.Competition\ActivEarth.Competition.csproj">
+      <Project>{593A8CE3-778B-4BA5-A39E-984FB0E17E50}</Project>
+      <Name>ActivEarth.Competition</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ActivEarth.Objects\ActivEarth.Objects.csproj">
       <Project>{AA6B79F0-72D0-404C-BA16-9573F1710470}</Project>
       <Name>ActivEarth.Objects</Name>
@@ -61,6 +67,9 @@
       <Project>{EA905182-E03B-4A7C-A4C4-84D77BFCEE28}</Project>
       <Name>ActivEarth.Server.Data</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Competition\Contests\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
