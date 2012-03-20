@@ -6,8 +6,8 @@
   </ItemGroup>
 
   <PropertyGroup>
-    <ServerName>(local)\SQLExpress</ServerName>
-    <UseDatabaseName>Lender.Slos</UseDatabaseName>
+    <ServerName>(local)</ServerName>
+    <UseDatabaseName>ActivEarth_Dev</UseDatabaseName>
 
     <SqlToolsRoot Condition=" '$(SqlToolsRoot)'==''">C:\Program Files\Microsoft SQL Server\100\Tools\Binn</SqlToolsRoot>
     <SqlCmdExe>sqlcmd.exe</SqlCmdExe>
