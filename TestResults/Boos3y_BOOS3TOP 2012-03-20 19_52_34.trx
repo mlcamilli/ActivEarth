@@ -1,0 +1,175 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<TestRun id="2691b1c3-986e-4a1a-816d-71698800d5e3" name="Boos3y@BOOS3TOP 2012-03-20 19:52:34" runUser="Boos3top\Boos3y" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <TestSettings name="Local" id="b6d0cd76-2b43-4d84-b2ff-264b4e80fa4d">
+    <Description>These are default test settings for a local test run.</Description>
+    <Deployment enabled="false" runDeploymentRoot="Boos3y_BOOS3TOP 2012-03-20 19_52_34">
+      <DeploymentItem filename="D:\Dev\ActivEarth\ActivEarth.Objects\bin\ActivEarth.Objects.dll" />
+      <DeploymentItem filename="D:\Dev\ActivEarth\ActivEarth.Server.Service\bin\ActivEarth.Server.Service.dll" />
+    </Deployment>
+    <Execution>
+      <TestTypeSpecific />
+      <AgentRule name="Execution Agents">
+      </AgentRule>
+    </Execution>
+  </TestSettings>
+  <Times creation="2012-03-20T19:52:34.9306640-04:00" queuing="2012-03-20T19:52:35.8164062-04:00" start="2012-03-20T19:52:35.8955078-04:00" finish="2012-03-20T19:52:36.3701171-04:00" />
+  <ResultSummary outcome="Completed">
+    <Counters total="8" executed="8" passed="8" error="0" failed="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+  <TestDefinitions>
+    <UnitTest name="TestBadgeUpdateUpMultipleLevels" storage="d:\dev\activearth\activearth.tests\bin\debug\activearth.tests.dll" id="c6ada7fc-bf0f-3c1a-2be3-93c7aa9d4af9">
+      <Execution id="7fd227f9-9ee5-4b77-8a9d-04d32a8d6f09" />
+      <TestMethod codeBase="D:/Dev/ActivEarth/ActivEarth.Tests/bin/Debug/ActivEarth.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="ActivEarth.Tests.Competition.Badges.BadgeTest, ActivEarth.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="TestBadgeUpdateUpMultipleLevels" />
+    </UnitTest>
+    <UnitTest name="TestBadgeGetNextLevelRequirement" storage="d:\dev\activearth\activearth.tests\bin\debug\activearth.tests.dll" id="9c117884-1cbb-cb33-e233-6242ba79cea1">
+      <Execution id="29f06e9b-634f-49ef-8e35-8fe3117ea9df" />
+      <TestMethod codeBase="D:/Dev/ActivEarth/ActivEarth.Tests/bin/Debug/ActivEarth.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="ActivEarth.Tests.Competition.Badges.BadgeTest, ActivEarth.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="TestBadgeGetNextLevelRequirement" />
+    </UnitTest>
+    <UnitTest name="TestBadgeUpdateInitialState" storage="d:\dev\activearth\activearth.tests\bin\debug\activearth.tests.dll" id="bf964d06-be20-62e3-21b9-0047dc364659">
+      <Execution id="b73f1a95-2616-4a96-8a0e-1d5904919f12" />
+      <TestMethod codeBase="D:/Dev/ActivEarth/ActivEarth.Tests/bin/Debug/ActivEarth.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="ActivEarth.Tests.Competition.Badges.BadgeTest, ActivEarth.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="TestBadgeUpdateInitialState" />
+    </UnitTest>
+    <UnitTest name="TestBadgeGetImagePath" storage="d:\dev\activearth\activearth.tests\bin\debug\activearth.tests.dll" id="a0f457a1-3a22-730a-fa52-4889af6f228b">
+      <Execution id="04d29cad-afa4-4251-a9de-695b90b11e59" />
+      <TestMethod codeBase="D:/Dev/ActivEarth/ActivEarth.Tests/bin/Debug/ActivEarth.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="ActivEarth.Tests.Competition.Badges.BadgeTest, ActivEarth.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="TestBadgeGetImagePath" />
+    </UnitTest>
+    <UnitTest name="TestBadgeGetNextLevelPoints" storage="d:\dev\activearth\activearth.tests\bin\debug\activearth.tests.dll" id="86cf8338-111b-6157-19b6-0c32f3258919">
+      <Execution id="535a4369-688c-4699-a499-887b0d378155" />
+      <TestMethod codeBase="D:/Dev/ActivEarth/ActivEarth.Tests/bin/Debug/ActivEarth.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="ActivEarth.Tests.Competition.Badges.BadgeTest, ActivEarth.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="TestBadgeGetNextLevelPoints" />
+    </UnitTest>
+    <UnitTest name="TestBadgeUpdateNoChange" storage="d:\dev\activearth\activearth.tests\bin\debug\activearth.tests.dll" id="d4194bd3-66c7-589d-19ed-42c4cdd3e22f">
+      <Execution id="ad7d5c11-a6f4-40e8-a888-db8c9769cb16" />
+      <TestMethod codeBase="D:/Dev/ActivEarth/ActivEarth.Tests/bin/Debug/ActivEarth.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="ActivEarth.Tests.Competition.Badges.BadgeTest, ActivEarth.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="TestBadgeUpdateNoChange" />
+    </UnitTest>
+    <UnitTest name="TestBadgeUpdateUpOneLevel" storage="d:\dev\activearth\activearth.tests\bin\debug\activearth.tests.dll" id="9aeb4b40-e5c4-bb67-77a0-d3122249bc3a">
+      <Execution id="6cd8c5ee-6e80-4fe5-84b8-3579c62e7a7d" />
+      <TestMethod codeBase="D:/Dev/ActivEarth/ActivEarth.Tests/bin/Debug/ActivEarth.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="ActivEarth.Tests.Competition.Badges.BadgeTest, ActivEarth.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="TestBadgeUpdateUpOneLevel" />
+    </UnitTest>
+    <UnitTest name="TestBadgeStatisticIndependence" storage="d:\dev\activearth\activearth.tests\bin\debug\activearth.tests.dll" id="ebf80fea-d530-5e20-ae05-ffac90e85cd4">
+      <Execution id="507f3d10-c041-4649-ad5e-713f8a432e1b" />
+      <TestMethod codeBase="D:/Dev/ActivEarth/ActivEarth.Tests/bin/Debug/ActivEarth.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="ActivEarth.Tests.Competition.Badges.BadgeTest, ActivEarth.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="TestBadgeStatisticIndependence" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <TestEntries>
+    <TestEntry testId="86cf8338-111b-6157-19b6-0c32f3258919" executionId="535a4369-688c-4699-a499-887b0d378155" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="9aeb4b40-e5c4-bb67-77a0-d3122249bc3a" executionId="6cd8c5ee-6e80-4fe5-84b8-3579c62e7a7d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="9c117884-1cbb-cb33-e233-6242ba79cea1" executionId="29f06e9b-634f-49ef-8e35-8fe3117ea9df" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="a0f457a1-3a22-730a-fa52-4889af6f228b" executionId="04d29cad-afa4-4251-a9de-695b90b11e59" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="bf964d06-be20-62e3-21b9-0047dc364659" executionId="b73f1a95-2616-4a96-8a0e-1d5904919f12" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="c6ada7fc-bf0f-3c1a-2be3-93c7aa9d4af9" executionId="7fd227f9-9ee5-4b77-8a9d-04d32a8d6f09" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="d4194bd3-66c7-589d-19ed-42c4cdd3e22f" executionId="ad7d5c11-a6f4-40e8-a888-db8c9769cb16" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="ebf80fea-d530-5e20-ae05-ffac90e85cd4" executionId="507f3d10-c041-4649-ad5e-713f8a432e1b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <Results>
+    <UnitTestResult executionId="535a4369-688c-4699-a499-887b0d378155" testId="86cf8338-111b-6157-19b6-0c32f3258919" testName="TestBadgeGetNextLevelPoints" computerName="BOOS3TOP" duration="00:00:00.0637600" startTime="2012-03-20T19:52:35.9306640-04:00" endTime="2012-03-20T19:52:36.2695312-04:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="535a4369-688c-4699-a499-887b0d378155">
+      <Output>
+        <TextMessages>
+          <Message>Fetching Steps badge</Message>
+          <Message>Verifying initial 'next level' reward</Message>
+          <Message>Increasing badge to gold level</Message>
+          <Message>Verifying 'next level' reward</Message>
+          <Message>Increasing badge to maximum level</Message>
+          <Message>Verifying 'next level' reward reported as zero</Message>
+        </TextMessages>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="6cd8c5ee-6e80-4fe5-84b8-3579c62e7a7d" testId="9aeb4b40-e5c4-bb67-77a0-d3122249bc3a" testName="TestBadgeUpdateUpOneLevel" computerName="BOOS3TOP" duration="00:00:00.0091592" startTime="2012-03-20T19:52:36.2734375-04:00" endTime="2012-03-20T19:52:36.2880859-04:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="6cd8c5ee-6e80-4fe5-84b8-3579c62e7a7d">
+      <Output>
+        <TextMessages>
+          <Message>Fetching Steps badge</Message>
+          <Message>Increasing badge to level 1</Message>
+          <Message>Verifying badge reward on update</Message>
+          <Message>Increasing badge to level 2</Message>
+          <Message>Verifying badge reward on update</Message>
+          <Message>Increasing badge to level 3</Message>
+          <Message>Verifying badge reward on update</Message>
+          <Message>Increasing badge to level 4</Message>
+          <Message>Verifying badge reward on update</Message>
+          <Message>Increasing badge to level 5</Message>
+          <Message>Verifying badge reward on update</Message>
+          <Message>Increasing badge to level 6</Message>
+          <Message>Verifying badge reward on update</Message>
+          <Message>Increasing badge to level 7</Message>
+          <Message>Verifying badge reward on update</Message>
+          <Message>Increasing badge to level 8</Message>
+          <Message>Verifying badge reward on update</Message>
+        </TextMessages>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="29f06e9b-634f-49ef-8e35-8fe3117ea9df" testId="9c117884-1cbb-cb33-e233-6242ba79cea1" testName="TestBadgeGetNextLevelRequirement" computerName="BOOS3TOP" duration="00:00:00.0050356" startTime="2012-03-20T19:52:36.2900390-04:00" endTime="2012-03-20T19:52:36.2978515-04:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="29f06e9b-634f-49ef-8e35-8fe3117ea9df">
+      <Output>
+        <TextMessages>
+          <Message>Fetching Steps badge</Message>
+          <Message>Verifying initial 'next level' requirements</Message>
+          <Message>Increasing badge to gold level</Message>
+          <Message>Verifying 'next level' requirements</Message>
+          <Message>Increasing badge to maximum level</Message>
+          <Message>Verifying 'next level' requirements reported as infinity</Message>
+        </TextMessages>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="04d29cad-afa4-4251-a9de-695b90b11e59" testId="a0f457a1-3a22-730a-fa52-4889af6f228b" testName="TestBadgeGetImagePath" computerName="BOOS3TOP" duration="00:00:00.0041828" startTime="2012-03-20T19:52:36.2998046-04:00" endTime="2012-03-20T19:52:36.3066406-04:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="04d29cad-afa4-4251-a9de-695b90b11e59">
+      <Output>
+        <TextMessages>
+          <Message>Fetching Steps badge</Message>
+          <Message>Verifying initial badge image path</Message>
+          <Message>Increasing badge to Bronze level</Message>
+          <Message>Verifying bronze badge image path</Message>
+          <Message>Increasing badge to Platinum level</Message>
+          <Message>Verifying platinum badge image path</Message>
+        </TextMessages>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="b73f1a95-2616-4a96-8a0e-1d5904919f12" testId="bf964d06-be20-62e3-21b9-0047dc364659" testName="TestBadgeUpdateInitialState" computerName="BOOS3TOP" duration="00:00:00.0015973" startTime="2012-03-20T19:52:36.3095703-04:00" endTime="2012-03-20T19:52:36.3134765-04:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b73f1a95-2616-4a96-8a0e-1d5904919f12">
+      <Output>
+        <TextMessages>
+          <Message>Fetching Steps badge</Message>
+          <Message>Verifying no activity points are reported by the badge</Message>
+        </TextMessages>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="7fd227f9-9ee5-4b77-8a9d-04d32a8d6f09" testId="c6ada7fc-bf0f-3c1a-2be3-93c7aa9d4af9" testName="TestBadgeUpdateUpMultipleLevels" computerName="BOOS3TOP" duration="00:00:00.0117476" startTime="2012-03-20T19:52:36.3164062-04:00" endTime="2012-03-20T19:52:36.3310546-04:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="7fd227f9-9ee5-4b77-8a9d-04d32a8d6f09">
+      <Output>
+        <TextMessages>
+          <Message>Fetching Steps badge</Message>
+          <Message>Increasing badge to level 1</Message>
+          <Message>Verifying badge reward on update</Message>
+          <Message>Increasing badge to level 3</Message>
+          <Message>Verifying badge reward on update</Message>
+          <Message>Increasing badge to level 5</Message>
+          <Message>Verifying badge reward on update</Message>
+          <Message>Increasing badge to level 7</Message>
+          <Message>Verifying badge reward on update</Message>
+        </TextMessages>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="ad7d5c11-a6f4-40e8-a888-db8c9769cb16" testId="d4194bd3-66c7-589d-19ed-42c4cdd3e22f" testName="TestBadgeUpdateNoChange" computerName="BOOS3TOP" duration="00:00:00.0023094" startTime="2012-03-20T19:52:36.3339843-04:00" endTime="2012-03-20T19:52:36.3388671-04:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ad7d5c11-a6f4-40e8-a888-db8c9769cb16">
+      <Output>
+        <TextMessages>
+          <Message>Fetching Steps badge</Message>
+          <Message>Updating user's step statistic to the bronze badge level</Message>
+          <Message>Verifying that first update reports bronze badge reward</Message>
+          <Message>Verifying that second update reports no new activity points</Message>
+        </TextMessages>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="507f3d10-c041-4649-ad5e-713f8a432e1b" testId="ebf80fea-d530-5e20-ae05-ffac90e85cd4" testName="TestBadgeStatisticIndependence" computerName="BOOS3TOP" duration="00:00:00.0043291" startTime="2012-03-20T19:52:36.3408203-04:00" endTime="2012-03-20T19:52:36.3486328-04:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="507f3d10-c041-4649-ad5e-713f8a432e1b">
+      <Output>
+        <TextMessages>
+          <Message>Fetching Steps badge</Message>
+          <Message>Fetching Walking badge</Message>
+          <Message>Setting user's initial statistics to bronze levels</Message>
+          <Message>Verifying step badge reward</Message>
+          <Message>Verifying walking badge reward</Message>
+          <Message>Increasing step statistic to silver level</Message>
+          <Message>Verifying no new walking badge points awarded</Message>
+          <Message>Verifying silver level step badge points awarded</Message>
+        </TextMessages>
+      </Output>
+    </UnitTestResult>
+  </Results>
+</TestRun>

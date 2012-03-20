@@ -9,3 +9,12 @@ C:\Users\matt.camilli\dev\ActivEarth\ActivEarth.Tests\bin\Debug\Microsoft.Visual
 C:\Users\matt.camilli\dev\ActivEarth\ActivEarth.Tests\obj\Debug\ResolveAssemblyReference.cache
 C:\Users\matt.camilli\dev\ActivEarth\ActivEarth.Tests\obj\Debug\ActivEarth.Tests.dll
 C:\Users\matt.camilli\dev\ActivEarth\ActivEarth.Tests\obj\Debug\ActivEarth.Tests.pdb
+D:\Dev\ActivEarth\ActivEarth.Tests\bin\Debug\ActivEarth.Tests.dll
+D:\Dev\ActivEarth\ActivEarth.Tests\bin\Debug\ActivEarth.Tests.pdb
+D:\Dev\ActivEarth\ActivEarth.Tests\bin\Debug\ActivEarth.Objects.dll
+D:\Dev\ActivEarth\ActivEarth.Tests\bin\Debug\ActivEarth.Server.Service.dll
+D:\Dev\ActivEarth\ActivEarth.Tests\bin\Debug\ActivEarth.Objects.pdb
+D:\Dev\ActivEarth\ActivEarth.Tests\bin\Debug\ActivEarth.Server.Service.pdb
+D:\Dev\ActivEarth\ActivEarth.Tests\obj\Debug\ResolveAssemblyReference.cache
+D:\Dev\ActivEarth\ActivEarth.Tests\obj\Debug\ActivEarth.Tests.dll
+D:\Dev\ActivEarth\ActivEarth.Tests\obj\Debug\ActivEarth.Tests.pdb

@@ -60,22 +60,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ActivityScore.cs" />
-    <Compile Include="Badges\Badge.cs" />
-    <Compile Include="Badges\BadgeConstants.cs" />
-    <Compile Include="Badges\BadgeLevels.cs" />
-    <Compile Include="Challenges\Challenge.cs" />
-    <Compile Include="Challenges\ChallengeManager.cs" />
-    <Compile Include="Contests\Contest.cs" />
-    <Compile Include="Contests\ContestManager.cs" />
-    <Compile Include="Contests\ContestType.cs" />
-    <Compile Include="Contests\ContestUser.cs" />
-    <Compile Include="Contests\IndividualContest.cs" />
-    <Compile Include="Contests\EndCondition.cs" />
-    <Compile Include="Contests\GroupContest.cs" />
-    <Compile Include="Contests\ContestEndMode.cs" />
-    <Compile Include="Placeholder.cs" />
-    <Compile Include="Contests\Team.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

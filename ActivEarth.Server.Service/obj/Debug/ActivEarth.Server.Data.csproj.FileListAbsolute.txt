@@ -15,3 +15,5 @@ C:\Users\matt.camilli\dev\ActivEarth\ActivEarth.Server.Service\bin\ActivEarth.Ob
 C:\Users\matt.camilli\dev\ActivEarth\ActivEarth.Server.Service\obj\Debug\ResolveAssemblyReference.cache
 C:\Users\matt.camilli\dev\ActivEarth\ActivEarth.Server.Service\obj\Debug\ActivEarth.Server.Service.dll
 C:\Users\matt.camilli\dev\ActivEarth\ActivEarth.Server.Service\obj\Debug\ActivEarth.Server.Service.pdb
+D:\Dev\ActivEarth\ActivEarth.Server.Service\bin\ActivEarth.Objects.dll
+D:\Dev\ActivEarth\ActivEarth.Server.Service\bin\ActivEarth.Objects.pdb

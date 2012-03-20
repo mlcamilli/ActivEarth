@@ -52,6 +52,22 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BMICalculator.cs" />
+    <Compile Include="Competition\ActivityScore.cs" />
+    <Compile Include="Competition\Badges\Badge.cs" />
+    <Compile Include="Competition\Badges\BadgeConstants.cs" />
+    <Compile Include="Competition\Badges\BadgeLevels.cs" />
+    <Compile Include="Competition\Challenges\Challenge.cs" />
+    <Compile Include="Competition\Challenges\ChallengeManager.cs" />
+    <Compile Include="Competition\Contests\Contest.cs" />
+    <Compile Include="Competition\Contests\ContestEndMode.cs" />
+    <Compile Include="Competition\Contests\ContestManager.cs" />
+    <Compile Include="Competition\Contests\ContestType.cs" />
+    <Compile Include="Competition\Contests\ContestUser.cs" />
+    <Compile Include="Competition\Contests\EndCondition.cs" />
+    <Compile Include="Competition\Contests\GroupContest.cs" />
+    <Compile Include="Competition\Contests\IndividualContest.cs" />
+    <Compile Include="Competition\Contests\Team.cs" />
+    <Compile Include="Competition\Placeholder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="User.cs" />
   </ItemGroup>

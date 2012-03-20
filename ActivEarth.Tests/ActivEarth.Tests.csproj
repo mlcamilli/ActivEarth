@@ -56,10 +56,6 @@
     <Compile Include="UserDAOTest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ActivEarth.Competition\ActivEarth.Competition.csproj">
-      <Project>{593A8CE3-778B-4BA5-A39E-984FB0E17E50}</Project>
-      <Name>ActivEarth.Competition</Name>
-    </ProjectReference>
     <ProjectReference Include="..\ActivEarth.Objects\ActivEarth.Objects.csproj">
       <Project>{AA6B79F0-72D0-404C-BA16-9573F1710470}</Project>
       <Name>ActivEarth.Objects</Name>
