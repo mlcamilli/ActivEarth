@@ -16,8 +16,8 @@ namespace ActivEarth.Competition.Contests
         public ContestManager()
         {
             //Both should ultimately be read in from DB
-            this._activeContests = new List<Contest>();
-            this._nextID = 1;
+            _activeContests = new List<Contest>();
+            _nextID = 1;
         }
 
         #endregion ---------- Constructor ----------
@@ -34,20 +34,20 @@ namespace ActivEarth.Competition.Contests
         /// <param name="end">Time to end the contest.</param>
         /// <param name="statistic">Statistic on which the Contest is based.</param>
         /// <returns>ID of the newly created Contest.</returns>
-        public uint CreateContest(ContestTypes type, string name, string description, int points, DateTime start,
-            DateTime end, Placeholder.Statistics statistic)
+        public uint CreateContest(ContestType type, string name, string description, int points, DateTime start,
+            DateTime end, Placeholder.Statistic statistic)
         {
-            uint id = this._nextID;
-            this._nextID++;
+            uint id = _nextID;
+            _nextID++;
 
-            if (type == ContestTypes.Group)
+            if (type == ContestType.Group)
             {
-                this._activeContests.Add(new GroupContest(id, name, description, points, ContestEndModes.TimeBased,
+                _activeContests.Add(new GroupContest(id, name, description, points, ContestEndMode.TimeBased,
                     start, new EndCondition(end), statistic));
             }
             else
             {
-                this._activeContests.Add(new IndividualContest(id, name, description, points, ContestEndModes.TimeBased,
+                _activeContests.Add(new IndividualContest(id, name, description, points, ContestEndMode.TimeBased,
                     start, new EndCondition(end), statistic));
             }
 
@@ -64,20 +64,20 @@ namespace ActivEarth.Competition.Contests
         /// <param name="end">Score at which to end the contest.</param>
         /// <param name="statistic">Statistic on which the Contest is based.</param>
         /// <returns>ID of the newly created Contest.</returns>
-        public uint CreateContest(ContestTypes type, string name, string description, int points, DateTime start,
-            float end, Placeholder.Statistics statistic)
+        public uint CreateContest(ContestType type, string name, string description, int points, DateTime start,
+            float end, Placeholder.Statistic statistic)
         {
-            uint id = this._nextID;
-            this._nextID++;
+            uint id = _nextID;
+            _nextID++;
 
-            if (type == ContestTypes.Group)
+            if (type == ContestType.Group)
             {
-                this._activeContests.Add(new GroupContest(id, name, description, points, ContestEndModes.GoalBased,
+                _activeContests.Add(new GroupContest(id, name, description, points, ContestEndMode.GoalBased,
                     start, new EndCondition(end), statistic));
             }
             else
             {
-                this._activeContests.Add(new IndividualContest(id, name, description, points, ContestEndModes.GoalBased,
+                _activeContests.Add(new IndividualContest(id, name, description, points, ContestEndMode.GoalBased,
                     start, new EndCondition(end), statistic));
             }
 
@@ -91,7 +91,7 @@ namespace ActivEarth.Competition.Contests
         /// <returns>Contest with ID matching the provided ID.</returns>
         public Contest GetContest(uint id)
         {
-            var query = from Contest contest in this._activeContests
+            var query = from Contest contest in _activeContests
                         where contest.ID == id
                         select contest;
 

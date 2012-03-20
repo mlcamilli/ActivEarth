@@ -73,28 +73,28 @@ namespace ActivEarth.Competition.Contests
         /// Adds a user to the team.
         /// </summary>
         /// <param name="user">The user to be added.</param>
-        public void Add(ContestUser user)
+        public void Add(Placeholder.User user)
         {
             if (user == null)
             {
                 return;
             }
 
-            this.Members.Add(user);
+            this.Members.Add(new ContestUser(user));
         }
 
         /// <summary>
         /// Adds a list of users to the team.
         /// </summary>
         /// <param name="users">List of users to be added.</param>
-        public void Add(List<ContestUser> users)
+        public void Add(List<Placeholder.User> users)
         {
             if (users == null)
             {
                 return;
             }
 
-            foreach (ContestUser user in users)
+            foreach (Placeholder.User user in users)
             {
                 this.Add(user);
             }
@@ -104,28 +104,28 @@ namespace ActivEarth.Competition.Contests
         /// Removes a user from the team.
         /// </summary>
         /// <param name="user"></param>
-        public void Remove(ContestUser user)
+        public void Remove(Placeholder.User user)
         {
             if (user == null)
             {
                 return;
             }
 
-            this.Members.Remove(user);
+            this.Members.Remove(new ContestUser(user));
         }
 
         /// <summary>
         /// Removes a list of users from the team.
         /// </summary>
         /// <param name="users"></param>
-        public void Remove(List<ContestUser> users)
+        public void Remove(List<Placeholder.User> users)
         {
             if (users == null)
             {
                 return;
             }
 
-            foreach (ContestUser user in users)
+            foreach (Placeholder.User user in users)
             {
                 this.Remove(user);
             }
@@ -135,14 +135,45 @@ namespace ActivEarth.Competition.Contests
         /// Recalculates and updates the team's contest score.
         /// </summary>
         /// <returns>Updated contest score for the team.</returns>
-        public void Update()
+        public void Update(Placeholder.Statistic statistic)
         {
             this.Score = 0;
 
             foreach (ContestUser user in this.Members)
             {
-                this.Score += user.CalculateScore();
+                this.Score += user.CalculateScore(statistic);
             }
+        }
+
+        /// <summary>
+        /// Locks the initial values for each team member, required for contest
+        /// score calculation.
+        /// </summary>
+        public void LockInitialValues(Placeholder.Statistic statistic)
+        {
+            foreach (ContestUser user in this.Members)
+            {
+                user.LockInitialValues(statistic);
+            }
+        }
+
+        /// <summary>
+        /// Searches the team for a particular member.
+        /// </summary>
+        /// <param name="user">User to look for.</param>
+        /// <returns>True if the user is a member of the team.</returns>
+        public bool ContainsMember(Placeholder.User user)
+        {
+            var query = from ContestUser cUser in this.Members
+                        where cUser.User == user
+                        select cUser;
+
+            foreach (ContestUser cUser in query)
+            {
+                return true;
+            }
+
+            return false;
         }
 
         #endregion ---------- Public Methods ----------

@@ -16,11 +16,11 @@ namespace ActivEarth.Competition.Challenges
         public ChallengeManager(Placeholder.Group allUsers)
         {
             //Both should ultimately be read in from DB
-            this._allChallenges = new List<Challenge>();
-            this._activeChallenges = new List<Challenge>();
-            this._nextID = 1;
+            _allChallenges = new List<Challenge>();
+            _activeChallenges = new List<Challenge>();
+            _nextID = 1;
 
-            this._allUsers = allUsers;
+            _allUsers = allUsers;
         }
 
         #endregion ---------- Constructor ----------
@@ -39,16 +39,16 @@ namespace ActivEarth.Competition.Challenges
         /// <param name="requirement">Statistic value required to complete the challenge.</param>
         /// <returns></returns>
         public uint CreateChallenge(string name, string description, int points, bool persistent,
-            DateTime end, Placeholder.Statistics statistic, float requirement)
+            DateTime end, Placeholder.Statistic statistic, float requirement)
         {
-            uint id = this._nextID;
-            this._nextID++;
+            uint id = _nextID;
+            _nextID++;
 
             Challenge newChallenge = new Challenge(id, name, description, points, persistent,
                     end, statistic, requirement);
 
-            this._activeChallenges.Add(newChallenge);
-            this._allChallenges.Add(newChallenge);
+            _activeChallenges.Add(newChallenge);
+            _allChallenges.Add(newChallenge);
 
             this.InitializeUsers(id, statistic);
 
@@ -75,7 +75,7 @@ namespace ActivEarth.Competition.Challenges
         /// <returns>Challenge with ID matching the provided ID, null if no match is found.</returns>
         public Challenge GetChallenge(uint id, bool activeOnly)
         {
-            List<Challenge> source = (activeOnly ? this._activeChallenges : this._allChallenges);
+            List<Challenge> source = (activeOnly ? _activeChallenges : _allChallenges);
             
             var query = from Challenge challenge in source
                         where challenge.ID == id
@@ -98,7 +98,7 @@ namespace ActivEarth.Competition.Challenges
         {
             List<Challenge> newActiveChallenges = new List<Challenge>();
 
-            foreach (Challenge challenge in this._activeChallenges)
+            foreach (Challenge challenge in _activeChallenges)
             {
                 if (challenge.EndTime > DateTime.Now)
                 {
@@ -118,7 +118,7 @@ namespace ActivEarth.Competition.Challenges
                 }
             }
 
-            this._activeChallenges = newActiveChallenges;
+            _activeChallenges = newActiveChallenges;
         }
 
         #endregion ---------- Public Methods ----------
@@ -132,9 +132,9 @@ namespace ActivEarth.Competition.Challenges
         /// </summary>
         /// <param name="id">Identifier for the challenge being initialized.</param>
         /// <param name="statistic">Statistic being tracked by the challenge.</param>
-        private void InitializeUsers(uint id, Placeholder.Statistics statistic)
+        private void InitializeUsers(uint id, Placeholder.Statistic statistic)
         {
-            foreach (Placeholder.User user in this._allUsers.Members)
+            foreach (Placeholder.User user in _allUsers.Members)
             {
                 if (user != null)
                 {
@@ -150,7 +150,7 @@ namespace ActivEarth.Competition.Challenges
         /// <param name="id">Expired challenge to remove initialization information for.</param>
         private void RemoveInitializationValues(uint id)
         {
-            foreach (Placeholder.User user in this._allUsers.Members)
+            foreach (Placeholder.User user in _allUsers.Members)
             {
                 if (user != null)
                 {

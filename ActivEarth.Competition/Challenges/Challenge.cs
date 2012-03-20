@@ -78,7 +78,7 @@ namespace ActivEarth.Competition.Challenges
         /// 
         /// DEPENDENCY: Profile.Statistics
         /// </summary>
-        public Placeholder.Statistics StatisticBinding
+        public Placeholder.Statistic StatisticBinding
         {
             get;
             set;
@@ -102,7 +102,7 @@ namespace ActivEarth.Competition.Challenges
         /// <param name="statistic">Statistic to which the Challenge is bound.</param>
         /// <param name="requirement">Statistic value required to complete the challenge.</param>
         public Challenge(uint id, string name, string description, int points, bool persistent,
-            DateTime endTime, Placeholder.Statistics statistic, float requirement)
+            DateTime endTime, Placeholder.Statistic statistic, float requirement)
         {
             this.ID = id;
             this.Name = name;

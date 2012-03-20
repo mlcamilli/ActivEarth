@@ -20,16 +20,16 @@ namespace ActivEarth.Competition
                 this.LastName = lastname;
                 this.ChallengeInitialValues = new Dictionary<uint, float>();
 
-                this._stats = new Dictionary<Statistics, float>();
+                _stats = new Dictionary<Statistic, float>();
 
-                this._stats.Add(Statistics.BikeDistance, 0);
-                this._stats.Add(Statistics.ChallengesCompleted, 0);
-                this._stats.Add(Statistics.GasSavings, 0);
-                this._stats.Add(Statistics.RunDistance, 0);
-                this._stats.Add(Statistics.Steps, 0);
-                this._stats.Add(Statistics.WalkDistance, 0);
+                _stats.Add(Statistic.BikeDistance, 0);
+                _stats.Add(Statistic.ChallengesCompleted, 0);
+                _stats.Add(Statistic.GasSavings, 0);
+                _stats.Add(Statistic.RunDistance, 0);
+                _stats.Add(Statistic.Steps, 0);
+                _stats.Add(Statistic.WalkDistance, 0);
 
-                this.Badges = new Dictionary<Statistics, Badges.Badge>();
+                this.Badges = new Dictionary<Statistic, Badges.Badge>();
                 this.Challenges = new Dictionary<uint, Challenges.Challenge>();
                 this.Contests = new Dictionary<uint, Contests.Contest>();
             }
@@ -52,12 +52,12 @@ namespace ActivEarth.Competition
                 set;
             }
 
-            public float GetStatistic(Statistics statToGet)
+            public float GetStatistic(Statistic statToGet)
             {
                 return _stats[statToGet];
             }
 
-            public void SetStatistic(Statistics statToSet, float val)
+            public void SetStatistic(Statistic statToSet, float val)
             {
                 _stats[statToSet] = val;
             }
@@ -68,7 +68,7 @@ namespace ActivEarth.Competition
                 set;
             }
 
-            public Dictionary<Statistics, Badges.Badge> Badges
+            public Dictionary<Statistic, Badges.Badge> Badges
             {
                 get;
                 set;
@@ -86,7 +86,7 @@ namespace ActivEarth.Competition
                 set;
             }
 
-            private Dictionary<Statistics, float> _stats;
+            private Dictionary<Statistic, float> _stats;
         }
 
         public class Group
@@ -111,7 +111,7 @@ namespace ActivEarth.Competition
             }
         }
 
-        public enum Statistics
+        public enum Statistic
         {
             Steps,
             WalkDistance,

@@ -23,7 +23,7 @@ namespace ActivEarth.Competition.Contests
         /// <param name="end">End Conditions to be observed.</param>
         /// <param name="statistic">Statistic on which the Contest is based.</param>
         public IndividualContest(uint id, string name, string description, int points,
-            ContestEndModes mode, DateTime start, EndCondition end, Placeholder.Statistics statistic)
+            ContestEndMode mode, DateTime start, EndCondition end, Placeholder.Statistic statistic)
             : base(id, name, description, points, mode, start, end, statistic)
         {
 
@@ -45,7 +45,7 @@ namespace ActivEarth.Competition.Contests
         /// <param name="statistic">Statistic on which the Contest is based.</param>
         /// <param name="groups">Groups participating in the Contest.</param>
         public IndividualContest(uint id, string name, string description, int points,
-            ContestEndModes mode, DateTime start, EndCondition end, Placeholder.Statistics statistic,
+            ContestEndMode mode, DateTime start, EndCondition end, Placeholder.Statistic statistic,
             List<Placeholder.User> users)
             : this(id, name, description, points, mode, start, end, statistic)
         {
@@ -68,7 +68,7 @@ namespace ActivEarth.Competition.Contests
             //TODO: Assert that no team with this name exists already
 
             Team newTeam = new Team(teamName);
-            newTeam.Members.Add(new ContestUser(user, this._statisticBinding));
+            newTeam.Add(user);
 
             base.AddTeam(newTeam);
         }

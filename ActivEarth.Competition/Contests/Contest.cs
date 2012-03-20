@@ -48,7 +48,7 @@ namespace ActivEarth.Competition.Contests
         /// <summary>
         /// The Contest mode, indicating whether the contest is time-based or goal-based.
         /// </summary>
-        public ContestEndModes Mode
+        public ContestEndMode Mode
         {
             get;
             set;
@@ -74,7 +74,8 @@ namespace ActivEarth.Competition.Contests
         }
 
         /// <summary>
-        /// List of competing teams in the competition.
+        /// List of competing teams in the competition, maintained in sorted order
+        /// for reporting standings.
         /// </summary>
         public List<Contests.Team> Teams
         {
@@ -100,7 +101,7 @@ namespace ActivEarth.Competition.Contests
         /// <param name="end">End Conditions to be observed.</param>
         /// <param name="statistic">Statistic on which the Contest is based.</param>
         protected Contest(uint id, string name, string description, int points,
-            ContestEndModes mode, DateTime start, EndCondition end, Placeholder.Statistics statistic)
+            ContestEndMode mode, DateTime start, EndCondition end, Placeholder.Statistic statistic)
         {
             this.ID = id;
             this.Name = name;
@@ -109,7 +110,7 @@ namespace ActivEarth.Competition.Contests
             this.Mode = mode;
             this.StartTime = start;
             this.EndCondition = end;
-            this._statisticBinding = statistic;
+            _statisticBinding = statistic;
 
             this.Teams = new List<Team>();
         }
@@ -129,7 +130,7 @@ namespace ActivEarth.Competition.Contests
         /// <param name="statistic">Statistic on which the Contest is based.</param>
         /// <param name="teams">Teams participating in the Contest.</param>
         protected Contest(uint id, string name, string description, int points,
-            ContestEndModes mode, DateTime start, EndCondition end, Placeholder.Statistics statistic,
+            ContestEndMode mode, DateTime start, EndCondition end, Placeholder.Statistic statistic,
             List<Team> teams)
             : this(id, name, description, points, mode, start, end, statistic)
         {
@@ -147,35 +148,10 @@ namespace ActivEarth.Competition.Contests
         {
             foreach (Team team in this.Teams)
             {
-                team.Update();
+                team.Update(_statisticBinding);
             }
 
             this.SortTeamsByScore();
-        }
-        
-        /// <summary>
-        /// Returns the team(s) that won the Contest. In the event of a tie, multiple
-        /// teams will be returned, otherwise a single team will be returned in the list.
-        /// </summary>
-        /// <returns>The Contest's winning team(s).</returns>
-        public List<Team> GetWinner()
-        {
-            List<Team> winners = new List<Team>();
-
-            if (this.Teams.Count > 0)
-            {
-                winners.Add(this.Teams[0]);
-
-                float winningScore = this.Teams[0].Score;
-
-                int i = 1;
-                while (i < this.Teams.Count && this.Teams[i].Score == winningScore)
-                {
-                    winners.Add(this.Teams[i]);
-                }
-            }
-
-            return winners;
         }
         
         /// <summary>
@@ -226,17 +202,29 @@ namespace ActivEarth.Competition.Contests
             }
         }
 
+        /// <summary>
+        /// Locks competitor initial values such that the calculation of
+        /// deltas can begin (to calculate team scores).
+        /// </summary>
+        public void LockInitialValues()
+        {
+            foreach (Team team in this.Teams)
+            {
+                team.LockInitialValues(_statisticBinding);
+            }
+        }
+
         #endregion ---------- Public Methods ----------
 
         #region ---------- Private Methods ----------
 
         /// <summary>
-        /// Sorts the participating teams by their score.
+        /// Sorts the participating teams in descending order by their score.
         /// </summary>
         private void SortTeamsByScore()
         {
             this.Teams.Sort(delegate (Team t1, Team t2) { 
-                return t1.Score.CompareTo(t2.Score); 
+                return t2.Score.CompareTo(t1.Score); 
                 });
         }
 
@@ -249,7 +237,7 @@ namespace ActivEarth.Competition.Contests
         /// 
         /// DEPENDENCY: Profile.Statistics
         /// </summary>
-        protected Placeholder.Statistics _statisticBinding; 
+        protected Placeholder.Statistic _statisticBinding; 
         
         #endregion ---------- Private Fields ----------
     }

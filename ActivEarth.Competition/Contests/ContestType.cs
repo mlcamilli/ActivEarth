@@ -5,9 +5,9 @@ using System.Web;
 
 namespace ActivEarth.Competition.Contests
 {
-    public enum ContestEndModes
+    public enum ContestType
     {
-        TimeBased,
-        GoalBased
+        Group,
+        Individual
     };
 }

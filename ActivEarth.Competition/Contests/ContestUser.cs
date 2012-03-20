@@ -36,11 +36,10 @@ namespace ActivEarth.Competition.Contests
         /// </summary>
         /// <param name="user">The user participating in the contest.</param>
         /// <param name="statistic">The statistic being scored in the contest.</param>
-        public ContestUser(Placeholder.User user, Placeholder.Statistics statistic)
+        public ContestUser(Placeholder.User user)
         {
             this.User = user;
-            this._statisticBinding = statistic;
-            this._initialized = false;
+            _initialized = false;
         }
 
         #endregion ---------- Constructor ----------
@@ -56,10 +55,10 @@ namespace ActivEarth.Competition.Contests
         /// 
         /// DEPENDENCY: Profile.GetStatistic()
         /// </summary>
-        public void Initialize()
+        public void LockInitialValues(Placeholder.Statistic statistic)
         {
-            this._initialScore = this.User.GetStatistic(this._statisticBinding);
-            this._initialized = true;
+            _initialScore = this.User.GetStatistic(statistic);
+            _initialized = true;
         }
 
         /// <summary>
@@ -70,11 +69,11 @@ namespace ActivEarth.Competition.Contests
         /// DEPENDENCY: Profile.GetStatistic()
         /// </summary>
         /// <returns></returns>
-        public float CalculateScore()
+        public float CalculateScore(Placeholder.Statistic statistic)
         {
-            if (this._initialized)
+            if (_initialized)
             {
-                return (this.User.GetStatistic(this._statisticBinding) - this._initialScore);
+                return (this.User.GetStatistic(statistic) - _initialScore);
             }
             else
             {
@@ -96,13 +95,6 @@ namespace ActivEarth.Competition.Contests
         /// True if the user has been properly initialized, false otherwise.
         /// </summary>
         private bool _initialized;
-
-        /// <summary>
-        /// Statistic to which the contest is bound.
-        /// 
-        /// DEPENDENCY: Profile.Statistics
-        /// </summary>
-        private Placeholder.Statistics _statisticBinding; 
 
         #endregion ---------- Private Fields ----------
     }

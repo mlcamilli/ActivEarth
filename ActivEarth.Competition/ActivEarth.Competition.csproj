@@ -68,12 +68,12 @@
     <Compile Include="Challenges\ChallengeManager.cs" />
     <Compile Include="Contests\Contest.cs" />
     <Compile Include="Contests\ContestManager.cs" />
-    <Compile Include="Contests\ContestTypes.cs" />
+    <Compile Include="Contests\ContestType.cs" />
     <Compile Include="Contests\ContestUser.cs" />
     <Compile Include="Contests\IndividualContest.cs" />
     <Compile Include="Contests\EndCondition.cs" />
     <Compile Include="Contests\GroupContest.cs" />
-    <Compile Include="Contests\ContestEndModes.cs" />
+    <Compile Include="Contests\ContestEndMode.cs" />
     <Compile Include="Placeholder.cs" />
     <Compile Include="Contests\Team.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
