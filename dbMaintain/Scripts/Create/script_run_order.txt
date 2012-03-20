@@ -1,2 +1,3 @@
 dbo.Users.Table.sql
 dbo.Profile.Table.sql
+TestData.sql
