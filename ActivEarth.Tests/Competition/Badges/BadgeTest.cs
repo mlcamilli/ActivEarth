@@ -7,7 +7,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ActivEarth.Competition;
 using ActivEarth.Competition.Badges;
 
-using Statistics = ActivEarth.Competition.Placeholder.Statistics;
+using Statistics = ActivEarth.Competition.Placeholder.Statistic;
 using User = ActivEarth.Competition.Placeholder.User;
 using Group = ActivEarth.Competition.Placeholder.Group;
 
@@ -34,72 +34,86 @@ namespace ActivEarth.Tests.Competition.Badges
         [TestInitialize]
         public void Initialize()
         {
-            this._user = new User("Test", "Subject");
+            _user = new User("Test", "Subject");
 
-            this._user.Badges[Statistics.BikeDistance] = 
-                new Badge(1, "BikeDistance", this._user, Statistics.BikeDistance,
+            _user.Badges[Statistics.BikeDistance] = 
+                new Badge(1, "BikeDistance", _user, Statistics.BikeDistance,
                 BadgeConstants.BikingDistance.REQUIREMENTS, BadgeConstants.BikingDistance.POINTS,
                 BadgeConstants.BikingDistance.IMAGES);
 
-            this._user.Badges[Statistics.WalkDistance] =
-                new Badge(2, "WalkDistance", this._user, Statistics.WalkDistance,
+            _user.Badges[Statistics.WalkDistance] =
+                new Badge(2, "WalkDistance", _user, Statistics.WalkDistance,
                 BadgeConstants.WalkingDistance.REQUIREMENTS, BadgeConstants.WalkingDistance.POINTS,
                 BadgeConstants.WalkingDistance.IMAGES);
 
-            this._user.Badges[Statistics.RunDistance] =
-                new Badge(3, "RunDistance", this._user, Statistics.RunDistance,
+            _user.Badges[Statistics.RunDistance] =
+                new Badge(3, "RunDistance", _user, Statistics.RunDistance,
                 BadgeConstants.RunningDistance.REQUIREMENTS, BadgeConstants.RunningDistance.POINTS,
                 BadgeConstants.RunningDistance.IMAGES);
 
-            this._user.Badges[Statistics.Steps] =
-                new Badge(4, "Steps", this._user, Statistics.Steps,
+            _user.Badges[Statistics.Steps] =
+                new Badge(4, "Steps", _user, Statistics.Steps,
                 BadgeConstants.Steps.REQUIREMENTS, BadgeConstants.Steps.POINTS,
                 BadgeConstants.Steps.IMAGES);
 
-            this._user.Badges[Statistics.GasSavings] =
-                new Badge(5, "BikeDistance", this._user, Statistics.GasSavings,
+            _user.Badges[Statistics.GasSavings] =
+                new Badge(5, "BikeDistance", _user, Statistics.GasSavings,
                 BadgeConstants.GasMoney.REQUIREMENTS, BadgeConstants.GasMoney.POINTS,
                 BadgeConstants.GasMoney.IMAGES);
 
-            this._user.Badges[Statistics.ChallengesCompleted] =
-                new Badge(6, "BikeDistance", this._user, Statistics.ChallengesCompleted,
+            _user.Badges[Statistics.ChallengesCompleted] =
+                new Badge(6, "BikeDistance", _user, Statistics.ChallengesCompleted,
                 BadgeConstants.Challenges.REQUIREMENTS, BadgeConstants.Challenges.POINTS,
                 BadgeConstants.Challenges.IMAGES);
 
-            this._user.SetStatistic(Statistics.BikeDistance, 0);
-            this._user.SetStatistic(Statistics.WalkDistance, 0);
-            this._user.SetStatistic(Statistics.RunDistance, 0);
-            this._user.SetStatistic(Statistics.Steps, 0);
-            this._user.SetStatistic(Statistics.GasSavings, 0);
-            this._user.SetStatistic(Statistics.ChallengesCompleted, 0);
+            _user.SetStatistic(Statistics.BikeDistance, 0);
+            _user.SetStatistic(Statistics.WalkDistance, 0);
+            _user.SetStatistic(Statistics.RunDistance, 0);
+            _user.SetStatistic(Statistics.Steps, 0);
+            _user.SetStatistic(Statistics.GasSavings, 0);
+            _user.SetStatistic(Statistics.ChallengesCompleted, 0);
         }
+
+        #region ---------- Test Cases ----------
 
         [TestMethod]
         public void TestBadgeUpdateInitialState()
         {
-            Badge badge = this._user.Badges[Statistics.Steps];
+            Log("Fetching Steps badge");
+            Badge badge = _user.Badges[Statistics.Steps];
+
+            Log("Verifying no activity points are reported by the badge");
             Assert.AreEqual(0, badge.Update());
         }
 
         [TestMethod]
         public void TestBadgeUpdateNoChange()
         {
-            Badge badge = this._user.Badges[Statistics.Steps];
+            Log("Fetching Steps badge");
+            Badge badge = _user.Badges[Statistics.Steps];
 
-            this._user.SetStatistic(Statistics.Steps, BadgeConstants.Steps.REQUIREMENTS[BadgeLevels.Bronze]);
+            Log("Updating user's step statistic to the bronze badge level");
+            _user.SetStatistic(Statistics.Steps, BadgeConstants.Steps.REQUIREMENTS[BadgeLevels.Bronze]);
 
+            Log("Verifying that first update reports bronze badge reward");
             Assert.AreEqual(BadgeConstants.Steps.POINTS[BadgeLevels.Bronze], badge.Update());
+
+            Log("Verifying that second update reports no new activity points");
             Assert.AreEqual(0, badge.Update());
         }
 
         [TestMethod]
         public void TestBadgeUpdateUpOneLevel()
         {
-            Badge badge = this._user.Badges[Statistics.Steps];
+            Log("Fetching Steps badge");
+            Badge badge = _user.Badges[Statistics.Steps];
 
             for (int level = BadgeLevels.Bronze; level <= BadgeLevels.Diamond; level++)
             {
-                this._user.SetStatistic(Statistics.Steps, BadgeConstants.Steps.REQUIREMENTS[level]);
+                Log(String.Format("Increasing badge to level {0}", level));
+                _user.SetStatistic(Statistics.Steps, BadgeConstants.Steps.REQUIREMENTS[level]);
+
+                Log("Verifying badge reward on update");
                 Assert.AreEqual(BadgeConstants.Steps.POINTS[level], badge.Update());
             }
         }
@@ -107,11 +121,15 @@ namespace ActivEarth.Tests.Competition.Badges
         [TestMethod]
         public void TestBadgeUpdateUpMultipleLevels()
         {
-            Badge badge = this._user.Badges[Statistics.Steps];
+            Log("Fetching Steps badge");
+            Badge badge = _user.Badges[Statistics.Steps];
 
             for (int level = BadgeLevels.Bronze; level <= BadgeLevels.Diamond; level+=2)
             {
-                this._user.SetStatistic(Statistics.Steps, BadgeConstants.Steps.REQUIREMENTS[level]);
+                Log(String.Format("Increasing badge to level {0}", level));
+                _user.SetStatistic(Statistics.Steps, BadgeConstants.Steps.REQUIREMENTS[level]);
+
+                Log("Verifying badge reward on update");
                 Assert.AreEqual(BadgeConstants.Steps.POINTS[level] + BadgeConstants.Steps.POINTS[level - 1], badge.Update());
             }
         }
@@ -119,64 +137,117 @@ namespace ActivEarth.Tests.Competition.Badges
         [TestMethod]
         public void TestBadgeStatisticIndependence()
         {
-            Badge stepBadge = this._user.Badges[Statistics.Steps];
-            Badge walkBadge = this._user.Badges[Statistics.WalkDistance];
+            Log("Fetching Steps badge");
+            Badge stepBadge = _user.Badges[Statistics.Steps];
 
-            this._user.SetStatistic(Statistics.Steps, BadgeConstants.Steps.REQUIREMENTS[BadgeLevels.Bronze]);
-            this._user.SetStatistic(Statistics.WalkDistance, BadgeConstants.WalkingDistance.REQUIREMENTS[BadgeLevels.Bronze]);
+            Log("Fetching Walking badge");
+            Badge walkBadge = _user.Badges[Statistics.WalkDistance];
 
+            Log("Setting user's initial statistics to bronze levels");
+            _user.SetStatistic(Statistics.Steps, BadgeConstants.Steps.REQUIREMENTS[BadgeLevels.Bronze]);
+            _user.SetStatistic(Statistics.WalkDistance, BadgeConstants.WalkingDistance.REQUIREMENTS[BadgeLevels.Bronze]);
+
+            Log("Verifying step badge reward");
             Assert.AreEqual(BadgeConstants.Steps.POINTS[BadgeLevels.Bronze], stepBadge.Update());
+
+            Log("Verifying walking badge reward");
             Assert.AreEqual(BadgeConstants.WalkingDistance.POINTS[BadgeLevels.Bronze], walkBadge.Update());
 
-            this._user.SetStatistic(Statistics.Steps, BadgeConstants.Steps.REQUIREMENTS[BadgeLevels.Silver]);
+            Log("Increasing step statistic to silver level");
+            _user.SetStatistic(Statistics.Steps, BadgeConstants.Steps.REQUIREMENTS[BadgeLevels.Silver]);
 
+            Log("Verifying no new walking badge points awarded");
             Assert.AreEqual(0, walkBadge.Update());
+
+            Log("Verifying silver level step badge points awarded");
             Assert.AreEqual(BadgeConstants.Steps.POINTS[BadgeLevels.Silver], stepBadge.Update());
         }
 
         [TestMethod]
         public void TestBadgeGetImagePath()
         {
-            Badge stepBadge = this._user.Badges[Statistics.Steps];
+            Log("Fetching Steps badge");
+            Badge stepBadge = _user.Badges[Statistics.Steps];
+
+            Log("Verifying initial badge image path");
             Assert.AreEqual(BadgeConstants.Steps.IMAGES[BadgeLevels.None], stepBadge.GetImagePath());
 
-            this._user.SetStatistic(Statistics.Steps, BadgeConstants.Steps.REQUIREMENTS[BadgeLevels.Bronze]);
+            Log("Increasing badge to Bronze level");
+            _user.SetStatistic(Statistics.Steps, BadgeConstants.Steps.REQUIREMENTS[BadgeLevels.Bronze]);
             stepBadge.Update();
+
+            Log("Verifying bronze badge image path");
             Assert.AreEqual(BadgeConstants.Steps.IMAGES[BadgeLevels.Bronze], stepBadge.GetImagePath());
 
-            this._user.SetStatistic(Statistics.Steps, BadgeConstants.Steps.REQUIREMENTS[BadgeLevels.Platinum]);
+            Log("Increasing badge to Platinum level");
+            _user.SetStatistic(Statistics.Steps, BadgeConstants.Steps.REQUIREMENTS[BadgeLevels.Platinum]);
             stepBadge.Update();
+
+            Log("Verifying platinum badge image path");
             Assert.AreEqual(BadgeConstants.Steps.IMAGES[BadgeLevels.Platinum], stepBadge.GetImagePath());
         }
 
         [TestMethod]
         public void TestBadgeGetNextLevelRequirement()
         {
-            Badge stepBadge = this._user.Badges[Statistics.Steps];
+            Log("Fetching Steps badge");
+            Badge stepBadge = _user.Badges[Statistics.Steps];
+
+            Log("Verifying initial 'next level' requirements");
             Assert.AreEqual(BadgeConstants.Steps.REQUIREMENTS[BadgeLevels.Bronze], stepBadge.GetNextLevelRequirement());
 
-            this._user.SetStatistic(Statistics.Steps, BadgeConstants.Steps.REQUIREMENTS[BadgeLevels.Gold]);
+            Log("Increasing badge to gold level");
+            _user.SetStatistic(Statistics.Steps, BadgeConstants.Steps.REQUIREMENTS[BadgeLevels.Gold]);
             stepBadge.Update();
+
+            Log("Verifying 'next level' requirements");
             Assert.AreEqual(BadgeConstants.Steps.REQUIREMENTS[BadgeLevels.Platinum], stepBadge.GetNextLevelRequirement());
 
-            this._user.SetStatistic(Statistics.Steps, BadgeConstants.Steps.REQUIREMENTS[BadgeLevels.Max]);
+            Log("Increasing badge to maximum level");
+            _user.SetStatistic(Statistics.Steps, BadgeConstants.Steps.REQUIREMENTS[BadgeLevels.Max]);
             stepBadge.Update();
+
+            Log("Verifying 'next level' requirements reported as infinity");
             Assert.AreEqual(float.PositiveInfinity, stepBadge.GetNextLevelRequirement());
         }
 
         [TestMethod]
         public void TestBadgeGetNextLevelPoints()
         {
-            Badge stepBadge = this._user.Badges[Statistics.Steps];
+            Log("Fetching Steps badge");
+            Badge stepBadge = _user.Badges[Statistics.Steps];
+
+            Log("Verifying initial 'next level' reward");
             Assert.AreEqual(BadgeConstants.Steps.POINTS[BadgeLevels.Bronze], stepBadge.GetNextLevelPoints());
 
-            this._user.SetStatistic(Statistics.Steps, BadgeConstants.Steps.REQUIREMENTS[BadgeLevels.Gold]);
+            Log("Increasing badge to gold level");
+            _user.SetStatistic(Statistics.Steps, BadgeConstants.Steps.REQUIREMENTS[BadgeLevels.Gold]);
             stepBadge.Update();
+
+            Log("Verifying 'next level' reward");
             Assert.AreEqual(BadgeConstants.Steps.POINTS[BadgeLevels.Platinum], stepBadge.GetNextLevelPoints());
 
-            this._user.SetStatistic(Statistics.Steps, BadgeConstants.Steps.REQUIREMENTS[BadgeLevels.Max]);
+            Log("Increasing badge to maximum level");
+            _user.SetStatistic(Statistics.Steps, BadgeConstants.Steps.REQUIREMENTS[BadgeLevels.Max]);
             stepBadge.Update();
+
+            Log("Verifying 'next level' reward reported as zero");
             Assert.AreEqual(0, stepBadge.GetNextLevelPoints());
         }
+
+        #endregion ---------- Test Cases ----------
+
+        #region ---------- Utility Methods ----------
+
+        /// <summary>
+        /// Logs a message to the Test Context's output (Test Results file).
+        /// </summary>
+        /// <param name="message">Message to add to the test log.</param>
+        private void Log(string message)
+        {
+            TestContext.WriteLine(message);
+        }
+
+        #endregion ---------- Utility Methods ----------
     }
 }

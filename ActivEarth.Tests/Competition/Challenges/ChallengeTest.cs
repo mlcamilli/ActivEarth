@@ -7,7 +7,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ActivEarth.Competition;
 using ActivEarth.Competition.Challenges;
 
-using Statistics = ActivEarth.Competition.Placeholder.Statistics;
+using Statistics = ActivEarth.Competition.Placeholder.Statistic;
 using User = ActivEarth.Competition.Placeholder.User;
 using Group = ActivEarth.Competition.Placeholder.Group;
 
@@ -39,139 +39,211 @@ namespace ActivEarth.Tests.Competition.Challenges
         [TestInitialize]
         public void Initialize()
         {
-            this._user1 = new User("Test", "Subject1");
-            this._user2 = new User("Test", "Subject2");
+            _user1 = new User("Test", "Subject1");
+            _user2 = new User("Test", "Subject2");
 
-            this._allUsers = new Group("All Users");
-            this._allUsers.Members.Add(this._user1);
-            this._allUsers.Members.Add(this._user2);
+            _allUsers = new Group("All Users");
+            _allUsers.Members.Add(_user1);
+            _allUsers.Members.Add(_user2);
 
-            this._manager = new ChallengeManager(this._allUsers);
+            _manager = new ChallengeManager(_allUsers);
         }
+
+        #region ---------- Test Cases ----------
 
         [TestMethod]
         public void TestChallengeCreation()
         {
-            this._user2.SetStatistic(Statistics.Steps, 50);
+            Log("Setting User2's initial Step statistic");
+            _user2.SetStatistic(Statistics.Steps, 50);
 
-            uint id = this._manager.CreateChallenge("Test Challenge", "This is a test challenge", 
+            Log("Creating Step-Based Challenge");
+            uint id = _manager.CreateChallenge("Test Challenge", "This is a test challenge", 
                 30, false, DateTime.Now.AddDays(1), Statistics.Steps, 500);
 
-            Assert.IsTrue(this._user1.ChallengeInitialValues.ContainsKey(id));
-            Assert.AreEqual(0, this._user1.ChallengeInitialValues[id]);
+            Log("Verifying that User1's initialization contains the new Challenge ID");
+            Assert.IsTrue(_user1.ChallengeInitialValues.ContainsKey(id));
 
-            Assert.IsTrue(this._user2.ChallengeInitialValues.ContainsKey(id));
-            Assert.AreEqual(50, this._user2.ChallengeInitialValues[id]);
+            Log("Verifying User1's initialization value for the new Challenge ID");
+            Assert.AreEqual(0, _user1.ChallengeInitialValues[id]);
+
+            Log("Verifying that User2's initialization contains the new Challenge ID");
+            Assert.IsTrue(_user2.ChallengeInitialValues.ContainsKey(id));
+
+            Log("Verifying User2's initialization value for the new Challenge ID");
+            Assert.AreEqual(50, _user2.ChallengeInitialValues[id]);
         }
 
         [TestMethod]
         public void TestChallengeProgressIncomplete()
         {
-            this._user2.SetStatistic(Statistics.Steps, 50);
+            Log("Setting User2's initial Step statistic");
+            _user2.SetStatistic(Statistics.Steps, 50);
 
-            uint id = this._manager.CreateChallenge("Test Challenge", "This is a test challenge", 
+            Log("Creating Step-Based Challenge");
+            uint id = _manager.CreateChallenge("Test Challenge", "This is a test challenge", 
                 30, false, DateTime.Now.AddDays(1), Statistics.Steps, 500);
 
-            Challenge challenge = this._manager.GetChallenge(id);
+            Challenge challenge = _manager.GetChallenge(id);
 
-            this._user1.SetStatistic(Statistics.Steps, 200);
-            this._user2.SetStatistic(Statistics.Steps, 200);
+            Log("Increasing User1's Step Statistic");
+            _user1.SetStatistic(Statistics.Steps, 200);
 
-            Assert.AreEqual(200, challenge.GetProgress(this._user1));
-            Assert.AreEqual(150, challenge.GetProgress(this._user2));
+            Log("Increasing User2's Step Statistic");
+            _user2.SetStatistic(Statistics.Steps, 200);
 
-            Assert.IsFalse(challenge.IsComplete(this._user1));
-            Assert.IsFalse(challenge.IsComplete(this._user2));
+            Log("Verifying User1's Challenge Progress");
+            Assert.AreEqual(200, challenge.GetProgress(_user1));
+
+            Log("Verifying User2's Challenge Progress");
+            Assert.AreEqual(150, challenge.GetProgress(_user2));
+
+            Log("Verifying User1 has not completed the Challenge");
+            Assert.IsFalse(challenge.IsComplete(_user1));
+
+            Log("Verifying User2 has not completed the Challenge");
+            Assert.IsFalse(challenge.IsComplete(_user2));
         }
 
         [TestMethod]
         public void TestChallengeProgressComplete()
-        {            
-            this._user2.SetStatistic(Statistics.Steps, 50);
+        {
+            Log("Setting User2's initial Step statistic");
+            _user2.SetStatistic(Statistics.Steps, 50);
 
-            uint id = this._manager.CreateChallenge("Test Challenge", "This is a test challenge", 
+            Log("Creating Step-Based Challenge");
+            uint id = _manager.CreateChallenge("Test Challenge", "This is a test challenge", 
                 30, false, DateTime.Now.AddDays(1), Statistics.Steps, 500);
 
-            Challenge challenge = this._manager.GetChallenge(id);
+            Challenge challenge = _manager.GetChallenge(id);
 
-            this._user1.SetStatistic(Statistics.Steps, 525);
-            this._user2.SetStatistic(Statistics.Steps, 550);
+            Log("Increasing User1's Step Statistic");
+            _user1.SetStatistic(Statistics.Steps, 525);
 
-            Assert.AreEqual(500, challenge.GetProgress(this._user1));
-            Assert.AreEqual(500, challenge.GetProgress(this._user2));
+            Log("Increasing User2's Step Statistic");
+            _user2.SetStatistic(Statistics.Steps, 550);
 
-            Assert.IsTrue(challenge.IsComplete(this._user1));
-            Assert.IsTrue(challenge.IsComplete(this._user2));
+            Log("Verifying User1's Challenge Progress");
+            Assert.AreEqual(500, challenge.GetProgress(_user1));
+
+            Log("Verifying User2's Challenge Progress");
+            Assert.AreEqual(500, challenge.GetProgress(_user2));
+
+            Log("Verifying User1 has completed the Challenge");
+            Assert.IsTrue(challenge.IsComplete(_user1));
+
+            Log("Verifying User2 has completed the Challenge");
+            Assert.IsTrue(challenge.IsComplete(_user2));
         }
         
         [TestMethod]
         public void TestChallengeMultipleInitialization()
         {
-            this._user1.SetStatistic(Statistics.Steps, 50);
-            this._user1.SetStatistic(Statistics.BikeDistance, 100);
+            Log("Setting User1's initial Step and Bike statistics");
+            _user1.SetStatistic(Statistics.Steps, 50);
+            _user1.SetStatistic(Statistics.BikeDistance, 100);
 
-            uint id1 = this._manager.CreateChallenge("Test Step Challenge", "This is a test challenge",
+            Log("Creating Step-based Challenge");
+            uint id1 = _manager.CreateChallenge("Test Step Challenge", "This is a test challenge",
                 30, false, DateTime.Now.AddDays(1), Statistics.Steps, 500);
 
-            uint id2 = this._manager.CreateChallenge("Test Bike Challenge", "This is a test challenge",
+            Log("Creating Biking-based Challenge");
+            uint id2 = _manager.CreateChallenge("Test Bike Challenge", "This is a test challenge",
                 30, false, DateTime.Now.AddDays(1), Statistics.BikeDistance, 100);
 
-            this._user1.SetStatistic(Statistics.Steps, 150);
+            Log("Increasing User1's Step statistic");
+            _user1.SetStatistic(Statistics.Steps, 150);
 
-            uint id3 = this._manager.CreateChallenge("Test Step Challenge 2", "This is another test challenge",
+            Log("Creating another Step-based Challenge");
+            uint id3 = _manager.CreateChallenge("Test Step Challenge 2", "This is another test challenge",
                 30, false, DateTime.Now.AddDays(1), Statistics.Steps, 500);
 
-            Assert.IsTrue(this._user1.ChallengeInitialValues.ContainsKey(id1));
-            Assert.AreEqual(50, this._user1.ChallengeInitialValues[id1]);
+            Log("Verifying initialization of first step-based challenge");
+            Assert.IsTrue(_user1.ChallengeInitialValues.ContainsKey(id1));
+            Assert.AreEqual(50, _user1.ChallengeInitialValues[id1]);
 
-            Assert.IsTrue(this._user1.ChallengeInitialValues.ContainsKey(id2));
-            Assert.AreEqual(100, this._user1.ChallengeInitialValues[id2]);
+            Log("Verifying initialization of biking-based challenge");
+            Assert.IsTrue(_user1.ChallengeInitialValues.ContainsKey(id2));
+            Assert.AreEqual(100, _user1.ChallengeInitialValues[id2]);
 
-            Assert.IsTrue(this._user1.ChallengeInitialValues.ContainsKey(id3));
-            Assert.AreEqual(150, this._user1.ChallengeInitialValues[id3]);
+            Log("Verifying initialization of second step-based challenge");
+            Assert.IsTrue(_user1.ChallengeInitialValues.ContainsKey(id3));
+            Assert.AreEqual(150, _user1.ChallengeInitialValues[id3]);
         }
 
         [TestMethod]
         public void TestChallengeCleanup()
         {
-            uint id1 = this._manager.CreateChallenge("Test Step Challenge", "This is an expired transient challenge",
+            Log("Creating an expired transient challenge");
+            uint id1 = _manager.CreateChallenge("Test Step Challenge", "This is an expired transient challenge",
                 30, false, DateTime.Now.AddMinutes(-5), Statistics.Steps, 500);
 
-            uint id2 = this._manager.CreateChallenge("Test Bike Challenge", "This is an active transient challenge",
+            Log("Creating an ongoing transient challenge");
+            uint id2 = _manager.CreateChallenge("Test Bike Challenge", "This is an active transient challenge",
                 30, false, DateTime.Now.AddDays(1), Statistics.BikeDistance, 100);
 
-            uint id3 = this._manager.CreateChallenge("Test Step Challenge 2", "This is a persistent challenge",
+            Log("Creating an expired persistent challenge");
+            uint id3 = _manager.CreateChallenge("Test Step Challenge 2", "This is a persistent challenge",
                 30, true, DateTime.Now.AddMinutes(-5), Statistics.Steps, 500);
 
-            Assert.IsNotNull(this._manager.GetChallenge(id1));
-            Assert.IsNotNull(this._manager.GetChallenge(id2));
-            Assert.IsNotNull(this._manager.GetChallenge(id3));
+            Log("Verifying that all three challenges are in the active collection (before CleanUp)");
+            Assert.IsNotNull(_manager.GetChallenge(id1));
+            Assert.IsNotNull(_manager.GetChallenge(id2));
+            Assert.IsNotNull(_manager.GetChallenge(id3));
 
-            this._manager.CleanUp();
+            Log("Call manager's CleanUp routine");
+            _manager.CleanUp();
 
-            Assert.IsNull(this._manager.GetChallenge(id1));
-            Assert.IsNotNull(this._manager.GetChallenge(id2));
-            Assert.IsNotNull(this._manager.GetChallenge(id3));
+            Log("Verifying that the expired transient challenge has been removed, but the other two remain");
+            Assert.IsNull(_manager.GetChallenge(id1));
+            Assert.IsNotNull(_manager.GetChallenge(id2));
+            Assert.IsNotNull(_manager.GetChallenge(id3));
 
-            Assert.IsNotNull(this._manager.GetChallenge(id1, false));
+            Log("Verify that the expired transient challenge still exists in the 'all challenges' collection");
+            Assert.IsNotNull(_manager.GetChallenge(id1, false));
         }
 
         [TestMethod]
         public void TestChallengeResetPersistentChallenge()
         {
-            uint id = this._manager.CreateChallenge("Test Step Challenge", "This is a persistent challenge",
+            Log("Creating an expired persistent challenge");
+            uint id = _manager.CreateChallenge("Test Step Challenge", "This is a persistent challenge",
                 30, true, DateTime.Now.AddMinutes(-5), Statistics.Steps, 500);
 
-            Challenge challenge = this._manager.GetChallenge(id);
+            Challenge challenge = _manager.GetChallenge(id);
 
-            this._user1.SetStatistic(Statistics.Steps, 250);
-            Assert.AreEqual(250, challenge.GetProgress(this._user1));
+            Log("Increasing User1's steps Statistic");
+            _user1.SetStatistic(Statistics.Steps, 250);
 
-            this._manager.CleanUp();
+            Log("Verifying challenge progress");
+            Assert.AreEqual(250, challenge.GetProgress(_user1));
 
-            Assert.AreEqual(0, challenge.GetProgress(this._user1));
-            this._user1.SetStatistic(Statistics.Steps, 500);
-            Assert.AreEqual(250, challenge.GetProgress(this._user1));
+            Log("Calling manager's CleanUp routine");
+            _manager.CleanUp();
+
+            Log("Verifying that challenge progress reset");
+            Assert.AreEqual(0, challenge.GetProgress(_user1));
+
+            Log("Increasing User1's steps Statistic");
+            _user1.SetStatistic(Statistics.Steps, 500);
+
+            Log("Verifying challenge progress");
+            Assert.AreEqual(250, challenge.GetProgress(_user1));
         }
+
+        #endregion ---------- Test Cases ----------
+
+        #region ---------- Utility Methods ----------
+
+        /// <summary>
+        /// Logs a message to the Test Context's output (Test Results file).
+        /// </summary>
+        /// <param name="message">Message to add to the test log.</param>
+        private void Log(string message)
+        {
+            TestContext.WriteLine(message);
+        }
+
+        #endregion ---------- Utility Methods ----------
     }
 }
