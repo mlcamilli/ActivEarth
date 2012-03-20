@@ -7,7 +7,7 @@
     </h2>
     <asp:Panel runat="server" ID="pnlBMI">
     <p>
-        Your BMI is <b><asp:Label runat="server" ID="lblBMI"></asp:Label></b> which means you are <asp:Label runat="server" ID="lblBMIResult"></asp:Label>.
+        Your BMI is <b><asp:Label runat="server" ID="lblBMI"></asp:Label></b> which means you are <b><asp:Label runat="server" ID="lblBMIResult"></asp:Label></b>.
     </p>
     </asp:Panel>
     <asp:Panel runat="server" ID="pnlNotEnoughData">

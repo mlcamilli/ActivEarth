@@ -1,0 +1,11 @@
+C:\Users\matt.camilli\dev\ActivEarth\ActivEarth.Tests\bin\Debug\ActivEarth.Tests.dll
+C:\Users\matt.camilli\dev\ActivEarth\ActivEarth.Tests\bin\Debug\ActivEarth.Tests.pdb
+C:\Users\matt.camilli\dev\ActivEarth\ActivEarth.Tests\bin\Debug\ActivEarth.Objects.dll
+C:\Users\matt.camilli\dev\ActivEarth\ActivEarth.Tests\bin\Debug\ActivEarth.Server.Service.dll
+C:\Users\matt.camilli\dev\ActivEarth\ActivEarth.Tests\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+C:\Users\matt.camilli\dev\ActivEarth\ActivEarth.Tests\bin\Debug\ActivEarth.Objects.pdb
+C:\Users\matt.camilli\dev\ActivEarth\ActivEarth.Tests\bin\Debug\ActivEarth.Server.Service.pdb
+C:\Users\matt.camilli\dev\ActivEarth\ActivEarth.Tests\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.xml
+C:\Users\matt.camilli\dev\ActivEarth\ActivEarth.Tests\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\matt.camilli\dev\ActivEarth\ActivEarth.Tests\obj\Debug\ActivEarth.Tests.dll
+C:\Users\matt.camilli\dev\ActivEarth\ActivEarth.Tests\obj\Debug\ActivEarth.Tests.pdb

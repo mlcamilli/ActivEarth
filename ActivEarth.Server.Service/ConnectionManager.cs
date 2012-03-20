@@ -8,17 +8,13 @@ using System.Diagnostics;
 namespace ActivEarth.Server.Service
 {
 
-    /// <summary>
-    /// Manages application connection strings and retrieves new connections to the database.
-    /// </summary>
+ 
 
     public class ConnectionManager
     {
         private static string _connectionString = ConfigurationManager.ConnectionStrings["DevDB"].ToString();
 
-        /// <summary>
-        /// The connection string used to connect to the Ecolink database.
-        /// </summary>
+     
 
         public static string ConnectionString
         {
@@ -30,7 +26,7 @@ namespace ActivEarth.Server.Service
             set
             {
                 _connectionString = value;
-                Debug.WriteLine(String.Format("Using connection string: {0}.  ", _connectionString));
+                
             }
         }
 

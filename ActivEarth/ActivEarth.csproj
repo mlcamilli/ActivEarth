@@ -126,7 +126,6 @@
     <Compile Include="Account\EditProfile.aspx.designer.cs">
       <DependentUpon>EditProfile.aspx</DependentUpon>
     </Compile>
-    <Compile Include="DAO\TestDAO.cs" />
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -155,6 +154,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="DAO\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Site.Master" />

@@ -27,26 +27,9 @@ namespace ActivEarth.Fitness
                 pnlBMI.Visible = true;
                 pnlNotEnoughData.Visible = false;
 
-                var bmi = (double) ((user.Weight*703)/(user.Height*user.Height)) ;
-                if (bmi < 18.5)
-                {
-                    lblBMIResult.Text = "underweight";
-                }
-                else if (bmi >= 18.5 && bmi < 25)
-                {
-                    lblBMIResult.Text = "normal";
-                }
-                else if (bmi >= 25 && bmi < 30)
-                {
-                    lblBMIResult.Text = "overweight";
-                }
-                else
-                {
-                    lblBMIResult.Text = "obese";
-                }
-
+                var bmi = BMICalculator.CalculateBMI((int)user.Height, (int)user.Weight) ;
                 lblBMI.Text = bmi.ToString();
-
+                lblBMIResult.Text = BMICalculator.GetBMIResult(bmi);
             }
 
         }

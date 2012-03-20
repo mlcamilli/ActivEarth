@@ -33,9 +33,10 @@ namespace ActivEarth.Account
             else
             {
                 var user = (Session["userDetails"] as User);
-                if (user != null && TestDAO.ConfirmPassword(CurrentPassword.Text, user.UserID))
+                if (user != null && UserDAO.ConfirmPassword(CurrentPassword.Text, user.UserID))
                 {
-                    TestDAO.UpdatePassword(NewPassword.Text, user.UserID);
+                    
+                    UserDAO.UpdatePassword(NewPassword.Text, user.UserID);
                     Response.Redirect("~/Account/ChangePasswordSuccess.aspx");
                 }
                 else

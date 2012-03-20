@@ -53,9 +53,9 @@ namespace ActivEarth.Account
                                Weight = int.Parse(tbWeight.Text)
 
                            };
-            if (TestDAO.UpdateUserProfile(user))
+            if (UserDAO.UpdateUserProfile(user))
             {
-                Session["userDetails"] = TestDAO.GetUserFromUserId(user.UserID);  
+                Session["userDetails"] = UserDAO.GetUserFromUserId(user.UserID);  
                 Response.Redirect("~/Account/Profile.aspx");
             }else
             {

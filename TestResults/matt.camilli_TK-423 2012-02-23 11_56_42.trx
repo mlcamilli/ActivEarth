@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<TestRun id="f5f469a0-cbc2-455b-9aed-7ed837fe2085" name="matt.camilli@TK-423 2012-02-23 11:56:42" runUser="XC\matt.camilli" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <TestSettings name="Local" id="b6d0cd76-2b43-4d84-b2ff-264b4e80fa4d">
+    <Description>These are default test settings for a local test run.</Description>
+    <Deployment enabled="false" runDeploymentRoot="matt.camilli_TK-423 2012-02-23 11_56_42">
+      <DeploymentItem filename="C:\Users\matt.camilli\dev\ActivEarth\ActivEarth.Objects\bin\ActivEarth.Objects.dll" />
+    </Deployment>
+    <Execution>
+      <TestTypeSpecific />
+      <AgentRule name="Execution Agents">
+      </AgentRule>
+    </Execution>
+  </TestSettings>
+  <Times creation="2012-02-23T11:56:42.8862045-05:00" queuing="2012-02-23T11:56:43.6562381-05:00" start="2012-02-23T11:56:43.6953261-05:00" finish="2012-02-23T11:56:44.2103105-05:00" />
+  <ResultSummary outcome="Failed">
+    <Counters total="1" executed="1" error="0" failed="1" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" passed="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+  <TestDefinitions>
+    <UnitTest name="TestCalculateBMI" storage="c:\users\matt.camilli\dev\activearth\activearth.tests\bin\debug\activearth.tests.dll" id="c400b4d0-3a6b-2119-1b60-9b7966376ee1">
+      <Execution id="b2ec106f-1f0a-450f-be4e-32c1cb13f408" />
+      <TestMethod codeBase="C:/Users/matt.camilli/dev/ActivEarth/ActivEarth.Tests/bin/Debug/ActivEarth.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="ActivEarth.Tests.BMICalculatorTest, ActivEarth.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="TestCalculateBMI" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <TestEntries>
+    <TestEntry testId="c400b4d0-3a6b-2119-1b60-9b7966376ee1" executionId="b2ec106f-1f0a-450f-be4e-32c1cb13f408" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <Results>
+    <UnitTestResult executionId="b2ec106f-1f0a-450f-be4e-32c1cb13f408" testId="c400b4d0-3a6b-2119-1b60-9b7966376ee1" testName="TestCalculateBMI" computerName="TK-423" duration="00:00:00.0362073" startTime="2012-02-23T11:56:43.7246421-05:00" endTime="2012-02-23T11:56:44.1164993-05:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b2ec106f-1f0a-450f-be4e-32c1cb13f408">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Fail failed. Assert.Equals should not be used for Assertions. Please use Assert.AreEqual &amp; overloads instead.</Message>
+          <StackTrace>   at ActivEarth.Tests.BMICalculatorTest.TestCalculateBMI() in C:\Users\matt.camilli\dev\ActivEarth\ActivEarth.Tests\BMICalculatorTest.cs:line 16
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+  </Results>
+</TestRun>
