@@ -20,8 +20,7 @@ namespace ActivEarth.Tests
         [ClassInitialize]
         public static void ClassInitialize(TestContext testContext)
         {
-            ConnectionManager.ConnectionString =
-                "data source=venus.cs.vt.edu;Initial Catalog=ActivEarth_Dev;user id = aeadmin; password = Hansh0tfirst;";
+            
         }
         
         [TestInitialize]
