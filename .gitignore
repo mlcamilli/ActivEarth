@@ -5,3 +5,7 @@ _ReSharper.**
 *[Bb]in
 *[Oo]bj
 *[Ll]ogs
+TestResults.**
+*.trx
+*/bin/*
+*/obj/*

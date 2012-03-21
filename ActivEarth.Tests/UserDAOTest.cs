@@ -16,16 +16,13 @@ namespace ActivEarth.Tests
     public class UserDAOTest
     {
         private TransactionScope _trans;
-        public TestContext TestContext { get; set; }
-        [ClassInitialize]
-        public static void ClassInitialize(TestContext testContext)
-        {
-            
-        }
+   
         
         [TestInitialize]
         public void Initialize()
         {
+//            ConnectionManager.ConnectionString =
+//                "data source=.;Initial Catalog=ActivEarth_Dev;Integrated Security=SSPI;";
             _trans = new TransactionScope();
             
         }
@@ -38,21 +35,26 @@ namespace ActivEarth.Tests
         [TestMethod]
         public void TestConfirmPassword()
         {
-            var user = new User
+            using (_trans)
             {
-                UserName = "testy123",
-                Age = 25,
-                City = "Bleaksburg",
-                Email = "whatisthis@idont.even",
-                FirstName = "I.C.",
-                Gender = 'M',
-                Height = 60,
-                LastName = "Poorcode",
-                State = "VA",
-                Weight = 130
-            };
-            UserDAO.CreateNewUser(user, "test");
-            Assert.IsTrue(UserDAO.ConfirmPassword("test", UserDAO.GetUserIdFromUserName("testy123")));
+                var user = new User
+                {
+                    UserName = "testy123",
+                    Age = 25,
+                    City = "Bleaksburg",
+                    Email = "whatisthis@idont.even",
+                    FirstName = "I.C.",
+                    Gender = 'M',
+                    Height = 60,
+                    LastName = "Poorcode",
+                    State = "VA",
+                    Weight = 130
+                };
+                UserDAO.CreateNewUser(user, "test");
+                Assert.IsTrue(UserDAO.ConfirmPassword("test", UserDAO.GetUserIdFromUserName("testy123")));
+                
+            }
+            
             
         }
 
