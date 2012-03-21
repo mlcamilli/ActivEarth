@@ -70,6 +70,15 @@ namespace ActivEarth.Competition.Challenges
         public DateTime EndTime
         {
             get;
+            set;
+        }
+
+        /// <summary>
+        /// The Duration of the challenge.
+        /// </summary>
+        public TimeSpan Duration
+        {
+            get;
             private set;
         }
 
@@ -102,14 +111,15 @@ namespace ActivEarth.Competition.Challenges
         /// <param name="statistic">Statistic to which the Challenge is bound.</param>
         /// <param name="requirement">Statistic value required to complete the challenge.</param>
         public Challenge(uint id, string name, string description, int points, bool persistent,
-            DateTime endTime, Placeholder.Statistic statistic, float requirement)
+            DateTime startTime, TimeSpan duration, Placeholder.Statistic statistic, float requirement)
         {
             this.ID = id;
             this.Name = name;
             this.Description = description;
             this.Points = points;
             this.IsPersistent = persistent;
-            this.EndTime = endTime;
+            this.Duration = duration;
+            this.EndTime = startTime.Add(duration);
             this.StatisticBinding = statistic;
             this.Requirement = requirement;
         }

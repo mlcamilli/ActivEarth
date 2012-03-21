@@ -7,7 +7,7 @@ namespace ActivEarth.Competition.Contests
 {
     public enum ContestType
     {
-        Group,
+        Group = 0,
         Individual
     };
 }

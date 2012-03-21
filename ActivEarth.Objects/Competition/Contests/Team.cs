@@ -158,7 +158,7 @@ namespace ActivEarth.Competition.Contests
         }
 
         /// <summary>
-        /// Searches the team for a particular member.
+        /// Test Hook: Searches the team for a particular member.
         /// </summary>
         /// <param name="user">User to look for.</param>
         /// <returns>True if the user is a member of the team.</returns>

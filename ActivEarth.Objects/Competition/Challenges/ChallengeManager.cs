@@ -39,18 +39,18 @@ namespace ActivEarth.Competition.Challenges
         /// <param name="requirement">Statistic value required to complete the challenge.</param>
         /// <returns></returns>
         public uint CreateChallenge(string name, string description, int points, bool persistent,
-            DateTime end, Placeholder.Statistic statistic, float requirement)
+            DateTime start, TimeSpan duration, Placeholder.Statistic statistic, float requirement)
         {
             uint id = _nextID;
             _nextID++;
 
             Challenge newChallenge = new Challenge(id, name, description, points, persistent,
-                    end, statistic, requirement);
+                    start, duration, statistic, requirement);
 
             _activeChallenges.Add(newChallenge);
             _allChallenges.Add(newChallenge);
 
-            this.InitializeUsers(id, statistic);
+            this.LockInitialValues(id, statistic);
 
             return id;
         }
@@ -109,7 +109,10 @@ namespace ActivEarth.Competition.Challenges
                     if (challenge.IsPersistent)
                     {
                         newActiveChallenges.Add(challenge);
-                        this.InitializeUsers(challenge.ID, challenge.StatisticBinding);
+
+                        challenge.EndTime = challenge.EndTime.Add(challenge.Duration);
+
+                        this.LockInitialValues(challenge.ID, challenge.StatisticBinding);
                     }
                     else
                     {
@@ -132,7 +135,7 @@ namespace ActivEarth.Competition.Challenges
         /// </summary>
         /// <param name="id">Identifier for the challenge being initialized.</param>
         /// <param name="statistic">Statistic being tracked by the challenge.</param>
-        private void InitializeUsers(uint id, Placeholder.Statistic statistic)
+        private void LockInitialValues(uint id, Placeholder.Statistic statistic)
         {
             foreach (Placeholder.User user in _allUsers.Members)
             {

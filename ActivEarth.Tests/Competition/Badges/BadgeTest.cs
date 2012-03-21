@@ -38,31 +38,26 @@ namespace ActivEarth.Tests.Competition.Badges
 
             _user.Badges[Statistics.BikeDistance] = 
                 new Badge(1, "BikeDistance", _user, Statistics.BikeDistance,
-                BadgeConstants.BikingDistance.REQUIREMENTS, BadgeConstants.BikingDistance.POINTS,
-                BadgeConstants.BikingDistance.IMAGES);
+                BadgeConstants.BikeDistance.REQUIREMENTS, BadgeConstants.BikeDistance.POINTS,
+                BadgeConstants.BikeDistance.IMAGES);
 
             _user.Badges[Statistics.WalkDistance] =
                 new Badge(2, "WalkDistance", _user, Statistics.WalkDistance,
-                BadgeConstants.WalkingDistance.REQUIREMENTS, BadgeConstants.WalkingDistance.POINTS,
-                BadgeConstants.WalkingDistance.IMAGES);
+                BadgeConstants.WalkDistance.REQUIREMENTS, BadgeConstants.WalkDistance.POINTS,
+                BadgeConstants.WalkDistance.IMAGES);
 
             _user.Badges[Statistics.RunDistance] =
                 new Badge(3, "RunDistance", _user, Statistics.RunDistance,
-                BadgeConstants.RunningDistance.REQUIREMENTS, BadgeConstants.RunningDistance.POINTS,
-                BadgeConstants.RunningDistance.IMAGES);
+                BadgeConstants.RunDistance.REQUIREMENTS, BadgeConstants.RunDistance.POINTS,
+                BadgeConstants.RunDistance.IMAGES);
 
             _user.Badges[Statistics.Steps] =
                 new Badge(4, "Steps", _user, Statistics.Steps,
                 BadgeConstants.Steps.REQUIREMENTS, BadgeConstants.Steps.POINTS,
                 BadgeConstants.Steps.IMAGES);
 
-            _user.Badges[Statistics.GasSavings] =
-                new Badge(5, "BikeDistance", _user, Statistics.GasSavings,
-                BadgeConstants.GasMoney.REQUIREMENTS, BadgeConstants.GasMoney.POINTS,
-                BadgeConstants.GasMoney.IMAGES);
-
             _user.Badges[Statistics.ChallengesCompleted] =
-                new Badge(6, "BikeDistance", _user, Statistics.ChallengesCompleted,
+                new Badge(5, "ChallengesCompleted", _user, Statistics.ChallengesCompleted,
                 BadgeConstants.Challenges.REQUIREMENTS, BadgeConstants.Challenges.POINTS,
                 BadgeConstants.Challenges.IMAGES);
 
@@ -70,7 +65,6 @@ namespace ActivEarth.Tests.Competition.Badges
             _user.SetStatistic(Statistics.WalkDistance, 0);
             _user.SetStatistic(Statistics.RunDistance, 0);
             _user.SetStatistic(Statistics.Steps, 0);
-            _user.SetStatistic(Statistics.GasSavings, 0);
             _user.SetStatistic(Statistics.ChallengesCompleted, 0);
         }
 
@@ -145,13 +139,13 @@ namespace ActivEarth.Tests.Competition.Badges
 
             Log("Setting user's initial statistics to bronze levels");
             _user.SetStatistic(Statistics.Steps, BadgeConstants.Steps.REQUIREMENTS[BadgeLevels.Bronze]);
-            _user.SetStatistic(Statistics.WalkDistance, BadgeConstants.WalkingDistance.REQUIREMENTS[BadgeLevels.Bronze]);
+            _user.SetStatistic(Statistics.WalkDistance, BadgeConstants.WalkDistance.REQUIREMENTS[BadgeLevels.Bronze]);
 
             Log("Verifying step badge reward");
             Assert.AreEqual(BadgeConstants.Steps.POINTS[BadgeLevels.Bronze], stepBadge.Update());
 
             Log("Verifying walking badge reward");
-            Assert.AreEqual(BadgeConstants.WalkingDistance.POINTS[BadgeLevels.Bronze], walkBadge.Update());
+            Assert.AreEqual(BadgeConstants.WalkDistance.POINTS[BadgeLevels.Bronze], walkBadge.Update());
 
             Log("Increasing step statistic to silver level");
             _user.SetStatistic(Statistics.Steps, BadgeConstants.Steps.REQUIREMENTS[BadgeLevels.Silver]);
