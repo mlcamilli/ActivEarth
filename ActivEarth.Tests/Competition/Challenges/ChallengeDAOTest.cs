@@ -55,7 +55,7 @@ namespace ActivEarth.Tests.Competition.Challenges
                     30, false, DateTime.Today, 1, Placeholder.Statistic.Steps, 500);
 
                 Log("Adding challenge to the database");
-                ChallengeDAO.CreateNewChallenge(challenge);
+                Assert.IsTrue(ChallengeDAO.CreateNewChallenge(challenge));
 
                 Log("Loading challenge from the database");
                 Challenge retrieved = ChallengeDAO.GetChallengeFromChallengeId(id);
@@ -87,7 +87,7 @@ namespace ActivEarth.Tests.Competition.Challenges
                     30, false, DateTime.Today, 1, Placeholder.Statistic.Steps, 500);
 
                 Log("Adding challenge to the database");
-                ChallengeDAO.CreateNewChallenge(challenge);
+                Assert.IsTrue(ChallengeDAO.CreateNewChallenge(challenge));
 
                 Log("Loading challenge from the database");
                 Challenge retrieved = ChallengeDAO.GetChallengeFromChallengeId(id);
@@ -101,7 +101,7 @@ namespace ActivEarth.Tests.Competition.Challenges
                 retrieved.IsActive = false;
 
                 Log("Updating the challenge to be expired");
-                ChallengeDAO.UpdateChallenge(retrieved);
+                Assert.IsTrue(ChallengeDAO.UpdateChallenge(retrieved));
 
                 Log("Reloading challenge from the database");
                 Challenge retrieved2 = ChallengeDAO.GetChallengeFromChallengeId(id);

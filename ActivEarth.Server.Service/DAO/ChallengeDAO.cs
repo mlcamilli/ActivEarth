@@ -9,6 +9,11 @@ namespace ActivEarth.DAO
 {
     public class ChallengeDAO
     {
+        /// <summary>
+        /// Retrieves a Challenge from the DB based on its ID.
+        /// </summary>
+        /// <param name="challengeId">Identifier of the challenge to retrieve.</param>
+        /// <returns>Challenge specified by the provided ID.</returns>
         public static Challenge GetChallengeFromChallengeId(uint challengeId)
         {
             using (SqlConnection connection = ConnectionManager.GetConnection())
@@ -33,6 +38,11 @@ namespace ActivEarth.DAO
             }
         }
 
+        /// <summary>
+        /// Saves a challenge as a new entry in the DB.
+        /// </summary>
+        /// <param name="challenge">Challenge object to add to the DB.</param>
+        /// <returns>True on success, false on failure.</returns>
         public static bool CreateNewChallenge(Challenge challenge)
         {
             try
@@ -64,6 +74,11 @@ namespace ActivEarth.DAO
             }
         }
 
+        /// <summary>
+        /// Updates an existing Challenge in the DB.
+        /// </summary>
+        /// <param name="challenge">Challenge whose record needs updating.</param>
+        /// <returns>True on success, false on failure.</returns>
         public static bool UpdateChallenge(Challenge challenge)
         {
             try
