@@ -2,6 +2,8 @@ dbo.Users.Table.sql
 dbo.Profile.Table.sql
 dbo.Groups.Table.sql
 dbo.Group_Members.Table.sql
+dbo.Contests.Table.sql
 dbo.Teams.Table.sql
 dbo.Team_Members.Table.sql
+dbo.Challenges.Table.sql
 TestData.sql
