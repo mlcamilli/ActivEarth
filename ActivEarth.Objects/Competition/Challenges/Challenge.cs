@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace ActivEarth.Competition.Challenges
+namespace ActivEarth.Objects.Competition.Challenges
 {
     public class Challenge
     {
@@ -15,7 +15,7 @@ namespace ActivEarth.Competition.Challenges
         public uint ID
         {
             get;
-            private set;
+            set;
         }
 
         /// <summary>
@@ -79,7 +79,7 @@ namespace ActivEarth.Competition.Challenges
         public TimeSpan Duration
         {
             get;
-            private set;
+            set;
         }
 
         /// <summary>
@@ -93,9 +93,26 @@ namespace ActivEarth.Competition.Challenges
             set;
         }
 
+        /// <summary>
+        /// Whether or not the challenge is currently running.
+        /// </summary>
+        public bool IsActive
+        {
+            get;
+            set;
+        }
+
         #endregion ---------- Public Properties ----------
 
         #region ---------- Constructor ----------
+
+        /// <summary>
+        /// Parameterless constructor for reconstituting challenges from the DB.
+        /// </summary>
+        public Challenge()
+        {
+
+        }
 
         /// <summary>
         /// Creates a new Challenge.
@@ -107,21 +124,23 @@ namespace ActivEarth.Competition.Challenges
         /// <param name="description">Challenge Description.</param>
         /// <param name="points">Points to be awarded upon completion of the Challenge.</param>
         /// <param name="persistent">True if the Challenge is persistent, false otherwise.</param>
-        /// <param name="endTime">Time at which the Challenge ends.</param>
+        /// <param name="startTime">Time at which the challenge begins.</param>
+        /// <param name="durationInDays">Number of days for which the challenge is active.</param>
         /// <param name="statistic">Statistic to which the Challenge is bound.</param>
         /// <param name="requirement">Statistic value required to complete the challenge.</param>
         public Challenge(uint id, string name, string description, int points, bool persistent,
-            DateTime startTime, TimeSpan duration, Placeholder.Statistic statistic, float requirement)
+            DateTime startTime, int durationInDays, Placeholder.Statistic statistic, float requirement)
         {
             this.ID = id;
             this.Name = name;
             this.Description = description;
             this.Points = points;
             this.IsPersistent = persistent;
-            this.Duration = duration;
-            this.EndTime = startTime.Add(duration);
+            this.Duration = new TimeSpan(durationInDays, 0, 0, 0);
+            this.EndTime = startTime.AddDays(durationInDays);
             this.StatisticBinding = statistic;
             this.Requirement = requirement;
+            this.IsActive = (DateTime.Now >= startTime && DateTime.Now < this.EndTime);
         }
 
         #endregion ---------- Constructor ----------

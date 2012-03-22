@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 
-namespace ActivEarth.Competition.Contests
+namespace ActivEarth.Objects.Competition.Contests
 {
     /// <summary>
     /// A team of participants, to be used in Contests.
@@ -11,6 +10,15 @@ namespace ActivEarth.Competition.Contests
     public class Team
     {
         #region ---------- Public Properties ----------
+
+        /// <summary>
+        /// Identifier for the team.
+        /// </summary>
+        public uint ID
+        {
+            get;
+            private set;
+        }
 
         /// <summary>
         /// The name of the team.

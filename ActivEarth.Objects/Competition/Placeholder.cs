@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace ActivEarth.Competition
+namespace ActivEarth.Objects.Competition
 {
     /// <summary>
     /// Temporary placeholder class to be used for return types/parameters until

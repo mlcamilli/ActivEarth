@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 
-namespace ActivEarth.Competition.Contests
+namespace ActivEarth.Objects.Competition.Contests
 {
     public abstract class Contest
     {

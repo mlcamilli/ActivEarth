@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
-namespace ActivEarth.Competition.Contests
+namespace ActivEarth.Objects.Competition.Contests
 {
     /// <summary>
     /// Wrapper class for Users for use with Contests.  Allows for the calculation of
@@ -24,6 +21,24 @@ namespace ActivEarth.Competition.Contests
             set;
         }
 
+        /// <summary>
+        /// The score held by the user when the contest begins.
+        /// </summary>
+        public float InitialScore
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// True if the user has been properly initialized, false otherwise.
+        /// </summary>
+        public bool Initialized
+        {
+            get;
+            private set;
+        }
+
         #endregion ---------- Public Properties ----------
 
         #region ---------- Constructor ----------
@@ -39,7 +54,7 @@ namespace ActivEarth.Competition.Contests
         public ContestUser(Placeholder.User user)
         {
             this.User = user;
-            _initialized = false;
+            this.Initialized = false;
         }
 
         #endregion ---------- Constructor ----------
@@ -57,8 +72,8 @@ namespace ActivEarth.Competition.Contests
         /// </summary>
         public void LockInitialValues(Placeholder.Statistic statistic)
         {
-            _initialScore = this.User.GetStatistic(statistic);
-            _initialized = true;
+            this.InitialScore = this.User.GetStatistic(statistic);
+            this.Initialized = true;
         }
 
         /// <summary>
@@ -71,9 +86,9 @@ namespace ActivEarth.Competition.Contests
         /// <returns></returns>
         public float CalculateScore(Placeholder.Statistic statistic)
         {
-            if (_initialized)
+            if (this.Initialized)
             {
-                return (this.User.GetStatistic(statistic) - _initialScore);
+                return (this.User.GetStatistic(statistic) - this.InitialScore);
             }
             else
             {
@@ -83,19 +98,5 @@ namespace ActivEarth.Competition.Contests
         }
 
         #endregion ---------- Public Methods ----------
-
-        #region ---------- Private Fields ----------
-
-        /// <summary>
-        /// The score held by the user when the contest begins.
-        /// </summary>
-        private float _initialScore;
-        
-        /// <summary>
-        /// True if the user has been properly initialized, false otherwise.
-        /// </summary>
-        private bool _initialized;
-
-        #endregion ---------- Private Fields ----------
     }
 }

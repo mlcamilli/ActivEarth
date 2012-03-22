@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace ActivEarth.Competition.Challenges
+namespace ActivEarth.Objects.Competition.Challenges
 {
     public class ChallengeManager
     {
@@ -33,19 +33,20 @@ namespace ActivEarth.Competition.Challenges
         /// <param name="name">Challenge Name.</param>
         /// <param name="description">Challenge Description.</param>
         /// <param name="points">Points to be awarded upon completion of the Challenge.</param>
-        /// <param name="end">Time when the Challenge shall end.</param>
+        /// <param name="start">Time at which the challenge should begin.</param>
+        /// <param name="durationInDays">Number of days that the challenge should be active.</param>
         /// <param name="persistent">True if the Challenge is persistent, false otherwise.</param>
         /// <param name="statistic">Statistic on which the Challenge is based.</param>
         /// <param name="requirement">Statistic value required to complete the challenge.</param>
         /// <returns></returns>
         public uint CreateChallenge(string name, string description, int points, bool persistent,
-            DateTime start, TimeSpan duration, Placeholder.Statistic statistic, float requirement)
+            DateTime start, int durationInDays, Placeholder.Statistic statistic, float requirement)
         {
             uint id = _nextID;
             _nextID++;
 
             Challenge newChallenge = new Challenge(id, name, description, points, persistent,
-                    start, duration, statistic, requirement);
+                    start, durationInDays, statistic, requirement);
 
             _activeChallenges.Add(newChallenge);
             _allChallenges.Add(newChallenge);
@@ -117,6 +118,8 @@ namespace ActivEarth.Competition.Challenges
                     else
                     {
                         this.RemoveInitializationValues(challenge.ID);
+
+                        challenge.IsActive = false;
                     }
                 }
             }

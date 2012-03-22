@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
-namespace ActivEarth.Competition.Contests
+namespace ActivEarth.Objects.Competition.Contests
 {
     /// <summary>
     /// Represents a compound of the two end condition types usable

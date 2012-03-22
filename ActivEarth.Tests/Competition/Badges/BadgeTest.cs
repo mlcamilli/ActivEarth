@@ -4,12 +4,12 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-using ActivEarth.Competition;
-using ActivEarth.Competition.Badges;
+using ActivEarth.Objects.Competition;
+using ActivEarth.Objects.Competition.Badges;
 
-using Statistics = ActivEarth.Competition.Placeholder.Statistic;
-using User = ActivEarth.Competition.Placeholder.User;
-using Group = ActivEarth.Competition.Placeholder.Group;
+using Statistics = ActivEarth.Objects.Competition.Placeholder.Statistic;
+using User = ActivEarth.Objects.Competition.Placeholder.User;
+using Group = ActivEarth.Objects.Competition.Placeholder.Group;
 
 namespace ActivEarth.Tests.Competition.Badges
 {

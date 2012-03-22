@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
-namespace ActivEarth.Competition.Badges
+namespace ActivEarth.Objects.Competition.Badges
 {
     public class Badge
     {
