@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Competition\Badges\BadgeTest.cs" />
+    <Compile Include="Competition\Challenges\ChallengeDAOTest.cs" />
     <Compile Include="Competition\Challenges\ChallengeTest.cs" />
     <Compile Include="Competition\Contests\ContestTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
