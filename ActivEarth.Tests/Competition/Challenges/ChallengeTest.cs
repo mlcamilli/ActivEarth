@@ -7,6 +7,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using ActivEarth.Objects.Competition;
 using ActivEarth.Objects.Competition.Challenges;
+using ActivEarth.Server.Service.Competition;
 
 using Statistics = ActivEarth.Objects.Competition.Placeholder.Statistic;
 using User = ActivEarth.Objects.Competition.Placeholder.User;

@@ -3,7 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace ActivEarth.Objects.Competition.Challenges
+using ActivEarth.Objects.Competition;
+using ActivEarth.Objects.Competition.Challenges;
+
+using ActivEarth.DAO;
+
+namespace ActivEarth.Server.Service.Competition
 {
     public class ChallengeManager
     {
