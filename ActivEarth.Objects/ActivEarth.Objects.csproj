@@ -57,7 +57,6 @@
     <Compile Include="Competition\Badges\BadgeConstants.cs" />
     <Compile Include="Competition\Badges\BadgeLevels.cs" />
     <Compile Include="Competition\Challenges\Challenge.cs" />
-    <Compile Include="Competition\Challenges\ChallengeManager.cs" />
     <Compile Include="Competition\Contests\Contest.cs" />
     <Compile Include="Competition\Contests\ContestEndMode.cs" />
     <Compile Include="Competition\Contests\ContestManager.cs" />

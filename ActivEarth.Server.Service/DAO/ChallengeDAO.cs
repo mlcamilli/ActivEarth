@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using ActivEarth.Objects.Competition;
@@ -35,6 +36,34 @@ namespace ActivEarth.DAO
                                 StatisticBinding = (Placeholder.Statistic)c.statistic,
                                 IsActive = c.active
                             }).FirstOrDefault();
+            }
+        }
+
+        /// <summary>
+        /// Retrieves all currently active challenges.
+        /// </summary>
+        /// <returns>All challenges currently marked as active.</returns>
+        public static List<Challenge> GetActiveChallenges()
+        {
+            using (SqlConnection connection = ConnectionManager.GetConnection())
+            {
+                var data = new ActivEarthDataProvidersDataContext(connection);
+                return (from c in data.ChallengeDataProviders
+                        where c.active == true
+                        select
+                            new Challenge
+                            {
+                                ID = (uint)c.id,
+                                Name = c.name,
+                                Description = c.description,
+                                Points = c.points,
+                                Requirement = (float)c.requirement,
+                                IsPersistent = c.persistent,
+                                EndTime = c.end_time,
+                                Duration = new TimeSpan(c.duration_days, 0, 0, 0),
+                                StatisticBinding = (Placeholder.Statistic)c.statistic,
+                                IsActive = c.active
+                            }).ToList();
             }
         }
 

@@ -57,6 +57,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ActivEarthDataProviders.dbml</DependentUpon>
     </Compile>
+    <Compile Include="ChallengeManager.cs" />
     <Compile Include="ConnectionManager.cs" />
     <Compile Include="DAO\ChallengeDAO.cs" />
     <Compile Include="DAO\UserDAO.cs" />
