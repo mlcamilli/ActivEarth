@@ -18,7 +18,7 @@ namespace ActivEarth.Objects.Competition
             {
                 this.FirstName = firstname;
                 this.LastName = lastname;
-                this.ChallengeInitialValues = new Dictionary<uint, float>();
+                this.ChallengeInitialValues = new Dictionary<int, float>();
 
                 _stats = new Dictionary<Statistic, float>();
 
@@ -30,8 +30,14 @@ namespace ActivEarth.Objects.Competition
                 _stats.Add(Statistic.WalkDistance, 0);
 
                 this.Badges = new Dictionary<Statistic, Badges.Badge>();
-                this.Challenges = new Dictionary<uint, Challenges.Challenge>();
-                this.Contests = new Dictionary<uint, Contests.Contest>();
+                this.Challenges = new Dictionary<int, Challenges.Challenge>();
+                this.Contests = new Dictionary<int, Contests.Contest>();
+            }
+
+            public int UserID
+            {
+                get;
+                set;
             }
 
             public string FirstName
@@ -46,7 +52,7 @@ namespace ActivEarth.Objects.Competition
                 set;
             }
 
-            public Dictionary<uint, float> ChallengeInitialValues
+            public Dictionary<int, float> ChallengeInitialValues
             {
                 get;
                 set;
@@ -74,13 +80,13 @@ namespace ActivEarth.Objects.Competition
                 set;
             }
 
-            public Dictionary<uint, Contests.Contest> Contests
+            public Dictionary<int, Contests.Contest> Contests
             {
                 get;
                 set;
             }
 
-            public Dictionary<uint, Challenges.Challenge> Challenges
+            public Dictionary<int, Challenges.Challenge> Challenges
             {
                 get;
                 set;

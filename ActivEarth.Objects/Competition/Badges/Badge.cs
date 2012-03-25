@@ -9,7 +9,7 @@ namespace ActivEarth.Objects.Competition.Badges
         /// <summary>
         /// Indentifier for the badge.
         /// </summary>
-        public uint ID
+        public int ID
         {
             get;
             private set;
@@ -54,7 +54,7 @@ namespace ActivEarth.Objects.Competition.Badges
         /// </summary>
         /// <param name="user">User to whom the Badge is bound.</param>
         /// <param name="statistic">Statistic to which the Badge is bound.</param>
-        public Badge(uint id, string name, Placeholder.User user, Placeholder.Statistic statistic, 
+        public Badge(int id, string name, Placeholder.User user, Placeholder.Statistic statistic, 
             float[] levelValues, int[] levelPoints, Uri[] imagePaths)
         {
             this.ID = id;

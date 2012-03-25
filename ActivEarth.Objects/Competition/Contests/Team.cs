@@ -14,10 +14,10 @@ namespace ActivEarth.Objects.Competition.Contests
         /// <summary>
         /// Identifier for the team.
         /// </summary>
-        public uint ID
+        public int ID
         {
             get;
-            private set;
+            set;
         }
 
         /// <summary>
@@ -32,7 +32,7 @@ namespace ActivEarth.Objects.Competition.Contests
         /// <summary>
         /// The members who make up the team.
         /// </summary>
-        public List<ContestUser> Members
+        public List<TeamMember> Members
         {
             get;
             set;
@@ -52,13 +52,21 @@ namespace ActivEarth.Objects.Competition.Contests
         #region ---------- Constructor ----------
 
         /// <summary>
+        /// Empty constructor for restoring from DB.
+        /// </summary>
+        public Team() : this(String.Empty)
+        {
+            
+        }
+
+        /// <summary>
         /// Constructs an empty team with the given name.
         /// </summary>
         /// <param name="name">Team Name</param>
         public Team(string name)
         {
             this.Name = name;
-            this.Members = new List<ContestUser>();
+            this.Members = new List<TeamMember>();
             this.Score = 0;
         }
 
@@ -67,7 +75,7 @@ namespace ActivEarth.Objects.Competition.Contests
         /// </summary>
         /// <param name="name">Team Name</param>
         /// <param name="members">List of team members</param>
-        public Team(string name, List<ContestUser> members) 
+        public Team(string name, List<TeamMember> members) 
             : this(name)
         {
             this.Members = members;
@@ -88,7 +96,7 @@ namespace ActivEarth.Objects.Competition.Contests
                 return;
             }
 
-            this.Members.Add(new ContestUser(user));
+            this.Members.Add(new TeamMember(user));
         }
 
         /// <summary>
@@ -119,7 +127,7 @@ namespace ActivEarth.Objects.Competition.Contests
                 return;
             }
 
-            this.Members.Remove(new ContestUser(user));
+            this.Members.Remove(new TeamMember(user));
         }
 
         /// <summary>
@@ -147,7 +155,7 @@ namespace ActivEarth.Objects.Competition.Contests
         {
             this.Score = 0;
 
-            foreach (ContestUser user in this.Members)
+            foreach (TeamMember user in this.Members)
             {
                 this.Score += user.CalculateScore(statistic);
             }
@@ -159,7 +167,7 @@ namespace ActivEarth.Objects.Competition.Contests
         /// </summary>
         public void LockInitialValues(Placeholder.Statistic statistic)
         {
-            foreach (ContestUser user in this.Members)
+            foreach (TeamMember user in this.Members)
             {
                 user.LockInitialValues(statistic);
             }
@@ -172,11 +180,11 @@ namespace ActivEarth.Objects.Competition.Contests
         /// <returns>True if the user is a member of the team.</returns>
         public bool ContainsMember(Placeholder.User user)
         {
-            var query = from ContestUser cUser in this.Members
+            var query = from TeamMember cUser in this.Members
                         where cUser.User == user
                         select cUser;
 
-            foreach (ContestUser cUser in query)
+            foreach (TeamMember cUser in query)
             {
                 return true;
             }

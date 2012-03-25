@@ -1,7 +1,7 @@
 USE [ActivEarth_Dev]
 GO
 
-/****** Object:  Table [dbo].[contests]    Script Date: 03/21/2012 22:52:32 ******/
+/****** Object:  Table [dbo].[contests]    Script Date: 03/23/2012 02:40:39 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -12,7 +12,7 @@ SET ANSI_PADDING ON
 GO
 
 CREATE TABLE [dbo].[contests](
-	[id] [int] NOT NULL,
+	[id] [int] IDENTITY(1,1) NOT NULL,
 	[name] [varchar](50) NOT NULL,
 	[description] [text] NOT NULL,
 	[points] [int] NOT NULL,
@@ -21,6 +21,7 @@ CREATE TABLE [dbo].[contests](
 	[end_goal] [float] NULL,
 	[start] [datetime] NOT NULL,
 	[statistic] [tinyint] NOT NULL,
+	[type] [tinyint] NOT NULL,
  CONSTRAINT [PK_contests] PRIMARY KEY CLUSTERED 
 (
 	[id] ASC

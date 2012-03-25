@@ -1,7 +1,7 @@
 USE [ActivEarth_Dev]
 GO
 
-/****** Object:  Table [dbo].[teams]    Script Date: 03/22/2012 00:55:56 ******/
+/****** Object:  Table [dbo].[teams]    Script Date: 03/23/2012 00:52:00 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -15,6 +15,7 @@ CREATE TABLE [dbo].[teams](
 	[id] [int] IDENTITY(1,1) NOT NULL,
 	[contest_id] [int] NOT NULL,
 	[name] [varchar](50) NOT NULL,
+	[score] [float] NOT NULL,
  CONSTRAINT [PK__teams__3213E83F145C0A3F] PRIMARY KEY CLUSTERED 
 (
 	[id] ASC

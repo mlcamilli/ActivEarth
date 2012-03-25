@@ -12,7 +12,7 @@ namespace ActivEarth.Objects.Competition.Challenges
         /// <summary>
         /// Identifier for the challenge.
         /// </summary>
-        public uint ID
+        public int ID
         {
             get;
             set;
@@ -128,10 +128,9 @@ namespace ActivEarth.Objects.Competition.Challenges
         /// <param name="durationInDays">Number of days for which the challenge is active.</param>
         /// <param name="statistic">Statistic to which the Challenge is bound.</param>
         /// <param name="requirement">Statistic value required to complete the challenge.</param>
-        public Challenge(uint id, string name, string description, int points, bool persistent,
+        public Challenge(string name, string description, int points, bool persistent,
             DateTime startTime, int durationInDays, Placeholder.Statistic statistic, float requirement)
         {
-            this.ID = id;
             this.Name = name;
             this.Description = description;
             this.Points = points;
@@ -140,7 +139,7 @@ namespace ActivEarth.Objects.Competition.Challenges
             this.EndTime = startTime.AddDays(durationInDays);
             this.StatisticBinding = statistic;
             this.Requirement = requirement;
-            this.IsActive = (DateTime.Now >= startTime && DateTime.Now < this.EndTime);
+            this.IsActive = true;
         }
 
         #endregion ---------- Constructor ----------

@@ -52,6 +52,7 @@
     <Compile Include="Competition\Challenges\ChallengeDAOTest.cs" />
     <Compile Include="Competition\Challenges\ChallengeTest.cs" />
     <Compile Include="Competition\Contests\ContestTest.cs" />
+    <Compile Include="Competition\Contests\ContestDAOTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BMICalculatorTest.cs" />
     <Compile Include="UserDAOTest.cs" />

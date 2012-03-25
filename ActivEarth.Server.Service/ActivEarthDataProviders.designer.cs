@@ -42,16 +42,16 @@ namespace ActivEarth.Server.Service
     partial void InsertContestDataProvider(ContestDataProvider instance);
     partial void UpdateContestDataProvider(ContestDataProvider instance);
     partial void DeleteContestDataProvider(ContestDataProvider instance);
-    partial void InsertContestUserDataProvider(ContestUserDataProvider instance);
-    partial void UpdateContestUserDataProvider(ContestUserDataProvider instance);
-    partial void DeleteContestUserDataProvider(ContestUserDataProvider instance);
+    partial void InsertTeamMemberDataProvider(TeamMemberDataProvider instance);
+    partial void UpdateTeamMemberDataProvider(TeamMemberDataProvider instance);
+    partial void DeleteTeamMemberDataProvider(TeamMemberDataProvider instance);
     partial void InsertTeamDataProvider(TeamDataProvider instance);
     partial void UpdateTeamDataProvider(TeamDataProvider instance);
     partial void DeleteTeamDataProvider(TeamDataProvider instance);
     #endregion
 		
 		public ActivEarthDataProvidersDataContext() : 
-				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["ActivEarth_DevConnectionString2"].ConnectionString, mappingSource)
+				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["ActivEarth_DevConnectionString"].ConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
@@ -112,11 +112,11 @@ namespace ActivEarth.Server.Service
 			}
 		}
 		
-		public System.Data.Linq.Table<ContestUserDataProvider> ContestUserDataProviders
+		public System.Data.Linq.Table<TeamMemberDataProvider> TeamMemberDataProviders
 		{
 			get
 			{
-				return this.GetTable<ContestUserDataProvider>();
+				return this.GetTable<TeamMemberDataProvider>();
 			}
 		}
 		
@@ -157,7 +157,7 @@ namespace ActivEarth.Server.Service
 		
 		private System.Nullable<int> _weight;
 		
-		private EntitySet<ContestUserDataProvider> _ContestUserDataProviders;
+		private EntitySet<TeamMemberDataProvider> _TeamMemberDataProviders;
 		
 		private EntityRef<UserDataProvider> _UserDataProvider;
 		
@@ -191,7 +191,7 @@ namespace ActivEarth.Server.Service
 		
 		public ProfileDataProvider()
 		{
-			this._ContestUserDataProviders = new EntitySet<ContestUserDataProvider>(new Action<ContestUserDataProvider>(this.attach_ContestUserDataProviders), new Action<ContestUserDataProvider>(this.detach_ContestUserDataProviders));
+			this._TeamMemberDataProviders = new EntitySet<TeamMemberDataProvider>(new Action<TeamMemberDataProvider>(this.attach_TeamMemberDataProviders), new Action<TeamMemberDataProvider>(this.detach_TeamMemberDataProviders));
 			this._UserDataProvider = default(EntityRef<UserDataProvider>);
 			OnCreated();
 		}
@@ -420,16 +420,16 @@ namespace ActivEarth.Server.Service
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ProfileDataProvider_team_member", Storage="_ContestUserDataProviders", ThisKey="id", OtherKey="user_id")]
-		public EntitySet<ContestUserDataProvider> ContestUserDataProviders
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ProfileDataProvider_team_member", Storage="_TeamMemberDataProviders", ThisKey="id", OtherKey="user_id")]
+		public EntitySet<TeamMemberDataProvider> TeamMemberDataProviders
 		{
 			get
 			{
-				return this._ContestUserDataProviders;
+				return this._TeamMemberDataProviders;
 			}
 			set
 			{
-				this._ContestUserDataProviders.Assign(value);
+				this._TeamMemberDataProviders.Assign(value);
 			}
 		}
 		
@@ -487,13 +487,13 @@ namespace ActivEarth.Server.Service
 			}
 		}
 		
-		private void attach_ContestUserDataProviders(ContestUserDataProvider entity)
+		private void attach_TeamMemberDataProviders(TeamMemberDataProvider entity)
 		{
 			this.SendPropertyChanging();
 			entity.ProfileDataProvider = this;
 		}
 		
-		private void detach_ContestUserDataProviders(ContestUserDataProvider entity)
+		private void detach_TeamMemberDataProviders(TeamMemberDataProvider entity)
 		{
 			this.SendPropertyChanging();
 			entity.ProfileDataProvider = null;
@@ -695,7 +695,7 @@ namespace ActivEarth.Server.Service
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int id
 		{
 			get
@@ -940,6 +940,8 @@ namespace ActivEarth.Server.Service
 		
 		private byte _statistic;
 		
+		private byte _type;
+		
 		private EntitySet<TeamDataProvider> _TeamDataProviders;
 		
     #region Extensibility Method Definitions
@@ -964,6 +966,8 @@ namespace ActivEarth.Server.Service
     partial void OnstartChanged();
     partial void OnstatisticChanging(byte value);
     partial void OnstatisticChanged();
+    partial void OntypeChanging(byte value);
+    partial void OntypeChanged();
     #endregion
 		
 		public ContestDataProvider()
@@ -972,7 +976,7 @@ namespace ActivEarth.Server.Service
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int id
 		{
 			get
@@ -1152,6 +1156,26 @@ namespace ActivEarth.Server.Service
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_type", DbType="TinyInt NOT NULL")]
+		public byte type
+		{
+			get
+			{
+				return this._type;
+			}
+			set
+			{
+				if ((this._type != value))
+				{
+					this.OntypeChanging(value);
+					this.SendPropertyChanging();
+					this._type = value;
+					this.SendPropertyChanged("type");
+					this.OntypeChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="contest_team", Storage="_TeamDataProviders", ThisKey="id", OtherKey="contest_id")]
 		public EntitySet<TeamDataProvider> TeamDataProviders
 		{
@@ -1199,7 +1223,7 @@ namespace ActivEarth.Server.Service
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.team_members")]
-	public partial class ContestUserDataProvider : INotifyPropertyChanging, INotifyPropertyChanged
+	public partial class TeamMemberDataProvider : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
@@ -1234,7 +1258,7 @@ namespace ActivEarth.Server.Service
     partial void OninitializedChanged();
     #endregion
 		
-		public ContestUserDataProvider()
+		public TeamMemberDataProvider()
 		{
 			this._ProfileDataProvider = default(EntityRef<ProfileDataProvider>);
 			this._TeamDataProvider = default(EntityRef<TeamDataProvider>);
@@ -1366,12 +1390,12 @@ namespace ActivEarth.Server.Service
 					if ((previousValue != null))
 					{
 						this._ProfileDataProvider.Entity = null;
-						previousValue.ContestUserDataProviders.Remove(this);
+						previousValue.TeamMemberDataProviders.Remove(this);
 					}
 					this._ProfileDataProvider.Entity = value;
 					if ((value != null))
 					{
-						value.ContestUserDataProviders.Add(this);
+						value.TeamMemberDataProviders.Add(this);
 						this._user_id = value.id;
 					}
 					else
@@ -1400,12 +1424,12 @@ namespace ActivEarth.Server.Service
 					if ((previousValue != null))
 					{
 						this._TeamDataProvider.Entity = null;
-						previousValue.ContestUserDataProviders.Remove(this);
+						previousValue.TeamMemberDataProviders.Remove(this);
 					}
 					this._TeamDataProvider.Entity = value;
 					if ((value != null))
 					{
-						value.ContestUserDataProviders.Add(this);
+						value.TeamMemberDataProviders.Add(this);
 						this._team_id = value.id;
 					}
 					else
@@ -1450,7 +1474,9 @@ namespace ActivEarth.Server.Service
 		
 		private string _name;
 		
-		private EntitySet<ContestUserDataProvider> _ContestUserDataProviders;
+		private double _score;
+		
+		private EntitySet<TeamMemberDataProvider> _TeamMemberDataProviders;
 		
 		private EntityRef<ContestDataProvider> _ContestDataProvider;
 		
@@ -1464,11 +1490,13 @@ namespace ActivEarth.Server.Service
     partial void Oncontest_idChanged();
     partial void OnnameChanging(string value);
     partial void OnnameChanged();
+    partial void OnscoreChanging(double value);
+    partial void OnscoreChanged();
     #endregion
 		
 		public TeamDataProvider()
 		{
-			this._ContestUserDataProviders = new EntitySet<ContestUserDataProvider>(new Action<ContestUserDataProvider>(this.attach_ContestUserDataProviders), new Action<ContestUserDataProvider>(this.detach_ContestUserDataProviders));
+			this._TeamMemberDataProviders = new EntitySet<TeamMemberDataProvider>(new Action<TeamMemberDataProvider>(this.attach_TeamMemberDataProviders), new Action<TeamMemberDataProvider>(this.detach_TeamMemberDataProviders));
 			this._ContestDataProvider = default(EntityRef<ContestDataProvider>);
 			OnCreated();
 		}
@@ -1537,16 +1565,36 @@ namespace ActivEarth.Server.Service
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="team_team_member", Storage="_ContestUserDataProviders", ThisKey="id", OtherKey="team_id")]
-		public EntitySet<ContestUserDataProvider> ContestUserDataProviders
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_score", DbType="Float NOT NULL")]
+		public double score
 		{
 			get
 			{
-				return this._ContestUserDataProviders;
+				return this._score;
 			}
 			set
 			{
-				this._ContestUserDataProviders.Assign(value);
+				if ((this._score != value))
+				{
+					this.OnscoreChanging(value);
+					this.SendPropertyChanging();
+					this._score = value;
+					this.SendPropertyChanged("score");
+					this.OnscoreChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="team_team_member", Storage="_TeamMemberDataProviders", ThisKey="id", OtherKey="team_id")]
+		public EntitySet<TeamMemberDataProvider> TeamMemberDataProviders
+		{
+			get
+			{
+				return this._TeamMemberDataProviders;
+			}
+			set
+			{
+				this._TeamMemberDataProviders.Assign(value);
 			}
 		}
 		
@@ -1604,13 +1652,13 @@ namespace ActivEarth.Server.Service
 			}
 		}
 		
-		private void attach_ContestUserDataProviders(ContestUserDataProvider entity)
+		private void attach_TeamMemberDataProviders(TeamMemberDataProvider entity)
 		{
 			this.SendPropertyChanging();
 			entity.TeamDataProvider = this;
 		}
 		
-		private void detach_ContestUserDataProviders(ContestUserDataProvider entity)
+		private void detach_TeamMemberDataProviders(TeamMemberDataProvider entity)
 		{
 			this.SendPropertyChanging();
 			entity.TeamDataProvider = null;
