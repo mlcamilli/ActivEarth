@@ -6,7 +6,7 @@ namespace ActivEarth.Objects.Competition.Contests
     /// Wrapper class for Users for use with Contests.  Allows for the calculation of
     /// score contributions since the beginning of a contest.
     /// </summary>
-    public class ContestUser
+    public class TeamMember
     {
         #region ---------- Public Properties ----------
 
@@ -27,7 +27,7 @@ namespace ActivEarth.Objects.Competition.Contests
         public float InitialScore
         {
             get;
-            private set;
+            set;
         }
 
         /// <summary>
@@ -36,12 +36,21 @@ namespace ActivEarth.Objects.Competition.Contests
         public bool Initialized
         {
             get;
-            private set;
+            set;
         }
 
         #endregion ---------- Public Properties ----------
 
         #region ---------- Constructor ----------
+
+        /// <summary>
+        /// Empty constructor for restoring from DB.
+        /// </summary>
+        public TeamMember()
+            : this(null)
+        {
+
+        }
 
         /// <summary>
         /// Creates a new ContestUser for a contest tracking a particular statistic.
@@ -51,7 +60,7 @@ namespace ActivEarth.Objects.Competition.Contests
         /// </summary>
         /// <param name="user">The user participating in the contest.</param>
         /// <param name="statistic">The statistic being scored in the contest.</param>
-        public ContestUser(Placeholder.User user)
+        public TeamMember(Placeholder.User user)
         {
             this.User = user;
             this.Initialized = false;

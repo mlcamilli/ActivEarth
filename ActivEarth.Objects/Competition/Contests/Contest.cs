@@ -4,17 +4,17 @@ using System.Linq;
 
 namespace ActivEarth.Objects.Competition.Contests
 {
-    public abstract class Contest
+    public class Contest
     {
         #region ---------- Public Properties ----------
 
         /// <summary>
         /// Numeric identifier for the Contest.
         /// </summary>
-        public uint ID
+        public int ID
         {
             get;
-            private set;
+            set;
         }
 
         /// <summary>
@@ -54,6 +54,15 @@ namespace ActivEarth.Objects.Competition.Contests
         }
 
         /// <summary>
+        /// The Contest type, indicating whether the contest is group-based or individual.
+        /// </summary>
+        public ContestType Type
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// Date and time when the Contest shall begin.
         /// </summary>
         public DateTime StartTime
@@ -82,9 +91,30 @@ namespace ActivEarth.Objects.Competition.Contests
             set;
         }
 
+        /// <summary>
+        /// Statistic to which the contest is bound.
+        /// 
+        /// DEPENDENCY: Profile.Statistics
+        /// </summary>
+        public Placeholder.Statistic StatisticBinding
+        {
+            get;
+            set;
+        }
+
         #endregion ---------- Public Properties ----------
 
         #region ---------- Constructor ----------
+
+        /// <summary>
+        /// Default constructor for loading contests from DB.
+        /// </summary>
+        public Contest()
+            : this(string.Empty, string.Empty, 0, ContestEndMode.GoalBased,
+                ContestType.Individual, DateTime.Today, null, Placeholder.Statistic.Steps)
+        {
+
+        }
 
         /// <summary>
         /// Creates a new Contest.
@@ -96,20 +126,22 @@ namespace ActivEarth.Objects.Competition.Contests
         /// <param name="description">Contest Description.</param>
         /// <param name="points">Points to be distributed to the winner(s).</param>
         /// <param name="mode">Contest mode for determining termination.</param>
+        /// <param name="type">Contest type (group or individual)</param>
         /// <param name="start">Time to start the contest.</param>
         /// <param name="end">End Conditions to be observed.</param>
         /// <param name="statistic">Statistic on which the Contest is based.</param>
-        protected Contest(uint id, string name, string description, int points,
-            ContestEndMode mode, DateTime start, EndCondition end, Placeholder.Statistic statistic)
+        public Contest(string name, string description, int points,
+            ContestEndMode mode, ContestType type, DateTime start, EndCondition end, 
+            Placeholder.Statistic statistic)
         {
-            this.ID = id;
             this.Name = name;
             this.Description = description;
             this.Points = points;
             this.Mode = mode;
+            this.Type = type;
             this.StartTime = start;
             this.EndCondition = end;
-            _statisticBinding = statistic;
+            this.StatisticBinding = statistic;
 
             this.Teams = new List<Team>();
         }
@@ -124,14 +156,15 @@ namespace ActivEarth.Objects.Competition.Contests
         /// <param name="description">Contest Description.</param>
         /// <param name="points">Points to be distributed to the winner(s).</param>
         /// <param name="mode">Contest mode for determining termination.</param>
+        /// <param name="type">Contest type (group or individual)</param>
         /// <param name="start">Time to start the contest.</param>
         /// <param name="end">End Conditions to be observed.</param>
         /// <param name="statistic">Statistic on which the Contest is based.</param>
         /// <param name="teams">Teams participating in the Contest.</param>
-        protected Contest(uint id, string name, string description, int points,
-            ContestEndMode mode, DateTime start, EndCondition end, Placeholder.Statistic statistic,
-            List<Team> teams)
-            : this(id, name, description, points, mode, start, end, statistic)
+        protected Contest(int id, string name, string description, int points,
+            ContestEndMode mode, ContestType type, DateTime start, EndCondition end, 
+            Placeholder.Statistic statistic, List<Team> teams)
+            : this(name, description, points, mode, type, start, end, statistic)
         {
             this.Teams = teams;
         }
@@ -147,7 +180,7 @@ namespace ActivEarth.Objects.Competition.Contests
         {
             foreach (Team team in this.Teams)
             {
-                team.Update(_statisticBinding);
+                team.Update(StatisticBinding);
             }
 
             this.SortTeamsByScore();
@@ -174,6 +207,84 @@ namespace ActivEarth.Objects.Competition.Contests
             foreach (Team team in teams)
             {
                 this.AddTeam(team);
+            }
+        }
+
+        /// <summary>
+        /// Adds a group to the Contest. In a group contest, members will be added as one team,
+        /// while in an individual contest members will be added individually.
+        /// 
+        /// DEPENDENCY: Groups.Group
+        /// </summary>
+        /// <param name="group">Group to be added.</param>
+        public void AddGroup(Placeholder.Group group)
+        {
+            if (this.Type == ContestType.Group)
+            {
+                string teamName = group.Name;
+                //TODO: Assert that no team with this name exists already
+
+                Team newTeam = new Team(teamName);
+
+                foreach (Placeholder.User user in group.Members)
+                {
+                    newTeam.Members.Add(new TeamMember(user));
+                }
+
+                this.AddTeam(newTeam);
+            }
+            else
+            {
+                foreach (Placeholder.User user in group.Members)
+                {
+                    this.AddUser(user);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Adds groups to the Contest. In a group contest, members will be added as one team,
+        /// while in an individual contest members will be added individually.
+        /// 
+        /// DEPENDENCY: Groups.Group
+        /// </summary>
+        /// <param name="group">Groups to be added.</param>
+        public void AddGroup(List<Placeholder.Group> groups)
+        {
+            foreach (Placeholder.Group group in groups)
+            {
+                this.AddGroup(group);
+            }
+        }
+
+        /// <summary>
+        /// Adds a user to the Contest.
+        /// 
+        /// DEPENDENCY: Profile.User
+        /// </summary>
+        /// <param name="user">User to be added.</param>
+        public void AddUser(Placeholder.User user)
+        {
+            string teamName = String.Format("{0} {1}", user.FirstName, user.LastName);
+            //TODO: Assert that no team with this name exists already
+
+            Team newTeam = new Team(teamName);
+            newTeam.Add(user);
+
+            this.AddTeam(newTeam);
+        }
+
+        /// <summary>
+        /// Adds users to the Contest.
+        /// 
+        /// DEPENDENCY: Profile.User
+        /// </summary>
+        /// <param name="user">Users to be added.</param>
+        public void AddUser(List<Placeholder.User> users)
+        {
+            foreach (Placeholder.User user in users)
+            {
+                this.AddUser(user);
             }
         }
 
@@ -209,7 +320,7 @@ namespace ActivEarth.Objects.Competition.Contests
         {
             foreach (Team team in this.Teams)
             {
-                team.LockInitialValues(_statisticBinding);
+                team.LockInitialValues(StatisticBinding);
             }
         }
 
@@ -228,16 +339,5 @@ namespace ActivEarth.Objects.Competition.Contests
         }
 
         #endregion ---------- Private Methods ----------
-
-        #region ---------- Private Fields ----------
-
-        /// <summary>
-        /// Statistic to which the contest is bound.
-        /// 
-        /// DEPENDENCY: Profile.Statistics
-        /// </summary>
-        protected Placeholder.Statistic _statisticBinding; 
-        
-        #endregion ---------- Private Fields ----------
     }
 }

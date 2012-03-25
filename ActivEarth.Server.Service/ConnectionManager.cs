@@ -12,7 +12,7 @@ namespace ActivEarth.Server.Service
 
     public class ConnectionManager
     {
-        private static string _connectionString = ConfigurationManager.ConnectionStrings["DevDB"].ToString();
+        private static string _connectionString = "server=.;database=ActivEarth_Dev;Integrated Security=SSPI;"; //ConfigurationManager.ConnectionStrings["DevDB"].ToString();
 
      
 

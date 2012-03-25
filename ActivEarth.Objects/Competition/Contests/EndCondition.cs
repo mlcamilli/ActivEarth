@@ -40,7 +40,7 @@ namespace ActivEarth.Objects.Competition.Contests
         public EndCondition(DateTime endTime)
         {
             this.EndTime = endTime;
-            this.EndValue = float.PositiveInfinity;
+            this.EndValue = float.MaxValue;
         }
 
         /// <summary>

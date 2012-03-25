@@ -15,7 +15,7 @@ namespace ActivEarth.DAO
         /// </summary>
         /// <param name="challengeId">Identifier of the challenge to retrieve.</param>
         /// <returns>Challenge specified by the provided ID.</returns>
-        public static Challenge GetChallengeFromChallengeId(uint challengeId)
+        public static Challenge GetChallengeFromChallengeId(int challengeId)
         {
             using (SqlConnection connection = ConnectionManager.GetConnection())
             {
@@ -25,7 +25,7 @@ namespace ActivEarth.DAO
                         select
                             new Challenge
                             {
-                                ID = (uint)c.id,
+                                ID = c.id,
                                 Name = c.name,
                                 Description = c.description,
                                 Points = c.points,
@@ -53,7 +53,35 @@ namespace ActivEarth.DAO
                         select
                             new Challenge
                             {
-                                ID = (uint)c.id,
+                                ID = c.id,
+                                Name = c.name,
+                                Description = c.description,
+                                Points = c.points,
+                                Requirement = (float)c.requirement,
+                                IsPersistent = c.persistent,
+                                EndTime = c.end_time,
+                                Duration = new TimeSpan(c.duration_days, 0, 0, 0),
+                                StatisticBinding = (Placeholder.Statistic)c.statistic,
+                                IsActive = c.active
+                            }).ToList();
+            }
+        }
+
+        /// <summary>
+        /// Retrieves all challenges in the archive.
+        /// </summary>
+        /// <returns>All challenges in the archive.</returns>
+        public static List<Challenge> GetAllChallenges()
+        {
+            using (SqlConnection connection = ConnectionManager.GetConnection())
+            {
+                var data = new ActivEarthDataProvidersDataContext(connection);
+                return (from c in data.ChallengeDataProviders
+                        where c.id >= 0
+                        select
+                            new Challenge
+                            {
+                                ID = c.id,
                                 Name = c.name,
                                 Description = c.description,
                                 Points = c.points,
@@ -71,8 +99,8 @@ namespace ActivEarth.DAO
         /// Saves a challenge as a new entry in the DB.
         /// </summary>
         /// <param name="challenge">Challenge object to add to the DB.</param>
-        /// <returns>True on success, false on failure.</returns>
-        public static bool CreateNewChallenge(Challenge challenge)
+        /// <returns>ID of the created challenge on success, 0 on failure.</returns>
+        public static int CreateNewChallenge(Challenge challenge)
         {
             try
             {
@@ -81,7 +109,6 @@ namespace ActivEarth.DAO
                     var data = new ActivEarthDataProvidersDataContext(connection);
                     var challengeData = new ChallengeDataProvider 
                         {
-                            id = (int)challenge.ID,
                             name = challenge.Name,
                             description = challenge.Description,
                             points = challenge.Points,
@@ -94,12 +121,12 @@ namespace ActivEarth.DAO
                         };
                     data.ChallengeDataProviders.InsertOnSubmit(challengeData);
                     data.SubmitChanges();
-                    return true;
+                    return challengeData.id;
                 }
             }
             catch (Exception)
             {
-                return false;
+                return 0;
             }
         }
 

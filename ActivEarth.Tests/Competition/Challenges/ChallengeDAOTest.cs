@@ -3,11 +3,12 @@ using System.Text;
 using System.Collections.Generic;
 using System.Linq;
 using System.Transactions;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
 using ActivEarth.DAO;
 using ActivEarth.Objects.Competition;
 using ActivEarth.Objects.Competition.Challenges;
 using ActivEarth.Server.Service;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ActivEarth.Tests.Competition.Challenges
 {
@@ -48,14 +49,14 @@ namespace ActivEarth.Tests.Competition.Challenges
         {
             using (_trans)
             {
-                uint id = 5;
+                int id;
 
                 Log("Creating challenge");
-                Challenge challenge = new Challenge(id, "Test Challenge", "This is a test challenge",
+                Challenge challenge = new Challenge("Test Challenge", "This is a test challenge",
                     30, false, DateTime.Today, 1, Placeholder.Statistic.Steps, 500);
 
                 Log("Adding challenge to the database");
-                Assert.IsTrue(ChallengeDAO.CreateNewChallenge(challenge));
+                Assert.IsTrue((id = ChallengeDAO.CreateNewChallenge(challenge)) > 0);
 
                 Log("Loading challenge from the database");
                 Challenge retrieved = ChallengeDAO.GetChallengeFromChallengeId(id);
@@ -67,7 +68,6 @@ namespace ActivEarth.Tests.Competition.Challenges
                 Assert.AreEqual(challenge.Name, retrieved.Name);
                 Assert.AreEqual(challenge.Description, retrieved.Description);
                 Assert.AreEqual(challenge.EndTime, retrieved.EndTime);
-                Assert.AreEqual(challenge.ID, id);
                 Assert.AreEqual(challenge.IsActive, retrieved.IsActive);
                 Assert.AreEqual(challenge.IsPersistent, retrieved.IsPersistent);
                 Assert.AreEqual(challenge.Points, retrieved.Points);
@@ -80,14 +80,14 @@ namespace ActivEarth.Tests.Competition.Challenges
         {
             using (_trans)
             {
-                uint id = 7;
+                int id;
 
                 Log("Creating challenge");
-                Challenge challenge = new Challenge(id, "Test Challenge", "This is a test challenge",
+                Challenge challenge = new Challenge("Test Challenge", "This is a test challenge",
                     30, false, DateTime.Today, 1, Placeholder.Statistic.Steps, 500);
 
                 Log("Adding challenge to the database");
-                Assert.IsTrue(ChallengeDAO.CreateNewChallenge(challenge));
+                Assert.IsTrue((id = ChallengeDAO.CreateNewChallenge(challenge)) > 0);
 
                 Log("Loading challenge from the database");
                 Challenge retrieved = ChallengeDAO.GetChallengeFromChallengeId(id);
@@ -112,6 +112,62 @@ namespace ActivEarth.Tests.Competition.Challenges
                 Log("Verifying that the challenge is inactive");
                 Assert.IsFalse(retrieved2.IsActive);
 
+            }
+        }
+
+        [TestMethod]
+        public void TestGetActiveChallenges()
+        {
+            using (_trans)
+            {
+                Log("Creating expired challenge");
+                Challenge challenge1 = new Challenge("Test Challenge", "This is a test challenge",
+                    30, false, DateTime.Today.AddDays(-1), 1, Placeholder.Statistic.Steps, 500);
+                challenge1.IsActive = false;
+
+                Log("Creating valid challenge");
+                Challenge challenge2 = new Challenge("Test Challenge", "This is a test challenge",
+                    30, false, DateTime.Today, 1, Placeholder.Statistic.BikeDistance, 500);
+
+                Log("Creating valid challenge");
+                Challenge challenge3 = new Challenge("Test Challenge", "This is a test challenge",
+                    30, false, DateTime.Today, 1, Placeholder.Statistic.ChallengesCompleted, 500);
+
+                Log("Adding challenges to DB");
+                ChallengeDAO.CreateNewChallenge(challenge1);
+                ChallengeDAO.CreateNewChallenge(challenge2);
+                ChallengeDAO.CreateNewChallenge(challenge3);
+
+                Log("Verifying that GetActiveChallenges returns two challenges");
+                Assert.AreEqual(2, ChallengeDAO.GetActiveChallenges().Count);
+            }
+        }
+
+        [TestMethod]
+        public void TestGetAllChallenges()
+        {
+            using (_trans)
+            {
+                Log("Creating expired challenge");
+                Challenge challenge1 = new Challenge("Test Challenge", "This is a test challenge",
+                    30, false, DateTime.Today.AddDays(-1), 1, Placeholder.Statistic.Steps, 500);
+                challenge1.IsActive = false;
+
+                Log("Creating valid challenge");
+                Challenge challenge2 = new Challenge("Test Challenge", "This is a test challenge",
+                    30, false, DateTime.Today, 1, Placeholder.Statistic.BikeDistance, 500);
+
+                Log("Creating valid challenge");
+                Challenge challenge3 = new Challenge("Test Challenge", "This is a test challenge",
+                    30, false, DateTime.Today, 1, Placeholder.Statistic.ChallengesCompleted, 500);
+
+                Log("Adding challenges to DB");
+                ChallengeDAO.CreateNewChallenge(challenge1);
+                ChallengeDAO.CreateNewChallenge(challenge2);
+                ChallengeDAO.CreateNewChallenge(challenge3);
+
+                Log("Verifying that GetAllChallenges returns three challenges");
+                Assert.AreEqual(3, ChallengeDAO.GetAllChallenges().Count);
             }
         }
 
