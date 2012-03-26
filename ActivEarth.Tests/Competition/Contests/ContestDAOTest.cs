@@ -6,6 +6,8 @@ using System.Transactions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using ActivEarth.DAO;
+using ActivEarth.Objects.Groups;
+using ActivEarth.Objects.Profile;
 using ActivEarth.Objects.Competition;
 using ActivEarth.Objects.Competition.Contests;
 using ActivEarth.Server.Service;
@@ -56,7 +58,7 @@ namespace ActivEarth.Tests.Competition.Contests
                 Log("Creating contest");
                 Contest contest = new Contest("Test Contest", "This is a test contest",
                     30, ContestEndMode.GoalBased, ContestType.Group, DateTime.Today, new EndCondition(500),
-                    Placeholder.Statistic.Steps);
+                    Statistic.Steps);
 
                 Log("Adding contest to the database");
                 Assert.IsTrue((id = ContestDAO.CreateNewContest(contest)) > 0);
@@ -93,13 +95,13 @@ namespace ActivEarth.Tests.Competition.Contests
                 Log("Creating contests");
                 Contest contest1 = new Contest("Test Contest1", "This is a test contest",
                     30, ContestEndMode.GoalBased, ContestType.Group, DateTime.Today, new EndCondition(500),
-                    Placeholder.Statistic.Steps);
+                    Statistic.Steps);
                 Contest contest2 = new Contest("Test Contest2", "This is also a test contest",
                     30, ContestEndMode.GoalBased, ContestType.Group, DateTime.Today, new EndCondition(500),
-                    Placeholder.Statistic.BikeDistance);
+                    Statistic.BikeDistance);
                 Contest contest3 = new Contest("Test Contest3", "This is another test contest",
                     30, ContestEndMode.GoalBased, ContestType.Group, DateTime.Today, new EndCondition(500),
-                    Placeholder.Statistic.RunDistance);
+                    Statistic.RunDistance);
 
                 Log("Adding contests to DB");
                 ContestDAO.CreateNewContest(contest1);
@@ -119,7 +121,7 @@ namespace ActivEarth.Tests.Competition.Contests
                 Log("Creating contests");
                 Contest contest = new Contest("Test Contest1", "This is a test contest",
                     30, ContestEndMode.GoalBased, ContestType.Group, DateTime.Today, new EndCondition(500),
-                    Placeholder.Statistic.Steps);
+                    Statistic.Steps);
 
                 Log("Saving to DB");
                 int id = ContestDAO.CreateNewContest(contest);
@@ -145,21 +147,19 @@ namespace ActivEarth.Tests.Competition.Contests
                 Log("Creating contest");
                 Contest contest = new Contest("Test Contest1", "This is a test contest",
                     30, ContestEndMode.GoalBased, ContestType.Group, DateTime.Today, new EndCondition(500),
-                    Placeholder.Statistic.Steps);
+                    Statistic.Steps);
 
                 Log("Creating Members");
-                Placeholder.User member1 = new Placeholder.User("Test", "Subject1");
-                Placeholder.User member2 = new Placeholder.User("Test", "Subject2");
-                Placeholder.User member3 = new Placeholder.User("Test", "Subject3");
-                Placeholder.User member4 = new Placeholder.User("Test", "Subject4");
+                User member1 = new User("Test", "Subject1");
+                User member2 = new User("Test", "Subject2");
+                User member3 = new User("Test", "Subject3");
+                User member4 = new User("Test", "Subject4");
 
                 Log("Creating Groups");
-                Placeholder.Group group1 = new Placeholder.Group("Group 1");
-                group1.Members.Add(member1);
+                Group group1 = new Group(1, "Group 1", member1, string.Empty, new List<string>());
                 group1.Members.Add(member2);
 
-                Placeholder.Group group2 = new Placeholder.Group("Group 2");
-                group2.Members.Add(member3);
+                Group group2 = new Group(2, "Group 2", member3, string.Empty, new List<string>());
                 group2.Members.Add(member4);
 
                 Log("Adding groups to the contest");
@@ -211,7 +211,7 @@ namespace ActivEarth.Tests.Competition.Contests
                 Log("Creating contest");
                 Contest contest = new Contest("Test Contest1", "This is a test contest",
                     30, ContestEndMode.GoalBased, ContestType.Group, DateTime.Today, new EndCondition(500),
-                    Placeholder.Statistic.Steps);
+                    Statistic.Steps);
 
                 Log("Saving to DB");
                 int id = ContestDAO.CreateNewContest(contest);
@@ -261,7 +261,7 @@ namespace ActivEarth.Tests.Competition.Contests
                 Log("Creating contest");
                 Contest contest = new Contest("Test Contest1", "This is a test contest",
                     30, ContestEndMode.GoalBased, ContestType.Group, DateTime.Today, new EndCondition(500),
-                    Placeholder.Statistic.Steps);
+                    Statistic.Steps);
 
                 Log("Saving to DB");
                 int id = ContestDAO.CreateNewContest(contest);
@@ -270,14 +270,13 @@ namespace ActivEarth.Tests.Competition.Contests
                 Contest retrieved = ContestDAO.GetContestFromContestId(id);
 
                 Log("Creating Members");
-                Placeholder.User member1 = new Placeholder.User("Test", "Subject1");
-                Placeholder.User member2 = new Placeholder.User("Test", "Subject2");
-                Placeholder.User member3 = new Placeholder.User("Test", "Subject3");
-                Placeholder.User member4 = new Placeholder.User("Test", "Subject4");
+                User member1 = new User("Test", "Subject1");
+                User member2 = new User("Test", "Subject2");
+                User member3 = new User("Test", "Subject3");
+                User member4 = new User("Test", "Subject4");
 
                 Log("Creating Groups");
-                Placeholder.Group group1 = new Placeholder.Group("Group 1");
-                group1.Members.Add(member1);
+                Group group1 = new Group(0, "Group 1", member1, string.Empty, new List<string>());
                 group1.Members.Add(member2);
                 group1.Members.Add(member3);
                 group1.Members.Add(member4);
@@ -318,17 +317,16 @@ namespace ActivEarth.Tests.Competition.Contests
                 Log("Creating contest");
                 Contest contest = new Contest("Test Contest1", "This is a test contest",
                     30, ContestEndMode.GoalBased, ContestType.Group, DateTime.Today, new EndCondition(500),
-                    Placeholder.Statistic.Steps);
+                    Statistic.Steps);
 
                 Log("Creating Members");
-                Placeholder.User member1 = new Placeholder.User("Test", "Subject1");
-                Placeholder.User member2 = new Placeholder.User("Test", "Subject2");
-                Placeholder.User member3 = new Placeholder.User("Test", "Subject3");
-                Placeholder.User member4 = new Placeholder.User("Test", "Subject4");
+                User member1 = new User("Test", "Subject1");
+                User member2 = new User("Test", "Subject2");
+                User member3 = new User("Test", "Subject3");
+                User member4 = new User("Test", "Subject4");
 
                 Log("Creating Groups");
-                Placeholder.Group group1 = new Placeholder.Group("Group 1");
-                group1.Members.Add(member1);
+                Group group1 = new Group(0, "Group 1", member1, string.Empty, new List<string>());
                 group1.Members.Add(member2);
 
                 Log("Adding group to the contest");
@@ -377,21 +375,19 @@ namespace ActivEarth.Tests.Competition.Contests
                 Log("Creating contest");
                 Contest contest = new Contest("Test Contest1", "This is a test contest",
                     30, ContestEndMode.GoalBased, ContestType.Group, DateTime.Today, new EndCondition(500),
-                    Placeholder.Statistic.Steps);
+                    Statistic.Steps);
 
                 Log("Creating Members");
-                Placeholder.User member1 = new Placeholder.User("Test", "Subject1");
-                Placeholder.User member2 = new Placeholder.User("Test", "Subject2");
-                Placeholder.User member3 = new Placeholder.User("Test", "Subject3");
-                Placeholder.User member4 = new Placeholder.User("Test", "Subject4");
+                User member1 = new User("Test", "Subject1");
+                User member2 = new User("Test", "Subject2");
+                User member3 = new User("Test", "Subject3");
+                User member4 = new User("Test", "Subject4");
 
                 Log("Creating Groups");
-                Placeholder.Group group1 = new Placeholder.Group("Group 1");
-                group1.Members.Add(member1);
+                Group group1 = new Group(0, "Group 1", member1, string.Empty, new List<string>());
                 group1.Members.Add(member2);
 
-                Placeholder.Group group2 = new Placeholder.Group("Group 2");
-                group2.Members.Add(member3);
+                Group group2 = new Group(0, "Group 2", member3, string.Empty, new List<string>());
                 group2.Members.Add(member4);
 
                 Log("Adding groups to the contest");
@@ -436,15 +432,15 @@ namespace ActivEarth.Tests.Competition.Contests
                 Log("Creating contest to put the team in");
                 Contest contest = new Contest("Test Contest1", "This is a test contest",
                     30, ContestEndMode.GoalBased, ContestType.Group, DateTime.Today, new EndCondition(500),
-                    Placeholder.Statistic.Steps);
+                    Statistic.Steps);
 
                 Log("Adding the contest to the DB");
                 int contestId = ContestDAO.CreateNewContest(contest);
 
                 Log("Creating team");
                 Team team = new Team("Test Team");
-                team.Add(new Placeholder.User("Test", "Subject1"));
-                team.Add(new Placeholder.User("Test", "Subject2"));
+                team.Add(new User("Test", "Subject1"));
+                team.Add(new User("Test", "Subject2"));
 
                 Log("Adding team to DB");
                 int id = TeamDAO.CreateNewTeam(team, contestId);

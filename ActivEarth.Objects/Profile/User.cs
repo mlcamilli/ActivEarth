@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using ActivEarth.Groups;
-using ActivEarth.Competition;
-using ActivEarth.Competition.Badges;
-using ActivEarth.Competition.Challenges;
-using ActivEarth.Competition.Contests;
+using ActivEarth.Objects.Groups;
+using ActivEarth.Objects.Competition;
+using ActivEarth.Objects.Competition.Badges;
+using ActivEarth.Objects.Competition.Challenges;
+using ActivEarth.Objects.Competition.Contests;
 
-namespace ActivEarth.Profile
+namespace ActivEarth.Objects.Profile
 {
     public class User
     {
@@ -26,15 +26,65 @@ namespace ActivEarth.Profile
             set;
         }
 
-        public enum Statistic
+        public String UserName 
         {
-            Steps,
-            WalkDistance,
-            BikeDistance,
-            RunDistance,
-            GasSavings,
-            ChallengesCompleted
-        };
+            get; 
+            set; 
+        }
+
+        public String Email
+        {
+            get;
+            set;
+        }
+
+        public int UserID
+        {
+            get;
+            set;
+        }
+
+        public int ProfileID
+        {
+            get;
+            set;
+        }
+
+        public Char Gender
+        {
+            get;
+            set;
+        }
+
+        public String City
+        {
+            get;
+            set;
+        }
+
+        public String State
+        {
+            get;
+            set;
+        }
+
+        public int? Age
+        {
+            get;
+            set;
+        }
+
+        public int? Weight
+        {
+            get;
+            set;
+        }
+
+        public int? Height
+        {
+            get;
+            set;
+        }
 
         public List<Group> Groups
         {
@@ -48,7 +98,7 @@ namespace ActivEarth.Profile
             set;
         }
 
-        public Dictionary<uint, float> ChallengeInitialValues
+        public Dictionary<int, float> ChallengeInitialValues
         {
             get;
             set;
@@ -66,13 +116,7 @@ namespace ActivEarth.Profile
             set;
         }
 
-        public Dictionary<uint, Contest> Contests
-        {
-            get;
-            set;
-        }
-
-        public Dictionary<uint, Challenge> Challenges
+        public List<Contest> Contests
         {
             get;
             set;
@@ -84,12 +128,18 @@ namespace ActivEarth.Profile
 
         #region ---------- Constructor ----------
 
+        public User()
+            : this(string.Empty, string.Empty)
+        {
+
+        }
+
         public User(string firstname, string lastname)
         {
             this.FirstName = firstname;
             this.LastName = lastname;
 
-            this.ChallengeInitialValues = new Dictionary<uint, float>();
+            this.ChallengeInitialValues = new Dictionary<int, float>();
 
             _stats = new Dictionary<Statistic, float>();
 
@@ -101,8 +151,8 @@ namespace ActivEarth.Profile
             _stats.Add(Statistic.WalkDistance, 0);
 
             this.Badges = new Dictionary<Statistic, Badge>();
-            this.Challenges = new Dictionary<uint, Challenge>();
-            this.Contests = new Dictionary<uint, Contest>();
+            this.Contests = new List<Contest>();
+            this.Groups = new List<Group>();
         }
 
         #endregion ---------- Constructor ----------

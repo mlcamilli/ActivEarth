@@ -1,5 +1,7 @@
 ﻿using System;
 
+using ActivEarth.Objects.Profile;
+
 namespace ActivEarth.Objects.Competition.Contests
 {
     /// <summary>
@@ -12,10 +14,8 @@ namespace ActivEarth.Objects.Competition.Contests
 
         /// <summary>
         /// The user object wrapped by the ContestUser object.
-        /// 
-        /// DEPENDENCY: Profile.User
         /// </summary>
-        public Placeholder.User User
+        public User User
         {
             get;
             set;
@@ -54,13 +54,10 @@ namespace ActivEarth.Objects.Competition.Contests
 
         /// <summary>
         /// Creates a new ContestUser for a contest tracking a particular statistic.
-        /// 
-        /// DEPENDENCY: Profile.User
-        /// DEPENDENCY: Profile.Statistics
         /// </summary>
         /// <param name="user">The user participating in the contest.</param>
         /// <param name="statistic">The statistic being scored in the contest.</param>
-        public TeamMember(Placeholder.User user)
+        public TeamMember(User user)
         {
             this.User = user;
             this.Initialized = false;
@@ -76,10 +73,8 @@ namespace ActivEarth.Objects.Competition.Contests
         /// 
         /// Sets the initialized flag to true, allowing the calculation of
         /// delta scores.
-        /// 
-        /// DEPENDENCY: Profile.GetStatistic()
         /// </summary>
-        public void LockInitialValues(Placeholder.Statistic statistic)
+        public void LockInitialValues(Statistic statistic)
         {
             this.InitialScore = this.User.GetStatistic(statistic);
             this.Initialized = true;
@@ -89,11 +84,9 @@ namespace ActivEarth.Objects.Competition.Contests
         /// Calculates the user's change in the relevant statistic
         /// since the beginning of the contest; their 'score' for
         /// the contest.
-        /// 
-        /// DEPENDENCY: Profile.GetStatistic()
         /// </summary>
         /// <returns></returns>
-        public float CalculateScore(Placeholder.Statistic statistic)
+        public float CalculateScore(Statistic statistic)
         {
             if (this.Initialized)
             {

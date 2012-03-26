@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
+using ActivEarth.Objects.Groups;
+using ActivEarth.Objects.Profile;
 using ActivEarth.Objects.Competition;
 using ActivEarth.Objects.Competition.Challenges;
 
@@ -15,7 +17,7 @@ namespace ActivEarth.Server.Service.Competition
     /// </summary>
     public class ChallengeManager
     {
-        public ChallengeManager(Placeholder.Group allUsers)
+        public ChallengeManager(Group allUsers)
         {
             _allUsers = allUsers;
         }
@@ -35,7 +37,7 @@ namespace ActivEarth.Server.Service.Competition
         /// <param name="requirement">Statistic value required to complete the challenge.</param>
         /// <returns></returns>
         public int CreateChallenge(string name, string description, int points, bool persistent,
-            DateTime start, int durationInDays, Placeholder.Statistic statistic, float requirement)
+            DateTime start, int durationInDays, Statistic statistic, float requirement)
         {
             Challenge newChallenge = new Challenge(name, description, points, persistent,
                     start, durationInDays, statistic, requirement);
@@ -97,9 +99,9 @@ namespace ActivEarth.Server.Service.Competition
         /// </summary>
         /// <param name="id">Identifier for the challenge being initialized.</param>
         /// <param name="statistic">Statistic being tracked by the challenge.</param>
-        private void LockInitialValues(int id, Placeholder.Statistic statistic)
+        private void LockInitialValues(int id, Statistic statistic)
         {
-            foreach (Placeholder.User user in _allUsers.Members)
+            foreach (User user in _allUsers.Members)
             {
                 if (user != null)
                 {
@@ -115,7 +117,7 @@ namespace ActivEarth.Server.Service.Competition
         /// <param name="id">Expired challenge to remove initialization information for.</param>
         private void RemoveInitializationValues(int id)
         {
-            foreach (Placeholder.User user in _allUsers.Members)
+            foreach (User user in _allUsers.Members)
             {
                 if (user != null)
                 {
@@ -132,7 +134,7 @@ namespace ActivEarth.Server.Service.Competition
         /// <summary>
         /// Group of all users, who must be updated with the creation of new challenges.
         /// </summary>
-        private Placeholder.Group _allUsers;
+        private Group _allUsers;
 
         #endregion ---------- Private Fields ----------
     }

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Transactions;
 using ActivEarth.DAO;
 using ActivEarth.Objects;
+using ActivEarth.Objects.Profile;
 using ActivEarth.Server.Service;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

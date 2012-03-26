@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using ActivEarth.Objects;
+using ActivEarth.Objects.Profile;
 using ActivEarth.Server.Service;
 
 namespace ActivEarth.Account

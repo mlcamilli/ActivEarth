@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+
+using ActivEarth.Objects.Profile;
 using ActivEarth.Objects.Competition;
 using ActivEarth.Objects.Competition.Challenges;
 using ActivEarth.Server.Service;
@@ -33,7 +35,7 @@ namespace ActivEarth.DAO
                                 IsPersistent = c.persistent,
                                 EndTime = c.end_time,
                                 Duration = new TimeSpan(c.duration_days, 0, 0, 0),
-                                StatisticBinding = (Placeholder.Statistic)c.statistic,
+                                StatisticBinding = (Statistic)c.statistic,
                                 IsActive = c.active
                             }).FirstOrDefault();
             }
@@ -61,7 +63,7 @@ namespace ActivEarth.DAO
                                 IsPersistent = c.persistent,
                                 EndTime = c.end_time,
                                 Duration = new TimeSpan(c.duration_days, 0, 0, 0),
-                                StatisticBinding = (Placeholder.Statistic)c.statistic,
+                                StatisticBinding = (Statistic)c.statistic,
                                 IsActive = c.active
                             }).ToList();
             }
@@ -89,7 +91,7 @@ namespace ActivEarth.DAO
                                 IsPersistent = c.persistent,
                                 EndTime = c.end_time,
                                 Duration = new TimeSpan(c.duration_days, 0, 0, 0),
-                                StatisticBinding = (Placeholder.Statistic)c.statistic,
+                                StatisticBinding = (Statistic)c.statistic,
                                 IsActive = c.active
                             }).ToList();
             }

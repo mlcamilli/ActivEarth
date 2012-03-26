@@ -5,13 +5,10 @@ using System.Linq;
 using System.Transactions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-using ActivEarth.Objects.Competition;
+using ActivEarth.Objects.Groups;
+using ActivEarth.Objects.Profile;
 using ActivEarth.Objects.Competition.Contests;
 using ActivEarth.DAO;
-
-using Statistics = ActivEarth.Objects.Competition.Placeholder.Statistic;
-using User = ActivEarth.Objects.Competition.Placeholder.User;
-using Group = ActivEarth.Objects.Competition.Placeholder.Group;
 
 namespace ActivEarth.Tests.Competition.Contests
 {
@@ -49,12 +46,10 @@ namespace ActivEarth.Tests.Competition.Contests
             _user3 = new User("Test", "Subject3");
             _user4 = new User("Test", "Subject4");
 
-            _group1 = new Group("Team 1");
-            _group1.Members.Add(_user1);
+            _group1 = new Group(1, "Group 1", _user1, string.Empty, new List<string>());
             _group1.Members.Add(_user2);
 
-            _group2 = new Group("Team 2");
-            _group2.Members.Add(_user3);
+            _group2 = new Group(2, "Group 2", _user3, string.Empty, new List<string>());
             _group2.Members.Add(_user4);
             _trans = new TransactionScope();
         }
@@ -75,7 +70,7 @@ namespace ActivEarth.Tests.Competition.Contests
                 Log("Creating time-based group contest");
                 int id = ContestManager.CreateContest(ContestType.Group, "Test Contest 1",
                     "This is a test time-based contest.", 50, DateTime.Now, DateTime.Now.AddDays(1),
-                    Statistics.Steps);
+                    Statistic.Steps);
                 Contest contest = ContestManager.GetContest(id);
 
                 Log("Adding groups to the contest");
@@ -106,13 +101,13 @@ namespace ActivEarth.Tests.Competition.Contests
                 Log("Creating time-based group contest");
                 int timeId = ContestManager.CreateContest(ContestType.Group, "Test Contest 1",
                     "This is a test time-based contest.", 50, DateTime.Now, DateTime.Now.AddDays(1),
-                    Statistics.Steps);
+                    Statistic.Steps);
                 Contest timedContest = ContestManager.GetContest(timeId);
 
                 Log("Creating goal-based individual contest");
                 int goalId = ContestManager.CreateContest(ContestType.Individual, "Test Contest 2",
                     "This is a test goal-based contest.", 50, DateTime.Now, 50000,
-                    Statistics.Steps);
+                    Statistic.Steps);
                 Contest goalContest = ContestManager.GetContest(goalId);
 
                 Log("Verifying time-based contest end mode");
@@ -131,7 +126,7 @@ namespace ActivEarth.Tests.Competition.Contests
                 Log("Creating group contest");
                 int id = ContestManager.CreateContest(ContestType.Group, "Test Contest 1",
                     "This is a test time-based contest.", 50, DateTime.Now, DateTime.Now.AddDays(1),
-                    Statistics.Steps);
+                    Statistic.Steps);
                 Contest contest = ContestManager.GetContest(id);
 
                 contest.AddGroup(_group1);
@@ -141,10 +136,10 @@ namespace ActivEarth.Tests.Competition.Contests
                 contest.LockInitialValues();
 
                 Log("Setting individual statistics such that group1 is winning");
-                _user1.SetStatistic(Statistics.Steps, 100);
-                _user2.SetStatistic(Statistics.Steps, 100);
-                _user3.SetStatistic(Statistics.Steps, 50);
-                _user4.SetStatistic(Statistics.Steps, 50);
+                _user1.SetStatistic(Statistic.Steps, 100);
+                _user2.SetStatistic(Statistic.Steps, 100);
+                _user3.SetStatistic(Statistic.Steps, 50);
+                _user4.SetStatistic(Statistic.Steps, 50);
 
                 Log("Updating contest scores");
                 contest.UpdateScores();
@@ -167,7 +162,7 @@ namespace ActivEarth.Tests.Competition.Contests
                 Log("Creating individual contest");
                 int id = ContestManager.CreateContest(ContestType.Individual, "Test Contest 1",
                     "This is a test time-based contest.", 50, DateTime.Now, DateTime.Now.AddDays(1),
-                    Statistics.Steps);
+                    Statistic.Steps);
                 Contest contest = ContestManager.GetContest(id);
 
                 contest.AddUser(_user1);
@@ -179,10 +174,10 @@ namespace ActivEarth.Tests.Competition.Contests
                 contest.LockInitialValues();
 
                 Log("Setting individual statistics");
-                _user1.SetStatistic(Statistics.Steps, 25);
-                _user2.SetStatistic(Statistics.Steps, 75);
-                _user3.SetStatistic(Statistics.Steps, 50);
-                _user4.SetStatistic(Statistics.Steps, 100);
+                _user1.SetStatistic(Statistic.Steps, 25);
+                _user2.SetStatistic(Statistic.Steps, 75);
+                _user3.SetStatistic(Statistic.Steps, 50);
+                _user4.SetStatistic(Statistic.Steps, 100);
 
                 Log("Updating contest scores");
                 contest.UpdateScores();
@@ -203,7 +198,7 @@ namespace ActivEarth.Tests.Competition.Contests
                 Log("Creating group contest");
                 int id = ContestManager.CreateContest(ContestType.Group, "Test Contest 1",
                     "This is a test time-based contest.", 50, DateTime.Now, DateTime.Now.AddDays(1),
-                    Statistics.Steps);
+                    Statistic.Steps);
                 Contest contest = ContestManager.GetContest(id);
 
                 Team team = new Team("Team1");
@@ -214,19 +209,19 @@ namespace ActivEarth.Tests.Competition.Contests
                 contest.AddTeam(team);
 
                 Log("Setting individual initial statistics");
-                _user1.SetStatistic(Statistics.Steps, 0);
-                _user2.SetStatistic(Statistics.Steps, 50);
-                _user3.SetStatistic(Statistics.Steps, 100);
-                _user4.SetStatistic(Statistics.Steps, 150);
+                _user1.SetStatistic(Statistic.Steps, 0);
+                _user2.SetStatistic(Statistic.Steps, 50);
+                _user3.SetStatistic(Statistic.Steps, 100);
+                _user4.SetStatistic(Statistic.Steps, 150);
 
                 Log("Locking initial values");
                 contest.LockInitialValues();
 
                 Log("Adding 50 steps to each user");
-                _user1.SetStatistic(Statistics.Steps, 50);
-                _user2.SetStatistic(Statistics.Steps, 100);
-                _user3.SetStatistic(Statistics.Steps, 150);
-                _user4.SetStatistic(Statistics.Steps, 200);
+                _user1.SetStatistic(Statistic.Steps, 50);
+                _user2.SetStatistic(Statistic.Steps, 100);
+                _user3.SetStatistic(Statistic.Steps, 150);
+                _user4.SetStatistic(Statistic.Steps, 200);
 
                 Log("Updating contest scores");
                 contest.UpdateScores();

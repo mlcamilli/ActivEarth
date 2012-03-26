@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-using ActivEarth.Profile;
+using ActivEarth.Objects.Profile;
 
-namespace ActivEarth.Groups
+namespace ActivEarth.Objects.Groups
 {
     public class Message
     {

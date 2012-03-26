@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 
+using ActivEarth.Objects.Profile;
 using ActivEarth.Objects.Competition;
 using ActivEarth.Objects.Competition.Contests;
 using ActivEarth.Server.Service;
@@ -38,7 +39,7 @@ namespace ActivEarth.DAO
                                         new EndCondition((DateTime)c.end_time)),
                                 Mode = (ContestEndMode)c.end_mode,
                                 Type = (ContestType)c.type,
-                                StatisticBinding = (Placeholder.Statistic)c.statistic
+                                StatisticBinding = (Statistic)c.statistic
                             }).FirstOrDefault();
             }
 
@@ -76,7 +77,7 @@ namespace ActivEarth.DAO
                                         new EndCondition((DateTime)c.end_time)),
                                 Mode = (ContestEndMode)c.end_mode,
                                 Type = (ContestType)c.type,
-                                StatisticBinding = (Placeholder.Statistic)c.statistic
+                                StatisticBinding = (Statistic)c.statistic
                             }).ToList();
 
                 if (toReturn != null)

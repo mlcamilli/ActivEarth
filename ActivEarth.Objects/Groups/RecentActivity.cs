@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-using ActivEarth.Profile;
-using ActivEarth.Competition;
+using ActivEarth.Objects.Profile;
+using ActivEarth.Objects.Competition;
 
 
-namespace ActivEarth.Groups
+namespace ActivEarth.Objects.Groups
 {
     public class RecentActivity : Message
     {

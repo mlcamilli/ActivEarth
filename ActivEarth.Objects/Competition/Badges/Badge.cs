@@ -1,5 +1,7 @@
 ﻿using System;
 
+using ActivEarth.Objects.Profile;
+
 namespace ActivEarth.Objects.Competition.Badges
 {
     public class Badge
@@ -48,13 +50,10 @@ namespace ActivEarth.Objects.Competition.Badges
 
         /// <summary>
         /// Creates a new badge belonging to a user, based on a specific statistic.
-        /// 
-        /// DEPENDENCY: Profile.User
-        /// DEPENDENCY: Profile.Statistics
         /// </summary>
         /// <param name="user">User to whom the Badge is bound.</param>
         /// <param name="statistic">Statistic to which the Badge is bound.</param>
-        public Badge(int id, string name, Placeholder.User user, Placeholder.Statistic statistic, 
+        public Badge(int id, string name, User user, Statistic statistic, 
             float[] levelValues, int[] levelPoints, Uri[] imagePaths)
         {
             this.ID = id;
@@ -139,17 +138,13 @@ namespace ActivEarth.Objects.Competition.Badges
 
         /// <summary>
         /// Statistic to which the badge is bound.
-        /// 
-        /// DEPENDENCY: Profile.Statistics
         /// </summary>
-        private Placeholder.Statistic _statisticBinding;
+        private Statistic _statisticBinding;
 
         /// <summary>
         /// User to which the badge is bound.
-        /// 
-        /// DEPENDENCY: Profile.User
         /// </summary>
-        private Placeholder.User _user;
+        private User _user;
 
         /// <summary>
         /// Array of the values required to advance to each level of the badge.

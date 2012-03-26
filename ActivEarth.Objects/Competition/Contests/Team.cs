@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 
+using ActivEarth.Objects.Profile;
+
 namespace ActivEarth.Objects.Competition.Contests
 {
     /// <summary>
@@ -89,7 +91,7 @@ namespace ActivEarth.Objects.Competition.Contests
         /// Adds a user to the team.
         /// </summary>
         /// <param name="user">The user to be added.</param>
-        public void Add(Placeholder.User user)
+        public void Add(User user)
         {
             if (user == null)
             {
@@ -103,14 +105,14 @@ namespace ActivEarth.Objects.Competition.Contests
         /// Adds a list of users to the team.
         /// </summary>
         /// <param name="users">List of users to be added.</param>
-        public void Add(List<Placeholder.User> users)
+        public void Add(List<User> users)
         {
             if (users == null)
             {
                 return;
             }
 
-            foreach (Placeholder.User user in users)
+            foreach (User user in users)
             {
                 this.Add(user);
             }
@@ -120,7 +122,7 @@ namespace ActivEarth.Objects.Competition.Contests
         /// Removes a user from the team.
         /// </summary>
         /// <param name="user"></param>
-        public void Remove(Placeholder.User user)
+        public void Remove(User user)
         {
             if (user == null)
             {
@@ -134,14 +136,14 @@ namespace ActivEarth.Objects.Competition.Contests
         /// Removes a list of users from the team.
         /// </summary>
         /// <param name="users"></param>
-        public void Remove(List<Placeholder.User> users)
+        public void Remove(List<User> users)
         {
             if (users == null)
             {
                 return;
             }
 
-            foreach (Placeholder.User user in users)
+            foreach (User user in users)
             {
                 this.Remove(user);
             }
@@ -151,7 +153,7 @@ namespace ActivEarth.Objects.Competition.Contests
         /// Recalculates and updates the team's contest score.
         /// </summary>
         /// <returns>Updated contest score for the team.</returns>
-        public void Update(Placeholder.Statistic statistic)
+        public void Update(Statistic statistic)
         {
             this.Score = 0;
 
@@ -165,7 +167,7 @@ namespace ActivEarth.Objects.Competition.Contests
         /// Locks the initial values for each team member, required for contest
         /// score calculation.
         /// </summary>
-        public void LockInitialValues(Placeholder.Statistic statistic)
+        public void LockInitialValues(Statistic statistic)
         {
             foreach (TeamMember user in this.Members)
             {
@@ -178,7 +180,7 @@ namespace ActivEarth.Objects.Competition.Contests
         /// </summary>
         /// <param name="user">User to look for.</param>
         /// <returns>True if the user is a member of the team.</returns>
-        public bool ContainsMember(Placeholder.User user)
+        public bool ContainsMember(User user)
         {
             var query = from TeamMember cUser in this.Members
                         where cUser.User == user

@@ -6,6 +6,8 @@ using System.Transactions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using ActivEarth.DAO;
+using ActivEarth.Objects.Groups;
+using ActivEarth.Objects.Profile;
 using ActivEarth.Objects.Competition;
 using ActivEarth.Objects.Competition.Challenges;
 using ActivEarth.Server.Service;
@@ -53,7 +55,7 @@ namespace ActivEarth.Tests.Competition.Challenges
 
                 Log("Creating challenge");
                 Challenge challenge = new Challenge("Test Challenge", "This is a test challenge",
-                    30, false, DateTime.Today, 1, Placeholder.Statistic.Steps, 500);
+                    30, false, DateTime.Today, 1, Statistic.Steps, 500);
 
                 Log("Adding challenge to the database");
                 Assert.IsTrue((id = ChallengeDAO.CreateNewChallenge(challenge)) > 0);
@@ -84,7 +86,7 @@ namespace ActivEarth.Tests.Competition.Challenges
 
                 Log("Creating challenge");
                 Challenge challenge = new Challenge("Test Challenge", "This is a test challenge",
-                    30, false, DateTime.Today, 1, Placeholder.Statistic.Steps, 500);
+                    30, false, DateTime.Today, 1, Statistic.Steps, 500);
 
                 Log("Adding challenge to the database");
                 Assert.IsTrue((id = ChallengeDAO.CreateNewChallenge(challenge)) > 0);
@@ -122,16 +124,16 @@ namespace ActivEarth.Tests.Competition.Challenges
             {
                 Log("Creating expired challenge");
                 Challenge challenge1 = new Challenge("Test Challenge", "This is a test challenge",
-                    30, false, DateTime.Today.AddDays(-1), 1, Placeholder.Statistic.Steps, 500);
+                    30, false, DateTime.Today.AddDays(-1), 1, Statistic.Steps, 500);
                 challenge1.IsActive = false;
 
                 Log("Creating valid challenge");
                 Challenge challenge2 = new Challenge("Test Challenge", "This is a test challenge",
-                    30, false, DateTime.Today, 1, Placeholder.Statistic.BikeDistance, 500);
+                    30, false, DateTime.Today, 1, Statistic.BikeDistance, 500);
 
                 Log("Creating valid challenge");
                 Challenge challenge3 = new Challenge("Test Challenge", "This is a test challenge",
-                    30, false, DateTime.Today, 1, Placeholder.Statistic.ChallengesCompleted, 500);
+                    30, false, DateTime.Today, 1, Statistic.ChallengesCompleted, 500);
 
                 Log("Adding challenges to DB");
                 ChallengeDAO.CreateNewChallenge(challenge1);
@@ -150,16 +152,16 @@ namespace ActivEarth.Tests.Competition.Challenges
             {
                 Log("Creating expired challenge");
                 Challenge challenge1 = new Challenge("Test Challenge", "This is a test challenge",
-                    30, false, DateTime.Today.AddDays(-1), 1, Placeholder.Statistic.Steps, 500);
+                    30, false, DateTime.Today.AddDays(-1), 1, Statistic.Steps, 500);
                 challenge1.IsActive = false;
 
                 Log("Creating valid challenge");
                 Challenge challenge2 = new Challenge("Test Challenge", "This is a test challenge",
-                    30, false, DateTime.Today, 1, Placeholder.Statistic.BikeDistance, 500);
+                    30, false, DateTime.Today, 1, Statistic.BikeDistance, 500);
 
                 Log("Creating valid challenge");
                 Challenge challenge3 = new Challenge("Test Challenge", "This is a test challenge",
-                    30, false, DateTime.Today, 1, Placeholder.Statistic.ChallengesCompleted, 500);
+                    30, false, DateTime.Today, 1, Statistic.ChallengesCompleted, 500);
 
                 Log("Adding challenges to DB");
                 ChallengeDAO.CreateNewChallenge(challenge1);

@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 
+using ActivEarth.Objects.Groups;
+using ActivEarth.Objects.Profile;
+
 namespace ActivEarth.Objects.Competition.Contests
 {
     public class Contest
@@ -93,10 +96,8 @@ namespace ActivEarth.Objects.Competition.Contests
 
         /// <summary>
         /// Statistic to which the contest is bound.
-        /// 
-        /// DEPENDENCY: Profile.Statistics
         /// </summary>
-        public Placeholder.Statistic StatisticBinding
+        public Statistic StatisticBinding
         {
             get;
             set;
@@ -111,15 +112,13 @@ namespace ActivEarth.Objects.Competition.Contests
         /// </summary>
         public Contest()
             : this(string.Empty, string.Empty, 0, ContestEndMode.GoalBased,
-                ContestType.Individual, DateTime.Today, null, Placeholder.Statistic.Steps)
+                ContestType.Individual, DateTime.Today, null, Statistic.Steps)
         {
 
         }
 
         /// <summary>
         /// Creates a new Contest.
-        /// 
-        /// DEPENDENCY: Profile.Statistics
         /// </summary>
         /// <param name="id">Numeric indentifier for the contest.</param>
         /// <param name="name">Contest Name.<param>
@@ -132,7 +131,7 @@ namespace ActivEarth.Objects.Competition.Contests
         /// <param name="statistic">Statistic on which the Contest is based.</param>
         public Contest(string name, string description, int points,
             ContestEndMode mode, ContestType type, DateTime start, EndCondition end, 
-            Placeholder.Statistic statistic)
+            Statistic statistic)
         {
             this.Name = name;
             this.Description = description;
@@ -148,8 +147,6 @@ namespace ActivEarth.Objects.Competition.Contests
 
         /// <summary>
         /// Creates a new Contest with predetermined teams.
-        /// 
-        /// DEPENDENCY: Profile.Statistics
         /// </summary>
         /// <param name="id">Numeric indentifier for the contest.</param>
         /// <param name="name">Contest Name.<param>
@@ -163,7 +160,7 @@ namespace ActivEarth.Objects.Competition.Contests
         /// <param name="teams">Teams participating in the Contest.</param>
         protected Contest(int id, string name, string description, int points,
             ContestEndMode mode, ContestType type, DateTime start, EndCondition end, 
-            Placeholder.Statistic statistic, List<Team> teams)
+            Statistic statistic, List<Team> teams)
             : this(name, description, points, mode, type, start, end, statistic)
         {
             this.Teams = teams;
@@ -213,11 +210,9 @@ namespace ActivEarth.Objects.Competition.Contests
         /// <summary>
         /// Adds a group to the Contest. In a group contest, members will be added as one team,
         /// while in an individual contest members will be added individually.
-        /// 
-        /// DEPENDENCY: Groups.Group
         /// </summary>
         /// <param name="group">Group to be added.</param>
-        public void AddGroup(Placeholder.Group group)
+        public void AddGroup(Group group)
         {
             if (this.Type == ContestType.Group)
             {
@@ -226,7 +221,7 @@ namespace ActivEarth.Objects.Competition.Contests
 
                 Team newTeam = new Team(teamName);
 
-                foreach (Placeholder.User user in group.Members)
+                foreach (User user in group.Members)
                 {
                     newTeam.Members.Add(new TeamMember(user));
                 }
@@ -235,7 +230,7 @@ namespace ActivEarth.Objects.Competition.Contests
             }
             else
             {
-                foreach (Placeholder.User user in group.Members)
+                foreach (User user in group.Members)
                 {
                     this.AddUser(user);
                 }
@@ -245,13 +240,11 @@ namespace ActivEarth.Objects.Competition.Contests
         /// <summary>
         /// Adds groups to the Contest. In a group contest, members will be added as one team,
         /// while in an individual contest members will be added individually.
-        /// 
-        /// DEPENDENCY: Groups.Group
         /// </summary>
         /// <param name="group">Groups to be added.</param>
-        public void AddGroup(List<Placeholder.Group> groups)
+        public void AddGroup(List<Group> groups)
         {
-            foreach (Placeholder.Group group in groups)
+            foreach (Group group in groups)
             {
                 this.AddGroup(group);
             }
@@ -259,11 +252,9 @@ namespace ActivEarth.Objects.Competition.Contests
 
         /// <summary>
         /// Adds a user to the Contest.
-        /// 
-        /// DEPENDENCY: Profile.User
         /// </summary>
         /// <param name="user">User to be added.</param>
-        public void AddUser(Placeholder.User user)
+        public void AddUser(User user)
         {
             string teamName = String.Format("{0} {1}", user.FirstName, user.LastName);
             //TODO: Assert that no team with this name exists already
@@ -276,13 +267,11 @@ namespace ActivEarth.Objects.Competition.Contests
 
         /// <summary>
         /// Adds users to the Contest.
-        /// 
-        /// DEPENDENCY: Profile.User
         /// </summary>
         /// <param name="user">Users to be added.</param>
-        public void AddUser(List<Placeholder.User> users)
+        public void AddUser(List<User> users)
         {
-            foreach (Placeholder.User user in users)
+            foreach (User user in users)
             {
                 this.AddUser(user);
             }

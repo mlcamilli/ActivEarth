@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
+using ActivEarth.Objects.Profile;
+
 namespace ActivEarth.Objects.Competition.Challenges
 {
     public class Challenge
@@ -84,10 +86,8 @@ namespace ActivEarth.Objects.Competition.Challenges
 
         /// <summary>
         /// Statistic to which the badge is bound.
-        /// 
-        /// DEPENDENCY: Profile.Statistics
         /// </summary>
-        public Placeholder.Statistic StatisticBinding
+        public Statistic StatisticBinding
         {
             get;
             set;
@@ -116,8 +116,6 @@ namespace ActivEarth.Objects.Competition.Challenges
 
         /// <summary>
         /// Creates a new Challenge.
-        /// 
-        /// DEPENDENCY: Profile.Statistics
         /// </summary>
         /// <param name="id">Identifier for the challenge.</param>
         /// <param name="name">Challenge Name.</param>
@@ -129,7 +127,7 @@ namespace ActivEarth.Objects.Competition.Challenges
         /// <param name="statistic">Statistic to which the Challenge is bound.</param>
         /// <param name="requirement">Statistic value required to complete the challenge.</param>
         public Challenge(string name, string description, int points, bool persistent,
-            DateTime startTime, int durationInDays, Placeholder.Statistic statistic, float requirement)
+            DateTime startTime, int durationInDays, Statistic statistic, float requirement)
         {
             this.Name = name;
             this.Description = description;
@@ -148,13 +146,11 @@ namespace ActivEarth.Objects.Competition.Challenges
 
         /// <summary>
         /// Gets the progress made by a user in the challenge.
-        /// 
-        /// DEPENDENCY: Profile.User
         /// </summary>
         /// <param name="user">The user to evaluate.</param>
         /// <returns>Minimum of the user's progress and the challenge's requirement 
         /// (for use in a progress bar).</returns>
-        public float GetProgress(Placeholder.User user)
+        public float GetProgress(User user)
         {
             if (user.ChallengeInitialValues.ContainsKey(this.ID))
             {
@@ -175,7 +171,7 @@ namespace ActivEarth.Objects.Competition.Challenges
         /// </summary>
         /// <param name="user">The user to evaluate.</param>
         /// <returns>Whether or not the user has completed the challenge.</returns>
-        public bool IsComplete(Placeholder.User user)
+        public bool IsComplete(User user)
         {
             return (this.GetProgress(user) == this.Requirement);
         }

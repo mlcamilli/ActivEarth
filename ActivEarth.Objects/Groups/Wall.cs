@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace ActivEarth.Groups
+namespace ActivEarth.Objects.Groups
 {
     public class Wall
     {

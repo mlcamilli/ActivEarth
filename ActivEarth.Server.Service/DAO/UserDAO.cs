@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Data.SqlClient;
 using System.Linq;
-using ActivEarth.Objects;
+using ActivEarth.Objects.Profile;
 using ActivEarth.Server.Service;
 
 namespace ActivEarth.DAO
@@ -124,7 +124,7 @@ namespace ActivEarth.DAO
                     }
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return false;
             }
@@ -157,7 +157,7 @@ namespace ActivEarth.DAO
                     return oldPassword != null && oldPassword == password;
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return false;
             }
@@ -182,7 +182,7 @@ namespace ActivEarth.DAO
                     return false;
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return false;
             }

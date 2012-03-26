@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
+using ActivEarth.Objects.Profile;
 using ActivEarth.Objects.Competition;
 using ActivEarth.Objects.Competition.Contests;
 
@@ -34,7 +35,7 @@ namespace ActivEarth.DAO
         /// <param name="statistic">Statistic on which the Contest is based.</param>
         /// <returns>ID of the newly created Contest.</returns>
         public static int CreateContest(ContestType type, string name, string description, int points, DateTime start,
-            DateTime end, Placeholder.Statistic statistic)
+            DateTime end, Statistic statistic)
         {
             return ContestDAO.CreateNewContest(new Contest(name, description, points, ContestEndMode.TimeBased,
                 type, start, new EndCondition(end), statistic));
@@ -51,7 +52,7 @@ namespace ActivEarth.DAO
         /// <param name="statistic">Statistic on which the Contest is based.</param>
         /// <returns>ID of the newly created Contest.</returns>
         public static int CreateContest(ContestType type, string name, string description, int points, DateTime start,
-            float end, Placeholder.Statistic statistic)
+            float end, Statistic statistic)
         {
             return ContestDAO.CreateNewContest(new Contest(name, description, points, ContestEndMode.GoalBased,
                 type, start, new EndCondition(end), statistic));
