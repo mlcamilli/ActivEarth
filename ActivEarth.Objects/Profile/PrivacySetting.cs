@@ -10,66 +10,99 @@ namespace ActivEarth.Objects.Profile
 
         #region ---------- Public Members ----------
 
+        /// <summary>
+        /// Field representing the overall visibility of a user's profile.
+        /// </summary>
         public ProfileVisibility ProfileVisibility
         { 
             get;
             set;
         }
 
+        /// <summary>
+        /// True if the user's email is visible, false otherwise.
+        /// </summary>
         public bool Email
         {
             get;
             set;
         }
 
+        /// <summary>
+        /// True if the user's gender is visible, false otherwise.
+        /// </summary>
         public bool Gender
         {
             get;
             set;
         }
 
+        /// <summary>
+        /// True if the user's age is visible, false otherwise.
+        /// </summary>
         public bool Age
         {
             get;
             set;
         }
 
+        /// <summary>
+        /// True if the user's weight is visible, false otherwise.
+        /// </summary>
         public bool Weight
         {
             get;
             set;
         }
 
+        /// <summary>
+        /// True if the user's height visible, false otherwise.
+        /// </summary>
         public bool Height
         {
             get;
             set;
         }
 
+        /// <summary>
+        /// True if the user's location is visible, false otherwise.
+        /// </summary>
         public bool Location
         {
             get;
             set;
         }
 
+        /// <summary>
+        /// True if the user's groups are visible, false otherwise.
+        /// </summary>
         public bool Group
         {
             get;
             set;
         }
 
+        /// <summary>
+        /// A unique identification number for the privacy setting.
+        /// </summary>
         public int ID
         {
             get;
             set;
         }
 
+        /// <summary>
+        /// A unique identification number for the privacy setting's user.
+        /// </summary>
         public int UserID
         {
             get;
             set;
         }
 
+        /// <summary>
+        /// The user owning the privacy setting.
+        /// </summary>
         public User User
         {
             get;
