@@ -38,6 +38,9 @@ namespace ActivEarth.Tests.Competition.Challenges
             set;
         }
 
+        /// <summary>
+        /// Creates two new users and a Challenge Manager to operate on them.
+        /// </summary>
         [TestInitialize]
         public void Initialize()
         {
@@ -52,6 +55,9 @@ namespace ActivEarth.Tests.Competition.Challenges
             _trans = new TransactionScope();
         }
 
+        /// <summary>
+        /// Disposes of the Transaction Scope, rolling back the DB transactions.
+        /// </summary>
         [TestCleanup]
         public void CleanUp()
         {
@@ -60,8 +66,22 @@ namespace ActivEarth.Tests.Competition.Challenges
 
         #region ---------- Test Cases ----------
 
+        /// <summary>
+        /// Verifies that each user's challenge initialization is executed and the initial
+        /// values are correct when a challenge is created by the Challenge Manager.
+        /// </summary>
+        /// <remarks>
+        /// Steps:
+        /// 1) Set user2's steps statistic to a nonzero value (leaving user1 at 0).
+        /// 2) Create a step-based challenge
+        /// 3) VERIFY: user1 contains initialization information for the challenge
+        /// 4) VERIFY: user1 reports 0 steps as the initialization value for the challenge
+        /// 5) VERIFY: user2 contains initialization information for the challenge
+        /// 6) VERIFY: user2 reports correct number of steps as the initialization 
+        ///     value for the challenge
+        /// </remarks>
         [TestMethod]
-        public void TestChallengeCreation()
+        public void TestChallengeInitialization()
         {
             Log("Setting User2's initial Step statistic");
             _user2.SetStatistic(Statistic.Steps, 50);
@@ -83,6 +103,19 @@ namespace ActivEarth.Tests.Competition.Challenges
             Assert.AreEqual(50, _user2.ChallengeInitialValues[id]);
         }
 
+        /// <summary>
+        /// Verifies that each user's challenge progress is correctly reported before they have reached
+        /// the statistics required to complete the challenge.
+        /// </summary>
+        /// <remarks>
+        /// Steps:
+        /// 1) Set user2's steps statistic to 50 (leaving user1 at 0).
+        /// 2) Create a step-based challenge
+        /// 3) Increase both user1 and user2's step statistics to 200.
+        /// 3) VERIFY: user1 reports 200 steps of progress
+        /// 4) VERIFY: user2 reports 150 steps of progress
+        /// 5) VERIFY: Both users have not completed the challenge.
+        /// </remarks>
         [TestMethod]
         public void TestChallengeProgressIncomplete()
         {
@@ -114,6 +147,19 @@ namespace ActivEarth.Tests.Competition.Challenges
             Assert.IsFalse(challenge.IsComplete(_user2));
         }
 
+        /// <summary>
+        /// Verifies that each user's challenge progress is correctly reported after they have reached
+        /// the statistics required to complete the challenge (and the progress is capped at the requirement).
+        /// </summary>
+        /// <remarks>
+        /// Steps:
+        /// 1) Set user2's steps statistic to 50 (leaving user1 at 0).
+        /// 2) Create a step-based challenge with 500-step requirement.
+        /// 3) Increase user1's step statistic to 525 (increase of 525)
+        /// 4) Increase user2's step statistic to 550 (increase of 500)
+        /// 5) VERIFY: Both users report progress of 500.
+        /// 6) VERIFY: Both users have not completed the challenge.
+        /// </remarks>
         [TestMethod]
         public void TestChallengeProgressComplete()
         {
@@ -144,7 +190,21 @@ namespace ActivEarth.Tests.Competition.Challenges
             Log("Verifying User2 has completed the Challenge");
             Assert.IsTrue(challenge.IsComplete(_user2));
         }
-        
+
+        /// <summary>
+        /// Verifies that multiple challenges can be initialized without interfering with one another.
+        /// </summary>
+        /// <remarks>
+        /// Steps:
+        /// 1) Set user1's steps to 50 and bike distance to 100
+        /// 2) Create a step-based challenge
+        /// 3) Create a bikedistance-based challenge
+        /// 3) Increase user1's steps to 150
+        /// 4) Create a step-based challenge
+        /// 5) VERIFY: First challenge's initialization value is 50
+        /// 6) VERIFY: Second challenge's initialization value is 100
+        /// 7) VERIFY: Third challenge's initialization value is 150
+        /// </remarks>
         [TestMethod]
         public void TestChallengeMultipleInitialization()
         {
@@ -180,6 +240,21 @@ namespace ActivEarth.Tests.Competition.Challenges
             Assert.AreEqual(150, _user1.ChallengeInitialValues[id3]);
         }
 
+        /// <summary>
+        /// Verifies that transient challenges are inactivated when they expire and persistent challenges
+        /// are not.
+        /// </summary>
+        /// <remarks>
+        /// Steps:
+        /// 1) Create an expired transient challenge
+        /// 2) Create an ongoing transient challenge
+        /// 3) Create an expired persistent challenge
+        /// 4) VERIFY: All three challenges appear in the database
+        /// 5) Call the cleanup routine
+        /// 6) VERIFY: The expired transient challenge is now inactive
+        /// 7) VERIFY: The ongoing transient challenge is still active
+        /// 8) VERIFY: The persistent challenge is still active
+        /// </remarks>
         [TestMethod]
         public void TestChallengeCleanup()
         {
@@ -213,6 +288,19 @@ namespace ActivEarth.Tests.Competition.Challenges
             Assert.IsTrue(_manager.GetChallenge(id3).IsActive);
         }
 
+        /// <summary>
+        /// Verifies that transient challenges are re-initialized when they expire.
+        /// </summary>
+        /// <remarks>
+        /// Steps:
+        /// 1) Create an expired step-based persistent challenge
+        /// 2) Increase the user's steps to 250
+        /// 3) VERIFY: User reports 250 steps of progress
+        /// 4) Call the cleanup routine
+        /// 5) Increase the user's steps by 200
+        /// 6) VERIFY: User reports 200 steps of progess
+        /// 7) VERIFY: Challenge reports updated end time
+        /// </remarks>
         [TestMethod]
         public void TestChallengeResetPersistentChallenge()
         {

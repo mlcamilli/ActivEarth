@@ -62,8 +62,20 @@ namespace ActivEarth.Tests.Competition.Contests
 
         #region ---------- Test Cases ----------
 
+        /// <summary>
+        /// Verifies that after locking initial values, teams in a contest report a score of 0.
+        /// </summary>
+        /// <remarks>
+        /// Steps:
+        /// 1) Create a new group contest.
+        /// 2) Add two teams to the contest.
+        /// 3) VERIFY: Contest contains two teams.
+        /// 4) VERIFY: Each team contains the correct number of members.
+        /// 5) Lock contest initialization values.
+        /// 6) VERIFY: Each team reports a score of 0.
+        /// </remarks>
         [TestMethod]
-        public void TestContestGroupContestCreation()
+        public void TestContestGroupContestInitialization()
         {
             using (_trans)
             {
@@ -93,6 +105,16 @@ namespace ActivEarth.Tests.Competition.Contests
             }
         }
 
+        /// <summary>
+        /// Verifies that contest end modes (time vs. goal) are correctly assigned.
+        /// </summary>
+        /// <remarks>
+        /// Steps:
+        /// 1) Create a time-based contest.
+        /// 2) Create a goal-based contest.
+        /// 3) VERIFY: First contest is determined to be time-based.
+        /// 4) VERIFY: Second contest is determined to be goal-based.
+        /// </remarks>
         [TestMethod]
         public void TestContestEndModeDetermination()
         {
@@ -118,6 +140,24 @@ namespace ActivEarth.Tests.Competition.Contests
             }
         }
 
+        /// <summary>
+        /// Verifies that after calculating scores, teams are presented in sorted order (for reporting
+        /// of standings) in a group competition (multiple members per team).
+        /// </summary>
+        /// <remarks>
+        /// Steps:
+        /// 1)  Create a group contest.
+        /// 2)  Add two teams to the contest.
+        /// 3)  Lock contest initial values.
+        /// 4)  Increase the statistics of individual members such that group1 is winning.
+        /// 5)  Update contest scores.
+        /// 6)  VERIFY: First team in the team collection is group1.
+        /// 7)  VERIFY: Second team in the team collection is group2.
+        /// 8)  Increase the statistics of individual members such that group2 is winning.
+        /// 9)  Update contest scores.
+        /// 10) VERIFY: First team in the team collection is group2.
+        /// 11) VERIFY: Second team in the team collection is group1.
+        /// </remarks>
         [TestMethod]
         public void TestContestGroupTeamsRemainSorted()
         {
@@ -151,9 +191,42 @@ namespace ActivEarth.Tests.Competition.Contests
                 Log("Verifying second team is group2");
                 Assert.IsTrue(contest.Teams[1].ContainsMember(_user3));
                 Assert.IsTrue(contest.Teams[1].ContainsMember(_user4));
+
+
+                Log("Setting individual statistics such that group2 is winning");
+                _user1.SetStatistic(Statistic.Steps, 200);
+                _user2.SetStatistic(Statistic.Steps, 200);
+                _user3.SetStatistic(Statistic.Steps, 300);
+                _user4.SetStatistic(Statistic.Steps, 300);
+
+                Log("Updating contest scores");
+                contest.UpdateScores();
+
+                Log("Verifying first team is group2");
+                Assert.IsTrue(contest.Teams[0].ContainsMember(_user3));
+                Assert.IsTrue(contest.Teams[0].ContainsMember(_user4));
+
+                Log("Verifying second team is group1");
+                Assert.IsTrue(contest.Teams[1].ContainsMember(_user1));
+                Assert.IsTrue(contest.Teams[1].ContainsMember(_user2));
             }
         }
 
+        /// <summary>
+        /// Verifies that after calculating scores, teams are presented in sorted 
+        /// order (for reporting of standings) in an individual competition 
+        /// (one member per team).
+        /// </summary>
+        /// <remarks>
+        /// Steps:
+        /// 1) Create an individual contest.
+        /// 2) Add four users to the contest.
+        /// 3) Lock contest initial values.
+        /// 4) Increase the statistics of individual members such that the standings 
+        ///     are shuffled (relative to the order members were added).
+        /// 5) Update contest scores.
+        /// 6) VERIFY: Teams are presented in descending order by score.
+        /// </remarks>
         [TestMethod]
         public void TestContestIndividualTeamsRemainSorted()
         {
@@ -190,6 +263,19 @@ namespace ActivEarth.Tests.Competition.Contests
             }
         }
 
+        /// <summary>
+        /// Verifies the correct calculation of a team's contest score.
+        /// </summary>
+        /// <remarks>
+        /// Steps:
+        /// 1) Create a group contest.
+        /// 2) Add a multi-member team to the contest.
+        /// 3) Lock contest initial values.
+        /// 4) Increase the statistics of the individual members.
+        /// 5) Update contest scores.
+        /// 6) VERIFY: Team's score is equal to the sum of the increase 
+        ///     in the members' values.
+        /// </remarks>
         [TestMethod]
         public void TestContestTeamScoreCalculation()
         {

@@ -15,7 +15,7 @@ using ActivEarth.Server.Service;
 namespace ActivEarth.Tests.Competition.Challenges
 {
     /// <summary>
-    /// Summary description for ChallengeDAOTest
+    /// Tests the functionality of the Challenge data layer.
     /// </summary>
     [TestClass]
     public class ChallengeDAOTest
@@ -32,12 +32,18 @@ namespace ActivEarth.Tests.Competition.Challenges
             set;
         }
 
+        /// <summary>
+        /// Creates the Transaction Scope for the test case.
+        /// </summary>
         [TestInitialize]
         public void Initialize()
         {
             _trans = new TransactionScope();
         }
 
+        /// <summary>
+        /// Disposes of the Transaction Scope, rolling back the DB transactions.
+        /// </summary>
         [TestCleanup]
         public void CleanUp()
         {
@@ -46,6 +52,9 @@ namespace ActivEarth.Tests.Competition.Challenges
 
         #region ---------- Test Cases ----------
 
+        /// <summary>
+        /// Verifies that Challenge entries are correctly written to and read from the DB.
+        /// </summary>
         [TestMethod]
         public void TestCreateChallenge()
         {
@@ -77,6 +86,9 @@ namespace ActivEarth.Tests.Competition.Challenges
             }
         }
 
+        /// <summary>
+        /// Verifies that Challenges can be updated correctly in the DB.
+        /// </summary>
         [TestMethod]
         public void TestUpdateChallenge()
         {
@@ -117,6 +129,9 @@ namespace ActivEarth.Tests.Competition.Challenges
             }
         }
 
+        /// <summary>
+        /// Verifies the ability to retrieve the collection of currently active challenges.
+        /// </summary>
         [TestMethod]
         public void TestGetActiveChallenges()
         {
@@ -145,6 +160,9 @@ namespace ActivEarth.Tests.Competition.Challenges
             }
         }
 
+        /// <summary>
+        /// Verifies the ability to retrieve the entire archive of challenges.
+        /// </summary>
         [TestMethod]
         public void TestGetAllChallenges()
         {

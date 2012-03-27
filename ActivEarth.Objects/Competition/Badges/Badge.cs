@@ -64,7 +64,7 @@ namespace ActivEarth.Objects.Competition.Badges
             _user = user;
             _statisticBinding = statistic;
             _levelRequirements = levelValues;
-            _levelPoints = levelPoints;
+            _levelRewards = levelPoints;
             _ImagePaths = imagePaths;
         }
 
@@ -94,7 +94,7 @@ namespace ActivEarth.Objects.Competition.Badges
 
             for (int i = oldLevel + 1; i <= newLevel; i++)
             {
-                pointsEarned += _levelPoints[i];
+                pointsEarned += _levelRewards[i];
             }
 
             this.Level = newLevel;
@@ -127,9 +127,9 @@ namespace ActivEarth.Objects.Competition.Badges
         /// </summary>
         /// <returns>Number of Activity Points awarded for achieving the next
         /// level of the badge.</returns>
-        public int GetNextLevelPoints()
+        public int GetNextLevelReward()
         {
-            return _levelPoints[this.Level + 1];
+            return _levelRewards[this.Level + 1];
         }
 
         #endregion ---------- Public Methods ----------
@@ -152,9 +152,9 @@ namespace ActivEarth.Objects.Competition.Badges
         private float[] _levelRequirements;
 
         /// <summary>
-        /// Array of the points awarded for each level of the badge.
+        /// Array of the activity points awarded for each level of the badge.
         /// </summary>
-        private int[] _levelPoints;
+        private int[] _levelRewards;
 
         /// <summary>
         /// Array of the image locations for each level of the badge.

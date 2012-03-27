@@ -93,19 +93,6 @@ namespace ActivEarth.Objects.Groups
         public Wall Wall;
 
         /// <summary>
-        /// The statistics tracked by badges for the Group.
-        /// </summary>
-        public enum Statistic
-        {
-            Steps,
-            WalkDistance,
-            BikeDistance,
-            RunDistance,
-            GasSavings,
-            ChallengesCompleted
-        };
-
-        /// <summary>
         /// The Badges accumulated by Users of the Group.
         /// </summary>
         public Dictionary<Statistic, Badge> Badges
