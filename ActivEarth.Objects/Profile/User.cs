@@ -50,6 +50,12 @@ namespace ActivEarth.Objects.Profile
             set;
         }
 
+        public int PrivacySettingID
+        {
+            get;
+            set;
+        }
+
         public char Gender
         {
             get;
@@ -159,6 +165,8 @@ namespace ActivEarth.Objects.Profile
             this.Badges = new Dictionary<Statistic, Badge>();
             this.Contests = new List<Contest>();
             this.Groups = new List<Group>();
+
+            this.userPrivacySettings = new PrivacySetting();
         }
 
         #endregion ---------- Constructor ----------

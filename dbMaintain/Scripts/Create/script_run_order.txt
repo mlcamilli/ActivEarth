@@ -6,4 +6,5 @@ dbo.Contests.Table.sql
 dbo.Teams.Table.sql
 dbo.Team_Members.Table.sql
 dbo.Challenges.Table.sql
+dbo.Privacy_Settings.Table.sql
 TestData.sql

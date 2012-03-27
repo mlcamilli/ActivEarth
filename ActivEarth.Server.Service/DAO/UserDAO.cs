@@ -18,11 +18,13 @@ namespace ActivEarth.DAO
         }
         public static User GetUserFromUserId(int userId)
         {
+            User toReturn;
             using (SqlConnection connection = ConnectionManager.GetConnection())
             {
                 var data = new ActivEarthDataProvidersDataContext(connection);
-                return (from u in data.UserDataProviders
+                toReturn = (from u in data.UserDataProviders
                         join p in data.ProfileDataProviders on u.id equals p.user_id
+                        join r in data.PrivacySettingDataProviders on u.id equals r.user_id
                         where u.id == userId
                         select
                             new User
@@ -42,6 +44,12 @@ namespace ActivEarth.DAO
                                 
                             }).FirstOrDefault();
             }
+            if (toReturn != null)
+            {
+                toReturn.userPrivacySettings = PrivacySettingDAO.GetPrivacySettingFromPrivacySettingId(toReturn.ProfileID);
+            }
+
+            return toReturn;
         }
 
         public static User GetUserFromUserNameAndPassword(string userName, string password)
@@ -53,6 +61,7 @@ namespace ActivEarth.DAO
                 return
                     (from u in data.UserDataProviders
                      join p in data.ProfileDataProviders on u.id equals p.user_id
+                     join r in data.PrivacySettingDataProviders on u.id equals r.user_id
                      where u.user_name == userName && u.password == password
                      select
                          new User
@@ -66,6 +75,7 @@ namespace ActivEarth.DAO
                                  State = p.state,
                                  Gender = p.gender,
                                  ProfileID = p.id,
+                                 PrivacySettingID = r.id,
                                  Age = p.age,
                                  Weight = p.weight,
                                  Height = p.height

@@ -48,6 +48,9 @@ namespace ActivEarth.Server.Service
     partial void InsertTeamDataProvider(TeamDataProvider instance);
     partial void UpdateTeamDataProvider(TeamDataProvider instance);
     partial void DeleteTeamDataProvider(TeamDataProvider instance);
+    partial void InsertPrivacySettingDataProvider(PrivacySettingDataProvider instance);
+    partial void UpdatePrivacySettingDataProvider(PrivacySettingDataProvider instance);
+    partial void DeletePrivacySettingDataProvider(PrivacySettingDataProvider instance);
     #endregion
 		
 		public ActivEarthDataProvidersDataContext() : 
@@ -125,6 +128,14 @@ namespace ActivEarth.Server.Service
 			get
 			{
 				return this.GetTable<TeamDataProvider>();
+			}
+		}
+		
+		public System.Data.Linq.Table<PrivacySettingDataProvider> PrivacySettingDataProviders
+		{
+			get
+			{
+				return this.GetTable<PrivacySettingDataProvider>();
 			}
 		}
 	}
@@ -420,7 +431,7 @@ namespace ActivEarth.Server.Service
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ProfileDataProvider_team_member", Storage="_TeamMemberDataProviders", ThisKey="id", OtherKey="user_id")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ProfileDataProvider_TeamMemberDataProvider", Storage="_TeamMemberDataProviders", ThisKey="id", OtherKey="user_id")]
 		public EntitySet<TeamMemberDataProvider> TeamMemberDataProviders
 		{
 			get
@@ -514,6 +525,8 @@ namespace ActivEarth.Server.Service
 		
 		private EntitySet<ProfileDataProvider> _ProfileDataProviders;
 		
+		private EntitySet<PrivacySettingDataProvider> _privacy_settings;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -529,6 +542,7 @@ namespace ActivEarth.Server.Service
 		public UserDataProvider()
 		{
 			this._ProfileDataProviders = new EntitySet<ProfileDataProvider>(new Action<ProfileDataProvider>(this.attach_ProfileDataProviders), new Action<ProfileDataProvider>(this.detach_ProfileDataProviders));
+			this._privacy_settings = new EntitySet<PrivacySettingDataProvider>(new Action<PrivacySettingDataProvider>(this.attach_privacy_settings), new Action<PrivacySettingDataProvider>(this.detach_privacy_settings));
 			OnCreated();
 		}
 		
@@ -605,6 +619,19 @@ namespace ActivEarth.Server.Service
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UserDataProvider_privacy_setting", Storage="_privacy_settings", ThisKey="id", OtherKey="user_id")]
+		public EntitySet<PrivacySettingDataProvider> PrivacySettingDataProviders
+		{
+			get
+			{
+				return this._privacy_settings;
+			}
+			set
+			{
+				this._privacy_settings.Assign(value);
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -632,6 +659,18 @@ namespace ActivEarth.Server.Service
 		}
 		
 		private void detach_ProfileDataProviders(ProfileDataProvider entity)
+		{
+			this.SendPropertyChanging();
+			entity.UserDataProvider = null;
+		}
+		
+		private void attach_privacy_settings(PrivacySettingDataProvider entity)
+		{
+			this.SendPropertyChanging();
+			entity.UserDataProvider = this;
+		}
+		
+		private void detach_privacy_settings(PrivacySettingDataProvider entity)
 		{
 			this.SendPropertyChanging();
 			entity.UserDataProvider = null;
@@ -1176,7 +1215,7 @@ namespace ActivEarth.Server.Service
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="contest_team", Storage="_TeamDataProviders", ThisKey="id", OtherKey="contest_id")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ContestDataProvider_TeamDataProvider", Storage="_TeamDataProviders", ThisKey="id", OtherKey="contest_id")]
 		public EntitySet<TeamDataProvider> TeamDataProviders
 		{
 			get
@@ -1373,7 +1412,7 @@ namespace ActivEarth.Server.Service
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ProfileDataProvider_team_member", Storage="_ProfileDataProvider", ThisKey="user_id", OtherKey="id", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ProfileDataProvider_TeamMemberDataProvider", Storage="_ProfileDataProvider", ThisKey="user_id", OtherKey="id", IsForeignKey=true)]
 		public ProfileDataProvider ProfileDataProvider
 		{
 			get
@@ -1407,7 +1446,7 @@ namespace ActivEarth.Server.Service
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="team_team_member", Storage="_TeamDataProvider", ThisKey="team_id", OtherKey="id", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TeamDataProvider_TeamMemberDataProvider", Storage="_TeamDataProvider", ThisKey="team_id", OtherKey="id", IsForeignKey=true)]
 		public TeamDataProvider TeamDataProvider
 		{
 			get
@@ -1585,7 +1624,7 @@ namespace ActivEarth.Server.Service
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="team_team_member", Storage="_TeamMemberDataProviders", ThisKey="id", OtherKey="team_id")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TeamDataProvider_TeamMemberDataProvider", Storage="_TeamMemberDataProviders", ThisKey="id", OtherKey="team_id")]
 		public EntitySet<TeamMemberDataProvider> TeamMemberDataProviders
 		{
 			get
@@ -1598,7 +1637,7 @@ namespace ActivEarth.Server.Service
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="contest_team", Storage="_ContestDataProvider", ThisKey="contest_id", OtherKey="id", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ContestDataProvider_TeamDataProvider", Storage="_ContestDataProvider", ThisKey="contest_id", OtherKey="id", IsForeignKey=true)]
 		public ContestDataProvider ContestDataProvider
 		{
 			get
@@ -1662,6 +1701,301 @@ namespace ActivEarth.Server.Service
 		{
 			this.SendPropertyChanging();
 			entity.TeamDataProvider = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.privacy_settings")]
+	public partial class PrivacySettingDataProvider : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id;
+		
+		private int _user_id;
+		
+		private byte _profile_visibility;
+		
+		private bool _email;
+		
+		private bool _gender;
+		
+		private bool _age;
+		
+		private bool _weight;
+		
+		private bool _height;
+		
+		private bool _groups;
+		
+		private EntityRef<UserDataProvider> _UserDataProvider;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void Onuser_idChanging(int value);
+    partial void Onuser_idChanged();
+    partial void Onprofile_visibilityChanging(byte value);
+    partial void Onprofile_visibilityChanged();
+    partial void OnemailChanging(bool value);
+    partial void OnemailChanged();
+    partial void OngenderChanging(bool value);
+    partial void OngenderChanged();
+    partial void OnageChanging(bool value);
+    partial void OnageChanged();
+    partial void OnweightChanging(bool value);
+    partial void OnweightChanged();
+    partial void OnheightChanging(bool value);
+    partial void OnheightChanged();
+    partial void OngroupsChanging(bool value);
+    partial void OngroupsChanged();
+    #endregion
+		
+		public PrivacySettingDataProvider()
+		{
+			this._UserDataProvider = default(EntityRef<UserDataProvider>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_user_id", DbType="Int NOT NULL")]
+		public int user_id
+		{
+			get
+			{
+				return this._user_id;
+			}
+			set
+			{
+				if ((this._user_id != value))
+				{
+					if (this._UserDataProvider.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onuser_idChanging(value);
+					this.SendPropertyChanging();
+					this._user_id = value;
+					this.SendPropertyChanged("user_id");
+					this.Onuser_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_profile_visibility", DbType="TinyInt NOT NULL")]
+		public byte profile_visibility
+		{
+			get
+			{
+				return this._profile_visibility;
+			}
+			set
+			{
+				if ((this._profile_visibility != value))
+				{
+					this.Onprofile_visibilityChanging(value);
+					this.SendPropertyChanging();
+					this._profile_visibility = value;
+					this.SendPropertyChanged("profile_visibility");
+					this.Onprofile_visibilityChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_email", DbType="Bit NOT NULL")]
+		public bool email
+		{
+			get
+			{
+				return this._email;
+			}
+			set
+			{
+				if ((this._email != value))
+				{
+					this.OnemailChanging(value);
+					this.SendPropertyChanging();
+					this._email = value;
+					this.SendPropertyChanged("email");
+					this.OnemailChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_gender", DbType="Bit NOT NULL")]
+		public bool gender
+		{
+			get
+			{
+				return this._gender;
+			}
+			set
+			{
+				if ((this._gender != value))
+				{
+					this.OngenderChanging(value);
+					this.SendPropertyChanging();
+					this._gender = value;
+					this.SendPropertyChanged("gender");
+					this.OngenderChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_age", DbType="Bit NOT NULL")]
+		public bool age
+		{
+			get
+			{
+				return this._age;
+			}
+			set
+			{
+				if ((this._age != value))
+				{
+					this.OnageChanging(value);
+					this.SendPropertyChanging();
+					this._age = value;
+					this.SendPropertyChanged("age");
+					this.OnageChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_weight", DbType="Bit NOT NULL")]
+		public bool weight
+		{
+			get
+			{
+				return this._weight;
+			}
+			set
+			{
+				if ((this._weight != value))
+				{
+					this.OnweightChanging(value);
+					this.SendPropertyChanging();
+					this._weight = value;
+					this.SendPropertyChanged("weight");
+					this.OnweightChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_height", DbType="Bit NOT NULL")]
+		public bool height
+		{
+			get
+			{
+				return this._height;
+			}
+			set
+			{
+				if ((this._height != value))
+				{
+					this.OnheightChanging(value);
+					this.SendPropertyChanging();
+					this._height = value;
+					this.SendPropertyChanged("height");
+					this.OnheightChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_groups", DbType="Bit NOT NULL")]
+		public bool groups
+		{
+			get
+			{
+				return this._groups;
+			}
+			set
+			{
+				if ((this._groups != value))
+				{
+					this.OngroupsChanging(value);
+					this.SendPropertyChanging();
+					this._groups = value;
+					this.SendPropertyChanged("groups");
+					this.OngroupsChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UserDataProvider_privacy_setting", Storage="_UserDataProvider", ThisKey="user_id", OtherKey="id", IsForeignKey=true)]
+		public UserDataProvider UserDataProvider
+		{
+			get
+			{
+				return this._UserDataProvider.Entity;
+			}
+			set
+			{
+				UserDataProvider previousValue = this._UserDataProvider.Entity;
+				if (((previousValue != value) 
+							|| (this._UserDataProvider.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._UserDataProvider.Entity = null;
+						previousValue.PrivacySettingDataProviders.Remove(this);
+					}
+					this._UserDataProvider.Entity = value;
+					if ((value != null))
+					{
+						value.PrivacySettingDataProviders.Add(this);
+						this._user_id = value.id;
+					}
+					else
+					{
+						this._user_id = default(int);
+					}
+					this.SendPropertyChanged("UserDataProvider");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 }
