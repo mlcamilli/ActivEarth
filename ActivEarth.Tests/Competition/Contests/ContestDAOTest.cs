@@ -15,8 +15,7 @@ using ActivEarth.Server.Service;
 namespace ActivEarth.Tests.Competition.Contests
 {
     /// <summary>
-    /// Tests the capabilities of ContestDAO and TeamDAO for manipulation
-    /// of contest-related data with the database.
+    /// Tests the capabilities of ContestDAO and TeamDAO data layers.
     /// </summary>
     [TestClass]
     public class ContestDAOTest
@@ -33,12 +32,18 @@ namespace ActivEarth.Tests.Competition.Contests
             set;
         }
 
+        /// <summary>
+        /// Creates the transaction scope for the test case.
+        /// </summary>
         [TestInitialize]
         public void Initialize()
         {
             _trans = new TransactionScope();
         }
 
+        /// <summary>
+        /// Disposes of the transaction scope, rolling back any DB transactions.
+        /// </summary>
         [TestCleanup]
         public void CleanUp()
         {
@@ -46,7 +51,10 @@ namespace ActivEarth.Tests.Competition.Contests
         }
 
         #region ---------- Test Cases ----------
-
+        
+        /// <summary>
+        /// Tests the ability to update the value of a contest's field in the DB.
+        /// </summary>
         [TestMethod]
         public void TestUpdateContestChangeName()
         {
@@ -57,8 +65,8 @@ namespace ActivEarth.Tests.Competition.Contests
 
                 Log("Creating contest");
                 Contest contest = new Contest("Test Contest", "This is a test contest",
-                    30, ContestEndMode.GoalBased, ContestType.Group, DateTime.Today, new EndCondition(500),
-                    Statistic.Steps);
+                    30, ContestEndMode.GoalBased, ContestType.Group, DateTime.Today, 
+                    new EndCondition(500), Statistic.Steps);
 
                 Log("Adding contest to the database");
                 Assert.IsTrue((id = ContestDAO.CreateNewContest(contest)) > 0);
@@ -87,6 +95,9 @@ namespace ActivEarth.Tests.Competition.Contests
             }
         }
 
+        /// <summary>
+        /// Tests the ability to retrieve the list of all current contests.
+        /// </summary>
         [TestMethod]
         public void TestGetAllContests()
         {
@@ -94,14 +105,14 @@ namespace ActivEarth.Tests.Competition.Contests
             {
                 Log("Creating contests");
                 Contest contest1 = new Contest("Test Contest1", "This is a test contest",
-                    30, ContestEndMode.GoalBased, ContestType.Group, DateTime.Today, new EndCondition(500),
-                    Statistic.Steps);
+                    30, ContestEndMode.GoalBased, ContestType.Group, DateTime.Today, 
+                    new EndCondition(500), Statistic.Steps);
                 Contest contest2 = new Contest("Test Contest2", "This is also a test contest",
-                    30, ContestEndMode.GoalBased, ContestType.Group, DateTime.Today, new EndCondition(500),
-                    Statistic.BikeDistance);
+                    30, ContestEndMode.GoalBased, ContestType.Group, DateTime.Today, 
+                    new EndCondition(500), Statistic.BikeDistance);
                 Contest contest3 = new Contest("Test Contest3", "This is another test contest",
-                    30, ContestEndMode.GoalBased, ContestType.Group, DateTime.Today, new EndCondition(500),
-                    Statistic.RunDistance);
+                    30, ContestEndMode.GoalBased, ContestType.Group, DateTime.Today, 
+                    new EndCondition(500), Statistic.RunDistance);
 
                 Log("Adding contests to DB");
                 ContestDAO.CreateNewContest(contest1);
@@ -113,6 +124,10 @@ namespace ActivEarth.Tests.Competition.Contests
             }
         }
 
+        /// <summary>
+        /// Tests the retrieval and rehydration of a contest object based on its Contest ID when
+        /// there are no teams associated with the contest yet.
+        /// </summary>
         [TestMethod]
         public void TestGetContestFromContestIdPresentNoTeams()
         {
@@ -120,8 +135,8 @@ namespace ActivEarth.Tests.Competition.Contests
             {
                 Log("Creating contests");
                 Contest contest = new Contest("Test Contest1", "This is a test contest",
-                    30, ContestEndMode.GoalBased, ContestType.Group, DateTime.Today, new EndCondition(500),
-                    Statistic.Steps);
+                    30, ContestEndMode.GoalBased, ContestType.Group, DateTime.Today, 
+                    new EndCondition(500), Statistic.Steps);
 
                 Log("Saving to DB");
                 int id = ContestDAO.CreateNewContest(contest);
@@ -138,6 +153,10 @@ namespace ActivEarth.Tests.Competition.Contests
             }
         }
 
+        /// <summary>
+        /// Tests the retrieval and rehydration of a contest object based on its Contest ID when
+        /// there are teams associated with the contest.
+        /// </summary>
         [TestMethod]
         [Ignore]
         public void TestGetContestFromContestIdPresentWithTeams()
@@ -146,8 +165,8 @@ namespace ActivEarth.Tests.Competition.Contests
             {
                 Log("Creating contest");
                 Contest contest = new Contest("Test Contest1", "This is a test contest",
-                    30, ContestEndMode.GoalBased, ContestType.Group, DateTime.Today, new EndCondition(500),
-                    Statistic.Steps);
+                    30, ContestEndMode.GoalBased, ContestType.Group, DateTime.Today, 
+                    new EndCondition(500), Statistic.Steps);
 
                 Log("Creating Members");
                 User member1 = new User("Test", "Subject1");
@@ -167,7 +186,7 @@ namespace ActivEarth.Tests.Competition.Contests
                 contest.AddGroup(group2);
 
                 Log("Adding Members to DB");
-                Assert.Fail("Must enable remainder of test code once full User database functionality exists");
+                Assert.Fail("Not yet implemented");
                 /*UserDAO.CreateNewUser(member1);
                 UserDAO.CreateNewUser(member2);
                 UserDAO.CreateNewUser(member3);
@@ -190,6 +209,10 @@ namespace ActivEarth.Tests.Competition.Contests
             }
         }
 
+        /// <summary>
+        /// Tests the attempted retrieval of a contest based on its ID, where no match
+        /// is found for the provided ID.
+        /// </summary>
         [TestMethod]
         public void TestGetContestFromContestIdNotPresent()
         {
@@ -203,6 +226,9 @@ namespace ActivEarth.Tests.Competition.Contests
             }
         }
 
+        /// <summary>
+        /// Tests the ability to remove a contest from the DB from its Contest ID.
+        /// </summary>
         [TestMethod]
         public void TestRemoveContestFromContestId()
         {
@@ -210,8 +236,8 @@ namespace ActivEarth.Tests.Competition.Contests
             {
                 Log("Creating contest");
                 Contest contest = new Contest("Test Contest1", "This is a test contest",
-                    30, ContestEndMode.GoalBased, ContestType.Group, DateTime.Today, new EndCondition(500),
-                    Statistic.Steps);
+                    30, ContestEndMode.GoalBased, ContestType.Group, DateTime.Today, 
+                    new EndCondition(500), Statistic.Steps);
 
                 Log("Saving to DB");
                 int id = ContestDAO.CreateNewContest(contest);
@@ -233,6 +259,10 @@ namespace ActivEarth.Tests.Competition.Contests
             }
         }
 
+        /// <summary>
+        /// Tests the attempted removal of a contest based on its ID where no matching contest
+        /// is found.
+        /// </summary>
         [TestMethod]
         public void TestRemoveContestFromContestIdNotPresent()
         {
@@ -252,6 +282,9 @@ namespace ActivEarth.Tests.Competition.Contests
             }
         }
 
+        /// <summary>
+        /// Tests the updating of a contest where a team was added since the last save.
+        /// </summary>
         [TestMethod]
         [Ignore]
         public void TestUpdateContestAddTeam()
@@ -260,8 +293,8 @@ namespace ActivEarth.Tests.Competition.Contests
             {
                 Log("Creating contest");
                 Contest contest = new Contest("Test Contest1", "This is a test contest",
-                    30, ContestEndMode.GoalBased, ContestType.Group, DateTime.Today, new EndCondition(500),
-                    Statistic.Steps);
+                    30, ContestEndMode.GoalBased, ContestType.Group, DateTime.Today, 
+                    new EndCondition(500), Statistic.Steps);
 
                 Log("Saving to DB");
                 int id = ContestDAO.CreateNewContest(contest);
@@ -285,7 +318,7 @@ namespace ActivEarth.Tests.Competition.Contests
                 contest.AddGroup(group1);
 
                 Log("Adding Members to DB");
-                Assert.Fail("Must enable remainder of test code once full User database functionality exists");
+                Assert.Fail("Not yet implemented");
                 /*UserDAO.CreateNewUser(member1);
                 UserDAO.CreateNewUser(member2);
                 UserDAO.CreateNewUser(member3);
@@ -308,6 +341,10 @@ namespace ActivEarth.Tests.Competition.Contests
             }
         }
 
+        /// <summary>
+        /// Tests the updating of a contest where members were added to a team 
+        /// participating in the contest.
+        /// </summary>
         [TestMethod]
         [Ignore]
         public void TestUpdateContestAddTeamMembers()
@@ -316,8 +353,8 @@ namespace ActivEarth.Tests.Competition.Contests
             {
                 Log("Creating contest");
                 Contest contest = new Contest("Test Contest1", "This is a test contest",
-                    30, ContestEndMode.GoalBased, ContestType.Group, DateTime.Today, new EndCondition(500),
-                    Statistic.Steps);
+                    30, ContestEndMode.GoalBased, ContestType.Group, DateTime.Today, 
+                    new EndCondition(500), Statistic.Steps);
 
                 Log("Creating Members");
                 User member1 = new User("Test", "Subject1");
@@ -333,7 +370,7 @@ namespace ActivEarth.Tests.Competition.Contests
                 contest.AddGroup(group1);
 
                 Log("Adding Members to DB");
-                Assert.Fail("Must enable remainder of test code once full User database functionality exists");
+                Assert.Fail("Not yet implemented");
                 /*UserDAO.CreateNewUser(member1);
                 UserDAO.CreateNewUser(member2);
                 UserDAO.CreateNewUser(member3);
@@ -366,6 +403,10 @@ namespace ActivEarth.Tests.Competition.Contests
             }
         }
 
+        /// <summary>
+        /// Tests the updating of a contest where the initial values for each 
+        /// participant have been locked (e.g., when the contest starts).
+        /// </summary>
         [TestMethod]
         [Ignore]
         public void TestUpdateContestLockInitialization()
@@ -374,8 +415,8 @@ namespace ActivEarth.Tests.Competition.Contests
             {
                 Log("Creating contest");
                 Contest contest = new Contest("Test Contest1", "This is a test contest",
-                    30, ContestEndMode.GoalBased, ContestType.Group, DateTime.Today, new EndCondition(500),
-                    Statistic.Steps);
+                    30, ContestEndMode.GoalBased, ContestType.Group, DateTime.Today, 
+                    new EndCondition(500), Statistic.Steps);
 
                 Log("Creating Members");
                 User member1 = new User("Test", "Subject1");
@@ -395,7 +436,7 @@ namespace ActivEarth.Tests.Competition.Contests
                 contest.AddGroup(group2);
 
                 Log("Adding Members to DB");
-                Assert.Fail("Must enable remainder of test code once full User database functionality exists");
+                Assert.Fail("Not yet implemented");
                 /*UserDAO.CreateNewUser(member1);
                 UserDAO.CreateNewUser(member2);
                 UserDAO.CreateNewUser(member3);
@@ -424,6 +465,9 @@ namespace ActivEarth.Tests.Competition.Contests
             }
         }
 
+        /// <summary>
+        /// Tests the retrieval of a Team from its Team ID.
+        /// </summary>
         [TestMethod]
         public void TestGetTeamByTeamId()
         {
@@ -431,8 +475,8 @@ namespace ActivEarth.Tests.Competition.Contests
             {
                 Log("Creating contest to put the team in");
                 Contest contest = new Contest("Test Contest1", "This is a test contest",
-                    30, ContestEndMode.GoalBased, ContestType.Group, DateTime.Today, new EndCondition(500),
-                    Statistic.Steps);
+                    30, ContestEndMode.GoalBased, ContestType.Group, DateTime.Today, 
+                    new EndCondition(500), Statistic.Steps);
 
                 Log("Adding the contest to the DB");
                 int contestId = ContestDAO.CreateNewContest(contest);
@@ -451,6 +495,10 @@ namespace ActivEarth.Tests.Competition.Contests
             }
         }
 
+        /// <summary>
+        /// Tests the attempted retrieval of a Team from its ID where no matching 
+        /// team is found.
+        /// </summary>
         [TestMethod]
         public void TestGetTeamByTeamIdNotPresent()
         {
