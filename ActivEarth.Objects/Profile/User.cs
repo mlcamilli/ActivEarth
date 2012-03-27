@@ -122,6 +122,12 @@ namespace ActivEarth.Objects.Profile
             set;
         }
 
+        public PrivacySetting userPrivacySettings
+        {
+            get;
+            set;
+        }
+
         private Dictionary<Statistic, float> _stats;
 
         #endregion ---------- Private Members ----------

@@ -67,6 +67,8 @@
     <Compile Include="Groups\Message.cs" />
     <Compile Include="Groups\RecentActivity.cs" />
     <Compile Include="Groups\Wall.cs" />
+    <Compile Include="Profile\PrivacySetting.cs" />
+    <Compile Include="Profile\ProfileVisibility.cs" />
     <Compile Include="Profile\Statistic.cs" />
     <Compile Include="Profile\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
