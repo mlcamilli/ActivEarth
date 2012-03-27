@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using ActivEarth.DAO;
+using ActivEarth.Objects.Profile;
 
 namespace ActivEarth.Account
 {
@@ -13,19 +15,21 @@ namespace ActivEarth.Account
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            RegisterUser.ContinueDestinationPageUrl = Request.QueryString["ReturnUrl"];
+            
         }
 
-        protected void RegisterUser_CreatedUser(object sender, EventArgs e)
+        protected void CreateUser(object sender, EventArgs e)
         {
-            FormsAuthentication.SetAuthCookie(RegisterUser.UserName, false /* createPersistentCookie */);
-
-            string continueUrl = RegisterUser.ContinueDestinationPageUrl;
-            if (String.IsNullOrEmpty(continueUrl))
+            if (UserDAO.GetUserFromUserName(txbUserName.Text) == null)
             {
-                continueUrl = "~/";
+                var user = new User { UserName = txbUserName.Text, FirstName = txbFirstName.Text, LastName = txbLastName.Text, Gender = Char.Parse(ddlGender.SelectedValue)};
+                UserDAO.CreateNewUser(user, txbPassword.Text);
+                Response.Redirect("RegisterConfirmation.aspx");
             }
-            Response.Redirect(continueUrl);
+            
+
+            //UserDAO.CreateNewUser() 
+
         }
 
     }

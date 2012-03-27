@@ -21,6 +21,7 @@ namespace ActivEarth
             }else
             {
                 var userDetails = (User) Session["userDetails"];
+                hlRegister.Visible = false;
                 hlLogin.Visible = false;
                 lbLogOut.Visible = true;
                 lblUserLoggedIn.Visible = true;

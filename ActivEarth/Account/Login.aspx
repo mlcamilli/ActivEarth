@@ -38,6 +38,9 @@
                 <p class="submitButton">
                     <asp:Button ID="LoginButton" runat="server" Text="Log In" OnClick="LoginUser" ValidationGroup="LoginUserValidationGroup"/>
                 </p>
+                <p>
+                    No account? Register <a href="Register.aspx">Here.</a>
+                </p>
             </div>
         
 </asp:Content>
