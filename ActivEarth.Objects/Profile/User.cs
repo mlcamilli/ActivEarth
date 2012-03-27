@@ -26,13 +26,13 @@ namespace ActivEarth.Objects.Profile
             set;
         }
 
-        public String UserName 
+        public string UserName 
         {
             get; 
             set; 
         }
 
-        public String Email
+        public string Email
         {
             get;
             set;
@@ -50,7 +50,7 @@ namespace ActivEarth.Objects.Profile
             set;
         }
 
-        public Char Gender
+        public char Gender
         {
             get;
             set;

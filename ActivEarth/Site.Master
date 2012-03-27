@@ -20,7 +20,8 @@
             <div class="loginDisplay">
                         <asp:Label runat="server" ID="lblUserLoggedIn"></asp:Label>
                         <asp:HyperLink runat="server" ID="hlLogin" NavigateUrl="~/Account/Login.aspx" Text="Log In"></asp:HyperLink>
-                        <asp:LinkButton runat="server" ID="lbLogOut" OnClick="UserLogOut" Text="Log Out" ></asp:LinkButton>                              
+                        <asp:LinkButton runat="server" ID="lbLogOut" OnClick="UserLogOut" Text="Log Out" ></asp:LinkButton>    
+                        <asp:HyperLink runat="server" ID="hlRegister" NavigateUrl="~/Account/Register.aspx" Text="Register"></asp:HyperLink>                          
             </div>
             <div class="clear hideSkiplink">
                 <asp:Menu ID="NavigationMenu" runat="server" CssClass="menu" EnableViewState="false" IncludeStyleBlock="false" Orientation="Horizontal">
