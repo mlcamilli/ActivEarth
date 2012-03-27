@@ -24,7 +24,6 @@ namespace ActivEarth.DAO
                 var data = new ActivEarthDataProvidersDataContext(connection);
                 toReturn = (from u in data.UserDataProviders
                         join p in data.ProfileDataProviders on u.id equals p.user_id
-                        join r in data.PrivacySettingDataProviders on u.id equals r.user_id
                         where u.id == userId
                         select
                             new User
@@ -61,7 +60,6 @@ namespace ActivEarth.DAO
                 return
                     (from u in data.UserDataProviders
                      join p in data.ProfileDataProviders on u.id equals p.user_id
-                     join r in data.PrivacySettingDataProviders on u.id equals r.user_id
                      where u.user_name == userName && u.password == password
                      select
                          new User
@@ -75,7 +73,6 @@ namespace ActivEarth.DAO
                                  State = p.state,
                                  Gender = p.gender,
                                  ProfileID = p.id,
-                                 PrivacySettingID = r.id,
                                  Age = p.age,
                                  Weight = p.weight,
                                  Height = p.height
