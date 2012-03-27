@@ -45,7 +45,7 @@ namespace ActivEarth.DAO
             }
             if (toReturn != null)
             {
-                toReturn.userPrivacySettings = PrivacySettingDAO.GetPrivacySettingFromPrivacySettingId(toReturn.ProfileID);
+                toReturn.userPrivacySettings = PrivacySettingDAO.GetPrivacySettingFromUserId(toReturn.UserID);
             }
 
             return toReturn;

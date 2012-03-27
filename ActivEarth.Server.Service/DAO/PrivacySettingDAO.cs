@@ -13,6 +13,41 @@ namespace ActivEarth.DAO
     public class PrivacySettingDAO
     {
         /// <summary>
+        /// Retrieves a User's PrivacySetting from the DB based on the user's ID.
+        /// </summary>
+        /// <param name="privacySettingId">Identifier of the user to retrieve the privacy setting for.</param>
+        /// <returns>Privacy setting specified by the provided user ID.</returns>
+        public static PrivacySetting GetPrivacySettingFromUserId(int userId)
+        {
+            PrivacySetting toReturn;
+            using (SqlConnection connection = ConnectionManager.GetConnection())
+            {
+                var data = new ActivEarthDataProvidersDataContext(connection);
+                toReturn = (from p in data.PrivacySettingDataProviders
+                            where p.user_id == userId
+                            select
+                                new PrivacySetting
+                                {
+                                    ID = p.id,
+                                    Email = p.email,
+                                    Gender = p.gender,
+                                    Age = p.age,
+                                    Height = p.height,
+                                    Weight = p.weight,
+                                    Group = p.groups,
+                                    ProfileVisibility = (ProfileVisibility)p.profile_visibility,
+                                    UserID = p.user_id
+                                }).FirstOrDefault();
+            }
+
+            if (toReturn != null)
+            {
+                toReturn.User = UserDAO.GetUserFromUserId(toReturn.UserID);
+            }
+            return toReturn;
+        }
+
+        /// <summary>
         /// Retrieves a PrivacySetting from the DB based on its ID.
         /// </summary>
         /// <param name="privacySettingId">Identifier of the privacy setting to retrieve.</param>
