@@ -14,15 +14,6 @@ namespace ActivEarth.Objects.Competition.Badges
         public int ID
         {
             get;
-            private set;
-        }
-
-        /// <summary>
-        /// Name for the badge.
-        /// </summary>
-        public string Name
-        {
-            get;
             set;
         }
 
@@ -44,25 +35,49 @@ namespace ActivEarth.Objects.Competition.Badges
             set;
         }
 
+        /// <summary>
+        /// Statistic to which the badge is bound.
+        /// </summary>
+        public Statistic StatisticBinding
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// User to which the badge is bound.
+        /// </summary>
+        public User User
+        {
+            get;
+            set;
+        }
+
         #endregion ---------- Public Properties ----------
 
         #region ---------- Constructor ----------
+
+        /// <summary>
+        /// Empty constructor for reading back in from the DB.
+        /// </summary>
+        public Badge()
+        {
+
+        }
 
         /// <summary>
         /// Creates a new badge belonging to a user, based on a specific statistic.
         /// </summary>
         /// <param name="user">User to whom the Badge is bound.</param>
         /// <param name="statistic">Statistic to which the Badge is bound.</param>
-        public Badge(int id, string name, User user, Statistic statistic, 
+        public Badge(User user, Statistic statistic, 
             float[] levelValues, int[] levelPoints, Uri[] imagePaths)
         {
-            this.ID = id;
-            this.Name = name;
             this.Level = BadgeLevels.None;
             this.Progress = 0;
 
-            _user = user;
-            _statisticBinding = statistic;
+            User = user;
+            StatisticBinding = statistic;
             _levelRequirements = levelValues;
             _levelRewards = levelPoints;
             _ImagePaths = imagePaths;
@@ -82,7 +97,7 @@ namespace ActivEarth.Objects.Competition.Badges
 
             int oldLevel = this.Level;
 
-            float stat = _user.GetStatistic(_statisticBinding);
+            float stat = User.GetStatistic(StatisticBinding);
 
             int newLevel = oldLevel;
 
@@ -135,16 +150,6 @@ namespace ActivEarth.Objects.Competition.Badges
         #endregion ---------- Public Methods ----------
 
         #region ---------- Private Fields ----------
-
-        /// <summary>
-        /// Statistic to which the badge is bound.
-        /// </summary>
-        private Statistic _statisticBinding;
-
-        /// <summary>
-        /// User to which the badge is bound.
-        /// </summary>
-        private User _user;
 
         /// <summary>
         /// Array of the values required to advance to each level of the badge.

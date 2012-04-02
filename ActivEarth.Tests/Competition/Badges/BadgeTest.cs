@@ -38,27 +38,27 @@ namespace ActivEarth.Tests.Competition.Badges
             _user = new User("Test", "Subject");
 
             _user.Badges[Statistic.BikeDistance] = 
-                new Badge(1, "BikeDistance", _user, Statistic.BikeDistance,
+                new Badge(_user, Statistic.BikeDistance,
                 BadgeConstants.BikeDistance.REQUIREMENTS, BadgeConstants.BikeDistance.REWARDS,
                 BadgeConstants.BikeDistance.IMAGES);
 
             _user.Badges[Statistic.WalkDistance] =
-                new Badge(2, "WalkDistance", _user, Statistic.WalkDistance,
+                new Badge(_user, Statistic.WalkDistance,
                 BadgeConstants.WalkDistance.REQUIREMENTS, BadgeConstants.WalkDistance.REWARDS,
                 BadgeConstants.WalkDistance.IMAGES);
 
             _user.Badges[Statistic.RunDistance] =
-                new Badge(3, "RunDistance", _user, Statistic.RunDistance,
+                new Badge(_user, Statistic.RunDistance,
                 BadgeConstants.RunDistance.REQUIREMENTS, BadgeConstants.RunDistance.REWARDS,
                 BadgeConstants.RunDistance.IMAGES);
 
             _user.Badges[Statistic.Steps] =
-                new Badge(4, "Steps", _user, Statistic.Steps,
+                new Badge(_user, Statistic.Steps,
                 BadgeConstants.Steps.REQUIREMENTS, BadgeConstants.Steps.REWARDS,
                 BadgeConstants.Steps.IMAGES);
 
             _user.Badges[Statistic.ChallengesCompleted] =
-                new Badge(5, "ChallengesCompleted", _user, Statistic.ChallengesCompleted,
+                new Badge(_user, Statistic.ChallengesCompleted,
                 BadgeConstants.Challenges.REQUIREMENTS, BadgeConstants.Challenges.REWARDS,
                 BadgeConstants.Challenges.IMAGES);
 
