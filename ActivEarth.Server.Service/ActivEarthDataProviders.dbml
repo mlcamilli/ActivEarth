@@ -14,6 +14,7 @@
       <Column Name="height" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="weight" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="ProfileDataProvider_TeamMemberDataProvider" Member="TeamMemberDataProviders" ThisKey="id" OtherKey="user_id" Type="TeamMemberDataProvider" />
+      <Association Name="ProfileDataProvider_badge" Member="BadgeDataProviders" ThisKey="id" OtherKey="user_id" Type="BadgeDataProvider" />
       <Association Name="UserDataProvider_ProfileDataProvider" Member="UserDataProvider" ThisKey="user_id" OtherKey="id" Type="UserDataProvider" IsForeignKey="true" />
     </Type>
   </Table>
@@ -23,7 +24,7 @@
       <Column Name="user_name" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
       <Column Name="password" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
       <Association Name="UserDataProvider_ProfileDataProvider" Member="ProfileDataProviders" ThisKey="id" OtherKey="user_id" Type="ProfileDataProvider" />
-      <Association Name="UserDataProvider_privacy_setting" Member="PrivacySettingDataProviders" Storage="_privacy_settings" ThisKey="id" OtherKey="user_id" Type="PrivacySettingDataProvider" />
+      <Association Name="UserDataProvider_PrivacySettingDataProvider" Member="PrivacySettingDataProviders" Storage="_privacy_settings" ThisKey="id" OtherKey="user_id" Type="PrivacySettingDataProvider" />
     </Type>
   </Table>
   <Table Name="dbo.challenges" Member="ChallengeDataProviders">
@@ -87,7 +88,17 @@
       <Column Name="weight" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Column Name="height" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Column Name="groups" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Association Name="UserDataProvider_privacy_setting" Member="UserDataProvider" ThisKey="user_id" OtherKey="id" Type="UserDataProvider" IsForeignKey="true" />
+      <Association Name="UserDataProvider_PrivacySettingDataProvider" Member="UserDataProvider" ThisKey="user_id" OtherKey="id" Type="UserDataProvider" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.badges" Member="BadgeDataProviders">
+    <Type Name="BadgeDataProvider">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="user_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="statistic" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="badge_level" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="progress" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Association Name="ProfileDataProvider_badge" Member="ProfileDataProvider" ThisKey="user_id" OtherKey="id" Type="ProfileDataProvider" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

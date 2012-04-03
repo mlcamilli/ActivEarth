@@ -51,6 +51,9 @@ namespace ActivEarth.Server.Service
     partial void InsertPrivacySettingDataProvider(PrivacySettingDataProvider instance);
     partial void UpdatePrivacySettingDataProvider(PrivacySettingDataProvider instance);
     partial void DeletePrivacySettingDataProvider(PrivacySettingDataProvider instance);
+    partial void InsertBadgeDataProvider(BadgeDataProvider instance);
+    partial void UpdateBadgeDataProvider(BadgeDataProvider instance);
+    partial void DeleteBadgeDataProvider(BadgeDataProvider instance);
     #endregion
 		
 		public ActivEarthDataProvidersDataContext() : 
@@ -138,6 +141,14 @@ namespace ActivEarth.Server.Service
 				return this.GetTable<PrivacySettingDataProvider>();
 			}
 		}
+		
+		public System.Data.Linq.Table<BadgeDataProvider> BadgeDataProviders
+		{
+			get
+			{
+				return this.GetTable<BadgeDataProvider>();
+			}
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.profile")]
@@ -169,6 +180,8 @@ namespace ActivEarth.Server.Service
 		private System.Nullable<int> _weight;
 		
 		private EntitySet<TeamMemberDataProvider> _TeamMemberDataProviders;
+		
+		private EntitySet<BadgeDataProvider> _BadgeDataProviders;
 		
 		private EntityRef<UserDataProvider> _UserDataProvider;
 		
@@ -203,6 +216,7 @@ namespace ActivEarth.Server.Service
 		public ProfileDataProvider()
 		{
 			this._TeamMemberDataProviders = new EntitySet<TeamMemberDataProvider>(new Action<TeamMemberDataProvider>(this.attach_TeamMemberDataProviders), new Action<TeamMemberDataProvider>(this.detach_TeamMemberDataProviders));
+			this._BadgeDataProviders = new EntitySet<BadgeDataProvider>(new Action<BadgeDataProvider>(this.attach_BadgeDataProviders), new Action<BadgeDataProvider>(this.detach_BadgeDataProviders));
 			this._UserDataProvider = default(EntityRef<UserDataProvider>);
 			OnCreated();
 		}
@@ -444,6 +458,19 @@ namespace ActivEarth.Server.Service
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ProfileDataProvider_badge", Storage="_BadgeDataProviders", ThisKey="id", OtherKey="user_id")]
+		public EntitySet<BadgeDataProvider> BadgeDataProviders
+		{
+			get
+			{
+				return this._BadgeDataProviders;
+			}
+			set
+			{
+				this._BadgeDataProviders.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UserDataProvider_ProfileDataProvider", Storage="_UserDataProvider", ThisKey="user_id", OtherKey="id", IsForeignKey=true)]
 		public UserDataProvider UserDataProvider
 		{
@@ -505,6 +532,18 @@ namespace ActivEarth.Server.Service
 		}
 		
 		private void detach_TeamMemberDataProviders(TeamMemberDataProvider entity)
+		{
+			this.SendPropertyChanging();
+			entity.ProfileDataProvider = null;
+		}
+		
+		private void attach_BadgeDataProviders(BadgeDataProvider entity)
+		{
+			this.SendPropertyChanging();
+			entity.ProfileDataProvider = this;
+		}
+		
+		private void detach_BadgeDataProviders(BadgeDataProvider entity)
 		{
 			this.SendPropertyChanging();
 			entity.ProfileDataProvider = null;
@@ -619,7 +658,7 @@ namespace ActivEarth.Server.Service
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UserDataProvider_privacy_setting", Storage="_privacy_settings", ThisKey="id", OtherKey="user_id")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UserDataProvider_PrivacySettingDataProvider", Storage="_privacy_settings", ThisKey="id", OtherKey="user_id")]
 		public EntitySet<PrivacySettingDataProvider> PrivacySettingDataProviders
 		{
 			get
@@ -1944,7 +1983,7 @@ namespace ActivEarth.Server.Service
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UserDataProvider_privacy_setting", Storage="_UserDataProvider", ThisKey="user_id", OtherKey="id", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UserDataProvider_PrivacySettingDataProvider", Storage="_UserDataProvider", ThisKey="user_id", OtherKey="id", IsForeignKey=true)]
 		public UserDataProvider UserDataProvider
 		{
 			get
@@ -1974,6 +2013,205 @@ namespace ActivEarth.Server.Service
 						this._user_id = default(int);
 					}
 					this.SendPropertyChanged("UserDataProvider");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.badges")]
+	public partial class BadgeDataProvider : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id;
+		
+		private int _user_id;
+		
+		private byte _statistic;
+		
+		private byte _badge_level;
+		
+		private byte _progress;
+		
+		private EntityRef<ProfileDataProvider> _ProfileDataProvider;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void Onuser_idChanging(int value);
+    partial void Onuser_idChanged();
+    partial void OnstatisticChanging(byte value);
+    partial void OnstatisticChanged();
+    partial void Onbadge_levelChanging(byte value);
+    partial void Onbadge_levelChanged();
+    partial void OnprogressChanging(byte value);
+    partial void OnprogressChanged();
+    #endregion
+		
+		public BadgeDataProvider()
+		{
+			this._ProfileDataProvider = default(EntityRef<ProfileDataProvider>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_user_id", DbType="Int NOT NULL")]
+		public int user_id
+		{
+			get
+			{
+				return this._user_id;
+			}
+			set
+			{
+				if ((this._user_id != value))
+				{
+					if (this._ProfileDataProvider.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onuser_idChanging(value);
+					this.SendPropertyChanging();
+					this._user_id = value;
+					this.SendPropertyChanged("user_id");
+					this.Onuser_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_statistic", DbType="TinyInt NOT NULL")]
+		public byte statistic
+		{
+			get
+			{
+				return this._statistic;
+			}
+			set
+			{
+				if ((this._statistic != value))
+				{
+					this.OnstatisticChanging(value);
+					this.SendPropertyChanging();
+					this._statistic = value;
+					this.SendPropertyChanged("statistic");
+					this.OnstatisticChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_badge_level", DbType="TinyInt NOT NULL")]
+		public byte badge_level
+		{
+			get
+			{
+				return this._badge_level;
+			}
+			set
+			{
+				if ((this._badge_level != value))
+				{
+					this.Onbadge_levelChanging(value);
+					this.SendPropertyChanging();
+					this._badge_level = value;
+					this.SendPropertyChanged("badge_level");
+					this.Onbadge_levelChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_progress", DbType="TinyInt NOT NULL")]
+		public byte progress
+		{
+			get
+			{
+				return this._progress;
+			}
+			set
+			{
+				if ((this._progress != value))
+				{
+					this.OnprogressChanging(value);
+					this.SendPropertyChanging();
+					this._progress = value;
+					this.SendPropertyChanged("progress");
+					this.OnprogressChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ProfileDataProvider_badge", Storage="_ProfileDataProvider", ThisKey="user_id", OtherKey="id", IsForeignKey=true)]
+		public ProfileDataProvider ProfileDataProvider
+		{
+			get
+			{
+				return this._ProfileDataProvider.Entity;
+			}
+			set
+			{
+				ProfileDataProvider previousValue = this._ProfileDataProvider.Entity;
+				if (((previousValue != value) 
+							|| (this._ProfileDataProvider.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._ProfileDataProvider.Entity = null;
+						previousValue.BadgeDataProviders.Remove(this);
+					}
+					this._ProfileDataProvider.Entity = value;
+					if ((value != null))
+					{
+						value.BadgeDataProviders.Add(this);
+						this._user_id = value.id;
+					}
+					else
+					{
+						this._user_id = default(int);
+					}
+					this.SendPropertyChanged("ProfileDataProvider");
 				}
 			}
 		}
