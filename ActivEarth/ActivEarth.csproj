@@ -33,6 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EO.Web, Version=9.0.45.2, Culture=neutral, PublicKeyToken=e92353a6bf73fffc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -59,7 +62,116 @@
     <Content Include="Account\Register.aspx" />
     <Content Include="Account\Profile.aspx" />
     <Content Include="Account\EditProfile.aspx" />
+    <Content Include="Competition\Badges\DisplayBadgesControl.ascx" />
+    <Content Include="Images\Competition\Challenges\Challenges_Template\Daily.png" />
+    <Content Include="Images\Competition\Challenges\Challenges_Template\Monthly.png" />
+    <Content Include="Images\Competition\Challenges\Challenges_Template\Permanent.png" />
+    <Content Include="Images\Competition\Challenges\Challenges_Template\Weekly.png" />
+    <Content Include="Images\Competition\Challenges\Challenge_Symbols\Distance_Biked.png" />
+    <Content Include="Images\Competition\Challenges\Challenge_Symbols\Distance_Ran.png" />
+    <Content Include="Images\Competition\Challenges\Challenge_Symbols\Distance_Walked.png" />
+    <Content Include="Images\Competition\Challenges\Challenge_Symbols\GasSavings.png" />
+    <Content Include="Images\Competition\Challenges\Challenge_Symbols\Steps.png" />
+    <Content Include="Images\Competition\Challenges\Distance_Biked\Daily.png" />
+    <Content Include="Images\Competition\Challenges\Distance_Biked\Monthly.png" />
+    <Content Include="Images\Competition\Challenges\Distance_Biked\Weekly.png" />
+    <Content Include="Images\Competition\Challenges\Distance_Ran\Daily.png" />
+    <Content Include="Images\Competition\Challenges\Distance_Ran\Monthly.png" />
+    <Content Include="Images\Competition\Challenges\Distance_Ran\Weekly.png" />
+    <Content Include="Images\Competition\Challenges\Distance_Walked\Daily.png" />
+    <Content Include="Images\Competition\Challenges\Distance_Walked\Monthly.png" />
+    <Content Include="Images\Competition\Challenges\Distance_Walked\Weekly.png" />
+    <Content Include="Images\Competition\Challenges\Gas_Savings\Daily.png" />
+    <Content Include="Images\Competition\Challenges\Gas_Savings\Monthly.png" />
+    <Content Include="Images\Competition\Challenges\Gas_Savings\Weekly.png" />
+    <Content Include="Images\Competition\Challenges\Steps\Daily.png" />
+    <Content Include="Images\Competition\Challenges\Steps\Monthly.png" />
+    <Content Include="Images\Competition\Challenges\Steps\Weekly.png" />
+    <Content Include="Images\Competition\Activity_Score.png" />
+    <Content Include="Competition\Badges\DisplayBadgeControl.ascx" />
+    <Content Include="Competition\Badges\DisplayBadgesPage.aspx" />
     <Content Include="Fitness\BMI.aspx" />
+    <Content Include="Images\Competition\Badges\Badge_Row.png" />
+    <Content Include="Images\Competition\Badges\Badge_Templates\Bronze.png" />
+    <Content Include="Images\Competition\Badges\Badge_Templates\Diamond.png" />
+    <Content Include="Images\Competition\Badges\Badge_Templates\Emerald.png" />
+    <Content Include="Images\Competition\Badges\Badge_Templates\Gold.png" />
+    <Content Include="Images\Competition\Badges\Badge_Templates\Platinum.png" />
+    <Content Include="Images\Competition\Badges\Badge_Templates\Ruby.png" />
+    <Content Include="Images\Competition\Badges\Badge_Templates\Sapphire.png" />
+    <Content Include="Images\Competition\Badges\Badge_Templates\Silver.png" />
+    <Content Include="Images\Competition\Badges\Challenges_Completed\Bronze.png" />
+    <Content Include="Images\Competition\Badges\Challenges_Completed\Diamond.png" />
+    <Content Include="Images\Competition\Badges\Challenges_Completed\Emerald.png" />
+    <Content Include="Images\Competition\Badges\Challenges_Completed\Gold.png" />
+    <Content Include="Images\Competition\Badges\Challenges_Completed\None.png" />
+    <Content Include="Images\Competition\Badges\Challenges_Completed\Platinum.png" />
+    <Content Include="Images\Competition\Badges\Challenges_Completed\Ruby.png" />
+    <Content Include="Images\Competition\Badges\Challenges_Completed\Sapphire.png" />
+    <Content Include="Images\Competition\Badges\Challenges_Completed\Silver.png" />
+    <Content Include="Images\Competition\Badges\Distance_Biked\Bronze.png" />
+    <Content Include="Images\Competition\Badges\Distance_Biked\Diamond.png" />
+    <Content Include="Images\Competition\Badges\Distance_Biked\Emerald.png" />
+    <Content Include="Images\Competition\Badges\Distance_Biked\Gold.png" />
+    <Content Include="Images\Competition\Badges\Distance_Biked\None.png" />
+    <Content Include="Images\Competition\Badges\Distance_Biked\Platinum.png" />
+    <Content Include="Images\Competition\Badges\Distance_Biked\Ruby.png" />
+    <Content Include="Images\Competition\Badges\Distance_Biked\Sapphire.png" />
+    <Content Include="Images\Competition\Badges\Distance_Biked\Silver.png" />
+    <Content Include="Images\Competition\Badges\Distance_Ran\Bronze.png" />
+    <Content Include="Images\Competition\Badges\Distance_Ran\Diamond.png" />
+    <Content Include="Images\Competition\Badges\Distance_Ran\Emerald.png" />
+    <Content Include="Images\Competition\Badges\Distance_Ran\Gold.png" />
+    <Content Include="Images\Competition\Badges\Distance_Ran\None.png" />
+    <Content Include="Images\Competition\Badges\Distance_Ran\Platinum.png" />
+    <Content Include="Images\Competition\Badges\Distance_Ran\Ruby.png" />
+    <Content Include="Images\Competition\Badges\Distance_Ran\Sapphire.png" />
+    <Content Include="Images\Competition\Badges\Distance_Ran\Silver.png" />
+    <Content Include="Images\Competition\Badges\Distance_Walked\Bronze.png" />
+    <Content Include="Images\Competition\Badges\Distance_Walked\Diamond.png" />
+    <Content Include="Images\Competition\Badges\Distance_Walked\Emerald.png" />
+    <Content Include="Images\Competition\Badges\Distance_Walked\Gold.png" />
+    <Content Include="Images\Competition\Badges\Distance_Walked\None.png" />
+    <Content Include="Images\Competition\Badges\Distance_Walked\Platinum.png" />
+    <Content Include="Images\Competition\Badges\Distance_Walked\Ruby.png" />
+    <Content Include="Images\Competition\Badges\Distance_Walked\Sapphire.png" />
+    <Content Include="Images\Competition\Badges\Distance_Walked\Silver.png" />
+    <Content Include="Images\Competition\Badges\Gas_Savings\Bronze.png" />
+    <Content Include="Images\Competition\Badges\Gas_Savings\Diamond.png" />
+    <Content Include="Images\Competition\Badges\Gas_Savings\Emerald.png" />
+    <Content Include="Images\Competition\Badges\Gas_Savings\Gold.png" />
+    <Content Include="Images\Competition\Badges\Gas_Savings\None.png" />
+    <Content Include="Images\Competition\Badges\Gas_Savings\Platinum.png" />
+    <Content Include="Images\Competition\Badges\Gas_Savings\Ruby.png" />
+    <Content Include="Images\Competition\Badges\Gas_Savings\Sapphire.png" />
+    <Content Include="Images\Competition\Badges\Gas_Savings\Silver.png" />
+    <Content Include="Images\Competition\Badges\Steps\Bronze.png" />
+    <Content Include="Images\Competition\Badges\Steps\Diamond.png" />
+    <Content Include="Images\Competition\Badges\Steps\Emerald.png" />
+    <Content Include="Images\Competition\Badges\Steps\Gold.png" />
+    <Content Include="Images\Competition\Badges\Steps\None.png" />
+    <Content Include="Images\Competition\Badges\Steps\Platinum.png" />
+    <Content Include="Images\Competition\Badges\Steps\Ruby.png" />
+    <Content Include="Images\Competition\Badges\Steps\Sapphire.png" />
+    <Content Include="Images\Competition\Badges\Steps\Silver.png" />
+    <Content Include="Images\Competition\Badges\Symbols\Challenges_Completed.png" />
+    <Content Include="Images\Competition\Badges\Symbols\Distance_Biked.png" />
+    <Content Include="Images\Competition\Badges\Symbols\Distance_Ran.png" />
+    <Content Include="Images\Competition\Badges\Symbols\Distance_Walked.png" />
+    <Content Include="Images\Competition\Badges\Symbols\Steps.png" />
+    <Content Include="Images\Competition\Challenges\Time_Biked\Daily.png" />
+    <Content Include="Images\Competition\Challenges\Time_Biked\Monthly.png" />
+    <Content Include="Images\Competition\Challenges\Time_Biked\Weekly.png" />
+    <Content Include="Images\Competition\Challenges\Time_Ran\Daily.png" />
+    <Content Include="Images\Competition\Challenges\Time_Ran\Monthly.png" />
+    <Content Include="Images\Competition\Challenges\Time_Ran\Weekly.png" />
+    <Content Include="Images\Competition\Challenges\Time_Walked\Daily.png" />
+    <Content Include="Images\Competition\Challenges\Time_Walked\Monthly.png" />
+    <Content Include="Images\Competition\Challenges\Time_Walked\Weekly.png" />
+    <Content Include="Images\Competition\ProgressBar\ProgressBarBackground.png" />
+    <Content Include="Images\Competition\ProgressBar\ProgressBarIndicator.png" />
+    <Content Include="Images\Competition\ProgressBar\ProgressBarLeft.png" />
+    <Content Include="Images\Competition\ProgressBar\ProgressBarRight.png" />
     <Content Include="Styles\Site.css" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
@@ -125,6 +237,27 @@
     </Compile>
     <Compile Include="Account\EditProfile.aspx.designer.cs">
       <DependentUpon>EditProfile.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Competition\Badges\DisplayBadgeControl.ascx.cs">
+      <DependentUpon>DisplayBadgeControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Competition\Badges\DisplayBadgeControl.ascx.designer.cs">
+      <DependentUpon>DisplayBadgeControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Competition\Badges\DisplayBadgesControl.ascx.cs">
+      <DependentUpon>DisplayBadgesControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Competition\Badges\DisplayBadgesControl.ascx.designer.cs">
+      <DependentUpon>DisplayBadgesControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Competition\Badges\DisplayBadgesPage.aspx.cs">
+      <DependentUpon>DisplayBadgesPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Competition\Badges\DisplayBadgesPage.aspx.designer.cs">
+      <DependentUpon>DisplayBadgesPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>

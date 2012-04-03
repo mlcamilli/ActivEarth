@@ -54,7 +54,7 @@ namespace ActivEarth.Objects.Competition.Badges
         /// <param name="user">User to whom the Badge is bound.</param>
         /// <param name="statistic">Statistic to which the Badge is bound.</param>
         public Badge(int id, string name, User user, Statistic statistic, 
-            float[] levelValues, int[] levelPoints, Uri[] imagePaths)
+            float[] levelValues, int[] levelPoints, string format, string[] imagePaths)
         {
             this.ID = id;
             this.Name = name;
@@ -65,6 +65,7 @@ namespace ActivEarth.Objects.Competition.Badges
             _statisticBinding = statistic;
             _levelRequirements = levelValues;
             _levelRewards = levelPoints;
+            _formatString = format;
             _ImagePaths = imagePaths;
         }
 
@@ -106,9 +107,20 @@ namespace ActivEarth.Objects.Competition.Badges
         /// Returns the image path for the current Badge level's icon.
         /// </summary>
         /// <returns>Image path for the current Badge level's icon.</returns>
-        public Uri GetImagePath()
+        public string GetImagePath()
         {
             return _ImagePaths[this.Level];
+        }
+
+        /// <summary>
+        /// Returns the current progress user has made to fulfilling this badge.
+        /// </summary>
+        /// <returns>
+        /// Current progress made towards this badge.
+        /// </returns>
+        public float GetCurrentProgress()
+        {
+            return _user.GetStatistic(_statisticBinding);
         }
 
         /// <summary>
@@ -130,6 +142,30 @@ namespace ActivEarth.Objects.Competition.Badges
         public int GetNextLevelReward()
         {
             return _levelRewards[this.Level + 1];
+        }
+
+        /// <summary>
+        /// Returns the current progress toward the badge
+        /// in a formated form.
+        /// </summary>
+        /// <returns>
+        /// The current progress as a formated string.
+        /// </returns>
+        public string GetCurrentProgressFormated()
+        {
+            return _user.GetStatistic(_statisticBinding).ToString(_formatString);
+        }
+
+        /// <summary>
+        /// Returns the next requirement toward the badge
+        /// in a formated form.
+        /// </summary>
+        /// <returns>
+        /// The next requirment as a formated string.
+        /// </returns>
+        public string GetNextLevelRequirementFormated()
+        {
+            return _levelRequirements[this.Level + 1].ToString(_formatString);
         }
 
         #endregion ---------- Public Methods ----------
@@ -159,7 +195,12 @@ namespace ActivEarth.Objects.Competition.Badges
         /// <summary>
         /// Array of the image locations for each level of the badge.
         /// </summary>
-        private Uri[] _ImagePaths;
+        private String[] _ImagePaths;
+
+        /// <summary>
+        /// Array of the image locations for each level of the badge.
+        /// </summary>
+        private String _formatString = "";
 
         #endregion ---------- Private Fields ----------
     }
