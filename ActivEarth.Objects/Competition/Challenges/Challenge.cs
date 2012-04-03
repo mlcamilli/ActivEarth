@@ -102,6 +102,15 @@ namespace ActivEarth.Objects.Competition.Challenges
             set;
         }
 
+        /// <summary>
+        /// Path of the image to be displayed with the challenge.
+        /// </summary>
+        public string ImagePath
+        {
+            get;
+            set;
+        }
+
         #endregion ---------- Public Properties ----------
 
         #region ---------- Constructor ----------
