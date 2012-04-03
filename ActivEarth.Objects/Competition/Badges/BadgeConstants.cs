@@ -118,7 +118,7 @@ namespace ActivEarth.Objects.Competition.Badges
                                                         "http://activearth/badgeSapphire.png",
                                                         "http://activearth/badgeEmerald.png",
                                                         "http://activearth/badgeDiamond.png"};
-            public static readonly string FORMAT = "${0:0.0}";
+            public static readonly string FORMAT = "${0:0.00}";
         }
 
     }

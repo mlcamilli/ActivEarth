@@ -62,17 +62,24 @@ namespace ActivEarth.Tests.Competition.Badges
                 BadgeConstants.Challenges.REQUIREMENTS, BadgeConstants.Challenges.REWARDS,
                 BadgeConstants.Challenges.IMAGES);
 
+            _user.Badges[Statistic.GasSavings] =
+                new Badge(_user, Statistic.ChallengesCompleted,
+                BadgeConstants.GasSavings.REQUIREMENTS, BadgeConstants.GasSavings.REWARDS,
+                BadgeConstants.GasSavings.IMAGES);
+
             _user.Badges[Statistic.BikeDistance].FormatString = BadgeConstants.BikeDistance.FORMAT;
             _user.Badges[Statistic.WalkDistance].FormatString = BadgeConstants.WalkDistance.FORMAT;
             _user.Badges[Statistic.RunDistance].FormatString = BadgeConstants.RunDistance.FORMAT;
             _user.Badges[Statistic.Steps].FormatString = BadgeConstants.Steps.FORMAT;
             _user.Badges[Statistic.ChallengesCompleted].FormatString = BadgeConstants.Challenges.FORMAT;
+            _user.Badges[Statistic.GasSavings].FormatString = BadgeConstants.GasSavings.FORMAT;
 
             _user.SetStatistic(Statistic.BikeDistance, 0);
             _user.SetStatistic(Statistic.WalkDistance, 0);
             _user.SetStatistic(Statistic.RunDistance, 0);
             _user.SetStatistic(Statistic.Steps, 0);
             _user.SetStatistic(Statistic.ChallengesCompleted, 0);
+            _user.SetStatistic(Statistic.GasSavings, 0);
         }
 
         #region ---------- Test Cases ----------
@@ -259,6 +266,12 @@ namespace ActivEarth.Tests.Competition.Badges
 
             Log("Verifying progress.");
             Assert.AreEqual(String.Format("{0}", BadgeConstants.Steps.REQUIREMENTS[BadgeLevels.Max]), badge.GetFormattedProgress());
+
+            Badge gasBadge = _user.Badges[Statistic.GasSavings];
+            gasBadge.Update();
+
+            Assert.AreEqual(String.Format("$0.00 / ${0:0.00}", BadgeConstants.GasSavings.REQUIREMENTS[BadgeLevels.Bronze]), 
+                gasBadge.GetFormattedProgress());
             
         }
 
