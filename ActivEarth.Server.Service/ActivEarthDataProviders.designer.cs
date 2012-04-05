@@ -54,6 +54,12 @@ namespace ActivEarth.Server.Service
     partial void InsertBadgeDataProvider(BadgeDataProvider instance);
     partial void UpdateBadgeDataProvider(BadgeDataProvider instance);
     partial void DeleteBadgeDataProvider(BadgeDataProvider instance);
+    partial void InsertBadgeConstantsDataProvider(BadgeConstantsDataProvider instance);
+    partial void UpdateBadgeConstantsDataProvider(BadgeConstantsDataProvider instance);
+    partial void DeleteBadgeConstantsDataProvider(BadgeConstantsDataProvider instance);
+    partial void InsertStatisticConstantsDataProvider(StatisticConstantsDataProvider instance);
+    partial void UpdateStatisticConstantsDataProvider(StatisticConstantsDataProvider instance);
+    partial void DeleteStatisticConstantsDataProvider(StatisticConstantsDataProvider instance);
     #endregion
 		
 		public ActivEarthDataProvidersDataContext() : 
@@ -147,6 +153,22 @@ namespace ActivEarth.Server.Service
 			get
 			{
 				return this.GetTable<BadgeDataProvider>();
+			}
+		}
+		
+		public System.Data.Linq.Table<BadgeConstantsDataProvider> BadgeConstantsDataProviders
+		{
+			get
+			{
+				return this.GetTable<BadgeConstantsDataProvider>();
+			}
+		}
+		
+		public System.Data.Linq.Table<StatisticConstantsDataProvider> StatisticConstantsDataProviders
+		{
+			get
+			{
+				return this.GetTable<StatisticConstantsDataProvider>();
 			}
 		}
 	}
@@ -458,7 +480,7 @@ namespace ActivEarth.Server.Service
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ProfileDataProvider_badge", Storage="_BadgeDataProviders", ThisKey="id", OtherKey="user_id")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ProfileDataProvider_BadgeDataProvider", Storage="_BadgeDataProviders", ThisKey="id", OtherKey="user_id")]
 		public EntitySet<BadgeDataProvider> BadgeDataProviders
 		{
 			get
@@ -2182,7 +2204,7 @@ namespace ActivEarth.Server.Service
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ProfileDataProvider_badge", Storage="_ProfileDataProvider", ThisKey="user_id", OtherKey="id", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ProfileDataProvider_BadgeDataProvider", Storage="_ProfileDataProvider", ThisKey="user_id", OtherKey="id", IsForeignKey=true)]
 		public ProfileDataProvider ProfileDataProvider
 		{
 			get
@@ -2212,6 +2234,322 @@ namespace ActivEarth.Server.Service
 						this._user_id = default(int);
 					}
 					this.SendPropertyChanged("ProfileDataProvider");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.badge_level_info")]
+	public partial class BadgeConstantsDataProvider : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id;
+		
+		private byte _statistic;
+		
+		private byte _level;
+		
+		private double _requirement;
+		
+		private int _reward;
+		
+		private string _image_path;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void OnstatisticChanging(byte value);
+    partial void OnstatisticChanged();
+    partial void OnlevelChanging(byte value);
+    partial void OnlevelChanged();
+    partial void OnrequirementChanging(double value);
+    partial void OnrequirementChanged();
+    partial void OnrewardChanging(int value);
+    partial void OnrewardChanged();
+    partial void Onimage_pathChanging(string value);
+    partial void Onimage_pathChanged();
+    #endregion
+		
+		public BadgeConstantsDataProvider()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_statistic", DbType="TinyInt NOT NULL")]
+		public byte statistic
+		{
+			get
+			{
+				return this._statistic;
+			}
+			set
+			{
+				if ((this._statistic != value))
+				{
+					this.OnstatisticChanging(value);
+					this.SendPropertyChanging();
+					this._statistic = value;
+					this.SendPropertyChanged("statistic");
+					this.OnstatisticChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[level]", Storage="_level", DbType="TinyInt NOT NULL")]
+		public byte level
+		{
+			get
+			{
+				return this._level;
+			}
+			set
+			{
+				if ((this._level != value))
+				{
+					this.OnlevelChanging(value);
+					this.SendPropertyChanging();
+					this._level = value;
+					this.SendPropertyChanged("level");
+					this.OnlevelChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_requirement", DbType="Float NOT NULL")]
+		public double requirement
+		{
+			get
+			{
+				return this._requirement;
+			}
+			set
+			{
+				if ((this._requirement != value))
+				{
+					this.OnrequirementChanging(value);
+					this.SendPropertyChanging();
+					this._requirement = value;
+					this.SendPropertyChanged("requirement");
+					this.OnrequirementChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_reward", DbType="Int NOT NULL")]
+		public int reward
+		{
+			get
+			{
+				return this._reward;
+			}
+			set
+			{
+				if ((this._reward != value))
+				{
+					this.OnrewardChanging(value);
+					this.SendPropertyChanging();
+					this._reward = value;
+					this.SendPropertyChanged("reward");
+					this.OnrewardChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_image_path", DbType="Text NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+		public string image_path
+		{
+			get
+			{
+				return this._image_path;
+			}
+			set
+			{
+				if ((this._image_path != value))
+				{
+					this.Onimage_pathChanging(value);
+					this.SendPropertyChanging();
+					this._image_path = value;
+					this.SendPropertyChanged("image_path");
+					this.Onimage_pathChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.statistic_info")]
+	public partial class StatisticConstantsDataProvider : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id;
+		
+		private byte _statistic_id;
+		
+		private string _name;
+		
+		private string _format_string;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void Onstatistic_idChanging(byte value);
+    partial void Onstatistic_idChanged();
+    partial void OnnameChanging(string value);
+    partial void OnnameChanged();
+    partial void Onformat_stringChanging(string value);
+    partial void Onformat_stringChanged();
+    #endregion
+		
+		public StatisticConstantsDataProvider()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_statistic_id", DbType="TinyInt NOT NULL")]
+		public byte statistic_id
+		{
+			get
+			{
+				return this._statistic_id;
+			}
+			set
+			{
+				if ((this._statistic_id != value))
+				{
+					this.Onstatistic_idChanging(value);
+					this.SendPropertyChanging();
+					this._statistic_id = value;
+					this.SendPropertyChanged("statistic_id");
+					this.Onstatistic_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", DbType="NChar(25) NOT NULL", CanBeNull=false)]
+		public string name
+		{
+			get
+			{
+				return this._name;
+			}
+			set
+			{
+				if ((this._name != value))
+				{
+					this.OnnameChanging(value);
+					this.SendPropertyChanging();
+					this._name = value;
+					this.SendPropertyChanged("name");
+					this.OnnameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_format_string", DbType="NChar(10) NOT NULL", CanBeNull=false)]
+		public string format_string
+		{
+			get
+			{
+				return this._format_string;
+			}
+			set
+			{
+				if ((this._format_string != value))
+				{
+					this.Onformat_stringChanging(value);
+					this.SendPropertyChanging();
+					this._format_string = value;
+					this.SendPropertyChanged("format_string");
+					this.Onformat_stringChanged();
 				}
 			}
 		}
