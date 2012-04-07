@@ -317,35 +317,6 @@ namespace ActivEarth.Tests.Competition.Badges
         }
 
         /// <summary>
-        /// Verifies that the badge image path changes appropriately as the badge increases in level.
-        /// </summary>
-        /// <remarks>
-        /// Steps:
-        /// 1) Initialize new badge with statistic at 0.
-        /// 2) Loop through each badge level by increasing the statistics to the required level.
-        /// 3) VERIFY: For each level reached, the correct image path is reported.
-        /// </remarks>
-        [TestMethod]
-        public void TestBadgeGetImagePath()
-        {
-
-            Log("Fetching Steps badge");
-            Badge badge = _user.Badges[Statistic.Steps];
-
-            for (int level = BadgeLevels.None; level <= BadgeLevels.Max; level++)
-            {
-                Log(String.Format("Increasing badge to level {0}", level));
-                _user.SetStatistic(Statistic.Steps, BadgeConstants.Steps.REQUIREMENTS[level]);
-
-                Log("Updating badge");
-                badge.Update();
-
-                Log("Verifying badge image path");
-                Assert.AreEqual(BadgeConstants.Steps.IMAGES[level], badge.GetImagePath());
-            }
-        }
-
-        /// <summary>
         /// Verifies that the requirement for the next level is reported correctly for each 
         /// badge level.
         /// </summary>

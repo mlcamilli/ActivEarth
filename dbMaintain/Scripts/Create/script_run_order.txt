@@ -1,6 +1,8 @@
 dbo.Users.Table.sql
 dbo.Profile.Table.sql
+dbo.Statistic_Info.Table.sql
 dbo.Badges.Table.sql
+dbo.Badge_Level_Info.Table.sql
 dbo.Groups.Table.sql
 dbo.Group_Members.Table.sql
 dbo.Contests.Table.sql
