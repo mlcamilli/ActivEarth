@@ -178,7 +178,7 @@ namespace ActivEarth.DAO
             badge.LevelRewards = BadgeLevelInfoDAO.GetBadgeRewardArray(badge.StatisticBinding);
             badge.ImagePath = BadgeLevelInfoDAO.GetBadgeImagePath(badge.StatisticBinding, badge.Level);
             badge.FormatString = StatisticInfoDAO.GetStatisticFormatString(badge.StatisticBinding);
-            badge.Name = StatisticInfoDAO.GetStatisticFormatString(badge.StatisticBinding);
+            badge.Name = StatisticInfoDAO.GetStatisticName(badge.StatisticBinding);
         }
     }
 }
