@@ -82,7 +82,7 @@ namespace ActivEarth.Tests.Competition.Challenges
                 Assert.AreEqual(challenge.EndTime, retrieved.EndTime);
                 Assert.AreEqual(challenge.IsActive, retrieved.IsActive);
                 Assert.AreEqual(challenge.IsPersistent, retrieved.IsPersistent);
-                Assert.AreEqual(challenge.Points, retrieved.Points);
+                Assert.AreEqual(challenge.Reward, retrieved.Reward);
                 Assert.AreEqual(challenge.StatisticBinding, retrieved.StatisticBinding);
             }
         }
