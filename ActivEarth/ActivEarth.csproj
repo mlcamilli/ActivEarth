@@ -42,6 +42,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Web.DataVisualization" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
@@ -63,6 +64,16 @@
     <Content Include="Account\Profile.aspx" />
     <Content Include="Account\EditProfile.aspx" />
     <Content Include="Competition\Badges\DisplayBadgesControl.ascx" />
+    <Content Include="Competition\Challenges\DisplayChallengeControl.ascx" />
+    <Content Include="Competition\Challenges\DisplayChallengesControl.ascx" />
+    <Content Include="Competition\Challenges\DisplayChallengesPage.aspx" />
+    <Content Include="Competition\Contests\ContestList.ascx" />
+    <Content Include="Competition\Contests\ContestListRow.ascx" />
+    <Content Include="Competition\Contests\CountdownClock.ascx" />
+    <Content Include="Competition\Contests\DisplayContestPage.aspx" />
+    <Content Include="Competition\Contests\LeaderBoard.ascx" />
+    <Content Include="Competition\Contests\LeaderBoardRow.ascx" />
+    <Content Include="Images\Competition\Challenges\Challenges_Row.png" />
     <Content Include="Images\Competition\Challenges\Challenges_Template\Daily.png" />
     <Content Include="Images\Competition\Challenges\Challenges_Template\Monthly.png" />
     <Content Include="Images\Competition\Challenges\Challenges_Template\Permanent.png" />
@@ -168,6 +179,8 @@
     <Content Include="Images\Competition\Challenges\Time_Walked\Daily.png" />
     <Content Include="Images\Competition\Challenges\Time_Walked\Monthly.png" />
     <Content Include="Images\Competition\Challenges\Time_Walked\Weekly.png" />
+    <Content Include="Images\Competition\Misc\LeftArrow.png" />
+    <Content Include="Images\Competition\Misc\RightArrow.png" />
     <Content Include="Images\Competition\ProgressBar\ProgressBarBackground.png" />
     <Content Include="Images\Competition\ProgressBar\ProgressBarIndicator.png" />
     <Content Include="Images\Competition\ProgressBar\ProgressBarLeft.png" />
@@ -258,6 +271,69 @@
     </Compile>
     <Compile Include="Competition\Badges\DisplayBadgesPage.aspx.designer.cs">
       <DependentUpon>DisplayBadgesPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Competition\Challenges\DisplayChallengeControl.ascx.cs">
+      <DependentUpon>DisplayChallengeControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Competition\Challenges\DisplayChallengeControl.ascx.designer.cs">
+      <DependentUpon>DisplayChallengeControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Competition\Challenges\DisplayChallengesControl.ascx.cs">
+      <DependentUpon>DisplayChallengesControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Competition\Challenges\DisplayChallengesControl.ascx.designer.cs">
+      <DependentUpon>DisplayChallengesControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Competition\Challenges\DisplayChallengesPage.aspx.cs">
+      <DependentUpon>DisplayChallengesPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Competition\Challenges\DisplayChallengesPage.aspx.designer.cs">
+      <DependentUpon>DisplayChallengesPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Competition\Contests\ContestList.ascx.cs">
+      <DependentUpon>ContestList.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Competition\Contests\ContestList.ascx.designer.cs">
+      <DependentUpon>ContestList.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Competition\Contests\ContestListRow.ascx.cs">
+      <DependentUpon>ContestListRow.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Competition\Contests\ContestListRow.ascx.designer.cs">
+      <DependentUpon>ContestListRow.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Competition\Contests\CountdownClock.ascx.cs">
+      <DependentUpon>CountdownClock.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Competition\Contests\CountdownClock.ascx.designer.cs">
+      <DependentUpon>CountdownClock.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Competition\Contests\DisplayContestPage.aspx.cs">
+      <DependentUpon>DisplayContestPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Competition\Contests\DisplayContestPage.aspx.designer.cs">
+      <DependentUpon>DisplayContestPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Competition\Contests\LeaderBoard.ascx.cs">
+      <DependentUpon>LeaderBoard.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Competition\Contests\LeaderBoard.ascx.designer.cs">
+      <DependentUpon>LeaderBoard.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Competition\Contests\LeaderBoardRow.ascx.cs">
+      <DependentUpon>LeaderBoardRow.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Competition\Contests\LeaderBoardRow.ascx.designer.cs">
+      <DependentUpon>LeaderBoardRow.ascx</DependentUpon>
     </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>

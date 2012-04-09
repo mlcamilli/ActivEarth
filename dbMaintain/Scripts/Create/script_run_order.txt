@@ -1,5 +1,6 @@
 dbo.Users.Table.sql
 dbo.Profile.Table.sql
+dbo.Badges.Table.sql
 dbo.Groups.Table.sql
 dbo.Group_Members.Table.sql
 dbo.Contests.Table.sql

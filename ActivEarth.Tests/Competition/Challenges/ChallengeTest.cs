@@ -135,10 +135,10 @@ namespace ActivEarth.Tests.Competition.Challenges
             _user2.SetStatistic(Statistic.Steps, 200);
 
             Log("Verifying User1's Challenge Progress");
-            Assert.AreEqual(200, challenge.GetProgress(_user1));
+            Assert.AreEqual(40, challenge.GetProgress(_user1));
 
             Log("Verifying User2's Challenge Progress");
-            Assert.AreEqual(150, challenge.GetProgress(_user2));
+            Assert.AreEqual(30, challenge.GetProgress(_user2));
 
             Log("Verifying User1 has not completed the Challenge");
             Assert.IsFalse(challenge.IsComplete(_user1));
@@ -179,10 +179,10 @@ namespace ActivEarth.Tests.Competition.Challenges
             _user2.SetStatistic(Statistic.Steps, 550);
 
             Log("Verifying User1's Challenge Progress");
-            Assert.AreEqual(500, challenge.GetProgress(_user1));
+            Assert.AreEqual(100, challenge.GetProgress(_user1));
 
             Log("Verifying User2's Challenge Progress");
-            Assert.AreEqual(500, challenge.GetProgress(_user2));
+            Assert.AreEqual(100, challenge.GetProgress(_user2));
 
             Log("Verifying User1 has completed the Challenge");
             Assert.IsTrue(challenge.IsComplete(_user1));
@@ -315,7 +315,7 @@ namespace ActivEarth.Tests.Competition.Challenges
             _user1.SetStatistic(Statistic.Steps, _user1.GetStatistic(Statistic.Steps) + 250);
 
             Log("Verifying challenge progress");
-            Assert.AreEqual(250, challenge.GetProgress(_user1));
+            Assert.AreEqual(50, challenge.GetProgress(_user1));
 
             Log("Calling manager's CleanUp routine");
             _manager.CleanUp();
@@ -330,7 +330,7 @@ namespace ActivEarth.Tests.Competition.Challenges
             _user1.SetStatistic(Statistic.Steps, _user1.GetStatistic(Statistic.Steps) + 200);
 
             Log("Verifying challenge progress");
-            Assert.AreEqual(200, challenge.GetProgress(_user1));
+            Assert.AreEqual(40, challenge.GetProgress(_user1));
 
             Log("Verifying new end time");
             Assert.AreEqual(DateTime.Today.AddDays(1), challenge.EndTime);

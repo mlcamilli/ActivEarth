@@ -161,6 +161,55 @@ namespace ActivEarth.Tests.Competition.Challenges
         }
 
         /// <summary>
+        /// Verifies the ability to retrieve the collection of currently active daily challenges.
+        /// </summary>
+        [TestMethod]
+        public void TestGetActiveChallengesByLength()
+        {
+            using (_trans)
+            {
+                Log("Creating expired challenge");
+                Challenge challenge1 = new Challenge("Test Challenge", "This is a test challenge",
+                    30, false, DateTime.Today.AddDays(-1), 1, Statistic.Steps, 500);
+                challenge1.IsActive = false;
+
+                Log("Creating a daily challenge");
+                Challenge challenge2 = new Challenge("Test Challenge", "This is a test challenge",
+                    30, false, DateTime.Today, 1, Statistic.BikeDistance, 500);
+
+                Log("Creating another daily challenge");
+                Challenge challenge3 = new Challenge("Test Challenge", "This is a test challenge",
+                    30, false, DateTime.Today, 1, Statistic.BikeDistance, 500);
+
+                Log("Creating weekly challenge 1");
+                Challenge challenge4 = new Challenge("Test Challenge", "This is a test challenge",
+                    30, false, DateTime.Today, 7, Statistic.ChallengesCompleted, 500);
+
+                Log("Creating weekly challenge 2");
+                Challenge challenge5 = new Challenge("Test Challenge", "This is a test challenge",
+                    30, false, DateTime.Today, 7, Statistic.ChallengesCompleted, 500);
+
+                Log("Creating weekly challenge 3");
+                Challenge challenge6 = new Challenge("Test Challenge", "This is a test challenge",
+                    30, false, DateTime.Today, 7, Statistic.ChallengesCompleted, 500);
+
+                Log("Adding challenges to DB");
+                ChallengeDAO.CreateNewChallenge(challenge1);
+                ChallengeDAO.CreateNewChallenge(challenge2);
+                ChallengeDAO.CreateNewChallenge(challenge3);
+                ChallengeDAO.CreateNewChallenge(challenge4);
+                ChallengeDAO.CreateNewChallenge(challenge5);
+                ChallengeDAO.CreateNewChallenge(challenge6);
+
+                Log("Verifying that GetActiveDailyChallenges returns two challenges");
+                Assert.AreEqual(2, ChallengeDAO.GetActiveDailyChallenges().Count);
+
+                Log("Verifying that GetActiveWeeklyChallenges returns three challenges");
+                Assert.AreEqual(3, ChallengeDAO.GetActiveWeeklyChallenges().Count);
+            }
+        }
+
+        /// <summary>
         /// Verifies the ability to retrieve the entire archive of challenges.
         /// </summary>
         [TestMethod]

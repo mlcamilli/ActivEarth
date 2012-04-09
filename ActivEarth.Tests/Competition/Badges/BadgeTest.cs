@@ -38,35 +38,43 @@ namespace ActivEarth.Tests.Competition.Badges
             _user = new User("Test", "Subject");
 
             _user.Badges[Statistic.BikeDistance] = 
-                new Badge(1, "BikeDistance", _user, Statistic.BikeDistance,
-                BadgeConstants.BikeDistance.REQUIREMENTS, BadgeConstants.BikeDistance.REWARDS,
-                BadgeConstants.BikeDistance.FORMAT, BadgeConstants.BikeDistance.IMAGES);
+                new Badge(_user, Statistic.BikeDistance,
+                BadgeConstants.BikeDistance.REQUIREMENTS, BadgeConstants.BikeDistance.REWARDS, BadgeConstants.BikeDistance.IMAGES);
 
             _user.Badges[Statistic.WalkDistance] =
-                new Badge(2, "WalkDistance", _user, Statistic.WalkDistance,
-                BadgeConstants.WalkDistance.REQUIREMENTS, BadgeConstants.WalkDistance.REWARDS,
-                BadgeConstants.WalkDistance.FORMAT, BadgeConstants.WalkDistance.IMAGES);
+                new Badge(_user, Statistic.WalkDistance,
+                BadgeConstants.WalkDistance.REQUIREMENTS, BadgeConstants.WalkDistance.REWARDS, BadgeConstants.WalkDistance.IMAGES);
 
             _user.Badges[Statistic.RunDistance] =
-                new Badge(3, "RunDistance", _user, Statistic.RunDistance,
-                BadgeConstants.RunDistance.REQUIREMENTS, BadgeConstants.RunDistance.REWARDS,
-                BadgeConstants.RunDistance.FORMAT, BadgeConstants.RunDistance.IMAGES);
+                new Badge(_user, Statistic.RunDistance,
+                BadgeConstants.RunDistance.REQUIREMENTS, BadgeConstants.RunDistance.REWARDS, BadgeConstants.RunDistance.IMAGES);
 
             _user.Badges[Statistic.Steps] =
-                new Badge(4, "Steps", _user, Statistic.Steps,
-                BadgeConstants.Steps.REQUIREMENTS, BadgeConstants.Steps.REWARDS,
-                BadgeConstants.Steps.FORMAT, BadgeConstants.Steps.IMAGES);
+                new Badge(_user, Statistic.Steps,
+                BadgeConstants.Steps.REQUIREMENTS, BadgeConstants.Steps.REWARDS, BadgeConstants.Steps.IMAGES);
 
             _user.Badges[Statistic.ChallengesCompleted] =
-                new Badge(5, "ChallengesCompleted", _user, Statistic.ChallengesCompleted,
-                BadgeConstants.Challenges.REQUIREMENTS, BadgeConstants.Challenges.REWARDS,
-                BadgeConstants.Challenges.FORMAT, BadgeConstants.Challenges.IMAGES);
+                new Badge(_user, Statistic.ChallengesCompleted,
+                BadgeConstants.Challenges.REQUIREMENTS, BadgeConstants.Challenges.REWARDS, BadgeConstants.Challenges.IMAGES);
+
+            _user.Badges[Statistic.GasSavings] =
+                new Badge(_user, Statistic.ChallengesCompleted,
+                BadgeConstants.GasSavings.REQUIREMENTS, BadgeConstants.GasSavings.REWARDS,
+                BadgeConstants.GasSavings.IMAGES);
+
+            _user.Badges[Statistic.BikeDistance].FormatString = BadgeConstants.BikeDistance.FORMAT;
+            _user.Badges[Statistic.WalkDistance].FormatString = BadgeConstants.WalkDistance.FORMAT;
+            _user.Badges[Statistic.RunDistance].FormatString = BadgeConstants.RunDistance.FORMAT;
+            _user.Badges[Statistic.Steps].FormatString = BadgeConstants.Steps.FORMAT;
+            _user.Badges[Statistic.ChallengesCompleted].FormatString = BadgeConstants.Challenges.FORMAT;
+            _user.Badges[Statistic.GasSavings].FormatString = BadgeConstants.GasSavings.FORMAT;
 
             _user.SetStatistic(Statistic.BikeDistance, 0);
             _user.SetStatistic(Statistic.WalkDistance, 0);
             _user.SetStatistic(Statistic.RunDistance, 0);
             _user.SetStatistic(Statistic.Steps, 0);
             _user.SetStatistic(Statistic.ChallengesCompleted, 0);
+            _user.SetStatistic(Statistic.GasSavings, 0);
         }
 
         #region ---------- Test Cases ----------
@@ -165,6 +173,101 @@ namespace ActivEarth.Tests.Competition.Badges
                 Log("Verifying badge reward on update");
                 Assert.AreEqual(BadgeConstants.Steps.REWARDS[level] + BadgeConstants.Steps.REWARDS[level - 1], badge.Update());
             }
+        }
+
+        /// <summary>
+        /// Verifies that level progress is calculated correctly for the progress bar.
+        /// </summary>
+        /// <remarks>
+        /// Steps:
+        /// 1) Initialize new badge with statistic at 0.
+        /// 2) VERIFY: Progress reports 0%.
+        /// 3) Set the statistic to halfway to the Bronze badge.
+        /// 4) VERIFY: Progress reports 50%.
+        /// 5) Set the statistic to halfway through the Bronze badge.
+        /// 6) VERIFY: Progress reports 50%.
+        /// 7) Set the statistic to exactly the level required for the Silver badge.
+        /// 8) VERIFY: Progress reports 0%.
+        /// </remarks>
+        [TestMethod]
+        public void TestBadgeProgress()
+        {
+            Log("Fetching Steps badge");
+            Badge badge = _user.Badges[Statistic.Steps];
+            badge.Update();
+
+            Log("Verifying progress.");
+            Assert.AreEqual(0, badge.Progress);
+
+            Log("Updating statistic to halfway to the Bronze badge.");
+            _user.SetStatistic(Statistic.Steps, BadgeConstants.Steps.REQUIREMENTS[BadgeLevels.Bronze] / 2);
+            badge.Update();
+
+            Log("Verifying progress.");
+            Assert.AreEqual(50, badge.Progress);
+
+            float delta = BadgeConstants.Steps.REQUIREMENTS[BadgeLevels.Silver] -
+                BadgeConstants.Steps.REQUIREMENTS[BadgeLevels.Bronze];
+            
+            Log("Updating statistic to halfway to the Silver badge.");
+            _user.SetStatistic(Statistic.Steps, BadgeConstants.Steps.REQUIREMENTS[BadgeLevels.Bronze] + (delta / 2));
+            badge.Update();
+
+            Log("Verifying progress.");
+            Assert.AreEqual(50, badge.Progress);
+
+            Log("Updating statistic to exactly get the Silver badge.");
+            _user.SetStatistic(Statistic.Steps, BadgeConstants.Steps.REQUIREMENTS[BadgeLevels.Silver]);
+            badge.Update();
+
+            Log("Verifying progress.");
+            Assert.AreEqual(0, badge.Progress);
+        }
+
+        /// <summary>
+        /// Verifies that text progress report is formatted correctly.
+        /// </summary>
+        /// <remarks>
+        /// Steps:
+        /// 1) Initialize new badge with statistic at 0.
+        /// 2) VERIFY: Progress reports 0%.
+        /// 3) Set the statistic to halfway to the Bronze badge.
+        /// 4) VERIFY: Progress reports 50%.
+        /// 5) Set the statistic to halfway through the Bronze badge.
+        /// 6) VERIFY: Progress reports 50%.
+        /// 7) Set the statistic to exactly the level required for the Silver badge.
+        /// 8) VERIFY: Progress reports 0%.
+        /// </remarks>
+        [TestMethod]
+        public void TestBadgeFormattedProgress()
+        {
+            Log("Fetching Steps badge");
+            Badge badge = _user.Badges[Statistic.Steps];
+            badge.Update();
+
+            Log("Verifying progress.");
+            Assert.AreEqual(0, badge.Progress);
+
+            Log("Updating statistic to halfway to the Bronze badge.");
+            _user.SetStatistic(Statistic.Steps, 50);
+            badge.Update();
+
+            Log("Verifying progress.");
+            Assert.AreEqual(String.Format("50 / {0}", BadgeConstants.Steps.REQUIREMENTS[BadgeLevels.Bronze]), badge.GetFormattedProgress());
+
+            Log("Updating statistic to the Max badge.");
+            _user.SetStatistic(Statistic.Steps, BadgeConstants.Steps.REQUIREMENTS[BadgeLevels.Max]);
+            badge.Update();
+
+            Log("Verifying progress.");
+            Assert.AreEqual(String.Format("{0}", BadgeConstants.Steps.REQUIREMENTS[BadgeLevels.Max]), badge.GetFormattedProgress());
+
+            Badge gasBadge = _user.Badges[Statistic.GasSavings];
+            gasBadge.Update();
+
+            Assert.AreEqual(String.Format("$0.00 / ${0:0.00}", BadgeConstants.GasSavings.REQUIREMENTS[BadgeLevels.Bronze]), 
+                gasBadge.GetFormattedProgress());
+            
         }
 
         /// <summary>

@@ -51,7 +51,62 @@ namespace ActivEarth.DAO
             {
                 var data = new ActivEarthDataProvidersDataContext(connection);
                 return (from c in data.ChallengeDataProviders
-                        where c.active == true
+                        where c.active
+                        select
+                            new Challenge
+                            {
+                                ID = c.id,
+                                Name = c.name,
+                                Description = c.description,
+                                Points = c.points,
+                                Requirement = (float)c.requirement,
+                                IsPersistent = c.persistent,
+                                EndTime = c.end_time,
+                                Duration = new TimeSpan(c.duration_days, 0, 0, 0),
+                                StatisticBinding = (Statistic)c.statistic,
+                                IsActive = c.active
+                            }).ToList();
+            }
+        }
+
+        /// <summary>
+        /// Retrieves all currently active daily challenges.
+        /// </summary>
+        /// <returns>All daily challenges currently marked as active.</returns>
+        public static List<Challenge> GetActiveDailyChallenges()
+        {
+            return GetActiveChallengesByDuration(1);
+        }
+
+        /// <summary>
+        /// Retrieves all currently active weekly challenges.
+        /// </summary>
+        /// <returns>All weekly challenges currently marked as active.</returns>
+        public static List<Challenge> GetActiveWeeklyChallenges()
+        {
+            return GetActiveChallengesByDuration(7);
+        }
+
+        /// <summary>
+        /// Retrieves all currently active monthly challenges.
+        /// </summary>
+        /// <returns>All monthly challenges currently marked as active.</returns>
+        public static List<Challenge> GetActiveMonthlyChallenges()
+        {
+            return GetActiveChallengesByDuration(DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month));
+        }
+
+        /// <summary>
+        /// Retrieves all currently active persistent challenges.
+        /// </summary>
+        /// <returns>All persistent challenges currently marked as active.</returns>
+        public static List<Challenge> GetActivePersistentChallenges()
+        {
+            using (SqlConnection connection = ConnectionManager.GetConnection())
+            {
+                var data = new ActivEarthDataProvidersDataContext(connection);
+                return (from c in data.ChallengeDataProviders
+                        where c.active && c.persistent
                         select
                             new Challenge
                             {
@@ -172,6 +227,38 @@ namespace ActivEarth.DAO
                 return false;
             }
         }
+
+        #region Private Methods
+
+        /// <summary>
+        /// Retrieves all currently active challenges of a given length.
+        /// </summary>
+        /// <returns>Duration of the challenge in days.</returns>
+        private static List<Challenge> GetActiveChallengesByDuration(int days)
+        {
+            using (SqlConnection connection = ConnectionManager.GetConnection())
+            {
+                var data = new ActivEarthDataProvidersDataContext(connection);
+                return (from c in data.ChallengeDataProviders
+                        where c.active && c.duration_days == days
+                        select
+                            new Challenge
+                            {
+                                ID = c.id,
+                                Name = c.name,
+                                Description = c.description,
+                                Points = c.points,
+                                Requirement = (float)c.requirement,
+                                IsPersistent = c.persistent,
+                                EndTime = c.end_time,
+                                Duration = new TimeSpan(c.duration_days, 0, 0, 0),
+                                StatisticBinding = (Statistic)c.statistic,
+                                IsActive = c.active
+                            }).ToList();
+            }
+        }
+
+        #endregion Private Methods
 
     }
 }
