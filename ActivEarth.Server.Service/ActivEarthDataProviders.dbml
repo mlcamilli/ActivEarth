@@ -53,6 +53,7 @@
       <Column Name="start" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="statistic" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
       <Column Name="type" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="searchable" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Association Name="ContestDataProvider_TeamDataProvider" Member="TeamDataProviders" ThisKey="id" OtherKey="contest_id" Type="TeamDataProvider" />
     </Type>
   </Table>

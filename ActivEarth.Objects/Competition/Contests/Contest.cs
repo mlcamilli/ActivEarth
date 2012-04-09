@@ -41,7 +41,7 @@ namespace ActivEarth.Objects.Competition.Contests
         /// <summary>
         /// The number of Activity Points to be awarded to the victor(s).
         /// </summary>
-        public int Points
+        public int Reward
         {
             get;
             set;
@@ -103,6 +103,24 @@ namespace ActivEarth.Objects.Competition.Contests
             set;
         }
 
+        /// <summary>
+        /// Format string for reporting the contest statistic information.
+        /// </summary>
+        public string FormatString
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// True if the contest is public and can be found by searching, false if private.
+        /// </summary>
+        public bool IsSearchable
+        {
+            get;
+            set;
+        }
+
         #endregion ---------- Public Properties ----------
 
         #region ---------- Constructor ----------
@@ -123,19 +141,19 @@ namespace ActivEarth.Objects.Competition.Contests
         /// <param name="id">Numeric indentifier for the contest.</param>
         /// <param name="name">Contest Name.<param>
         /// <param name="description">Contest Description.</param>
-        /// <param name="points">Points to be distributed to the winner(s).</param>
+        /// <param name="reward">Points to be distributed to the winner(s).</param>
         /// <param name="mode">Contest mode for determining termination.</param>
         /// <param name="type">Contest type (group or individual)</param>
         /// <param name="start">Time to start the contest.</param>
         /// <param name="end">End Conditions to be observed.</param>
         /// <param name="statistic">Statistic on which the Contest is based.</param>
-        public Contest(string name, string description, int points,
+        public Contest(string name, string description, int reward,
             ContestEndMode mode, ContestType type, DateTime start, EndCondition end, 
             Statistic statistic)
         {
             this.Name = name;
             this.Description = description;
-            this.Points = points;
+            this.Reward = reward;
             this.Mode = mode;
             this.Type = type;
             this.StartTime = start;
@@ -151,17 +169,17 @@ namespace ActivEarth.Objects.Competition.Contests
         /// <param name="id">Numeric indentifier for the contest.</param>
         /// <param name="name">Contest Name.<param>
         /// <param name="description">Contest Description.</param>
-        /// <param name="points">Points to be distributed to the winner(s).</param>
+        /// <param name="reward">Points to be distributed to the winner(s).</param>
         /// <param name="mode">Contest mode for determining termination.</param>
         /// <param name="type">Contest type (group or individual)</param>
         /// <param name="start">Time to start the contest.</param>
         /// <param name="end">End Conditions to be observed.</param>
         /// <param name="statistic">Statistic on which the Contest is based.</param>
         /// <param name="teams">Teams participating in the Contest.</param>
-        protected Contest(int id, string name, string description, int points,
+        protected Contest(int id, string name, string description, int reward,
             ContestEndMode mode, ContestType type, DateTime start, EndCondition end, 
             Statistic statistic, List<Team> teams)
-            : this(name, description, points, mode, type, start, end, statistic)
+            : this(name, description, reward, mode, type, start, end, statistic)
         {
             this.Teams = teams;
         }

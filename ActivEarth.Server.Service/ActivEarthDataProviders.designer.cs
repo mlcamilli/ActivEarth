@@ -1042,6 +1042,8 @@ namespace ActivEarth.Server.Service
 		
 		private byte _type;
 		
+		private bool _searchable;
+		
 		private EntitySet<TeamDataProvider> _TeamDataProviders;
 		
     #region Extensibility Method Definitions
@@ -1068,6 +1070,8 @@ namespace ActivEarth.Server.Service
     partial void OnstatisticChanged();
     partial void OntypeChanging(byte value);
     partial void OntypeChanged();
+    partial void OnsearchableChanging(bool value);
+    partial void OnsearchableChanged();
     #endregion
 		
 		public ContestDataProvider()
@@ -1272,6 +1276,26 @@ namespace ActivEarth.Server.Service
 					this._type = value;
 					this.SendPropertyChanged("type");
 					this.OntypeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_searchable", DbType="Bit NOT NULL")]
+		public bool searchable
+		{
+			get
+			{
+				return this._searchable;
+			}
+			set
+			{
+				if ((this._searchable != value))
+				{
+					this.OnsearchableChanging(value);
+					this.SendPropertyChanging();
+					this._searchable = value;
+					this.SendPropertyChanged("searchable");
+					this.OnsearchableChanged();
 				}
 			}
 		}

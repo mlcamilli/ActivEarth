@@ -24,7 +24,7 @@ namespace ActivEarth.DAO
                 var data = new ActivEarthDataProvidersDataContext(connection);
                 return (from c in data.StatisticConstantsDataProviders
                                 where c.statistic_id == (byte)stat
-                                select c.name).FirstOrDefault();
+                        select c.name).FirstOrDefault().Trim();
             }
         }
 
@@ -40,7 +40,7 @@ namespace ActivEarth.DAO
                 var data = new ActivEarthDataProvidersDataContext(connection);
                 return (from c in data.StatisticConstantsDataProviders
                                 where c.statistic_id == (byte)stat
-                                select c.format_string).FirstOrDefault();
+                                select c.format_string).FirstOrDefault().Trim();
             }
         }
     }
