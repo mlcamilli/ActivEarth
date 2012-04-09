@@ -160,6 +160,33 @@ namespace ActivEarth.Tests.Competition.Badges
             Assert.AreEqual(user1ID, badge.UserID);
         }
 
+        /// <summary>
+        /// Tests the assignment of format strings when a badge is loaded.
+        /// </summary>
+        [TestMethod]
+        public void TestGetBadgeFormatString()
+        {
+            using (_trans)
+            {
+                Log("Initializing user");
+                int user1ID = UserDAO.GetUserIdFromUserName("badgetest1");
+                User user1 = UserDAO.GetUserFromUserId(user1ID);
+
+                Log("Creating badges for user1");
+                BadgeManager.CreateBadge(user1, Statistic.Steps);
+                BadgeManager.CreateBadge(user1, Statistic.GasSavings);
+
+                Log("Retrieving badge");
+                Badge stepBadge = BadgeDAO.GetBadgeFromUserIdAndStatistic(user1ID, Statistic.Steps);
+                Badge gasBadge = BadgeDAO.GetBadgeFromUserIdAndStatistic(user1ID, Statistic.GasSavings);
+
+                Log("Verifying format strings");
+                Assert.AreEqual("{0}", stepBadge.FormatString);
+                Assert.AreEqual("${0:0.00}", gasBadge.FormatString);
+
+            }
+        }
+
         #endregion ---------- Test Cases ----------
 
         #region ---------- Utility Methods ----------

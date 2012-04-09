@@ -258,14 +258,16 @@ namespace ActivEarth.Tests.Competition.Badges
             badge.Update();
 
             Log("Verifying progress.");
-            Assert.AreEqual(String.Format("50 / {0}", BadgeConstants.Steps.REQUIREMENTS[BadgeLevels.Bronze]), badge.GetFormattedProgress());
+            Assert.AreEqual(String.Format("50 / {0}", BadgeConstants.Steps.REQUIREMENTS[BadgeLevels.Bronze]), 
+                badge.GetFormattedProgress());
 
             Log("Updating statistic to the Max badge.");
             _user.SetStatistic(Statistic.Steps, BadgeConstants.Steps.REQUIREMENTS[BadgeLevels.Max]);
             badge.Update();
 
             Log("Verifying progress.");
-            Assert.AreEqual(String.Format("{0}", BadgeConstants.Steps.REQUIREMENTS[BadgeLevels.Max]), badge.GetFormattedProgress());
+            Assert.AreEqual(String.Format("{0}", BadgeConstants.Steps.REQUIREMENTS[BadgeLevels.Max]), 
+                badge.GetFormattedProgress());
 
             Badge gasBadge = _user.Badges[Statistic.GasSavings];
             gasBadge.Update();
