@@ -98,7 +98,7 @@ namespace ActivEarth.Objects.Profile
             set;
         }
 
-        public uint GreenScore
+        public int GreenScore
         {
             get;
             set;

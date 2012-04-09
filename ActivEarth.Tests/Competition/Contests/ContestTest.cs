@@ -46,10 +46,10 @@ namespace ActivEarth.Tests.Competition.Contests
             _user3 = new User("Test", "Subject3");
             _user4 = new User("Test", "Subject4");
 
-            _group1 = new Group(1, "Group 1", _user1, string.Empty, new List<string>());
+            _group1 = new Group("Group 1", _user1, string.Empty, new List<string>());
             _group1.Members.Add(_user2);
 
-            _group2 = new Group(2, "Group 2", _user3, string.Empty, new List<string>());
+            _group2 = new Group("Group 2", _user3, string.Empty, new List<string>());
             _group2.Members.Add(_user4);
             _trans = new TransactionScope();
         }

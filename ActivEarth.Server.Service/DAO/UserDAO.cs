@@ -79,7 +79,7 @@ namespace ActivEarth.DAO
                              }).FirstOrDefault();
             }
         }
-        public static bool CreateNewUser(User user, string password)
+        public static int CreateNewUser(User user, string password)
         {
             try
             {
@@ -91,14 +91,33 @@ namespace ActivEarth.DAO
                 var userData = new UserDataProvider {password = password, user_name = user.UserName,};
                 data.UserDataProviders.InsertOnSubmit(userData);
                 data.SubmitChanges();
-                return true;
+
+                var profileData = new ProfileDataProvider
+                {
+                    user_id = userData.id,
+                    email = user.Email,
+                    first_name = user.FirstName,
+                    last_name = user.LastName,
+                    city = user.City,
+                    state = user.State,
+                    gender = user.Gender,
+                    id = user.ProfileID,
+                    age = user.Age,
+                    weight = user.Weight,
+                    height = user.Height
+                };
+                data.ProfileDataProviders.InsertOnSubmit(profileData);
+                data.SubmitChanges();
+                user.ProfileID = profileData.id;
+
+                return userData.id;
 
             }
             }
             catch (Exception)
             {
 
-                return false;
+                return 0;
             }
         }
         public static bool UpdateUserProfile(User user)

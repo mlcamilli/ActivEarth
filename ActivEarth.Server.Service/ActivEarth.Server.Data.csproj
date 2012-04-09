@@ -63,6 +63,7 @@
     <Compile Include="DAO\BadgeDAO.cs" />
     <Compile Include="DAO\ChallengeDAO.cs" />
     <Compile Include="DAO\ContestDAO.cs" />
+    <Compile Include="DAO\GroupDAO.cs" />
     <Compile Include="DAO\PrivacySettingDAO.cs" />
     <Compile Include="DAO\TeamDAO.cs" />
     <Compile Include="DAO\UserDAO.cs" />
@@ -74,6 +75,7 @@
       <LastGenOutput>ActivEarthDataProviders.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
+    <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />

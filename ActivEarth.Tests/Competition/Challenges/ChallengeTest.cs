@@ -47,7 +47,7 @@ namespace ActivEarth.Tests.Competition.Challenges
             _user1 = new User("Test", "Subject1");
             _user2 = new User("Test", "Subject2");
 
-            _allUsers = new Group(0, "All Users", _user1, string.Empty, new List<string>());
+            _allUsers = new Group("All Users", _user1, string.Empty, new List<string>());
             _allUsers.Members.Add(_user1);
             _allUsers.Members.Add(_user2);
 
