@@ -14,7 +14,7 @@
       <Column Name="height" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="weight" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="ProfileDataProvider_TeamMemberDataProvider" Member="TeamMemberDataProviders" ThisKey="id" OtherKey="user_id" Type="TeamMemberDataProvider" />
-      <Association Name="ProfileDataProvider_badge" Member="BadgeDataProviders" ThisKey="id" OtherKey="user_id" Type="BadgeDataProvider" />
+      <Association Name="ProfileDataProvider_BadgeDataProvider" Member="BadgeDataProviders" ThisKey="id" OtherKey="user_id" Type="BadgeDataProvider" />
       <Association Name="UserDataProvider_ProfileDataProvider" Member="UserDataProvider" ThisKey="user_id" OtherKey="id" Type="UserDataProvider" IsForeignKey="true" />
     </Type>
   </Table>
@@ -53,6 +53,7 @@
       <Column Name="start" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="statistic" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
       <Column Name="type" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="searchable" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Association Name="ContestDataProvider_TeamDataProvider" Member="TeamDataProviders" ThisKey="id" OtherKey="contest_id" Type="TeamDataProvider" />
     </Type>
   </Table>
@@ -98,7 +99,25 @@
       <Column Name="statistic" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
       <Column Name="badge_level" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
       <Column Name="progress" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
-      <Association Name="ProfileDataProvider_badge" Member="ProfileDataProvider" ThisKey="user_id" OtherKey="id" Type="ProfileDataProvider" IsForeignKey="true" />
+      <Association Name="ProfileDataProvider_BadgeDataProvider" Member="ProfileDataProvider" ThisKey="user_id" OtherKey="id" Type="ProfileDataProvider" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.badge_level_info" Member="BadgeConstantsDataProviders">
+    <Type Name="BadgeConstantsDataProvider">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="statistic" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="[level]" Member="level" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="requirement" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="reward" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="image_path" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+    </Type>
+  </Table>
+  <Table Name="dbo.statistic_info" Member="StatisticConstantsDataProviders">
+    <Type Name="StatisticConstantsDataProvider">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="statistic_id" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="NChar(25) NOT NULL" CanBeNull="false" />
+      <Column Name="format_string" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
 </Database>

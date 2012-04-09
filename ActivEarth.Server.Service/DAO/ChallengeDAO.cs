@@ -22,7 +22,7 @@ namespace ActivEarth.DAO
             using (SqlConnection connection = ConnectionManager.GetConnection())
             {
                 var data = new ActivEarthDataProvidersDataContext(connection);
-                return (from c in data.ChallengeDataProviders
+                Challenge toReturn = (from c in data.ChallengeDataProviders
                         where c.id == challengeId
                         select
                             new Challenge
@@ -38,6 +38,10 @@ namespace ActivEarth.DAO
                                 StatisticBinding = (Statistic)c.statistic,
                                 IsActive = c.active
                             }).FirstOrDefault();
+
+                toReturn.FormatString = StatisticInfoDAO.GetStatisticFormatString(toReturn.StatisticBinding);
+
+                return toReturn;
             }
         }
 
@@ -47,10 +51,12 @@ namespace ActivEarth.DAO
         /// <returns>All challenges currently marked as active.</returns>
         public static List<Challenge> GetActiveChallenges()
         {
+            List<Challenge> toReturn;
+
             using (SqlConnection connection = ConnectionManager.GetConnection())
             {
                 var data = new ActivEarthDataProvidersDataContext(connection);
-                return (from c in data.ChallengeDataProviders
+                toReturn = (from c in data.ChallengeDataProviders
                         where c.active
                         select
                             new Challenge
@@ -66,6 +72,13 @@ namespace ActivEarth.DAO
                                 StatisticBinding = (Statistic)c.statistic,
                                 IsActive = c.active
                             }).ToList();
+
+                foreach (Challenge challenge in toReturn)
+                {
+                    challenge.FormatString = StatisticInfoDAO.GetStatisticFormatString(challenge.StatisticBinding);
+                }
+
+                return toReturn;
             }
         }
 
@@ -102,10 +115,11 @@ namespace ActivEarth.DAO
         /// <returns>All persistent challenges currently marked as active.</returns>
         public static List<Challenge> GetActivePersistentChallenges()
         {
+            List<Challenge> toReturn;
             using (SqlConnection connection = ConnectionManager.GetConnection())
             {
                 var data = new ActivEarthDataProvidersDataContext(connection);
-                return (from c in data.ChallengeDataProviders
+                toReturn = (from c in data.ChallengeDataProviders
                         where c.active && c.persistent
                         select
                             new Challenge
@@ -121,6 +135,13 @@ namespace ActivEarth.DAO
                                 StatisticBinding = (Statistic)c.statistic,
                                 IsActive = c.active
                             }).ToList();
+
+                foreach (Challenge challenge in toReturn)
+                {
+                    challenge.FormatString = StatisticInfoDAO.GetStatisticFormatString(challenge.StatisticBinding);
+                }
+
+                return toReturn;
             }
         }
 
@@ -130,10 +151,12 @@ namespace ActivEarth.DAO
         /// <returns>All challenges in the archive.</returns>
         public static List<Challenge> GetAllChallenges()
         {
+            List<Challenge> toReturn;
+
             using (SqlConnection connection = ConnectionManager.GetConnection())
             {
                 var data = new ActivEarthDataProvidersDataContext(connection);
-                return (from c in data.ChallengeDataProviders
+                toReturn = (from c in data.ChallengeDataProviders
                         where c.id >= 0
                         select
                             new Challenge
@@ -149,6 +172,13 @@ namespace ActivEarth.DAO
                                 StatisticBinding = (Statistic)c.statistic,
                                 IsActive = c.active
                             }).ToList();
+
+                foreach (Challenge challenge in toReturn)
+                {
+                    challenge.FormatString = StatisticInfoDAO.GetStatisticFormatString(challenge.StatisticBinding);
+                }
+
+                return toReturn;
             }
         }
 
@@ -236,10 +266,12 @@ namespace ActivEarth.DAO
         /// <returns>Duration of the challenge in days.</returns>
         private static List<Challenge> GetActiveChallengesByDuration(int days)
         {
+            List<Challenge> toReturn;
+
             using (SqlConnection connection = ConnectionManager.GetConnection())
             {
                 var data = new ActivEarthDataProvidersDataContext(connection);
-                return (from c in data.ChallengeDataProviders
+                toReturn = (from c in data.ChallengeDataProviders
                         where c.active && c.duration_days == days
                         select
                             new Challenge
@@ -255,6 +287,13 @@ namespace ActivEarth.DAO
                                 StatisticBinding = (Statistic)c.statistic,
                                 IsActive = c.active
                             }).ToList();
+
+                foreach (Challenge challenge in toReturn)
+                {
+                    challenge.FormatString = StatisticInfoDAO.GetStatisticFormatString(challenge.StatisticBinding);
+                }
+
+                return toReturn;
             }
         }
 

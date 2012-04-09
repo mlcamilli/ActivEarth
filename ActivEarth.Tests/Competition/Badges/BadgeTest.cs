@@ -253,14 +253,16 @@ namespace ActivEarth.Tests.Competition.Badges
             badge.Update();
 
             Log("Verifying progress.");
-            Assert.AreEqual(String.Format("50 / {0}", BadgeConstants.Steps.REQUIREMENTS[BadgeLevels.Bronze]), badge.GetFormattedProgress());
+            Assert.AreEqual(String.Format("50 / {0}", BadgeConstants.Steps.REQUIREMENTS[BadgeLevels.Bronze]), 
+                badge.GetFormattedProgress());
 
             Log("Updating statistic to the Max badge.");
             _user.SetStatistic(Statistic.Steps, BadgeConstants.Steps.REQUIREMENTS[BadgeLevels.Max]);
             badge.Update();
 
             Log("Verifying progress.");
-            Assert.AreEqual(String.Format("{0}", BadgeConstants.Steps.REQUIREMENTS[BadgeLevels.Max]), badge.GetFormattedProgress());
+            Assert.AreEqual(String.Format("{0}", BadgeConstants.Steps.REQUIREMENTS[BadgeLevels.Max]), 
+                badge.GetFormattedProgress());
 
             Badge gasBadge = _user.Badges[Statistic.GasSavings];
             gasBadge.Update();
@@ -309,35 +311,6 @@ namespace ActivEarth.Tests.Competition.Badges
 
             Log("Verifying silver level step badge points awarded");
             Assert.AreEqual(BadgeConstants.Steps.REWARDS[BadgeLevels.Silver], stepBadge.Update());
-        }
-
-        /// <summary>
-        /// Verifies that the badge image path changes appropriately as the badge increases in level.
-        /// </summary>
-        /// <remarks>
-        /// Steps:
-        /// 1) Initialize new badge with statistic at 0.
-        /// 2) Loop through each badge level by increasing the statistics to the required level.
-        /// 3) VERIFY: For each level reached, the correct image path is reported.
-        /// </remarks>
-        [TestMethod]
-        public void TestBadgeGetImagePath()
-        {
-
-            Log("Fetching Steps badge");
-            Badge badge = _user.Badges[Statistic.Steps];
-
-            for (int level = BadgeLevels.None; level <= BadgeLevels.Max; level++)
-            {
-                Log(String.Format("Increasing badge to level {0}", level));
-                _user.SetStatistic(Statistic.Steps, BadgeConstants.Steps.REQUIREMENTS[level]);
-
-                Log("Updating badge");
-                badge.Update();
-
-                Log("Verifying badge image path");
-                Assert.AreEqual(BadgeConstants.Steps.IMAGES[level], badge.GetImagePath());
-            }
         }
 
         /// <summary>

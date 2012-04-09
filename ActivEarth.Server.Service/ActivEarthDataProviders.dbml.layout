@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 9.5" name="ActivEarthDataProviders">
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 12.375" name="ActivEarthDataProviders">
   <DataContextMoniker Name="/ActivEarthDataProvidersDataContext" />
   <nestedChildShapes>
     <classShape Id="9bb1702d-ae42-4e39-b110-5325cd3e0737" absoluteBounds="3.375, 1.75, 2, 2.9247054036458326">
@@ -14,52 +14,52 @@
         <elementListCompartment Id="78e6d7af-4e77-4492-8b53-07ca5cd3b534" absoluteBounds="0.515, 2.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(2.5 : 2.44314697265625); (3.375 : 2.44314697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(2.5 : 2.44314697265625); (3.375 : 2.44314697265625)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/ActivEarthDataProvidersDataContext/UserDataProvider/UserDataProvider_ProfileDataProvider" />
       <nodes>
         <classShapeMoniker Id="3e8324b9-399b-4069-bdc7-7aded2dfc2e7" />
         <classShapeMoniker Id="9bb1702d-ae42-4e39-b110-5325cd3e0737" />
       </nodes>
     </associationConnector>
-    <classShape Id="d0440aa2-db5c-4dbc-8edc-83632b2813be" absoluteBounds="6.75, 5.75, 2, 2.7324039713541666">
+    <classShape Id="d0440aa2-db5c-4dbc-8edc-83632b2813be" absoluteBounds="0.5, 9.375, 2, 2.7324039713541666">
       <DataClassMoniker Name="/ActivEarthDataProvidersDataContext/ChallengeDataProvider" />
       <nestedChildShapes>
-        <elementListCompartment Id="7ce5918a-baba-438e-a55f-9eff235ed244" absoluteBounds="6.765, 6.21, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="7ce5918a-baba-438e-a55f-9eff235ed244" absoluteBounds="0.51499999999999968, 9.835, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="2c3e3669-6836-40a2-96c9-40e59b10c4e3" absoluteBounds="0.75, 6.5, 2, 2.7324039713541666">
+    <classShape Id="2c3e3669-6836-40a2-96c9-40e59b10c4e3" absoluteBounds="0.5, 6.25, 2, 2.9247054036458326">
       <DataClassMoniker Name="/ActivEarthDataProvidersDataContext/ContestDataProvider" />
       <nestedChildShapes>
-        <elementListCompartment Id="902318b0-af1a-4fb2-b088-5e5b3c5565cf" absoluteBounds="0.76500000000000012, 6.96, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="902318b0-af1a-4fb2-b088-5e5b3c5565cf" absoluteBounds="0.51500000000000012, 6.71, 1.9700000000000002, 2.364705403645833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="58faf8a5-6acf-473c-b7da-16b8a758b37c" absoluteBounds="6.625, 3.125, 2, 1.7708968098958327">
+    <classShape Id="58faf8a5-6acf-473c-b7da-16b8a758b37c" absoluteBounds="6, 6.875, 2, 1.7708968098958327">
       <DataClassMoniker Name="/ActivEarthDataProvidersDataContext/TeamMemberDataProvider" />
       <nestedChildShapes>
-        <elementListCompartment Id="8d80c30d-8ee0-4c10-b66c-46e77305d315" absoluteBounds="6.64, 3.585, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="8d80c30d-8ee0-4c10-b66c-46e77305d315" absoluteBounds="6.015, 7.335, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="79e05f96-5a6d-4346-9c78-f6f7aa4e7f4d" absoluteBounds="3.375, 5.5, 2, 1.5785953776041666">
+    <classShape Id="79e05f96-5a6d-4346-9c78-f6f7aa4e7f4d" absoluteBounds="3.375, 7, 2, 1.5785953776041666">
       <DataClassMoniker Name="/ActivEarthDataProvidersDataContext/TeamDataProvider" />
       <nestedChildShapes>
-        <elementListCompartment Id="7c1f08c9-e80b-4c08-82a4-71848fe12e08" absoluteBounds="3.3900000000000006, 5.96, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="7c1f08c9-e80b-4c08-82a4-71848fe12e08" absoluteBounds="3.3900000000000006, 7.46, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(5.375 : 3.89985270182292); (6.625 : 3.89985270182292)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(5.375 : 4.06655110677083); (6.34375 : 4.06655110677083); (6.34375 : 6.875)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/ActivEarthDataProvidersDataContext/ProfileDataProvider/ProfileDataProvider_TeamMemberDataProvider" />
       <nodes>
         <classShapeMoniker Id="9bb1702d-ae42-4e39-b110-5325cd3e0737" />
         <classShapeMoniker Id="58faf8a5-6acf-473c-b7da-16b8a758b37c" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(5.375 : 5.59375); (6.65625 : 5.59375); (6.65625 : 4.89589680989583)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(5.375 : 7.78929768880208); (6 : 7.78929768880208)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/ActivEarthDataProvidersDataContext/TeamDataProvider/TeamDataProvider_TeamMemberDataProvider" />
       <nodes>
         <classShapeMoniker Id="79e05f96-5a6d-4346-9c78-f6f7aa4e7f4d" />
         <classShapeMoniker Id="58faf8a5-6acf-473c-b7da-16b8a758b37c" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.75 : 6.78929768880208); (3.375 : 6.78929768880208)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(2.5 : 7.78929768880208); (3.375 : 7.78929768880208)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/ActivEarthDataProvidersDataContext/ContestDataProvider/ContestDataProvider_TeamDataProvider" />
       <nodes>
         <classShapeMoniker Id="2c3e3669-6836-40a2-96c9-40e59b10c4e3" />
@@ -79,18 +79,30 @@
         <classShapeMoniker Id="71aae01b-9aed-4edd-8b53-63a55696a73f" />
       </nodes>
     </associationConnector>
-    <classShape Id="58f10e10-8ca3-4899-a00c-a6c9fd232e5e" absoluteBounds="6.625, 1, 2, 1.7708968098958331">
+    <classShape Id="58f10e10-8ca3-4899-a00c-a6c9fd232e5e" absoluteBounds="6.75, 1.625, 2, 1.7708968098958331">
       <DataClassMoniker Name="/ActivEarthDataProvidersDataContext/BadgeDataProvider" />
       <nestedChildShapes>
-        <elementListCompartment Id="295b8885-6817-4211-a469-8e842fd441cf" absoluteBounds="6.64, 1.46, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="295b8885-6817-4211-a469-8e842fd441cf" absoluteBounds="6.765, 2.085, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(5.375 : 2.26044840494792); (6.625 : 2.26044840494792)]" fixedFrom="Algorithm" fixedTo="Algorithm">
-      <AssociationMoniker Name="/ActivEarthDataProvidersDataContext/ProfileDataProvider/ProfileDataProvider_badge" />
+    <associationConnector edgePoints="[(5.375 : 2.57294840494792); (6.75 : 2.57294840494792)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ActivEarthDataProvidersDataContext/ProfileDataProvider/ProfileDataProvider_BadgeDataProvider" />
       <nodes>
         <classShapeMoniker Id="9bb1702d-ae42-4e39-b110-5325cd3e0737" />
         <classShapeMoniker Id="58f10e10-8ca3-4899-a00c-a6c9fd232e5e" />
       </nodes>
     </associationConnector>
+    <classShape Id="4ebd45e6-f9db-4fe9-8cf4-fc3620878ef6" absoluteBounds="3.375, 9.375, 2, 1.9631982421875">
+      <DataClassMoniker Name="/ActivEarthDataProvidersDataContext/BadgeConstantsDataProvider" />
+      <nestedChildShapes>
+        <elementListCompartment Id="5b2ec0b3-3b3e-4881-a37a-04cb215492fc" absoluteBounds="3.3899999999999997, 9.835, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="2c6e1ed3-1f8d-4b5a-8fda-13a61219c525" absoluteBounds="6, 9.375, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/ActivEarthDataProvidersDataContext/StatisticConstantsDataProvider" />
+      <nestedChildShapes>
+        <elementListCompartment Id="4f53d933-ab00-47b5-a67f-4b1ab0a6b6a1" absoluteBounds="6.0150000000000006, 9.835, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
   </nestedChildShapes>
 </ordesignerObjectsDiagram>

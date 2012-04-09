@@ -31,7 +31,7 @@ namespace ActivEarth.DAO
                                 ID = c.id,
                                 Name = c.name,
                                 Description = c.description,
-                                Points = c.points,
+                                Reward = c.points,
                                 StartTime = c.start,
                                 EndCondition =
                                     ((ContestEndMode)c.end_mode == ContestEndMode.GoalBased ?
@@ -46,6 +46,7 @@ namespace ActivEarth.DAO
             if (toReturn != null)
             {
                 toReturn.Teams = TeamDAO.GetTeamsFromContestId(toReturn.ID);
+                toReturn.FormatString = StatisticInfoDAO.GetStatisticFormatString(toReturn.StatisticBinding);
             }
             return toReturn;
         }
@@ -69,7 +70,7 @@ namespace ActivEarth.DAO
                                 ID = c.id,
                                 Name = c.name,
                                 Description = c.description,
-                                Points = c.points,
+                                Reward = c.points,
                                 StartTime = c.start,
                                 EndCondition = 
                                     ((ContestEndMode)c.end_mode == ContestEndMode.GoalBased ? 
@@ -85,6 +86,50 @@ namespace ActivEarth.DAO
                     foreach (Contest contest in toReturn)
                     {
                         contest.Teams = TeamDAO.GetTeamsFromContestId(contest.ID);
+                        contest.FormatString = StatisticInfoDAO.GetStatisticFormatString(contest.StatisticBinding);
+                    }
+                }
+
+                return toReturn;
+            }
+        }
+
+        public static List<Contest> GetJoinableContestsFromContestName(string name, bool exactMatch)
+        {
+            List<Contest> toReturn;
+
+            using (SqlConnection connection = ConnectionManager.GetConnection())
+            {
+                var data = new ActivEarthDataProvidersDataContext(connection);
+                toReturn = (from c in data.ContestDataProviders
+                            where (exactMatch ? 
+                                c.name.ToLower().Equals(name.ToLower()) : 
+                                c.name.ToLower().Contains(name.ToLower())) &&
+                                c.start > DateTime.Now &&
+                                c.searchable == true
+                            select
+                                new Contest
+                                {
+                                    ID = c.id,
+                                    Name = c.name,
+                                    Description = c.description,
+                                    Reward = c.points,
+                                    StartTime = c.start,
+                                    EndCondition =
+                                        ((ContestEndMode)c.end_mode == ContestEndMode.GoalBased ?
+                                            new EndCondition((float)c.end_goal) :
+                                            new EndCondition((DateTime)c.end_time)),
+                                    Mode = (ContestEndMode)c.end_mode,
+                                    Type = (ContestType)c.type,
+                                    StatisticBinding = (Statistic)c.statistic
+                                }).ToList();
+
+                if (toReturn != null)
+                {
+                    foreach (Contest contest in toReturn)
+                    {
+                        contest.Teams = TeamDAO.GetTeamsFromContestId(contest.ID);
+                        contest.FormatString = StatisticInfoDAO.GetStatisticFormatString(contest.StatisticBinding);
                     }
                 }
 
@@ -110,13 +155,14 @@ namespace ActivEarth.DAO
                     {
                         name = contest.Name,
                         description = contest.Description,
-                        points = contest.Points,
+                        points = contest.Reward,
                         end_mode = (byte)contest.Mode,
                         end_goal = contest.EndCondition.EndValue,
                         end_time = contest.EndCondition.EndTime,
                         start = contest.StartTime,
                         type = (byte)contest.Type,
                         statistic = (byte)contest.StatisticBinding,
+                        searchable = contest.IsSearchable
                     };
                     data.ContestDataProviders.InsertOnSubmit(contestData);
                     data.SubmitChanges();
@@ -155,13 +201,14 @@ namespace ActivEarth.DAO
                     {
                         dbContest.name = contest.Name;
                         dbContest.description = contest.Description;
-                        dbContest.points = contest.Points;
+                        dbContest.points = contest.Reward;
                         dbContest.end_mode = (byte)contest.Mode;
                         dbContest.end_goal = contest.EndCondition.EndValue;
                         dbContest.end_time = contest.EndCondition.EndTime;
                         dbContest.start = contest.StartTime;
                         dbContest.type = (byte)contest.Type;
                         dbContest.statistic = (byte)contest.StatisticBinding;
+                        dbContest.searchable = contest.IsSearchable;
 
                         data.SubmitChanges();
                     }
