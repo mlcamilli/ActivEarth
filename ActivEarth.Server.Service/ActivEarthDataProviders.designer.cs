@@ -1044,6 +1044,10 @@ namespace ActivEarth.Server.Service
 		
 		private bool _searchable;
 		
+		private bool _active;
+		
+		private System.Nullable<System.DateTime> _deactivated;
+		
 		private EntitySet<TeamDataProvider> _TeamDataProviders;
 		
     #region Extensibility Method Definitions
@@ -1072,6 +1076,10 @@ namespace ActivEarth.Server.Service
     partial void OntypeChanged();
     partial void OnsearchableChanging(bool value);
     partial void OnsearchableChanged();
+    partial void OnactiveChanging(bool value);
+    partial void OnactiveChanged();
+    partial void OndeactivatedChanging(System.Nullable<System.DateTime> value);
+    partial void OndeactivatedChanged();
     #endregion
 		
 		public ContestDataProvider()
@@ -1296,6 +1304,46 @@ namespace ActivEarth.Server.Service
 					this._searchable = value;
 					this.SendPropertyChanged("searchable");
 					this.OnsearchableChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_active", DbType="Bit NOT NULL")]
+		public bool active
+		{
+			get
+			{
+				return this._active;
+			}
+			set
+			{
+				if ((this._active != value))
+				{
+					this.OnactiveChanging(value);
+					this.SendPropertyChanging();
+					this._active = value;
+					this.SendPropertyChanged("active");
+					this.OnactiveChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_deactivated", DbType="DateTime")]
+		public System.Nullable<System.DateTime> deactivated
+		{
+			get
+			{
+				return this._deactivated;
+			}
+			set
+			{
+				if ((this._deactivated != value))
+				{
+					this.OndeactivatedChanging(value);
+					this.SendPropertyChanging();
+					this._deactivated = value;
+					this.SendPropertyChanged("deactivated");
+					this.OndeactivatedChanged();
 				}
 			}
 		}

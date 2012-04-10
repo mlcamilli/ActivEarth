@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 12.375" name="ActivEarthDataProviders">
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 12.75" name="ActivEarthDataProviders">
   <DataContextMoniker Name="/ActivEarthDataProvidersDataContext" />
   <nestedChildShapes>
     <classShape Id="9bb1702d-ae42-4e39-b110-5325cd3e0737" absoluteBounds="3.375, 1.75, 2, 2.9247054036458326">
@@ -21,16 +21,16 @@
         <classShapeMoniker Id="9bb1702d-ae42-4e39-b110-5325cd3e0737" />
       </nodes>
     </associationConnector>
-    <classShape Id="d0440aa2-db5c-4dbc-8edc-83632b2813be" absoluteBounds="0.5, 9.375, 2, 2.7324039713541666">
+    <classShape Id="d0440aa2-db5c-4dbc-8edc-83632b2813be" absoluteBounds="0.5, 9.75, 2, 2.7324039713541666">
       <DataClassMoniker Name="/ActivEarthDataProvidersDataContext/ChallengeDataProvider" />
       <nestedChildShapes>
-        <elementListCompartment Id="7ce5918a-baba-438e-a55f-9eff235ed244" absoluteBounds="0.51499999999999968, 9.835, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="7ce5918a-baba-438e-a55f-9eff235ed244" absoluteBounds="0.51499999999999968, 10.21, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="2c3e3669-6836-40a2-96c9-40e59b10c4e3" absoluteBounds="0.5, 6.25, 2, 2.9247054036458326">
+    <classShape Id="2c3e3669-6836-40a2-96c9-40e59b10c4e3" absoluteBounds="0.5, 6.25, 2, 3.3093082682291666">
       <DataClassMoniker Name="/ActivEarthDataProvidersDataContext/ContestDataProvider" />
       <nestedChildShapes>
-        <elementListCompartment Id="902318b0-af1a-4fb2-b088-5e5b3c5565cf" absoluteBounds="0.51500000000000012, 6.71, 1.9700000000000002, 2.364705403645833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="902318b0-af1a-4fb2-b088-5e5b3c5565cf" absoluteBounds="0.51500000000000012, 6.71, 1.9700000000000002, 2.7493082682291665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
     <classShape Id="58faf8a5-6acf-473c-b7da-16b8a758b37c" absoluteBounds="6, 6.875, 2, 1.7708968098958327">
@@ -59,7 +59,7 @@
         <classShapeMoniker Id="58faf8a5-6acf-473c-b7da-16b8a758b37c" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.5 : 7.78929768880208); (3.375 : 7.78929768880208)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(2.5 : 7.78929768880208); (3.375 : 7.78929768880208)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/ActivEarthDataProvidersDataContext/ContestDataProvider/ContestDataProvider_TeamDataProvider" />
       <nodes>
         <classShapeMoniker Id="2c3e3669-6836-40a2-96c9-40e59b10c4e3" />

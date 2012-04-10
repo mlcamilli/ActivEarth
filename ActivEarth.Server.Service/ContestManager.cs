@@ -47,7 +47,9 @@ namespace ActivEarth.DAO
                 StartTime = start,
                 EndCondition = new EndCondition(end),
                 StatisticBinding = statistic,
-                IsSearchable = searchable
+                IsSearchable = searchable,
+                IsActive = true,
+                DeactivatedTime = null
             };
 
             return ContestDAO.CreateNewContest(newContest);
@@ -112,6 +114,28 @@ namespace ActivEarth.DAO
         public static int CalculateContestReward(float goal, Statistic statistic)
         {
             return 0;
+        }
+
+        /// <summary>
+        /// Cleans up the contest list, deactivating expired time-based contests and deleting
+        /// deactivated contests that have reached the end of their retainment period.
+        /// </summary>
+        public void CleanUp()
+        {
+            foreach (Contest contest in ContestDAO.GetActiveContests())
+            {
+                if (contest.EndCondition.EndTime <= DateTime.Now)
+                {
+                    //Distribute Activity Score rewards
+                    throw new NotImplementedException("Distribution of Contest rewards not yet implemented");
+
+                    contest.IsActive = false;
+                    contest.DeactivatedTime = DateTime.Now;
+                    ContestDAO.UpdateContest(contest);
+                }
+            }
+
+            ContestDAO.RemoveOldContests();
         }
 
         #endregion ---------- Public Methods ----------
