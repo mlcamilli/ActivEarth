@@ -9,7 +9,7 @@ using ActivEarth.Objects.Competition.Badges;
 using ActivEarth.Server.Service;
 using ActivEarth.DAO;
 
-namespace ActivEarth.Server.Service.DAO
+namespace ActivEarth.DAO
 {
     public class BadgeDAO
     {
@@ -29,21 +29,75 @@ namespace ActivEarth.Server.Service.DAO
                                    new Badge
                                    {
                                        ID = c.id,
+                                       UserID = c.user_id,
                                        StatisticBinding = (Statistic)c.statistic,
                                        Level = c.badge_level,
-                                       User = UserDAO.GetUserFromUserId(c.user_id),
                                        Progress = c.progress
                                    }).ToList();
 
-                if (badges != null)
+                foreach (Badge badge in badges)
                 {
-                    foreach (Badge badge in badges)
-                    {
-                        LoadBadgeConstants(badge);
-                    }
+                    LoadExternalBadgeData(badge);
                 }
 
                 return badges;
+            }
+        }
+
+        /// <summary>
+        /// Retrieves a badge matching a provided ID.
+        /// </summary>
+        /// <param name="badgeId">Identifier of the badge.</param>
+        /// <returns>Badge matching the provided ID.</returns>
+        public static Badge GetBadgeFromBadgeId(int badgeId)
+        {
+            using (SqlConnection connection = ConnectionManager.GetConnection())
+            {
+                var data = new ActivEarthDataProvidersDataContext(connection);
+                Badge badge = (from c in data.BadgeDataProviders
+                        where c.id == badgeId
+                        select
+                            new Badge
+                            {
+                                ID = c.id,
+                                UserID = c.user_id,
+                                StatisticBinding = (Statistic)c.statistic,
+                                Level = c.badge_level,
+                                Progress = c.progress
+                            }).FirstOrDefault();
+
+                LoadExternalBadgeData(badge);
+                
+                return badge;
+            }
+        }
+
+        /// <summary>
+        /// Retrieves a badge of a particular statistic for a specific user.
+        /// </summary>
+        /// <param name="userId">Identifier of the badge owner.</param>
+        /// <param name="statistic">Statistic tracked by the badge.</param>
+        /// <returns>Badge matching the provided ID.</returns>
+        public static Badge GetBadgeFromUserIdAndStatistic(int userId, Statistic statistic)
+        {
+            using (SqlConnection connection = ConnectionManager.GetConnection())
+            {
+                var data = new ActivEarthDataProvidersDataContext(connection);
+                Badge badge = (from c in data.BadgeDataProviders
+                               where c.user_id == userId && c.statistic == (byte)statistic
+                               select
+                                   new Badge
+                                   {
+                                       ID = c.id,
+                                       UserID = c.user_id,
+                                       StatisticBinding = (Statistic)c.statistic,
+                                       Level = c.badge_level,
+                                       Progress = c.progress
+                                   }).FirstOrDefault();
+
+                LoadExternalBadgeData(badge);
+
+                return badge;
             }
         }
 
@@ -93,7 +147,7 @@ namespace ActivEarth.Server.Service.DAO
                         (from c in data.BadgeDataProviders where c.id == badge.ID select c).FirstOrDefault();
                     if (dbBadge != null)
                     {
-                        dbBadge.user_id = badge.User.UserID;
+                        dbBadge.user_id = badge.UserID;
                         dbBadge.badge_level = (byte)badge.Level;
                         dbBadge.progress = (byte)badge.Progress;
                         dbBadge.statistic = (byte)badge.StatisticBinding;
@@ -114,57 +168,17 @@ namespace ActivEarth.Server.Service.DAO
         }
 
         /// <summary>
-        /// Loads the requirements, rewards, and imagepaths arrays for a badge based on
-        /// the bound statistic.
+        /// Loads the information stored in external tables for the badge (LevelRequirements, LevelRewards, etc.)
         /// </summary>
-        /// <param name="badge">The badge to load information for.</param>
-        private static void LoadBadgeConstants(Badge badge)
+        /// <param name="badge">The badge to finish loading.</param>
+        private static void LoadExternalBadgeData(Badge badge)
         {
-            switch (badge.StatisticBinding)
-            {
-                case Statistic.BikeDistance:
-                {
-                    badge.ImagePaths = BadgeConstants.BikeDistance.IMAGES;
-                    badge.LevelRequirements = BadgeConstants.BikeDistance.REQUIREMENTS;
-                    badge.LevelRewards = BadgeConstants.BikeDistance.REWARDS;
-                    break;
-                }
-                case Statistic.WalkDistance:
-                {
-                    badge.ImagePaths = BadgeConstants.WalkDistance.IMAGES;
-                    badge.LevelRequirements = BadgeConstants.WalkDistance.REQUIREMENTS;
-                    badge.LevelRewards = BadgeConstants.WalkDistance.REWARDS;
-                    break;
-                }
-                case Statistic.RunDistance:
-                {
-                    badge.ImagePaths = BadgeConstants.RunDistance.IMAGES;
-                    badge.LevelRequirements = BadgeConstants.RunDistance.REQUIREMENTS;
-                    badge.LevelRewards = BadgeConstants.RunDistance.REWARDS;
-                    break;
-                }
-                case Statistic.Steps:
-                {
-                    badge.ImagePaths = BadgeConstants.Steps.IMAGES;
-                    badge.LevelRequirements = BadgeConstants.Steps.REQUIREMENTS;
-                    badge.LevelRewards = BadgeConstants.Steps.REWARDS;
-                    break;
-                }
-                case Statistic.ChallengesCompleted:
-                {
-                    badge.ImagePaths = BadgeConstants.Challenges.IMAGES;
-                    badge.LevelRequirements = BadgeConstants.Challenges.REQUIREMENTS;
-                    badge.LevelRewards = BadgeConstants.Challenges.REWARDS;
-                    break;
-                }
-                case Statistic.GasSavings:
-                {
-                    badge.ImagePaths = BadgeConstants.GasSavings.IMAGES;
-                    badge.LevelRequirements = BadgeConstants.GasSavings.REQUIREMENTS;
-                    badge.LevelRewards = BadgeConstants.GasSavings.REWARDS;
-                    break;
-                }
-            }
+            badge.User = UserDAO.GetUserFromUserId(badge.UserID);
+            badge.LevelRequirements = BadgeLevelInfoDAO.GetBadgeRequirementArray(badge.StatisticBinding);
+            badge.LevelRewards = BadgeLevelInfoDAO.GetBadgeRewardArray(badge.StatisticBinding);
+            badge.ImagePath = BadgeLevelInfoDAO.GetBadgeImagePath(badge.StatisticBinding, badge.Level);
+            badge.FormatString = StatisticInfoDAO.GetStatisticFormatString(badge.StatisticBinding);
+            badge.Name = StatisticInfoDAO.GetStatisticName(badge.StatisticBinding);
         }
     }
 }

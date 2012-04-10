@@ -82,7 +82,7 @@ namespace ActivEarth.Tests.Competition.Contests
                 Log("Creating time-based group contest");
                 int id = ContestManager.CreateContest(ContestType.Group, "Test Contest 1",
                     "This is a test time-based contest.", 50, DateTime.Now, DateTime.Now.AddDays(1),
-                    Statistic.Steps);
+                    true, Statistic.Steps);
                 Contest contest = ContestManager.GetContest(id);
 
                 Log("Adding groups to the contest");
@@ -123,13 +123,13 @@ namespace ActivEarth.Tests.Competition.Contests
                 Log("Creating time-based group contest");
                 int timeId = ContestManager.CreateContest(ContestType.Group, "Test Contest 1",
                     "This is a test time-based contest.", 50, DateTime.Now, DateTime.Now.AddDays(1),
-                    Statistic.Steps);
+                    true, Statistic.Steps);
                 Contest timedContest = ContestManager.GetContest(timeId);
 
                 Log("Creating goal-based individual contest");
                 int goalId = ContestManager.CreateContest(ContestType.Individual, "Test Contest 2",
                     "This is a test goal-based contest.", 50, DateTime.Now, 50000,
-                    Statistic.Steps);
+                    true, Statistic.Steps);
                 Contest goalContest = ContestManager.GetContest(goalId);
 
                 Log("Verifying time-based contest end mode");
@@ -166,7 +166,7 @@ namespace ActivEarth.Tests.Competition.Contests
                 Log("Creating group contest");
                 int id = ContestManager.CreateContest(ContestType.Group, "Test Contest 1",
                     "This is a test time-based contest.", 50, DateTime.Now, DateTime.Now.AddDays(1),
-                    Statistic.Steps);
+                    true, Statistic.Steps);
                 Contest contest = ContestManager.GetContest(id);
 
                 contest.AddGroup(_group1);
@@ -235,7 +235,7 @@ namespace ActivEarth.Tests.Competition.Contests
                 Log("Creating individual contest");
                 int id = ContestManager.CreateContest(ContestType.Individual, "Test Contest 1",
                     "This is a test time-based contest.", 50, DateTime.Now, DateTime.Now.AddDays(1),
-                    Statistic.Steps);
+                    true, Statistic.Steps);
                 Contest contest = ContestManager.GetContest(id);
 
                 contest.AddUser(_user1);
@@ -284,7 +284,7 @@ namespace ActivEarth.Tests.Competition.Contests
                 Log("Creating group contest");
                 int id = ContestManager.CreateContest(ContestType.Group, "Test Contest 1",
                     "This is a test time-based contest.", 50, DateTime.Now, DateTime.Now.AddDays(1),
-                    Statistic.Steps);
+                    true, Statistic.Steps);
                 Contest contest = ContestManager.GetContest(id);
 
                 Team team = new Team("Team1");

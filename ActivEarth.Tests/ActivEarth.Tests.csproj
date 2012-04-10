@@ -48,6 +48,7 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Competition\Badges\BadgeDAOTest.cs" />
     <Compile Include="Competition\Badges\BadgeTest.cs" />
     <Compile Include="Competition\Challenges\ChallengeDAOTest.cs" />
     <Compile Include="Competition\Challenges\ChallengeTest.cs" />

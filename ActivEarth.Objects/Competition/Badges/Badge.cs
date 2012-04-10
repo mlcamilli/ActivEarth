@@ -18,6 +18,24 @@ namespace ActivEarth.Objects.Competition.Badges
         }
 
         /// <summary>
+        /// Indentifier for the owner of the badge.
+        /// </summary>
+        public int UserID
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Name of the badge.
+        /// </summary>
+        public string Name
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// Current level of the badge.
         /// </summary>
         public int Level
@@ -54,6 +72,15 @@ namespace ActivEarth.Objects.Competition.Badges
         }
 
         /// <summary>
+        /// Path for the badge image.
+        /// </summary>
+        public string ImagePath
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// Array of the values required to advance to each level of the badge.
         /// </summary>
         public float[] LevelRequirements
@@ -66,15 +93,6 @@ namespace ActivEarth.Objects.Competition.Badges
         /// Array of the activity points awarded for each level of the badge.
         /// </summary>
         public int[] LevelRewards
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// Array of the image locations for each level of the badge.
-        /// </summary>
-        public string[] ImagePaths
         {
             get;
             set;
@@ -98,7 +116,21 @@ namespace ActivEarth.Objects.Competition.Badges
         /// </summary>
         public Badge()
         {
+            this.Level = BadgeLevels.None;
+            this.Progress = 0;
+        }
 
+        /// <summary>
+        /// Creates a new badge belonging to a user, based on a specific statistic.
+        /// </summary>
+        /// <param name="user">User to whom the Badge is bound.</param>
+        /// <param name="statistic">Statistic to which the Badge is bound.</param>
+        public Badge(User user, Statistic statistic)
+            : this()
+        {
+            this.User = user;
+            this.UserID = user.UserID;
+            this.StatisticBinding = statistic;
         }
 
         /// <summary>
@@ -116,7 +148,6 @@ namespace ActivEarth.Objects.Competition.Badges
             StatisticBinding = statistic;
             LevelRequirements = levelValues;
             LevelRewards = levelPoints;
-            ImagePaths = imagePaths;
         }
 
         #endregion ---------- Constructor ----------
@@ -160,15 +191,6 @@ namespace ActivEarth.Objects.Competition.Badges
             }
 
             return pointsEarned;
-        }
-
-        /// <summary>
-        /// Returns the image path for the current Badge level's icon.
-        /// </summary>
-        /// <returns>Image path for the current Badge level's icon.</returns>
-        public string GetImagePath()
-        {
-            return ImagePaths[this.Level];
         }
 
         /// <summary>

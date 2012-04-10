@@ -11,6 +11,7 @@ using ActivEarth.Objects.Profile;
 using ActivEarth.Objects.Competition;
 using ActivEarth.Objects.Competition.Challenges;
 using ActivEarth.Server.Service;
+using ActivEarth.Server.Service.Competition;
 
 namespace ActivEarth.Tests.Competition.Challenges
 {
@@ -81,7 +82,7 @@ namespace ActivEarth.Tests.Competition.Challenges
                 Assert.AreEqual(challenge.EndTime, retrieved.EndTime);
                 Assert.AreEqual(challenge.IsActive, retrieved.IsActive);
                 Assert.AreEqual(challenge.IsPersistent, retrieved.IsPersistent);
-                Assert.AreEqual(challenge.Points, retrieved.Points);
+                Assert.AreEqual(challenge.Reward, retrieved.Reward);
                 Assert.AreEqual(challenge.StatisticBinding, retrieved.StatisticBinding);
             }
         }
@@ -237,6 +238,34 @@ namespace ActivEarth.Tests.Competition.Challenges
 
                 Log("Verifying that GetAllChallenges returns three challenges");
                 Assert.AreEqual(3, ChallengeDAO.GetAllChallenges().Count);
+            }
+        }
+
+        /// <summary>
+        /// Tests the assignment of format strings when a challenge is loaded.
+        /// </summary>
+        [TestMethod]
+        public void TestGetChallengeFormatString()
+        {
+            using (_trans)
+            {
+                Log("Creating challenges");
+                Challenge challenge1 = new Challenge("Test Challenge", "This is a test challenge",
+                    30, false, DateTime.Today, 1, Statistic.Steps, 500);
+                int id1 = ChallengeDAO.CreateNewChallenge(challenge1);
+
+                Challenge challenge2 = new Challenge("Test Challenge", "This is a test challenge",
+                    30, false, DateTime.Today, 1, Statistic.GasSavings, 500);
+                int id2 = ChallengeDAO.CreateNewChallenge(challenge2);
+
+                Log("Retrieving challenges");
+                Challenge stepChallenge = ChallengeDAO.GetChallengeFromChallengeId(id1);
+                Challenge gasChallenge = ChallengeDAO.GetChallengeFromChallengeId(id2);
+
+                Log("Verifying format strings");
+                Assert.AreEqual("{0}", stepChallenge.FormatString);
+                Assert.AreEqual("${0:0.00}", gasChallenge.FormatString);
+
             }
         }
 

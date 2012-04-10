@@ -35,10 +35,22 @@ namespace ActivEarth.DAO
         /// <param name="statistic">Statistic on which the Contest is based.</param>
         /// <returns>ID of the newly created Contest.</returns>
         public static int CreateContest(ContestType type, string name, string description, int points, DateTime start,
-            DateTime end, Statistic statistic)
+            DateTime end, bool searchable, Statistic statistic)
         {
-            return ContestDAO.CreateNewContest(new Contest(name, description, points, ContestEndMode.TimeBased,
-                type, start, new EndCondition(end), statistic));
+            Contest newContest = new Contest
+            {
+                Name = name,
+                Description = description,
+                Reward = points,
+                Mode = ContestEndMode.TimeBased,
+                Type = type,
+                StartTime = start,
+                EndCondition = new EndCondition(end),
+                StatisticBinding = statistic,
+                IsSearchable = searchable
+            };
+
+            return ContestDAO.CreateNewContest(newContest);
         }
 
         /// <summary>
@@ -52,10 +64,22 @@ namespace ActivEarth.DAO
         /// <param name="statistic">Statistic on which the Contest is based.</param>
         /// <returns>ID of the newly created Contest.</returns>
         public static int CreateContest(ContestType type, string name, string description, int points, DateTime start,
-            float end, Statistic statistic)
+            float end, bool searchable, Statistic statistic)
         {
-            return ContestDAO.CreateNewContest(new Contest(name, description, points, ContestEndMode.GoalBased,
-                type, start, new EndCondition(end), statistic));
+            Contest newContest = new Contest
+            {
+                Name = name,
+                Description = description,
+                Reward = points,
+                Mode = ContestEndMode.GoalBased,
+                Type = type,
+                StartTime = start,
+                EndCondition = new EndCondition(end),
+                StatisticBinding = statistic,
+                IsSearchable = searchable
+            };
+
+            return ContestDAO.CreateNewContest(newContest);
         }
 
         /// <summary>
@@ -66,6 +90,28 @@ namespace ActivEarth.DAO
         public static Contest GetContest(int id)
         {
             return ContestDAO.GetContestFromContestId(id);
+        }
+
+        /// <summary>
+        /// Calculates the reward for a time-based contest.
+        /// </summary>
+        /// <param name="duration">Duration of the contest.</param>
+        /// <param name="statistic">Statistic on which the contest is based.</param>
+        /// <returns></returns>
+        public static int CalculateContestReward(TimeSpan duration, Statistic statistic)
+        {
+            return 0;
+        }
+
+        /// <summary>
+        /// Calculates the reward for a goal-based contest.
+        /// </summary>
+        /// <param name="goal">Goal value for the contest.</param>
+        /// <param name="statistic">Statistic on which the contest is based.</param>
+        /// <returns></returns>
+        public static int CalculateContestReward(float goal, Statistic statistic)
+        {
+            return 0;
         }
 
         #endregion ---------- Public Methods ----------

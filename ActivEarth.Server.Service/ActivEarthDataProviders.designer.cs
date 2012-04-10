@@ -783,7 +783,7 @@ namespace ActivEarth.Server.Service
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UserDataProvider_message", Storage="_messages", ThisKey="id", OtherKey="poster_id")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UserDataProvider_MessageDataProvider", Storage="_messages", ThisKey="id", OtherKey="poster_id")]
 		public EntitySet<MessageDataProvider> MessageDataProviders
 		{
 			get
@@ -1181,6 +1181,8 @@ namespace ActivEarth.Server.Service
 		
 		private byte _type;
 		
+		private bool _searchable;
+		
 		private EntitySet<TeamDataProvider> _TeamDataProviders;
 		
 		private EntitySet<GroupContestDataProvider> _GroupContestDataProviders;
@@ -1209,6 +1211,8 @@ namespace ActivEarth.Server.Service
     partial void OnstatisticChanged();
     partial void OntypeChanging(byte value);
     partial void OntypeChanged();
+    partial void OnsearchableChanging(bool value);
+    partial void OnsearchableChanged();
     #endregion
 		
 		public ContestDataProvider()
@@ -1418,6 +1422,26 @@ namespace ActivEarth.Server.Service
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_searchable", DbType="Bit NOT NULL")]
+		public bool searchable
+		{
+			get
+			{
+				return this._searchable;
+			}
+			set
+			{
+				if ((this._searchable != value))
+				{
+					this.OnsearchableChanging(value);
+					this.SendPropertyChanging();
+					this._searchable = value;
+					this.SendPropertyChanged("searchable");
+					this.OnsearchableChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ContestDataProvider_TeamDataProvider", Storage="_TeamDataProviders", ThisKey="id", OtherKey="contest_id")]
 		public EntitySet<TeamDataProvider> TeamDataProviders
 		{
@@ -1431,7 +1455,7 @@ namespace ActivEarth.Server.Service
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ContestDataProvider_group_contest", Storage="_GroupContestDataProviders", ThisKey="id", OtherKey="contest_id")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ContestDataProvider_GroupContestDataProvider", Storage="_GroupContestDataProviders", ThisKey="id", OtherKey="contest_id")]
 		public EntitySet<GroupContestDataProvider> GroupContestDataProviders
 		{
 			get
@@ -3175,7 +3199,7 @@ namespace ActivEarth.Server.Service
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="GroupDataProvider_group_hashtag", Storage="_group_hashtags", ThisKey="id", OtherKey="group_id")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="GroupDataProvider_GroupHashtagDataProvider", Storage="_group_hashtags", ThisKey="id", OtherKey="group_id")]
 		public EntitySet<GroupHashtagDataProvider> GroupHashtagDataProviders
 		{
 			get
@@ -3188,7 +3212,7 @@ namespace ActivEarth.Server.Service
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="GroupDataProvider_message", Storage="_messages", ThisKey="id", OtherKey="group_id")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="GroupDataProvider_MessageDataProvider", Storage="_messages", ThisKey="id", OtherKey="group_id")]
 		public EntitySet<MessageDataProvider> MessageDataProviders
 		{
 			get
@@ -3201,7 +3225,7 @@ namespace ActivEarth.Server.Service
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="GroupDataProvider_group_contest", Storage="_GroupContestDataProviders", ThisKey="id", OtherKey="group_id")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="GroupDataProvider_GroupContestDataProvider", Storage="_GroupContestDataProviders", ThisKey="id", OtherKey="group_id")]
 		public EntitySet<GroupContestDataProvider> GroupContestDataProviders
 		{
 			get
@@ -3413,7 +3437,7 @@ namespace ActivEarth.Server.Service
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="GroupDataProvider_group_hashtag", Storage="_GroupDataProvider", ThisKey="group_id", OtherKey="id", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="GroupDataProvider_GroupHashtagDataProvider", Storage="_GroupDataProvider", ThisKey="group_id", OtherKey="id", IsForeignKey=true)]
 		public GroupDataProvider GroupDataProvider
 		{
 			get
@@ -3715,7 +3739,7 @@ namespace ActivEarth.Server.Service
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="GroupDataProvider_message", Storage="_GroupDataProvider", ThisKey="group_id", OtherKey="id", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="GroupDataProvider_MessageDataProvider", Storage="_GroupDataProvider", ThisKey="group_id", OtherKey="id", IsForeignKey=true)]
 		public GroupDataProvider GroupDataProvider
 		{
 			get
@@ -3749,7 +3773,7 @@ namespace ActivEarth.Server.Service
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UserDataProvider_message", Storage="_UserDataProvider", ThisKey="poster_id", OtherKey="id", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UserDataProvider_MessageDataProvider", Storage="_UserDataProvider", ThisKey="poster_id", OtherKey="id", IsForeignKey=true)]
 		public UserDataProvider UserDataProvider
 		{
 			get
@@ -3907,7 +3931,7 @@ namespace ActivEarth.Server.Service
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ContestDataProvider_group_contest", Storage="_ContestDataProvider", ThisKey="contest_id", OtherKey="id", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ContestDataProvider_GroupContestDataProvider", Storage="_ContestDataProvider", ThisKey="contest_id", OtherKey="id", IsForeignKey=true)]
 		public ContestDataProvider ContestDataProvider
 		{
 			get
@@ -3941,7 +3965,7 @@ namespace ActivEarth.Server.Service
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="GroupDataProvider_group_contest", Storage="_GroupDataProvider", ThisKey="group_id", OtherKey="id", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="GroupDataProvider_GroupContestDataProvider", Storage="_GroupDataProvider", ThisKey="group_id", OtherKey="id", IsForeignKey=true)]
 		public GroupDataProvider GroupDataProvider
 		{
 			get

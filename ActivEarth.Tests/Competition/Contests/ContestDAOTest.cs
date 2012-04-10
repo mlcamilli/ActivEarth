@@ -147,7 +147,7 @@ namespace ActivEarth.Tests.Competition.Contests
                 Log("Verifying the integrity of the contest fields");
                 Assert.AreEqual(contest.Name, retrieved.Name);
                 Assert.AreEqual(contest.Description, retrieved.Description);
-                Assert.AreEqual(contest.Points, retrieved.Points);
+                Assert.AreEqual(contest.Reward, retrieved.Reward);
                 Assert.AreEqual(contest.Teams.Count, retrieved.Teams.Count);
                 Assert.AreEqual(contest.StatisticBinding, retrieved.StatisticBinding);
             }
@@ -187,10 +187,10 @@ namespace ActivEarth.Tests.Competition.Contests
 
                 Log("Adding Members to DB");
                 Assert.Fail("Not yet implemented");
-                /*UserDAO.CreateNewUser(member1);
-                UserDAO.CreateNewUser(member2);
-                UserDAO.CreateNewUser(member3);
-                UserDAO.CreateNewUser(member4);*/
+                UserDAO.CreateNewUser(member1, "pw1");
+                UserDAO.CreateNewUser(member2, "pw2");
+                UserDAO.CreateNewUser(member3, "pw3");
+                UserDAO.CreateNewUser(member4, "pw4");
 
                 Log("Saving to DB");
                 int id = ContestDAO.CreateNewContest(contest);
@@ -319,10 +319,10 @@ namespace ActivEarth.Tests.Competition.Contests
 
                 Log("Adding Members to DB");
                 Assert.Fail("Not yet implemented");
-                /*UserDAO.CreateNewUser(member1);
-                UserDAO.CreateNewUser(member2);
-                UserDAO.CreateNewUser(member3);
-                UserDAO.CreateNewUser(member4);*/
+                UserDAO.CreateNewUser(member1, "pw1");
+                UserDAO.CreateNewUser(member2, "pw2");
+                UserDAO.CreateNewUser(member3, "pw3");
+                UserDAO.CreateNewUser(member4, "pw4");
 
                 Log("Updating Contest in DB");
                 Assert.IsTrue(ContestDAO.UpdateContest(retrieved));
@@ -371,10 +371,10 @@ namespace ActivEarth.Tests.Competition.Contests
 
                 Log("Adding Members to DB");
                 Assert.Fail("Not yet implemented");
-                /*UserDAO.CreateNewUser(member1);
-                UserDAO.CreateNewUser(member2);
-                UserDAO.CreateNewUser(member3);
-                UserDAO.CreateNewUser(member4);*/
+                UserDAO.CreateNewUser(member1, "pw1");
+                UserDAO.CreateNewUser(member2, "pw2");
+                UserDAO.CreateNewUser(member3, "pw3");
+                UserDAO.CreateNewUser(member4, "pw4");
 
                 Log("Saving to DB");
                 int id = ContestDAO.CreateNewContest(contest);
@@ -437,10 +437,10 @@ namespace ActivEarth.Tests.Competition.Contests
 
                 Log("Adding Members to DB");
                 Assert.Fail("Not yet implemented");
-                /*UserDAO.CreateNewUser(member1);
-                UserDAO.CreateNewUser(member2);
-                UserDAO.CreateNewUser(member3);
-                UserDAO.CreateNewUser(member4);*/
+                UserDAO.CreateNewUser(member1, "pw1");
+                UserDAO.CreateNewUser(member2, "pw2");
+                UserDAO.CreateNewUser(member3, "pw3");
+                UserDAO.CreateNewUser(member4, "pw4");
 
                 Log("Saving to DB");
                 int id = ContestDAO.CreateNewContest(contest);
@@ -496,6 +496,32 @@ namespace ActivEarth.Tests.Competition.Contests
         }
 
         /// <summary>
+        /// Tests the assignment of format strings when a contest is loaded.
+        /// </summary>
+        [TestMethod]
+        public void TestGetContestFormatString()
+        {
+            using (_trans)
+            {
+                Log("Creating contests of different types");
+                int cID1 = ContestManager.CreateContest(ContestType.Group, "Test Contest1", 
+                    "This is a test contest", 30, DateTime.Today, 500, true, Statistic.Steps);
+
+                int cID2 = ContestManager.CreateContest(ContestType.Group, "Test Contest2",
+                    "This is a test contest", 30, DateTime.Today, 500, true, Statistic.GasSavings);
+
+                Log("Retrieving contests from DB");
+                Contest c1 = ContestManager.GetContest(cID1);
+                Contest c2 = ContestManager.GetContest(cID2);
+
+                Log("Verifying format strings");
+                Assert.AreEqual("{0}", c1.FormatString);
+                Assert.AreEqual("${0:0.00}", c2.FormatString);
+
+            }
+        }
+
+        /// <summary>
         /// Tests the attempted retrieval of a Team from its ID where no matching 
         /// team is found.
         /// </summary>
@@ -506,6 +532,59 @@ namespace ActivEarth.Tests.Competition.Contests
             {
                 Log("Attempting to retrieve non-existent team from DB");
                 Assert.IsNull(TeamDAO.GetTeamFromTeamId(-1));
+            }
+        }
+
+        /// <summary>
+        /// Tests the retrieval of currently joinable contests from their name.
+        /// </summary>
+        [TestMethod]
+        public void TestGetJoinableContests()
+        {
+            using (_trans)
+            {
+                Log("Creating contests");
+                //Joinable
+                ContestManager.CreateContest(ContestType.Group, "Test",
+                    "This is a test contest", 30, DateTime.Today.AddDays(1), 500, true, Statistic.Steps);
+
+                //Joinable
+                ContestManager.CreateContest(ContestType.Group, "Test Competition",
+                    "This is a test contest", 30, DateTime.Today.AddDays(1), 500, true, Statistic.GasSavings);
+
+                //Joinable
+                ContestManager.CreateContest(ContestType.Group, "testing again",
+                    "This is a test contest", 30, DateTime.Today.AddDays(1), 500, true, Statistic.GasSavings);
+
+                //Not Joinable (already started)
+                ContestManager.CreateContest(ContestType.Group, "My Test Contest",
+                    "This is a test contest", 30, DateTime.Today, 500, true, Statistic.GasSavings);
+
+                //Joinable, but doesn't match the search
+                ContestManager.CreateContest(ContestType.Group, "ActivEarth FTW",
+                    "This is a test contest", 30, DateTime.Today.AddDays(1), 500, true, Statistic.GasSavings);
+
+                //Joinable, but not public
+                ContestManager.CreateContest(ContestType.Group, "test contest2",
+                    "This is a test contest", 30, DateTime.Today.AddDays(1), 500, false, Statistic.GasSavings);
+
+                //Joinable
+                ContestManager.CreateContest(ContestType.Group, "this is another test",
+                    "This is a test contest", 30, DateTime.Today.AddDays(1), 500, true, Statistic.GasSavings);
+
+                Log("Retrieving contest list from DB: Search term: 'test', exact match");
+                List<Contest> listFromTestExact = ContestDAO.GetJoinableContestsFromContestName("test", true);
+
+                Log("Retrieving contest list from DB: Search term: 'test', not exact match");
+                List<Contest> listFromTestNotExact = ContestDAO.GetJoinableContestsFromContestName("test", false);
+
+                Log("Retrieving contest list from DB: Search term: 'salamanders', not exact match");
+                List<Contest> listFromSalamandersNotExact = ContestDAO.GetJoinableContestsFromContestName("salamanders", false);
+
+                Log("Verifying returned contest counts");
+                Assert.AreEqual(1, listFromTestExact.Count);
+                Assert.AreEqual(4, listFromTestNotExact.Count);
+                Assert.AreEqual(0, listFromSalamandersNotExact.Count);
             }
         }
 

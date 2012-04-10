@@ -41,7 +41,7 @@ namespace ActivEarth.Objects.Competition.Challenges
         /// <summary>
         /// Activity Points to be awarded upon completion of the challenge.
         /// </summary>
-        public int Points
+        public int Reward
         {
             get;
             set;
@@ -138,18 +138,18 @@ namespace ActivEarth.Objects.Competition.Challenges
         /// <param name="id">Identifier for the challenge.</param>
         /// <param name="name">Challenge Name.</param>
         /// <param name="description">Challenge Description.</param>
-        /// <param name="points">Points to be awarded upon completion of the Challenge.</param>
+        /// <param name="reward">Points to be awarded upon completion of the Challenge.</param>
         /// <param name="persistent">True if the Challenge is persistent, false otherwise.</param>
         /// <param name="startTime">Time at which the challenge begins.</param>
         /// <param name="durationInDays">Number of days for which the challenge is active.</param>
         /// <param name="statistic">Statistic to which the Challenge is bound.</param>
         /// <param name="requirement">Statistic value required to complete the challenge.</param>
-        public Challenge(string name, string description, int points, bool persistent,
+        public Challenge(string name, string description, int reward, bool persistent,
             DateTime startTime, int durationInDays, Statistic statistic, float requirement)
         {
             this.Name = name;
             this.Description = description;
-            this.Points = points;
+            this.Reward = reward;
             this.IsPersistent = persistent;
             this.Duration = new TimeSpan(durationInDays, 0, 0, 0);
             this.EndTime = startTime.AddDays(durationInDays);
