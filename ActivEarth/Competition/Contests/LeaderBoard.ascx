@@ -2,7 +2,7 @@
 <%@ Reference Control="LeaderBoardRow.ascx" %>
 
 <asp:Panel ID="_displayLeaderBoardRows" runat="server" Width="300px" 
-    style="position: relative" BorderColor="Black" BorderStyle="Solid">
+    style="position: relative" BorderColor="Black" BorderStyle="Solid" BorderWidth="3px">
 
     <asp:Panel ID="_header" runat="server" Height="25px" 
     Width="300px" style="position: relative">

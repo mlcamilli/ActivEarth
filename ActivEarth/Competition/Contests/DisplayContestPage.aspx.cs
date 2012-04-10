@@ -64,7 +64,22 @@ namespace ActivEarth.Competition.Contests
                 teams.Add(new Team("G"));
                 //End Test Code
 
+            //More tests
+            List<Contest> contests = new List<Contest>();
+            contests.Add(new Contest("Super Awesome Happy Funtime Contest", "No", 500, ContestEndMode.GoalBased, 
+                ContestType.Group, DateTime.Now, new EndCondition(9001), Objects.Profile.Statistic.Steps));
+            contests.Add(new Contest("Super Awesome Happy Funtime Contest", "No", 500, ContestEndMode.GoalBased,
+                ContestType.Group, DateTime.Now, new EndCondition(9001), Objects.Profile.Statistic.Steps));
+            contests.Add(new Contest("Super Awesome Happy Funtime Contest", "No", 500, ContestEndMode.GoalBased,
+                ContestType.Group, DateTime.Now, new EndCondition(9001), Objects.Profile.Statistic.Steps));
+            contests.Add(new Contest("Super Awesome Happy Funtime Contest", "No", 500, ContestEndMode.GoalBased,
+                ContestType.Group, DateTime.Now, new EndCondition(9001), Objects.Profile.Statistic.Steps));
+
             populateLeaderBoard(10, teams);
+
+            Color[] backColors = { Color.FromArgb(34, 139, 34), Color.White };
+            Color[] textColors = { Color.White, Color.Black };
+            ContestDisplayTable1.PopulateContestTable(contests, backColors, textColors);
         }
 
         private void populateLeaderBoard(int slots, List<Team> teams)

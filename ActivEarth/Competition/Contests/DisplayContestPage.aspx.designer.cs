@@ -31,12 +31,12 @@ namespace ActivEarth.Competition.Contests {
         protected global::ActivEarth.Competition.Contests.LeaderBoard _leaderBoard;
         
         /// <summary>
-        /// CountdownClock1 control.
+        /// ContestDisplayTable1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::ActivEarth.Competition.Contests.CountdownClock CountdownClock1;
+        protected global::ActivEarth.Competition.Contests.ContestDisplayTable ContestDisplayTable1;
     }
 }

@@ -19,7 +19,7 @@ namespace ActivEarth.Server.Service.Competition
         #region ---------- Static Methods ----------
 
         /// <summary>
-        /// Creates a new Challenge and adds it to the collection.
+        /// Creates a new Badge and adds it to the collection.
         /// </summary>
         /// <param name="user">User to whom the Badge belongs.</param>
         /// <param name="statistic">Statistic being tracked by the badge.</param>

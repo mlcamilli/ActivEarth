@@ -67,6 +67,8 @@
     <Content Include="Competition\Challenges\DisplayChallengeControl.ascx" />
     <Content Include="Competition\Challenges\DisplayChallengesControl.ascx" />
     <Content Include="Competition\Challenges\DisplayChallengesPage.aspx" />
+    <Content Include="Competition\Contests\ContestDisplayTable.ascx" />
+    <Content Include="Competition\Contests\ContestHomePage.aspx" />
     <Content Include="Competition\Contests\ContestList.ascx" />
     <Content Include="Competition\Contests\ContestListRow.ascx" />
     <Content Include="Competition\Contests\CountdownClock.ascx" />
@@ -292,6 +294,20 @@
     </Compile>
     <Compile Include="Competition\Challenges\DisplayChallengesPage.aspx.designer.cs">
       <DependentUpon>DisplayChallengesPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Competition\Contests\ContestDisplayTable.ascx.cs">
+      <DependentUpon>ContestDisplayTable.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Competition\Contests\ContestDisplayTable.ascx.designer.cs">
+      <DependentUpon>ContestDisplayTable.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Competition\Contests\ContestHomePage.aspx.cs">
+      <DependentUpon>ContestHomePage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Competition\Contests\ContestHomePage.aspx.designer.cs">
+      <DependentUpon>ContestHomePage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Competition\Contests\ContestList.ascx.cs">
       <DependentUpon>ContestList.ascx</DependentUpon>

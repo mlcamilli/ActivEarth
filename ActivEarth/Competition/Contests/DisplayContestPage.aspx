@@ -7,6 +7,8 @@
 
 <%@ Register src="CountdownClock.ascx" tagname="CountdownClock" tagprefix="uc1" %>
 
+<%@ Register src="ContestDisplayTable.ascx" tagname="ContestDisplayTable" tagprefix="uc2" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -15,6 +17,7 @@
         Font-Names="Eras Bold ITC" Font-Overline="False" Font-Size="XX-Large" 
         ForeColor="Black"></asp:Label>
     <uc:LeaderBoard ID="_leaderBoard" runat="server" />    
-    <uc1:CountdownClock ID="CountdownClock1" runat="server" />
+    
+    <uc2:ContestDisplayTable ID="ContestDisplayTable1" runat="server" />
     
 </asp:Content>

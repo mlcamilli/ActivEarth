@@ -6,6 +6,8 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using ActivEarth.Objects.Competition.Badges;
 using ActivEarth.Objects.Profile;
+using ActivEarth.DAO;
+using ActivEarth.Server.Service.Competition;
 
 namespace ActivEarth.Competition.Badges
 {
@@ -14,66 +16,44 @@ namespace ActivEarth.Competition.Badges
         protected void Page_Load(object sender, EventArgs e)
         {
             //Test Code
-            User _user = new User("Test", "Subject");
+            User user = UserDAO.GetUserFromUserId(UserDAO.GetUserIdFromUserName("badgetest1"));
 
-            _user.Badges[Statistic.BikeDistance] =
-                new Badge(_user, Statistic.BikeDistance,
-                BadgeConstants.BikeDistance.REQUIREMENTS, BadgeConstants.BikeDistance.REWARDS, BadgeConstants.BikeDistance.IMAGES);
+            Badge Steps = user.Badges[Statistic.Steps] = BadgeManager.CreateBadge(user, Statistic.Steps);
+            Badge WalkDistance = user.Badges[Statistic.WalkDistance] = BadgeManager.CreateBadge(user, Statistic.WalkDistance);
+            Badge RunDistance  = user.Badges[Statistic.RunDistance] = BadgeManager.CreateBadge(user, Statistic.RunDistance);
+            Badge BikeDistance = user.Badges[Statistic.BikeDistance] = BadgeManager.CreateBadge(user, Statistic.BikeDistance);
+            Badge ChallengesCompleted = user.Badges[Statistic.ChallengesCompleted] = BadgeManager.CreateBadge(user, Statistic.ChallengesCompleted);
+            Badge GasSavings = user.Badges[Statistic.GasSavings] = BadgeManager.CreateBadge(user, Statistic.GasSavings);
 
-            _user.Badges[Statistic.WalkDistance] =
-                new Badge(_user, Statistic.WalkDistance,
-                BadgeConstants.WalkDistance.REQUIREMENTS, BadgeConstants.WalkDistance.REWARDS, BadgeConstants.WalkDistance.IMAGES);
+            user.SetStatistic(Statistic.BikeDistance, 345);
+            user.SetStatistic(Statistic.WalkDistance, 150);
+            user.SetStatistic(Statistic.RunDistance, 2345);
+            user.SetStatistic(Statistic.Steps, 23456);
+            user.SetStatistic(Statistic.ChallengesCompleted, 145);
+            user.SetStatistic(Statistic.GasSavings, 55.76f);
 
-            _user.Badges[Statistic.RunDistance] =
-                new Badge(_user, Statistic.RunDistance,
-                BadgeConstants.RunDistance.REQUIREMENTS, BadgeConstants.RunDistance.REWARDS, BadgeConstants.RunDistance.IMAGES);
+            /*
+            Steps.Update();
+            WalkDistance.Update();
+            RunDistance.Update();
+            BikeDistance.Update();
+            ChallengesCompleted.Update();
+            GasSavings.Update();
+            */
 
-            _user.Badges[Statistic.Steps] =
-                new Badge(_user, Statistic.Steps,
-                BadgeConstants.Steps.REQUIREMENTS, BadgeConstants.Steps.REWARDS, BadgeConstants.Steps.IMAGES);
+            user.Badges[Statistic.Steps].Update();
+            user.Badges[Statistic.BikeDistance].Update();
+            user.Badges[Statistic.ChallengesCompleted].Update();
+            user.Badges[Statistic.RunDistance].Update();
+            user.Badges[Statistic.WalkDistance].Update();
+            user.Badges[Statistic.GasSavings].Update();
 
-            _user.Badges[Statistic.ChallengesCompleted] =
-                new Badge(_user, Statistic.ChallengesCompleted,
-                BadgeConstants.Challenges.REQUIREMENTS, BadgeConstants.Challenges.REWARDS, BadgeConstants.Challenges.IMAGES);
-
-            _user.Badges[Statistic.GasSavings] =
-                new Badge(_user, Statistic.GasSavings,
-                BadgeConstants.GasSavings.REQUIREMENTS, BadgeConstants.GasSavings.REWARDS, BadgeConstants.GasSavings.IMAGES);
-
-            _user.SetStatistic(Statistic.BikeDistance, 345);
-            _user.SetStatistic(Statistic.WalkDistance, 150);
-            _user.SetStatistic(Statistic.RunDistance, 2345);
-            _user.SetStatistic(Statistic.Steps, 23456);
-            _user.SetStatistic(Statistic.ChallengesCompleted, 145);
-            _user.SetStatistic(Statistic.GasSavings, 55.76f);
-
-            _user.Badges[Statistic.BikeDistance].FormatString = BadgeConstants.BikeDistance.FORMAT;
-            _user.Badges[Statistic.WalkDistance].FormatString = BadgeConstants.WalkDistance.FORMAT;
-            _user.Badges[Statistic.RunDistance].FormatString = BadgeConstants.RunDistance.FORMAT;
-            _user.Badges[Statistic.Steps].FormatString = BadgeConstants.Steps.FORMAT;
-            _user.Badges[Statistic.ChallengesCompleted].FormatString = BadgeConstants.Challenges.FORMAT;
-            _user.Badges[Statistic.GasSavings].FormatString = BadgeConstants.GasSavings.FORMAT;
-
-            _user.Badges[Statistic.Steps].Update();
-            _user.Badges[Statistic.BikeDistance].Update();
-            _user.Badges[Statistic.ChallengesCompleted].Update();
-            _user.Badges[Statistic.RunDistance].Update();
-            _user.Badges[Statistic.WalkDistance].Update();
-            _user.Badges[Statistic.GasSavings].Update();
-
-            _user.Badges[Statistic.Steps].Update();
-            _user.Badges[Statistic.BikeDistance].Update();
-            _user.Badges[Statistic.ChallengesCompleted].Update();
-            _user.Badges[Statistic.RunDistance].Update();
-            _user.Badges[Statistic.WalkDistance].Update();
-            _user.Badges[Statistic.GasSavings].Update();
-
-            _displayBadgesControl.AddBadgeToDisplay(_user.Badges[Statistic.Steps]);
-            _displayBadgesControl.AddBadgeToDisplay(_user.Badges[Statistic.WalkDistance]);
-            _displayBadgesControl.AddBadgeToDisplay(_user.Badges[Statistic.RunDistance]);
-            _displayBadgesControl.AddBadgeToDisplay(_user.Badges[Statistic.BikeDistance]);
-            _displayBadgesControl.AddBadgeToDisplay(_user.Badges[Statistic.ChallengesCompleted]);
-            _displayBadgesControl.AddBadgeToDisplay(_user.Badges[Statistic.GasSavings]);
+            _displayBadgesControl.AddBadgeToDisplay(Steps);
+            _displayBadgesControl.AddBadgeToDisplay(WalkDistance);
+            _displayBadgesControl.AddBadgeToDisplay(RunDistance);
+            _displayBadgesControl.AddBadgeToDisplay(BikeDistance);
+            _displayBadgesControl.AddBadgeToDisplay(ChallengesCompleted);
+            _displayBadgesControl.AddBadgeToDisplay(GasSavings);
         }
     }
 }
