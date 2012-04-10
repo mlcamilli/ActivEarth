@@ -30,7 +30,7 @@ namespace ActivEarth.DAO
                                 ID = c.id,
                                 Name = c.name,
                                 Description = c.description,
-                                Points = c.points,
+                                Reward = c.points,
                                 Requirement = (float)c.requirement,
                                 IsPersistent = c.persistent,
                                 EndTime = c.end_time,
@@ -64,7 +64,7 @@ namespace ActivEarth.DAO
                                 ID = c.id,
                                 Name = c.name,
                                 Description = c.description,
-                                Points = c.points,
+                                Reward = c.points,
                                 Requirement = (float)c.requirement,
                                 IsPersistent = c.persistent,
                                 EndTime = c.end_time,
@@ -127,7 +127,7 @@ namespace ActivEarth.DAO
                                 ID = c.id,
                                 Name = c.name,
                                 Description = c.description,
-                                Points = c.points,
+                                Reward = c.points,
                                 Requirement = (float)c.requirement,
                                 IsPersistent = c.persistent,
                                 EndTime = c.end_time,
@@ -164,7 +164,7 @@ namespace ActivEarth.DAO
                                 ID = c.id,
                                 Name = c.name,
                                 Description = c.description,
-                                Points = c.points,
+                                Reward = c.points,
                                 Requirement = (float)c.requirement,
                                 IsPersistent = c.persistent,
                                 EndTime = c.end_time,
@@ -198,7 +198,7 @@ namespace ActivEarth.DAO
                         {
                             name = challenge.Name,
                             description = challenge.Description,
-                            points = challenge.Points,
+                            points = challenge.Reward,
                             requirement = challenge.Requirement,
                             persistent = challenge.IsPersistent,
                             end_time = challenge.EndTime,
@@ -235,7 +235,7 @@ namespace ActivEarth.DAO
                     {
                         dbChallenge.name = challenge.Name;
                         dbChallenge.description = challenge.Description;
-                        dbChallenge.points = challenge.Points;
+                        dbChallenge.points = challenge.Reward;
                         dbChallenge.requirement = challenge.Requirement;
                         dbChallenge.persistent = challenge.IsPersistent;
                         dbChallenge.end_time = challenge.EndTime;
@@ -279,7 +279,7 @@ namespace ActivEarth.DAO
                                 ID = c.id,
                                 Name = c.name,
                                 Description = c.description,
-                                Points = c.points,
+                                Reward = c.points,
                                 Requirement = (float)c.requirement,
                                 IsPersistent = c.persistent,
                                 EndTime = c.end_time,
