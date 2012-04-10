@@ -113,8 +113,37 @@ namespace ActivEarth.DAO
         }
 
         /// <summary>
+        /// Retrieves all Groups that a given user is a part of.
+        /// </summary>
+        /// <param name="userID">UserID of the desired User</param>
+        /// <returns>All Groups in the database the User is in.</returns>
+        public static List<Group> GetGroupsByUser(int userID)
+        {
+            List<Group> toReturn = new List<Group>();
+
+            using (SqlConnection connection = ConnectionManager.GetConnection())
+            {
+                var data = new ActivEarthDataProvidersDataContext(connection);
+
+                List<int> groupIds = (from u in data.GroupMemberDataProviders
+                                      where u.user_id == userID
+                                      select u.group_id
+                                      ).ToList();
+
+                foreach (int groupId in groupIds)
+                {
+                    toReturn.Add(GetGroupFromGroupId(groupId));
+                }
+            }
+
+            return toReturn;
+        }
+
+
+        /// <summary>
         /// Retrieves all currently created Groups that are tagged with the given hashtag.
         /// </summary>
+        /// <param name="hashtag">A desired string tag</param>
         /// <returns>All Groups in the database with the given hashtag.</returns>
         public static List<Group> GetAllGroupsByHashTag(string hashtag)
         {
@@ -141,7 +170,7 @@ namespace ActivEarth.DAO
         /// <summary>
         /// Creates a Group as a new entry in the DB.
         /// </summary>
-        /// <param name="challenge">Group object to add to the DB.</param>
+        /// <param name="group">Group object to add to the DB.</param>
         /// <returns>ID of the created Group on success, 0 on failure.</returns>
         public static int CreateNewGroup(Group group)
         {
@@ -218,7 +247,7 @@ namespace ActivEarth.DAO
         /// <summary>
         /// Updates an existing Group in the DB.
         /// </summary>
-        /// <param name="challenge">Group whose information needs to be updated.</param>
+        /// <param name="group">Group whose information needs to be updated.</param>
         /// <returns>True on success, false on failure.</returns>
         public static bool UpdateGroup(Group group)
         {
@@ -410,6 +439,89 @@ namespace ActivEarth.DAO
                                 };
                                 data.MessageDataProviders.InsertOnSubmit(messageData);
                             }
+                        }
+
+                        data.SubmitChanges();
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Removes an existing Group from the DB.
+        /// </summary>
+        /// <param name="groupId">ID of Group whose information needs to be deleted.</param>
+        /// <returns>True on success, false on failure.</returns>
+        public static bool DeleteGroup(int groupId)
+        {
+            try
+            {
+                using (SqlConnection connection = ConnectionManager.GetConnection())
+                {
+                    var data = new ActivEarthDataProvidersDataContext(connection);
+                    GroupDataProvider dbGroup = (from g in data.GroupDataProviders
+                                                 where g.id == groupId
+                                                 select g).FirstOrDefault();
+                    if (dbGroup != null)
+                    {
+                        data.GroupDataProviders.DeleteOnSubmit(dbGroup);
+                        
+                        //Delete entries in the group_hashtags table
+                        List<GroupHashtagDataProvider> hashtags = (from h in data.GroupHashtagDataProviders
+                                                                   where h.group_id == groupId
+                                                                   select
+                                                                       h
+                                         ).ToList();
+
+                        foreach (GroupHashtagDataProvider hashtagData in hashtags)
+                        {                      
+                            data.GroupHashtagDataProviders.DeleteOnSubmit(hashtagData);   
+                        }
+
+
+                        //Delete entries in group_members table
+                        List<GroupMemberDataProvider> members = (from u in data.GroupMemberDataProviders
+                                                                 where u.group_id == groupId
+                                                                 select
+                                                                     u
+                                              ).ToList();
+
+                        foreach (GroupMemberDataProvider memberData in members)
+                        {
+                            data.GroupMemberDataProviders.DeleteOnSubmit(memberData);
+                        }
+
+                        //Delete entires in group_contests table
+                        List<GroupContestDataProvider> contests = (from c in data.GroupContestDataProviders
+                                                                   where c.group_id == groupId
+                                                                   select
+                                                                       c
+                                                 ).ToList();
+
+                        foreach (GroupContestDataProvider contestData in contests)
+                        {
+                            data.GroupContestDataProviders.DeleteOnSubmit(contestData);
+                        }
+                                           
+                        //Remove entires in messages table
+                        List<MessageDataProvider> messages = (from m in data.MessageDataProviders
+                                                              where m.group_id == groupId
+                                                              select
+                                                                  m
+                                                  ).ToList();
+
+                        foreach (MessageDataProvider messageData in messages)
+                        {
+                                data.MessageDataProviders.DeleteOnSubmit(messageData);
                         }
 
                         data.SubmitChanges();
