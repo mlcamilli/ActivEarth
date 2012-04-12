@@ -56,6 +56,21 @@ namespace ActivEarth.Objects.Competition
             this.ContestScore = 0;
         }
 
+        /// <summary>
+        /// Creates a new ActivityScore, initialized to the given parameters.  Used to rebuild
+        /// Group and User objects when retreiving data from the DB.
+        /// </summary>
+        /// <param name="badgeScore">The BadgeScore stored in the DB</param>
+        /// <param name="challengeScore">The ChallengeScore stored in the DB</param>
+        /// <param name="contestScore">The ContestScore stored in the DB</param>
+        public ActivityScore(int badgeScore, int challengeScore, int contestScore)
+        {
+            this.BadgeScore = badgeScore;
+            this.ChallengeScore = challengeScore;
+            this.ContestScore = contestScore;
+            this.TotalScore = badgeScore + challengeScore + contestScore;
+        }
+
         #endregion ---------- Constructor ----------
 
         #region ---------- Public Methods ----------
