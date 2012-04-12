@@ -18,7 +18,7 @@ namespace ActivEarth.Competition.Challenges
         {
             _challengeName.Text = challenge.Name;
             _challengeImage.ImageUrl = challenge.ImagePath;
-            _activityPointsValue.Text = challenge.Points.ToString();
+            _activityPointsValue.Text = challenge.Reward.ToString();
             _challengeDescription.Text = challenge.Description;
 
             _challengeProgressBar.Value = 50; //challenge.GetProgress(user);

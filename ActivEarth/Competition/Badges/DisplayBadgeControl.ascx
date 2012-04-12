@@ -19,8 +19,7 @@
         style="z-index: 1; left: 0px; top: 0px; position: absolute" Width="80px" 
         ImageUrl="~/Images/Competition/Badges/Steps/Bronze.png"/>
 
-    <eo:ProgressBar ID="_badgeProgressBar" runat="server"        
-        
+    <eo:ProgressBar ID="_badgeProgressBar" runat="server"              
         style="z-index: 1; left: 82px; top: 55px; position: absolute; height: 36px; width: 314px" 
         BackgroundImage="~/Images/Competition/ProgressBar/ProgressBarBackground.png" 
         BackgroundImageLeft="~/Images/Competition/ProgressBar/ProgressBarLeft.png" 
