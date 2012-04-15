@@ -72,7 +72,7 @@ namespace ActivEarth.Objects.Groups
         /// <summary>
         /// The GreenScore assigned to the group based on the active transportation of Users in the Group.
         /// </summary>
-        public uint GreenScore
+        public int GreenScore
         {
             get;
             set;
@@ -92,6 +92,7 @@ namespace ActivEarth.Objects.Groups
         /// </summary>
         public Wall Wall;
 
+        /**
         /// <summary>
         /// The Badges accumulated by Users of the Group.
         /// </summary>
@@ -100,11 +101,12 @@ namespace ActivEarth.Objects.Groups
             get;
             set;
         }
-
+        */
+         
         /// <summary>
         /// The Contests in which the Group is participating.
         /// </summary>
-        public List<int> Contests
+        public List<Contest> Contests
         {
             get;
             set;
@@ -118,17 +120,15 @@ namespace ActivEarth.Objects.Groups
         /// Creates a new Group.
         /// 
         /// </summary>
-        /// <param name="id">A unique ID number identifying the Group.</param>
         /// <param name="name">The name of the Group.</param>
         /// <param name="owner">The User that created the Group</param>
         /// <param name="description">A text description of the Group.</param>
         /// <param name="hashtags">A list of hashtags that can be used to search for the Group</param>
-        public Group(int id, string name, User owner, string description,
-            List<string> hashtags)
+        public Group(string name, User owner, string description, List<string> hashtags)
         {
-            this.ID = id;
             this.Name = name;
             this.Owner = owner;
+            this.Description = description;
 
             this.Members = new List<User>();
             this.Members.Add(owner);
@@ -136,12 +136,19 @@ namespace ActivEarth.Objects.Groups
 
             this.HashTags = hashtags;
 
-            this.GreenScore = owner.GreenScore;
-            this.ActivityScore = owner.ActivityScore;
+            this.GreenScore = 0;
+            this.ActivityScore = new ActivityScore();
 
             this.Wall = new Wall();
-            this.Badges = new Dictionary<Statistic, Badge>();
-            this.Contests = new List<int>();
+            this.Contests = new List<Contest>();
+        }
+
+        /// <summary>
+        /// Creates a new Group.  This constructor used when rebuilding Group object from DB.
+        /// </summary>
+        public Group()
+        {
+            this.Wall = new Wall();
         }
 
         #endregion ---------- Constructor ----------

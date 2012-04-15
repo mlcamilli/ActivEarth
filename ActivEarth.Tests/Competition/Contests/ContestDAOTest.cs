@@ -175,10 +175,10 @@ namespace ActivEarth.Tests.Competition.Contests
                 User member4 = new User("Test", "Subject4");
 
                 Log("Creating Groups");
-                Group group1 = new Group(1, "Group 1", member1, string.Empty, new List<string>());
+                Group group1 = new Group("Group 1", member1, string.Empty, new List<string>());
                 group1.Members.Add(member2);
 
-                Group group2 = new Group(2, "Group 2", member3, string.Empty, new List<string>());
+                Group group2 = new Group("Group 2", member3, string.Empty, new List<string>());
                 group2.Members.Add(member4);
 
                 Log("Adding groups to the contest");
@@ -309,7 +309,7 @@ namespace ActivEarth.Tests.Competition.Contests
                 User member4 = new User("Test", "Subject4");
 
                 Log("Creating Groups");
-                Group group1 = new Group(0, "Group 1", member1, string.Empty, new List<string>());
+                Group group1 = new Group("Group 1", member1, string.Empty, new List<string>());
                 group1.Members.Add(member2);
                 group1.Members.Add(member3);
                 group1.Members.Add(member4);
@@ -363,7 +363,7 @@ namespace ActivEarth.Tests.Competition.Contests
                 User member4 = new User("Test", "Subject4");
 
                 Log("Creating Groups");
-                Group group1 = new Group(0, "Group 1", member1, string.Empty, new List<string>());
+                Group group1 = new Group("Group 1", member1, string.Empty, new List<string>());
                 group1.Members.Add(member2);
 
                 Log("Adding group to the contest");
@@ -425,10 +425,10 @@ namespace ActivEarth.Tests.Competition.Contests
                 User member4 = new User("Test", "Subject4");
 
                 Log("Creating Groups");
-                Group group1 = new Group(0, "Group 1", member1, string.Empty, new List<string>());
+                Group group1 = new Group("Group 1", member1, string.Empty, new List<string>());
                 group1.Members.Add(member2);
 
-                Group group2 = new Group(0, "Group 2", member3, string.Empty, new List<string>());
+                Group group2 = new Group("Group 2", member3, string.Empty, new List<string>());
                 group2.Members.Add(member4);
 
                 Log("Adding groups to the contest");

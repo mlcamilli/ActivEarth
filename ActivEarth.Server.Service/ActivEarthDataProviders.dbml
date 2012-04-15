@@ -25,6 +25,9 @@
       <Column Name="password" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
       <Association Name="UserDataProvider_ProfileDataProvider" Member="ProfileDataProviders" ThisKey="id" OtherKey="user_id" Type="ProfileDataProvider" />
       <Association Name="UserDataProvider_PrivacySettingDataProvider" Member="PrivacySettingDataProviders" Storage="_privacy_settings" ThisKey="id" OtherKey="user_id" Type="PrivacySettingDataProvider" />
+      <Association Name="UserDataProvider_GroupMemberDataProvider" Member="GroupMemberDataProviders" ThisKey="id" OtherKey="user_id" Type="GroupMemberDataProvider" />
+      <Association Name="UserDataProvider_GroupDataProvider" Member="GroupDataProviders" ThisKey="id" OtherKey="owner_id" Type="GroupDataProvider" />
+      <Association Name="UserDataProvider_MessageDataProvider" Member="MessageDataProviders" Storage="_messages" ThisKey="id" OtherKey="poster_id" Type="MessageDataProvider" />
     </Type>
   </Table>
   <Table Name="dbo.challenges" Member="ChallengeDataProviders">
@@ -57,6 +60,7 @@
       <Column Name="active" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Column Name="deactivated" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Association Name="ContestDataProvider_TeamDataProvider" Member="TeamDataProviders" ThisKey="id" OtherKey="contest_id" Type="TeamDataProvider" />
+      <Association Name="ContestDataProvider_GroupContestDataProvider" Member="GroupContestDataProviders" ThisKey="id" OtherKey="contest_id" Type="GroupContestDataProvider" />
     </Type>
   </Table>
   <Table Name="dbo.team_members" Member="TeamMemberDataProviders">
@@ -120,6 +124,64 @@
       <Column Name="statistic_id" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
       <Column Name="name" Type="System.String" DbType="NChar(25) NOT NULL" CanBeNull="false" />
       <Column Name="format_string" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.group_members" Member="GroupMemberDataProviders">
+    <Type Name="GroupMemberDataProvider">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="group_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="user_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="UserDataProvider_GroupMemberDataProvider" Member="UserDataProvider" ThisKey="user_id" OtherKey="id" Type="UserDataProvider" IsForeignKey="true" />
+      <Association Name="GroupDataProvider_GroupMemberDataProvider" Member="GroupDataProvider" ThisKey="group_id" OtherKey="id" Type="GroupDataProvider" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.groups" Member="GroupDataProviders">
+    <Type Name="GroupDataProvider">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="owner_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="description" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="green_score" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="challenge_score" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="contest_score" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="badge_score" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="GroupDataProvider_GroupMemberDataProvider" Member="GroupMemberDataProviders" ThisKey="id" OtherKey="group_id" Type="GroupMemberDataProvider" />
+      <Association Name="GroupDataProvider_GroupHashtagDataProvider" Member="GroupHashtagDataProviders" Storage="_group_hashtags" ThisKey="id" OtherKey="group_id" Type="GroupHashtagDataProvider" />
+      <Association Name="GroupDataProvider_MessageDataProvider" Member="MessageDataProviders" Storage="_messages" ThisKey="id" OtherKey="group_id" Type="MessageDataProvider" />
+      <Association Name="GroupDataProvider_GroupContestDataProvider" Member="GroupContestDataProviders" ThisKey="id" OtherKey="group_id" Type="GroupContestDataProvider" />
+      <Association Name="UserDataProvider_GroupDataProvider" Member="UserDataProvider" ThisKey="owner_id" OtherKey="id" Type="UserDataProvider" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.group_hashtags" Member="GroupHashtagDataProviders">
+    <Type Name="GroupHashtagDataProvider">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="group_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="hashtag" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="GroupDataProvider_GroupHashtagDataProvider" Member="GroupDataProvider" ThisKey="group_id" OtherKey="id" Type="GroupDataProvider" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.messages" Member="MessageDataProviders">
+    <Type Name="MessageDataProvider">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="group_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="poster_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="title" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="message" Storage="_message1" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="add_green_score" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="add_competition_score" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="add_challenge_score" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="add_badge_score" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="GroupDataProvider_MessageDataProvider" Member="GroupDataProvider" ThisKey="group_id" OtherKey="id" Type="GroupDataProvider" IsForeignKey="true" />
+      <Association Name="UserDataProvider_MessageDataProvider" Member="UserDataProvider" ThisKey="poster_id" OtherKey="id" Type="UserDataProvider" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.group_contests" Member="GroupContestDataProviders">
+    <Type Name="GroupContestDataProvider">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="contest_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="group_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="ContestDataProvider_GroupContestDataProvider" Member="ContestDataProvider" ThisKey="contest_id" OtherKey="id" Type="ContestDataProvider" IsForeignKey="true" />
+      <Association Name="GroupDataProvider_GroupContestDataProvider" Member="GroupDataProvider" ThisKey="group_id" OtherKey="id" Type="GroupDataProvider" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

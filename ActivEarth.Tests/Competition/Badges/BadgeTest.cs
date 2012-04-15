@@ -39,28 +39,23 @@ namespace ActivEarth.Tests.Competition.Badges
 
             _user.Badges[Statistic.BikeDistance] = 
                 new Badge(_user, Statistic.BikeDistance,
-                BadgeConstants.BikeDistance.REQUIREMENTS, BadgeConstants.BikeDistance.REWARDS,
-                BadgeConstants.BikeDistance.IMAGES);
+                BadgeConstants.BikeDistance.REQUIREMENTS, BadgeConstants.BikeDistance.REWARDS, BadgeConstants.BikeDistance.IMAGES);
 
             _user.Badges[Statistic.WalkDistance] =
                 new Badge(_user, Statistic.WalkDistance,
-                BadgeConstants.WalkDistance.REQUIREMENTS, BadgeConstants.WalkDistance.REWARDS,
-                BadgeConstants.WalkDistance.IMAGES);
+                BadgeConstants.WalkDistance.REQUIREMENTS, BadgeConstants.WalkDistance.REWARDS, BadgeConstants.WalkDistance.IMAGES);
 
             _user.Badges[Statistic.RunDistance] =
                 new Badge(_user, Statistic.RunDistance,
-                BadgeConstants.RunDistance.REQUIREMENTS, BadgeConstants.RunDistance.REWARDS,
-                BadgeConstants.RunDistance.IMAGES);
+                BadgeConstants.RunDistance.REQUIREMENTS, BadgeConstants.RunDistance.REWARDS, BadgeConstants.RunDistance.IMAGES);
 
             _user.Badges[Statistic.Steps] =
                 new Badge(_user, Statistic.Steps,
-                BadgeConstants.Steps.REQUIREMENTS, BadgeConstants.Steps.REWARDS,
-                BadgeConstants.Steps.IMAGES);
+                BadgeConstants.Steps.REQUIREMENTS, BadgeConstants.Steps.REWARDS, BadgeConstants.Steps.IMAGES);
 
             _user.Badges[Statistic.ChallengesCompleted] =
                 new Badge(_user, Statistic.ChallengesCompleted,
-                BadgeConstants.Challenges.REQUIREMENTS, BadgeConstants.Challenges.REWARDS,
-                BadgeConstants.Challenges.IMAGES);
+                BadgeConstants.Challenges.REQUIREMENTS, BadgeConstants.Challenges.REWARDS, BadgeConstants.Challenges.IMAGES);
 
             _user.Badges[Statistic.GasSavings] =
                 new Badge(_user, Statistic.ChallengesCompleted,
