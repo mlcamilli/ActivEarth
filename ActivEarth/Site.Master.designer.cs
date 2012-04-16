@@ -58,13 +58,22 @@ namespace ActivEarth {
         protected global::System.Web.UI.WebControls.HyperLink hlRegister;
         
         /// <summary>
-        /// NavigationMenu control.
+        /// lblUserName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Menu NavigationMenu;
+        protected global::System.Web.UI.WebControls.Label lblUserName;
+        
+        /// <summary>
+        /// lblCityState control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblCityState;
         
         /// <summary>
         /// MainContent control.

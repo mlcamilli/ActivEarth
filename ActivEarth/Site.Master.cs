@@ -26,6 +26,10 @@ namespace ActivEarth
                 lbLogOut.Visible = true;
                 lblUserLoggedIn.Visible = true;
                 lblUserLoggedIn.Text = "Logged in as " + userDetails.UserName;
+
+                lblUserName.Text = userDetails.FirstName + " " + userDetails.LastName;
+                lblCityState.Text = userDetails.City + ", " + userDetails.State;
+
             }
 
         }

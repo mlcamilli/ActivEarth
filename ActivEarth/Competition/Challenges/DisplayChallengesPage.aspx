@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="DisplayChallengesPage.aspx.cs" Inherits="ActivEarth.Competition.Challenges.DisplayChallengesPage" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Tabs.Master" AutoEventWireup="true" CodeBehind="DisplayChallengesPage.aspx.cs" Inherits="ActivEarth.Competition.Challenges.DisplayChallengesPage" %>
 <%@ Register src="DisplayChallengesControl.ascx" tagname="DisplayChallengesControl" tagprefix="uc1" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
