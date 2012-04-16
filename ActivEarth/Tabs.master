@@ -1,0 +1,23 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Tabs.master.cs" Inherits="ActivEarth.Tabs" %>
+<asp:Content ID="TabsHeader" ContentPlaceHolderID="HeadContent" runat="server">
+    <asp:ContentPlaceHolder ID="HeadContent" runat="server"></asp:ContentPlaceHolder>
+</asp:Content>
+
+<asp:Content ID="Tab" ContentPlaceHolderID="MainContent" runat="server">
+    <div class="clear hideSkiplink">
+        <asp:Menu ID="NavigationMenu" runat="server" CssClass="menu" EnableViewState="false" IncludeStyleBlock="false" Orientation="Horizontal">
+            <Items>
+                <asp:MenuItem Text="Badges" Value="Badges" 
+                    NavigateUrl="~/Competition/Badges/DisplayBadgesPage.aspx"></asp:MenuItem>
+                <asp:MenuItem NavigateUrl="~/Competition/Challenges/DisplayChallengesPage.aspx" 
+                    Text="Challenges" Value="Challenges"></asp:MenuItem>
+                <asp:MenuItem NavigateUrl="~/Competition/Contests/DisplayContestPage.aspx" 
+                    Text="Contest" Value="Contest"></asp:MenuItem>
+            </Items>
+        </asp:Menu>
+    </div>
+    <div class="tabContent">
+        <asp:ContentPlaceHolder ID="MainContent" runat="server"/>
+    </div>
+    
+</asp:Content>

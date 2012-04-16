@@ -1,0 +1,38 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="SiteNotLoggedIn.master.cs" Inherits="ActivEarth.SiteNotLoggedIn" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+ <html>
+    <head id="Head1" runat="server">
+        <title></title>
+        <link href="~/Styles/Site.css" rel="stylesheet" type="text/css" />
+        <asp:ContentPlaceHolder ID="HeadContent" runat="server">
+        </asp:ContentPlaceHolder>
+    </head>
+    <body>
+        <form id="Form1" runat="server">
+        <div class="page">
+            <div class="header">
+                <div class="title">
+                    <h1>
+                        ActivEarth
+                    </h1>
+                </div>
+                <div class="loginDisplay">
+                            <asp:Label runat="server" ID="lblUserLoggedIn"></asp:Label>
+                            <asp:HyperLink runat="server" ID="hlLogin" NavigateUrl="~/Account/Login.aspx" Text="Log In"></asp:HyperLink>
+                            <asp:LinkButton runat="server" ID="lbLogOut" OnClick="UserLogOut" Text="Log Out" ></asp:LinkButton>    
+                            <asp:HyperLink runat="server" ID="hlRegister" NavigateUrl="~/Account/Register.aspx" Text="Register"></asp:HyperLink>                          
+                </div>        
+            </div>
+            <div class="mainNotLoggedIn">
+                <asp:ContentPlaceHolder ID="MainContent" runat="server"/>
+            </div>
+            <div class="clear">
+            </div>
+        </div>
+        <div class="footer">
+        
+        </div>
+        </form>
+    </body>
+</html>
