@@ -202,7 +202,7 @@ fieldset p
     margin: 2px 12px 10px 10px;
 }
 
-fieldset.login label, fieldset.register label, fieldset.changePassword label
+fieldset.login label, fieldset.register label, fieldset.changePassword label, fieldset.createContest
 {
     display: block;
 }
@@ -225,13 +225,24 @@ input.textEntry
     border: 1px solid #ccc;
 }
 
+input.textMultilineEntry
+{
+    min-height: 120px;
+    max-height: 120px;
+    height: 120px;
+    min-width: 320px;
+    max-width: 320px;
+    width: 320px;
+    border: 1px solid #ccc;
+}
+
 input.passwordEntry 
 {
     width: 320px;
     border: 1px solid #ccc;
 }
 
-div.accountInfo
+div.accountInfo, div.contestInfo
 {
     width: 42%;
 }

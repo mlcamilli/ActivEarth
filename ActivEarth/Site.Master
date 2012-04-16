@@ -34,7 +34,7 @@
                             NavigateUrl="~/Competition/Badges/DisplayBadgesPage.aspx"></asp:MenuItem>
                         <asp:MenuItem NavigateUrl="~/Competition/Challenges/DisplayChallengesPage.aspx" 
                             Text="Challenges" Value="Challenges"></asp:MenuItem>
-                        <asp:MenuItem NavigateUrl="~/Competition/Contests/DisplayContestPage.aspx" 
+                        <asp:MenuItem NavigateUrl="~/Competition/Contests/ContestCreationPage.aspx" 
                             Text="Contest" Value="Contest"></asp:MenuItem>
                     </Items>
                 </asp:Menu>
