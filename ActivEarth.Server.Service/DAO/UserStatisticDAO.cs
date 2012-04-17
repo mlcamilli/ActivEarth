@@ -27,7 +27,8 @@ namespace ActivEarth.DAO
                             && p.statistic_type.Equals((byte)statType)
                             select new UserStatistic((Statistic)p.statistic_type, (float)p.value)
                             {
-                                UserStatisticID = p.id
+                                UserStatisticID = p.id,
+                                UserID = p.user_id
                             }).FirstOrDefault();
             }
         }
@@ -47,7 +48,8 @@ namespace ActivEarth.DAO
                         select
                             new UserStatistic((Statistic)c.statistic_type, (float)c.value)
                             {
-                                UserStatisticID = c.id
+                                UserStatisticID = c.id,
+                                UserID = c.user_id
                             }).FirstOrDefault();
             }
         }
@@ -68,7 +70,8 @@ namespace ActivEarth.DAO
                         where p.user_id == userId
                         select new UserStatistic((Statistic)p.statistic_type, (float)p.value)
                         {
-                            UserStatisticID = p.id
+                            UserStatisticID = p.id,
+                            UserID = p.user_id
                         }).ToList();
             }
         }

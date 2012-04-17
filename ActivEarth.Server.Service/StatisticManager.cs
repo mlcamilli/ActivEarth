@@ -86,10 +86,31 @@ namespace ActivEarth.Server.Service.Statistics
 
         #endregion ---------- Public Methods ----------
 
-        #region ---------- Private Methods ----------
+        #region ---------- Static Methods ----------
 
+        /// <summary>
+        /// Sets the value of a statistic for a specific user.
+        /// </summary>
+        /// <param name="userId">ID of the user to update.</param>
+        /// <param name="statistic">Statistic to be updated.</param>
+        /// <param name="value">New value for the statistic.</param>
+        /// <returns></returns>
+        public static bool SetUserStatistic(int userId, Statistic statistic, float value)
+        {
+            UserStatistic userStat = UserStatisticDAO.GetStatisticFromUserIdAndStatType(userId, statistic);
 
-        #endregion ---------- Private Methods ----------
+            if (userStat != null)
+            {
+                userStat.value = value;
+                return UserStatisticDAO.UpdateUserStatistic(userStat);
+            }
+            else
+            {
+                return (UserStatisticDAO.CreateNewStatisticForUser(userId, statistic, value) > 0);
+            }
+        }
+
+        #endregion ---------- Static Methods ----------
 
         #region ---------- Private Fields ----------
 

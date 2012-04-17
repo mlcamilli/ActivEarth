@@ -159,52 +159,5 @@ namespace ActivEarth.Objects.Competition.Challenges
         }
 
         #endregion ---------- Constructor ----------
-
-        #region ---------- Public Methods ----------
-
-        /// <summary>
-        /// Gets the progress made by a user in the challenge as a percentage (0-100).
-        /// </summary>
-        /// <param name="user">The user to evaluate.</param>
-        /// <returns>User's progress in the challenge (for use in a progress bar).</returns>
-        public int GetProgress(User user)
-        {
-            if (user.ChallengeInitialValues.ContainsKey(this.ID))
-            {
-                float startingPoint = user.ChallengeInitialValues[this.ID];
-                return Math.Min(
-                    (int)(100 * (user.GetStatistic(this.StatisticBinding) - startingPoint) / this.Requirement), 100);
-            }
-            else
-            {
-                //TODO: Throw an exception here?
-                return -1;
-            }
-        }
-
-        /// <summary>
-        /// Returns the formatted text progress report for the Challenge (e.g., "34.5 / 40.0").
-        /// </summary>
-        /// <returns>Formatted text progress report for the Challenge.</returns>
-        public string GetFormattedProgress(User user)
-        {
-            string numerator = String.Format(this.FormatString, user.GetStatistic(this.StatisticBinding));
-            string denominator = String.Format(this.FormatString, this.Requirement);
-
-            return String.Format("{0} / {1}", numerator, denominator);
-        }
-
-        /// <summary>
-        /// Returns true if the user has met the requirements to complete the challenge,
-        /// false otherwise.
-        /// </summary>
-        /// <param name="user">The user to evaluate.</param>
-        /// <returns>Whether or not the user has completed the challenge.</returns>
-        public bool IsComplete(User user)
-        {
-            return (this.GetProgress(user) == 100);
-        }
-
-        #endregion ---------- Public Methods ----------
     }
 }

@@ -9,7 +9,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 CREATE TABLE [dbo].[user_statistics](
-	[id] [int] NOT NULL,
+	[id] [int] IDENTITY(1,1) NOT NULL,
 	[user_id] [int] NOT NULL,
 	[statistic_type] [tinyint] NOT NULL,
 	[value] [float] NOT NULL,

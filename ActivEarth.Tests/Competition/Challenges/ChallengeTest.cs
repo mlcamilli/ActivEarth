@@ -10,6 +10,8 @@ using ActivEarth.Objects.Profile;
 using ActivEarth.Objects.Competition;
 using ActivEarth.Objects.Competition.Challenges;
 using ActivEarth.Server.Service.Competition;
+using ActivEarth.Server.Service.Statistics;
+using ActivEarth.DAO;
 
 namespace ActivEarth.Tests.Competition.Challenges
 {
@@ -21,10 +23,6 @@ namespace ActivEarth.Tests.Competition.Challenges
     {
         private User _user1;
         private User _user2;
-
-        private Group _allUsers;
-
-        private ChallengeManager _manager;
 
         private TransactionScope _trans;
 
@@ -44,14 +42,26 @@ namespace ActivEarth.Tests.Competition.Challenges
         [TestInitialize]
         public void Initialize()
         {
-            _user1 = new User("Test", "Subject1");
-            _user2 = new User("Test", "Subject2");
+            _user1 = new User
+            {
+                UserName = "testSubject1",
+                FirstName = "Test",
+                LastName = "Subject1",
+                City = "Montreal",
+                State = "QC",
+                Email = "email1@test.com"
+            };
 
-            _allUsers = new Group("All Users", _user1, string.Empty, new List<string>());
-            _allUsers.Members.Add(_user1);
-            _allUsers.Members.Add(_user2);
+            _user2 = new User
+            {
+                UserName = "testSubject2",
+                FirstName = "Test",
+                LastName = "Subject2",
+                City = "Vancouver",
+                State = "BC",
+                Email = "email1@test.net"
+            };
 
-            _manager = new ChallengeManager(_allUsers);
             _trans = new TransactionScope();
         }
 
@@ -83,24 +93,29 @@ namespace ActivEarth.Tests.Competition.Challenges
         [TestMethod]
         public void TestChallengeInitialization()
         {
-            Log("Setting User2's initial Step statistic");
-            _user2.SetStatistic(Statistic.Steps, 50);
+            using (_trans)
+            {
+                Log("Creating test users in DB");
+                _user1.UserID = UserDAO.CreateNewUser(_user1, "pass1");
+                _user2.UserID = UserDAO.CreateNewUser(_user2, "pass2");
 
-            Log("Creating Step-Based Challenge");
-            int id = _manager.CreateChallenge("Test Challenge", "This is a test challenge",
-                30, false, DateTime.Today, 1, Statistic.Steps, 500);
+                Log("Setting users' initial Step statistic");
+                StatisticManager.SetUserStatistic(_user1.UserID, Statistic.Steps, 0);
+                StatisticManager.SetUserStatistic(_user2.UserID, Statistic.Steps, 50);
 
-            Log("Verifying that User1's initialization contains the new Challenge ID");
-            Assert.IsTrue(_user1.ChallengeInitialValues.ContainsKey(id));
+                Log("Creating Step-Based Challenge");
+                int challengeId = ChallengeManager.CreateChallenge("Test Challenge", "This is a test challenge",
+                    30, false, DateTime.Today, 1, Statistic.Steps, 500);
 
-            Log("Verifying User1's initialization value for the new Challenge ID");
-            Assert.AreEqual(0, _user1.ChallengeInitialValues[id]);
+                ChallengeManager.InitializeUser(challengeId, _user1.UserID);
+                ChallengeManager.InitializeUser(challengeId, _user2.UserID);
 
-            Log("Verifying that User2's initialization contains the new Challenge ID");
-            Assert.IsTrue(_user2.ChallengeInitialValues.ContainsKey(id));
+                Log("Verifying User1's initialization value for the new Challenge ID");
+                Assert.IsTrue(ChallengeDAO.GetInitializationValue(challengeId, _user1.UserID) == 0);
 
-            Log("Verifying User2's initialization value for the new Challenge ID");
-            Assert.AreEqual(50, _user2.ChallengeInitialValues[id]);
+                Log("Verifying User2's initialization value for the new Challenge ID");
+                Assert.IsTrue(ChallengeDAO.GetInitializationValue(challengeId, _user2.UserID) == 50);
+            }
         }
 
         /// <summary>
@@ -119,32 +134,43 @@ namespace ActivEarth.Tests.Competition.Challenges
         [TestMethod]
         public void TestChallengeProgressIncomplete()
         {
-            Log("Setting User2's initial Step statistic");
-            _user2.SetStatistic(Statistic.Steps, 50);
+            using (_trans)
+            {
+                Log("Creating test users in DB");
+                _user1.UserID = UserDAO.CreateNewUser(_user1, "pass1");
+                _user2.UserID = UserDAO.CreateNewUser(_user2, "pass1");
 
-            Log("Creating Step-Based Challenge");
-            int id = _manager.CreateChallenge("Test Challenge", "This is a test challenge",
-                30, false, DateTime.Today, 1, Statistic.Steps, 500);
+                Log("Setting users' initial Step statistic");
+                StatisticManager.SetUserStatistic(_user1.UserID, Statistic.Steps, 0);
+                StatisticManager.SetUserStatistic(_user2.UserID, Statistic.Steps, 50);
 
-            Challenge challenge = _manager.GetChallenge(id);
+                Log("Creating Step-Based Challenge");
+                int challengeId = ChallengeManager.CreateChallenge("Test Challenge", "This is a test challenge",
+                    30, false, DateTime.Today, 1, Statistic.Steps, 500);
 
-            Log("Increasing User1's Step Statistic");
-            _user1.SetStatistic(Statistic.Steps, 200);
+                ChallengeManager.InitializeUser(challengeId, _user1.UserID);
+                ChallengeManager.InitializeUser(challengeId, _user2.UserID);
 
-            Log("Increasing User2's Step Statistic");
-            _user2.SetStatistic(Statistic.Steps, 200);
+                Challenge challenge = ChallengeManager.GetChallenge(challengeId);
 
-            Log("Verifying User1's Challenge Progress");
-            Assert.AreEqual(40, challenge.GetProgress(_user1));
+                Log("Increasing User1's Step Statistic");
+                StatisticManager.SetUserStatistic(_user1.UserID, Statistic.Steps, 200);
 
-            Log("Verifying User2's Challenge Progress");
-            Assert.AreEqual(30, challenge.GetProgress(_user2));
+                Log("Increasing User2's Step Statistic");
+                StatisticManager.SetUserStatistic(_user2.UserID, Statistic.Steps, 200);
 
-            Log("Verifying User1 has not completed the Challenge");
-            Assert.IsFalse(challenge.IsComplete(_user1));
+                Log("Verifying User1's Challenge Progress");
+                Assert.AreEqual(40, ChallengeManager.GetProgress(challengeId, _user1.UserID));
 
-            Log("Verifying User2 has not completed the Challenge");
-            Assert.IsFalse(challenge.IsComplete(_user2));
+                Log("Verifying User2's Challenge Progress");
+                Assert.AreEqual(30, ChallengeManager.GetProgress(challengeId, _user2.UserID));
+
+                Log("Verifying User1 has not completed the Challenge");
+                Assert.IsFalse(ChallengeManager.IsComplete(challengeId, _user1.UserID));
+
+                Log("Verifying User2 has not completed the Challenge");
+                Assert.IsFalse(ChallengeManager.IsComplete(challengeId, _user2.UserID));
+            }
         }
 
         /// <summary>
@@ -163,32 +189,43 @@ namespace ActivEarth.Tests.Competition.Challenges
         [TestMethod]
         public void TestChallengeProgressComplete()
         {
-            Log("Setting User2's initial Step statistic");
-            _user2.SetStatistic(Statistic.Steps, 50);
+            using (_trans)
+            {
+                Log("Creating test users in DB");
+                _user1.UserID = UserDAO.CreateNewUser(_user1, "pass1");
+                _user2.UserID = UserDAO.CreateNewUser(_user2, "pass1");
 
-            Log("Creating Step-Based Challenge");
-            int id = _manager.CreateChallenge("Test Challenge", "This is a test challenge",
-                30, false, DateTime.Today, 1, Statistic.Steps, 500);
+                Log("Setting User2's initial Step statistic");
+                StatisticManager.SetUserStatistic(_user1.UserID, Statistic.Steps, 0);
+                StatisticManager.SetUserStatistic(_user2.UserID, Statistic.Steps, 50);
 
-            Challenge challenge = _manager.GetChallenge(id);
+                Log("Creating Step-Based Challenge");
+                int challengeId = ChallengeManager.CreateChallenge("Test Challenge", "This is a test challenge",
+                    30, false, DateTime.Today, 1, Statistic.Steps, 500);
 
-            Log("Increasing User1's Step Statistic");
-            _user1.SetStatistic(Statistic.Steps, 525);
+                ChallengeManager.InitializeUser(challengeId, _user1.UserID);
+                ChallengeManager.InitializeUser(challengeId, _user2.UserID);
 
-            Log("Increasing User2's Step Statistic");
-            _user2.SetStatistic(Statistic.Steps, 550);
+                Challenge challenge = ChallengeManager.GetChallenge(challengeId);
 
-            Log("Verifying User1's Challenge Progress");
-            Assert.AreEqual(100, challenge.GetProgress(_user1));
+                Log("Increasing User1's Step Statistic");
+                StatisticManager.SetUserStatistic(_user1.UserID, Statistic.Steps, 525);
 
-            Log("Verifying User2's Challenge Progress");
-            Assert.AreEqual(100, challenge.GetProgress(_user2));
+                Log("Increasing User2's Step Statistic");
+                StatisticManager.SetUserStatistic(_user2.UserID, Statistic.Steps, 550);
 
-            Log("Verifying User1 has completed the Challenge");
-            Assert.IsTrue(challenge.IsComplete(_user1));
+                Log("Verifying User1's Challenge Progress");
+                Assert.AreEqual(100, ChallengeManager.GetProgress(challengeId, _user1.UserID));
 
-            Log("Verifying User2 has completed the Challenge");
-            Assert.IsTrue(challenge.IsComplete(_user2));
+                Log("Verifying User2's Challenge Progress");
+                Assert.AreEqual(100, ChallengeManager.GetProgress(challengeId, _user2.UserID));
+
+                Log("Verifying User1 has completed the Challenge");
+                Assert.IsTrue(ChallengeManager.IsComplete(challengeId, _user1.UserID));
+
+                Log("Verifying User2 has completed the Challenge");
+                Assert.IsTrue(ChallengeManager.IsComplete(challengeId, _user2.UserID));
+            }
         }
 
         /// <summary>
@@ -208,36 +245,46 @@ namespace ActivEarth.Tests.Competition.Challenges
         [TestMethod]
         public void TestChallengeMultipleInitialization()
         {
-            Log("Setting User1's initial Step and Bike statistics");
-            _user1.SetStatistic(Statistic.Steps, 50);
-            _user1.SetStatistic(Statistic.BikeDistance, 100);
+            using (_trans)
+            {
+                Log("Creating test users in DB");
+                _user1.UserID = UserDAO.CreateNewUser(_user1, "pass1");
+                _user2.UserID = UserDAO.CreateNewUser(_user2, "pass1");
 
-            Log("Creating Step-based Challenge");
-            int id1 = _manager.CreateChallenge("Test Step Challenge", "This is a test challenge",
-                30, false, DateTime.Today, 1, Statistic.Steps, 500);
+                Log("Setting User1's initial Step and Bike statistics");
+                StatisticManager.SetUserStatistic(_user1.UserID, Statistic.Steps, 50);
+                StatisticManager.SetUserStatistic(_user1.UserID, Statistic.BikeDistance, 100);
 
-            Log("Creating Biking-based Challenge");
-            int id2 = _manager.CreateChallenge("Test Bike Challenge", "This is a test challenge",
-                30, false, DateTime.Today, 1, Statistic.BikeDistance, 500);
+                Log("Creating Step-based Challenge");
+                int challengeId1 = ChallengeManager.CreateChallenge("Test Step Challenge", "This is a test challenge",
+                    30, false, DateTime.Today, 1, Statistic.Steps, 500);
 
-            Log("Increasing User1's Step statistic");
-            _user1.SetStatistic(Statistic.Steps, 150);
+                Log("Creating Biking-based Challenge");
+                int challengeId2 = ChallengeManager.CreateChallenge("Test Bike Challenge", "This is a test challenge",
+                    30, false, DateTime.Today, 1, Statistic.BikeDistance, 500);
 
-            Log("Creating another Step-based Challenge");
-            int id3 = _manager.CreateChallenge("Test Step Challenge 2", "This is another test challenge",
-                30, false, DateTime.Today, 1, Statistic.Steps, 500);
+                Log("Locking initial values");
+                ChallengeManager.InitializeUser(challengeId1, _user1.UserID);
+                ChallengeManager.InitializeUser(challengeId2, _user1.UserID);
 
-            Log("Verifying initialization of first step-based challenge");
-            Assert.IsTrue(_user1.ChallengeInitialValues.ContainsKey(id1));
-            Assert.AreEqual(50, _user1.ChallengeInitialValues[id1]);
+                Log("Increasing User1's Step statistic");
+                StatisticManager.SetUserStatistic(_user1.UserID, Statistic.Steps, 150);
 
-            Log("Verifying initialization of biking-based challenge");
-            Assert.IsTrue(_user1.ChallengeInitialValues.ContainsKey(id2));
-            Assert.AreEqual(100, _user1.ChallengeInitialValues[id2]);
+                Log("Creating another Step-based Challenge");
+                int challengeId3 = ChallengeManager.CreateChallenge("Test Step Challenge 2", "This is another test challenge",
+                    30, false, DateTime.Today, 1, Statistic.Steps, 500);
 
-            Log("Verifying initialization of second step-based challenge");
-            Assert.IsTrue(_user1.ChallengeInitialValues.ContainsKey(id3));
-            Assert.AreEqual(150, _user1.ChallengeInitialValues[id3]);
+                ChallengeManager.InitializeUser(challengeId3, _user1.UserID);
+
+                Log("Verifying initialization of first step-based challenge");
+                Assert.AreEqual(50, ChallengeDAO.GetInitializationValue(challengeId1, _user1.UserID));
+
+                Log("Verifying initialization of biking-based challenge");
+                Assert.AreEqual(100, ChallengeDAO.GetInitializationValue(challengeId2, _user1.UserID));
+
+                Log("Verifying initialization of second step-based challenge");
+                Assert.AreEqual(150, ChallengeDAO.GetInitializationValue(challengeId3, _user1.UserID));
+            }
         }
 
         /// <summary>
@@ -258,34 +305,40 @@ namespace ActivEarth.Tests.Competition.Challenges
         [TestMethod]
         public void TestChallengeCleanup()
         {
-            Log("Creating an expired transient challenge");
-            int id1 = _manager.CreateChallenge("Test Step Challenge", "This is an expired transient challenge",
-                30, false, DateTime.Today.AddDays(-1), 1, Statistic.Steps, 500);
+            {
+                Log("Creating test users in DB");
+                _user1.UserID = UserDAO.CreateNewUser(_user1, "pass1");
+                _user2.UserID = UserDAO.CreateNewUser(_user2, "pass1");
 
-            Log("Creating an ongoing transient challenge");
-            int id2 = _manager.CreateChallenge("Test Bike Challenge", "This is an active transient challenge",
-                30, false, DateTime.Today, 1, Statistic.Steps, 500);
+                Log("Creating an expired transient challenge");
+                int challengeId1 = ChallengeManager.CreateChallenge("Test Step Challenge", "This is an expired transient challenge",
+                    30, false, DateTime.Today.AddDays(-1), 1, Statistic.Steps, 500);
 
-            Log("Creating an expired persistent challenge");
-            int id3 = _manager.CreateChallenge("Test Step Challenge 2", "This is a persistent challenge",
-                30, true, DateTime.Today.AddDays(-1), 1, Statistic.Steps, 500);
+                Log("Creating an ongoing transient challenge");
+                int challengeId2 = ChallengeManager.CreateChallenge("Test Bike Challenge", "This is an active transient challenge",
+                    30, false, DateTime.Today, 1, Statistic.Steps, 500);
 
-            Log("Verifying that all three challenges are in the active collection (before CleanUp)");
-            Assert.IsNotNull(_manager.GetChallenge(id1));
-            Assert.IsNotNull(_manager.GetChallenge(id2));
-            Assert.IsNotNull(_manager.GetChallenge(id3));
+                Log("Creating an expired persistent challenge");
+                int challengeId3 = ChallengeManager.CreateChallenge("Test Step Challenge 2", "This is a persistent challenge",
+                    30, true, DateTime.Today.AddDays(-1), 1, Statistic.Steps, 500);
 
-            Log("Call manager's CleanUp routine");
-            _manager.CleanUp();
+                Log("Verifying that all three challenges are in the active collection (before CleanUp)");
+                Assert.IsNotNull(ChallengeManager.GetChallenge(challengeId1));
+                Assert.IsNotNull(ChallengeManager.GetChallenge(challengeId2));
+                Assert.IsNotNull(ChallengeManager.GetChallenge(challengeId3));
 
-            Log("Verifying that the expired transient challenge is now inactive");
-            Assert.IsFalse(_manager.GetChallenge(id1).IsActive);
+                Log("Call manager's CleanUp routine");
+                ChallengeManager.CleanUp();
 
-            Log("Verifying that the valid transient challenge is still active");
-            Assert.IsTrue(_manager.GetChallenge(id2).IsActive);
+                Log("Verifying that the expired transient challenge is now inactive");
+                Assert.IsFalse(ChallengeManager.GetChallenge(challengeId1).IsActive);
 
-            Log("Verifying that the persistent challenge is still active");
-            Assert.IsTrue(_manager.GetChallenge(id3).IsActive);
+                Log("Verifying that the valid transient challenge is still active");
+                Assert.IsTrue(ChallengeManager.GetChallenge(challengeId2).IsActive);
+
+                Log("Verifying that the persistent challenge is still active");
+                Assert.IsTrue(ChallengeManager.GetChallenge(challengeId3).IsActive);
+            }
         }
 
         /// <summary>
@@ -304,36 +357,46 @@ namespace ActivEarth.Tests.Competition.Challenges
         [TestMethod]
         public void TestChallengeResetPersistentChallenge()
         {
-            Log("Creating an expired persistent challenge");
-            int id = _manager.CreateChallenge("Test Step Challenge", "This is a persistent challenge",
-                30, true, DateTime.Today.AddDays(-1), 1, Statistic.Steps, 500);
+            using (_trans)
+            {
+                Log("Creating test users in DB");
+                _user1.UserID = UserDAO.CreateNewUser(_user1, "pass1");
+                StatisticManager.SetUserStatistic(_user1.UserID, Statistic.Steps, 0);
 
-            Log("Fetching challenge from DB");
-            Challenge challenge = _manager.GetChallenge(id);
+                Log("Creating an expired persistent challenge");
+                int challengeId = ChallengeManager.CreateChallenge("Test Step Challenge", "This is a persistent challenge",
+                    30, true, DateTime.Today.AddDays(-1), 1, Statistic.Steps, 500);
 
-            Log("Increasing User1's steps Statistic");
-            _user1.SetStatistic(Statistic.Steps, _user1.GetStatistic(Statistic.Steps) + 250);
+                Log("Locking initial values");
+                ChallengeManager.InitializeUser(challengeId, _user1.UserID);
 
-            Log("Verifying challenge progress");
-            Assert.AreEqual(50, challenge.GetProgress(_user1));
+                Log("Increasing User1's steps Statistic");
+                StatisticManager.SetUserStatistic(_user1.UserID, Statistic.Steps, 250);
 
-            Log("Calling manager's CleanUp routine");
-            _manager.CleanUp();
+                Log("Verifying challenge progress");
+                Assert.AreEqual(50, ChallengeManager.GetProgress(challengeId, _user1.UserID));
 
-            Log("Refreshing challenge from DB");
-            challenge = _manager.GetChallenge(id);
+                Log("Calling manager's CleanUp routine");
+                ChallengeManager.CleanUp();
 
-            Log("Verifying that challenge progress reset");
-            Assert.AreEqual(0, challenge.GetProgress(_user1));
+                Log("Verifying that challenge progress reset");
+                Assert.AreEqual(0, ChallengeManager.GetProgress(challengeId, _user1.UserID));
 
-            Log("Increasing User1's steps Statistic");
-            _user1.SetStatistic(Statistic.Steps, _user1.GetStatistic(Statistic.Steps) + 200);
+                Log("Re-locking initial value");
+                ChallengeManager.InitializeUser(challengeId, _user1.UserID);
 
-            Log("Verifying challenge progress");
-            Assert.AreEqual(40, challenge.GetProgress(_user1));
+                Log("Increasing User1's steps Statistic");
+                StatisticManager.SetUserStatistic(_user1.UserID, Statistic.Steps, 450);
 
-            Log("Verifying new end time");
-            Assert.AreEqual(DateTime.Today.AddDays(1), challenge.EndTime);
+                Log("Verifying challenge progress");
+                Assert.AreEqual(40, ChallengeManager.GetProgress(challengeId, _user1.UserID));
+
+                Log("Retrieving challenge from DB");
+                Challenge challenge = ChallengeDAO.GetChallengeFromChallengeId(challengeId);
+
+                Log("Verifying new end time");
+                Assert.AreEqual(DateTime.Today.AddDays(1), challenge.EndTime);
+            }
         }
 
         #endregion ---------- Test Cases ----------

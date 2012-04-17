@@ -104,12 +104,6 @@ namespace ActivEarth.Objects.Profile
             set;
         }
 
-        public Dictionary<int, float> ChallengeInitialValues
-        {
-            get;
-            set;
-        }
-
         public ActivityScore ActivityScore
         {
             get;
@@ -150,8 +144,6 @@ namespace ActivEarth.Objects.Profile
         {
             this.FirstName = firstname;
             this.LastName = lastname;
-
-            this.ChallengeInitialValues = new Dictionary<int, float>();
 
             _stats = new Dictionary<Statistic, UserStatistic>();
 

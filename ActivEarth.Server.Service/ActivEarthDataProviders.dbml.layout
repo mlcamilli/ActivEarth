@@ -14,7 +14,7 @@
         <elementListCompartment Id="78e6d7af-4e77-4492-8b53-07ca5cd3b534" absoluteBounds="0.515, 5.46, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(2.5 : 5.50423872949219); (3.04166666666667 : 5.50423872949219 : JumpStart); (3.20833333333333 : 5.50423872949219 : JumpEnd); (3.375 : 5.50423872949219)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(2.5 : 5.50423872949219); (3.375 : 5.50423872949219)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/ActivEarthDataProvidersDataContext/UserDataProvider/UserDataProvider_ProfileDataProvider" />
       <nodes>
         <classShapeMoniker Id="3e8324b9-399b-4069-bdc7-7aded2dfc2e7" />
@@ -33,33 +33,13 @@
         <elementListCompartment Id="902318b0-af1a-4fb2-b088-5e5b3c5565cf" absoluteBounds="0.51500000000000012, 9.96, 1.9700000000000002, 2.7493082682291665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="58faf8a5-6acf-473c-b7da-16b8a758b37c" absoluteBounds="6, 10.125, 2, 1.7708968098958327">
-      <DataClassMoniker Name="/ActivEarthDataProvidersDataContext/TeamMemberDataProvider" />
-      <nestedChildShapes>
-        <elementListCompartment Id="8d80c30d-8ee0-4c10-b66c-46e77305d315" absoluteBounds="6.015, 10.585, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
     <classShape Id="79e05f96-5a6d-4346-9c78-f6f7aa4e7f4d" absoluteBounds="3.375, 10.25, 2, 1.5785953776041666">
       <DataClassMoniker Name="/ActivEarthDataProvidersDataContext/TeamDataProvider" />
       <nestedChildShapes>
         <elementListCompartment Id="7c1f08c9-e80b-4c08-82a4-71848fe12e08" absoluteBounds="3.3900000000000006, 10.71, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(5.375 : 7.31655110677083); (6.34375 : 7.31655110677083); (6.34375 : 10.125)]" fixedFrom="NotFixed" fixedTo="NotFixed">
-      <AssociationMoniker Name="/ActivEarthDataProvidersDataContext/ProfileDataProvider/ProfileDataProvider_TeamMemberDataProvider" />
-      <nodes>
-        <classShapeMoniker Id="9bb1702d-ae42-4e39-b110-5325cd3e0737" />
-        <classShapeMoniker Id="58faf8a5-6acf-473c-b7da-16b8a758b37c" />
-      </nodes>
-    </associationConnector>
-    <associationConnector edgePoints="[(5.375 : 11.0392976888021); (6 : 11.0392976888021)]" fixedFrom="NotFixed" fixedTo="NotFixed">
-      <AssociationMoniker Name="/ActivEarthDataProvidersDataContext/TeamDataProvider/TeamDataProvider_TeamMemberDataProvider" />
-      <nodes>
-        <classShapeMoniker Id="79e05f96-5a6d-4346-9c78-f6f7aa4e7f4d" />
-        <classShapeMoniker Id="58faf8a5-6acf-473c-b7da-16b8a758b37c" />
-      </nodes>
-    </associationConnector>
-    <associationConnector edgePoints="[(2.5 : 11.0392976888021); (3.375 : 11.0392976888021)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(2.5 : 11.0392976888021); (2.97916666666667 : 11.0392976888021 : JumpStart); (3.14583333333333 : 11.0392976888021 : JumpEnd); (3.375 : 11.0392976888021)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/ActivEarthDataProvidersDataContext/ContestDataProvider/ContestDataProvider_TeamDataProvider" />
       <nodes>
         <classShapeMoniker Id="2c3e3669-6836-40a2-96c9-40e59b10c4e3" />
@@ -79,23 +59,10 @@
         <classShapeMoniker Id="71aae01b-9aed-4edd-8b53-63a55696a73f" />
       </nodes>
     </associationConnector>
-    <classShape Id="58f10e10-8ca3-4899-a00c-a6c9fd232e5e" absoluteBounds="6.75, 4.875, 2, 1.7708968098958331">
-      <DataClassMoniker Name="/ActivEarthDataProvidersDataContext/BadgeDataProvider" />
-      <nestedChildShapes>
-        <elementListCompartment Id="295b8885-6817-4211-a469-8e842fd441cf" absoluteBounds="6.765, 5.335, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <associationConnector edgePoints="[(5.375 : 5.40625); (6.75 : 5.40625)]" fixedFrom="NotFixed" fixedTo="NotFixed">
-      <AssociationMoniker Name="/ActivEarthDataProvidersDataContext/ProfileDataProvider/ProfileDataProvider_BadgeDataProvider" />
-      <nodes>
-        <classShapeMoniker Id="9bb1702d-ae42-4e39-b110-5325cd3e0737" />
-        <classShapeMoniker Id="58f10e10-8ca3-4899-a00c-a6c9fd232e5e" />
-      </nodes>
-    </associationConnector>
-    <classShape Id="4ebd45e6-f9db-4fe9-8cf4-fc3620878ef6" absoluteBounds="3.375, 12.625, 2, 1.9631982421875">
+    <classShape Id="4ebd45e6-f9db-4fe9-8cf4-fc3620878ef6" absoluteBounds="8.5, 10.125, 2, 1.9631982421875">
       <DataClassMoniker Name="/ActivEarthDataProvidersDataContext/BadgeConstantsDataProvider" />
       <nestedChildShapes>
-        <elementListCompartment Id="5b2ec0b3-3b3e-4881-a37a-04cb215492fc" absoluteBounds="3.3899999999999997, 13.085, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="5b2ec0b3-3b3e-4881-a37a-04cb215492fc" absoluteBounds="8.515, 10.585, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
     <classShape Id="2c6e1ed3-1f8d-4b5a-8fda-13a61219c525" absoluteBounds="6, 12.625, 2, 1.5785953776041666">
@@ -169,14 +136,14 @@
         <classShapeMoniker Id="a4943361-cce5-49a6-990e-d89f5be99336" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.5 : 6.07097245898438); (3.125 : 6.07097245898438); (3.125 : 4.625); (3.20188479226762 : 4.625 : JumpStart); (3.36855145893429 : 4.625 : JumpEnd); (5.44386555989584 : 4.625 : JumpStart); (5.6105322265625 : 4.625 : JumpEnd); (7.75 : 4.625); (7.75 : 4.4151025390625)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(2.5 : 5.51872615713892); (3.125 : 5.51872615713892); (3.125 : 4.75); (3.12688479226762 : 4.75 : JumpStart); (3.33333333333333 : 4.75 : JumpEnd); (5.56886555989584 : 4.75 : JumpStart); (5.7355322265625 : 4.75 : JumpEnd); (7.75 : 4.75); (7.75 : 4.4151025390625)]" fixedFrom="Algorithm" fixedTo="NotFixed">
       <AssociationMoniker Name="/ActivEarthDataProvidersDataContext/UserDataProvider/UserDataProvider_MessageDataProvider" />
       <nodes>
         <classShapeMoniker Id="3e8324b9-399b-4069-bdc7-7aded2dfc2e7" />
         <classShapeMoniker Id="a4943361-cce5-49a6-990e-d89f5be99336" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.5 : 9.50153746153846); (2.875 : 9.12653746153846); (2.875 : 10.0112939453125); (3 : 10.0112939453125); (3.375 : 9.6362939453125)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(2.5 : 9.50153746153846); (2.875 : 9.12653746153846); (2.875 : 10.0112939453125); (3 : 10.0112939453125); (3.00357443490112 : 10.0077195104114 : JumpStart); (3.12142556509888 : 9.88986838021362 : JumpEnd); (3.375 : 9.6362939453125)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/ActivEarthDataProvidersDataContext/ContestDataProvider/ContestDataProvider_GroupContestDataProvider" />
       <nodes>
         <classShapeMoniker Id="2c3e3669-6836-40a2-96c9-40e59b10c4e3" />
@@ -197,10 +164,63 @@
       </nestedChildShapes>
     </classShape>
     <associationConnector edgePoints="[(0.5 : 5); (0.125 : 4.625); (0.125 : 2.45359537760417); (0.5 : 2.07859537760417)]" fixedFrom="NotFixed" fixedTo="NotFixed">
-      <AssociationMoniker Name="/ActivEarthDataProvidersDataContext/UserDataProvider/UserDataProvider_user_statistic" />
+      <AssociationMoniker Name="/ActivEarthDataProvidersDataContext/UserDataProvider/UserDataProvider_UserStatisticDataProvider" />
       <nodes>
         <classShapeMoniker Id="3e8324b9-399b-4069-bdc7-7aded2dfc2e7" />
         <classShapeMoniker Id="0dd97249-1d3b-4023-aa5b-5e2f36eab116" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="c20308d4-7b6c-495a-840f-8ea43e6b5c79" absoluteBounds="3.375, 13, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/ActivEarthDataProvidersDataContext/ChallengeInitializationDataProvider" />
+      <nestedChildShapes>
+        <elementListCompartment Id="27d73922-8c1a-46c1-8b51-7661c616946c" absoluteBounds="3.3899999999999997, 13.46, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="b37f191e-24fc-4bc5-beeb-061e041220b7" absoluteBounds="6, 10.25, 2, 1.7708968098958331">
+      <DataClassMoniker Name="/ActivEarthDataProvidersDataContext/TeamMemberDataProvider" />
+      <nestedChildShapes>
+        <elementListCompartment Id="8858aa6a-1881-4e1b-b6d3-bd39c8d8e139" absoluteBounds="6.015, 10.71, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="8cc14453-4f71-47f1-b37a-1b8e6cd65b5e" absoluteBounds="6.75, 5, 2, 1.7708968098958331">
+      <DataClassMoniker Name="/ActivEarthDataProvidersDataContext/BadgeDataProvider" />
+      <nestedChildShapes>
+        <elementListCompartment Id="7668ada1-9c00-41bb-8d0c-0ff92daa253e" absoluteBounds="6.765, 5.46, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(2.5 : 13.7892976888021); (3.375 : 13.7892976888021)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/ActivEarthDataProvidersDataContext/ChallengeDataProvider/ChallengeDataProvider_ChallengeInitializationDataProvider" />
+      <nodes>
+        <classShapeMoniker Id="d0440aa2-db5c-4dbc-8edc-83632b2813be" />
+        <classShapeMoniker Id="c20308d4-7b6c-495a-840f-8ea43e6b5c79" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.5 : 6.3244429077524); (3.0625 : 6.8869429077524); (3.0625 : 13.363396844401); (3.375 : 13.363396844401)]" fixedFrom="NotFixed" fixedTo="Algorithm">
+      <AssociationMoniker Name="/ActivEarthDataProvidersDataContext/UserDataProvider/UserDataProvider_ChallengeInitializationDataProvider" />
+      <nodes>
+        <classShapeMoniker Id="3e8324b9-399b-4069-bdc7-7aded2dfc2e7" />
+        <classShapeMoniker Id="c20308d4-7b6c-495a-840f-8ea43e6b5c79" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.375 : 11.0392976888021); (6 : 11.0392976888021)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/ActivEarthDataProvidersDataContext/TeamDataProvider/TeamDataProvider_TeamMemberDataProvider" />
+      <nodes>
+        <classShapeMoniker Id="79e05f96-5a6d-4346-9c78-f6f7aa4e7f4d" />
+        <classShapeMoniker Id="b37f191e-24fc-4bc5-beeb-061e041220b7" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.5 : 6.00215620750701); (3.25 : 6.00215620750701); (3.25 : 8); (5.54166666666667 : 8 : JumpStart); (5.70833333333333 : 8 : JumpEnd); (7 : 8); (7 : 10.25)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/ActivEarthDataProvidersDataContext/UserDataProvider/UserDataProvider_TeamMemberDataProvider" />
+      <nodes>
+        <classShapeMoniker Id="3e8324b9-399b-4069-bdc7-7aded2dfc2e7" />
+        <classShapeMoniker Id="b37f191e-24fc-4bc5-beeb-061e041220b7" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.5 : 5.51872615713892); (3.25 : 5.51872615713892); (3.25 : 4.625); (5.44386555989584 : 4.625 : JumpStart); (5.6105322265625 : 4.625 : JumpEnd); (7.75 : 4.625); (7.75 : 5)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/ActivEarthDataProvidersDataContext/UserDataProvider/UserDataProvider_BadgeDataProvider" />
+      <nodes>
+        <classShapeMoniker Id="3e8324b9-399b-4069-bdc7-7aded2dfc2e7" />
+        <classShapeMoniker Id="8cc14453-4f71-47f1-b37a-1b8e6cd65b5e" />
       </nodes>
     </associationConnector>
   </nestedChildShapes>

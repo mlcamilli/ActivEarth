@@ -17,9 +17,11 @@ namespace ActivEarth.Server.Service.Competition
     /// </summary>
     public class ChallengeManager
     {
-        public ChallengeManager(Group allUsers)
+        /// <summary>
+        /// Private constructor, can't instantiate class.
+        /// </summary>
+        private ChallengeManager()
         {
-            _allUsers = allUsers;
         }
 
         #region ---------- Static Methods ----------
@@ -36,15 +38,13 @@ namespace ActivEarth.Server.Service.Competition
         /// <param name="statistic">Statistic on which the Challenge is based.</param>
         /// <param name="requirement">Statistic value required to complete the challenge.</param>
         /// <returns></returns>
-        public int CreateChallenge(string name, string description, int points, bool persistent,
+        public static int CreateChallenge(string name, string description, int points, bool persistent,
             DateTime start, int durationInDays, Statistic statistic, float requirement)
         {
             Challenge newChallenge = new Challenge(name, description, points, persistent,
                     start, durationInDays, statistic, requirement);
 
             int id = ChallengeDAO.CreateNewChallenge(newChallenge);
-
-            LockInitialValues(id, statistic);
 
             return id;
         }
@@ -55,7 +55,7 @@ namespace ActivEarth.Server.Service.Competition
         /// <param name="id">ID of the Challenge to be retrieved.</param>
         /// false to search only active challenges.</param>
         /// <returns>Challenge with ID matching the provided ID, null if no match is found.</returns>
-        public Challenge GetChallenge(int id)
+        public static Challenge GetChallenge(int id)
         {
             return ChallengeDAO.GetChallengeFromChallengeId(id);
         }
@@ -64,78 +64,99 @@ namespace ActivEarth.Server.Service.Competition
         /// Cleans up the challenge list, moving expired transient challenges to the archive
         /// and refreshing persistent challenges. Should be called daily at the challenge cutoff time.
         /// </summary>
-        public void CleanUp()
+        public static void CleanUp()
         {
             foreach (Challenge challenge in ChallengeDAO.GetActiveChallenges())
             {
                 if (challenge.EndTime <= DateTime.Now)
                 {
+                    ChallengeDAO.RemoveInitializationValues(challenge.ID);
+
                     if (challenge.IsPersistent)
                     {
                         challenge.EndTime = challenge.EndTime.Add(challenge.Duration);
-                        ChallengeDAO.UpdateChallenge(challenge);
-
-                        this.LockInitialValues(challenge.ID, challenge.StatisticBinding);
                     }
                     else
                     {
-                        this.RemoveInitializationValues(challenge.ID);
-
                         challenge.IsActive = false;
-                        ChallengeDAO.UpdateChallenge(challenge);
                     }
+
+                    ChallengeDAO.UpdateChallenge(challenge);
                 }
             }
+        }
+
+        /// <summary>
+        /// Sets a user's initial value for a challenge (to allow calculation of the
+        /// user's delta from the beginning of the challenge).
+        /// </summary>
+        public static void InitializeUser(int challengeId, int userId)
+        {
+            Statistic statistic = ChallengeDAO.GetStatisticFromChallengeId(challengeId);
+            UserStatistic userStat = UserStatisticDAO.GetStatisticFromUserIdAndStatType(userId, statistic);
+
+            if (userStat == null)
+            {
+                UserStatisticDAO.CreateNewStatisticForUser(userId, statistic, 0);
+                userStat = UserStatisticDAO.GetStatisticFromUserIdAndStatType(userId, statistic);
+            };
+
+            ChallengeDAO.CreateInitializationEntry(challengeId, userId, userStat.value);
+        }
+
+
+        /// <summary>
+        /// Gets the progress made by a user in the challenge as a percentage (0-100).
+        /// </summary>
+        /// <param name="challengeId">The challenge to evaluate progress for.</param>
+        /// <param name="userId">The user to evaluate.</param>
+        /// <returns>User's progress in the challenge (for use in a progress bar).</returns>
+        public static int GetProgress(int challengeId, int userId)
+        {
+            Challenge challenge = ChallengeDAO.GetChallengeFromChallengeId(challengeId);
+
+            float initial = ChallengeDAO.GetInitializationValue(challengeId, userId);
+            UserStatistic current = UserStatisticDAO.GetStatisticFromUserIdAndStatType(userId, challenge.StatisticBinding);
+
+            if (initial >= 0 && current != null)
+            {
+                return Math.Min((int)(100 * (current.value - initial) / challenge.Requirement), 100);
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
+        /// <summary>
+        /// Returns the formatted text progress report for the Challenge (e.g., "34.5 / 40.0").
+        /// </summary>
+        /// <param name="challengeId">Challenge to report progress for.</param>
+        /// <param name="userId">User to evaluate.</param>
+        /// <returns>Formatted text progress report for the Challenge.</returns>
+        public static string GetFormattedProgress(int challengeId, int userId)
+        {
+            Challenge challenge = ChallengeDAO.GetChallengeFromChallengeId(challengeId);
+            UserStatistic statistic = UserStatisticDAO.GetStatisticFromUserIdAndStatType(userId, challenge.StatisticBinding);
+
+            string numerator = String.Format(challenge.FormatString, (statistic != null ? statistic.value : 0));
+            string denominator = String.Format(challenge.FormatString, challenge.Requirement);
+
+            return String.Format("{0} / {1}", numerator, denominator);
+        }
+
+        /// <summary>
+        /// Returns true if the user has met the requirements to complete the challenge,
+        /// false otherwise.
+        /// </summary>
+        /// <param name="challengeId">Challenge to test for completion.</param>
+        /// <param name="userId">User to evaluate.</param>
+        /// <returns>Whether or not the user has completed the challenge.</returns>
+        public static bool IsComplete(int challengeId, int userId)
+        {
+            return (ChallengeManager.GetProgress(challengeId, userId) == 100);
         }
 
         #endregion ---------- Public Methods ----------
-
-        #region ---------- Private Methods ----------
-
-        /// <summary>
-        /// Sets the initial statistic value for each ActivEarth user upon creation
-        /// of a new challenge, so that the progress during the duration of the challenge
-        /// can be calculated.
-        /// </summary>
-        /// <param name="id">Identifier for the challenge being initialized.</param>
-        /// <param name="statistic">Statistic being tracked by the challenge.</param>
-        private void LockInitialValues(int id, Statistic statistic)
-        {
-            foreach (User user in _allUsers.Members)
-            {
-                if (user != null)
-                {
-                    user.ChallengeInitialValues[id] = user.GetStatistic(statistic);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Removes the initialization values of an expired challenge from the
-        /// users' records.
-        /// </summary>
-        /// <param name="id">Expired challenge to remove initialization information for.</param>
-        private void RemoveInitializationValues(int id)
-        {
-            foreach (User user in _allUsers.Members)
-            {
-                if (user != null)
-                {
-                    user.ChallengeInitialValues.Remove(id);
-                }
-            }
-
-        }
-
-        #endregion ---------- Private Methods ----------
-
-        #region ---------- Private Fields ----------
-
-        /// <summary>
-        /// Group of all users, who must be updated with the creation of new challenges.
-        /// </summary>
-        private Group _allUsers;
-
-        #endregion ---------- Private Fields ----------
     }
 }

@@ -30,7 +30,7 @@ ALTER TABLE [dbo].[team_members] CHECK CONSTRAINT [fk_team_id]
 GO
 
 ALTER TABLE [dbo].[team_members]  WITH CHECK ADD  CONSTRAINT [fk_user_id_teams] FOREIGN KEY([user_id])
-REFERENCES [dbo].[profile] ([id])
+REFERENCES [dbo].[users] ([id])
 GO
 
 ALTER TABLE [dbo].[team_members] CHECK CONSTRAINT [fk_user_id_teams]

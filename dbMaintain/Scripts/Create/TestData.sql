@@ -13,6 +13,11 @@ insert into ActivEarth_Dev.dbo.statistic_info Values (2, 'Distance Biked', '{0:0
 insert into ActivEarth_Dev.dbo.statistic_info Values (3, 'Distance Ran', '{0:0.0}')
 insert into ActivEarth_Dev.dbo.statistic_info Values (4, 'Gas Money Saved', '${0:0.00}')
 insert into ActivEarth_Dev.dbo.statistic_info Values (5, 'Challenges Completed', '{0}')
+insert into ActivEarth_Dev.dbo.statistic_info Values (6, 'Total Distance', '{0:0.0}')
+insert into ActivEarth_Dev.dbo.statistic_info Values (7, 'Total Time', '{0:0.00}')
+insert into ActivEarth_Dev.dbo.statistic_info Values (8, 'Time Walking', '{0:0.00}')
+insert into ActivEarth_Dev.dbo.statistic_info Values (9, 'Time Biking', '{0:0.00}')
+insert into ActivEarth_Dev.dbo.statistic_info Values (10, 'Time Running', '{0:0.00}')
 
 insert into ActivEarth_Dev.dbo.badge_level_info Values (0, 0, 0, 0, '~/Images/Competition/Badges/Steps/None.png')
 insert into ActivEarth_Dev.dbo.badge_level_info Values (0, 1, 30000, 50, '~/Images/Competition/Badges/Steps/Bronze.png')

@@ -23,7 +23,7 @@ CREATE TABLE [dbo].[badges](
 GO
 
 ALTER TABLE [dbo].[badges]  WITH CHECK ADD  CONSTRAINT [FK_badges_user_id] FOREIGN KEY([user_id])
-REFERENCES [dbo].[profile] ([id])
+REFERENCES [dbo].[users] ([id])
 GO
 
 ALTER TABLE [dbo].[badges] CHECK CONSTRAINT [FK_badges_user_id]
