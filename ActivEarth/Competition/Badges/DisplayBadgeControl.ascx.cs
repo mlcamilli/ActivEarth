@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using ActivEarth.Objects.Competition.Badges;
+using ActivEarth.Server.Service.Competition;
 
 namespace ActivEarth.Competition.Badges
 {
@@ -19,7 +20,7 @@ namespace ActivEarth.Competition.Badges
             _badgeName.Text = badge.Name;
             _badgeImage.ImageUrl = badge.ImagePath;
             _activityPointsValue.Text = badge.GetNextLevelReward().ToString();
-            _badgeProgressNumerical.Text = badge.GetFormattedProgress();
+            _badgeProgressNumerical.Text = BadgeManager.GetFormattedProgress(badge.ID);
             _badgeProgressBar.Value = badge.Progress;
 
             if (badge.IsComplete())

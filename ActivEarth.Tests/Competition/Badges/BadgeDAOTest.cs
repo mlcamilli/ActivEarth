@@ -68,7 +68,7 @@ namespace ActivEarth.Tests.Competition.Badges
             User user1 = UserDAO.GetUserFromUserId(user1ID);
 
             Log("Creating Step Badge");
-            Badge stepBadge = BadgeManager.CreateBadge(user1, Statistic.Steps);
+            Badge stepBadge = BadgeManager.CreateBadge(user1ID, Statistic.Steps);
 
             for (int level = BadgeLevels.None; level <= BadgeLevels.Max; level++)
             {
@@ -103,18 +103,18 @@ namespace ActivEarth.Tests.Competition.Badges
             User user2 = UserDAO.GetUserFromUserId(user2ID);
 
             Log("Creating 6 badges for user1");
-            BadgeManager.CreateBadge(user1, Statistic.Steps);
-            BadgeManager.CreateBadge(user1, Statistic.BikeDistance);
-            BadgeManager.CreateBadge(user1, Statistic.RunDistance);
-            BadgeManager.CreateBadge(user1, Statistic.WalkDistance);
-            BadgeManager.CreateBadge(user1, Statistic.GasSavings);
-            BadgeManager.CreateBadge(user1, Statistic.ChallengesCompleted);
+            BadgeManager.CreateBadge(user1ID, Statistic.Steps);
+            BadgeManager.CreateBadge(user1ID, Statistic.BikeDistance);
+            BadgeManager.CreateBadge(user1ID, Statistic.RunDistance);
+            BadgeManager.CreateBadge(user1ID, Statistic.WalkDistance);
+            BadgeManager.CreateBadge(user1ID, Statistic.GasSavings);
+            BadgeManager.CreateBadge(user1ID, Statistic.ChallengesCompleted);
 
             Log("Creating 4 badges for user2");
-            BadgeManager.CreateBadge(user2, Statistic.Steps);
-            BadgeManager.CreateBadge(user2, Statistic.BikeDistance);
-            BadgeManager.CreateBadge(user2, Statistic.RunDistance);
-            BadgeManager.CreateBadge(user2, Statistic.WalkDistance);
+            BadgeManager.CreateBadge(user2ID, Statistic.Steps);
+            BadgeManager.CreateBadge(user2ID, Statistic.BikeDistance);
+            BadgeManager.CreateBadge(user2ID, Statistic.RunDistance);
+            BadgeManager.CreateBadge(user2ID, Statistic.WalkDistance);
 
             Log("Verifying user1's badge count");
             Assert.AreEqual(6, BadgeDAO.GetBadgesFromUserId(user1ID).Count);
@@ -143,12 +143,12 @@ namespace ActivEarth.Tests.Competition.Badges
             User user2 = UserDAO.GetUserFromUserId(user2ID);
 
             Log("Creating badges for user1");
-            BadgeManager.CreateBadge(user1, Statistic.Steps);
-            BadgeManager.CreateBadge(user1, Statistic.BikeDistance);
-            BadgeManager.CreateBadge(user1, Statistic.RunDistance);
-            BadgeManager.CreateBadge(user1, Statistic.WalkDistance);
-            BadgeManager.CreateBadge(user1, Statistic.GasSavings);
-            BadgeManager.CreateBadge(user1, Statistic.ChallengesCompleted);
+            BadgeManager.CreateBadge(user1ID, Statistic.Steps);
+            BadgeManager.CreateBadge(user1ID, Statistic.BikeDistance);
+            BadgeManager.CreateBadge(user1ID, Statistic.RunDistance);
+            BadgeManager.CreateBadge(user1ID, Statistic.WalkDistance);
+            BadgeManager.CreateBadge(user1ID, Statistic.GasSavings);
+            BadgeManager.CreateBadge(user1ID, Statistic.ChallengesCompleted);
 
             Log("Retrieving badge");
             Badge badge = BadgeDAO.GetBadgeFromUserIdAndStatistic(user1ID, Statistic.Steps);
@@ -173,8 +173,8 @@ namespace ActivEarth.Tests.Competition.Badges
                 User user1 = UserDAO.GetUserFromUserId(user1ID);
 
                 Log("Creating badges for user1");
-                BadgeManager.CreateBadge(user1, Statistic.Steps);
-                BadgeManager.CreateBadge(user1, Statistic.GasSavings);
+                BadgeManager.CreateBadge(user1ID, Statistic.Steps);
+                BadgeManager.CreateBadge(user1ID, Statistic.GasSavings);
 
                 Log("Retrieving badge");
                 Badge stepBadge = BadgeDAO.GetBadgeFromUserIdAndStatistic(user1ID, Statistic.Steps);
@@ -199,8 +199,8 @@ namespace ActivEarth.Tests.Competition.Badges
                 User user1 = UserDAO.GetUserFromUserId(user1ID);
 
                 Log("Creating badges for user1");
-                BadgeManager.CreateBadge(user1, Statistic.Steps);
-                BadgeManager.CreateBadge(user1, Statistic.GasSavings);
+                BadgeManager.CreateBadge(user1ID, Statistic.Steps);
+                BadgeManager.CreateBadge(user1ID, Statistic.GasSavings);
 
                 Log("Retrieving badge");
                 Badge stepBadge = BadgeDAO.GetBadgeFromUserIdAndStatistic(user1ID, Statistic.Steps);

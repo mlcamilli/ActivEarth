@@ -25,12 +25,12 @@ namespace ActivEarth.Competition.Badges
                 List<Badge> badges = BadgeDAO.GetBadgesFromUserId(user.UserID);
                 if (badges == null || badges.Count == 0)
                 {
-                    BadgeManager.CreateBadge(user, Statistic.Steps);
-                    BadgeManager.CreateBadge(user, Statistic.WalkDistance);
-                    BadgeManager.CreateBadge(user, Statistic.RunDistance);
-                    BadgeManager.CreateBadge(user, Statistic.BikeDistance);
-                    BadgeManager.CreateBadge(user, Statistic.ChallengesCompleted);
-                    BadgeManager.CreateBadge(user, Statistic.GasSavings);
+                    BadgeManager.CreateBadge(user.UserID, Statistic.Steps);
+                    BadgeManager.CreateBadge(user.UserID, Statistic.WalkDistance);
+                    BadgeManager.CreateBadge(user.UserID, Statistic.RunDistance);
+                    BadgeManager.CreateBadge(user.UserID, Statistic.BikeDistance);
+                    BadgeManager.CreateBadge(user.UserID, Statistic.ChallengesCompleted);
+                    BadgeManager.CreateBadge(user.UserID, Statistic.GasSavings);
                     badges = BadgeDAO.GetBadgesFromUserId(user.UserID);
                 }
 
