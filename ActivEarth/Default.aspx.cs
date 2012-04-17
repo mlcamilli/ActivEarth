@@ -19,6 +19,7 @@ namespace ActivEarth
             if(Session["userdetails"] == null)
             {
                 lblMainUserName.Text = "Please Login";
+                hlAccessProfile.Visible = false;
             }else
             {
                 var userDetails = (User)Session["userdetails"];

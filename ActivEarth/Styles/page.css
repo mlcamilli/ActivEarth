@@ -1,0 +1,233 @@
+/*Any green you use color1*/
+/*Any blue you use color2*/
+.color1 {color: #76ed87}
+.color2 {color: #1493fa}
+
+/*Any body text, White background, Black writing, Left aligned*/
+body {
+	margin: 5px;
+	padding: 5px;
+	text-align: left;
+	font-family:"Adobe Garamond Pro Bold", Georgia, "Times New Roman", Times, serif;
+	font-size: 12px;
+	color: #000000;
+	background: #ffffff;
+	background-repeat:repeat-x;
+}
+/*Auto-margins, left alignement.*/
+*
+{
+  margin: 0 auto 0 auto;
+ text-align:left;
+    position: relative;
+}
+/*If this becomes the inner lock, width may have to be adjusted.*/
+#page
+{
+  display: block; 
+  height:auto;
+  position: relative; 
+  overflow: hidden; 
+  width: 650px;
+}
+
+/*Links need to be white or black, all widges/margins can be adjusted.*/
+.topNaviagationLink
+{
+text-align:center;
+position:relative;
+margin-top:15px;
+font-size:18px;
+margin-left:+60px;  /*This will have to be changed based on how many links there are*/
+width:140px;
+height: 35px;
+line-height: 35px;
+float:left;
+color:#000000;
+font-family:"Adobe Garamond Pro Bold", Georgia, "Times New Roman", Times, serif;
+}
+
+.topNaviagationLink a
+{
+text-decoration:none;
+text-align:center;
+color:#000000;
+}
+
+.topNaviagationLink a:hover
+{
+text-align:center;
+border-bottom:none;
+color:#0C61C9;
+display: block;
+width:121px;
+height: 35px;
+line-height: 35px;
+background-image:url(tab.png);
+
+}
+
+/*Any image that needs to be centered on whole page*/
+.centeredImage
+{
+  text-align:center;
+  margin-top:0px;
+  margin-bottom:0px;
+  padding:0px;
+  }
+
+#mainPicture
+{
+width:600px;
+height:300px;
+background-color:#ffffff;
+}
+
+#mainPicture .picture
+{
+position:relative;
+width:500px;
+height:270px;
+top:10px;
+background-image:url(blah.jpg);/*if you have a bg image*/
+background-repeat:no-repeat; /*or repeat-x*/
+margin-left:10px;
+}
+
+/*Heading of table for example*/
+#headerTitle
+{
+position:relative;
+text-align:center;
+top:10px;
+font-size:30px;
+color:#000000;
+font-family:"Adobe Garamond Pro Bold", Georgia, "Times New Roman", Times, serif;
+}
+/*Text within the table for example*/
+#headerSubtext
+{
+position:relative;
+top:30px;
+left:50px;
+font-size:14px;
+color:#000000;
+font-family:"Adobe Garamond Pro Bold", Georgia, "Times New Roman", Times, serif;
+}
+
+/*Headings section*/
+#h1 { 
+font-family:"Adobe Garamond Pro Bold", Georgia, "Times New Roman", Times, serif;
+font-size:32px}
+
+#h2 { 
+font-family:"Adobe Garamond Pro Bold", Georgia, "Times New Roman", Times, serif;
+font-size:26px}
+
+#h3 { 
+font-family:"Adobe Garamond Pro Bold", Georgia, font-family:Arial, Arial, Helvetica, sans-serif;
+font-size:20px}
+
+
+/*Anything you need in a box of text--most likely won't use except for About page.*/
+.contentBox
+{
+width:670px;
+height:auto;
+background-color:#FFFFFF;
+margin-top:10px;
+}
+
+.contentBox .innerBox
+{
+position:relative;
+width:650px;
+height:auto;
+top:10px;
+margin-left:10px;
+background-image:url(content_back.png);
+background-repeat:repeat-x;
+padding-bottom:35px;
+}
+
+.contentTitle
+{
+text-align:center;
+font-size:19px;
+margin-bottom:0px;
+padding-top:18px;
+margin-left:15px;
+margin-top:15px;
+}
+
+.contentText
+{
+font-size:13px;
+line-height:24px;
+margin-left:13px;
+margin-right:13px;
+}
+
+
+#footer {
+
+width: 670px;
+height:16px;
+background: #000000;
+text-align:center;
+font-size:9px;
+font-family:"Adobe Garamond Pro Bold", Georgia, "Times New Roman", Times, serif;
+color:#386172;
+padding-top:5px;
+}
+
+#footer a
+{
+text-decoration:none;
+font-size:9px;
+color:#386172;
+}
+
+html, body {
+text-align: center;
+}
+p {text-align: left;}
+
+
+/* Styles specific to competition pages */
+.badgeHeader
+{
+    font-size:medium;
+    color:#000000;
+    font-family:"Adobe Garamond Pro Bold", Georgia, "Times New Roman", Times, serif;
+    font-weight:bold;
+}
+
+.challengeHeader
+{
+    font-size:medium;
+    color:#000000;
+    font-family:"Adobe Garamond Pro Bold", Georgia, "Times New Roman", Times, serif;
+    font-weight:bold;
+}
+
+.challengeBody
+{
+    font-size:small;
+    color:#000000;
+    font-family:"Adobe Garamond Pro Bold", Georgia, "Times New Roman", Times, serif;
+}
+
+.numericalText
+{
+    font-size:medium;
+    color:#000000;
+    font-family:"Eras Bold ITC";
+}
+
+.contestTableText
+{
+    font-size:medium;
+    font-family:"Adobe Garamond Pro Bold", Georgia, "Times New Roman", Times, serif;
+}
+

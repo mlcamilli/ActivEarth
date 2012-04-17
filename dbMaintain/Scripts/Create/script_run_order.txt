@@ -6,11 +6,12 @@ dbo.Badge_Level_Info.Table.sql
 dbo.Groups.Table.sql
 dbo.Group_Members.Table.sql
 dbo.Group_Hashtags.Table.sql
-dbp.Messages.Table.sql
+dbo.Messages.Table.sql
 dbo.Contests.Table.sql
 dbo.Group_Contests.Table.sql
 dbo.Teams.Table.sql
 dbo.Team_Members.Table.sql
 dbo.Challenges.Table.sql
+dbo.Challenge_Definitions.Table.sql
 dbo.Privacy_Settings.Table.sql
 TestData.sql

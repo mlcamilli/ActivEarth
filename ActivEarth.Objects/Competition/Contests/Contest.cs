@@ -121,6 +121,25 @@ namespace ActivEarth.Objects.Competition.Contests
             set;
         }
 
+        /// <summary>
+        /// Whether or not the contest is currently running.
+        /// </summary>
+        public bool IsActive
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// The time at which the contest was closed.
+        /// </summary>
+        public DateTime? DeactivatedTime
+        {
+            get;
+            set;
+        }
+
+
         #endregion ---------- Public Properties ----------
 
         #region ---------- Constructor ----------
@@ -129,10 +148,8 @@ namespace ActivEarth.Objects.Competition.Contests
         /// Default constructor for loading contests from DB.
         /// </summary>
         public Contest()
-            : this(string.Empty, string.Empty, 0, ContestEndMode.GoalBased,
-                ContestType.Individual, DateTime.Today, null, Statistic.Steps)
         {
-
+            this.Teams = new List<Team>();
         }
 
         /// <summary>
@@ -159,6 +176,7 @@ namespace ActivEarth.Objects.Competition.Contests
             this.StartTime = start;
             this.EndCondition = end;
             this.StatisticBinding = statistic;
+            this.IsActive = true;
 
             this.Teams = new List<Team>();
         }
@@ -331,18 +349,16 @@ namespace ActivEarth.Objects.Competition.Contests
             }
         }
 
-        #endregion ---------- Public Methods ----------
-
-        #region ---------- Private Methods ----------
-
         /// <summary>
         /// Sorts the participating teams in descending order by their score.
         /// </summary>
-        private void SortTeamsByScore()
+        public List<Team> SortTeamsByScore()
         {
             this.Teams.Sort(delegate (Team t1, Team t2) { 
                 return t2.Score.CompareTo(t1.Score); 
                 });
+
+            return this.Teams;
         }
 
         #endregion ---------- Private Methods ----------

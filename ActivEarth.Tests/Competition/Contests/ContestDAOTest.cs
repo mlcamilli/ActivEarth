@@ -120,7 +120,7 @@ namespace ActivEarth.Tests.Competition.Contests
                 ContestDAO.CreateNewContest(contest3);
 
                 Log("Verifying that GetAllContests returns three contests");
-                Assert.AreEqual(3, ContestDAO.GetAllContests().Count);
+                Assert.AreEqual(3, ContestDAO.GetActiveContests().Count);
             }
         }
 

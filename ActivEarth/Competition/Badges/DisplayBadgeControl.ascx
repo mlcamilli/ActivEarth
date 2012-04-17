@@ -5,15 +5,11 @@
     style="position: relative; z-index: 1; left: 10px; top: 15px; height: 80px; width: 400px; margin-top: 3px" Width="400px" 
     BackImageUrl="~/Images/Competition/Badges/Badge_Row.png">
 
-    <asp:Label ID="_badgeName" runat="server" Text="Name" 
-        style="z-index: 1; left: 81px; top: 3px; position: absolute; width: 222px; height: 17px;  text-align: left;" 
-        Font-Names="Eras Bold ITC" Font-Bold="True" 
-        Font-Size="Medium" ForeColor="Black" />
+    <asp:Label ID="_badgeName" runat="server" Text="Name" CssClass="badgeHeader"
+        style="z-index: 1; left: 81px; top: 3px; position: absolute; width: 222px; height: 17px;  text-align: left;"/>
 
-    <asp:Label ID="_activityPointsValue" runat="server" Text="1000"      
-        style="z-index: 1; left: 330px; top: 4px; position: absolute; text-align: right; width: 41px;" 
-        Font-Names="Eras Bold ITC" Font-Bold="False" Font-Size="Medium" 
-        ForeColor="Black" />
+    <asp:Label ID="_activityPointsValue" runat="server" Text="1000" CssClass="numericalText"     
+        style="z-index: 1; left: 330px; top: 4px; position: absolute; text-align: right; width: 41px;"/>
 
     <asp:Image ID="_badgeImage" runat="server" Height="80px" 
         style="z-index: 1; left: 0px; top: 0px; position: absolute" Width="80px" 
@@ -27,10 +23,8 @@
         IndicatorImage="~/Images/Competition/ProgressBar/ProgressBarIndicator.png">
     </eo:ProgressBar>
 
-    <asp:Label ID="_badgeProgressNumerical" runat="server" Text="0 / 0" 
-        style="z-index: 1; left: 93px; top: 32px; position: absolute; text-align: right; width: 299px;" 
-        Font-Names="Eras Bold ITC" Font-Bold="False" Font-Size="Medium" 
-        ForeColor="Black" />
+    <asp:Label ID="_badgeProgressNumerical" runat="server" Text="0 / 0" CssClass="numericalText" 
+        style="z-index: 1; left: 93px; top: 32px; position: absolute; text-align: right; width: 299px;" />
 
     <asp:Image ID="_activityScoreImage" runat="server" Height="20px" 
         style="z-index: 1; left: 374px; top: 4px; position: absolute" Width="20px" 

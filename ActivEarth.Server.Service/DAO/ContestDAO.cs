@@ -39,7 +39,9 @@ namespace ActivEarth.DAO
                                         new EndCondition((DateTime)c.end_time)),
                                 Mode = (ContestEndMode)c.end_mode,
                                 Type = (ContestType)c.type,
-                                StatisticBinding = (Statistic)c.statistic
+                                StatisticBinding = (Statistic)c.statistic,
+                                IsActive = c.active,
+                                DeactivatedTime = c.deactivated
                             }).FirstOrDefault();
             }
 
@@ -52,10 +54,10 @@ namespace ActivEarth.DAO
         }
 
         /// <summary>
-        /// Retrieves all contests in the DB.
+        /// Retrieves all active contests in the DB.
         /// </summary>
-        /// <returns>All contests in the DB.</returns>
-        public static List<Contest> GetAllContests()
+        /// <returns>All active contests in the DB.</returns>
+        public static List<Contest> GetActiveContests()
         {
             List<Contest> toReturn;
 
@@ -63,7 +65,7 @@ namespace ActivEarth.DAO
             {
                 var data = new ActivEarthDataProvidersDataContext(connection);
                 toReturn = (from c in data.ContestDataProviders
-                        where c.id >= 0
+                        where c.active
                         select
                             new Contest
                             {
@@ -78,7 +80,9 @@ namespace ActivEarth.DAO
                                         new EndCondition((DateTime)c.end_time)),
                                 Mode = (ContestEndMode)c.end_mode,
                                 Type = (ContestType)c.type,
-                                StatisticBinding = (Statistic)c.statistic
+                                StatisticBinding = (Statistic)c.statistic,
+                                IsActive = c.active,
+                                DeactivatedTime = c.deactivated
                             }).ToList();
 
                 if (toReturn != null)
@@ -121,7 +125,8 @@ namespace ActivEarth.DAO
                                             new EndCondition((DateTime)c.end_time)),
                                     Mode = (ContestEndMode)c.end_mode,
                                     Type = (ContestType)c.type,
-                                    StatisticBinding = (Statistic)c.statistic
+                                    StatisticBinding = (Statistic)c.statistic,
+                                    IsActive = c.active
                                 }).ToList();
 
                 if (toReturn != null)
@@ -162,7 +167,9 @@ namespace ActivEarth.DAO
                         start = contest.StartTime,
                         type = (byte)contest.Type,
                         statistic = (byte)contest.StatisticBinding,
-                        searchable = contest.IsSearchable
+                        searchable = contest.IsSearchable,
+                        active = contest.IsActive,
+                        deactivated = contest.DeactivatedTime
                     };
                     data.ContestDataProviders.InsertOnSubmit(contestData);
                     data.SubmitChanges();
@@ -209,6 +216,8 @@ namespace ActivEarth.DAO
                         dbContest.type = (byte)contest.Type;
                         dbContest.statistic = (byte)contest.StatisticBinding;
                         dbContest.searchable = contest.IsSearchable;
+                        dbContest.active = contest.IsActive;
+                        dbContest.deactivated = contest.DeactivatedTime;
 
                         data.SubmitChanges();
                     }
@@ -249,6 +258,40 @@ namespace ActivEarth.DAO
                     ContestDataProvider dbContest =
                         (from c in data.ContestDataProviders where c.id == contestId select c).FirstOrDefault();
                     if (dbContest != null)
+                    {
+                        data.ContestDataProviders.DeleteOnSubmit(dbContest);
+                        data.SubmitChanges();
+                    }
+
+                    return true;
+                }
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Removes contests from the DB that have were deactivated more than two weeks ago.
+        /// </summary>
+        /// <returns></returns>
+        public static bool RemoveOldContests()
+        {
+            int daysToExpire = 14;
+
+            try
+            {
+                using (SqlConnection connection = ConnectionManager.GetConnection())
+                {
+                    var data = new ActivEarthDataProvidersDataContext(connection);
+                    List<ContestDataProvider> dbContests =
+                        (from c in data.ContestDataProviders where 
+                            (c.deactivated != null && 
+                                c.deactivated.Value.Subtract(DateTime.Now) > new TimeSpan(daysToExpire, 0, 0, 0))
+                         select c).ToList();
+                    
+                    foreach (ContestDataProvider dbContest in dbContests)
                     {
                         data.ContestDataProviders.DeleteOnSubmit(dbContest);
                         data.SubmitChanges();

@@ -10,7 +10,7 @@ using ActivEarth.Objects.Profile;
 
 namespace ActivEarth
 {
-    public partial class SiteMaster : System.Web.UI.MasterPage
+    public partial class SiteNotLoggedIn : System.Web.UI.MasterPage
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -18,8 +18,7 @@ namespace ActivEarth
             {
                 lbLogOut.Visible = false;
                 lblUserLoggedIn.Visible = false;
-            }
-            else
+            }else
             {
                 var userDetails = (User) Session["userDetails"];
                 hlRegister.Visible = false;
@@ -28,17 +27,16 @@ namespace ActivEarth
                 lblUserLoggedIn.Visible = true;
                 lblUserLoggedIn.Text = "Logged in as " + userDetails.UserName;
 
-                lblUserName.Text = userDetails.FirstName + " " + userDetails.LastName;
-                lblCityState.Text = userDetails.City + ", " + userDetails.State;
+                
 
             }
-
         }
-        
         protected void UserLogOut(object sender, EventArgs e)
         {
             Session["userDetails"] = null;
             Response.Redirect("~/Default.aspx");
         }
     }
+       
+ 
 }

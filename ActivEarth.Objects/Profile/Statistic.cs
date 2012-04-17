@@ -14,6 +14,11 @@
         BikeDistance = 2,
         RunDistance = 3,
         GasSavings = 4,
-        ChallengesCompleted = 5
+        ChallengesCompleted = 5,
+        AggregateDistance = 6,
+        AggregateTime = 7,
+        WalkTime = 8,
+        BikeTime = 9,
+        RunTime = 10
     };
 }

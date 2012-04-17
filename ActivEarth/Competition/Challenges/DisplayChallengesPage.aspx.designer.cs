@@ -13,15 +13,6 @@ namespace ActivEarth.Competition.Challenges {
     public partial class DisplayChallengesPage {
         
         /// <summary>
-        /// _dailyChallengeLabel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label _dailyChallengeLabel;
-        
-        /// <summary>
         /// _displayDailyChallenges control.
         /// </summary>
         /// <remarks>
@@ -29,15 +20,6 @@ namespace ActivEarth.Competition.Challenges {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::ActivEarth.Competition.Challenges.DisplayChallengesControl _displayDailyChallenges;
-        
-        /// <summary>
-        /// _weeklyChallengeLabel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label _weeklyChallengeLabel;
         
         /// <summary>
         /// _displayWeeklyChallenges control.
@@ -49,15 +31,6 @@ namespace ActivEarth.Competition.Challenges {
         protected global::ActivEarth.Competition.Challenges.DisplayChallengesControl _displayWeeklyChallenges;
         
         /// <summary>
-        /// _monthlyChallengesLabel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label _monthlyChallengesLabel;
-        
-        /// <summary>
         /// _displayMonthlyChallenges control.
         /// </summary>
         /// <remarks>
@@ -65,15 +38,6 @@ namespace ActivEarth.Competition.Challenges {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::ActivEarth.Competition.Challenges.DisplayChallengesControl _displayMonthlyChallenges;
-        
-        /// <summary>
-        /// _persistentChallenges control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label _persistentChallenges;
         
         /// <summary>
         /// _displayPersistentChallenges control.

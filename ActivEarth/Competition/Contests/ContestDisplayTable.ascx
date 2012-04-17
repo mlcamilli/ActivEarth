@@ -1,10 +1,7 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ContestDisplayTable.ascx.cs" Inherits="ActivEarth.Competition.Contests.ContestDisplayTable" %>
 
-<asp:Table ID="_contestTable" runat="server" BorderStyle="Solid" 
-    BorderColor="Black" ForeColor="Black" Font-Names="Eras Bold ITC" 
-    CellPadding="5" CellSpacing="5" GridLines="Vertical" BorderWidth="3px" 
-    HorizontalAlign="Left">
-    <asp:TableHeaderRow>
+<asp:Table ID="_contestTable" runat="server" CssClass="contestTableText" BackColor="Black" CellSpacing="3" CellPadding="5">
+    <asp:TableHeaderRow BackColor="White">
         <asp:TableHeaderCell Text="Contest Name"></asp:TableHeaderCell>
         <asp:TableHeaderCell Text="Type"></asp:TableHeaderCell>
     </asp:TableHeaderRow>

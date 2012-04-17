@@ -98,7 +98,7 @@ first child of the left and right table columns */
 {
     position: relative;
     margin: 0px;
-    padding: 0px;
+    padding: 0px 0px 12px 0px;
     background: #4b6c9e;
     width: 100%;
 }
@@ -113,12 +113,32 @@ first child of the left and right table columns */
     line-height: 2em;
     font-size: 2em;
 }
-
+.profileInfo
+{
+	width: 180px;
+	float: left;
+	clear:left;
+	margin: 0px 0px 0px 10px;
+}
 .main
 {
-    padding: 0px 12px;
-    margin: 12px 8px 8px 8px;
+    padding: 0px;
+    margin: 0px;
     min-height: 420px;
+    width: 600px;
+    float: left;
+    border-left-style: solid;
+    border-bottom-style: solid;
+    border-right-style: solid;
+    border-width: 1px;
+    border-color: #d7d7d7;
+}
+.statInfo
+{
+	width: 100px;
+	float: left;
+	margin: 0px 0px 0px 10px;
+	
 }
 
 .leftCol
@@ -187,6 +207,24 @@ div.menu ul li a:active
     text-decoration: none;
 }
 
+.tabContent
+{
+	padding: 0px 12px;
+    margin: 12px 8px 8px 8px;
+}
+
+/* Not Logged In   
+----------------------------------------------------------*/
+
+.mainNotLoggedIn
+{
+	padding: 0px;
+    margin: auto;
+    min-height: 600px;
+    width: 70%;
+    
+	
+}
 /* FORM ELEMENTS   
 ----------------------------------------------------------*/
 

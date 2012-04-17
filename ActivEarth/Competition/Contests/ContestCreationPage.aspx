@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ContestCreationPage.aspx.cs" Inherits="ActivEarth.Competition.Contests.ContestCreationPage" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Tabs.master" AutoEventWireup="true" CodeBehind="ContestCreationPage.aspx.cs" Inherits="ActivEarth.Competition.Contests.ContestCreationPage" %>
 <%@ Register TagPrefix="ajaxToolkit" Namespace="AjaxControlToolkit" Assembly="AjaxControlToolkit"%>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">

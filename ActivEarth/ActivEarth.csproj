@@ -83,8 +83,6 @@
     <Content Include="Competition\Contests\ContestCreationPage.aspx" />
     <Content Include="Competition\Contests\ContestDisplayTable.ascx" />
     <Content Include="Competition\Contests\ContestHomePage.aspx" />
-    <Content Include="Competition\Contests\ContestList.ascx" />
-    <Content Include="Competition\Contests\ContestListRow.ascx" />
     <Content Include="Competition\Contests\CountdownClock.ascx" />
     <Content Include="Competition\Contests\DisplayContestPage.aspx" />
     <Content Include="Competition\Contests\LeaderBoard.ascx" />
@@ -202,6 +200,7 @@
     <Content Include="Images\Competition\ProgressBar\ProgressBarIndicator.png" />
     <Content Include="Images\Competition\ProgressBar\ProgressBarLeft.png" />
     <Content Include="Images\Competition\ProgressBar\ProgressBarRight.png" />
+    <Content Include="Styles\page.css" />
     <Content Include="Styles\Site.css" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
@@ -331,20 +330,6 @@
     <Compile Include="Competition\Contests\ContestHomePage.aspx.designer.cs">
       <DependentUpon>ContestHomePage.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Competition\Contests\ContestList.ascx.cs">
-      <DependentUpon>ContestList.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Competition\Contests\ContestList.ascx.designer.cs">
-      <DependentUpon>ContestList.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="Competition\Contests\ContestListRow.ascx.cs">
-      <DependentUpon>ContestListRow.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Competition\Contests\ContestListRow.ascx.designer.cs">
-      <DependentUpon>ContestListRow.ascx</DependentUpon>
-    </Compile>
     <Compile Include="Competition\Contests\CountdownClock.ascx.cs">
       <DependentUpon>CountdownClock.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -398,6 +383,20 @@
     <Compile Include="Site.Master.designer.cs">
       <DependentUpon>Site.Master</DependentUpon>
     </Compile>
+    <Compile Include="SiteNotLoggedIn.Master.cs">
+      <DependentUpon>SiteNotLoggedIn.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SiteNotLoggedIn.Master.designer.cs">
+      <DependentUpon>SiteNotLoggedIn.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Tabs.master.cs">
+      <DependentUpon>Tabs.master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Tabs.master.designer.cs">
+      <DependentUpon>Tabs.master</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -418,6 +417,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+    <Content Include="Tabs.master" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="SiteNotLoggedIn.Master" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
