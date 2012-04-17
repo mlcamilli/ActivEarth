@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using ActivEarth.Objects.Competition.Challenges;
+using ActivEarth.Server.Service.Competition;
 
 namespace ActivEarth.Competition.Challenges
 {
@@ -21,11 +22,11 @@ namespace ActivEarth.Competition.Challenges
             _activityPointsValue.Text = challenge.Reward.ToString();
             _challengeDescription.Text = challenge.Description;
 
-            _challengeProgressBar.Value = 50; //challenge.GetProgress(user);
-            _challengeProgressNumerical.Text = "0 / 5"; //challenge.GetFormattedProgress(user); 
+            _challengeProgressBar.Value = 50; // ChallengeManager.GetProgress(challenge.ID, user.UserID);
+            _challengeProgressNumerical.Text = "0 / 5"; //ChallengeManager.GetFormattedProgress(challenge.ID, user.UserID); 
 
             /*
-            if (challenge.IsComplete(user))
+            if (ChallengeManager.IsComplete(challenge.ID, user.UserID))
             {
                 _challengeProgressNumerical.Text = "Completed";
             }

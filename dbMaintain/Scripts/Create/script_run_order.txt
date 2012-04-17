@@ -13,5 +13,7 @@ dbo.Teams.Table.sql
 dbo.Team_Members.Table.sql
 dbo.Challenges.Table.sql
 dbo.Challenge_Definitions.Table.sql
+dbo.Challenge_Initial_Values.Table.sql
 dbo.Privacy_Settings.Table.sql
+dbo.UserStatistics.Table.sql
 TestData.sql

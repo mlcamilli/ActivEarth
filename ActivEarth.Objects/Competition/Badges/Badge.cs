@@ -63,15 +63,6 @@ namespace ActivEarth.Objects.Competition.Badges
         }
 
         /// <summary>
-        /// User to which the badge is bound.
-        /// </summary>
-        public User User
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
         /// Path for the badge image.
         /// </summary>
         public string ImagePath
@@ -125,11 +116,10 @@ namespace ActivEarth.Objects.Competition.Badges
         /// </summary>
         /// <param name="user">User to whom the Badge is bound.</param>
         /// <param name="statistic">Statistic to which the Badge is bound.</param>
-        public Badge(User user, Statistic statistic)
+        public Badge(int userId, Statistic statistic)
             : this()
         {
-            this.User = user;
-            this.UserID = user.UserID;
+            this.UserID = userId;
             this.StatisticBinding = statistic;
         }
 
@@ -138,61 +128,22 @@ namespace ActivEarth.Objects.Competition.Badges
         /// </summary>
         /// <param name="user">User to whom the Badge is bound.</param>
         /// <param name="statistic">Statistic to which the Badge is bound.</param>
-        public Badge(User user, Statistic statistic, 
+        public Badge(int userId, Statistic statistic, 
             float[] levelValues, int[] levelPoints, string[] imagePaths)
         {
             this.Level = BadgeLevels.None;
             this.Progress = 0;
 
-            User = user;
-            StatisticBinding = statistic;
-            LevelRequirements = levelValues;
-            LevelRewards = levelPoints;
+            this.UserID = userId;
+            this.StatisticBinding = statistic;
+            this.LevelRequirements = levelValues;
+            this.LevelRewards = levelPoints;
         }
 
         #endregion ---------- Constructor ----------
 
         #region ---------- Public Methods ----------
-
-        /// <summary>
-        /// Updates the badge to reflect a change in statistics.
-        /// </summary>
-        /// <returns>Activity points earned since the last update.</returns>
-        public int Update()
-        {
-            int pointsEarned = 0;
-
-            int oldLevel = this.Level;
-            int newLevel = oldLevel;
-
-            float stat = User.GetStatistic(StatisticBinding);
-
-            while ((newLevel < BadgeLevels.Max) && 
-                (stat >= LevelRequirements[(int)newLevel + 1]))
-            {
-                newLevel++;
-            }
-
-            for (int i = oldLevel + 1; i <= newLevel; i++)
-            {
-                pointsEarned += LevelRewards[i];
-            }
-
-            this.Level = newLevel;
-
-            if (this.Level == BadgeLevels.Max)
-            {
-                this.Progress = 100;
-            }
-            else
-            {
-                this.Progress = (int)(100 * (stat - this.LevelRequirements[newLevel]) /
-                    (this.LevelRequirements[newLevel + 1] - this.LevelRequirements[newLevel]));
-            }
-
-            return pointsEarned;
-        }
-
+        
         /// <summary>
         /// Returns the statistic value required to get to the next level
         /// of the badge.
@@ -200,7 +151,7 @@ namespace ActivEarth.Objects.Competition.Badges
         /// <returns>Statistic requirement for the next level of the badge.</returns>
         public float GetNextLevelRequirement()
         {
-            return LevelRequirements[this.Level + 1];
+            return (LevelRequirements[this.Level + 1] >= 0 ? LevelRequirements[this.Level + 1] : float.PositiveInfinity);
         }
 
         /// <summary>
@@ -212,26 +163,6 @@ namespace ActivEarth.Objects.Competition.Badges
         public int GetNextLevelReward()
         {
             return LevelRewards[this.Level + 1];
-        }
-
-        /// <summary>
-        /// Returns the formatted text progress report for the Badge (e.g., "34.5 / 40.0").
-        /// </summary>
-        /// <returns>Formatted text progress report for the Badge.</returns>
-        public string GetFormattedProgress()
-        {
-            string numerator = String.Format(this.FormatString, this.User.GetStatistic(this.StatisticBinding));
-
-            if (this.Level < BadgeLevels.Max)
-            {
-                string denominator = String.Format(this.FormatString, this.GetNextLevelRequirement());
-
-                return String.Format("{0} / {1}", numerator, denominator);
-            }
-            else
-            {
-                return numerator;
-            }
         }
 
         /// <summary>

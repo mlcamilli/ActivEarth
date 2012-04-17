@@ -71,6 +71,7 @@
     <Compile Include="Profile\ProfileVisibility.cs" />
     <Compile Include="Profile\Statistic.cs" />
     <Compile Include="Profile\User.cs" />
+    <Compile Include="Profile\UserStatistic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

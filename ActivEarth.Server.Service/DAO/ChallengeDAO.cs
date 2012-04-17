@@ -183,6 +183,22 @@ namespace ActivEarth.DAO
         }
 
         /// <summary>
+        /// Lookup for the statistic being tracked by a specific challenge.
+        /// </summary>
+        /// <param name="challengeId">ID of the challenge to query.</param>
+        /// <returns>Statistic being watched by the challenge.</returns>
+        public static Statistic GetStatisticFromChallengeId(int challengeId)
+        {
+            using (SqlConnection connection = ConnectionManager.GetConnection())
+            {
+                var data = new ActivEarthDataProvidersDataContext(connection);
+                return (Statistic)(from c in data.ChallengeDataProviders
+                                      where c.id == challengeId
+                                      select c.statistic).FirstOrDefault();
+            }
+        }
+
+        /// <summary>
         /// Saves a challenge as a new entry in the DB.
         /// </summary>
         /// <param name="challenge">Challenge object to add to the DB.</param>
@@ -255,6 +271,95 @@ namespace ActivEarth.DAO
             catch (Exception)
             {
                 return false;
+            }
+        }
+
+        /// <summary>
+        /// Creates a new user initialization entry for a challenge.
+        /// </summary>
+        /// <param name="challengeId">ID of the challenge the user is participating in.</param>
+        /// <param name="userId">ID of the user being initialized.</param>
+        /// <param name="value">Current value of the relevant statistic for the challenge.</param>
+        /// <returns></returns>
+        public static bool CreateInitializationEntry(int challengeId, int userId, float value)
+        {
+            try
+            {
+                using (SqlConnection connection = ConnectionManager.GetConnection())
+                {
+                    var data = new ActivEarthDataProvidersDataContext(connection);
+                    var challengeData = new ChallengeInitializationDataProvider
+                    {
+                        challenge_id = challengeId,
+                        user_id = userId,
+                        value = value
+                    };
+                    data.ChallengeInitializationDataProviders.InsertOnSubmit(challengeData);
+                    data.SubmitChanges();
+                    return (challengeData.id > 0);
+                }
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Removes all initialization entries for a challenge (to clean up DB upon challenge expiration).
+        /// </summary>
+        /// <param name="challengeId">ID of the challenge whose data shall be removed.</param>
+        /// <returns></returns>
+        public static bool RemoveInitializationValues(int challengeId)
+        {
+            try
+            {
+                using (SqlConnection connection = ConnectionManager.GetConnection())
+                {
+                    var data = new ActivEarthDataProvidersDataContext(connection);
+                    var toDelete = (from c in data.ChallengeInitializationDataProviders
+                                where c.challenge_id == challengeId
+                                select c).ToList();
+
+                    foreach (ChallengeInitializationDataProvider row in toDelete)
+                    {
+                        data.ChallengeInitializationDataProviders.DeleteOnSubmit(row);
+                    }
+
+                    data.SubmitChanges();
+
+                    return true;
+                }
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Returns the stored initial value for a user in a particular challenge.
+        /// </summary>
+        /// <param name="challengeId">ID of the challenge to look up.</param>
+        /// <param name="userId">ID of the user whose value shall be returned.</param>
+        /// <returns></returns>
+        public static float GetInitializationValue(int challengeId, int userId)
+        {
+            try
+            {
+                using (SqlConnection connection = ConnectionManager.GetConnection())
+                {
+                    var data = new ActivEarthDataProvidersDataContext(connection);
+                    var initval = (from c in data.ChallengeInitializationDataProviders
+                                    where (c.challenge_id == challengeId) && (c.user_id == userId)
+                                    select c).FirstOrDefault();
+
+                    return (initval != null ? (float)initval.value : -1);
+                }
+            }
+            catch (Exception)
+            {
+                return -1;
             }
         }
 

@@ -115,7 +115,7 @@ namespace ActivEarth.DAO
                     var data = new ActivEarthDataProvidersDataContext(connection);
                     var badgeData = new BadgeDataProvider
                     {
-                        user_id = badge.User.UserID,
+                        user_id = badge.UserID,
                         badge_level = (byte)badge.Level,
                         progress = (byte)badge.Progress,
                         statistic = (byte)badge.StatisticBinding
@@ -173,7 +173,6 @@ namespace ActivEarth.DAO
         /// <param name="badge">The badge to finish loading.</param>
         private static void LoadExternalBadgeData(Badge badge)
         {
-            badge.User = UserDAO.GetUserFromUserId(badge.UserID);
             badge.LevelRequirements = BadgeLevelInfoDAO.GetBadgeRequirementArray(badge.StatisticBinding);
             badge.LevelRewards = BadgeLevelInfoDAO.GetBadgeRewardArray(badge.StatisticBinding);
             badge.ImagePath = BadgeLevelInfoDAO.GetBadgeImagePath(badge.StatisticBinding, badge.Level);
