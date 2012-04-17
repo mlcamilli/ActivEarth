@@ -1,4 +1,4 @@
-﻿<%@ Page Title="ActivEarth Home" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true"
+﻿<%@ Page Title="ActivEarth Home" Language="C#" MasterPageFile="~/SiteNotLoggedIn.master" AutoEventWireup="true"
     CodeBehind="Default.aspx.cs" Inherits="ActivEarth._Default" %>
 
 <asp:Content ID="HeaderContent" runat="server" ContentPlaceHolderID="HeadContent">
@@ -10,5 +10,7 @@
     <p>
         This site is currently under construction and will be updated soon. 
     </p>
-  
+    <asp:HyperLink ID="hlAccessProfile" runat="server" Text="Access Your Profile" NavigateUrl="~/Account/Profile.aspx"></asp:HyperLink><br/>
+    <asp:HyperLink ID="hlAbout" runat="server" Text="About" NavigateUrl="~/About.aspx"></asp:HyperLink><br/>
+    
 </asp:Content>

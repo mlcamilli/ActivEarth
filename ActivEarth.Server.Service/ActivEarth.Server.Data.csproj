@@ -57,14 +57,19 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ActivEarthDataProviders.dbml</DependentUpon>
     </Compile>
-    <Compile Include="StatisticManager.cs" />
+    <Compile Include="BadgeManager.cs" />
+    <Compile Include="ChallengeManager.cs" />
     <Compile Include="ConnectionManager.cs" />
     <Compile Include="ContestManager.cs" />
-    <Compile Include="ChallengeManager.cs" />
+    <Compile Include="StatisticManager.cs" />
+    <Compile Include="DAO\BadgeDAO.cs" />
+    <Compile Include="DAO\BadgeLevelInfoDAO.cs" />
     <Compile Include="DAO\ChallengeDAO.cs" />
     <Compile Include="DAO\ContestDAO.cs" />
+    <Compile Include="DAO\GroupDAO.cs" />
     <Compile Include="DAO\PrivacySettingDAO.cs" />
     <Compile Include="DAO\UserStatisticDAO.cs" />
+    <Compile Include="DAO\StatisticInfoDAO.cs" />
     <Compile Include="DAO\TeamDAO.cs" />
     <Compile Include="DAO\UserDAO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -75,6 +80,7 @@
       <LastGenOutput>ActivEarthDataProviders.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
+    <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />

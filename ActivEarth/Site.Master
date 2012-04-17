@@ -22,20 +22,26 @@
                         <asp:HyperLink runat="server" ID="hlLogin" NavigateUrl="~/Account/Login.aspx" Text="Log In"></asp:HyperLink>
                         <asp:LinkButton runat="server" ID="lbLogOut" OnClick="UserLogOut" Text="Log Out" ></asp:LinkButton>    
                         <asp:HyperLink runat="server" ID="hlRegister" NavigateUrl="~/Account/Register.aspx" Text="Register"></asp:HyperLink>                          
+            </div>        
+        </div>
+
+        <div class="profileInfo">
+            <div style="width: 150px;height:150px;border:1px solid; margin: 15px 0px 0px 10px;">
             </div>
-            <div class="clear hideSkiplink">
-                <asp:Menu ID="NavigationMenu" runat="server" CssClass="menu" EnableViewState="false" IncludeStyleBlock="false" Orientation="Horizontal">
-                    <Items>
-                        <asp:MenuItem NavigateUrl="~/Default.aspx" Text="Home"/>
-                        <asp:MenuItem NavigateUrl="~/Account/Profile.aspx" Text="Profile"/>
-                        <asp:MenuItem NavigateUrl="~/Fitness/BMI.aspx" Text="BMI"></asp:MenuItem>
-                        <asp:MenuItem NavigateUrl="~/About.aspx" Text="About"></asp:MenuItem>
-                    </Items>
-                </asp:Menu>
-            </div>
+            
+            <h2>
+                <asp:Label runat="server" ID="lblUserName"></asp:Label>
+            </h2>
+            <p><asp:Label runat="server" ID="lblCityState"></asp:Label></p>
+            <h2>Recent Activity:</h2>
         </div>
         <div class="main">
             <asp:ContentPlaceHolder ID="MainContent" runat="server"/>
+        </div>
+        <div class="statInfo">
+            <h2>
+                Statistical Information
+            </h2>
         </div>
         <div class="clear">
         </div>

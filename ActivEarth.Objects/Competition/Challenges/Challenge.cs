@@ -41,7 +41,7 @@ namespace ActivEarth.Objects.Competition.Challenges
         /// <summary>
         /// Activity Points to be awarded upon completion of the challenge.
         /// </summary>
-        public int Points
+        public int Reward
         {
             get;
             set;
@@ -102,6 +102,24 @@ namespace ActivEarth.Objects.Competition.Challenges
             set;
         }
 
+        /// <summary>
+        /// Path of the image to be displayed with the challenge.
+        /// </summary>
+        public string ImagePath
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Format string for reporting the challenge information.
+        /// </summary>
+        public string FormatString
+        {
+            get;
+            set;
+        }
+
         #endregion ---------- Public Properties ----------
 
         #region ---------- Constructor ----------
@@ -120,18 +138,18 @@ namespace ActivEarth.Objects.Competition.Challenges
         /// <param name="id">Identifier for the challenge.</param>
         /// <param name="name">Challenge Name.</param>
         /// <param name="description">Challenge Description.</param>
-        /// <param name="points">Points to be awarded upon completion of the Challenge.</param>
+        /// <param name="reward">Points to be awarded upon completion of the Challenge.</param>
         /// <param name="persistent">True if the Challenge is persistent, false otherwise.</param>
         /// <param name="startTime">Time at which the challenge begins.</param>
         /// <param name="durationInDays">Number of days for which the challenge is active.</param>
         /// <param name="statistic">Statistic to which the Challenge is bound.</param>
         /// <param name="requirement">Statistic value required to complete the challenge.</param>
-        public Challenge(string name, string description, int points, bool persistent,
+        public Challenge(string name, string description, int reward, bool persistent,
             DateTime startTime, int durationInDays, Statistic statistic, float requirement)
         {
             this.Name = name;
             this.Description = description;
-            this.Points = points;
+            this.Reward = reward;
             this.IsPersistent = persistent;
             this.Duration = new TimeSpan(durationInDays, 0, 0, 0);
             this.EndTime = startTime.AddDays(durationInDays);
@@ -145,24 +163,35 @@ namespace ActivEarth.Objects.Competition.Challenges
         #region ---------- Public Methods ----------
 
         /// <summary>
-        /// Gets the progress made by a user in the challenge.
+        /// Gets the progress made by a user in the challenge as a percentage (0-100).
         /// </summary>
         /// <param name="user">The user to evaluate.</param>
-        /// <returns>Minimum of the user's progress and the challenge's requirement 
-        /// (for use in a progress bar).</returns>
-        public float GetProgress(User user)
+        /// <returns>User's progress in the challenge (for use in a progress bar).</returns>
+        public int GetProgress(User user)
         {
             if (user.ChallengeInitialValues.ContainsKey(this.ID))
             {
                 float startingPoint = user.ChallengeInitialValues[this.ID];
-                return Math.Min(user.GetStatistic(this.StatisticBinding) - startingPoint,
-                    this.Requirement);
+                return Math.Min(
+                    (int)(100 * (user.GetStatistic(this.StatisticBinding) - startingPoint) / this.Requirement), 100);
             }
             else
             {
                 //TODO: Throw an exception here?
                 return -1;
             }
+        }
+
+        /// <summary>
+        /// Returns the formatted text progress report for the Challenge (e.g., "34.5 / 40.0").
+        /// </summary>
+        /// <returns>Formatted text progress report for the Challenge.</returns>
+        public string GetFormattedProgress(User user)
+        {
+            string numerator = String.Format(this.FormatString, user.GetStatistic(this.StatisticBinding));
+            string denominator = String.Format(this.FormatString, this.Requirement);
+
+            return String.Format("{0} / {1}", numerator, denominator);
         }
 
         /// <summary>
@@ -173,7 +202,7 @@ namespace ActivEarth.Objects.Competition.Challenges
         /// <returns>Whether or not the user has completed the challenge.</returns>
         public bool IsComplete(User user)
         {
-            return (this.GetProgress(user) == this.Requirement);
+            return (this.GetProgress(user) == 100);
         }
 
         #endregion ---------- Public Methods ----------

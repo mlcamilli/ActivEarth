@@ -25,7 +25,7 @@ namespace ActivEarth.Account
             }else
             {
                 Session["userDetails"] = userDetails;
-                Response.Redirect("../Default.aspx");
+                Response.Redirect("~/Competition/Badges/DisplayBadgesPage.aspx");
             }
         }
     }
