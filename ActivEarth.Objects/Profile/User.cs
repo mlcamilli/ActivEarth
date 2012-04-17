@@ -134,7 +134,7 @@ namespace ActivEarth.Objects.Profile
             set;
         }
 
-        private Dictionary<Statistic, float> _stats;
+        private Dictionary<Statistic, UserStatistic> _stats;
 
         #endregion ---------- Private Members ----------
 
@@ -153,14 +153,7 @@ namespace ActivEarth.Objects.Profile
 
             this.ChallengeInitialValues = new Dictionary<int, float>();
 
-            _stats = new Dictionary<Statistic, float>();
-
-            _stats.Add(Statistic.BikeDistance, 0);
-            _stats.Add(Statistic.ChallengesCompleted, 0);
-            _stats.Add(Statistic.GasSavings, 0);
-            _stats.Add(Statistic.RunDistance, 0);
-            _stats.Add(Statistic.Steps, 0);
-            _stats.Add(Statistic.WalkDistance, 0);
+            _stats = new Dictionary<Statistic, UserStatistic>();
 
             this.Badges = new Dictionary<Statistic, Badge>();
             this.Contests = new List<Contest>();
@@ -175,12 +168,35 @@ namespace ActivEarth.Objects.Profile
 
         public float GetStatistic(Statistic statToGet)
         {
-            return _stats[statToGet];
+            if (_stats.ContainsKey(statToGet))
+            {
+                return _stats[statToGet].value;
+            }
+            else
+            {
+                return 0;
+            }
         }
 
         public void SetStatistic(Statistic statToSet, float val)
         {
-            _stats[statToSet] = val;
+            if (_stats.ContainsKey(statToSet))
+            {
+                _stats[statToSet].value = val;
+            }
+            else
+            {
+                _stats[statToSet] = new UserStatistic(statToSet, val);
+            }
+        }
+
+        /// <summary>
+        /// Sets in memory statistic values.
+        /// </summary>
+        /// <param name="stats">Dictionary mapping statistics to values.</param>
+        public void SetStatisticsDict(Dictionary<Statistic, UserStatistic> stats)
+        {
+            _stats = stats;
         }
 
         #endregion ---------- Public Methods ----------

@@ -23,7 +23,8 @@
       <Column Name="user_name" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
       <Column Name="password" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
       <Association Name="UserDataProvider_ProfileDataProvider" Member="ProfileDataProviders" ThisKey="id" OtherKey="user_id" Type="ProfileDataProvider" />
-      <Association Name="UserDataProvider_privacy_setting" Member="PrivacySettingDataProviders" Storage="_privacy_settings" ThisKey="id" OtherKey="user_id" Type="PrivacySettingDataProvider" />
+      <Association Name="UserDataProvider_PrivacySettingDataProvider" Member="PrivacySettingDataProviders" Storage="_privacy_settings" ThisKey="id" OtherKey="user_id" Type="PrivacySettingDataProvider" />
+      <Association Name="UserDataProvider_StatisticDataProvider" Member="UserStatisticDataProviders" Storage="_StatisticDataProviders" ThisKey="id" OtherKey="user_id" Type="UserStatisticDataProvider" />
     </Type>
   </Table>
   <Table Name="dbo.challenges" Member="ChallengeDataProviders">
@@ -87,7 +88,16 @@
       <Column Name="weight" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Column Name="height" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Column Name="groups" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Association Name="UserDataProvider_privacy_setting" Member="UserDataProvider" ThisKey="user_id" OtherKey="id" Type="UserDataProvider" IsForeignKey="true" />
+      <Association Name="UserDataProvider_PrivacySettingDataProvider" Member="UserDataProvider" ThisKey="user_id" OtherKey="id" Type="UserDataProvider" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.[statistics]" Member="UserStatisticDataProviders">
+    <Type Name="UserStatisticDataProvider">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="user_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="statistic_type" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="value" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Association Name="UserDataProvider_StatisticDataProvider" Member="UserDataProvider" ThisKey="user_id" OtherKey="id" Type="UserDataProvider" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

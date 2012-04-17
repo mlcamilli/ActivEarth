@@ -7,4 +7,5 @@ dbo.Teams.Table.sql
 dbo.Team_Members.Table.sql
 dbo.Challenges.Table.sql
 dbo.Privacy_Settings.Table.sql
+dbo.Statistics.Table.sql
 TestData.sql

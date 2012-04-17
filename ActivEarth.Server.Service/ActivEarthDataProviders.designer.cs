@@ -51,6 +51,9 @@ namespace ActivEarth.Server.Service
     partial void InsertPrivacySettingDataProvider(PrivacySettingDataProvider instance);
     partial void UpdatePrivacySettingDataProvider(PrivacySettingDataProvider instance);
     partial void DeletePrivacySettingDataProvider(PrivacySettingDataProvider instance);
+    partial void InsertUserStatisticDataProvider(UserStatisticDataProvider instance);
+    partial void UpdateUserStatisticDataProvider(UserStatisticDataProvider instance);
+    partial void DeleteUserStatisticDataProvider(UserStatisticDataProvider instance);
     #endregion
 		
 		public ActivEarthDataProvidersDataContext() : 
@@ -136,6 +139,14 @@ namespace ActivEarth.Server.Service
 			get
 			{
 				return this.GetTable<PrivacySettingDataProvider>();
+			}
+		}
+		
+		public System.Data.Linq.Table<UserStatisticDataProvider> UserStatisticDataProviders
+		{
+			get
+			{
+				return this.GetTable<UserStatisticDataProvider>();
 			}
 		}
 	}
@@ -527,6 +538,8 @@ namespace ActivEarth.Server.Service
 		
 		private EntitySet<PrivacySettingDataProvider> _privacy_settings;
 		
+		private EntitySet<UserStatisticDataProvider> _StatisticDataProviders;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -543,6 +556,7 @@ namespace ActivEarth.Server.Service
 		{
 			this._ProfileDataProviders = new EntitySet<ProfileDataProvider>(new Action<ProfileDataProvider>(this.attach_ProfileDataProviders), new Action<ProfileDataProvider>(this.detach_ProfileDataProviders));
 			this._privacy_settings = new EntitySet<PrivacySettingDataProvider>(new Action<PrivacySettingDataProvider>(this.attach_privacy_settings), new Action<PrivacySettingDataProvider>(this.detach_privacy_settings));
+			this._StatisticDataProviders = new EntitySet<UserStatisticDataProvider>(new Action<UserStatisticDataProvider>(this.attach_StatisticDataProviders), new Action<UserStatisticDataProvider>(this.detach_StatisticDataProviders));
 			OnCreated();
 		}
 		
@@ -619,7 +633,7 @@ namespace ActivEarth.Server.Service
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UserDataProvider_privacy_setting", Storage="_privacy_settings", ThisKey="id", OtherKey="user_id")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UserDataProvider_PrivacySettingDataProvider", Storage="_privacy_settings", ThisKey="id", OtherKey="user_id")]
 		public EntitySet<PrivacySettingDataProvider> PrivacySettingDataProviders
 		{
 			get
@@ -629,6 +643,19 @@ namespace ActivEarth.Server.Service
 			set
 			{
 				this._privacy_settings.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UserDataProvider_StatisticDataProvider", Storage="_StatisticDataProviders", ThisKey="id", OtherKey="user_id")]
+		public EntitySet<UserStatisticDataProvider> UserStatisticDataProviders
+		{
+			get
+			{
+				return this._StatisticDataProviders;
+			}
+			set
+			{
+				this._StatisticDataProviders.Assign(value);
 			}
 		}
 		
@@ -671,6 +698,18 @@ namespace ActivEarth.Server.Service
 		}
 		
 		private void detach_privacy_settings(PrivacySettingDataProvider entity)
+		{
+			this.SendPropertyChanging();
+			entity.UserDataProvider = null;
+		}
+		
+		private void attach_StatisticDataProviders(UserStatisticDataProvider entity)
+		{
+			this.SendPropertyChanging();
+			entity.UserDataProvider = this;
+		}
+		
+		private void detach_StatisticDataProviders(UserStatisticDataProvider entity)
 		{
 			this.SendPropertyChanging();
 			entity.UserDataProvider = null;
@@ -1944,7 +1983,7 @@ namespace ActivEarth.Server.Service
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UserDataProvider_privacy_setting", Storage="_UserDataProvider", ThisKey="user_id", OtherKey="id", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UserDataProvider_PrivacySettingDataProvider", Storage="_UserDataProvider", ThisKey="user_id", OtherKey="id", IsForeignKey=true)]
 		public UserDataProvider UserDataProvider
 		{
 			get
@@ -1967,6 +2006,181 @@ namespace ActivEarth.Server.Service
 					if ((value != null))
 					{
 						value.PrivacySettingDataProviders.Add(this);
+						this._user_id = value.id;
+					}
+					else
+					{
+						this._user_id = default(int);
+					}
+					this.SendPropertyChanged("UserDataProvider");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.[statistics]")]
+	public partial class UserStatisticDataProvider : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id;
+		
+		private int _user_id;
+		
+		private byte _statistic_type;
+		
+		private double _value;
+		
+		private EntityRef<UserDataProvider> _UserDataProvider;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void Onuser_idChanging(int value);
+    partial void Onuser_idChanged();
+    partial void Onstatistic_typeChanging(byte value);
+    partial void Onstatistic_typeChanged();
+    partial void OnvalueChanging(double value);
+    partial void OnvalueChanged();
+    #endregion
+		
+		public UserStatisticDataProvider()
+		{
+			this._UserDataProvider = default(EntityRef<UserDataProvider>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_user_id", DbType="Int NOT NULL")]
+		public int user_id
+		{
+			get
+			{
+				return this._user_id;
+			}
+			set
+			{
+				if ((this._user_id != value))
+				{
+					if (this._UserDataProvider.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onuser_idChanging(value);
+					this.SendPropertyChanging();
+					this._user_id = value;
+					this.SendPropertyChanged("user_id");
+					this.Onuser_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_statistic_type", DbType="TinyInt NOT NULL")]
+		public byte statistic_type
+		{
+			get
+			{
+				return this._statistic_type;
+			}
+			set
+			{
+				if ((this._statistic_type != value))
+				{
+					this.Onstatistic_typeChanging(value);
+					this.SendPropertyChanging();
+					this._statistic_type = value;
+					this.SendPropertyChanged("statistic_type");
+					this.Onstatistic_typeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_value", DbType="Float NOT NULL")]
+		public double value
+		{
+			get
+			{
+				return this._value;
+			}
+			set
+			{
+				if ((this._value != value))
+				{
+					this.OnvalueChanging(value);
+					this.SendPropertyChanging();
+					this._value = value;
+					this.SendPropertyChanged("value");
+					this.OnvalueChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UserDataProvider_StatisticDataProvider", Storage="_UserDataProvider", ThisKey="user_id", OtherKey="id", IsForeignKey=true)]
+		public UserDataProvider UserDataProvider
+		{
+			get
+			{
+				return this._UserDataProvider.Entity;
+			}
+			set
+			{
+				UserDataProvider previousValue = this._UserDataProvider.Entity;
+				if (((previousValue != value) 
+							|| (this._UserDataProvider.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._UserDataProvider.Entity = null;
+						previousValue.UserStatisticDataProviders.Remove(this);
+					}
+					this._UserDataProvider.Entity = value;
+					if ((value != null))
+					{
+						value.UserStatisticDataProviders.Add(this);
 						this._user_id = value.id;
 					}
 					else

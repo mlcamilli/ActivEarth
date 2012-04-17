@@ -16,6 +16,7 @@ namespace ActivEarth.DAO
                 return data.UserDataProviders.FirstOrDefault(u => u.user_name == userName);
             }
         }
+
         public static User GetUserFromUserId(int userId)
         {
             User toReturn;
@@ -46,6 +47,8 @@ namespace ActivEarth.DAO
             if (toReturn != null)
             {
                 toReturn.userPrivacySettings = PrivacySettingDAO.GetPrivacySettingFromUserId(toReturn.UserID);
+                toReturn.SetStatisticsDict(
+                    UserStatisticDAO.GetAllStatisticsByUserId(toReturn.UserID).ToDictionary(k => k.statistic, e => e));
             }
 
             return toReturn;
@@ -57,7 +60,7 @@ namespace ActivEarth.DAO
             using (SqlConnection connection = ConnectionManager.GetConnection())
             {
                 var data = new ActivEarthDataProvidersDataContext(connection);
-                return
+                var toReturn =
                     (from u in data.UserDataProviders
                      join p in data.ProfileDataProviders on u.id equals p.user_id
                      where u.user_name == userName && u.password == password
@@ -77,6 +80,11 @@ namespace ActivEarth.DAO
                                  Weight = p.weight,
                                  Height = p.height
                              }).FirstOrDefault();
+                if (toReturn != null)
+                {
+                    UserStatisticDAO.GetAllStatisticsByUserId(toReturn.UserID).ToDictionary(k => k.statistic, e => e);
+                }
+                return toReturn;
             }
         }
         public static bool CreateNewUser(User user, string password)
