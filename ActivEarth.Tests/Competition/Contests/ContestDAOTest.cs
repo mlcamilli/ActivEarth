@@ -21,6 +21,13 @@ namespace ActivEarth.Tests.Competition.Contests
     public class ContestDAOTest
     {
         private TransactionScope _trans;
+        User _user1;
+        User _user2;
+        User _user3;
+        User _user4;
+
+        Group _group1;
+        Group _group2;
 
         /// <summary>
         ///Gets or sets the test context which provides
@@ -38,6 +45,61 @@ namespace ActivEarth.Tests.Competition.Contests
         [TestInitialize]
         public void Initialize()
         {
+            _user1 = new User
+            {
+                UserName = "testSubject1",
+                FirstName = "Test",
+                LastName = "Subject1",
+                City = "St. Louis",
+                State = "MO",
+                Email = "email1@test.com"
+            };
+
+            _user2 = new User
+            {
+                UserName = "testSubject2",
+                FirstName = "Test",
+                LastName = "Subject2",
+                City = "Missoula",
+                State = "MT",
+                Email = "email1@test.net"
+            };
+            _user3 = new User
+            {
+                UserName = "testSubject3",
+                FirstName = "Test",
+                LastName = "Subject3",
+                City = "Oakland",
+                State = "CA",
+                Email = "email1@test.org"
+            };
+
+            _user4 = new User
+            {
+                UserName = "testSubject4",
+                FirstName = "Test",
+                LastName = "Subject4",
+                City = "Albany",
+                State = "NY",
+                Email = "email1@test.gov"
+            };
+
+            _group1 = new Group
+            {
+                Name = "Group 1",
+                Owner = _user1,
+                Description = String.Empty
+            };
+            _group1.Members.Add(_user2);
+
+            _group2 = new Group
+            {
+                Name = "Group 2",
+                Owner = _user3,
+                Description = String.Empty
+            };
+            _group2.Members.Add(_user4);
+
             _trans = new TransactionScope();
         }
 
@@ -163,37 +225,19 @@ namespace ActivEarth.Tests.Competition.Contests
         {
             using (_trans)
             {
+                InitializeTestDBEntries();
+
                 Log("Creating contest");
                 Contest contest = new Contest("Test Contest1", "This is a test contest",
                     30, ContestEndMode.GoalBased, ContestType.Group, DateTime.Today, 
                     new EndCondition(500), Statistic.Steps);
 
-                Log("Creating Members");
-                User member1 = new User("Test", "Subject1");
-                User member2 = new User("Test", "Subject2");
-                User member3 = new User("Test", "Subject3");
-                User member4 = new User("Test", "Subject4");
-
-                Log("Creating Groups");
-                Group group1 = new Group("Group 1", member1, string.Empty, new List<string>());
-                group1.Members.Add(member2);
-
-                Group group2 = new Group("Group 2", member3, string.Empty, new List<string>());
-                group2.Members.Add(member4);
-
-                Log("Adding groups to the contest");
-                contest.AddGroup(group1);
-                contest.AddGroup(group2);
-
-                Log("Adding Members to DB");
-                Assert.Fail("Not yet implemented");
-                UserDAO.CreateNewUser(member1, "pw1");
-                UserDAO.CreateNewUser(member2, "pw2");
-                UserDAO.CreateNewUser(member3, "pw3");
-                UserDAO.CreateNewUser(member4, "pw4");
-
                 Log("Saving to DB");
                 int id = ContestDAO.CreateNewContest(contest);
+
+                Log("Adding groups to the contest");
+                ContestManager.AddGroup(id, _group1);
+                ContestManager.AddGroup(id, _group2);
 
                 Log("Reading back from DB");
                 Contest retrieved = ContestDAO.GetContestFromContestId(id);
@@ -202,10 +246,10 @@ namespace ActivEarth.Tests.Competition.Contests
                 Assert.AreEqual(contest.Teams.Count, retrieved.Teams.Count);
 
                 Log("Verifying that each member is found");
-                Assert.IsTrue(retrieved.Teams[0].ContainsMember(member1));
-                Assert.IsTrue(retrieved.Teams[0].ContainsMember(member2));
-                Assert.IsTrue(retrieved.Teams[1].ContainsMember(member3));
-                Assert.IsTrue(retrieved.Teams[1].ContainsMember(member4));
+                Assert.IsTrue(retrieved.Teams[0].ContainsMember(_user1.UserID));
+                Assert.IsTrue(retrieved.Teams[0].ContainsMember(_user2.UserID));
+                Assert.IsTrue(retrieved.Teams[1].ContainsMember(_user3.UserID));
+                Assert.IsTrue(retrieved.Teams[1].ContainsMember(_user4.UserID));
             }
         }
 
@@ -281,66 +325,7 @@ namespace ActivEarth.Tests.Competition.Contests
 
             }
         }
-
-        /// <summary>
-        /// Tests the updating of a contest where a team was added since the last save.
-        /// </summary>
-        [TestMethod]
-        [Ignore]
-        public void TestUpdateContestAddTeam()
-        {
-            using (_trans)
-            {
-                Log("Creating contest");
-                Contest contest = new Contest("Test Contest1", "This is a test contest",
-                    30, ContestEndMode.GoalBased, ContestType.Group, DateTime.Today, 
-                    new EndCondition(500), Statistic.Steps);
-
-                Log("Saving to DB");
-                int id = ContestDAO.CreateNewContest(contest);
-
-                Log("Reading back from DB");
-                Contest retrieved = ContestDAO.GetContestFromContestId(id);
-
-                Log("Creating Members");
-                User member1 = new User("Test", "Subject1");
-                User member2 = new User("Test", "Subject2");
-                User member3 = new User("Test", "Subject3");
-                User member4 = new User("Test", "Subject4");
-
-                Log("Creating Groups");
-                Group group1 = new Group("Group 1", member1, string.Empty, new List<string>());
-                group1.Members.Add(member2);
-                group1.Members.Add(member3);
-                group1.Members.Add(member4);
-
-                Log("Adding group to the contest");
-                contest.AddGroup(group1);
-
-                Log("Adding Members to DB");
-                Assert.Fail("Not yet implemented");
-                UserDAO.CreateNewUser(member1, "pw1");
-                UserDAO.CreateNewUser(member2, "pw2");
-                UserDAO.CreateNewUser(member3, "pw3");
-                UserDAO.CreateNewUser(member4, "pw4");
-
-                Log("Updating Contest in DB");
-                Assert.IsTrue(ContestDAO.UpdateContest(retrieved));
-
-                Log("Re-loading contest from DB");
-                Contest retrieved2 = ContestDAO.GetContestFromContestId(id);
-
-                Log("Verifying the correct number of teams");
-                Assert.AreEqual(retrieved.Teams.Count, retrieved2.Teams.Count);
-
-                Log("Verifying that each member is found");
-                Assert.IsTrue(retrieved2.Teams[0].ContainsMember(member1));
-                Assert.IsTrue(retrieved2.Teams[0].ContainsMember(member2));
-                Assert.IsTrue(retrieved2.Teams[0].ContainsMember(member3));
-                Assert.IsTrue(retrieved2.Teams[0].ContainsMember(member4));
-            }
-        }
-
+        
         /// <summary>
         /// Tests the updating of a contest where members were added to a team 
         /// participating in the contest.
@@ -351,43 +336,32 @@ namespace ActivEarth.Tests.Competition.Contests
         {
             using (_trans)
             {
+                InitializeTestDBEntries();
+
                 Log("Creating contest");
                 Contest contest = new Contest("Test Contest1", "This is a test contest",
                     30, ContestEndMode.GoalBased, ContestType.Group, DateTime.Today, 
                     new EndCondition(500), Statistic.Steps);
 
-                Log("Creating Members");
-                User member1 = new User("Test", "Subject1");
-                User member2 = new User("Test", "Subject2");
-                User member3 = new User("Test", "Subject3");
-                User member4 = new User("Test", "Subject4");
-
-                Log("Creating Groups");
-                Group group1 = new Group("Group 1", member1, string.Empty, new List<string>());
-                group1.Members.Add(member2);
-
-                Log("Adding group to the contest");
-                contest.AddGroup(group1);
-
-                Log("Adding Members to DB");
-                Assert.Fail("Not yet implemented");
-                UserDAO.CreateNewUser(member1, "pw1");
-                UserDAO.CreateNewUser(member2, "pw2");
-                UserDAO.CreateNewUser(member3, "pw3");
-                UserDAO.CreateNewUser(member4, "pw4");
-
                 Log("Saving to DB");
                 int id = ContestDAO.CreateNewContest(contest);
 
+                ContestManager.AddGroup(id, _group1);
+
                 Log("Reading back from DB");
                 Contest retrieved = ContestDAO.GetContestFromContestId(id);
+                
+                Log("Verifying that the two added members are found");
+                Assert.IsTrue(retrieved.Teams[0].ContainsMember(_user1.UserID));
+                Assert.IsTrue(retrieved.Teams[0].ContainsMember(_user2.UserID));
+                Assert.IsFalse(retrieved.Teams[0].ContainsMember(_user3.UserID));
+                Assert.IsFalse(retrieved.Teams[0].ContainsMember(_user4.UserID));
 
                 Log("Adding two more members to the team");
-                retrieved.Teams[0].Members.Add(new TeamMember(member3));
-                retrieved.Teams[0].Members.Add(new TeamMember(member4));
+                retrieved.Teams[0].Members.Add(new TeamMember() { UserId = _user3.UserID });
+                retrieved.Teams[0].Members.Add(new TeamMember() { UserId = _user4.UserID });
 
-                Log("Updating Contest in DB");
-                Assert.IsTrue(ContestDAO.UpdateContest(retrieved));
+                ContestDAO.UpdateContest(retrieved);
 
                 Log("Re-loading contest from DB");
                 Contest retrieved2 = ContestDAO.GetContestFromContestId(id);
@@ -396,10 +370,10 @@ namespace ActivEarth.Tests.Competition.Contests
                 Assert.AreEqual(retrieved.Teams.Count, retrieved2.Teams.Count);
 
                 Log("Verifying that each member is found");
-                Assert.IsTrue(retrieved2.Teams[0].ContainsMember(member1));
-                Assert.IsTrue(retrieved2.Teams[0].ContainsMember(member2));
-                Assert.IsTrue(retrieved2.Teams[0].ContainsMember(member3));
-                Assert.IsTrue(retrieved2.Teams[0].ContainsMember(member4));
+                Assert.IsTrue(retrieved2.Teams[0].ContainsMember(_user1.UserID));
+                Assert.IsTrue(retrieved2.Teams[0].ContainsMember(_user2.UserID));
+                Assert.IsTrue(retrieved2.Teams[0].ContainsMember(_user3.UserID));
+                Assert.IsTrue(retrieved2.Teams[0].ContainsMember(_user4.UserID));
             }
         }
 
@@ -409,50 +383,28 @@ namespace ActivEarth.Tests.Competition.Contests
         /// </summary>
         [TestMethod]
         [Ignore]
-        public void TestUpdateContestLockInitialization()
+        public void TestContestLockContest()
         {
             using (_trans)
             {
+                InitializeTestDBEntries();
+
                 Log("Creating contest");
                 Contest contest = new Contest("Test Contest1", "This is a test contest",
                     30, ContestEndMode.GoalBased, ContestType.Group, DateTime.Today, 
                     new EndCondition(500), Statistic.Steps);
 
-                Log("Creating Members");
-                User member1 = new User("Test", "Subject1");
-                User member2 = new User("Test", "Subject2");
-                User member3 = new User("Test", "Subject3");
-                User member4 = new User("Test", "Subject4");
-
-                Log("Creating Groups");
-                Group group1 = new Group("Group 1", member1, string.Empty, new List<string>());
-                group1.Members.Add(member2);
-
-                Group group2 = new Group("Group 2", member3, string.Empty, new List<string>());
-                group2.Members.Add(member4);
-
-                Log("Adding groups to the contest");
-                contest.AddGroup(group1);
-                contest.AddGroup(group2);
-
-                Log("Adding Members to DB");
-                Assert.Fail("Not yet implemented");
-                UserDAO.CreateNewUser(member1, "pw1");
-                UserDAO.CreateNewUser(member2, "pw2");
-                UserDAO.CreateNewUser(member3, "pw3");
-                UserDAO.CreateNewUser(member4, "pw4");
-
                 Log("Saving to DB");
                 int id = ContestDAO.CreateNewContest(contest);
 
-                Log("Reading back from DB");
-                Contest retrieved = ContestDAO.GetContestFromContestId(id);
+                ContestManager.AddGroup(id, _group1);
+                ContestManager.AddGroup(id, _group2);
 
                 Log("Locking Initialization");
-                retrieved.LockInitialValues();
+                ContestManager.LockContest(id);
 
-                Log("Updating contest entry in DB");
-                Assert.IsTrue(ContestDAO.UpdateContest(retrieved));
+                Log("Reading back from DB");
+                Contest retrieved = ContestDAO.GetContestFromContestId(id);
 
                 Log("Reading back from DB");
                 Contest retrieved2 = ContestDAO.GetContestFromContestId(id);
@@ -473,6 +425,8 @@ namespace ActivEarth.Tests.Competition.Contests
         {
             using (_trans)
             {
+                InitializeTestDBEntries();
+
                 Log("Creating contest to put the team in");
                 Contest contest = new Contest("Test Contest1", "This is a test contest",
                     30, ContestEndMode.GoalBased, ContestType.Group, DateTime.Today, 
@@ -482,15 +436,23 @@ namespace ActivEarth.Tests.Competition.Contests
                 int contestId = ContestDAO.CreateNewContest(contest);
 
                 Log("Creating team");
-                Team team = new Team("Test Team");
-                team.Add(new User("Test", "Subject1"));
-                team.Add(new User("Test", "Subject2"));
+                Team team = new Team()
+                {
+                    ContestId = contestId,
+                    Name = "Test Team"
+                };
 
                 Log("Adding team to DB");
-                int id = TeamDAO.CreateNewTeam(team, contestId);
+                int teamId = TeamDAO.CreateNewTeam(team);
+
+                int i = TeamDAO.CreateNewTeamMember(_user1.UserID, teamId);
+                int j = TeamDAO.CreateNewTeamMember(_user2.UserID, teamId);
 
                 Log("Retrieving team from DB");
-                Assert.IsNotNull(TeamDAO.GetTeamFromTeamId(id));
+                Team retrieved = TeamDAO.GetTeamFromTeamId(teamId);
+
+                Assert.IsNotNull(retrieved);
+                Assert.AreEqual(2, retrieved.Members.Count);
 
             }
         }
@@ -600,6 +562,17 @@ namespace ActivEarth.Tests.Competition.Contests
         private void Log(string message)
         {
             TestContext.WriteLine(message);
+        }
+
+        private void InitializeTestDBEntries()
+        {
+            _user1.UserID = UserDAO.CreateNewUser(_user1, "pw1");
+            _user2.UserID = UserDAO.CreateNewUser(_user2, "pw2");
+            _user3.UserID = UserDAO.CreateNewUser(_user3, "pw3");
+            _user4.UserID = UserDAO.CreateNewUser(_user4, "pw4");
+
+            GroupDAO.CreateNewGroup(_group1);
+            GroupDAO.CreateNewGroup(_group2);
         }
 
         #endregion ---------- Utility Methods ----------

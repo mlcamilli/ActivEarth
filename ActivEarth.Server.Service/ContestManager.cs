@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using ActivEarth.Objects.Profile;
+using ActivEarth.Objects.Groups;
 using ActivEarth.Objects.Competition;
 using ActivEarth.Objects.Competition.Contests;
 
@@ -120,7 +121,7 @@ namespace ActivEarth.DAO
         /// Cleans up the contest list, deactivating expired time-based contests and deleting
         /// deactivated contests that have reached the end of their retainment period.
         /// </summary>
-        public void CleanUp()
+        public static void CleanUp()
         {
             foreach (Contest contest in ContestDAO.GetActiveContests())
             {
@@ -136,6 +137,95 @@ namespace ActivEarth.DAO
             }
 
             ContestDAO.RemoveOldContests();
+        }
+
+        /// <summary>
+        /// Locks competitor initial values such that the calculation of
+        /// deltas can begin (to calculate team scores).
+        /// </summary>
+        public static void LockContest(int contestId)
+        {
+            List<Team> teams = TeamDAO.GetTeamsFromContestId(contestId);
+
+            foreach (Team team in teams)
+            {
+                TeamDAO.LockTeam(team);
+            }
+        }
+
+        /// <summary>
+        /// Adds a team to the Contest.
+        /// </summary>
+        /// <param name="team">The team to be added.</param>
+        public static void AddTeam(Team team)
+        {
+            TeamDAO.CreateNewTeam(team);
+        }
+
+        /// <summary>
+        /// Adds a group to a group Contest; will fail if a group is added to an individual contest.
+        /// </summary>
+        /// <param name="contestId">ID for the contest the group should be added to.</param>
+        /// <param name="group">Group to be added.</param>
+        /// <returns>True on success, false on failure.</returns>
+        public static bool AddGroup(int contestId, Group group)
+        {
+            Contest contest = ContestDAO.GetContestFromContestId(contestId);
+            if (contest.Type == ContestType.Group)
+            {
+                string teamName = group.Name;
+
+                Team newTeam = new Team
+                {
+                    ContestId = contestId,
+                    Name = teamName,
+                    GroupId = group.ID
+                };
+
+                int teamId = TeamDAO.CreateNewTeam(newTeam);
+
+                foreach (User user in group.Members)
+                {
+                    TeamDAO.CreateNewTeamMember(user.UserID, teamId);
+                }
+
+                return (teamId > 0);
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Adds a user to the Contest.
+        /// </summary>
+        /// <param name="user">User to be added.</param>
+        public static void AddUser(int contestId, User user)
+        {
+            string teamName = String.Format("{0} {1}", user.FirstName, user.LastName);
+            //TODO: Assert that no team with this name exists already
+
+            Team newTeam = new Team
+            {
+                ContestId = contestId,
+                Name = teamName
+            };
+
+            int teamId = TeamDAO.CreateNewTeam(newTeam);
+            TeamDAO.CreateNewTeamMember(user.UserID, teamId);
+        }
+
+        /// <summary>
+        /// Removes a team from its associated Contest.
+        /// </summary>
+        /// <param name="team">The team to be removed.</param>
+        public static void RemoveTeam(Team team)
+        {
+            if (team != null)
+            {
+                TeamDAO.RemoveTeam(team.ID);
+            }
         }
 
         #endregion ---------- Public Methods ----------

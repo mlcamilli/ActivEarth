@@ -19,11 +19,11 @@ namespace ActivEarth.DAO
         /// <returns>Contest specified by the provided ID.</returns>
         public static Contest GetContestFromContestId(int contestId)
         {
-            Contest toReturn;
+            Contest contest;
             using (SqlConnection connection = ConnectionManager.GetConnection())
             {
                 var data = new ActivEarthDataProvidersDataContext(connection);
-                toReturn = (from c in data.ContestDataProviders
+                contest = (from c in data.ContestDataProviders
                         where c.id == contestId
                         select
                             new Contest
@@ -45,12 +45,13 @@ namespace ActivEarth.DAO
                             }).FirstOrDefault();
             }
 
-            if (toReturn != null)
+            if (contest != null)
             {
-                toReturn.Teams = TeamDAO.GetTeamsFromContestId(toReturn.ID);
-                toReturn.FormatString = StatisticInfoDAO.GetStatisticFormatString(toReturn.StatisticBinding);
+                contest.Teams = TeamDAO.GetTeamsFromContestId(contest.ID);
+                contest.Teams.Sort(delegate(Team t1, Team t2) { return t2.Score.CompareTo(t1.Score); });
+                contest.FormatString = StatisticInfoDAO.GetStatisticFormatString(contest.StatisticBinding);
             }
-            return toReturn;
+            return contest;
         }
 
         /// <summary>
@@ -59,12 +60,12 @@ namespace ActivEarth.DAO
         /// <returns>All active contests in the DB.</returns>
         public static List<Contest> GetActiveContests()
         {
-            List<Contest> toReturn;
+            List<Contest> contests;
 
             using (SqlConnection connection = ConnectionManager.GetConnection())
             {
                 var data = new ActivEarthDataProvidersDataContext(connection);
-                toReturn = (from c in data.ContestDataProviders
+                contests = (from c in data.ContestDataProviders
                         where c.active
                         select
                             new Contest
@@ -85,27 +86,35 @@ namespace ActivEarth.DAO
                                 DeactivatedTime = c.deactivated
                             }).ToList();
 
-                if (toReturn != null)
+                if (contests != null)
                 {
-                    foreach (Contest contest in toReturn)
+                    foreach (Contest contest in contests)
                     {
                         contest.Teams = TeamDAO.GetTeamsFromContestId(contest.ID);
+                        contest.Teams.Sort(delegate (Team t1, Team t2) { return t2.Score.CompareTo(t1.Score); });
+
                         contest.FormatString = StatisticInfoDAO.GetStatisticFormatString(contest.StatisticBinding);
                     }
                 }
 
-                return toReturn;
+                return contests;
             }
         }
 
+        /// <summary>
+        /// Gets the list of currently joinable contests with a search query (searching contests by name).
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="exactMatch"></param>
+        /// <returns></returns>
         public static List<Contest> GetJoinableContestsFromContestName(string name, bool exactMatch)
         {
-            List<Contest> toReturn;
+            List<Contest> contests;
 
             using (SqlConnection connection = ConnectionManager.GetConnection())
             {
                 var data = new ActivEarthDataProvidersDataContext(connection);
-                toReturn = (from c in data.ContestDataProviders
+                contests = (from c in data.ContestDataProviders
                             where (exactMatch ? 
                                 c.name.ToLower().Equals(name.ToLower()) : 
                                 c.name.ToLower().Contains(name.ToLower())) &&
@@ -129,16 +138,17 @@ namespace ActivEarth.DAO
                                     IsActive = c.active
                                 }).ToList();
 
-                if (toReturn != null)
+                if (contests != null)
                 {
-                    foreach (Contest contest in toReturn)
+                    foreach (Contest contest in contests)
                     {
                         contest.Teams = TeamDAO.GetTeamsFromContestId(contest.ID);
+                        contest.Teams.Sort(delegate(Team t1, Team t2) { return t2.Score.CompareTo(t1.Score); });
                         contest.FormatString = StatisticInfoDAO.GetStatisticFormatString(contest.StatisticBinding);
                     }
                 }
 
-                return toReturn;
+                return contests;
             }
         }
 
@@ -179,7 +189,7 @@ namespace ActivEarth.DAO
 
                 foreach (Team team in contest.Teams)
                 {
-                    //TeamDAO.CreateNewTeam(team, contest.ID);
+                    TeamDAO.CreateNewTeam(team);
                 }
 
                 return id;
@@ -231,7 +241,7 @@ namespace ActivEarth.DAO
                 {
                     foreach (Team team in contest.Teams)
                     {
-                        TeamDAO.UpdateTeam(team, contest.ID);
+                        TeamDAO.UpdateTeam(team);
                     }
                 }
 
@@ -303,6 +313,22 @@ namespace ActivEarth.DAO
             catch (Exception)
             {
                 return false;
+            }
+        }
+
+        /// <summary>
+        /// Lookup for the statistic being tracked by a specific challenge.
+        /// </summary>
+        /// <param name="contestId">ID of the contest to query.</param>
+        /// <returns>Statistic being watched by the contest.</returns>
+        public static Statistic GetStatisticFromContestId(int contestId)
+        {
+            using (SqlConnection connection = ConnectionManager.GetConnection())
+            {
+                var data = new ActivEarthDataProvidersDataContext(connection);
+                return (Statistic)(from c in data.ContestDataProviders
+                                   where c.id == contestId
+                                   select c.statistic).FirstOrDefault();
             }
         }
 

@@ -2,65 +2,27 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using ActivEarth.Objects.Profile;
 using ActivEarth.Objects.Competition;
 using ActivEarth.Objects.Competition.Contests;
 using ActivEarth.Server.Service;
+using ActivEarth.Server.Service.Statistics;
 
 namespace ActivEarth.DAO
 {
     public class TeamDAO
     {
-        /// <summary>
-        /// Retrieves a Team from the DB based on its ID.
-        /// </summary>
-        /// <param name="teamId">Identifier of the team to retrieve.</param>
-        /// <returns>Team specified by the provided ID.</returns>
-        public static Team GetTeamFromTeamId(int teamId)
-        {
-            using (SqlConnection connection = ConnectionManager.GetConnection())
-            {
-                var data = new ActivEarthDataProvidersDataContext(connection);
-                return (from c in data.TeamDataProviders
-                        where c.id == teamId
-                        select
-                            new Team
-                            {
-                                ID = c.id,
-                                Name = c.name,
-                                Score = (float)c.score,
-                                Members = GetTeamMembersFromTeamId(c.id)
-                            }).FirstOrDefault();
-            }
-        }
 
-        /// <summary>
-        /// Retrieves all teams competing in a particular contest.
-        /// </summary>
-        /// <returns>All teams currently participating in the contest specified by the given ID.</returns>
-        public static List<Team> GetTeamsFromContestId(int contestId)
-        {
-            using (SqlConnection connection = ConnectionManager.GetConnection())
-            {
-                var data = new ActivEarthDataProvidersDataContext(connection);
-                return (from c in data.TeamDataProviders
-                        where c.contest_id == contestId
-                        select
-                            new Team
-                            {
-                                ID = c.id,
-                                Name = c.name,
-                                Score = (float)c.score,
-                                Members = GetTeamMembersFromTeamId(c.id)
-                            }).ToList();
-            }
-        }
+        #region ---------- Team Methods ----------
+
+        #region Team Creation
 
         /// <summary>
         /// Saves a Team as a new entry in the DB.
         /// </summary>
         /// <param name="team">Team object to add to the DB.</param>
         /// <returns>ID of the created team on success, 0 on failure.</returns>
-        public static int CreateNewTeam(Team team, int contestId)
+        public static int CreateNewTeam(Team team)
         {
             try
             {
@@ -73,7 +35,9 @@ namespace ActivEarth.DAO
                     {
                         name = team.Name,
                         score = team.Score,
-                        contest_id = contestId
+                        contest_id = team.ContestId,
+                        locked = team.IsLocked,
+                        group_id = team.GroupId
                     };
                     data.TeamDataProviders.InsertOnSubmit(teamData);
                     data.SubmitChanges();
@@ -81,7 +45,7 @@ namespace ActivEarth.DAO
                     id = teamData.id;
                 }
 
-                UpdateTeamMembers(team);
+                TeamDAO.UpdateTeamMembers(team);
 
                 return id;
             }
@@ -91,12 +55,98 @@ namespace ActivEarth.DAO
             }
         }
 
+        #endregion Team Creation
+
+        #region Team Retrieval 
+
+        /// <summary>
+        /// Retrieves a Team from the DB based on its ID.
+        /// </summary>
+        /// <param name="teamId">Identifier of the team to retrieve.</param>
+        /// <returns>Team specified by the provided ID.</returns>
+        public static Team GetTeamFromTeamId(int teamId)
+        {
+            using (SqlConnection connection = ConnectionManager.GetConnection())
+            {
+                var data = new ActivEarthDataProvidersDataContext(connection);
+                Team team = (from c in data.TeamDataProviders
+                        where c.id == teamId
+                        select
+                            new Team
+                            {
+                                ID = c.id,
+                                Name = c.name,
+                                Score = (float)c.score,
+                                IsLocked = c.locked,
+                                GroupId = c.group_id,
+                                ContestId = c.contest_id
+                            }).FirstOrDefault();
+
+                if (team != null)
+                {
+                    team.Members = GetTeamMembersFromTeamId(team.ID);
+                }
+
+                return team;
+            }
+        }
+
+        /// <summary>
+        /// Retrieves all teams competing in a particular contest.
+        /// </summary>
+        /// <returns>All teams currently participating in the contest specified by the given ID.</returns>
+        public static List<Team> GetTeamsFromContestId(int contestId)
+        {
+            using (SqlConnection connection = ConnectionManager.GetConnection())
+            {
+                var data = new ActivEarthDataProvidersDataContext(connection);
+                List<Team> teams =  (from c in data.TeamDataProviders
+                                    where c.contest_id == contestId
+                                    select
+                                        new Team
+                                        {
+                                            ID = c.id,
+                                            Name = c.name,
+                                            Score = (float)c.score,
+                                            IsLocked = c.locked,
+                                            GroupId = c.group_id,
+                                            ContestId = c.contest_id
+                                        }).ToList();
+
+                foreach (Team team in teams)
+                {
+                    team.Members = GetTeamMembersFromTeamId(team.ID);
+                }
+
+                return teams;
+            }
+        }
+
+        /// <summary>
+        /// Retrieves all team IDs of which the provided user is a member.
+        /// </summary>
+        /// <returns>IDs of all teams of which the provided user is a member.</returns>
+        public static List<int> GetTeamIdsFromUserId(int userId)
+        {
+            using (SqlConnection connection = ConnectionManager.GetConnection())
+            {
+                var data = new ActivEarthDataProvidersDataContext(connection);
+                return (from c in data.TeamMemberDataProviders
+                        where c.user_id == userId
+                        select c.team_id).ToList();
+            }
+        }
+
+        #endregion Team Retrieval
+
+        #region Team DB Update
+
         /// <summary>
         /// Updates an existing Team in the DB.
         /// </summary>
-        /// <param name="challenge">Team whose record needs updating.</param>
+        /// <param name="team">Team whose record needs updating.</param>
         /// <returns>True on success, false on failure.</returns>
-        public static bool UpdateTeam(Team team, int contestId)
+        public static bool UpdateTeam(Team team)
         {
             try
             {
@@ -109,6 +159,9 @@ namespace ActivEarth.DAO
                     {
                         dbTeam.name = team.Name;
                         dbTeam.score = team.Score;
+                        dbTeam.locked = team.IsLocked;
+                        dbTeam.group_id = team.GroupId;
+                        dbTeam.contest_id = team.ContestId;
 
                         data.SubmitChanges();
                         UpdateTeamMembers(team);
@@ -116,7 +169,7 @@ namespace ActivEarth.DAO
                     }
                     else
                     {
-                        CreateNewTeam(team, contestId);
+                        CreateNewTeam(team);
                         return true;
                     }
                 }
@@ -126,6 +179,108 @@ namespace ActivEarth.DAO
                 return false;
             }
         }
+
+        #endregion Team DB Update
+
+        #region Team Utilities
+
+        /// <summary>
+        /// Recalculates and updates the team's contest score.
+        /// </summary>
+        /// <param name="team">Team to be updated.</param>
+        /// <param name="statistic"></param>
+        public static void UpdateTeamScore(int teamId)
+        {
+            Team team = TeamDAO.GetTeamFromTeamId(teamId);
+
+            if (team.IsLocked)
+            {
+                Statistic statistic = ContestDAO.GetStatisticFromContestId(team.ContestId);
+                float total = 0;
+
+                foreach (TeamMember member in team.Members)
+                {
+                    total += TeamDAO.CalculateUserScore(member.UserId, member.InitialScore, statistic);
+                }
+
+                team.Score = total;
+                TeamDAO.UpdateTeam(team);
+            }
+        }
+
+        /// <summary>
+        /// Notes each user's state at the beginning of a contest so that
+        /// the delta score can be calculated.
+        /// 
+        /// Sets the initialized flag to true, allowing the calculation of
+        /// delta scores.
+        /// </summary>
+        public static void LockTeam(Team team)
+        {
+            Statistic statistic = ContestDAO.GetStatisticFromContestId(team.ContestId);
+
+            foreach (TeamMember user in team.Members)
+            {
+                UserStatistic userStat = UserStatisticDAO.GetStatisticFromUserIdAndStatType(user.UserId, statistic);
+                user.InitialScore = (userStat != null ? userStat.value : 0);
+                user.Initialized = true;
+            }
+
+            team.IsLocked = true;
+            TeamDAO.UpdateTeam(team);
+        }
+
+        private static int GetContestIdFromTeamId(int teamId)
+        {
+            using (SqlConnection connection = ConnectionManager.GetConnection())
+            {
+                var data = new ActivEarthDataProvidersDataContext(connection);
+                return (from c in data.TeamDataProviders
+                        where c.id == teamId
+                        select c.contest_id).FirstOrDefault();
+            }
+        }
+
+        #endregion Team Utilities
+
+        #region Team Removal
+
+        /// <summary>
+        /// Removes an existing Team from the DB.
+        /// </summary>
+        /// <param name="team">Team to remove.</param>
+        /// <returns>True on success, false on failure.</returns>
+        public static bool RemoveTeam(int teamId)
+        {
+            try
+            {
+                using (SqlConnection connection = ConnectionManager.GetConnection())
+                {
+                    var data = new ActivEarthDataProvidersDataContext(connection);
+                    TeamDataProvider dbTeam =
+                        (from c in data.TeamDataProviders where c.id == teamId select c).FirstOrDefault();
+                    if (dbTeam != null)
+                    {
+                        data.TeamDataProviders.DeleteOnSubmit(dbTeam);
+                        data.SubmitChanges();
+                    }
+
+                    return true;
+                }
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        #endregion Team Removal
+
+        #endregion ---------- Team Methods ----------
+
+        #region ---------- Team Member Methods ----------
+
+        #region Team Member Creation
 
         /// <summary>
         /// Creates a new DB entry for a team member.
@@ -137,13 +292,22 @@ namespace ActivEarth.DAO
         {
             try
             {
+                int contestId = TeamDAO.GetContestIdFromTeamId(teamId);
+
                 using (SqlConnection connection = ConnectionManager.GetConnection())
                 {
                     var data = new ActivEarthDataProvidersDataContext(connection);
+                    bool alreadyInContest = ((from c in data.TeamMemberDataProviders
+                                             where c.user_id == teamMember.UserId && c.contest_id == contestId
+                                             select c.team_id).FirstOrDefault()) > 0;
+
+                    if (alreadyInContest) { throw new Exception("User is already competing in the contest"); }
+
                     var userData = new TeamMemberDataProvider
                     {
-                        team_id = (int)teamId,
-                        user_id = (int)teamMember.User.UserID,
+                        contest_id = contestId,
+                        team_id = teamId,
+                        user_id = teamMember.UserId,
                         initialized = teamMember.Initialized,
                         initial_score = teamMember.InitialScore
                     };
@@ -159,6 +323,33 @@ namespace ActivEarth.DAO
         }
 
         /// <summary>
+        /// Creates a new DB entry for a team member.
+        /// </summary>
+        /// <param name="userId">ID of the Member to be added to the DB.</param>
+        /// <param name="teamId">Team ID that the member should be added to.</param>
+        /// <returns>ID of the newly added Team Member entry on success, 0 on failure.</returns>
+        public static int CreateNewTeamMember(int userId, int teamId)
+        {
+            try
+            {
+                TeamMember member = new TeamMember()
+                {
+                    UserId = userId
+                };
+
+                return TeamDAO.CreateNewTeamMember(member, teamId);
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
+
+        #endregion Team Member Creation
+
+        #region Team Member Retrieval
+
+        /// <summary>
         /// Retrieves the list of team members for a particular team.
         /// </summary>
         /// <param name="teamId">Team ID to retrieve the members for.</param>
@@ -169,18 +360,20 @@ namespace ActivEarth.DAO
             {
                 var data = new ActivEarthDataProvidersDataContext(connection);
                 return (from c in data.TeamMemberDataProviders
-                        where c.team_id == (int)teamId
+                        where c.team_id == teamId
                         select
                             new TeamMember
                             {
                                 Initialized = c.initialized,
                                 InitialScore = (float)c.initial_score,
-
-                                // Activate when necessary profile dependencies are resolved
-                                //User = UserDAO.GetUserFromUserId(c.user_id) 
+                                UserId = c.user_id
                             }).ToList();
             }
         }
+
+        #endregion Team Member Retrieval
+
+        #region Team Member DB Update
 
         /// <summary>
         /// Updates the entry of any members already existing on the team, and creates
@@ -199,25 +392,24 @@ namespace ActivEarth.DAO
                     {
                         var data = new ActivEarthDataProvidersDataContext(connection);
 
-                            TeamMemberDataProvider dbUser =
-                                (from u in data.TeamMemberDataProviders 
-                                 where u.team_id == team.ID && u.user_id == user.User.UserID
-                                 select u).FirstOrDefault();
-                            if (dbUser != null)
-                            {
-                                dbUser.initial_score = user.InitialScore;
-                                dbUser.initialized = user.Initialized;
+                        TeamMemberDataProvider dbUser =
+                            (from u in data.TeamMemberDataProviders
+                             where u.team_id == team.ID && u.user_id == user.UserId
+                             select u).FirstOrDefault();
+                        if (dbUser != null)
+                        {
+                            dbUser.initial_score = user.InitialScore;
+                            dbUser.initialized = user.Initialized;
 
-                                data.SubmitChanges();
-                                return true;
-                            }
-                            else
+                            data.SubmitChanges();
+                        }
+                        else
+                        {
+                            if (CreateNewTeamMember(user, team.ID) == 0)
                             {
-                                if (CreateNewTeamMember(user, team.ID) == 0)
-                                {
-                                    return false;
-                                }
+                                return false;
                             }
+                        }
                     }
                 }
 
@@ -228,5 +420,27 @@ namespace ActivEarth.DAO
                 return false;
             }
         }
+
+        #endregion Team Member DB Update
+
+        #region Team Member Utilities
+
+        /// <summary>
+        /// Calculates the user's change in the relevant statistic
+        /// since the beginning of the contest; their 'score' for
+        /// the contest.
+        /// </summary>
+        /// <returns></returns>
+        private static float CalculateUserScore(int userId, float initial, Statistic statistic)
+        {
+            UserStatistic userStat = UserStatisticDAO.GetStatisticFromUserIdAndStatType(userId, statistic);
+            float current = (userStat != null ? userStat.value : 0);
+
+            return current - initial;
+        }
+
+        #endregion Team Member Utilities
+
+        #endregion ---------- Team Member Methods ----------
     }
 }

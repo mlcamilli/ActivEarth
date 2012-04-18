@@ -1,7 +1,7 @@
 USE [ActivEarth_Dev]
 GO
 
-/****** Object:  Table [dbo].[teams]    Script Date: 03/23/2012 00:52:00 ******/
+/****** Object:  Table [dbo].[teams]    Script Date: 04/17/2012 21:49:11 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -16,6 +16,8 @@ CREATE TABLE [dbo].[teams](
 	[contest_id] [int] NOT NULL,
 	[name] [varchar](50) NOT NULL,
 	[score] [float] NOT NULL,
+    [locked] [bit] NOT NULL,
+	[group_id] [int] NULL,
  CONSTRAINT [PK__teams__3213E83F145C0A3F] PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
@@ -32,5 +34,12 @@ REFERENCES [dbo].[contests] ([id])
 GO
 
 ALTER TABLE [dbo].[teams] CHECK CONSTRAINT [fk_contest_id]
+GO
+
+ALTER TABLE [dbo].[teams]  WITH CHECK ADD  CONSTRAINT [FK_teams_group_id] FOREIGN KEY([group_id])
+REFERENCES [dbo].[groups] ([id])
+GO
+
+ALTER TABLE [dbo].[teams] CHECK CONSTRAINT [FK_teams_group_id]
 GO
 

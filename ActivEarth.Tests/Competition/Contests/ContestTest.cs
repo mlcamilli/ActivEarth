@@ -9,6 +9,7 @@ using ActivEarth.Objects.Groups;
 using ActivEarth.Objects.Profile;
 using ActivEarth.Objects.Competition.Contests;
 using ActivEarth.DAO;
+using ActivEarth.Server.Service.Statistics;
 
 namespace ActivEarth.Tests.Competition.Contests
 {
@@ -41,16 +42,63 @@ namespace ActivEarth.Tests.Competition.Contests
         [TestInitialize]
         public void Initialize()
         {
-            _user1 = new User("Test", "Subject1");
-            _user2 = new User("Test", "Subject2");
-            _user3 = new User("Test", "Subject3");
-            _user4 = new User("Test", "Subject4");
+            _user1 = new User
+            {
+                UserName = "testSubject1",
+                FirstName = "Test",
+                LastName = "Subject1",
+                City = "St. Louis",
+                State = "MO",
+                Email = "email1@test.com"
+            };
 
-            _group1 = new Group("Group 1", _user1, string.Empty, new List<string>());
+            _user2 = new User
+            {
+                UserName = "testSubject2",
+                FirstName = "Test",
+                LastName = "Subject2",
+                City = "Missoula",
+                State = "MT",
+                Email = "email1@test.net"
+            };
+            _user3 = new User
+            {
+                UserName = "testSubject3",
+                FirstName = "Test",
+                LastName = "Subject3",
+                City = "Oakland",
+                State = "CA",
+                Email = "email1@test.org"
+            };
+
+            _user4 = new User
+            {
+                UserName = "testSubject4",
+                FirstName = "Test",
+                LastName = "Subject4",
+                City = "Albany",
+                State = "NY",
+                Email = "email1@test.gov"
+            };
+
+            _group1 = new Group
+            {
+                Name = "Group 1",
+                Owner = _user1,
+                Description = String.Empty
+            };
+            _group1.Members.Add(_user1);
             _group1.Members.Add(_user2);
 
-            _group2 = new Group("Group 2", _user3, string.Empty, new List<string>());
+            _group2 = new Group
+            {
+                Name = "Group 2",
+                Owner = _user3,
+                Description = String.Empty
+            };
+            _group2.Members.Add(_user3);
             _group2.Members.Add(_user4);
+
             _trans = new TransactionScope();
         }
 
@@ -79,15 +127,18 @@ namespace ActivEarth.Tests.Competition.Contests
         {
             using (_trans)
             {
+                InitializeTestDBEntries();
+
                 Log("Creating time-based group contest");
                 int id = ContestManager.CreateContest(ContestType.Group, "Test Contest 1",
                     "This is a test time-based contest.", 50, DateTime.Now, DateTime.Now.AddDays(1),
                     true, Statistic.Steps);
-                Contest contest = ContestManager.GetContest(id);
 
                 Log("Adding groups to the contest");
-                contest.AddGroup(_group1);
-                contest.AddGroup(_group2);
+                ContestManager.AddGroup(id, _group1);
+                ContestManager.AddGroup(id, _group2);
+
+                Contest contest = ContestManager.GetContest(id);
 
                 Log("Verifying team count");
                 Assert.AreEqual(2, contest.Teams.Count);
@@ -97,7 +148,8 @@ namespace ActivEarth.Tests.Competition.Contests
                 Assert.AreEqual(2, contest.Teams[1].Members.Count);
 
                 Log("Locking team initialization");
-                contest.LockInitialValues();
+                ContestManager.LockContest(id);
+                contest = ContestManager.GetContest(id);
 
                 Log("Verifying initial team scores");
                 Assert.AreEqual(0, contest.Teams[0].Score);
@@ -116,7 +168,7 @@ namespace ActivEarth.Tests.Competition.Contests
         /// 4) VERIFY: Second contest is determined to be goal-based.
         /// </remarks>
         [TestMethod]
-        public void TestContestEndModeDetermination()
+        public void TestContestEndMode()
         {
             using (_trans)
             {
@@ -159,56 +211,50 @@ namespace ActivEarth.Tests.Competition.Contests
         /// 11) VERIFY: Second team in the team collection is group1.
         /// </remarks>
         [TestMethod]
-        public void TestContestGroupTeamsRemainSorted()
+        public void TestContestGroupTeamsSorted()
         {
             using (_trans)
             {
+                InitializeTestDBEntries();
+
                 Log("Creating group contest");
                 int id = ContestManager.CreateContest(ContestType.Group, "Test Contest 1",
                     "This is a test time-based contest.", 50, DateTime.Now, DateTime.Now.AddDays(1),
                     true, Statistic.Steps);
-                Contest contest = ContestManager.GetContest(id);
 
-                contest.AddGroup(_group1);
-                contest.AddGroup(_group2);
+                ContestManager.AddGroup(id, _group1);
+                ContestManager.AddGroup(id, _group2);
 
                 Log("Locking initial values");
-                contest.LockInitialValues();
+                ContestManager.LockContest(id);
 
                 Log("Setting individual statistics such that group1 is winning");
-                _user1.SetStatistic(Statistic.Steps, 100);
-                _user2.SetStatistic(Statistic.Steps, 100);
-                _user3.SetStatistic(Statistic.Steps, 50);
-                _user4.SetStatistic(Statistic.Steps, 50);
+                StatisticManager.SetUserStatistic(_user1.UserID, Statistic.Steps, 100);
+                StatisticManager.SetUserStatistic(_user2.UserID, Statistic.Steps, 100);
+                StatisticManager.SetUserStatistic(_user3.UserID, Statistic.Steps, 50);
+                StatisticManager.SetUserStatistic(_user4.UserID, Statistic.Steps, 50);
 
-                Log("Updating contest scores");
-                contest.UpdateScores();
+                Contest contest = ContestManager.GetContest(id);
 
                 Log("Verifying first team is group1");
-                Assert.IsTrue(contest.Teams[0].ContainsMember(_user1));
-                Assert.IsTrue(contest.Teams[0].ContainsMember(_user2));
+                Assert.AreEqual("Group 1", contest.Teams[0].Name);
 
                 Log("Verifying second team is group2");
-                Assert.IsTrue(contest.Teams[1].ContainsMember(_user3));
-                Assert.IsTrue(contest.Teams[1].ContainsMember(_user4));
-
+                Assert.AreEqual("Group 2", contest.Teams[1].Name);
 
                 Log("Setting individual statistics such that group2 is winning");
-                _user1.SetStatistic(Statistic.Steps, 200);
-                _user2.SetStatistic(Statistic.Steps, 200);
-                _user3.SetStatistic(Statistic.Steps, 300);
-                _user4.SetStatistic(Statistic.Steps, 300);
+                StatisticManager.SetUserStatistic(_user1.UserID, Statistic.Steps, 200);
+                StatisticManager.SetUserStatistic(_user2.UserID, Statistic.Steps, 200);
+                StatisticManager.SetUserStatistic(_user3.UserID, Statistic.Steps, 300);
+                StatisticManager.SetUserStatistic(_user4.UserID, Statistic.Steps, 300);
 
-                Log("Updating contest scores");
-                contest.UpdateScores();
+                contest = ContestManager.GetContest(id);
 
                 Log("Verifying first team is group2");
-                Assert.IsTrue(contest.Teams[0].ContainsMember(_user3));
-                Assert.IsTrue(contest.Teams[0].ContainsMember(_user4));
+                Assert.AreEqual("Group 2", contest.Teams[0].Name);
 
                 Log("Verifying second team is group1");
-                Assert.IsTrue(contest.Teams[1].ContainsMember(_user1));
-                Assert.IsTrue(contest.Teams[1].ContainsMember(_user2));
+                Assert.AreEqual("Group 1", contest.Teams[1].Name);
             }
         }
 
@@ -232,34 +278,34 @@ namespace ActivEarth.Tests.Competition.Contests
         {
             using (_trans)
             {
+                InitializeTestDBEntries();
+
                 Log("Creating individual contest");
                 int id = ContestManager.CreateContest(ContestType.Individual, "Test Contest 1",
                     "This is a test time-based contest.", 50, DateTime.Now, DateTime.Now.AddDays(1),
                     true, Statistic.Steps);
-                Contest contest = ContestManager.GetContest(id);
 
-                contest.AddUser(_user1);
-                contest.AddUser(_user2);
-                contest.AddUser(_user3);
-                contest.AddUser(_user4);
+                ContestManager.AddUser(id, _user1);
+                ContestManager.AddUser(id, _user2);
+                ContestManager.AddUser(id, _user3);
+                ContestManager.AddUser(id, _user4);
 
                 Log("Locking initial values");
-                contest.LockInitialValues();
+                ContestManager.LockContest(id);
 
                 Log("Setting individual statistics");
-                _user1.SetStatistic(Statistic.Steps, 25);
-                _user2.SetStatistic(Statistic.Steps, 75);
-                _user3.SetStatistic(Statistic.Steps, 50);
-                _user4.SetStatistic(Statistic.Steps, 100);
+                StatisticManager.SetUserStatistic(_user1.UserID, Statistic.Steps, 25);
+                StatisticManager.SetUserStatistic(_user2.UserID, Statistic.Steps, 75);
+                StatisticManager.SetUserStatistic(_user3.UserID, Statistic.Steps, 50);
+                StatisticManager.SetUserStatistic(_user4.UserID, Statistic.Steps, 100);
 
-                Log("Updating contest scores");
-                contest.UpdateScores();
+                Contest contest = ContestManager.GetContest(id);
 
                 Log("Verifying team order");
-                Assert.IsTrue(contest.Teams[0].ContainsMember(_user4));
-                Assert.IsTrue(contest.Teams[1].ContainsMember(_user2));
-                Assert.IsTrue(contest.Teams[2].ContainsMember(_user3));
-                Assert.IsTrue(contest.Teams[3].ContainsMember(_user1));
+                Assert.IsTrue(contest.Teams[0].ContainsMember(_user4.UserID));
+                Assert.IsTrue(contest.Teams[1].ContainsMember(_user2.UserID));
+                Assert.IsTrue(contest.Teams[2].ContainsMember(_user3.UserID));
+                Assert.IsTrue(contest.Teams[3].ContainsMember(_user1.UserID));
             }
         }
 
@@ -281,36 +327,43 @@ namespace ActivEarth.Tests.Competition.Contests
         {
             using (_trans)
             {
+                InitializeTestDBEntries();
+
                 Log("Creating group contest");
                 int id = ContestManager.CreateContest(ContestType.Group, "Test Contest 1",
                     "This is a test time-based contest.", 50, DateTime.Now, DateTime.Now.AddDays(1),
                     true, Statistic.Steps);
-                Contest contest = ContestManager.GetContest(id);
 
-                Team team = new Team("Team1");
-                team.Add(_group1.Members);
-                team.Add(_group2.Members);
+                Team team = new Team()
+                {
+                    Name = "Team1",
+                    ContestId = id
+                };
 
-                Log("Adding four-member team to contest");
-                contest.AddTeam(team);
+                int teamId = TeamDAO.CreateNewTeam(team);
+
+                TeamDAO.CreateNewTeamMember(_user1.UserID, teamId);
+                TeamDAO.CreateNewTeamMember(_user2.UserID, teamId);
+                TeamDAO.CreateNewTeamMember(_user3.UserID, teamId);
+                TeamDAO.CreateNewTeamMember(_user4.UserID, teamId);
 
                 Log("Setting individual initial statistics");
-                _user1.SetStatistic(Statistic.Steps, 0);
-                _user2.SetStatistic(Statistic.Steps, 50);
-                _user3.SetStatistic(Statistic.Steps, 100);
-                _user4.SetStatistic(Statistic.Steps, 150);
+                StatisticManager.SetUserStatistic(_user1.UserID, Statistic.Steps, 0);
+                StatisticManager.SetUserStatistic(_user2.UserID, Statistic.Steps, 50);
+                StatisticManager.SetUserStatistic(_user3.UserID, Statistic.Steps, 100);
+                StatisticManager.SetUserStatistic(_user4.UserID, Statistic.Steps, 150);
 
                 Log("Locking initial values");
-                contest.LockInitialValues();
+                ContestManager.LockContest(id);
 
                 Log("Adding 50 steps to each user");
-                _user1.SetStatistic(Statistic.Steps, 50);
-                _user2.SetStatistic(Statistic.Steps, 100);
-                _user3.SetStatistic(Statistic.Steps, 150);
-                _user4.SetStatistic(Statistic.Steps, 200);
+                StatisticManager.SetUserStatistic(_user1.UserID, Statistic.Steps, 50);
+                StatisticManager.SetUserStatistic(_user2.UserID, Statistic.Steps, 100);
+                StatisticManager.SetUserStatistic(_user3.UserID, Statistic.Steps, 150);
+                StatisticManager.SetUserStatistic(_user4.UserID, Statistic.Steps, 200);
 
-                Log("Updating contest scores");
-                contest.UpdateScores();
+                Log("Retrieving Contest from DB");
+                Contest contest = ContestManager.GetContest(id);
 
                 Log("Verifying team aggregate score");
                 Assert.AreEqual(200, contest.Teams[0].Score);
@@ -328,6 +381,17 @@ namespace ActivEarth.Tests.Competition.Contests
         private void Log(string message)
         {
             TestContext.WriteLine(message);
+        }
+
+        private void InitializeTestDBEntries()
+        {
+            _user1.UserID = UserDAO.CreateNewUser(_user1, "pw1");
+            _user2.UserID = UserDAO.CreateNewUser(_user2, "pw2");
+            _user3.UserID = UserDAO.CreateNewUser(_user3, "pw3");
+            _user4.UserID = UserDAO.CreateNewUser(_user4, "pw4");
+
+            _group1.ID = GroupDAO.CreateNewGroup(_group1);
+            _group2.ID = GroupDAO.CreateNewGroup(_group2);
         }
 
         #endregion ---------- Utility Methods ----------

@@ -60,7 +60,7 @@
     <Compile Include="Competition\Contests\Contest.cs" />
     <Compile Include="Competition\Contests\ContestEndMode.cs" />
     <Compile Include="Competition\Contests\ContestType.cs" />
-    <Compile Include="Competition\Contests\ContestUser.cs" />
+    <Compile Include="Competition\Contests\TeamMember.cs" />
     <Compile Include="Competition\Contests\EndCondition.cs" />
     <Compile Include="Competition\Contests\Team.cs" />
     <Compile Include="Groups\Group.cs" />

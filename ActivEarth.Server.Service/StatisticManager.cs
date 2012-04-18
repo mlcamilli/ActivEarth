@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 
 using ActivEarth.Objects.Profile;
+using ActivEarth.Server.Service.Competition;
 
 using ActivEarth.DAO;
 
@@ -95,19 +96,30 @@ namespace ActivEarth.Server.Service.Statistics
         /// <param name="statistic">Statistic to be updated.</param>
         /// <param name="value">New value for the statistic.</param>
         /// <returns></returns>
-        public static bool SetUserStatistic(int userId, Statistic statistic, float value)
+        public static void SetUserStatistic(int userId, Statistic statistic, float value)
         {
             UserStatistic userStat = UserStatisticDAO.GetStatisticFromUserIdAndStatType(userId, statistic);
 
             if (userStat != null)
             {
                 userStat.value = value;
-                return UserStatisticDAO.UpdateUserStatistic(userStat);
+                UserStatisticDAO.UpdateUserStatistic(userStat);
             }
             else
             {
-                return (UserStatisticDAO.CreateNewStatisticForUser(userId, statistic, value) > 0);
+                UserStatisticDAO.CreateNewStatisticForUser(userId, statistic, value);
             }
+
+            //Update the affected contests
+            List<int> teamIds = TeamDAO.GetTeamIdsFromUserId(userId);
+
+            foreach (int id in teamIds)
+            {
+                TeamDAO.UpdateTeamScore(id);
+            }
+
+            //Update the affected badge
+            //ActivityScoreDAO.AddBadgePoints(userId, BadgeManager.UpdateBadge(userId, statistic));
         }
 
         #endregion ---------- Static Methods ----------

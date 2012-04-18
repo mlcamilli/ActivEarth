@@ -148,7 +148,12 @@ namespace ActivEarth.Objects.Groups
         /// </summary>
         public Group()
         {
+            this.GreenScore = 0;
             this.Wall = new Wall();
+            this.ActivityScore = new ActivityScore();
+            this.Contests = new List<Contest>();
+            this.HashTags = new List<string>();
+            this.Members = new List<User>();
         }
 
         #endregion ---------- Constructor ----------

@@ -23,6 +23,15 @@ namespace ActivEarth.Objects.Competition.Contests
         }
 
         /// <summary>
+        /// Identifier for the contest in which the team is participating.
+        /// </summary>
+        public int ContestId
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// The name of the team.
         /// </summary>
         public string Name
@@ -49,6 +58,24 @@ namespace ActivEarth.Objects.Competition.Contests
             set;
         }
 
+        /// <summary>
+        /// True if member changes are allowed, false otherwise.
+        /// </summary>
+        public bool IsLocked
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// ID of the group represented by this team, if applicable (null otherwise).
+        /// </summary>
+        public int? GroupId
+        {
+            get;
+            set;
+        }
+
         #endregion ---------- Public Properties ----------
 
         #region ---------- Constructor ----------
@@ -56,31 +83,10 @@ namespace ActivEarth.Objects.Competition.Contests
         /// <summary>
         /// Empty constructor for restoring from DB.
         /// </summary>
-        public Team() : this(String.Empty)
+        public Team()
         {
-            
-        }
-
-        /// <summary>
-        /// Constructs an empty team with the given name.
-        /// </summary>
-        /// <param name="name">Team Name</param>
-        public Team(string name)
-        {
-            this.Name = name;
             this.Members = new List<TeamMember>();
             this.Score = 0;
-        }
-
-        /// <summary>
-        /// Constructs a team from a pre-formed list of members, with the given name.
-        /// </summary>
-        /// <param name="name">Team Name</param>
-        /// <param name="members">List of team members</param>
-        public Team(string name, List<TeamMember> members) 
-            : this(name)
-        {
-            this.Members = members;
         }
 
         #endregion ---------- Constructor ----------
@@ -88,102 +94,14 @@ namespace ActivEarth.Objects.Competition.Contests
         #region ---------- Public Methods ----------
 
         /// <summary>
-        /// Adds a user to the team.
-        /// </summary>
-        /// <param name="user">The user to be added.</param>
-        public void Add(User user)
-        {
-            if (user == null)
-            {
-                return;
-            }
-
-            this.Members.Add(new TeamMember(user));
-        }
-
-        /// <summary>
-        /// Adds a list of users to the team.
-        /// </summary>
-        /// <param name="users">List of users to be added.</param>
-        public void Add(List<User> users)
-        {
-            if (users == null)
-            {
-                return;
-            }
-
-            foreach (User user in users)
-            {
-                this.Add(user);
-            }
-        }
-
-        /// <summary>
-        /// Removes a user from the team.
-        /// </summary>
-        /// <param name="user"></param>
-        public void Remove(User user)
-        {
-            if (user == null)
-            {
-                return;
-            }
-
-            this.Members.Remove(new TeamMember(user));
-        }
-
-        /// <summary>
-        /// Removes a list of users from the team.
-        /// </summary>
-        /// <param name="users"></param>
-        public void Remove(List<User> users)
-        {
-            if (users == null)
-            {
-                return;
-            }
-
-            foreach (User user in users)
-            {
-                this.Remove(user);
-            }
-        }
-
-        /// <summary>
-        /// Recalculates and updates the team's contest score.
-        /// </summary>
-        /// <returns>Updated contest score for the team.</returns>
-        public void Update(Statistic statistic)
-        {
-            this.Score = 0;
-
-            foreach (TeamMember user in this.Members)
-            {
-                this.Score += user.CalculateScore(statistic);
-            }
-        }
-
-        /// <summary>
-        /// Locks the initial values for each team member, required for contest
-        /// score calculation.
-        /// </summary>
-        public void LockInitialValues(Statistic statistic)
-        {
-            foreach (TeamMember user in this.Members)
-            {
-                user.LockInitialValues(statistic);
-            }
-        }
-
-        /// <summary>
         /// Test Hook: Searches the team for a particular member.
         /// </summary>
         /// <param name="user">User to look for.</param>
         /// <returns>True if the user is a member of the team.</returns>
-        public bool ContainsMember(User user)
+        public bool ContainsMember(int userId)
         {
             var query = from TeamMember cUser in this.Members
-                        where cUser.User == user
+                        where cUser.UserId == userId
                         select cUser;
 
             foreach (TeamMember cUser in query)

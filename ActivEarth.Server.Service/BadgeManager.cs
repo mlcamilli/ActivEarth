@@ -42,45 +42,48 @@ namespace ActivEarth.Server.Service.Competition
 
             Badge badge = BadgeDAO.GetBadgeFromUserIdAndStatistic(userId, statistic);
 
-            int oldLevel = badge.Level;
-            int newLevel = oldLevel;
-
-            UserStatistic userStat = UserStatisticDAO.GetStatisticFromUserIdAndStatType(userId, statistic);
-
-            if (userStat == null)
+            if (badge != null)
             {
-                UserStatisticDAO.CreateNewStatisticForUser(userId, statistic, 0);
-                userStat = UserStatisticDAO.GetStatisticFromUserIdAndStatType(userId, statistic);
+                int oldLevel = badge.Level;
+                int newLevel = oldLevel;
 
-                if (userStat == null) { return 0; }
+                UserStatistic userStat = UserStatisticDAO.GetStatisticFromUserIdAndStatType(userId, statistic);
+
+                if (userStat == null)
+                {
+                    UserStatisticDAO.CreateNewStatisticForUser(userId, statistic, 0);
+                    userStat = UserStatisticDAO.GetStatisticFromUserIdAndStatType(userId, statistic);
+
+                    if (userStat == null) { return 0; }
+                }
+
+                float stat = userStat.value;
+
+                while ((newLevel < BadgeLevels.Max) &&
+                    (stat >= badge.LevelRequirements[(int)newLevel + 1]))
+                {
+                    newLevel++;
+                }
+
+                for (int i = oldLevel + 1; i <= newLevel; i++)
+                {
+                    pointsEarned += badge.LevelRewards[i];
+                }
+
+                badge.Level = newLevel;
+
+                if (badge.Level == BadgeLevels.Max)
+                {
+                    badge.Progress = 100;
+                }
+                else
+                {
+                    badge.Progress = (int)(100 * (stat - badge.LevelRequirements[newLevel]) /
+                        (badge.LevelRequirements[newLevel + 1] - badge.LevelRequirements[newLevel]));
+                }
+
+                BadgeDAO.UpdateBadge(badge);
             }
-
-            float stat = userStat.value;
-
-            while ((newLevel < BadgeLevels.Max) &&
-                (stat >= badge.LevelRequirements[(int)newLevel + 1]))
-            {
-                newLevel++;
-            }
-
-            for (int i = oldLevel + 1; i <= newLevel; i++)
-            {
-                pointsEarned += badge.LevelRewards[i];
-            }
-
-            badge.Level = newLevel;
-
-            if (badge.Level == BadgeLevels.Max)
-            {
-                badge.Progress = 100;
-            }
-            else
-            {
-                badge.Progress = (int)(100 * (stat - badge.LevelRequirements[newLevel]) /
-                    (badge.LevelRequirements[newLevel + 1] - badge.LevelRequirements[newLevel]));
-            }
-
-            BadgeDAO.UpdateBadge(badge);
 
             return pointsEarned;
         }

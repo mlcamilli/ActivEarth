@@ -95,7 +95,7 @@ namespace ActivEarth.DAO
                                        Progress = c.progress
                                    }).FirstOrDefault();
 
-                LoadExternalBadgeData(badge);
+                if (badge != null) { LoadExternalBadgeData(badge); }
 
                 return badge;
             }
