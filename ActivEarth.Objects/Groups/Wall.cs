@@ -34,7 +34,7 @@ namespace ActivEarth.Objects.Groups
         /// the capacity is exceeded.
         /// </summary>
         /// <param name="message"></param>
-        public void post(Message message)
+        public void Post(Message message)
         {
             if (Messages.Count == MAX_MESSAGES)
             {

@@ -162,7 +162,7 @@ namespace ActivEarth.Objects.Profile
         {
             if (_stats.ContainsKey(statToGet))
             {
-                return _stats[statToGet].value;
+                return _stats[statToGet].Value;
             }
             else
             {
@@ -174,7 +174,7 @@ namespace ActivEarth.Objects.Profile
         {
             if (_stats.ContainsKey(statToSet))
             {
-                _stats[statToSet].value = val;
+                _stats[statToSet].Value = val;
             }
             else
             {

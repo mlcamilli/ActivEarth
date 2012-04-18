@@ -57,7 +57,7 @@ namespace ActivEarth.Server.Service.Competition
                     if (userStat == null) { return 0; }
                 }
 
-                float stat = userStat.value;
+                float stat = userStat.Value;
 
                 while ((newLevel < BadgeLevels.Max) &&
                     (stat >= badge.LevelRequirements[(int)newLevel + 1]))
@@ -100,7 +100,7 @@ namespace ActivEarth.Server.Service.Competition
 
             UserStatistic userStat = UserStatisticDAO.GetStatisticFromUserIdAndStatType(badge.UserID, badge.StatisticBinding);
 
-            string numerator = (userStat != null ? userStat.value : 0).ToString(badge.FormatString);
+            string numerator = (userStat != null ? userStat.Value : 0).ToString(badge.FormatString);
             if (badge.Level < BadgeLevels.Max)
             {
                 string denominator = badge.GetNextLevelRequirement().ToString(badge.FormatString);

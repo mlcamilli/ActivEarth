@@ -69,7 +69,7 @@ namespace ActivEarth.Tests.Groups
         #region ---------------- Test Methods -------------------
 
         [TestMethod]
-        public void createGroup()
+        public void TestCreateGroup()
         {
             var owner = new User
             {
@@ -123,7 +123,7 @@ namespace ActivEarth.Tests.Groups
         }
 
         [TestMethod]
-        public void getGroupByHashtag()
+        public void TestGetGroupByHashtag()
         {
             var owner = new User
             {
@@ -207,7 +207,7 @@ namespace ActivEarth.Tests.Groups
         }
 
         [TestMethod]
-        public void getGroupWall()
+        public void TestGetGroupWall()
         {
             var owner = new User
             {
@@ -261,7 +261,7 @@ namespace ActivEarth.Tests.Groups
         }
 
         [TestMethod]
-        public void updateGroup()
+        public void TestUpdateGroup()
         {
             var owner = new User
             {

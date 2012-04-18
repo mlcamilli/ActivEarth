@@ -21,13 +21,13 @@ namespace ActivEarth.Objects.Profile
             set;
         }
 
-        public Statistic statistic
+        public Statistic Statistic
         {
             get;
             set;
         }
 
-        public float value
+        public float Value
         {
             get;
             set;
@@ -45,8 +45,8 @@ namespace ActivEarth.Objects.Profile
 
         public UserStatistic(Statistic stat, float val)
         {
-            statistic = stat;
-            value = val;
+            Statistic = stat;
+            Value = val;
         }
 
         #endregion ---------- Constructor ----------

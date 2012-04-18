@@ -101,7 +101,7 @@ namespace ActivEarth.Server.Service.Competition
                 userStat = UserStatisticDAO.GetStatisticFromUserIdAndStatType(userId, statistic);
             };
 
-            ChallengeDAO.CreateInitializationEntry(challengeId, userId, userStat.value);
+            ChallengeDAO.CreateInitializationEntry(challengeId, userId, userStat.Value);
         }
 
 
@@ -120,7 +120,7 @@ namespace ActivEarth.Server.Service.Competition
 
             if (initial >= 0 && current != null)
             {
-                return Math.Min((int)(100 * (current.value - initial) / challenge.Requirement), 100);
+                return Math.Min((int)(100 * (current.Value - initial) / challenge.Requirement), 100);
             }
             else
             {
@@ -139,7 +139,7 @@ namespace ActivEarth.Server.Service.Competition
             Challenge challenge = ChallengeDAO.GetChallengeFromChallengeId(challengeId);
             UserStatistic statistic = UserStatisticDAO.GetStatisticFromUserIdAndStatType(userId, challenge.StatisticBinding);
 
-            string numerator = String.Format(challenge.FormatString, (statistic != null ? statistic.value : 0));
+            string numerator = String.Format(challenge.FormatString, (statistic != null ? statistic.Value : 0));
             string denominator = String.Format(challenge.FormatString, challenge.Requirement);
 
             return String.Format("{0} / {1}", numerator, denominator);

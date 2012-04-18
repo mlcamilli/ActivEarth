@@ -64,7 +64,7 @@ namespace ActivEarth.Server.Service.Statistics
         {
             if (_userStatisticMap.ContainsKey(statToSet))
             {
-                _userStatisticMap[statToSet].value = val;
+                _userStatisticMap[statToSet].Value = val;
                 UserStatisticDAO.UpdateUserStatistic(_userStatisticMap[statToSet]);
             }
             else
@@ -81,7 +81,7 @@ namespace ActivEarth.Server.Service.Statistics
             List<UserStatistic> userStatistics = UserStatisticDAO.GetAllStatisticsByUserId(_user.UserID);
             foreach (UserStatistic stat in userStatistics)
             {
-                _userStatisticMap[(Statistic)stat.statistic] = stat;
+                _userStatisticMap[(Statistic)stat.Statistic] = stat;
             }
         }
 
@@ -102,7 +102,7 @@ namespace ActivEarth.Server.Service.Statistics
 
             if (userStat != null)
             {
-                userStat.value = value;
+                userStat.Value = value;
                 UserStatisticDAO.UpdateUserStatistic(userStat);
             }
             else

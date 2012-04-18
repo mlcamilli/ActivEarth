@@ -237,7 +237,7 @@ namespace ActivEarth.DAO
             foreach (TeamMember user in team.Members)
             {
                 UserStatistic userStat = UserStatisticDAO.GetStatisticFromUserIdAndStatType(user.UserId, statistic);
-                user.InitialScore = (userStat != null ? userStat.value : 0);
+                user.InitialScore = (userStat != null ? userStat.Value : 0);
                 user.Initialized = true;
             }
 
@@ -454,7 +454,7 @@ namespace ActivEarth.DAO
         private static float CalculateUserScore(int userId, float initial, Statistic statistic)
         {
             UserStatistic userStat = UserStatisticDAO.GetStatisticFromUserIdAndStatType(userId, statistic);
-            float current = (userStat != null ? userStat.value : 0);
+            float current = (userStat != null ? userStat.Value : 0);
 
             return current - initial;
         }

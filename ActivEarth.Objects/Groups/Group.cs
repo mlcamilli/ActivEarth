@@ -186,7 +186,7 @@ namespace ActivEarth.Objects.Groups
         /// <param name="message">The Message to be added to the Group's Wall.</param>
         public void Post(Message message)
         {
-            this.Wall.post(message);
+            this.Wall.Post(message);
         }
 
         #endregion ---------- Public Methods ----------

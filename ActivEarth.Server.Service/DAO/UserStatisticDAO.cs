@@ -130,9 +130,9 @@ namespace ActivEarth.DAO
 
                     if (dbStatistic != null)
                     {
-                        dbStatistic.statistic_type = (byte)statistic.statistic;
+                        dbStatistic.statistic_type = (byte)statistic.Statistic;
                         dbStatistic.user_id = statistic.UserID;
-                        dbStatistic.value = statistic.value;
+                        dbStatistic.value = statistic.Value;
 
                         data.SubmitChanges();
                     }

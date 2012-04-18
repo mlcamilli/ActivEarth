@@ -48,7 +48,7 @@ namespace ActivEarth.DAO
             {
                 toReturn.userPrivacySettings = PrivacySettingDAO.GetPrivacySettingFromUserId(toReturn.UserID);
                 toReturn.SetStatisticsDict(
-                    UserStatisticDAO.GetAllStatisticsByUserId(toReturn.UserID).ToDictionary(k => k.statistic, e => e));
+                    UserStatisticDAO.GetAllStatisticsByUserId(toReturn.UserID).ToDictionary(k => k.Statistic, e => e));
             }
 
             return toReturn;
@@ -82,7 +82,7 @@ namespace ActivEarth.DAO
                              }).FirstOrDefault();
                 if (toReturn != null)
                 {
-                    UserStatisticDAO.GetAllStatisticsByUserId(toReturn.UserID).ToDictionary(k => k.statistic, e => e);
+                    UserStatisticDAO.GetAllStatisticsByUserId(toReturn.UserID).ToDictionary(k => k.Statistic, e => e);
                 }
                 return toReturn;
             }
