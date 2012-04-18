@@ -100,12 +100,10 @@ namespace ActivEarth.Server.Service.Competition
 
             UserStatistic userStat = UserStatisticDAO.GetStatisticFromUserIdAndStatType(badge.UserID, badge.StatisticBinding);
 
-            string numerator = String.Format(badge.FormatString, (userStat != null ? userStat.value : 0));
-
+            string numerator = (userStat != null ? userStat.value : 0).ToString(badge.FormatString);
             if (badge.Level < BadgeLevels.Max)
             {
-                string denominator = String.Format(badge.FormatString, badge.GetNextLevelRequirement());
-
+                string denominator = badge.GetNextLevelRequirement().ToString(badge.FormatString);
                 return String.Format("{0} / {1}", numerator, denominator);
             }
             else

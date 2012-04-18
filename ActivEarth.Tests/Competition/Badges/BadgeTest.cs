@@ -283,7 +283,7 @@ namespace ActivEarth.Tests.Competition.Badges
                 BadgeManager.UpdateBadge(_id, Statistic.Steps);
 
                 Log("Verifying progress.");
-                Assert.AreEqual(String.Format("50 / {0}", BadgeConstants.Steps.REQUIREMENTS[BadgeLevels.Bronze]),
+                Assert.AreEqual(String.Format("50 / {0}", BadgeConstants.Steps.REQUIREMENTS[BadgeLevels.Bronze].ToString("N0")),
                     BadgeManager.GetFormattedProgress(badge.ID));
 
                 Log("Updating statistic to the Max badge.");
@@ -291,7 +291,7 @@ namespace ActivEarth.Tests.Competition.Badges
                 BadgeManager.UpdateBadge(_id, Statistic.Steps);
 
                 Log("Verifying progress.");
-                Assert.AreEqual(String.Format("{0}", BadgeConstants.Steps.REQUIREMENTS[BadgeLevels.Max]),
+                Assert.AreEqual(String.Format("{0}", BadgeConstants.Steps.REQUIREMENTS[BadgeLevels.Max].ToString("N0")),
                     BadgeManager.GetFormattedProgress(badge.ID));
 
                 BadgeManager.UpdateBadge(_id, Statistic.GasSavings);

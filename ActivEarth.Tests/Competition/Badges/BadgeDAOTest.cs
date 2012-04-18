@@ -181,8 +181,8 @@ namespace ActivEarth.Tests.Competition.Badges
                 Badge gasBadge = BadgeDAO.GetBadgeFromUserIdAndStatistic(user1ID, Statistic.GasSavings);
 
                 Log("Verifying format strings");
-                Assert.AreEqual("{0}", stepBadge.FormatString);
-                Assert.AreEqual("${0:0.00}", gasBadge.FormatString);
+                Assert.AreEqual("N0", stepBadge.FormatString);
+                Assert.AreEqual("C", gasBadge.FormatString);
             }
         }
 

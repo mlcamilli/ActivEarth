@@ -263,8 +263,8 @@ namespace ActivEarth.Tests.Competition.Challenges
                 Challenge gasChallenge = ChallengeDAO.GetChallengeFromChallengeId(id2);
 
                 Log("Verifying format strings");
-                Assert.AreEqual("{0}", stepChallenge.FormatString);
-                Assert.AreEqual("${0:0.00}", gasChallenge.FormatString);
+                Assert.AreEqual("N0", stepChallenge.FormatString);
+                Assert.AreEqual("C", gasChallenge.FormatString);
 
             }
         }

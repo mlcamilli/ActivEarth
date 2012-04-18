@@ -477,8 +477,8 @@ namespace ActivEarth.Tests.Competition.Contests
                 Contest c2 = ContestManager.GetContest(cID2);
 
                 Log("Verifying format strings");
-                Assert.AreEqual("{0}", c1.FormatString);
-                Assert.AreEqual("${0:0.00}", c2.FormatString);
+                Assert.AreEqual("N0", c1.FormatString);
+                Assert.AreEqual("C", c2.FormatString);
 
             }
         }

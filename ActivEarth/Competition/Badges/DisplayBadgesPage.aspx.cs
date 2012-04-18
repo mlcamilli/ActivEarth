@@ -22,6 +22,13 @@ namespace ActivEarth.Competition.Badges
             }
             else
             {
+                BadgeManager.UpdateBadge(user.UserID, Statistic.Steps);
+                BadgeManager.UpdateBadge(user.UserID, Statistic.WalkDistance);
+                BadgeManager.UpdateBadge(user.UserID, Statistic.RunDistance);
+                BadgeManager.UpdateBadge(user.UserID, Statistic.BikeDistance);
+                BadgeManager.UpdateBadge(user.UserID, Statistic.ChallengesCompleted);
+                BadgeManager.UpdateBadge(user.UserID, Statistic.GasSavings);
+
                 List<Badge> badges = BadgeDAO.GetBadgesFromUserId(user.UserID);
                 if (badges == null || badges.Count == 0)
                 {
