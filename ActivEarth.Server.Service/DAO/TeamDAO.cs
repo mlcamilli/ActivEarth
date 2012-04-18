@@ -137,6 +137,21 @@ namespace ActivEarth.DAO
             }
         }
 
+        /// <summary>
+        /// Retrieves all team IDs which match the provided group.
+        /// </summary>
+        /// <returns>IDs of all teams which list the provided group as their source.</returns>
+        public static List<int> GetTeamIdsFromGroupId(int groupId)
+        {
+            using (SqlConnection connection = ConnectionManager.GetConnection())
+            {
+                var data = new ActivEarthDataProvidersDataContext(connection);
+                return (from c in data.TeamDataProviders
+                        where c.group_id == groupId
+                        select c.id).ToList();
+            }
+        }
+
         #endregion Team Retrieval
 
         #region Team DB Update
@@ -230,6 +245,11 @@ namespace ActivEarth.DAO
             TeamDAO.UpdateTeam(team);
         }
 
+        /// <summary>
+        /// Retrieves the contest ID for the contest that a team is participating in.
+        /// </summary>
+        /// <param name="teamId">Team ID to query.</param>
+        /// <returns>ID of the contest that the team is participating in.</returns>
         private static int GetContestIdFromTeamId(int teamId)
         {
             using (SqlConnection connection = ConnectionManager.GetConnection())

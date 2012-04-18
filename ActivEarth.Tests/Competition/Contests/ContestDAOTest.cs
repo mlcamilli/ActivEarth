@@ -90,6 +90,7 @@ namespace ActivEarth.Tests.Competition.Contests
                 Owner = _user1,
                 Description = String.Empty
             };
+            _group1.Members.Add(_user1);
             _group1.Members.Add(_user2);
 
             _group2 = new Group
@@ -98,6 +99,7 @@ namespace ActivEarth.Tests.Competition.Contests
                 Owner = _user3,
                 Description = String.Empty
             };
+            _group2.Members.Add(_user3);
             _group2.Members.Add(_user4);
 
             _trans = new TransactionScope();
@@ -449,8 +451,10 @@ namespace ActivEarth.Tests.Competition.Contests
                 int j = TeamDAO.CreateNewTeamMember(_user2.UserID, teamId);
 
                 Log("Retrieving team from DB");
+                Team notFound = TeamDAO.GetTeamFromTeamId(-1);
                 Team retrieved = TeamDAO.GetTeamFromTeamId(teamId);
 
+                Assert.IsNull(notFound);
                 Assert.IsNotNull(retrieved);
                 Assert.AreEqual(2, retrieved.Members.Count);
 
@@ -543,13 +547,112 @@ namespace ActivEarth.Tests.Competition.Contests
                 Log("Retrieving contest list from DB: Search term: 'salamanders', not exact match");
                 List<Contest> listFromSalamandersNotExact = ContestDAO.GetJoinableContestsFromContestName("salamanders", false);
 
+                Log("Retrieving contest list from DB: Search term: 'salamanders', exact match");
+                List<Contest> listFromSalamandersExact = ContestDAO.GetJoinableContestsFromContestName("salamanders", true);
+
                 Log("Verifying returned contest counts");
                 Assert.AreEqual(1, listFromTestExact.Count);
                 Assert.AreEqual(4, listFromTestNotExact.Count);
                 Assert.AreEqual(0, listFromSalamandersNotExact.Count);
+                Assert.AreEqual(0, listFromSalamandersExact.Count);
             }
         }
 
+        /// <summary>
+        /// Tests the retrieval of contests from a group ID.
+        /// </summary>
+        [TestMethod]
+        public void TestGetContestsFromGroupOrUserId()
+        {
+            using (_trans)
+            {
+                InitializeTestDBEntries();
+
+                string c1Name = "Test";
+                string c2Name = "Test Competition";
+                string c3Name = "testing again";
+
+                Log("Creating contests");
+                int id1 = ContestManager.CreateContest(ContestType.Group, c1Name,
+                    "This is a test contest", 30, DateTime.Today.AddDays(1), 500, true, Statistic.Steps);
+
+                int id2 = ContestManager.CreateContest(ContestType.Group, c2Name,
+                    "This is a test contest", 30, DateTime.Today.AddDays(1), 500, true, Statistic.GasSavings);
+
+                int id3 = ContestManager.CreateContest(ContestType.Group, c3Name,
+                    "This is a test contest", 30, DateTime.Today.AddDays(1), 500, true, Statistic.GasSavings);
+
+                ContestManager.AddGroup(id1, _group1);
+                ContestManager.AddGroup(id2, _group1);
+                ContestManager.AddGroup(id2, _group2);
+                ContestManager.AddGroup(id3, _group2);
+
+                Log("Retrieving contest lists for group1, group2, user1, and user3");
+                List<int> group1Contests = ContestDAO.GetContestIdsFromGroupId(_group1.ID);
+                List<int> group2Contests = ContestDAO.GetContestIdsFromGroupId(_group2.ID);
+                List<int> user1Contests = ContestDAO.GetContestIdsFromUserId(_user1.UserID);
+                List<int> user3Contests = ContestDAO.GetContestIdsFromUserId(_user3.UserID);
+
+                Log("Retrieving team lists for group1, group2, user1, and user3");
+                List<int> group1Teams = TeamDAO.GetTeamIdsFromGroupId(_group1.ID);
+                List<int> group2Teams = TeamDAO.GetTeamIdsFromGroupId(_group2.ID);
+                List<int> user1Teams = TeamDAO.GetTeamIdsFromUserId(_user1.UserID);
+                List<int> user3Teams = TeamDAO.GetTeamIdsFromUserId(_user3.UserID);
+
+                Log("Verifying returned contest counts");
+                Assert.AreEqual(2, group1Contests.Count);
+                Assert.AreEqual(2, group2Contests.Count);
+                Assert.AreEqual(2, user1Contests.Count);
+                Assert.AreEqual(2, user3Contests.Count);
+
+                Log("Verifying returned team counts");
+                Assert.AreEqual(2, group1Teams.Count);
+                Assert.AreEqual(2, group2Teams.Count);
+                Assert.AreEqual(2, user1Teams.Count);
+                Assert.AreEqual(2, user3Teams.Count);
+
+                Log("Verifying correct contest memberships");
+                Assert.IsTrue(group1Contests.Contains(id1));
+                Assert.IsTrue(group1Contests.Contains(id2));
+                Assert.IsTrue(group2Contests.Contains(id2));
+                Assert.IsTrue(group2Contests.Contains(id3));
+                Assert.IsTrue(user1Contests.Contains(id1));
+                Assert.IsTrue(user1Contests.Contains(id2));
+                Assert.IsTrue(user3Contests.Contains(id2));
+                Assert.IsTrue(user3Contests.Contains(id3));
+            }
+        }
+
+        /// <summary>
+        /// Tests the retrieval of contest name from the contest ID.
+        /// </summary>
+        [TestMethod]
+        public void TestGetContestNameFromContestId()
+        {
+            using (_trans)
+            {
+                InitializeTestDBEntries();
+
+                string c1Name = "Test";
+                string c2Name = "Test Competition";
+                string c3Name = "testing again";
+
+                Log("Creating contests");
+                int id1 = ContestManager.CreateContest(ContestType.Group, c1Name,
+                    "This is a test contest", 30, DateTime.Today.AddDays(1), 500, true, Statistic.Steps);
+
+                int id2 = ContestManager.CreateContest(ContestType.Group, c2Name,
+                    "This is a test contest", 30, DateTime.Today.AddDays(1), 500, true, Statistic.GasSavings);
+
+                int id3 = ContestManager.CreateContest(ContestType.Group, c3Name,
+                    "This is a test contest", 30, DateTime.Today.AddDays(1), 500, true, Statistic.GasSavings);
+
+                Log("Verifying contest name retrieval");
+                Assert.AreEqual(c1Name, ContestDAO.GetContestNameFromContestId(id1));
+                Assert.AreEqual(c2Name, ContestDAO.GetContestNameFromContestId(id2));
+                Assert.AreEqual(c3Name, ContestDAO.GetContestNameFromContestId(id3));
+            }
+        }
 
         #endregion ---------- Test Cases ----------
 
@@ -571,8 +674,8 @@ namespace ActivEarth.Tests.Competition.Contests
             _user3.UserID = UserDAO.CreateNewUser(_user3, "pw3");
             _user4.UserID = UserDAO.CreateNewUser(_user4, "pw4");
 
-            GroupDAO.CreateNewGroup(_group1);
-            GroupDAO.CreateNewGroup(_group2);
+            _group1.ID = GroupDAO.CreateNewGroup(_group1);
+            _group2.ID = GroupDAO.CreateNewGroup(_group2);
         }
 
         #endregion ---------- Utility Methods ----------
