@@ -48,12 +48,9 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Competition\Badges\BadgeDAOTest.cs" />
-    <Compile Include="Competition\Badges\BadgeTest.cs" />
-    <Compile Include="Competition\Challenges\ChallengeDAOTest.cs" />
-    <Compile Include="Competition\Challenges\ChallengeTest.cs" />
-    <Compile Include="Competition\Contests\ContestTest.cs" />
-    <Compile Include="Competition\Contests\ContestDAOTest.cs" />
+    <Compile Include="Competition\BadgeTest.cs" />
+    <Compile Include="Competition\ChallengeTest.cs" />
+    <Compile Include="Competition\ContestTest.cs" />
     <Compile Include="Groups\GroupDAOTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BMICalculatorTest.cs" />

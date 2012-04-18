@@ -5,30 +5,30 @@ using System.Linq;
 using System.Transactions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-using ActivEarth.DAO;
 using ActivEarth.Objects.Groups;
 using ActivEarth.Objects.Profile;
-using ActivEarth.Objects.Competition;
 using ActivEarth.Objects.Competition.Contests;
-using ActivEarth.Server.Service;
+using ActivEarth.DAO;
+using ActivEarth.Server.Service.Statistics;
 
-namespace ActivEarth.Tests.Competition.Contests
+namespace ActivEarth.Tests.Competition
 {
     /// <summary>
-    /// Tests the capabilities of ContestDAO and TeamDAO data layers.
+    /// Summary description for ContestTest
     /// </summary>
     [TestClass]
-    public class ContestDAOTest
+    public class ContestTest
     {
+        private User _user1;
+        private User _user2;
+        private User _user3;
+        private User _user4;
+
+        private Group _group1;
+        private Group _group2;
+
         private TransactionScope _trans;
-        User _user1;
-        User _user2;
-        User _user3;
-        User _user4;
-
-        Group _group1;
-        Group _group2;
-
+        
         /// <summary>
         ///Gets or sets the test context which provides
         ///information about and functionality for the current test run.
@@ -39,9 +39,6 @@ namespace ActivEarth.Tests.Competition.Contests
             set;
         }
 
-        /// <summary>
-        /// Creates the transaction scope for the test case.
-        /// </summary>
         [TestInitialize]
         public void Initialize()
         {
@@ -105,9 +102,6 @@ namespace ActivEarth.Tests.Competition.Contests
             _trans = new TransactionScope();
         }
 
-        /// <summary>
-        /// Disposes of the transaction scope, rolling back any DB transactions.
-        /// </summary>
         [TestCleanup]
         public void CleanUp()
         {
@@ -115,7 +109,267 @@ namespace ActivEarth.Tests.Competition.Contests
         }
 
         #region ---------- Test Cases ----------
-        
+
+        /// <summary>
+        /// Verifies that after locking initial values, teams in a contest report a score of 0.
+        /// </summary>
+        /// <remarks>
+        /// Steps:
+        /// 1) Create a new group contest.
+        /// 2) Add two teams to the contest.
+        /// 3) VERIFY: Contest contains two teams.
+        /// 4) VERIFY: Each team contains the correct number of members.
+        /// 5) Lock contest initialization values.
+        /// 6) VERIFY: Each team reports a score of 0.
+        /// </remarks>
+        [TestMethod]
+        public void TestContestGroupContestInitialization()
+        {
+            using (_trans)
+            {
+                InitializeTestDBEntries();
+
+                Log("Creating time-based group contest");
+                int id = ContestManager.CreateContest(ContestType.Group, "Test Contest 1",
+                    "This is a test time-based contest.", 50, DateTime.Now, DateTime.Now.AddDays(1),
+                    true, Statistic.Steps);
+
+                Log("Adding groups to the contest");
+                ContestManager.AddGroup(id, _group1);
+                ContestManager.AddGroup(id, _group2);
+
+                Contest contest = ContestManager.GetContest(id);
+
+                Log("Verifying team count");
+                Assert.AreEqual(2, contest.Teams.Count);
+
+                Log("Verifying number of members per team");
+                Assert.AreEqual(2, contest.Teams[0].Members.Count);
+                Assert.AreEqual(2, contest.Teams[1].Members.Count);
+
+                Log("Locking team initialization");
+                ContestManager.LockContest(id);
+                contest = ContestManager.GetContest(id);
+
+                Log("Verifying initial team scores");
+                Assert.AreEqual(0, contest.Teams[0].Score);
+                Assert.AreEqual(0, contest.Teams[1].Score);
+            }
+        }
+
+        /// <summary>
+        /// Verifies that contest end modes (time vs. goal) are correctly assigned.
+        /// </summary>
+        /// <remarks>
+        /// Steps:
+        /// 1) Create a time-based contest.
+        /// 2) Create a goal-based contest.
+        /// 3) VERIFY: First contest is determined to be time-based.
+        /// 4) VERIFY: Second contest is determined to be goal-based.
+        /// </remarks>
+        [TestMethod]
+        public void TestContestEndMode()
+        {
+            using (_trans)
+            {
+                Log("Creating time-based group contest");
+                int timeId = ContestManager.CreateContest(ContestType.Group, "Test Contest 1",
+                    "This is a test time-based contest.", 50, DateTime.Now, DateTime.Now.AddDays(1),
+                    true, Statistic.Steps);
+                Contest timedContest = ContestManager.GetContest(timeId);
+
+                Log("Creating goal-based individual contest");
+                int goalId = ContestManager.CreateContest(ContestType.Individual, "Test Contest 2",
+                    "This is a test goal-based contest.", 50, DateTime.Now, 50000,
+                    true, Statistic.Steps);
+                Contest goalContest = ContestManager.GetContest(goalId);
+
+                Log("Verifying time-based contest end mode");
+                Assert.AreEqual(ContestEndMode.TimeBased, timedContest.Mode);
+
+                Log("Verifying goal-based contest end mode");
+                Assert.AreEqual(ContestEndMode.GoalBased, goalContest.Mode);
+            }
+        }
+
+        /// <summary>
+        /// Verifies that after calculating scores, teams are presented in sorted order (for reporting
+        /// of standings) in a group competition (multiple members per team).
+        /// </summary>
+        /// <remarks>
+        /// Steps:
+        /// 1)  Create a group contest.
+        /// 2)  Add two teams to the contest.
+        /// 3)  Lock contest initial values.
+        /// 4)  Increase the statistics of individual members such that group1 is winning.
+        /// 5)  Update contest scores.
+        /// 6)  VERIFY: First team in the team collection is group1.
+        /// 7)  VERIFY: Second team in the team collection is group2.
+        /// 8)  Increase the statistics of individual members such that group2 is winning.
+        /// 9)  Update contest scores.
+        /// 10) VERIFY: First team in the team collection is group2.
+        /// 11) VERIFY: Second team in the team collection is group1.
+        /// </remarks>
+        [TestMethod]
+        public void TestContestGroupTeamsSorted()
+        {
+            using (_trans)
+            {
+                InitializeTestDBEntries();
+
+                Log("Creating group contest");
+                int id = ContestManager.CreateContest(ContestType.Group, "Test Contest 1",
+                    "This is a test time-based contest.", 50, DateTime.Now, DateTime.Now.AddDays(1),
+                    true, Statistic.Steps);
+
+                ContestManager.AddGroup(id, _group1);
+                ContestManager.AddGroup(id, _group2);
+
+                Log("Locking initial values");
+                ContestManager.LockContest(id);
+
+                Log("Setting individual statistics such that group1 is winning");
+                StatisticManager.SetUserStatistic(_user1.UserID, Statistic.Steps, 100);
+                StatisticManager.SetUserStatistic(_user2.UserID, Statistic.Steps, 100);
+                StatisticManager.SetUserStatistic(_user3.UserID, Statistic.Steps, 50);
+                StatisticManager.SetUserStatistic(_user4.UserID, Statistic.Steps, 50);
+
+                Contest contest = ContestManager.GetContest(id);
+
+                Log("Verifying first team is group1");
+                Assert.AreEqual("Group 1", contest.Teams[0].Name);
+
+                Log("Verifying second team is group2");
+                Assert.AreEqual("Group 2", contest.Teams[1].Name);
+
+                Log("Setting individual statistics such that group2 is winning");
+                StatisticManager.SetUserStatistic(_user1.UserID, Statistic.Steps, 200);
+                StatisticManager.SetUserStatistic(_user2.UserID, Statistic.Steps, 200);
+                StatisticManager.SetUserStatistic(_user3.UserID, Statistic.Steps, 300);
+                StatisticManager.SetUserStatistic(_user4.UserID, Statistic.Steps, 300);
+
+                contest = ContestManager.GetContest(id);
+
+                Log("Verifying first team is group2");
+                Assert.AreEqual("Group 2", contest.Teams[0].Name);
+
+                Log("Verifying second team is group1");
+                Assert.AreEqual("Group 1", contest.Teams[1].Name);
+            }
+        }
+
+        /// <summary>
+        /// Verifies that after calculating scores, teams are presented in sorted 
+        /// order (for reporting of standings) in an individual competition 
+        /// (one member per team).
+        /// </summary>
+        /// <remarks>
+        /// Steps:
+        /// 1) Create an individual contest.
+        /// 2) Add four users to the contest.
+        /// 3) Lock contest initial values.
+        /// 4) Increase the statistics of individual members such that the standings 
+        ///     are shuffled (relative to the order members were added).
+        /// 5) Update contest scores.
+        /// 6) VERIFY: Teams are presented in descending order by score.
+        /// </remarks>
+        [TestMethod]
+        public void TestContestIndividualTeamsRemainSorted()
+        {
+            using (_trans)
+            {
+                InitializeTestDBEntries();
+
+                Log("Creating individual contest");
+                int id = ContestManager.CreateContest(ContestType.Individual, "Test Contest 1",
+                    "This is a test time-based contest.", 50, DateTime.Now, DateTime.Now.AddDays(1),
+                    true, Statistic.Steps);
+
+                ContestManager.AddUser(id, _user1);
+                ContestManager.AddUser(id, _user2);
+                ContestManager.AddUser(id, _user3);
+                ContestManager.AddUser(id, _user4);
+
+                Log("Locking initial values");
+                ContestManager.LockContest(id);
+
+                Log("Setting individual statistics");
+                StatisticManager.SetUserStatistic(_user1.UserID, Statistic.Steps, 25);
+                StatisticManager.SetUserStatistic(_user2.UserID, Statistic.Steps, 75);
+                StatisticManager.SetUserStatistic(_user3.UserID, Statistic.Steps, 50);
+                StatisticManager.SetUserStatistic(_user4.UserID, Statistic.Steps, 100);
+
+                Contest contest = ContestManager.GetContest(id);
+
+                Log("Verifying team order");
+                Assert.IsTrue(contest.Teams[0].ContainsMember(_user4.UserID));
+                Assert.IsTrue(contest.Teams[1].ContainsMember(_user2.UserID));
+                Assert.IsTrue(contest.Teams[2].ContainsMember(_user3.UserID));
+                Assert.IsTrue(contest.Teams[3].ContainsMember(_user1.UserID));
+            }
+        }
+
+        /// <summary>
+        /// Verifies the correct calculation of a team's contest score.
+        /// </summary>
+        /// <remarks>
+        /// Steps:
+        /// 1) Create a group contest.
+        /// 2) Add a multi-member team to the contest.
+        /// 3) Lock contest initial values.
+        /// 4) Increase the statistics of the individual members.
+        /// 5) Update contest scores.
+        /// 6) VERIFY: Team's score is equal to the sum of the increase 
+        ///     in the members' values.
+        /// </remarks>
+        [TestMethod]
+        public void TestContestTeamScoreCalculation()
+        {
+            using (_trans)
+            {
+                InitializeTestDBEntries();
+
+                Log("Creating group contest");
+                int id = ContestManager.CreateContest(ContestType.Group, "Test Contest 1",
+                    "This is a test time-based contest.", 50, DateTime.Now, DateTime.Now.AddDays(1),
+                    true, Statistic.Steps);
+
+                Team team = new Team()
+                {
+                    Name = "Team1",
+                    ContestId = id
+                };
+
+                int teamId = TeamDAO.CreateNewTeam(team);
+
+                TeamDAO.CreateNewTeamMember(_user1.UserID, teamId);
+                TeamDAO.CreateNewTeamMember(_user2.UserID, teamId);
+                TeamDAO.CreateNewTeamMember(_user3.UserID, teamId);
+                TeamDAO.CreateNewTeamMember(_user4.UserID, teamId);
+
+                Log("Setting individual initial statistics");
+                StatisticManager.SetUserStatistic(_user1.UserID, Statistic.Steps, 0);
+                StatisticManager.SetUserStatistic(_user2.UserID, Statistic.Steps, 50);
+                StatisticManager.SetUserStatistic(_user3.UserID, Statistic.Steps, 100);
+                StatisticManager.SetUserStatistic(_user4.UserID, Statistic.Steps, 150);
+
+                Log("Locking initial values");
+                ContestManager.LockContest(id);
+
+                Log("Adding 50 steps to each user");
+                StatisticManager.SetUserStatistic(_user1.UserID, Statistic.Steps, 50);
+                StatisticManager.SetUserStatistic(_user2.UserID, Statistic.Steps, 100);
+                StatisticManager.SetUserStatistic(_user3.UserID, Statistic.Steps, 150);
+                StatisticManager.SetUserStatistic(_user4.UserID, Statistic.Steps, 200);
+
+                Log("Retrieving Contest from DB");
+                Contest contest = ContestManager.GetContest(id);
+
+                Log("Verifying team aggregate score");
+                Assert.AreEqual(200, contest.Teams[0].Score);
+            }
+        }
+
         /// <summary>
         /// Tests the ability to update the value of a contest's field in the DB.
         /// </summary>
@@ -129,7 +383,7 @@ namespace ActivEarth.Tests.Competition.Contests
 
                 Log("Creating contest");
                 Contest contest = new Contest("Test Contest", "This is a test contest",
-                    30, ContestEndMode.GoalBased, ContestType.Group, DateTime.Today, 
+                    30, ContestEndMode.GoalBased, ContestType.Group, DateTime.Today,
                     new EndCondition(500), Statistic.Steps);
 
                 Log("Adding contest to the database");
@@ -169,13 +423,13 @@ namespace ActivEarth.Tests.Competition.Contests
             {
                 Log("Creating contests");
                 Contest contest1 = new Contest("Test Contest1", "This is a test contest",
-                    30, ContestEndMode.GoalBased, ContestType.Group, DateTime.Today, 
+                    30, ContestEndMode.GoalBased, ContestType.Group, DateTime.Today,
                     new EndCondition(500), Statistic.Steps);
                 Contest contest2 = new Contest("Test Contest2", "This is also a test contest",
-                    30, ContestEndMode.GoalBased, ContestType.Group, DateTime.Today, 
+                    30, ContestEndMode.GoalBased, ContestType.Group, DateTime.Today,
                     new EndCondition(500), Statistic.BikeDistance);
                 Contest contest3 = new Contest("Test Contest3", "This is another test contest",
-                    30, ContestEndMode.GoalBased, ContestType.Group, DateTime.Today, 
+                    30, ContestEndMode.GoalBased, ContestType.Group, DateTime.Today,
                     new EndCondition(500), Statistic.RunDistance);
 
                 Log("Adding contests to DB");
@@ -199,7 +453,7 @@ namespace ActivEarth.Tests.Competition.Contests
             {
                 Log("Creating contests");
                 Contest contest = new Contest("Test Contest1", "This is a test contest",
-                    30, ContestEndMode.GoalBased, ContestType.Group, DateTime.Today, 
+                    30, ContestEndMode.GoalBased, ContestType.Group, DateTime.Today,
                     new EndCondition(500), Statistic.Steps);
 
                 Log("Saving to DB");
@@ -231,7 +485,7 @@ namespace ActivEarth.Tests.Competition.Contests
 
                 Log("Creating contest");
                 Contest contest = new Contest("Test Contest1", "This is a test contest",
-                    30, ContestEndMode.GoalBased, ContestType.Group, DateTime.Today, 
+                    30, ContestEndMode.GoalBased, ContestType.Group, DateTime.Today,
                     new EndCondition(500), Statistic.Steps);
 
                 Log("Saving to DB");
@@ -282,7 +536,7 @@ namespace ActivEarth.Tests.Competition.Contests
             {
                 Log("Creating contest");
                 Contest contest = new Contest("Test Contest1", "This is a test contest",
-                    30, ContestEndMode.GoalBased, ContestType.Group, DateTime.Today, 
+                    30, ContestEndMode.GoalBased, ContestType.Group, DateTime.Today,
                     new EndCondition(500), Statistic.Steps);
 
                 Log("Saving to DB");
@@ -327,7 +581,7 @@ namespace ActivEarth.Tests.Competition.Contests
 
             }
         }
-        
+
         /// <summary>
         /// Tests the updating of a contest where members were added to a team 
         /// participating in the contest.
@@ -342,7 +596,7 @@ namespace ActivEarth.Tests.Competition.Contests
 
                 Log("Creating contest");
                 Contest contest = new Contest("Test Contest1", "This is a test contest",
-                    30, ContestEndMode.GoalBased, ContestType.Group, DateTime.Today, 
+                    30, ContestEndMode.GoalBased, ContestType.Group, DateTime.Today,
                     new EndCondition(500), Statistic.Steps);
 
                 Log("Saving to DB");
@@ -352,7 +606,7 @@ namespace ActivEarth.Tests.Competition.Contests
 
                 Log("Reading back from DB");
                 Contest retrieved = ContestDAO.GetContestFromContestId(id);
-                
+
                 Log("Verifying that the two added members are found");
                 Assert.IsTrue(retrieved.Teams[0].ContainsMember(_user1.UserID));
                 Assert.IsTrue(retrieved.Teams[0].ContainsMember(_user2.UserID));
@@ -393,7 +647,7 @@ namespace ActivEarth.Tests.Competition.Contests
 
                 Log("Creating contest");
                 Contest contest = new Contest("Test Contest1", "This is a test contest",
-                    30, ContestEndMode.GoalBased, ContestType.Group, DateTime.Today, 
+                    30, ContestEndMode.GoalBased, ContestType.Group, DateTime.Today,
                     new EndCondition(500), Statistic.Steps);
 
                 Log("Saving to DB");
@@ -431,7 +685,7 @@ namespace ActivEarth.Tests.Competition.Contests
 
                 Log("Creating contest to put the team in");
                 Contest contest = new Contest("Test Contest1", "This is a test contest",
-                    30, ContestEndMode.GoalBased, ContestType.Group, DateTime.Today, 
+                    30, ContestEndMode.GoalBased, ContestType.Group, DateTime.Today,
                     new EndCondition(500), Statistic.Steps);
 
                 Log("Adding the contest to the DB");
@@ -470,7 +724,7 @@ namespace ActivEarth.Tests.Competition.Contests
             using (_trans)
             {
                 Log("Creating contests of different types");
-                int cID1 = ContestManager.CreateContest(ContestType.Group, "Test Contest1", 
+                int cID1 = ContestManager.CreateContest(ContestType.Group, "Test Contest1",
                     "This is a test contest", 30, DateTime.Today, 500, true, Statistic.Steps);
 
                 int cID2 = ContestManager.CreateContest(ContestType.Group, "Test Contest2",
@@ -679,6 +933,5 @@ namespace ActivEarth.Tests.Competition.Contests
         }
 
         #endregion ---------- Utility Methods ----------
-
     }
 }
