@@ -5,7 +5,7 @@ body
 {
     background: #b6b7bc;
     font-size: .80em;
-    font-family: "Helvetica Neue", "Lucida Grande", "Segoe UI", Arial, Helvetica, Verdana, sans-serif;
+    font-family:"Adobe Garamond Pro Bold", Georgia, "Times New Roman", Times, serif;
     margin: 0px;
     padding: 0px;
     color: #696969;
@@ -52,26 +52,31 @@ h1
     font-size: 1.6em;
     padding-bottom: 0px;
     margin-bottom: 0px;
+	font-family:"Adobe Garamond Pro Bold", Georgia, "Times New Roman", Times, serif;
 }
 
 h2
 {
     font-size: 1.5em;
     font-weight: 600;
+	font-family:"Adobe Garamond Pro Bold", Georgia, "Times New Roman", Times, serif;
 }
 
 h3
 {
+	font-family:"Adobe Garamond Pro Bold", Georgia, "Times New Roman", Times, serif;
     font-size: 1.2em;
 }
 
 h4
 {
+	font-family:"Adobe Garamond Pro Bold", Georgia, "Times New Roman", Times, serif;
     font-size: 1.1em;
 }
 
 h5, h6
 {
+	font-family:"Adobe Garamond Pro Bold", Georgia, "Times New Roman", Times, serif;
     font-size: 1em;
 }
 
@@ -89,7 +94,7 @@ first child of the left and right table columns */
 .page
 {
     width: 960px;
-    background-color: #fff;
+    background-color: #ffffff;
     margin: 20px auto 0px auto;
     border: 1px solid #496077;
 }
@@ -112,6 +117,7 @@ first child of the left and right table columns */
     border: none;
     line-height: 2em;
     font-size: 2em;
+	font-family:"Adobe Garamond Pro Bold", Georgia, "Times New Roman", Times, serif;
 }
 .profileInfo
 {
@@ -138,7 +144,7 @@ first child of the left and right table columns */
 	width: 100px;
 	float: left;
 	margin: 0px 0px 0px 10px;
-	
+
 }
 
 .leftCol
@@ -155,6 +161,7 @@ first child of the left and right table columns */
     padding: 8px 0px 0px 0px;
     margin: 0px auto;
     text-align: center;
+	font-family:"Adobe Garamond Pro Bold", Georgia, "Times New Roman", Times, serif;
     line-height: normal;
 }
 
@@ -164,7 +171,7 @@ first child of the left and right table columns */
 
 div.hideSkiplink
 {
-    background-color:#3a4f63;
+    background-color:#ffffff;
     width:100%;
 }
 
@@ -183,7 +190,7 @@ div.menu ul
 
 div.menu ul li a, div.menu ul li a:visited
 {
-    background-color: #465c71;
+    background-color: #1493fa;
     border: 1px #4e667d solid;
     color: #dde4ec;
     display: block;
@@ -195,8 +202,8 @@ div.menu ul li a, div.menu ul li a:visited
 
 div.menu ul li a:hover
 {
-    background-color: #bfcbd6;
-    color: #465c71;
+    background-color: #ffffff;
+    color: #000000;
     text-decoration: none;
 }
 
@@ -223,7 +230,7 @@ div.menu ul li a:active
     min-height: 600px;
     width: 70%;
     
-	
+
 }
 /* FORM ELEMENTS   
 ----------------------------------------------------------*/
@@ -254,6 +261,7 @@ legend
 {
     font-size: 1.1em;
     font-weight: 600;
+	font-family:"Adobe Garamond Pro Bold", Georgia, "Times New Roman", Times, serif;
     padding: 2px 4px 8px 4px;
 }
 
@@ -296,6 +304,7 @@ div.accountInfo, div.contestInfo
 .title
 {
     display: block;
+	font-family:"Adobe Garamond Pro Bold", Georgia, "Times New Roman", Times, serif;
     float: left;
     text-align: left;
     width: auto;
@@ -306,6 +315,7 @@ div.accountInfo, div.contestInfo
     font-size: 1.1em;
     display: block;
     text-align: right;
+	font-family:"Adobe Garamond Pro Bold", Georgia, "Times New Roman", Times, serif;
     padding: 10px;
     color: White;
 }
@@ -339,5 +349,6 @@ div.accountInfo, div.contestInfo
 .submitButton
 {
     text-align: right;
+	font-family:"Adobe Garamond Pro Bold", Georgia, "Times New Roman", Times, serif;
     padding-right: 10px;
 }
