@@ -13,6 +13,7 @@ body
 
 a:link, a:visited
 {
+    font-family:"Adobe Garamond Pro Bold", Georgia, "Times New Roman", Times, serif;
     color: #034af3;
 }
 
@@ -36,12 +37,18 @@ p
 
 /* HEADINGS   
 ----------------------------------------------------------*/
+TITLEBANNER
+{
+    color: #ffffff;
+    font-size: 3em;
+    font-family:"Adobe Garamond Pro Bold", Georgia, "Times New Roman", Times, serif;
+}
 
 h1, h2, h3, h4, h5, h6
 {
+    font-family:"Adobe Garamond Pro Bold", Georgia, "Times New Roman", Times, serif;
     font-size: 1.5em;
-    color: #666666;
-    font-variant: small-caps;
+    color: #ffffff;
     text-transform: none;
     font-weight: 200;
     margin-bottom: 0px;
@@ -52,31 +59,26 @@ h1
     font-size: 1.6em;
     padding-bottom: 0px;
     margin-bottom: 0px;
-	font-family:"Adobe Garamond Pro Bold", Georgia, "Times New Roman", Times, serif;
 }
 
 h2
 {
     font-size: 1.5em;
     font-weight: 600;
-	font-family:"Adobe Garamond Pro Bold", Georgia, "Times New Roman", Times, serif;
 }
 
 h3
 {
-	font-family:"Adobe Garamond Pro Bold", Georgia, "Times New Roman", Times, serif;
     font-size: 1.2em;
 }
 
 h4
 {
-	font-family:"Adobe Garamond Pro Bold", Georgia, "Times New Roman", Times, serif;
     font-size: 1.1em;
 }
 
 h5, h6
 {
-	font-family:"Adobe Garamond Pro Bold", Georgia, "Times New Roman", Times, serif;
     font-size: 1em;
 }
 
@@ -110,6 +112,7 @@ first child of the left and right table columns */
 
 .header h1
 {
+    font-family:"Adobe Garamond Pro Bold", Georgia, "Times New Roman", Times, serif;
     font-weight: 700;
     margin: 0px;
     padding: 0px 0px 0px 20px;
@@ -117,7 +120,7 @@ first child of the left and right table columns */
     border: none;
     line-height: 2em;
     font-size: 2em;
-	font-family:"Adobe Garamond Pro Bold", Georgia, "Times New Roman", Times, serif;
+	
 }
 .profileInfo
 {
@@ -128,6 +131,7 @@ first child of the left and right table columns */
 }
 .main
 {
+   	font-family:"Adobe Garamond Pro Bold", Georgia, "Times New Roman", Times, serif;
     padding: 0px;
     margin: 0px;
     min-height: 420px;
@@ -171,7 +175,7 @@ first child of the left and right table columns */
 
 div.hideSkiplink
 {
-    background-color:#ffffff;
+    background-color:#000000;
     width:100%;
 }
 
@@ -191,8 +195,8 @@ div.menu ul
 div.menu ul li a, div.menu ul li a:visited
 {
     background-color: #1493fa;
-    border: 1px #4e667d solid;
-    color: #dde4ec;
+    border: 3px #FFBF00 solid;
+    color: #FFBF00;
     display: block;
     line-height: 1.35em;
     padding: 4px 20px;
@@ -202,14 +206,14 @@ div.menu ul li a, div.menu ul li a:visited
 
 div.menu ul li a:hover
 {
-    background-color: #ffffff;
+    background-color: #76ed87;
     color: #000000;
     text-decoration: none;
 }
 
 div.menu ul li a:active
 {
-    background-color: #465c71;
+    background-color: #76ed87;
     color: #cfdbe6;
     text-decoration: none;
 }
@@ -305,6 +309,8 @@ div.accountInfo, div.contestInfo
 {
     display: block;
 	font-family:"Adobe Garamond Pro Bold", Georgia, "Times New Roman", Times, serif;
+	color: #ffffff;
+	font-weight: 700px;
     float: left;
     text-align: left;
     width: auto;
@@ -349,6 +355,6 @@ div.accountInfo, div.contestInfo
 .submitButton
 {
     text-align: right;
-	font-family:"Adobe Garamond Pro Bold", Georgia, "Times New Roman", Times, serif;
+	 font-family:"Adobe Garamond Pro Bold", Georgia, "Times New Roman", Times, serif;
     padding-right: 10px;
 }
