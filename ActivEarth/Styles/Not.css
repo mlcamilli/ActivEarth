@@ -8,7 +8,7 @@ body
     font-family:"Adobe Garamond Pro Bold", Georgia, "Times New Roman", Times, serif;
     margin: 0px;
     padding: 0px;
-    color: #696969;
+    color: #000000;
 }
 
 a:link, a:visited
@@ -40,7 +40,8 @@ p
 TITLEBANNER
 {
     color: #ffffff;
-    font-size: 3em;
+    font-size: 4em;
+    padding: 0px 0px 0px 20px;
     font-family:"Adobe Garamond Pro Bold", Georgia, "Times New Roman", Times, serif;
 }
 
@@ -48,7 +49,7 @@ h1, h2, h3, h4, h5, h6
 {
     font-family:"Adobe Garamond Pro Bold", Georgia, "Times New Roman", Times, serif;
     font-size: 1.5em;
-    color: #ffffff;
+    color: #000000;
     text-transform: none;
     font-weight: 200;
     margin-bottom: 0px;
@@ -98,15 +99,15 @@ first child of the left and right table columns */
     width: 960px;
     background-color: #ffffff;
     margin: 20px auto 0px auto;
-    border: 1px solid #496077;
+    border: 2px solid #000000;
 }
 
 .header
 {
     position: relative;
     margin: 0px;
-    padding: 0px 0px 12px 0px;
-    background: #4b6c9e;
+    padding: 6px 0px 26px 0px;
+    background: #76ed87;
     width: 100%;
 }
 
@@ -124,16 +125,17 @@ first child of the left and right table columns */
 }
 .profileInfo
 {
+    background-color: #ffffff;
 	width: 180px;
 	float: left;
 	clear:left;
-	margin: 0px 0px 0px 10px;
+	margin: 0px 0px 0px 0px;
 }
 .main
 {
    	font-family:"Adobe Garamond Pro Bold", Georgia, "Times New Roman", Times, serif;
-    padding: 0px;
-    margin: 0px;
+    padding: 0px 0px 0px 10px;
+    margin: 0px 0px 0px 0px;
     min-height: 420px;
     width: 600px;
     float: left;
@@ -145,9 +147,11 @@ first child of the left and right table columns */
 }
 .statInfo
 {
+    background-color: #ffffff;
 	width: 100px;
 	float: left;
-	margin: 0px 0px 0px 10px;
+	margin: 0px 0px 0px 0px;
+	padding: 0px 0px 0px 0px;
 
 }
 
@@ -156,7 +160,7 @@ first child of the left and right table columns */
     padding: 6px 0px;
     margin: 12px 8px 8px 8px;
     width: 200px;
-    min-height: 200px;
+    min-height: auto;
 }
 
 .footer
@@ -175,13 +179,13 @@ first child of the left and right table columns */
 
 div.hideSkiplink
 {
-    background-color:#000000;
+    background-color:#ffffff;
     width:100%;
 }
 
 div.menu
 {
-    padding: 4px 0px 4px 8px;
+    padding: 0px 0px 16px 155px;
 }
 
 div.menu ul
@@ -195,8 +199,8 @@ div.menu ul
 div.menu ul li a, div.menu ul li a:visited
 {
     background-color: #1493fa;
-    border: 3px #FFBF00 solid;
-    color: #FFBF00;
+    border: 2px #000000 solid;
+    color: #ffffff;
     display: block;
     line-height: 1.35em;
     padding: 4px 20px;
@@ -318,11 +322,11 @@ div.accountInfo, div.contestInfo
 
 .loginDisplay
 {
-    font-size: 1.1em;
+    font-size: 1.4em;
     display: block;
     text-align: right;
 	font-family:"Adobe Garamond Pro Bold", Georgia, "Times New Roman", Times, serif;
-    padding: 10px;
+    padding: 0px 10px 26px 0px;
     color: White;
 }
 
