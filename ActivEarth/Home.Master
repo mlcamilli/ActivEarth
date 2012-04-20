@@ -1,0 +1,42 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Home.Master.cs" Inherits="ActivEarth.Site1" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head id="Head1" runat="server">
+    <title>ActiveEarth Home</title>
+    <link href="~/Styles/home.css" rel="stylesheet" type="text/css" />
+    <asp:ContentPlaceHolder ID="HeadContent" runat="server">
+    </asp:ContentPlaceHolder>
+  <style type="text/css">
+  .centeredImage
+    {
+    text-align:center;
+    margin-top:0px;
+    margin-bottom:0px;
+    padding:0px;
+    }
+</style>
+</head>
+<body>
+    <form id="Form1" runat="server">
+    <div>
+        <asp:ContentPlaceHolder ID="MainContent" runat="server">
+        </asp:ContentPlaceHolder>
+
+        <p class="centeredImage">
+    <img src="~/Images/Home/trans_earth.gif" alt="Earth" height="270" width="270">
+	</p>
+	<div id="headerTitle">ActivEarth</div>
+	<br><br><br>
+    <div id="page">
+        <div class="topNaviagationLink"><a href="index.html">Login</a></div>
+        <div class="topNaviagationLink"><a href="index.html">Sign Up</a></div>
+        <div class="topNaviagationLink"><a href="about.html">About</a></div>
+		
+	</div>
+	<br>
+    </div>
+    </form>
+</body>
+</html>
