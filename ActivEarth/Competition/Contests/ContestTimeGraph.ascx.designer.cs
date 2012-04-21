@@ -10,60 +10,60 @@
 namespace ActivEarth.Competition.Contests {
     
     
-    public partial class DisplayContestPage {
+    public partial class ContestTimeGraph {
         
         /// <summary>
-        /// ContestName control.
+        /// _DisplayGraph control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label ContestName;
+        protected global::System.Web.UI.WebControls.Panel _DisplayGraph;
         
         /// <summary>
-        /// ContestDescription control.
+        /// _GraphTitle control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label ContestDescription;
+        protected global::System.Web.UI.WebControls.Label _GraphTitle;
         
         /// <summary>
-        /// ContestStatusTable control.
+        /// _DisplayProgress control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Table ContestStatusTable;
+        protected global::System.Web.UI.WebControls.Panel _DisplayProgress;
         
         /// <summary>
-        /// GoalGraph control.
+        /// _ContestProgress control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::ActivEarth.Competition.Contests.ContestGraph GoalGraph;
+        protected global::EO.Web.ProgressBar _ContestProgress;
         
         /// <summary>
-        /// TimeGraph control.
+        /// _StartLabel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::ActivEarth.Competition.Contests.ContestTimeGraph TimeGraph;
+        protected global::System.Web.UI.WebControls.Label _StartLabel;
         
         /// <summary>
-        /// ContestLeaderBoard control.
+        /// _EndLabel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::ActivEarth.Competition.Contests.LeaderBoard ContestLeaderBoard;
+        protected global::System.Web.UI.WebControls.Label _EndLabel;
     }
 }

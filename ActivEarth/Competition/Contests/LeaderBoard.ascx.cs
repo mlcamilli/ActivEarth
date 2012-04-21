@@ -19,20 +19,10 @@ namespace ActivEarth.Competition.Contests
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (IsPostBack)
-            {
-                _displayIndex = (int)ViewState["_displayIndex"];
-            }
-            else
-            {
-                previousRankings.Enabled = false;
-                populateLeaderBoard();
-                _displayIndex = 0;
-                ViewState["_displayIndex"] = _displayIndex;
-            }
+
         }
 
-        public void makeLeaderBoard(int slots, List<Team> teams, Color[] backColors, Color[] textColors)
+        public void MakeLeaderBoard(int slots, List<Team> teams, Color[] backColors, Color[] textColors)
         {
             _numSlots = slots;
             _contestTeams = teams;
@@ -57,6 +47,8 @@ namespace ActivEarth.Competition.Contests
                     textIndex = 0;
                 }
             }
+
+            populateLeaderBoard();
         }
 
         private void AddRowToLeaderBoard(Color backColor, Color textColor)
@@ -83,32 +75,6 @@ namespace ActivEarth.Competition.Contests
                 {
                     leaderBoardRow.hideRowText();
                 }
-            }
-        }
-
-        protected void nextRankings_Click(object sender, ImageClickEventArgs e)
-        {
-            previousRankings.Enabled = true;
-            _displayIndex += _numSlots;
-            ViewState["_displayIndex"] = _displayIndex;
-            populateLeaderBoard();
-
-            if (_displayIndex + _numSlots >= _contestTeams.Count)
-            {
-                nextRankings.Enabled = false;
-            }
-        }
-
-        protected void previousRankings_Click(object sender, ImageClickEventArgs e)
-        {
-            nextRankings.Enabled = true;
-            _displayIndex -= _numSlots;
-            ViewState["_displayIndex"] = _displayIndex;
-            populateLeaderBoard();
-
-            if (_displayIndex == 0)
-            {
-                previousRankings.Enabled = false;
             }
         }
     }

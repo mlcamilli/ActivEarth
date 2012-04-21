@@ -16,14 +16,15 @@ namespace ActivEarth.Competition.Contests
 
         }
 
-        public void PopulateContestTable(List<Contest> contests, Color[] backColors, Color[] textColors)
+        public void PopulateContestTable(List<string> contests, List<int> ids, Color[] backColors, Color[] textColors)
         {
             int colorIndex = 0;
             int textIndex = 0;
+            int idIndex = 0;
 
-            foreach (Contest contest in contests)
+            foreach (string contest in contests)
             {
-                _contestTable.Rows.Add(MakeRowForTable(contest, backColors[colorIndex], textColors[textIndex]));
+                _contestTable.Rows.Add(MakeRowForTable(contest, ids[idIndex], backColors[colorIndex], textColors[textIndex]));
 
                 colorIndex++;
                 if (colorIndex == backColors.Length)
@@ -33,39 +34,30 @@ namespace ActivEarth.Competition.Contests
 
                 textIndex++;
                 if (textIndex == textColors.Length)
-                {
+                { 
                     textIndex = 0;
                 }
+
+                idIndex++;
             }
         }
 
-        private TableRow MakeRowForTable(Contest contest, Color backColor, Color textColor)
+        private TableRow MakeRowForTable(string contestName, int contestId, Color backColor, Color textColor)
         {
-            string typeString = "";
-            if (contest.Type == ContestType.Group)
-            {
-                typeString = "Group";
-            }
-            else
-            {
-                typeString = "Individual";
-            }
-
             TableRow newRow = new TableRow();
             newRow.BackColor = backColor;
-           // newRow.ForeColor = Color.Black;
-            newRow.Cells.Add(MakeTextCellForRow(contest.Name, textColor));
-            newRow.Cells.Add(MakeTextCellForRow(typeString, textColor));
+            newRow.Cells.Add(MakeTextCellForRow(contestName, contestId, textColor));
             return newRow;
         }
 
-        private TableCell MakeTextCellForRow(string text, Color textColor)
+        private TableCell MakeTextCellForRow(string text, int contestId, Color textColor)
         {
             TableCell newCell = new TableCell();
-            Label textLabel = new Label();
-            textLabel.Text = text;
-            textLabel.ForeColor = textColor;
-            newCell.Controls.Add(textLabel);
+            HyperLink textLink = new HyperLink();
+            textLink.Text = text;
+            textLink.ForeColor = textColor;
+            textLink.NavigateUrl = "~/Competition/Contests/DisplayContestPage.aspx?id=" + contestId;
+            newCell.Controls.Add(textLink);
             return newCell;
         }   
     }

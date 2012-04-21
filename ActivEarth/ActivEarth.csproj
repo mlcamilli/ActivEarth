@@ -82,11 +82,40 @@
     <Content Include="Competition\Challenges\DisplayChallengesPage.aspx" />
     <Content Include="Competition\Contests\ContestCreationPage.aspx" />
     <Content Include="Competition\Contests\ContestDisplayTable.ascx" />
+    <Content Include="Competition\Contests\ContestGoalGraph.ascx" />
     <Content Include="Competition\Contests\ContestHomePage.aspx" />
+    <Content Include="Competition\Contests\ContestTimeGraph.ascx" />
     <Content Include="Competition\Contests\CountdownClock.ascx" />
     <Content Include="Competition\Contests\DisplayContestPage.aspx" />
     <Content Include="Competition\Contests\LeaderBoard.ascx" />
     <Content Include="Competition\Contests\LeaderBoardRow.ascx" />
+    <Content Include="Images\Competition\Badges\Time_Biked\Bronze.png" />
+    <Content Include="Images\Competition\Badges\Time_Biked\Diamond.png" />
+    <Content Include="Images\Competition\Badges\Time_Biked\Emerald.png" />
+    <Content Include="Images\Competition\Badges\Time_Biked\Gold.png" />
+    <Content Include="Images\Competition\Badges\Time_Biked\None.png" />
+    <Content Include="Images\Competition\Badges\Time_Biked\Platinum.png" />
+    <Content Include="Images\Competition\Badges\Time_Biked\Ruby.png" />
+    <Content Include="Images\Competition\Badges\Time_Biked\Sapphire.png" />
+    <Content Include="Images\Competition\Badges\Time_Biked\Silver.png" />
+    <Content Include="Images\Competition\Badges\Time_Ran\Bronze.png" />
+    <Content Include="Images\Competition\Badges\Time_Ran\Diamond.png" />
+    <Content Include="Images\Competition\Badges\Time_Ran\Emerald.png" />
+    <Content Include="Images\Competition\Badges\Time_Ran\Gold.png" />
+    <Content Include="Images\Competition\Badges\Time_Ran\None.png" />
+    <Content Include="Images\Competition\Badges\Time_Ran\Platinum.png" />
+    <Content Include="Images\Competition\Badges\Time_Ran\Ruby.png" />
+    <Content Include="Images\Competition\Badges\Time_Ran\Sapphire.png" />
+    <Content Include="Images\Competition\Badges\Time_Ran\Silver.png" />
+    <Content Include="Images\Competition\Badges\Time_Walked\Bronze.png" />
+    <Content Include="Images\Competition\Badges\Time_Walked\Diamond.png" />
+    <Content Include="Images\Competition\Badges\Time_Walked\Emerald.png" />
+    <Content Include="Images\Competition\Badges\Time_Walked\Gold.png" />
+    <Content Include="Images\Competition\Badges\Time_Walked\None.png" />
+    <Content Include="Images\Competition\Badges\Time_Walked\Platinum.png" />
+    <Content Include="Images\Competition\Badges\Time_Walked\Ruby.png" />
+    <Content Include="Images\Competition\Badges\Time_Walked\Sapphire.png" />
+    <Content Include="Images\Competition\Badges\Time_Walked\Silver.png" />
     <Content Include="Images\Competition\Challenges\Challenges_Row.png" />
     <Content Include="Images\Competition\Challenges\Challenges_Template\Daily.png" />
     <Content Include="Images\Competition\Challenges\Challenges_Template\Monthly.png" />
@@ -323,12 +352,26 @@
     <Compile Include="Competition\Contests\ContestDisplayTable.ascx.designer.cs">
       <DependentUpon>ContestDisplayTable.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Competition\Contests\ContestGoalGraph.ascx.cs">
+      <DependentUpon>ContestGoalGraph.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Competition\Contests\ContestGoalGraph.ascx.designer.cs">
+      <DependentUpon>ContestGoalGraph.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Competition\Contests\ContestHomePage.aspx.cs">
       <DependentUpon>ContestHomePage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Competition\Contests\ContestHomePage.aspx.designer.cs">
       <DependentUpon>ContestHomePage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Competition\Contests\ContestTimeGraph.ascx.cs">
+      <DependentUpon>ContestTimeGraph.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Competition\Contests\ContestTimeGraph.ascx.designer.cs">
+      <DependentUpon>ContestTimeGraph.ascx</DependentUpon>
     </Compile>
     <Compile Include="Competition\Contests\CountdownClock.ascx.cs">
       <DependentUpon>CountdownClock.ascx</DependentUpon>
