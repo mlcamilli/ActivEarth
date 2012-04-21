@@ -1,7 +1,7 @@
 USE [ActivEarth_Dev]
 GO
 
-/****** Object:  Table [dbo].[contests]    Script Date: 04/09/2012 22:28:22 ******/
+/****** Object:  Table [dbo].[contests]    Script Date: 04/20/2012 22:06:07 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -25,6 +25,7 @@ CREATE TABLE [dbo].[contests](
 	[searchable] [bit] NOT NULL,
 	[active] [bit] NOT NULL,
 	[deactivated] [datetime] NULL,
+	[creator_id] [int] NOT NULL,
  CONSTRAINT [PK_contests] PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
@@ -34,5 +35,12 @@ CREATE TABLE [dbo].[contests](
 GO
 
 SET ANSI_PADDING OFF
+GO
+
+ALTER TABLE [dbo].[contests]  WITH CHECK ADD  CONSTRAINT [FK_contests_creator_id] FOREIGN KEY([creator_id])
+REFERENCES [dbo].[users] ([id])
+GO
+
+ALTER TABLE [dbo].[contests] CHECK CONSTRAINT [FK_contests_creator_id]
 GO
 

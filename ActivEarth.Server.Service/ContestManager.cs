@@ -6,8 +6,9 @@ using ActivEarth.Objects.Profile;
 using ActivEarth.Objects.Groups;
 using ActivEarth.Objects.Competition;
 using ActivEarth.Objects.Competition.Contests;
+using ActivEarth.DAO;
 
-namespace ActivEarth.DAO
+namespace ActivEarth.Server.Service.Competition
 {
 
     public class ContestManager
@@ -28,15 +29,18 @@ namespace ActivEarth.DAO
         /// <summary>
         /// Creates a new time-based Contest
         /// </summary>
+        /// <param name="type">Determines whether the contest in Individual or Group-based.</param>
         /// <param name="name">Contest Name.</param>
         /// <param name="description">Contest Description.</param>
         /// <param name="points">Points to be distributed to the winner(s).</param>
         /// <param name="start">Time to start the contest.</param>
         /// <param name="end">Time to end the contest.</param>
+        /// <param name="searchable">True if the Contest can be found by searching (public), false if private.</param>
         /// <param name="statistic">Statistic on which the Contest is based.</param>
+        /// <param name="creatorId">UserID of the creator of the contest.</param>
         /// <returns>ID of the newly created Contest.</returns>
         public static int CreateContest(ContestType type, string name, string description, int points, DateTime start,
-            DateTime end, bool searchable, Statistic statistic)
+            DateTime end, bool searchable, Statistic statistic, int creatorId)
         {
             Contest newContest = new Contest
             {
@@ -50,7 +54,8 @@ namespace ActivEarth.DAO
                 StatisticBinding = statistic,
                 IsSearchable = searchable,
                 IsActive = true,
-                DeactivatedTime = null
+                DeactivatedTime = null,
+                CreatorId = creatorId
             };
 
             return ContestDAO.CreateNewContest(newContest);
@@ -59,15 +64,18 @@ namespace ActivEarth.DAO
         /// <summary>
         /// Creates a new goal-based Contest
         /// </summary>
+        /// <param name="type">Determines whether the contest in Individual or Group-based.</param>
         /// <param name="name">Contest Name.</param>
         /// <param name="description">Contest Description.</param>
         /// <param name="points">Points to be distributed to the winner(s).</param>
         /// <param name="start">Time to start the contest.</param>
         /// <param name="end">Score at which to end the contest.</param>
+        /// <param name="searchable">True if the Contest can be found by searching (public), false if private.</param>
         /// <param name="statistic">Statistic on which the Contest is based.</param>
+        /// <param name="creatorId">UserID of the creator of the contest.</param>
         /// <returns>ID of the newly created Contest.</returns>
         public static int CreateContest(ContestType type, string name, string description, int points, DateTime start,
-            float end, bool searchable, Statistic statistic)
+            float end, bool searchable, Statistic statistic, int creatorId)
         {
             Contest newContest = new Contest
             {
@@ -79,10 +87,15 @@ namespace ActivEarth.DAO
                 StartTime = start,
                 EndCondition = new EndCondition(end),
                 StatisticBinding = statistic,
-                IsSearchable = searchable
+                IsSearchable = searchable,
+                DeactivatedTime = null,
+                IsActive = true,
+                CreatorId = creatorId
+                
             };
-
+            
             return ContestDAO.CreateNewContest(newContest);
+            
         }
 
         /// <summary>
@@ -226,6 +239,17 @@ namespace ActivEarth.DAO
             {
                 TeamDAO.RemoveTeam(team.ID);
             }
+        }
+
+        /// <summary>
+        /// Queries the DB to see if a user is registered for a particular contest.
+        /// </summary>
+        /// <param name="userId">ID of the user.</param>
+        /// <param name="contestId">ID of the contest to query.</param>
+        /// <returns>True if the user is competing in the contest, false otherwise.</returns>
+        public static bool UserCompetingInContest(int userId, int contestId)
+        {
+            return (TeamDAO.UserCompetingInContest(userId, contestId));
         }
 
         #endregion ---------- Public Methods ----------

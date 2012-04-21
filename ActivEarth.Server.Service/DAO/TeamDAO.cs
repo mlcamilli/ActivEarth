@@ -316,13 +316,9 @@ namespace ActivEarth.DAO
 
                 using (SqlConnection connection = ConnectionManager.GetConnection())
                 {
+                    if (TeamDAO.UserCompetingInContest(teamMember.UserId, contestId)) { throw new Exception("User is already competing in the contest"); }
+                    
                     var data = new ActivEarthDataProvidersDataContext(connection);
-                    bool alreadyInContest = ((from c in data.TeamMemberDataProviders
-                                             where c.user_id == teamMember.UserId && c.contest_id == contestId
-                                             select c.team_id).FirstOrDefault()) > 0;
-
-                    if (alreadyInContest) { throw new Exception("User is already competing in the contest"); }
-
                     var userData = new TeamMemberDataProvider
                     {
                         contest_id = contestId,
@@ -444,6 +440,30 @@ namespace ActivEarth.DAO
         #endregion Team Member DB Update
 
         #region Team Member Utilities
+
+        /// <summary>
+        /// Queries the DB to see if a user is registered for a particular contest.
+        /// </summary>
+        /// <param name="userId">ID of the user.</param>
+        /// <param name="contestId">ID of the contest to query.</param>
+        /// <returns>True if the user is competing in the contest, false otherwise.</returns>
+        public static bool UserCompetingInContest(int userId, int contestId)
+        {
+            try
+            {
+                using (SqlConnection connection = ConnectionManager.GetConnection())
+                {
+                    var data = new ActivEarthDataProvidersDataContext(connection);
+                    return ((from c in data.TeamMemberDataProviders
+                                              where c.user_id == userId && c.contest_id == contestId
+                                              select c.team_id).FirstOrDefault()) > 0;
+                }
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
 
         /// <summary>
         /// Calculates the user's change in the relevant statistic

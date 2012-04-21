@@ -5,8 +5,10 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Drawing;
-using ActivEarth.Objects.Competition.Contests;
+using ActivEarth.DAO;
+using ActivEarth.Server.Service.Competition;
 using ActivEarth.Objects.Profile;
+using ActivEarth.Objects.Competition.Contests;
 
 namespace ActivEarth.Competition.Contests
 {
@@ -22,15 +24,7 @@ namespace ActivEarth.Competition.Contests
             else
             {
                 //Test code
-                List<Contest> contests = new List<Contest>();
-                contests.Add(new Contest("Super Awesome Happy Funtime Contest", "No", 500, ContestEndMode.GoalBased,
-                    ContestType.Group, DateTime.Now, new EndCondition(9001), Objects.Profile.Statistic.Steps));
-                contests.Add(new Contest("Space Eyes", "No", 500, ContestEndMode.GoalBased,
-                    ContestType.Group, DateTime.Now, new EndCondition(9001), Objects.Profile.Statistic.Steps));
-                contests.Add(new Contest("No I needed that.", "No", 500, ContestEndMode.GoalBased,
-                    ContestType.Group, DateTime.Now, new EndCondition(9001), Objects.Profile.Statistic.Steps));
-                contests.Add(new Contest("The Doctor", "No", 500, ContestEndMode.GoalBased,
-                    ContestType.Individual, DateTime.Now, new EndCondition(9001), Objects.Profile.Statistic.Steps));
+                List<Contest> contests = ContestDAO.GetActiveContests();
 
                 Color[] backColors = { Color.FromArgb(34, 139, 34), Color.White };
                 Color[] textColors = { Color.White, Color.Black };

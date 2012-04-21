@@ -7,6 +7,9 @@ insert into ActivEarth_Dev.dbo.profile Values (2, 'Test', 'Subject1', 'thisisate
 insert into ActivEarth_Dev.dbo.users Values ('badgetest2', 'password2')
 insert into ActivEarth_Dev.dbo.profile Values (3, 'Test', 'Subject2', 'anothertestaccount@email.com', 'M', 'St. Louis', 'MO', 26, 72, 175)
 
+insert into ActivEarth_Dev.dbo.users Values ('mark', 'k')
+insert into ActivEarth_Dev.dbo.profile Values (4, 'Mark', 'Talley', 'yetanothertestaccount@email.com', 'M', 'Topeka', 'KS', 22, 71, 155)
+
 insert into ActivEarth_Dev.dbo.statistic_info Values (0, 'Steps', 'N0')
 insert into ActivEarth_Dev.dbo.statistic_info Values (1, 'Distance Walked', 'N1')
 insert into ActivEarth_Dev.dbo.statistic_info Values (2, 'Distance Biked', 'N1')
@@ -234,3 +237,50 @@ insert into ActivEarth_Dev.dbo.challenge_definitions Values (0, 1, 3, 13.1, 30, 
 insert into ActivEarth_Dev.dbo.challenge_definitions Values (0, 1, 3, 26.2, 60, 'Run {0} miles in a single day.', 'Marathon')
 insert into ActivEarth_Dev.dbo.challenge_definitions Values (0, 1, 3, 31.1, 75, 'Run {0} miles in a single day.', 'Ultra-Marathon')
 
+insert into ActivEarth_Dev.dbo.contests Values ('Super Awesome Happy Funtime Contest', 'Description for Super Awesome Happy Funtime Contest', 500, 1, null, 9001, CURRENT_TIMESTAMP, 0, 0, 1, 1, null, 1)
+insert into ActivEarth_Dev.dbo.contests Values ('Space Eyes', 'Description for Space Eyes', 500, 1, null, 9001, CURRENT_TIMESTAMP, 0, 0, 1, 1, null, 1)
+insert into ActivEarth_Dev.dbo.contests Values ('No I Needed That.', 'Description for No I needed that.', 500, 1, null, 9001, CURRENT_TIMESTAMP, 0, 0, 1, 1, null, 1)
+insert into ActivEarth_Dev.dbo.contests Values ('The Doctor', 'Description for The Doctor', 500, 1, null, 9001, CURRENT_TIMESTAMP, 0, 1, 1, 1, null, 1)
+
+/* Teams for Super Awesome Happy Funtime Contest */
+insert into ActivEarth_Dev.dbo.teams Values (1, 'SAHFC Team 1', 0, 0, null)
+insert into ActivEarth_Dev.dbo.teams Values (1, 'SAHFC Team 2', 0, 0, null)
+
+/* Teams for Space Eyes Contest */
+insert into ActivEarth_Dev.dbo.teams Values (2, 'Space Eyes Team 1', 0, 0, null)
+insert into ActivEarth_Dev.dbo.teams Values (2, 'Space Eyes Team 2', 0, 0, null)
+
+/* Teams for No I Needed That Contest */
+insert into ActivEarth_Dev.dbo.teams Values (3, 'NINT Team 1', 0, 0, null)
+insert into ActivEarth_Dev.dbo.teams Values (3, 'NINT Team 2', 0, 0, null)
+insert into ActivEarth_Dev.dbo.teams Values (3, 'NINT Team 3', 0, 0, null)
+
+/* Teams for The Doctor Contest */
+insert into ActivEarth_Dev.dbo.teams Values (4, 'John Test', 0, 0, null)
+insert into ActivEarth_Dev.dbo.teams Values (4, 'Test Subject1', 0, 0, null)
+insert into ActivEarth_Dev.dbo.teams Values (4, 'Test Subject2', 0, 0, null)
+insert into ActivEarth_Dev.dbo.teams Values (4, 'Mark Talley', 0, 0, null)
+
+/* Team members for SAHFC */
+insert into ActivEarth_Dev.dbo.team_members Values (1, 1, 1, 0, 0)
+insert into ActivEarth_Dev.dbo.team_members Values (1, 1, 2, 0, 0)
+insert into ActivEarth_Dev.dbo.team_members Values (1, 2, 3, 0, 0)
+insert into ActivEarth_Dev.dbo.team_members Values (1, 2, 4, 0, 0)
+
+/* Team members for SEC */
+insert into ActivEarth_Dev.dbo.team_members Values (2, 3, 1, 0, 0)
+insert into ActivEarth_Dev.dbo.team_members Values (2, 3, 2, 0, 0)
+insert into ActivEarth_Dev.dbo.team_members Values (2, 4, 3, 0, 0)
+insert into ActivEarth_Dev.dbo.team_members Values (2, 4, 4, 0, 0)
+
+/* Team members for NINTC */
+insert into ActivEarth_Dev.dbo.team_members Values (3, 5, 1, 0, 0)
+insert into ActivEarth_Dev.dbo.team_members Values (3, 5, 2, 0, 0)
+insert into ActivEarth_Dev.dbo.team_members Values (3, 6, 3, 0, 0)
+insert into ActivEarth_Dev.dbo.team_members Values (3, 7, 4, 0, 0)
+
+/* Team members for TDC */
+insert into ActivEarth_Dev.dbo.team_members Values (4, 8, 1, 0, 0)
+insert into ActivEarth_Dev.dbo.team_members Values (4, 9, 2, 0, 0)
+insert into ActivEarth_Dev.dbo.team_members Values (4, 10, 3, 0, 0)
+insert into ActivEarth_Dev.dbo.team_members Values (4, 11, 4, 0, 0)

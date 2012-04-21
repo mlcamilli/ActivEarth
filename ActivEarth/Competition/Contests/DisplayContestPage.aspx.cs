@@ -6,6 +6,8 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Drawing;
 using ActivEarth.Objects.Competition.Contests;
+using ActivEarth.Objects.Profile;
+using ActivEarth.DAO;
 
 namespace ActivEarth.Competition.Contests
 {
@@ -65,15 +67,7 @@ namespace ActivEarth.Competition.Contests
                 //End Test Code
 
             //More tests
-            List<Contest> contests = new List<Contest>();
-            contests.Add(new Contest("Super Awesome Happy Funtime Contest", "No", 500, ContestEndMode.GoalBased, 
-                ContestType.Group, DateTime.Now, new EndCondition(9001), Objects.Profile.Statistic.Steps));
-            contests.Add(new Contest("Super Awesome Happy Funtime Contest", "No", 500, ContestEndMode.GoalBased,
-                ContestType.Group, DateTime.Now, new EndCondition(9001), Objects.Profile.Statistic.Steps));
-            contests.Add(new Contest("Super Awesome Happy Funtime Contest", "No", 500, ContestEndMode.GoalBased,
-                ContestType.Group, DateTime.Now, new EndCondition(9001), Objects.Profile.Statistic.Steps));
-            contests.Add(new Contest("Super Awesome Happy Funtime Contest", "No", 500, ContestEndMode.GoalBased,
-                ContestType.Group, DateTime.Now, new EndCondition(9001), Objects.Profile.Statistic.Steps));
+            List<Contest> contests = ContestDAO.GetActiveContests();
 
             populateLeaderBoard(10, teams);
 
