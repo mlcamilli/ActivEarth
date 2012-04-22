@@ -28,17 +28,23 @@ namespace ActivEarth.Competition.Contests
             _CurrentUserProgress.Value = (int)((currentUsersTeam.Score / goal.EndValue) * 100);
         }
 
-        public void PopulateContestGraph(Team firstPlace, Team secondPlace, Team thirdPlace, Team currentUsersTeam, EndCondition goal)
+        public void PopulateContestGraph(Team firstPlace, Team secondPlace, Team thirdPlace, Team currentUsersTeam, float goal)
         {
             _FirstPlaceTeamName.Text = firstPlace.Name;
             _SecondPlaceTeamName.Text = secondPlace.Name;
             _ThirdPlaceTeamName.Text = thirdPlace.Name;
             _CurrentUserName.Text = currentUsersTeam.Name;
 
-            _FirstPlaceProgress.Value = (int)((firstPlace.Score / goal.EndValue) * 100);
-            _SecondPlaceProgress.Value = (int)((secondPlace.Score / goal.EndValue) * 100);
-            _ThirdPlaceProgress.Value = (int)((thirdPlace.Score / goal.EndValue) * 100);
-            _CurrentUserProgress.Value = (int)((currentUsersTeam.Score / goal.EndValue) * 100);
+            _FirstPlaceProgress.Value = (int)((firstPlace.Score / goal) * 100);
+            _SecondPlaceProgress.Value = (int)((secondPlace.Score / goal) * 100);
+            _ThirdPlaceProgress.Value = (int)((thirdPlace.Score / goal) * 100);
+            _CurrentUserProgress.Value = (int)((currentUsersTeam.Score / goal) * 100);
+        }
+
+        public void SetGraphLabels(float goal, string format)
+        {
+            _StartLabel.Text = 0.ToString(format);
+            _GoalLabel.Text = goal.ToString(format); 
         }
     }
 }

@@ -41,7 +41,8 @@ namespace ActivEarth.DAO
                         statistic = (byte)contest.StatisticBinding,
                         searchable = contest.IsSearchable,
                         active = contest.IsActive,
-                        deactivated = contest.DeactivatedTime
+                        deactivated = contest.DeactivatedTime,
+                        creator_id = contest.CreatorId
                     };
                     data.ContestDataProviders.InsertOnSubmit(contestData);
                     data.SubmitChanges();
@@ -95,7 +96,8 @@ namespace ActivEarth.DAO
                                    Type = (ContestType)c.type,
                                    StatisticBinding = (Statistic)c.statistic,
                                    IsActive = c.active,
-                                   DeactivatedTime = c.deactivated
+                                   DeactivatedTime = c.deactivated,
+                                   CreatorId = c.creator_id
                                }).FirstOrDefault();
             }
 
@@ -137,7 +139,8 @@ namespace ActivEarth.DAO
                                     Type = (ContestType)c.type,
                                     StatisticBinding = (Statistic)c.statistic,
                                     IsActive = c.active,
-                                    DeactivatedTime = c.deactivated
+                                    DeactivatedTime = c.deactivated,
+                                    CreatorId = c.creator_id
                                 }).ToList();
 
                 if (contests != null)
@@ -189,7 +192,8 @@ namespace ActivEarth.DAO
                                     Mode = (ContestEndMode)c.end_mode,
                                     Type = (ContestType)c.type,
                                     StatisticBinding = (Statistic)c.statistic,
-                                    IsActive = c.active
+                                    IsActive = c.active,
+                                    CreatorId = c.creator_id
                                 }).ToList();
 
                 if (contests != null)
@@ -238,6 +242,7 @@ namespace ActivEarth.DAO
                         dbContest.searchable = contest.IsSearchable;
                         dbContest.active = contest.IsActive;
                         dbContest.deactivated = contest.DeactivatedTime;
+                        dbContest.creator_id = contest.CreatorId;
 
                         data.SubmitChanges();
                     }

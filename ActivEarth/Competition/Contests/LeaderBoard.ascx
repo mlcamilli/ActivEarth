@@ -8,8 +8,7 @@
     Width="300px" style="position: relative">
 
         <asp:Label ID="_leaderBoardTitle" runat="server" Text="Contest Rankings"       
-            style="z-index: 1; left: 6px; top: 3px; position: absolute; width: 227px;" 
-            Font-Names="Eras Bold ITC" Font-Size="Medium" ForeColor="Black"></asp:Label>
+            style="z-index: 1; left: 6px; top: 3px; position: absolute; width: 227px;" ForeColor="Black"></asp:Label>
     </asp:Panel>
 
 </asp:Panel>

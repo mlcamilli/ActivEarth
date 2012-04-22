@@ -139,8 +139,8 @@ namespace ActivEarth.Server.Service.Competition
             Challenge challenge = ChallengeDAO.GetChallengeFromChallengeId(challengeId);
             UserStatistic statistic = UserStatisticDAO.GetStatisticFromUserIdAndStatType(userId, challenge.StatisticBinding);
 
-            string numerator = String.Format(challenge.FormatString, (statistic != null ? statistic.Value : 0));
-            string denominator = String.Format(challenge.FormatString, challenge.Requirement);
+            string numerator = (statistic != null ? statistic.Value : 0).ToString(challenge.FormatString);
+            string denominator = challenge.Requirement.ToString(challenge.FormatString);
 
             return String.Format("{0} / {1}", numerator, denominator);
         }

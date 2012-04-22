@@ -49,7 +49,7 @@
                     </asp:DropDownList>
                 </p>
                 <p>
-                    <asp:Label ID="contestStartDateLabel" runat="server" Text="Contest Start Date:"></asp:Label>
+                    <asp:Label ID="contestStartDateLabel" runat="server" Text="Contest Start Date (MM/DD/YYYY):"></asp:Label>
                     <asp:TextBox ID="txbContestStartDate" runat="server" Enabled="True" ></asp:TextBox>
                     <asp:ImageButton runat="Server" ID="displayStartDateCalender" 
                         AlternateText="Display Calender" 
@@ -58,6 +58,8 @@
                     <asp:RequiredFieldValidator ID="contestStartRequired" runat="server" ControlToValidate="txbContestStartDate" 
                         CssClass="failureNotification" ErrorMessage="Contest Start Date is required." ToolTip="Contest Start Date is required." 
                         ValidationGroup="CreateContestValidationGroup">*</asp:RequiredFieldValidator>
+                    <asp:RegularExpressionValidator ID="contestStartFormat" runat="server" ControlToValidate="txbContestStartDate" 
+                        ErrorMessage="Start date is in incorrect format or is invalid date." ValidationGroup="CreateContestValidationGroup" ValidationExpression="^(((0?[1-9]|1[012])/(0?[1-9]|1\d|2[0-8])|(0?[13456789]|1[012])/(29|30)|(0?[13578]|1[02])/31)/(19|[2-9]\d)\d{2}|0?2/29/((19|[2-9]\d)(0[48]|[2468][048]|[13579][26])|(([2468][048]|[3579][26])00)))$">*</asp:RegularExpressionValidator>
                 </p>
                  <p>
                     <asp:Label ID="contestModeLabel" runat="server" Text="Contest Mode:"></asp:Label>
@@ -69,17 +71,20 @@
                 </p>
                 <asp:Panel ID="contestModeTimePanel" runat="server" Visible="True">
                     <p>
-                        <asp:Label ID="contestEndDateLabel" runat="server" Text="Contest End Date:"></asp:Label>
+                        <asp:Label ID="contestEndDateLabel" runat="server" Text="Contest End Date (MM/DD/YYYY):"></asp:Label>
                         <asp:TextBox ID="txbContestEndDate" runat="server" Enabled="True"></asp:TextBox>
                         <asp:ImageButton runat="Server" ID="displayEndDateCalender" AlternateText="Display Calender" 
                             ImageUrl="~/Images/Competition/Misc/Calender.png" ImageAlign="AbsMiddle" /> 
                         <ajaxToolkit:CalendarExtender ID="contestEndDateCalender" runat="server" PopupButtonID="displayEndDateCalender" TargetControlID="txbContestEndDate" />
+                        <asp:RegularExpressionValidator ID="contestEndFormat" runat="server" ControlToValidate="txbContestEndDate" 
+                        ErrorMessage="End date is in incorrect format or is invalid date." ValidationGroup="CreateContestValidationGroup" ValidationExpression="^(((0?[1-9]|1[012])/(0?[1-9]|1\d|2[0-8])|(0?[13456789]|1[012])/(29|30)|(0?[13578]|1[02])/31)/(19|[2-9]\d)\d{2}|0?2/29/((19|[2-9]\d)(0[48]|[2468][048]|[13579][26])|(([2468][048]|[3579][26])00)))$">*</asp:RegularExpressionValidator>
                     </p>
                 </asp:Panel>
                 <asp:Panel ID="contestModeGoalPanel" runat="server" Visible="False">
                     <p>
                         <asp:Label ID="contestEndGoalLabel" runat="server" Text="Statistic Goal:"></asp:Label>
                         <asp:TextBox ID="txbContestEndGoal" runat="server" CssClass="textEntry"></asp:TextBox>
+                        <ajaxToolkit:FilteredTextBoxExtender ID="txbContestEndGoalFilter" runat="server" TargetControlID="txbContestEndGoal" FilterType="Numbers" />
                     </p>
                 </asp:Panel>
         </fieldset>

@@ -19,11 +19,11 @@ namespace ActivEarth.Competition.Contests
             hideRowText();
         }
 
-        public void setRowText(int position, string team, string score)
+        public void setRowText(int position, string team, float score, string format)
         {
             _position.Text = position + ".";
             _teamName.Text = team;
-            _currentScore.Text = score;
+            _currentScore.Text = score.ToString(format);
         }
 
         public void hideRowText()

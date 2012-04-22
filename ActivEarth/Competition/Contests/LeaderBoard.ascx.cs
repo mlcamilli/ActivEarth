@@ -22,7 +22,7 @@ namespace ActivEarth.Competition.Contests
 
         }
 
-        public void MakeLeaderBoard(int slots, List<Team> teams, Color[] backColors, Color[] textColors)
+        public void MakeLeaderBoard(int slots, List<Team> teams, Color[] backColors, Color[] textColors, string format)
         {
             _numSlots = slots;
             _contestTeams = teams;
@@ -48,7 +48,7 @@ namespace ActivEarth.Competition.Contests
                 }
             }
 
-            populateLeaderBoard();
+            populateLeaderBoard(format);
         }
 
         private void AddRowToLeaderBoard(Color backColor, Color textColor)
@@ -59,7 +59,7 @@ namespace ActivEarth.Competition.Contests
             _displayLeaderBoardRows.Controls.Add(leaderBoardRow);
         }
 
-        private void populateLeaderBoard()
+        private void populateLeaderBoard(string format)
         {
             for (int i = 0; i < _numSlots; i++)
             {
@@ -68,7 +68,7 @@ namespace ActivEarth.Competition.Contests
                 if (i + _displayIndex < _contestTeams.Count)
                 {
                     int position = i + _displayIndex;
-                    leaderBoardRow.setRowText(position + 1, _contestTeams[position].Name, _contestTeams[position].Score.ToString());
+                    leaderBoardRow.setRowText(position + 1, _contestTeams[position].Name, _contestTeams[position].Score, format);
                     leaderBoardRow.displayRowText();
                 }
                 else

@@ -7,6 +7,14 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server"> 
+    <div align="right">
+        <asp:Panel ID="ActivtyScorePanel" runat="server" style="position: relative">
+            <asp:Label ID="ContestActivityScore" runat="server" Text="100" 
+                style="z-index: 1; left: 249px; top: 2px; position: absolute; width: 289px"></asp:Label>
+            <asp:Image ID="_activityScoreImage" runat="server" Height="20px" Width="20px" 
+                ImageUrl="~/Images/Competition/Activity_Score.png"/>
+        </asp:Panel>
+    </div>
     <p>
         <asp:Label ID="ContestName" runat="server" Text="Contest Name"></asp:Label>
     </p>

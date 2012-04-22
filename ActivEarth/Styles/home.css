@@ -1,0 +1,166 @@
+body {
+	margin: 0;
+	padding: 0;
+	text-align: left;
+	font-family:"Adobe Garamond Pro Bold", Georgia, "Times New Roman", Times, serif;
+	font-size: 13px;
+	color: #061C37;
+	background: #014D5D url(~/Images/Home/background.png);
+	background-repeat:repeat-x;
+}
+*
+{
+  margin: 0 auto 0 auto;
+ text-align:left;}
+
+#page
+{
+  display: block; 
+  height:auto;
+  position: relative; 
+  overflow: hidden; 
+  width: 670px;
+}
+
+.topNaviagationLink
+{
+text-align:center;
+position:relative;
+margin-top:15px;
+font-size:18px;
+margin-left:+60px;
+width:140px;
+height: 35px;
+line-height: 35px;
+float:left;
+color:#000000;
+font-family:"Adobe Garamond Pro Bold", Georgia, "Times New Roman", Times, serif;
+}
+
+
+.topNaviagationLink a
+{
+text-decoration:none;
+text-align:center;
+color:#000000;
+}
+
+.topNaviagationLink a:hover
+{
+text-align:center;
+border-bottom:none;
+color:#0C61C9;
+display: block;
+width:121px;
+height: 35px;
+line-height: 35px;
+background-image:url(tab.png);
+
+}
+
+#mainPicture
+{
+width:670px;
+height:345px;
+background-color:#FFFFFF;
+}
+
+#mainPicture
+{
+width:670px;
+height:345px;
+background-color:#FFFFFF;
+}
+
+#mainPicture .picture
+{
+position:relative;
+width:650px;
+height:325px;
+top:10px;
+background-image:url(bicycling_on_campus.jpg);
+background-repeat:no-repeat;
+margin-left:10px;
+}
+
+#headerTitle
+{
+position:relative;
+text-align:center;
+top:10px;
+font-size:60px;
+color:#FFFFFF;
+font-family:"Adobe Garamond Pro Bold", Georgia, "Times New Roman", Times, serif;
+}
+
+#headerSubtext
+{
+position:relative;
+top:30px;
+left:50px;
+font-size:14px;
+color:#A9C8FA;
+font-family:"Adobe Garamond Pro Bold", Georgia, "Times New Roman", Times, serif;
+}
+
+.contentBox
+{
+width:670px;
+height:auto;
+background-color:#FFFFFF;
+margin-top:10px;
+}
+
+.contentBox .innerBox
+{
+position:relative;
+width:650px;
+height:auto;
+top:10px;
+margin-left:10px;
+background-image:url(content_back.png);
+background-repeat:repeat-x;
+padding-bottom:35px;
+}
+
+.contentTitle
+{
+text-align:center;
+font-size:19px;
+margin-bottom:0px;
+padding-top:18px;
+margin-left:15px;
+margin-top:15px;
+}
+
+.contentText
+{
+font-size:13px;
+line-height:24px;
+margin-left:13px;
+margin-right:13px;
+}
+
+#footer {
+
+width: 670px;
+height:16px;
+background: url(footer.png) no-repeat;
+text-align:center;
+font-size:9px;
+font-family:Arial, Helvetica, sans-serif;
+color:#386172;
+padding-top:5px;
+}
+
+#footer a
+{
+text-decoration:none;
+font-size:9px;
+color:#386172;
+}
+
+html, body {
+text-align: center;
+}
+p {text-align: left;}

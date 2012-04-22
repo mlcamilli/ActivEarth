@@ -166,6 +166,15 @@ namespace ActivEarth.Competition.Contests {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator contestStartRequired;
         
         /// <summary>
+        /// contestStartFormat control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator contestStartFormat;
+        
+        /// <summary>
         /// contestModeLabel control.
         /// </summary>
         /// <remarks>
@@ -229,6 +238,15 @@ namespace ActivEarth.Competition.Contests {
         protected global::AjaxControlToolkit.CalendarExtender contestEndDateCalender;
         
         /// <summary>
+        /// contestEndFormat control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator contestEndFormat;
+        
+        /// <summary>
         /// contestModeGoalPanel control.
         /// </summary>
         /// <remarks>
@@ -254,6 +272,15 @@ namespace ActivEarth.Competition.Contests {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txbContestEndGoal;
+        
+        /// <summary>
+        /// txbContestEndGoalFilter control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.FilteredTextBoxExtender txbContestEndGoalFilter;
         
         /// <summary>
         /// CreateContestButton control.

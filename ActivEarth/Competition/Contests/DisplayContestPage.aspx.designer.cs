@@ -31,6 +31,33 @@ namespace ActivEarth.Competition.Contests {
         protected global::System.Web.UI.WebControls.Label ContestDescription;
         
         /// <summary>
+        /// ActivtyScorePanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel ActivtyScorePanel;
+        
+        /// <summary>
+        /// ContestActivityScore control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label ContestActivityScore;
+        
+        /// <summary>
+        /// _activityScoreImage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image _activityScoreImage;
+        
+        /// <summary>
         /// ContestStatusTable control.
         /// </summary>
         /// <remarks>

@@ -33,7 +33,8 @@
             IndicatorColor="ForestGreen"></eo:ProgressBar>
     </asp:Panel>
     <asp:Label ID="_GoalLabel" runat="server" Text="100"  
-        style="z-index: 1; left: 238px; top: 267px; position: absolute; text-align: right">
+        
+        style="z-index: 1; left: 63px; top: 267px; position: absolute; text-align: right; width: 199px;">
     </asp:Label>
     <asp:Label ID="_StartLabel" runat="server" 
         style="z-index: 1; left: 5px; top: 267px; position: absolute; width: 47px; text-align: left" 
