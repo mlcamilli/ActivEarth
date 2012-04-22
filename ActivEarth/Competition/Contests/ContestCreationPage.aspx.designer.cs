@@ -256,6 +256,15 @@ namespace ActivEarth.Competition.Contests {
         protected global::System.Web.UI.WebControls.TextBox txbContestEndGoal;
         
         /// <summary>
+        /// chkContestSearchable control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox chkContestSearchable;
+        
+        /// <summary>
         /// CreateContestButton control.
         /// </summary>
         /// <remarks>

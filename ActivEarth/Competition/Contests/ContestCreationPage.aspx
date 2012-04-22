@@ -41,11 +41,6 @@
                 <p>
                     <asp:Label ID="statisticMeasuredLabel" runat="server" Text="Statistic Measured:"></asp:Label>
                     <asp:DropDownList runat="server" ID="ddlStatisticMeasured">
-                        <asp:ListItem  Text="Steps" Value="Steps"></asp:ListItem>
-                        <asp:ListItem  Text="Distance Walked" Value="Distance Walked"></asp:ListItem>
-                        <asp:ListItem  Text="Distance Ran" Value="Distance Ran"></asp:ListItem>
-                        <asp:ListItem  Text="Distance Biked" Value="Distance Biked"></asp:ListItem>
-                        <asp:ListItem  Text="Gas Savings" Value="Gas Savings"></asp:ListItem>
                     </asp:DropDownList>
                 </p>
                 <p>
@@ -82,6 +77,10 @@
                         <asp:TextBox ID="txbContestEndGoal" runat="server" CssClass="textEntry"></asp:TextBox>
                     </p>
                 </asp:Panel>
+            <p __designer:mapid="33">
+                        <asp:CheckBox ID="chkContestSearchable" runat="server" Checked="True" 
+                            Text="Public Contest" />
+                    </p>
         </fieldset>
         
             <asp:Button ID="CreateContestButton" runat="server" CommandName="MoveNext" Text="Create Contest" 
