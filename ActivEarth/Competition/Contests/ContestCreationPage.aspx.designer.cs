@@ -175,6 +175,15 @@ namespace ActivEarth.Competition.Contests {
         protected global::System.Web.UI.WebControls.RegularExpressionValidator contestStartFormat;
         
         /// <summary>
+        /// contestStartAfterToday control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator contestStartAfterToday;
+        
+        /// <summary>
         /// contestModeLabel control.
         /// </summary>
         /// <remarks>
@@ -238,6 +247,15 @@ namespace ActivEarth.Competition.Contests {
         protected global::AjaxControlToolkit.CalendarExtender contestEndDateCalender;
         
         /// <summary>
+        /// contestEndDateRequired control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator contestEndDateRequired;
+        
+        /// <summary>
         /// contestEndFormat control.
         /// </summary>
         /// <remarks>
@@ -245,6 +263,15 @@ namespace ActivEarth.Competition.Contests {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RegularExpressionValidator contestEndFormat;
+        
+        /// <summary>
+        /// contestEndsAfterStart control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator contestEndsAfterStart;
         
         /// <summary>
         /// contestModeGoalPanel control.
@@ -281,6 +308,15 @@ namespace ActivEarth.Competition.Contests {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::AjaxControlToolkit.FilteredTextBoxExtender txbContestEndGoalFilter;
+        
+        /// <summary>
+        /// chkContestSearchable control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox chkContestSearchable;
         
         /// <summary>
         /// CreateContestButton control.

@@ -41,11 +41,6 @@
                 <p>
                     <asp:Label ID="statisticMeasuredLabel" runat="server" Text="Statistic Measured:"></asp:Label>
                     <asp:DropDownList runat="server" ID="ddlStatisticMeasured">
-                        <asp:ListItem  Text="Steps" Value="Steps"></asp:ListItem>
-                        <asp:ListItem  Text="Distance Walked" Value="Distance Walked"></asp:ListItem>
-                        <asp:ListItem  Text="Distance Ran" Value="Distance Ran"></asp:ListItem>
-                        <asp:ListItem  Text="Distance Biked" Value="Distance Biked"></asp:ListItem>
-                        <asp:ListItem  Text="Gas Savings" Value="Gas Savings"></asp:ListItem>
                     </asp:DropDownList>
                 </p>
                 <p>
@@ -58,8 +53,11 @@
                     <asp:RequiredFieldValidator ID="contestStartRequired" runat="server" ControlToValidate="txbContestStartDate" 
                         CssClass="failureNotification" ErrorMessage="Contest Start Date is required." ToolTip="Contest Start Date is required." 
                         ValidationGroup="CreateContestValidationGroup">*</asp:RequiredFieldValidator>
-                    <asp:RegularExpressionValidator ID="contestStartFormat" runat="server" ControlToValidate="txbContestStartDate" 
+                    <asp:RegularExpressionValidator ID="contestStartFormat" runat="server" ControlToValidate="txbContestStartDate" CssClass="failureNotification"
                         ErrorMessage="Start date is in incorrect format or is invalid date." ValidationGroup="CreateContestValidationGroup" ValidationExpression="^(((0?[1-9]|1[012])/(0?[1-9]|1\d|2[0-8])|(0?[13456789]|1[012])/(29|30)|(0?[13578]|1[02])/31)/(19|[2-9]\d)\d{2}|0?2/29/((19|[2-9]\d)(0[48]|[2468][048]|[13579][26])|(([2468][048]|[3579][26])00)))$">*</asp:RegularExpressionValidator>
+                    <asp:CustomValidator ID="contestStartAfterToday" runat="server" ControlToValidate="txbContestStartDate" CssClass="failureNotification"
+                        Display="Dynamic" ErrorMessage="Start date must be after today." ValidationGroup="CreateContestValidationGroup" Text="*"
+                        onservervalidate="ValidateStartDate" />
                 </p>
                  <p>
                     <asp:Label ID="contestModeLabel" runat="server" Text="Contest Mode:"></asp:Label>
@@ -76,8 +74,14 @@
                         <asp:ImageButton runat="Server" ID="displayEndDateCalender" AlternateText="Display Calender" 
                             ImageUrl="~/Images/Competition/Misc/Calender.png" ImageAlign="AbsMiddle" /> 
                         <ajaxToolkit:CalendarExtender ID="contestEndDateCalender" runat="server" PopupButtonID="displayEndDateCalender" TargetControlID="txbContestEndDate" />
-                        <asp:RegularExpressionValidator ID="contestEndFormat" runat="server" ControlToValidate="txbContestEndDate" 
-                        ErrorMessage="End date is in incorrect format or is invalid date." ValidationGroup="CreateContestValidationGroup" ValidationExpression="^(((0?[1-9]|1[012])/(0?[1-9]|1\d|2[0-8])|(0?[13456789]|1[012])/(29|30)|(0?[13578]|1[02])/31)/(19|[2-9]\d)\d{2}|0?2/29/((19|[2-9]\d)(0[48]|[2468][048]|[13579][26])|(([2468][048]|[3579][26])00)))$">*</asp:RegularExpressionValidator>
+                        <asp:RequiredFieldValidator ID="contestEndDateRequired" runat="server" ControlToValidate="txbContestEndDate" 
+                            CssClass="failureNotification" ErrorMessage="Contest End Date is required." ToolTip="Contest End Date is required." 
+                            ValidationGroup="CreateContestValidationGroup">*</asp:RequiredFieldValidator>
+                        <asp:RegularExpressionValidator ID="contestEndFormat" runat="server" ControlToValidate="txbContestEndDate" CssClass="failureNotification"
+                            ErrorMessage="End date is in incorrect format or is invalid date." ValidationGroup="CreateContestValidationGroup" ValidationExpression="^(((0?[1-9]|1[012])/(0?[1-9]|1\d|2[0-8])|(0?[13456789]|1[012])/(29|30)|(0?[13578]|1[02])/31)/(19|[2-9]\d)\d{2}|0?2/29/((19|[2-9]\d)(0[48]|[2468][048]|[13579][26])|(([2468][048]|[3579][26])00)))$">*</asp:RegularExpressionValidator>
+                        <asp:CustomValidator ID="contestEndsAfterStart" runat="server" ControlToValidate="txbContestEndDate" CssClass="failureNotification"
+                            Display="Dynamic" ErrorMessage="End date must be after start date." ValidationGroup="CreateContestValidationGroup" Text="*"
+                            onservervalidate="ValidateEndDate" />
                     </p>
                 </asp:Panel>
                 <asp:Panel ID="contestModeGoalPanel" runat="server" Visible="False">
@@ -87,9 +91,13 @@
                         <ajaxToolkit:FilteredTextBoxExtender ID="txbContestEndGoalFilter" runat="server" TargetControlID="txbContestEndGoal" FilterType="Numbers" />
                     </p>
                 </asp:Panel>
+                    <p>
+                        <asp:CheckBox ID="chkContestSearchable" runat="server" Checked="True" 
+                            Text="Public Contest" />
+                    </p>
         </fieldset>
         
-            <asp:Button ID="CreateContestButton" runat="server" CommandName="MoveNext" Text="Create Contest" 
+            <asp:Button ID="CreateContestButton" runat="server" CommandName="MoveNext" Text="Create Contest" CausesValidation="true"
                 ValidationGroup="CreateContestValidationGroup" OnClick="CreateContest" />     
     </div>
 

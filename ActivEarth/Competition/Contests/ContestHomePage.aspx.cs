@@ -8,7 +8,6 @@ using System.Drawing;
 using ActivEarth.DAO;
 using ActivEarth.Server.Service.Competition;
 using ActivEarth.Objects.Profile;
-using ActivEarth.DAO;
 using ActivEarth.Objects.Competition.Contests;
 
 namespace ActivEarth.Competition.Contests
@@ -25,6 +24,7 @@ namespace ActivEarth.Competition.Contests
             else
             {
                 //Test code
+                /*
                 int id = ContestManager.CreateContest(ContestType.Individual, "Super Awesome Happy Funtime Contest", "You want 500 dollar.", 500,
                     new DateTime(2012, 4, 18, 0, 0, 0), 25000, true, Statistic.Steps, user.UserID);
                 ContestManager.AddTeam(new Team() { ContestId=id, Name = "The Doctor", Score = 23454 });
@@ -48,6 +48,7 @@ namespace ActivEarth.Competition.Contests
                 Color[] backColors = { Color.FromArgb(34, 139, 34), Color.White };
                 Color[] textColors = { Color.White, Color.Black };
                 displayCurrentContests.PopulateContestTable(contestNames, contestIds, backColors, textColors);
+                */
             }
         }
 

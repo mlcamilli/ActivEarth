@@ -34,30 +34,38 @@ namespace ActivEarth.Competition.Contests
                         ContestDescription.Text = contest.Description;
                         ContestActivityScore.Text = contest.Reward.ToString();
 
-                        if (contest.Mode == ContestEndMode.TimeBased)
+                        if (DateTime.Compare(DateTime.Now, contest.StartTime) < 0)
                         {
-                            TimeGraph.PopulateTimeGraph(contest.StartTime, contest.EndCondition.EndTime);
-                            TimeGraph.Visible = true;
+                            //Display join information. Still needs to be crested.
                         }
                         else
                         {
-                            if (contest.Teams.Count >= 3)
+
+                            if (contest.Mode == ContestEndMode.TimeBased)
                             {
-                                GoalGraph.PopulateContestGraph(contest.Teams[0], contest.Teams[1], contest.Teams[2], contest.Teams[2], contest.EndCondition.EndValue);
+                                TimeGraph.PopulateTimeGraph(contest.StartTime, contest.EndCondition.EndTime);
+                                TimeGraph.Visible = true;
                             }
                             else
                             {
-                                GoalGraph.PopulateContestGraph(contest.Teams[0], contest.Teams[1], contest.Teams[2], contest.EndCondition);
+                                if (contest.Teams.Count >= 3)
+                                {
+                                    GoalGraph.PopulateContestGraph(contest.Teams[0], contest.Teams[1], contest.Teams[2], contest.Teams[2], contest.EndCondition.EndValue);
+                                }
+                                else
+                                {
+                                    GoalGraph.PopulateContestGraph(contest.Teams[0], contest.Teams[1], contest.Teams[2], contest.EndCondition);
+                                }
+
+                                GoalGraph.SetGraphLabels(contest.EndCondition.EndValue, contest.FormatString);
+                                GoalGraph.Visible = true;
                             }
 
-                            GoalGraph.SetGraphLabels(contest.EndCondition.EndValue, contest.FormatString);
-                            GoalGraph.Visible = true;
+                            Color[] backColors = { Color.FromArgb(34, 139, 34), Color.White };
+                            Color[] textColors = { Color.White, Color.Black };
+                            ContestLeaderBoard.MakeLeaderBoard(10, contest.Teams, backColors, textColors, contest.FormatString);
+                            ContestLeaderBoard.Visible = true;
                         }
-
-                        Color[] backColors = { Color.FromArgb(34, 139, 34), Color.White };
-                        Color[] textColors = { Color.White, Color.Black };
-                        ContestLeaderBoard.MakeLeaderBoard(10, contest.Teams, backColors, textColors, contest.FormatString);
-                        ContestLeaderBoard.Visible = true;
                     }
                 }
             }
