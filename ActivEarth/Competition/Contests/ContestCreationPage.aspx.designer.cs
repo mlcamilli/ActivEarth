@@ -310,6 +310,15 @@ namespace ActivEarth.Competition.Contests {
         protected global::AjaxControlToolkit.FilteredTextBoxExtender txbContestEndGoalFilter;
         
         /// <summary>
+        /// contestModeGoalRequired control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator contestModeGoalRequired;
+        
+        /// <summary>
         /// lblContestSearchable control.
         /// </summary>
         /// <remarks>

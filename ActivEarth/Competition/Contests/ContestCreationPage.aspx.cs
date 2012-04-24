@@ -122,11 +122,15 @@ namespace ActivEarth.Competition.Contests
             string mode = ddlContestMode.SelectedValue;
             if (mode == "Time")
             {
+                contestEndDateLabel.Visible = true;
+                contestEndGoalLabel.Visible = false;
                 contestModeTimePanel.Visible = true;
                 contestModeGoalPanel.Visible = false;
             }
             else
             {
+                contestEndDateLabel.Visible = false;
+                contestEndGoalLabel.Visible = true;
                 contestModeGoalPanel.Visible = true;
                 contestModeTimePanel.Visible = false;
             }
