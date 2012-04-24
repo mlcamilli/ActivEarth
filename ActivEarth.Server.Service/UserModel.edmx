@@ -1,0 +1,1316 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="UserModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="UserModelStoreContainer">
+          <EntitySet Name="badge_level_info" EntityType="UserModel.Store.badge_level_info" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="badges" EntityType="UserModel.Store.badges" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="challenge_definitions" EntityType="UserModel.Store.challenge_definitions" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="challenge_initial_values" EntityType="UserModel.Store.challenge_initial_values" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="challenges" EntityType="UserModel.Store.challenges" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="contests" EntityType="UserModel.Store.contests" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="group_contests" EntityType="UserModel.Store.group_contests" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="group_hashtags" EntityType="UserModel.Store.group_hashtags" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="group_members" EntityType="UserModel.Store.group_members" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="groups" EntityType="UserModel.Store.groups" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="messages" EntityType="UserModel.Store.messages" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="privacy_settings" EntityType="UserModel.Store.privacy_settings" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="profile" EntityType="UserModel.Store.profile" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="statistic_info" EntityType="UserModel.Store.statistic_info" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="team_members" EntityType="UserModel.Store.team_members" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="teams" EntityType="UserModel.Store.teams" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="user_statistics" EntityType="UserModel.Store.user_statistics" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="users" EntityType="UserModel.Store.users" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK__profile__state__0CBAE877" Association="UserModel.Store.FK__profile__state__0CBAE877">
+            <End Role="users" EntitySet="users" />
+            <End Role="profile" EntitySet="profile" />
+          </AssociationSet>
+          <AssociationSet Name="FK_badges_user_id" Association="UserModel.Store.FK_badges_user_id">
+            <End Role="users" EntitySet="users" />
+            <End Role="badges" EntitySet="badges" />
+          </AssociationSet>
+          <AssociationSet Name="FK_challenge_initial_values_challenge_id" Association="UserModel.Store.FK_challenge_initial_values_challenge_id">
+            <End Role="challenges" EntitySet="challenges" />
+            <End Role="challenge_initial_values" EntitySet="challenge_initial_values" />
+          </AssociationSet>
+          <AssociationSet Name="FK_challenge_initial_values_user_id" Association="UserModel.Store.FK_challenge_initial_values_user_id">
+            <End Role="users" EntitySet="users" />
+            <End Role="challenge_initial_values" EntitySet="challenge_initial_values" />
+          </AssociationSet>
+          <AssociationSet Name="FK_contest_id_group_contests" Association="UserModel.Store.FK_contest_id_group_contests">
+            <End Role="contests" EntitySet="contests" />
+            <End Role="group_contests" EntitySet="group_contests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_contests_creator_id" Association="UserModel.Store.FK_contests_creator_id">
+            <End Role="users" EntitySet="users" />
+            <End Role="contests" EntitySet="contests" />
+          </AssociationSet>
+          <AssociationSet Name="fk_group_id" Association="UserModel.Store.fk_group_id">
+            <End Role="groups" EntitySet="groups" />
+            <End Role="group_members" EntitySet="group_members" />
+          </AssociationSet>
+          <AssociationSet Name="FK_group_id_group_contests" Association="UserModel.Store.FK_group_id_group_contests">
+            <End Role="groups" EntitySet="groups" />
+            <End Role="group_contests" EntitySet="group_contests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_group_id_group_hashtags" Association="UserModel.Store.FK_group_id_group_hashtags">
+            <End Role="groups" EntitySet="groups" />
+            <End Role="group_hashtags" EntitySet="group_hashtags" />
+          </AssociationSet>
+          <AssociationSet Name="FK_group_id_messages" Association="UserModel.Store.FK_group_id_messages">
+            <End Role="groups" EntitySet="groups" />
+            <End Role="messages" EntitySet="messages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_poster_id_messages" Association="UserModel.Store.FK_poster_id_messages">
+            <End Role="users" EntitySet="users" />
+            <End Role="messages" EntitySet="messages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_statistics_users" Association="UserModel.Store.FK_statistics_users">
+            <End Role="users" EntitySet="users" />
+            <End Role="user_statistics" EntitySet="user_statistics" />
+          </AssociationSet>
+          <AssociationSet Name="fk_team_id" Association="UserModel.Store.fk_team_id">
+            <End Role="teams" EntitySet="teams" />
+            <End Role="team_members" EntitySet="team_members" />
+          </AssociationSet>
+          <AssociationSet Name="FK_team_members_team_id" Association="UserModel.Store.FK_team_members_team_id">
+            <End Role="teams" EntitySet="teams" />
+            <End Role="team_members" EntitySet="team_members" />
+          </AssociationSet>
+          <AssociationSet Name="fk_team_members_user_id" Association="UserModel.Store.fk_team_members_user_id">
+            <End Role="users" EntitySet="users" />
+            <End Role="team_members" EntitySet="team_members" />
+          </AssociationSet>
+          <AssociationSet Name="fk_user_id_groups" Association="UserModel.Store.fk_user_id_groups">
+            <End Role="users" EntitySet="users" />
+            <End Role="group_members" EntitySet="group_members" />
+          </AssociationSet>
+          <AssociationSet Name="fk_user_id_teams" Association="UserModel.Store.fk_user_id_teams">
+            <End Role="users" EntitySet="users" />
+            <End Role="team_members" EntitySet="team_members" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="badge_level_info">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="statistic" Type="tinyint" Nullable="false" />
+          <Property Name="level" Type="tinyint" Nullable="false" />
+          <Property Name="requirement" Type="float" Nullable="false" />
+          <Property Name="reward" Type="int" Nullable="false" />
+          <Property Name="image_path" Type="text" Nullable="false" />
+        </EntityType>
+        <EntityType Name="badges">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="statistic" Type="tinyint" Nullable="false" />
+          <Property Name="badge_level" Type="tinyint" Nullable="false" />
+          <Property Name="progress" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="challenge_definitions">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="challenge_type" Type="tinyint" Nullable="false" />
+          <Property Name="persistent" Type="bit" Nullable="false" />
+          <Property Name="statistic" Type="tinyint" Nullable="false" />
+          <Property Name="requirement" Type="float" Nullable="false" />
+          <Property Name="reward" Type="int" Nullable="false" />
+          <Property Name="condition_text" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="name" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="challenge_initial_values">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="challenge_id" Type="int" Nullable="false" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="value" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="challenges">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="description" Type="text" Nullable="false" />
+          <Property Name="points" Type="int" Nullable="false" />
+          <Property Name="requirement" Type="float" Nullable="false" />
+          <Property Name="persistent" Type="bit" Nullable="false" />
+          <Property Name="end_time" Type="datetime" Nullable="false" />
+          <Property Name="duration_days" Type="int" Nullable="false" />
+          <Property Name="statistic" Type="tinyint" Nullable="false" />
+          <Property Name="active" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="contests">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="description" Type="text" Nullable="false" />
+          <Property Name="points" Type="int" Nullable="false" />
+          <Property Name="end_mode" Type="tinyint" Nullable="false" />
+          <Property Name="end_time" Type="datetime" />
+          <Property Name="end_goal" Type="float" />
+          <Property Name="start" Type="datetime" Nullable="false" />
+          <Property Name="statistic" Type="tinyint" Nullable="false" />
+          <Property Name="type" Type="tinyint" Nullable="false" />
+          <Property Name="searchable" Type="bit" Nullable="false" />
+          <Property Name="active" Type="bit" Nullable="false" />
+          <Property Name="deactivated" Type="datetime" />
+          <Property Name="creator_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="group_contests">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="contest_id" Type="int" Nullable="false" />
+          <Property Name="group_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="group_hashtags">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="group_id" Type="int" Nullable="false" />
+          <Property Name="hashtag" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="group_members">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="group_id" Type="int" Nullable="false" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="groups">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="messages">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="group_id" Type="int" Nullable="false" />
+          <Property Name="poster_id" Type="int" Nullable="false" />
+          <Property Name="title" Type="varchar(max)" Nullable="false" />
+          <Property Name="message" Type="varchar(max)" Nullable="false" />
+          <Property Name="add_green_score" Type="int" />
+          <Property Name="add_competition_score" Type="int" />
+          <Property Name="add_challenge_score" Type="int" />
+          <Property Name="add_badge_score" Type="int" />
+        </EntityType>
+        <EntityType Name="privacy_settings">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="profile_visibility" Type="tinyint" Nullable="false" />
+          <Property Name="email" Type="bit" Nullable="false" />
+          <Property Name="gender" Type="bit" Nullable="false" />
+          <Property Name="age" Type="bit" Nullable="false" />
+          <Property Name="weight" Type="bit" Nullable="false" />
+          <Property Name="height" Type="bit" Nullable="false" />
+          <Property Name="groups" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="profile">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="first_name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="last_name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="email" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="gender" Type="char" Nullable="false" MaxLength="1" />
+          <Property Name="city" Type="varchar" MaxLength="50" />
+          <Property Name="state" Type="char" MaxLength="2" />
+          <Property Name="age" Type="int" />
+          <Property Name="height" Type="int" />
+          <Property Name="weight" Type="int" />
+        </EntityType>
+        <EntityType Name="statistic_info">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="statistic_id" Type="tinyint" Nullable="false" />
+          <Property Name="name" Type="nchar" Nullable="false" MaxLength="25" />
+          <Property Name="format_string" Type="nchar" Nullable="false" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="team_members">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="team_id" Type="int" Nullable="false" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="teams">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="user_statistics">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="statistic_type" Type="tinyint" Nullable="false" />
+          <Property Name="value" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="users">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="user_name" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="password" Type="varchar" Nullable="false" MaxLength="20" />
+        </EntityType>
+        <Association Name="FK__profile__state__0CBAE877">
+          <End Role="users" Type="UserModel.Store.users" Multiplicity="1" />
+          <End Role="profile" Type="UserModel.Store.profile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="profile">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_badges_user_id">
+          <End Role="users" Type="UserModel.Store.users" Multiplicity="1" />
+          <End Role="badges" Type="UserModel.Store.badges" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="badges">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_challenge_initial_values_challenge_id">
+          <End Role="challenges" Type="UserModel.Store.challenges" Multiplicity="1" />
+          <End Role="challenge_initial_values" Type="UserModel.Store.challenge_initial_values" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="challenges">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="challenge_initial_values">
+              <PropertyRef Name="challenge_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_challenge_initial_values_user_id">
+          <End Role="users" Type="UserModel.Store.users" Multiplicity="1" />
+          <End Role="challenge_initial_values" Type="UserModel.Store.challenge_initial_values" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="challenge_initial_values">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_contest_id_group_contests">
+          <End Role="contests" Type="UserModel.Store.contests" Multiplicity="1" />
+          <End Role="group_contests" Type="UserModel.Store.group_contests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="contests">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="group_contests">
+              <PropertyRef Name="contest_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_contests_creator_id">
+          <End Role="users" Type="UserModel.Store.users" Multiplicity="1" />
+          <End Role="contests" Type="UserModel.Store.contests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="contests">
+              <PropertyRef Name="creator_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_group_id">
+          <End Role="groups" Type="UserModel.Store.groups" Multiplicity="1" />
+          <End Role="group_members" Type="UserModel.Store.group_members" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="groups">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="group_members">
+              <PropertyRef Name="group_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_group_id_group_contests">
+          <End Role="groups" Type="UserModel.Store.groups" Multiplicity="1" />
+          <End Role="group_contests" Type="UserModel.Store.group_contests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="groups">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="group_contests">
+              <PropertyRef Name="group_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_group_id_group_hashtags">
+          <End Role="groups" Type="UserModel.Store.groups" Multiplicity="1" />
+          <End Role="group_hashtags" Type="UserModel.Store.group_hashtags" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="groups">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="group_hashtags">
+              <PropertyRef Name="group_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_group_id_messages">
+          <End Role="groups" Type="UserModel.Store.groups" Multiplicity="1" />
+          <End Role="messages" Type="UserModel.Store.messages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="groups">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="messages">
+              <PropertyRef Name="group_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_poster_id_messages">
+          <End Role="users" Type="UserModel.Store.users" Multiplicity="1" />
+          <End Role="messages" Type="UserModel.Store.messages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="messages">
+              <PropertyRef Name="poster_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_statistics_users">
+          <End Role="users" Type="UserModel.Store.users" Multiplicity="1" />
+          <End Role="user_statistics" Type="UserModel.Store.user_statistics" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="user_statistics">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_team_id">
+          <End Role="teams" Type="UserModel.Store.teams" Multiplicity="1" />
+          <End Role="team_members" Type="UserModel.Store.team_members" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="teams">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="team_members">
+              <PropertyRef Name="team_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_team_members_team_id">
+          <End Role="teams" Type="UserModel.Store.teams" Multiplicity="1" />
+          <End Role="team_members" Type="UserModel.Store.team_members" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="teams">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="team_members">
+              <PropertyRef Name="team_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_team_members_user_id">
+          <End Role="users" Type="UserModel.Store.users" Multiplicity="1" />
+          <End Role="team_members" Type="UserModel.Store.team_members" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="team_members">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_user_id_groups">
+          <End Role="users" Type="UserModel.Store.users" Multiplicity="1" />
+          <End Role="group_members" Type="UserModel.Store.group_members" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="group_members">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_user_id_teams">
+          <End Role="users" Type="UserModel.Store.users" Multiplicity="1" />
+          <End Role="team_members" Type="UserModel.Store.team_members" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="team_members">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="UserModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="UserEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="badge_level_info" EntityType="UserModel.badge_level_info" />
+          <EntitySet Name="badges" EntityType="UserModel.badge" />
+          <EntitySet Name="challenge_definitions" EntityType="UserModel.challenge_definitions" />
+          <EntitySet Name="challenge_initial_values" EntityType="UserModel.challenge_initial_values" />
+          <EntitySet Name="challenges" EntityType="UserModel.challenge" />
+          <EntitySet Name="contests" EntityType="UserModel.contest" />
+          <EntitySet Name="group_contests" EntityType="UserModel.group_contests" />
+          <EntitySet Name="group_hashtags" EntityType="UserModel.group_hashtags" />
+          <EntitySet Name="group_members" EntityType="UserModel.group_members" />
+          <EntitySet Name="groups" EntityType="UserModel.group" />
+          <EntitySet Name="messages" EntityType="UserModel.message" />
+          <EntitySet Name="privacy_settings" EntityType="UserModel.privacy_settings" />
+          <EntitySet Name="profiles" EntityType="UserModel.profile" />
+          <EntitySet Name="statistic_info" EntityType="UserModel.statistic_info" />
+          <EntitySet Name="team_members" EntityType="UserModel.team_members" />
+          <EntitySet Name="teams" EntityType="UserModel.team" />
+          <EntitySet Name="user_statistics" EntityType="UserModel.user_statistics" />
+          <EntitySet Name="users" EntityType="UserModel.user" />
+          <AssociationSet Name="FK_badges_user_id" Association="UserModel.FK_badges_user_id">
+            <End Role="users" EntitySet="users" />
+            <End Role="badges" EntitySet="badges" />
+          </AssociationSet>
+          <AssociationSet Name="FK_challenge_initial_values_challenge_id" Association="UserModel.FK_challenge_initial_values_challenge_id">
+            <End Role="challenges" EntitySet="challenges" />
+            <End Role="challenge_initial_values" EntitySet="challenge_initial_values" />
+          </AssociationSet>
+          <AssociationSet Name="FK_challenge_initial_values_user_id" Association="UserModel.FK_challenge_initial_values_user_id">
+            <End Role="users" EntitySet="users" />
+            <End Role="challenge_initial_values" EntitySet="challenge_initial_values" />
+          </AssociationSet>
+          <AssociationSet Name="FK_contest_id_group_contests" Association="UserModel.FK_contest_id_group_contests">
+            <End Role="contests" EntitySet="contests" />
+            <End Role="group_contests" EntitySet="group_contests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_contests_creator_id" Association="UserModel.FK_contests_creator_id">
+            <End Role="users" EntitySet="users" />
+            <End Role="contests" EntitySet="contests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_group_id_group_contests" Association="UserModel.FK_group_id_group_contests">
+            <End Role="groups" EntitySet="groups" />
+            <End Role="group_contests" EntitySet="group_contests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_group_id_group_hashtags" Association="UserModel.FK_group_id_group_hashtags">
+            <End Role="groups" EntitySet="groups" />
+            <End Role="group_hashtags" EntitySet="group_hashtags" />
+          </AssociationSet>
+          <AssociationSet Name="fk_group_id" Association="UserModel.fk_group_id">
+            <End Role="groups" EntitySet="groups" />
+            <End Role="group_members" EntitySet="group_members" />
+          </AssociationSet>
+          <AssociationSet Name="fk_user_id_groups" Association="UserModel.fk_user_id_groups">
+            <End Role="users" EntitySet="users" />
+            <End Role="group_members" EntitySet="group_members" />
+          </AssociationSet>
+          <AssociationSet Name="FK_group_id_messages" Association="UserModel.FK_group_id_messages">
+            <End Role="groups" EntitySet="groups" />
+            <End Role="messages" EntitySet="messages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_poster_id_messages" Association="UserModel.FK_poster_id_messages">
+            <End Role="users" EntitySet="users" />
+            <End Role="messages" EntitySet="messages" />
+          </AssociationSet>
+          <AssociationSet Name="FK__profile__state__0CBAE877" Association="UserModel.FK__profile__state__0CBAE877">
+            <End Role="users" EntitySet="users" />
+            <End Role="profile" EntitySet="profiles" />
+          </AssociationSet>
+          <AssociationSet Name="fk_team_id" Association="UserModel.fk_team_id">
+            <End Role="teams" EntitySet="teams" />
+            <End Role="team_members" EntitySet="team_members" />
+          </AssociationSet>
+          <AssociationSet Name="FK_team_members_team_id" Association="UserModel.FK_team_members_team_id">
+            <End Role="teams" EntitySet="teams" />
+            <End Role="team_members" EntitySet="team_members" />
+          </AssociationSet>
+          <AssociationSet Name="fk_team_members_user_id" Association="UserModel.fk_team_members_user_id">
+            <End Role="users" EntitySet="users" />
+            <End Role="team_members" EntitySet="team_members" />
+          </AssociationSet>
+          <AssociationSet Name="fk_user_id_teams" Association="UserModel.fk_user_id_teams">
+            <End Role="users" EntitySet="users" />
+            <End Role="team_members" EntitySet="team_members" />
+          </AssociationSet>
+          <AssociationSet Name="FK_statistics_users" Association="UserModel.FK_statistics_users">
+            <End Role="users" EntitySet="users" />
+            <End Role="user_statistics" EntitySet="user_statistics" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="badge_level_info">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="statistic" Type="Byte" Nullable="false" />
+          <Property Name="level" Type="Byte" Nullable="false" />
+          <Property Name="requirement" Type="Double" Nullable="false" />
+          <Property Name="reward" Type="Int32" Nullable="false" />
+          <Property Name="image_path" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="badge">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="statistic" Type="Byte" Nullable="false" />
+          <Property Name="badge_level" Type="Byte" Nullable="false" />
+          <Property Name="progress" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="user" Relationship="UserModel.FK_badges_user_id" FromRole="badges" ToRole="users" />
+        </EntityType>
+        <EntityType Name="challenge_definitions">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="challenge_type" Type="Byte" Nullable="false" />
+          <Property Name="persistent" Type="Boolean" Nullable="false" />
+          <Property Name="statistic" Type="Byte" Nullable="false" />
+          <Property Name="requirement" Type="Double" Nullable="false" />
+          <Property Name="reward" Type="Int32" Nullable="false" />
+          <Property Name="condition_text" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="name" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="challenge_initial_values">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="challenge_id" Type="Int32" Nullable="false" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="value" Type="Double" Nullable="false" />
+          <NavigationProperty Name="challenge" Relationship="UserModel.FK_challenge_initial_values_challenge_id" FromRole="challenge_initial_values" ToRole="challenges" />
+          <NavigationProperty Name="user" Relationship="UserModel.FK_challenge_initial_values_user_id" FromRole="challenge_initial_values" ToRole="users" />
+        </EntityType>
+        <EntityType Name="challenge">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="description" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="points" Type="Int32" Nullable="false" />
+          <Property Name="requirement" Type="Double" Nullable="false" />
+          <Property Name="persistent" Type="Boolean" Nullable="false" />
+          <Property Name="end_time" Type="DateTime" Nullable="false" />
+          <Property Name="duration_days" Type="Int32" Nullable="false" />
+          <Property Name="statistic" Type="Byte" Nullable="false" />
+          <Property Name="active" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="challenge_initial_values" Relationship="UserModel.FK_challenge_initial_values_challenge_id" FromRole="challenges" ToRole="challenge_initial_values" />
+        </EntityType>
+        <EntityType Name="contest">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="description" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="points" Type="Int32" Nullable="false" />
+          <Property Name="end_mode" Type="Byte" Nullable="false" />
+          <Property Name="end_time" Type="DateTime" />
+          <Property Name="end_goal" Type="Double" />
+          <Property Name="start" Type="DateTime" Nullable="false" />
+          <Property Name="statistic" Type="Byte" Nullable="false" />
+          <Property Name="type" Type="Byte" Nullable="false" />
+          <Property Name="searchable" Type="Boolean" Nullable="false" />
+          <Property Name="active" Type="Boolean" Nullable="false" />
+          <Property Name="deactivated" Type="DateTime" />
+          <Property Name="creator_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="group_contests" Relationship="UserModel.FK_contest_id_group_contests" FromRole="contests" ToRole="group_contests" />
+          <NavigationProperty Name="user" Relationship="UserModel.FK_contests_creator_id" FromRole="contests" ToRole="users" />
+        </EntityType>
+        <EntityType Name="group_contests">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="contest_id" Type="Int32" Nullable="false" />
+          <Property Name="group_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="contest" Relationship="UserModel.FK_contest_id_group_contests" FromRole="group_contests" ToRole="contests" />
+          <NavigationProperty Name="group" Relationship="UserModel.FK_group_id_group_contests" FromRole="group_contests" ToRole="groups" />
+        </EntityType>
+        <EntityType Name="group_hashtags">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="group_id" Type="Int32" Nullable="false" />
+          <Property Name="hashtag" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="group" Relationship="UserModel.FK_group_id_group_hashtags" FromRole="group_hashtags" ToRole="groups" />
+        </EntityType>
+        <EntityType Name="group_members">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="group_id" Type="Int32" Nullable="false" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="group" Relationship="UserModel.fk_group_id" FromRole="group_members" ToRole="groups" />
+          <NavigationProperty Name="user" Relationship="UserModel.fk_user_id_groups" FromRole="group_members" ToRole="users" />
+        </EntityType>
+        <EntityType Name="group">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="group_contests" Relationship="UserModel.FK_group_id_group_contests" FromRole="groups" ToRole="group_contests" />
+          <NavigationProperty Name="group_hashtags" Relationship="UserModel.FK_group_id_group_hashtags" FromRole="groups" ToRole="group_hashtags" />
+          <NavigationProperty Name="group_members" Relationship="UserModel.fk_group_id" FromRole="groups" ToRole="group_members" />
+          <NavigationProperty Name="messages" Relationship="UserModel.FK_group_id_messages" FromRole="groups" ToRole="messages" />
+        </EntityType>
+        <EntityType Name="message">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="group_id" Type="Int32" Nullable="false" />
+          <Property Name="poster_id" Type="Int32" Nullable="false" />
+          <Property Name="title" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="message1" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="add_green_score" Type="Int32" />
+          <Property Name="add_competition_score" Type="Int32" />
+          <Property Name="add_challenge_score" Type="Int32" />
+          <Property Name="add_badge_score" Type="Int32" />
+          <NavigationProperty Name="group" Relationship="UserModel.FK_group_id_messages" FromRole="messages" ToRole="groups" />
+          <NavigationProperty Name="user" Relationship="UserModel.FK_poster_id_messages" FromRole="messages" ToRole="users" />
+        </EntityType>
+        <EntityType Name="privacy_settings">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="profile_visibility" Type="Byte" Nullable="false" />
+          <Property Name="email" Type="Boolean" Nullable="false" />
+          <Property Name="gender" Type="Boolean" Nullable="false" />
+          <Property Name="age" Type="Boolean" Nullable="false" />
+          <Property Name="weight" Type="Boolean" Nullable="false" />
+          <Property Name="height" Type="Boolean" Nullable="false" />
+          <Property Name="groups" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="profile">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="first_name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="last_name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="email" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="gender" Type="String" Nullable="false" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Name="city" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="state" Type="String" MaxLength="2" Unicode="false" FixedLength="true" />
+          <Property Name="age" Type="Int32" />
+          <Property Name="height" Type="Int32" />
+          <Property Name="weight" Type="Int32" />
+          <NavigationProperty Name="user" Relationship="UserModel.FK__profile__state__0CBAE877" FromRole="profile" ToRole="users" />
+        </EntityType>
+        <EntityType Name="statistic_info">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="statistic_id" Type="Byte" Nullable="false" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="25" Unicode="true" FixedLength="true" />
+          <Property Name="format_string" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="true" />
+        </EntityType>
+        <EntityType Name="team_members">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="team_id" Type="Int32" Nullable="false" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="team" Relationship="UserModel.fk_team_id" FromRole="team_members" ToRole="teams" />
+          <NavigationProperty Name="team1" Relationship="UserModel.FK_team_members_team_id" FromRole="team_members" ToRole="teams" />
+          <NavigationProperty Name="user" Relationship="UserModel.fk_team_members_user_id" FromRole="team_members" ToRole="users" />
+          <NavigationProperty Name="user1" Relationship="UserModel.fk_user_id_teams" FromRole="team_members" ToRole="users" />
+        </EntityType>
+        <EntityType Name="team">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="team_members" Relationship="UserModel.fk_team_id" FromRole="teams" ToRole="team_members" />
+          <NavigationProperty Name="team_members1" Relationship="UserModel.FK_team_members_team_id" FromRole="teams" ToRole="team_members" />
+        </EntityType>
+        <EntityType Name="user_statistics">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="statistic_type" Type="Byte" Nullable="false" />
+          <Property Name="value" Type="Double" Nullable="false" />
+          <NavigationProperty Name="user" Relationship="UserModel.FK_statistics_users" FromRole="user_statistics" ToRole="users" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_name" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="password" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="badges" Relationship="UserModel.FK_badges_user_id" FromRole="users" ToRole="badges" />
+          <NavigationProperty Name="challenge_initial_values" Relationship="UserModel.FK_challenge_initial_values_user_id" FromRole="users" ToRole="challenge_initial_values" />
+          <NavigationProperty Name="contests" Relationship="UserModel.FK_contests_creator_id" FromRole="users" ToRole="contests" />
+          <NavigationProperty Name="group_members" Relationship="UserModel.fk_user_id_groups" FromRole="users" ToRole="group_members" />
+          <NavigationProperty Name="messages" Relationship="UserModel.FK_poster_id_messages" FromRole="users" ToRole="messages" />
+          <NavigationProperty Name="profiles" Relationship="UserModel.FK__profile__state__0CBAE877" FromRole="users" ToRole="profile" />
+          <NavigationProperty Name="team_members" Relationship="UserModel.fk_team_members_user_id" FromRole="users" ToRole="team_members" />
+          <NavigationProperty Name="team_members1" Relationship="UserModel.fk_user_id_teams" FromRole="users" ToRole="team_members" />
+          <NavigationProperty Name="user_statistics" Relationship="UserModel.FK_statistics_users" FromRole="users" ToRole="user_statistics" />
+        </EntityType>
+        <Association Name="FK_badges_user_id">
+          <End Role="users" Type="UserModel.user" Multiplicity="1" />
+          <End Role="badges" Type="UserModel.badge" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="badges">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_challenge_initial_values_challenge_id">
+          <End Role="challenges" Type="UserModel.challenge" Multiplicity="1" />
+          <End Role="challenge_initial_values" Type="UserModel.challenge_initial_values" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="challenges">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="challenge_initial_values">
+              <PropertyRef Name="challenge_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_challenge_initial_values_user_id">
+          <End Role="users" Type="UserModel.user" Multiplicity="1" />
+          <End Role="challenge_initial_values" Type="UserModel.challenge_initial_values" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="challenge_initial_values">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_contest_id_group_contests">
+          <End Role="contests" Type="UserModel.contest" Multiplicity="1" />
+          <End Role="group_contests" Type="UserModel.group_contests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="contests">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="group_contests">
+              <PropertyRef Name="contest_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_contests_creator_id">
+          <End Role="users" Type="UserModel.user" Multiplicity="1" />
+          <End Role="contests" Type="UserModel.contest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="contests">
+              <PropertyRef Name="creator_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_group_id_group_contests">
+          <End Role="groups" Type="UserModel.group" Multiplicity="1" />
+          <End Role="group_contests" Type="UserModel.group_contests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="groups">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="group_contests">
+              <PropertyRef Name="group_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_group_id_group_hashtags">
+          <End Role="groups" Type="UserModel.group" Multiplicity="1" />
+          <End Role="group_hashtags" Type="UserModel.group_hashtags" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="groups">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="group_hashtags">
+              <PropertyRef Name="group_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_group_id">
+          <End Role="groups" Type="UserModel.group" Multiplicity="1" />
+          <End Role="group_members" Type="UserModel.group_members" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="groups">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="group_members">
+              <PropertyRef Name="group_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_user_id_groups">
+          <End Role="users" Type="UserModel.user" Multiplicity="1" />
+          <End Role="group_members" Type="UserModel.group_members" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="group_members">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_group_id_messages">
+          <End Role="groups" Type="UserModel.group" Multiplicity="1" />
+          <End Role="messages" Type="UserModel.message" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="groups">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="messages">
+              <PropertyRef Name="group_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_poster_id_messages">
+          <End Role="users" Type="UserModel.user" Multiplicity="1" />
+          <End Role="messages" Type="UserModel.message" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="messages">
+              <PropertyRef Name="poster_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__profile__state__0CBAE877">
+          <End Role="users" Type="UserModel.user" Multiplicity="1" />
+          <End Role="profile" Type="UserModel.profile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="profile">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_team_id">
+          <End Role="teams" Type="UserModel.team" Multiplicity="1" />
+          <End Role="team_members" Type="UserModel.team_members" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="teams">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="team_members">
+              <PropertyRef Name="team_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_team_members_team_id">
+          <End Role="teams" Type="UserModel.team" Multiplicity="1" />
+          <End Role="team_members" Type="UserModel.team_members" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="teams">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="team_members">
+              <PropertyRef Name="team_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_team_members_user_id">
+          <End Role="users" Type="UserModel.user" Multiplicity="1" />
+          <End Role="team_members" Type="UserModel.team_members" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="team_members">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_user_id_teams">
+          <End Role="users" Type="UserModel.user" Multiplicity="1" />
+          <End Role="team_members" Type="UserModel.team_members" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="team_members">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_statistics_users">
+          <End Role="users" Type="UserModel.user" Multiplicity="1" />
+          <End Role="user_statistics" Type="UserModel.user_statistics" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="user_statistics">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="UserModelStoreContainer" CdmEntityContainer="UserEntities">
+          <EntitySetMapping Name="badge_level_info"><EntityTypeMapping TypeName="UserModel.badge_level_info"><MappingFragment StoreEntitySet="badge_level_info">
+            <ScalarProperty Name="id" ColumnName="id" />
+            <ScalarProperty Name="statistic" ColumnName="statistic" />
+            <ScalarProperty Name="level" ColumnName="level" />
+            <ScalarProperty Name="requirement" ColumnName="requirement" />
+            <ScalarProperty Name="reward" ColumnName="reward" />
+            <ScalarProperty Name="image_path" ColumnName="image_path" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="badges"><EntityTypeMapping TypeName="UserModel.badge"><MappingFragment StoreEntitySet="badges">
+            <ScalarProperty Name="id" ColumnName="id" />
+            <ScalarProperty Name="user_id" ColumnName="user_id" />
+            <ScalarProperty Name="statistic" ColumnName="statistic" />
+            <ScalarProperty Name="badge_level" ColumnName="badge_level" />
+            <ScalarProperty Name="progress" ColumnName="progress" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="challenge_definitions"><EntityTypeMapping TypeName="UserModel.challenge_definitions"><MappingFragment StoreEntitySet="challenge_definitions">
+            <ScalarProperty Name="id" ColumnName="id" />
+            <ScalarProperty Name="challenge_type" ColumnName="challenge_type" />
+            <ScalarProperty Name="persistent" ColumnName="persistent" />
+            <ScalarProperty Name="statistic" ColumnName="statistic" />
+            <ScalarProperty Name="requirement" ColumnName="requirement" />
+            <ScalarProperty Name="reward" ColumnName="reward" />
+            <ScalarProperty Name="condition_text" ColumnName="condition_text" />
+            <ScalarProperty Name="name" ColumnName="name" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="challenge_initial_values"><EntityTypeMapping TypeName="UserModel.challenge_initial_values"><MappingFragment StoreEntitySet="challenge_initial_values">
+            <ScalarProperty Name="id" ColumnName="id" />
+            <ScalarProperty Name="challenge_id" ColumnName="challenge_id" />
+            <ScalarProperty Name="user_id" ColumnName="user_id" />
+            <ScalarProperty Name="value" ColumnName="value" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="challenges"><EntityTypeMapping TypeName="UserModel.challenge"><MappingFragment StoreEntitySet="challenges">
+            <ScalarProperty Name="id" ColumnName="id" />
+            <ScalarProperty Name="name" ColumnName="name" />
+            <ScalarProperty Name="description" ColumnName="description" />
+            <ScalarProperty Name="points" ColumnName="points" />
+            <ScalarProperty Name="requirement" ColumnName="requirement" />
+            <ScalarProperty Name="persistent" ColumnName="persistent" />
+            <ScalarProperty Name="end_time" ColumnName="end_time" />
+            <ScalarProperty Name="duration_days" ColumnName="duration_days" />
+            <ScalarProperty Name="statistic" ColumnName="statistic" />
+            <ScalarProperty Name="active" ColumnName="active" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="contests"><EntityTypeMapping TypeName="UserModel.contest"><MappingFragment StoreEntitySet="contests">
+            <ScalarProperty Name="id" ColumnName="id" />
+            <ScalarProperty Name="name" ColumnName="name" />
+            <ScalarProperty Name="description" ColumnName="description" />
+            <ScalarProperty Name="points" ColumnName="points" />
+            <ScalarProperty Name="end_mode" ColumnName="end_mode" />
+            <ScalarProperty Name="end_time" ColumnName="end_time" />
+            <ScalarProperty Name="end_goal" ColumnName="end_goal" />
+            <ScalarProperty Name="start" ColumnName="start" />
+            <ScalarProperty Name="statistic" ColumnName="statistic" />
+            <ScalarProperty Name="type" ColumnName="type" />
+            <ScalarProperty Name="searchable" ColumnName="searchable" />
+            <ScalarProperty Name="active" ColumnName="active" />
+            <ScalarProperty Name="deactivated" ColumnName="deactivated" />
+            <ScalarProperty Name="creator_id" ColumnName="creator_id" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="group_contests"><EntityTypeMapping TypeName="UserModel.group_contests"><MappingFragment StoreEntitySet="group_contests">
+            <ScalarProperty Name="id" ColumnName="id" />
+            <ScalarProperty Name="contest_id" ColumnName="contest_id" />
+            <ScalarProperty Name="group_id" ColumnName="group_id" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="group_hashtags"><EntityTypeMapping TypeName="UserModel.group_hashtags"><MappingFragment StoreEntitySet="group_hashtags">
+            <ScalarProperty Name="id" ColumnName="id" />
+            <ScalarProperty Name="group_id" ColumnName="group_id" />
+            <ScalarProperty Name="hashtag" ColumnName="hashtag" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="group_members"><EntityTypeMapping TypeName="UserModel.group_members"><MappingFragment StoreEntitySet="group_members">
+            <ScalarProperty Name="id" ColumnName="id" />
+            <ScalarProperty Name="group_id" ColumnName="group_id" />
+            <ScalarProperty Name="user_id" ColumnName="user_id" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="groups"><EntityTypeMapping TypeName="UserModel.group"><MappingFragment StoreEntitySet="groups">
+            <ScalarProperty Name="id" ColumnName="id" />
+            <ScalarProperty Name="name" ColumnName="name" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="messages"><EntityTypeMapping TypeName="UserModel.message"><MappingFragment StoreEntitySet="messages">
+            <ScalarProperty Name="id" ColumnName="id" />
+            <ScalarProperty Name="group_id" ColumnName="group_id" />
+            <ScalarProperty Name="poster_id" ColumnName="poster_id" />
+            <ScalarProperty Name="title" ColumnName="title" />
+            <ScalarProperty Name="message1" ColumnName="message" />
+            <ScalarProperty Name="add_green_score" ColumnName="add_green_score" />
+            <ScalarProperty Name="add_competition_score" ColumnName="add_competition_score" />
+            <ScalarProperty Name="add_challenge_score" ColumnName="add_challenge_score" />
+            <ScalarProperty Name="add_badge_score" ColumnName="add_badge_score" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="privacy_settings"><EntityTypeMapping TypeName="UserModel.privacy_settings"><MappingFragment StoreEntitySet="privacy_settings">
+            <ScalarProperty Name="id" ColumnName="id" />
+            <ScalarProperty Name="user_id" ColumnName="user_id" />
+            <ScalarProperty Name="profile_visibility" ColumnName="profile_visibility" />
+            <ScalarProperty Name="email" ColumnName="email" />
+            <ScalarProperty Name="gender" ColumnName="gender" />
+            <ScalarProperty Name="age" ColumnName="age" />
+            <ScalarProperty Name="weight" ColumnName="weight" />
+            <ScalarProperty Name="height" ColumnName="height" />
+            <ScalarProperty Name="groups" ColumnName="groups" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="profiles"><EntityTypeMapping TypeName="UserModel.profile"><MappingFragment StoreEntitySet="profile">
+            <ScalarProperty Name="id" ColumnName="id" />
+            <ScalarProperty Name="user_id" ColumnName="user_id" />
+            <ScalarProperty Name="first_name" ColumnName="first_name" />
+            <ScalarProperty Name="last_name" ColumnName="last_name" />
+            <ScalarProperty Name="email" ColumnName="email" />
+            <ScalarProperty Name="gender" ColumnName="gender" />
+            <ScalarProperty Name="city" ColumnName="city" />
+            <ScalarProperty Name="state" ColumnName="state" />
+            <ScalarProperty Name="age" ColumnName="age" />
+            <ScalarProperty Name="height" ColumnName="height" />
+            <ScalarProperty Name="weight" ColumnName="weight" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="statistic_info"><EntityTypeMapping TypeName="UserModel.statistic_info"><MappingFragment StoreEntitySet="statistic_info">
+            <ScalarProperty Name="id" ColumnName="id" />
+            <ScalarProperty Name="statistic_id" ColumnName="statistic_id" />
+            <ScalarProperty Name="name" ColumnName="name" />
+            <ScalarProperty Name="format_string" ColumnName="format_string" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="team_members"><EntityTypeMapping TypeName="UserModel.team_members"><MappingFragment StoreEntitySet="team_members">
+            <ScalarProperty Name="id" ColumnName="id" />
+            <ScalarProperty Name="team_id" ColumnName="team_id" />
+            <ScalarProperty Name="user_id" ColumnName="user_id" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="teams"><EntityTypeMapping TypeName="UserModel.team"><MappingFragment StoreEntitySet="teams">
+            <ScalarProperty Name="id" ColumnName="id" />
+            <ScalarProperty Name="name" ColumnName="name" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="user_statistics"><EntityTypeMapping TypeName="UserModel.user_statistics"><MappingFragment StoreEntitySet="user_statistics">
+            <ScalarProperty Name="id" ColumnName="id" />
+            <ScalarProperty Name="user_id" ColumnName="user_id" />
+            <ScalarProperty Name="statistic_type" ColumnName="statistic_type" />
+            <ScalarProperty Name="value" ColumnName="value" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="users"><EntityTypeMapping TypeName="UserModel.user"><MappingFragment StoreEntitySet="users">
+            <ScalarProperty Name="id" ColumnName="id" />
+            <ScalarProperty Name="user_name" ColumnName="user_name" />
+            <ScalarProperty Name="password" ColumnName="password" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="UserModel">
+        <EntityTypeShape EntityType="UserModel.badge_level_info" Width="1.5" PointX="0.75" PointY="0.75" Height="2.172587890625" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserModel.badge" Width="1.5" PointX="3" PointY="8.5" Height="2.1725878906249996" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserModel.challenge_definitions" Width="1.5" PointX="0.75" PointY="3.75" Height="2.5571907552083335" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserModel.challenge_initial_values" Width="1.5" PointX="6" PointY="14.25" Height="2.1725878906250014" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserModel.challenge" Width="1.5" PointX="3.75" PointY="0.875" Height="3.1340950520833317" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserModel.contest" Width="1.5" PointX="3" PointY="14.375" Height="4.0956022135416674" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserModel.group_contests" Width="1.5" PointX="5.25" PointY="17.375" Height="1.9802864583333317" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserModel.group_hashtags" Width="1.5" PointX="6" PointY="5.5" Height="1.7879850260416674" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserModel.group_members" Width="1.5" PointX="3" PointY="11.375" Height="1.9802864583333317" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserModel.group" Width="1.5" PointX="3.75" PointY="5.25" Height="2.1725878906249996" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserModel.message" Width="1.5" PointX="6" PointY="9.875" Height="3.1340950520833317" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserModel.privacy_settings" Width="1.5" PointX="5.75" PointY="0.75" Height="2.7494921875000031" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserModel.profile" Width="1.5" PointX="3" PointY="25.75" Height="3.3263964843750031" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserModel.statistic_info" Width="1.5" PointX="7.75" PointY="0.75" Height="1.7879850260416674" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserModel.team_members" Width="1.5" PointX="3" PointY="19.25" Height="2.3648893229166674" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserModel.team" Width="1.5" PointX="0.75" PointY="19.5" Height="1.7879850260416674" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserModel.user_statistics" Width="1.5" PointX="3" PointY="33" Height="1.9802864583333388" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserModel.user" Width="1.5" PointX="0.75" PointY="13.75" Height="3.3263964843750014" IsExpanded="true" />
+        <AssociationConnector Association="UserModel.FK_badges_user_id" ManuallyRouted="false">
+          <ConnectorPoint PointX="1.5" PointY="13.75" />
+          <ConnectorPoint PointX="1.5" PointY="9.5862939453125" />
+          <ConnectorPoint PointX="3" PointY="9.5862939453125" />
+        </AssociationConnector>
+        <AssociationConnector Association="UserModel.FK_challenge_initial_values_challenge_id" ManuallyRouted="false">
+          <ConnectorPoint PointX="5.25" PointY="4.0090950520833317" />
+          <ConnectorPoint PointX="5.625" PointY="4.3840950520833317" />
+          <ConnectorPoint PointX="5.625" PointY="15.336293945312502" />
+          <ConnectorPoint PointX="6" PointY="15.336293945312502" />
+        </AssociationConnector>
+        <AssociationConnector Association="UserModel.FK_challenge_initial_values_user_id" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="14.28125" />
+          <ConnectorPoint PointX="4.791666666666667" PointY="14.28125" />
+          <ConnectorPoint PointX="4.958333333333333" PointY="14.28125" />
+          <ConnectorPoint PointX="5.541666666666667" PointY="14.28125" />
+          <ConnectorPoint PointX="5.708333333333333" PointY="14.28125" />
+          <ConnectorPoint PointX="6" PointY="14.28125" />
+        </AssociationConnector>
+        <AssociationConnector Association="UserModel.FK_contest_id_group_contests" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.5" PointY="17.922801106770834" />
+          <ConnectorPoint PointX="4.791666666666667" PointY="17.922801106770834" />
+          <ConnectorPoint PointX="4.958333333333333" PointY="17.922801106770834" />
+          <ConnectorPoint PointX="5.25" PointY="17.922801106770834" />
+        </AssociationConnector>
+        <AssociationConnector Association="UserModel.FK_contests_creator_id" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="15.725698242187502" />
+          <ConnectorPoint PointX="3" PointY="15.725698242187502" />
+        </AssociationConnector>
+        <AssociationConnector Association="UserModel.FK_group_id_group_contests" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.875" PointY="7.422587890625" />
+          <ConnectorPoint PointX="4.875" PointY="18.860301106770834" />
+          <ConnectorPoint PointX="5.25" PointY="18.860301106770834" />
+        </AssociationConnector>
+        <AssociationConnector Association="UserModel.FK_group_id_group_hashtags" ManuallyRouted="false">
+          <ConnectorPoint PointX="5.25" PointY="6.3939925130208337" />
+          <ConnectorPoint PointX="5.541666666666667" PointY="6.3939925130208328" />
+          <ConnectorPoint PointX="5.708333333333333" PointY="6.3939925130208337" />
+          <ConnectorPoint PointX="6" PointY="6.3939925130208337" />
+        </AssociationConnector>
+        <AssociationConnector Association="UserModel.fk_group_id" ManuallyRouted="false">
+          <ConnectorPoint PointX="5.0937525" PointY="7.422587890625" />
+          <ConnectorPoint PointX="5.0937525" PointY="12.365143229166666" />
+          <ConnectorPoint PointX="4.958333333333333" PointY="12.365143229166666" />
+          <ConnectorPoint PointX="4.791666666666667" PointY="12.365143229166666" />
+          <ConnectorPoint PointX="4.5" PointY="12.365143229166666" />
+        </AssociationConnector>
+        <AssociationConnector Association="UserModel.fk_user_id_groups" ManuallyRouted="false">
+          <ConnectorPoint PointX="1.9062525" PointY="13.75" />
+          <ConnectorPoint PointX="1.9062525" PointY="12.365143229166666" />
+          <ConnectorPoint PointX="3" PointY="12.365143229166666" />
+        </AssociationConnector>
+        <AssociationConnector Association="UserModel.FK_group_id_messages" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.6874975" PointY="7.422587890625" />
+          <ConnectorPoint PointX="4.6874975" PointY="11.0237939453125" />
+          <ConnectorPoint PointX="4.791666666666667" PointY="11.0237939453125" />
+          <ConnectorPoint PointX="4.958333333333333" PointY="11.0237939453125" />
+          <ConnectorPoint PointX="5.0104191666666669" PointY="11.0237939453125" />
+          <ConnectorPoint PointX="5.1770858333333329" PointY="11.0237939453125" />
+          <ConnectorPoint PointX="5.541666666666667" PointY="11.0237939453125" />
+          <ConnectorPoint PointX="5.708333333333333" PointY="11.0237939453125" />
+          <ConnectorPoint PointX="6" PointY="11.0237939453125" />
+        </AssociationConnector>
+        <AssociationConnector Association="UserModel.FK_poster_id_messages" ManuallyRouted="false">
+          <ConnectorPoint PointX="1.0937475" PointY="13.75" />
+          <ConnectorPoint PointX="1.0937475" PointY="11.19939947265625" />
+          <ConnectorPoint PointX="1.4166666666666667" PointY="11.19939947265625" />
+          <ConnectorPoint PointX="1.5833333333333333" PointY="11.19939947265625" />
+          <ConnectorPoint PointX="4.791666666666667" PointY="11.19939947265625" />
+          <ConnectorPoint PointX="4.958333333333333" PointY="11.19939947265625" />
+          <ConnectorPoint PointX="5.0104191666666669" PointY="11.19939947265625" />
+          <ConnectorPoint PointX="5.1770858333333329" PointY="11.19939947265625" />
+          <ConnectorPoint PointX="5.541666666666667" PointY="11.19939947265625" />
+          <ConnectorPoint PointX="5.708333333333333" PointY="11.19939947265625" />
+          <ConnectorPoint PointX="6" PointY="11.19939947265625" />
+        </AssociationConnector>
+        <AssociationConnector Association="UserModel.FK__profile__state__0CBAE877" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="17.061395484375" />
+          <ConnectorPoint PointX="2.71875" PointY="17.530145484375" />
+          <ConnectorPoint PointX="2.71875" PointY="27.4131982421875" />
+          <ConnectorPoint PointX="3" PointY="27.4131982421875" />
+        </AssociationConnector>
+        <AssociationConnector Association="UserModel.fk_team_id" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="20.393992513020834" />
+          <ConnectorPoint PointX="2.5416666666666665" PointY="20.393992513020834" />
+          <ConnectorPoint PointX="2.9270833333333335" PointY="20.393992513020834" />
+          <ConnectorPoint PointX="3" PointY="20.393992513020834" />
+        </AssociationConnector>
+        <AssociationConnector Association="UserModel.FK_team_members_team_id" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="19.884496256510417" />
+          <ConnectorPoint PointX="2.5416666666666665" PointY="19.884496256510417" />
+          <ConnectorPoint PointX="2.9270833333333335" PointY="19.884496256510417" />
+          <ConnectorPoint PointX="3" PointY="19.884496256510417" />
+        </AssociationConnector>
+        <AssociationConnector Association="UserModel.fk_team_members_user_id" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="17.063703176682694" />
+          <ConnectorPoint PointX="2.78125" PointY="17.594953176682694" />
+          <ConnectorPoint PointX="2.78125" PointY="21.035692917968753" />
+          <ConnectorPoint PointX="3" PointY="21.035692917968753" />
+        </AssociationConnector>
+        <AssociationConnector Association="UserModel.fk_user_id_teams" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="17.03485702283654" />
+          <ConnectorPoint PointX="2.84375" PointY="17.62860702283654" />
+          <ConnectorPoint PointX="2.84375" PointY="21.035692917968753" />
+          <ConnectorPoint PointX="3" PointY="21.035692917968753" />
+        </AssociationConnector>
+        <AssociationConnector Association="UserModel.FK_statistics_users" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.2049999999999979" PointY="17.076396484375003" />
+          <ConnectorPoint PointX="2.625" PointY="17.496396484375005" />
+          <ConnectorPoint PointX="2.625" PointY="33.990143229166669" />
+          <ConnectorPoint PointX="3" PointY="33.990143229166669" />
+        </AssociationConnector>
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>
