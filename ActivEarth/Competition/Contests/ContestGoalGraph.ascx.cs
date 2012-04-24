@@ -15,30 +15,26 @@ namespace ActivEarth.Competition.Contests
 
         }
 
-        public void PopulateContestGraph(Team firstPlace, Team secondPlace, Team currentUsersTeam, EndCondition goal)
-        {
-            _FirstPlaceTeamName.Text = firstPlace.Name;
-            _SecondPlaceTeamName.Text = secondPlace.Name;
-            _ThirdPlaceTeamName.Visible = false;
-            _CurrentUserName.Text = currentUsersTeam.Name;
-
-            _FirstPlaceProgress.Value = (int)((firstPlace.Score / goal.EndValue) * 100);
-            _SecondPlaceProgress.Value = (int)((secondPlace.Score / goal.EndValue) * 100);
-            _ThirdPlaceProgress.Visible = false;
-            _CurrentUserProgress.Value = (int)((currentUsersTeam.Score / goal.EndValue) * 100);
-        }
-
         public void PopulateContestGraph(Team firstPlace, Team secondPlace, Team thirdPlace, Team currentUsersTeam, float goal)
         {
-            _FirstPlaceTeamName.Text = firstPlace.Name;
-            _SecondPlaceTeamName.Text = secondPlace.Name;
-            _ThirdPlaceTeamName.Text = thirdPlace.Name;
-            _CurrentUserName.Text = currentUsersTeam.Name;
+            _FirstPlaceTeamName.Visible = (firstPlace != null);
+            _FirstPlaceProgress.Visible = (firstPlace != null);
+            _SecondPlaceTeamName.Visible = (secondPlace != null);
+            _SecondPlaceProgress.Visible = (secondPlace != null);
+            _ThirdPlaceTeamName.Visible = (thirdPlace != null);
+            _ThirdPlaceProgress.Visible = (thirdPlace != null);
+            _CurrentUserName.Visible = (currentUsersTeam != null);
+            _CurrentUserProgress.Visible = (currentUsersTeam != null);
 
-            _FirstPlaceProgress.Value = (int)((firstPlace.Score / goal) * 100);
-            _SecondPlaceProgress.Value = (int)((secondPlace.Score / goal) * 100);
-            _ThirdPlaceProgress.Value = (int)((thirdPlace.Score / goal) * 100);
-            _CurrentUserProgress.Value = (int)((currentUsersTeam.Score / goal) * 100);
+            _FirstPlaceTeamName.Text = (firstPlace != null ? firstPlace.Name : String.Empty);
+            _SecondPlaceTeamName.Text = (secondPlace != null ? secondPlace.Name : String.Empty);
+            _ThirdPlaceTeamName.Text = (thirdPlace != null ? thirdPlace.Name : String.Empty);
+            _CurrentUserName.Text = (currentUsersTeam != null ? currentUsersTeam.Name : String.Empty);
+
+            _FirstPlaceProgress.Value = (firstPlace != null ? (int)((firstPlace.Score / goal) * 100) : 0);
+            _SecondPlaceProgress.Value = (secondPlace != null ? (int)((secondPlace.Score / goal) * 100) : 0);
+            _ThirdPlaceProgress.Value = (thirdPlace != null ? (int)((thirdPlace.Score / goal) * 100) : 0);
+            _CurrentUserProgress.Value = (currentUsersTeam != null ? (int)((currentUsersTeam.Score / goal) * 100) : 0);
         }
 
         public void SetGraphLabels(float goal, string format)

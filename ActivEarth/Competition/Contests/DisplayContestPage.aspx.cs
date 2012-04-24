@@ -27,7 +27,7 @@ namespace ActivEarth.Competition.Contests
                 int id;
                 if (contestIdString != null && int.TryParse(contestIdString, out id))
                 {
-                    Contest contest = ContestDAO.GetContestFromContestId(id);
+                    Contest contest = ContestDAO.GetContestFromContestId(id, true, false);
                     if (contest != null)
                     {
                         ContestName.Text = contest.Name;
@@ -48,14 +48,12 @@ namespace ActivEarth.Competition.Contests
                             }
                             else
                             {
-                                if (contest.Teams.Count >= 3)
-                                {
-                                    GoalGraph.PopulateContestGraph(contest.Teams[0], contest.Teams[1], contest.Teams[2], contest.Teams[2], contest.EndCondition.EndValue);
-                                }
-                                else
-                                {
-                                    GoalGraph.PopulateContestGraph(contest.Teams[0], contest.Teams[1], contest.Teams[2], contest.EndCondition);
-                                }
+                                GoalGraph.PopulateContestGraph(
+                                    (contest.Teams.Count >= 1 ? contest.Teams[0] : null),
+                                    (contest.Teams.Count >= 2 ? contest.Teams[1] : null),
+                                    (contest.Teams.Count >= 3 ? contest.Teams[2] : null), 
+                                    TeamDAO.GetTeamFromUserIdAndContestId(user.UserID, id, false),
+                                    contest.EndCondition.EndValue);
 
                                 GoalGraph.SetGraphLabels(contest.EndCondition.EndValue, contest.FormatString);
                                 GoalGraph.Visible = true;

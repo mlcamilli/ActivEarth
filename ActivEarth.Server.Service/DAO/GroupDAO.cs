@@ -50,7 +50,7 @@ namespace ActivEarth.DAO
                 List<Contest> contests = new List<Contest>();
                 foreach (int id in contest_ids)
                 {
-                    contests.Add(ContestDAO.GetContestFromContestId(id));
+                    contests.Add(ContestDAO.GetContestFromContestId(id, true, true));
                 }
 
                 List<Message> messages = (from m in data.MessageDataProviders

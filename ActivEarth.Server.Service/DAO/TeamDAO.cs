@@ -63,8 +63,9 @@ namespace ActivEarth.DAO
         /// Retrieves a Team from the DB based on its ID.
         /// </summary>
         /// <param name="teamId">Identifier of the team to retrieve.</param>
+        /// <param name="loadMembers">Indicates whether or not the team member list should be populated.</param>
         /// <returns>Team specified by the provided ID.</returns>
-        public static Team GetTeamFromTeamId(int teamId)
+        public static Team GetTeamFromTeamId(int teamId, bool loadMembers)
         {
             using (SqlConnection connection = ConnectionManager.GetConnection())
             {
@@ -82,7 +83,7 @@ namespace ActivEarth.DAO
                                 ContestId = c.contest_id
                             }).FirstOrDefault();
 
-                if (team != null)
+                if (loadMembers && team != null)
                 {
                     team.Members = GetTeamMembersFromTeamId(team.ID);
                 }
@@ -94,8 +95,10 @@ namespace ActivEarth.DAO
         /// <summary>
         /// Retrieves all teams competing in a particular contest.
         /// </summary>
+        /// <param name="contestId">ID of the contest to load teams for.</param>
+        /// <param name="loadMembers">Indicates whether or not the team member lists should be populated.</param>
         /// <returns>All teams currently participating in the contest specified by the given ID.</returns>
-        public static List<Team> GetTeamsFromContestId(int contestId)
+        public static List<Team> GetTeamsFromContestId(int contestId, bool loadMembers)
         {
             using (SqlConnection connection = ConnectionManager.GetConnection())
             {
@@ -113,12 +116,35 @@ namespace ActivEarth.DAO
                                             ContestId = c.contest_id
                                         }).ToList();
 
-                foreach (Team team in teams)
+                if (loadMembers)
                 {
-                    team.Members = GetTeamMembersFromTeamId(team.ID);
+                    foreach (Team team in teams)
+                    {
+                        team.Members = GetTeamMembersFromTeamId(team.ID);
+                    }
                 }
 
                 return teams;
+            }
+        }
+
+        /// <summary>
+        /// Retrieves the team from a given contest which contains a given member.
+        /// </summary>
+        /// <param name="userId">ID of the user to match the team to.</param>
+        /// <param name="contestId">ID of the contest to match the team to.</param>
+        /// <param name="loadMembers">Indicates whether or not the team member lists should be populated.</param>
+        /// <returns>Team containing the given member from the given contest.</returns>
+        public static Team GetTeamFromUserIdAndContestId(int userId, int contestId, bool loadMembers)
+        {
+            using (SqlConnection connection = ConnectionManager.GetConnection())
+            {
+                var data = new ActivEarthDataProvidersDataContext(connection);
+                int teamId = (from c in data.TeamMemberDataProviders
+                        where c.user_id == userId && c.contest_id == contestId
+                        select c.team_id).FirstOrDefault();
+
+                return TeamDAO.GetTeamFromTeamId(teamId, loadMembers);
             }
         }
 
@@ -206,7 +232,7 @@ namespace ActivEarth.DAO
         /// <param name="statistic"></param>
         public static void UpdateTeamScore(int teamId)
         {
-            Team team = TeamDAO.GetTeamFromTeamId(teamId);
+            Team team = TeamDAO.GetTeamFromTeamId(teamId, true);
 
             if (team.IsLocked)
             {

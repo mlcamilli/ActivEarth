@@ -103,9 +103,9 @@ namespace ActivEarth.Server.Service.Competition
         /// </summary>
         /// <param name="id">ID of the Contest to be retrieved.</param>
         /// <returns>Contest with ID matching the provided ID.</returns>
-        public static Contest GetContest(int id)
+        public static Contest GetContest(int id, bool loadTeams, bool loadTeamMembers)
         {
-            return ContestDAO.GetContestFromContestId(id);
+            return ContestDAO.GetContestFromContestId(id, loadTeams, loadTeamMembers);
         }
 
         /// <summary>
@@ -136,7 +136,7 @@ namespace ActivEarth.Server.Service.Competition
         /// </summary>
         public static void CleanUp()
         {
-            foreach (Contest contest in ContestDAO.GetActiveContests())
+            foreach (Contest contest in ContestDAO.GetActiveContests(false, false))
             {
                 if (contest.EndCondition.EndTime <= DateTime.Now)
                 {
@@ -158,7 +158,7 @@ namespace ActivEarth.Server.Service.Competition
         /// </summary>
         public static void LockContest(int contestId)
         {
-            List<Team> teams = TeamDAO.GetTeamsFromContestId(contestId);
+            List<Team> teams = TeamDAO.GetTeamsFromContestId(contestId, true);
 
             foreach (Team team in teams)
             {
@@ -183,7 +183,7 @@ namespace ActivEarth.Server.Service.Competition
         /// <returns>True on success, false on failure.</returns>
         public static bool AddGroup(int contestId, Group group)
         {
-            Contest contest = ContestDAO.GetContestFromContestId(contestId);
+            Contest contest = ContestDAO.GetContestFromContestId(contestId, true, false);
             if (contest.Type == ContestType.Group)
             {
                 string teamName = group.Name;

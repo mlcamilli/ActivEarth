@@ -72,7 +72,7 @@ namespace ActivEarth.DAO
         /// </summary>
         /// <param name="contestId">Identifier of the contest to retrieve.</param>
         /// <returns>Contest specified by the provided ID.</returns>
-        public static Contest GetContestFromContestId(int contestId)
+        public static Contest GetContestFromContestId(int contestId, bool loadTeams, bool loadTeamMembers)
         {
             Contest contest;
             using (SqlConnection connection = ConnectionManager.GetConnection())
@@ -103,8 +103,11 @@ namespace ActivEarth.DAO
 
             if (contest != null)
             {
-                contest.Teams = TeamDAO.GetTeamsFromContestId(contest.ID);
-                contest.Teams.Sort(delegate(Team t1, Team t2) { return t2.Score.CompareTo(t1.Score); });
+                if (loadTeams)
+                {
+                    contest.Teams = TeamDAO.GetTeamsFromContestId(contest.ID, loadTeamMembers);
+                    contest.Teams.Sort(delegate(Team t1, Team t2) { return t2.Score.CompareTo(t1.Score); });
+                }
                 contest.FormatString = StatisticInfoDAO.GetStatisticFormatString(contest.StatisticBinding);
             }
             return contest;
@@ -114,7 +117,7 @@ namespace ActivEarth.DAO
         /// Retrieves all active contests in the DB.
         /// </summary>
         /// <returns>All active contests in the DB.</returns>
-        public static List<Contest> GetActiveContests()
+        public static List<Contest> GetActiveContests(bool loadTeams, bool loadTeamMembers)
         {
             List<Contest> contests;
 
@@ -147,8 +150,11 @@ namespace ActivEarth.DAO
                 {
                     foreach (Contest contest in contests)
                     {
-                        contest.Teams = TeamDAO.GetTeamsFromContestId(contest.ID);
-                        contest.Teams.Sort(delegate(Team t1, Team t2) { return t2.Score.CompareTo(t1.Score); });
+                        if (loadTeams)
+                        {
+                            contest.Teams = TeamDAO.GetTeamsFromContestId(contest.ID, loadTeamMembers);
+                            contest.Teams.Sort(delegate(Team t1, Team t2) { return t2.Score.CompareTo(t1.Score); });
+                        }
 
                         contest.FormatString = StatisticInfoDAO.GetStatisticFormatString(contest.StatisticBinding);
                     }
@@ -164,49 +170,17 @@ namespace ActivEarth.DAO
         /// <param name="name"></param>
         /// <param name="exactMatch"></param>
         /// <returns></returns>
-        public static List<Contest> GetJoinableContestsFromContestName(string name, bool exactMatch)
+        public static List<int> GetJoinableContestsFromContestName(string name, bool exactMatch)
         {
-            List<Contest> contests;
-
             using (SqlConnection connection = ConnectionManager.GetConnection())
             {
                 var data = new ActivEarthDataProvidersDataContext(connection);
-                contests = (from c in data.ContestDataProviders
+                return (from c in data.ContestDataProviders
                             where (exactMatch ?
                                 c.name.ToLower().Equals(name.ToLower()) :
                                 c.name.ToLower().Contains(name.ToLower())) &&
-                                c.start > DateTime.Now &&
                                 c.searchable == true
-                            select
-                                new Contest
-                                {
-                                    ID = c.id,
-                                    Name = c.name,
-                                    Description = c.description,
-                                    Reward = c.points,
-                                    StartTime = c.start,
-                                    EndCondition =
-                                        ((ContestEndMode)c.end_mode == ContestEndMode.GoalBased ?
-                                            new EndCondition((float)c.end_goal) :
-                                            new EndCondition((DateTime)c.end_time)),
-                                    Mode = (ContestEndMode)c.end_mode,
-                                    Type = (ContestType)c.type,
-                                    StatisticBinding = (Statistic)c.statistic,
-                                    IsActive = c.active,
-                                    CreatorId = c.creator_id
-                                }).ToList();
-
-                if (contests != null)
-                {
-                    foreach (Contest contest in contests)
-                    {
-                        contest.Teams = TeamDAO.GetTeamsFromContestId(contest.ID);
-                        contest.Teams.Sort(delegate(Team t1, Team t2) { return t2.Score.CompareTo(t1.Score); });
-                        contest.FormatString = StatisticInfoDAO.GetStatisticFormatString(contest.StatisticBinding);
-                    }
-                }
-
-                return contests;
+                            select c.id).ToList();
             }
         }
 
