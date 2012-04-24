@@ -61,6 +61,7 @@
     <Compile Include="ChallengeManager.cs" />
     <Compile Include="ConnectionManager.cs" />
     <Compile Include="ContestManager.cs" />
+    <Compile Include="DAO\RecentActivityDAO.cs" />
     <Compile Include="StatisticManager.cs" />
     <Compile Include="DAO\BadgeDAO.cs" />
     <Compile Include="DAO\BadgeLevelInfoDAO.cs" />

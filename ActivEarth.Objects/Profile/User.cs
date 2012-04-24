@@ -128,6 +128,8 @@ namespace ActivEarth.Objects.Profile
             set;
         }
 
+        public Wall Wall;
+
         private Dictionary<Statistic, UserStatistic> _stats;
 
         #endregion ---------- Private Members ----------
@@ -150,6 +152,7 @@ namespace ActivEarth.Objects.Profile
             this.Badges = new Dictionary<Statistic, Badge>();
             this.Contests = new List<Contest>();
             this.Groups = new List<Group>();
+            this.Wall = new Wall();
 
             this.userPrivacySettings = new PrivacySetting();
         }
@@ -189,6 +192,15 @@ namespace ActivEarth.Objects.Profile
         public void SetStatisticsDict(Dictionary<Statistic, UserStatistic> stats)
         {
             _stats = stats;
+        }
+
+        /// <summary>
+        /// Posts a Message to the Group's Wall.
+        /// </summary>
+        /// <param name="message">The Message to be added to the Group's Wall.</param>
+        public void Post(Message message)
+        {
+            this.Wall.post(message);
         }
 
         #endregion ---------- Public Methods ----------

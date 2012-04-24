@@ -56,7 +56,7 @@ namespace ActivEarth.DAO
                 List<Message> messages = (from m in data.MessageDataProviders
                                           where m.group_id == groupId
                                           select
-                                              new Message(m.title, m.message, UserDAO.GetUserFromUserId(m.poster_id)) 
+                                              new Message(m.title, m.message, UserDAO.GetUserFromUserId(m.user_id), m.date, m.time) 
                                           ).ToList();
 
                 Group toReturn = (from g in data.GroupDataProviders
@@ -139,6 +139,33 @@ namespace ActivEarth.DAO
             return toReturn;
         }
 
+        /// <summary>
+        /// Retrieves all currently created Groups that have a name containing the given string.
+        /// </summary>
+        /// <param name="partialName">A string desired to be contained within the Group name</param>
+        /// <returns>All Groups in the database with names containing the given string.</returns>
+        public static List<Group> GetAllGroupsByName(string partialName)
+        {
+            List<Group> namedGroups = new List<Group>();
+
+            using (SqlConnection connection = ConnectionManager.GetConnection())
+            {
+                var data = new ActivEarthDataProvidersDataContext(connection);
+
+                List<int> groupIds = (from g in data.GroupDataProviders
+                                      where g.name.ToLower().Contains(partialName)
+                                      select g.id
+                                      ).ToList();
+
+                foreach (int groupId in groupIds)
+                {
+                    Group group = GetGroupFromGroupId(groupId);
+                    namedGroups.Add(group);
+                }
+
+                return namedGroups;
+            }
+        }
 
         /// <summary>
         /// Retrieves all currently created Groups that are tagged with the given hashtag.
@@ -207,8 +234,10 @@ namespace ActivEarth.DAO
                         {
                             title = message.Title,
                             message = message.Text,
-                            poster_id = message.Poster.UserID,
-                            group_id = groupData.id
+                            user_id = message.Poster.UserID,
+                            group_id = groupData.id,
+                            date = message.Date,
+                            time = message.Time
                         };
                         data.MessageDataProviders.InsertOnSubmit(messageData);
                     }
@@ -405,8 +434,8 @@ namespace ActivEarth.DAO
                             bool found = false;
                             foreach (Message message in group.Wall.Messages)
                             {
-                                if (messageData.message == message.Text && messageData.poster_id == message.Poster.UserID
-                                    && messageData.title == message.Title)
+                                if (messageData.message == message.Text && messageData.user_id == message.Poster.UserID
+                                    && messageData.title == message.Title && messageData.time == message.Time && messageData.date == message.Date)
                                 {
                                     found = true;
                                 }
@@ -422,8 +451,8 @@ namespace ActivEarth.DAO
                             bool found = false;
                             foreach (MessageDataProvider messageData in messages)
                             {
-                                if (messageData.message == message.Text && messageData.poster_id == message.Poster.UserID
-                                    && messageData.title == message.Title)
+                                if (messageData.message == message.Text && messageData.user_id == message.Poster.UserID
+                                    && messageData.title == message.Title && messageData.time == message.Time && messageData.date == message.Date)
                                 {
                                     found = true;
                                 }
@@ -434,8 +463,10 @@ namespace ActivEarth.DAO
                                 {
                                     title = message.Title,
                                     message = message.Text,
-                                    poster_id = message.Poster.UserID,
-                                    group_id = groupId
+                                    user_id = message.Poster.UserID,
+                                    group_id = groupId,
+                                    date = message.Date,
+                                    time = message.Time
                                 };
                                 data.MessageDataProviders.InsertOnSubmit(messageData);
                             }
