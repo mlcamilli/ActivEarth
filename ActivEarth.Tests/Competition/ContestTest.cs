@@ -884,56 +884,56 @@ namespace ActivEarth.Tests.Competition
         /// Tests the retrieval of currently joinable contests from their name.
         /// </summary>
         [TestMethod]
-        public void TestGetJoinableContests()
+        public void TestFindContests()
         {
             using (_trans)
             {
                 InitializeTestDBEntries();
 
                 Log("Creating contests");
-                //Joinable
-                ContestManager.CreateContest(ContestType.Group, "Test",
+                //Matches
+                ContestManager.CreateContest(ContestType.Group, "Testlike",
                     "This is a test contest", 30, DateTime.Today.AddDays(1), 500, true, Statistic.Steps, _user1.UserID);
 
-                //Joinable
-                ContestManager.CreateContest(ContestType.Group, "Test Competition",
+                //Matches
+                ContestManager.CreateContest(ContestType.Group, "Testlike Competition",
                     "This is a test contest", 30, DateTime.Today.AddDays(1), 500, true, Statistic.GasSavings, _user1.UserID);
 
-                //Joinable
-                ContestManager.CreateContest(ContestType.Group, "testing again",
+                //Matches
+                ContestManager.CreateContest(ContestType.Group, "testlikeing again",
                     "This is a test contest", 30, DateTime.Today.AddDays(1), 500, true, Statistic.GasSavings, _user1.UserID);
 
-                //Not Joinable (already started)
-                ContestManager.CreateContest(ContestType.Group, "My Test Contest",
+                //Matches
+                ContestManager.CreateContest(ContestType.Group, "My Testlike Contest",
                     "This is a test contest", 30, DateTime.Today, 500, true, Statistic.GasSavings, _user1.UserID);
 
-                //Joinable, but doesn't match the search
+                //Doesn't Match
                 ContestManager.CreateContest(ContestType.Group, "ActivEarth FTW",
                     "This is a test contest", 30, DateTime.Today.AddDays(1), 500, true, Statistic.GasSavings, _user1.UserID);
 
-                //Joinable, but not public
-                ContestManager.CreateContest(ContestType.Group, "test contest2",
+                //Matches, but not public
+                ContestManager.CreateContest(ContestType.Group, "testlike contest2",
                     "This is a test contest", 30, DateTime.Today.AddDays(1), 500, false, Statistic.GasSavings, _user1.UserID);
 
-                //Joinable
-                ContestManager.CreateContest(ContestType.Group, "this is another test",
+                //Matches
+                ContestManager.CreateContest(ContestType.Group, "this is another testlike contest",
                     "This is a test contest", 30, DateTime.Today.AddDays(1), 500, true, Statistic.GasSavings, _user1.UserID);
 
-                Log("Retrieving contest list from DB: Search term: 'test', exact match");
-                List<int> listFromTestExact = ContestDAO.GetJoinableContestsFromContestName("test", true);
+                Log("Retrieving contest list from DB: Search term: 'testlike', exact match");
+                List<int> listFromTestExact = ContestDAO.FindContests("testlike", true);
 
-                Log("Retrieving contest list from DB: Search term: 'test', not exact match");
-                List<int> listFromTestNotExact = ContestDAO.GetJoinableContestsFromContestName("test", false);
+                Log("Retrieving contest list from DB: Search term: 'testlike', not exact match");
+                List<int> listFromTestNotExact = ContestDAO.FindContests("testlike", false);
 
                 Log("Retrieving contest list from DB: Search term: 'salamanders', not exact match");
-                List<int> listFromSalamandersNotExact = ContestDAO.GetJoinableContestsFromContestName("salamanders", false);
+                List<int> listFromSalamandersNotExact = ContestDAO.FindContests("salamanders", false);
 
                 Log("Retrieving contest list from DB: Search term: 'salamanders', exact match");
-                List<int> listFromSalamandersExact = ContestDAO.GetJoinableContestsFromContestName("salamanders", true);
+                List<int> listFromSalamandersExact = ContestDAO.FindContests("salamanders", true);
 
                 Log("Verifying returned contest counts");
                 Assert.AreEqual(1, listFromTestExact.Count);
-                Assert.AreEqual(4, listFromTestNotExact.Count);
+                Assert.AreEqual(5, listFromTestNotExact.Count);
                 Assert.AreEqual(0, listFromSalamandersNotExact.Count);
                 Assert.AreEqual(0, listFromSalamandersExact.Count);
             }

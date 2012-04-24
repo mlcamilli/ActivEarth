@@ -27,7 +27,7 @@ namespace ActivEarth.Competition.Contests
 
         protected void ExecuteSearch(object sender, EventArgs e)
         {
-            List<int> contestIds = ContestDAO.GetJoinableContestsFromContestName(txtSearchText.Text, chkExactMatch.Checked);
+            List<int> contestIds = ContestDAO.FindContests(txtSearchText.Text, chkExactMatch.Checked);
             List<string> contestNames = new List<string>();
 
             if (contestIds.Count > 0)

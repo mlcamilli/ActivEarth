@@ -170,7 +170,7 @@ namespace ActivEarth.DAO
         /// <param name="name"></param>
         /// <param name="exactMatch"></param>
         /// <returns></returns>
-        public static List<int> GetJoinableContestsFromContestName(string name, bool exactMatch)
+        public static List<int> FindContests(string name, bool exactMatch)
         {
             using (SqlConnection connection = ConnectionManager.GetConnection())
             {
