@@ -12,25 +12,25 @@
          </asp:Label>
          <eo:ProgressBar ID="_FirstPlaceProgress" runat="server" Width="258px"   
             style="z-index: 1; left: 0px; top: 15px; position: absolute; height: 30px; width: 248px" 
-            IndicatorColor="ForestGreen"></eo:ProgressBar>
+            IndicatorColor="ForestGreen" BackColor="#CCCCCC"></eo:ProgressBar>
          <asp:Label ID="_SecondPlaceTeamName" runat="server" Text="Label" 
             style="z-index: 1; left: 3px; top: 56px; position: absolute">
          </asp:Label>
          <eo:ProgressBar ID="_SecondPlaceProgress" runat="server" Width="258px"   
             style="z-index: 1; left: 0px; top: 70px; position: absolute; height: 30px; width: 248px"  
-            IndicatorColor="ForestGreen"></eo:ProgressBar>
+            IndicatorColor="ForestGreen" BackColor="#CCCCCC"></eo:ProgressBar>
          <asp:Label ID="_ThirdPlaceTeamName" runat="server" Text="Label" 
             style="z-index: 1; left: 3px; top: 114px; position: absolute">
          </asp:Label>
          <eo:ProgressBar ID="_ThirdPlaceProgress" runat="server" Width="258px"   
             style="z-index: 1; left: 0px; top: 130px; position: absolute; height: 30px; width: 248px"  
-            IndicatorColor="ForestGreen"></eo:ProgressBar>
+            IndicatorColor="ForestGreen" BackColor="#CCCCCC"></eo:ProgressBar>
          <asp:Label ID="_CurrentUserName" runat="server" Text="Label" 
             style="z-index: 1; left: 3px; top: 175px; position: absolute">
          </asp:Label>
          <eo:ProgressBar ID="_CurrentUserProgress" runat="server" Width="258px"   
             style="z-index: 1; left: 0px; top: 190px; position: absolute; height: 30px; width: 248px"  
-            IndicatorColor="ForestGreen"></eo:ProgressBar>
+            IndicatorColor="ForestGreen" BackColor="#CCCCCC"></eo:ProgressBar>
     </asp:Panel>
     <asp:Label ID="_GoalLabel" runat="server" Text="100"  
         
