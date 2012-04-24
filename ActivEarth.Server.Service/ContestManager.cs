@@ -216,17 +216,20 @@ namespace ActivEarth.Server.Service.Competition
         /// <param name="user">User to be added.</param>
         public static void AddUser(int contestId, User user)
         {
-            string teamName = String.Format("{0} {1}", user.FirstName, user.LastName);
-            //TODO: Assert that no team with this name exists already
-
-            Team newTeam = new Team
+            if (!TeamDAO.UserCompetingInContest(user.UserID, contestId))
             {
-                ContestId = contestId,
-                Name = teamName
-            };
+                string teamName = String.Format("{0} {1}", user.FirstName, user.LastName);
+                //TODO: Assert that no team with this name exists already
 
-            int teamId = TeamDAO.CreateNewTeam(newTeam);
-            TeamDAO.CreateNewTeamMember(user.UserID, teamId);
+                Team newTeam = new Team
+                {
+                    ContestId = contestId,
+                    Name = teamName
+                };
+
+                int teamId = TeamDAO.CreateNewTeam(newTeam);
+                TeamDAO.CreateNewTeamMember(user.UserID, teamId);
+            }
         }
 
         /// <summary>
