@@ -90,6 +90,7 @@
     <Content Include="Competition\Contests\DisplayContestPage.aspx" />
     <Content Include="Competition\Contests\LeaderBoard.ascx" />
     <Content Include="Competition\Contests\LeaderBoardRow.ascx" />
+    <Content Include="Competition\Contests\TeamDisplayTable.ascx" />
     <Content Include="Images\Competition\Badges\Time_Biked\Bronze.png" />
     <Content Include="Images\Competition\Badges\Time_Biked\Diamond.png" />
     <Content Include="Images\Competition\Badges\Time_Biked\Emerald.png" />
@@ -117,6 +118,24 @@
     <Content Include="Images\Competition\Badges\Time_Walked\Ruby.png" />
     <Content Include="Images\Competition\Badges\Time_Walked\Sapphire.png" />
     <Content Include="Images\Competition\Badges\Time_Walked\Silver.png" />
+    <Content Include="Images\Competition\Badges\Total_Distance\Bronze.png" />
+    <Content Include="Images\Competition\Badges\Total_Distance\Diamond.png" />
+    <Content Include="Images\Competition\Badges\Total_Distance\Emerald.png" />
+    <Content Include="Images\Competition\Badges\Total_Distance\Gold.png" />
+    <Content Include="Images\Competition\Badges\Total_Distance\None.png" />
+    <Content Include="Images\Competition\Badges\Total_Distance\Platinum.png" />
+    <Content Include="Images\Competition\Badges\Total_Distance\Ruby.png" />
+    <Content Include="Images\Competition\Badges\Total_Distance\Sapphire.png" />
+    <Content Include="Images\Competition\Badges\Total_Distance\Silver.png" />
+    <Content Include="Images\Competition\Badges\Total_Time\Bronze.png" />
+    <Content Include="Images\Competition\Badges\Total_Time\Diamond.png" />
+    <Content Include="Images\Competition\Badges\Total_Time\Emerald.png" />
+    <Content Include="Images\Competition\Badges\Total_Time\Gold.png" />
+    <Content Include="Images\Competition\Badges\Total_Time\None.png" />
+    <Content Include="Images\Competition\Badges\Total_Time\Platinum.png" />
+    <Content Include="Images\Competition\Badges\Total_Time\Ruby.png" />
+    <Content Include="Images\Competition\Badges\Total_Time\Sapphire.png" />
+    <Content Include="Images\Competition\Badges\Total_Time\Silver.png" />
     <Content Include="Images\Competition\Challenges\Challenges_Row.png" />
     <Content Include="Images\Competition\Challenges\Challenges_Template\Daily.png" />
     <Content Include="Images\Competition\Challenges\Challenges_Template\Monthly.png" />
@@ -408,6 +427,13 @@
     </Compile>
     <Compile Include="Competition\Contests\LeaderBoardRow.ascx.designer.cs">
       <DependentUpon>LeaderBoardRow.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Competition\Contests\TeamDisplayTable.ascx.cs">
+      <DependentUpon>TeamDisplayTable.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Competition\Contests\TeamDisplayTable.ascx.designer.cs">
+      <DependentUpon>TeamDisplayTable.ascx</DependentUpon>
     </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>

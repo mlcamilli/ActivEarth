@@ -23,9 +23,14 @@ namespace ActivEarth.Competition.Badges
             else
             {
                 BadgeManager.UpdateBadge(user.UserID, Statistic.Steps);
+                BadgeManager.UpdateBadge(user.UserID, Statistic.AggregateDistance);
                 BadgeManager.UpdateBadge(user.UserID, Statistic.WalkDistance);
                 BadgeManager.UpdateBadge(user.UserID, Statistic.RunDistance);
                 BadgeManager.UpdateBadge(user.UserID, Statistic.BikeDistance);
+                BadgeManager.UpdateBadge(user.UserID, Statistic.AggregateTime);
+                BadgeManager.UpdateBadge(user.UserID, Statistic.WalkTime);
+                BadgeManager.UpdateBadge(user.UserID, Statistic.RunTime);
+                BadgeManager.UpdateBadge(user.UserID, Statistic.BikeTime);
                 BadgeManager.UpdateBadge(user.UserID, Statistic.ChallengesCompleted);
                 BadgeManager.UpdateBadge(user.UserID, Statistic.GasSavings);
 
@@ -33,9 +38,14 @@ namespace ActivEarth.Competition.Badges
                 if (badges == null || badges.Count == 0)
                 {
                     BadgeManager.CreateBadge(user.UserID, Statistic.Steps);
+                    BadgeManager.CreateBadge(user.UserID, Statistic.AggregateDistance);
                     BadgeManager.CreateBadge(user.UserID, Statistic.WalkDistance);
                     BadgeManager.CreateBadge(user.UserID, Statistic.RunDistance);
                     BadgeManager.CreateBadge(user.UserID, Statistic.BikeDistance);
+                    BadgeManager.CreateBadge(user.UserID, Statistic.AggregateTime);
+                    BadgeManager.CreateBadge(user.UserID, Statistic.WalkTime);
+                    BadgeManager.CreateBadge(user.UserID, Statistic.RunTime);
+                    BadgeManager.CreateBadge(user.UserID, Statistic.BikeTime);
                     BadgeManager.CreateBadge(user.UserID, Statistic.ChallengesCompleted);
                     BadgeManager.CreateBadge(user.UserID, Statistic.GasSavings);
                     badges = BadgeDAO.GetBadgesFromUserId(user.UserID);

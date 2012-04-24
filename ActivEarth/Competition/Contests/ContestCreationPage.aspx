@@ -92,7 +92,10 @@
                             <asp:CustomValidator ID="contestStartAfterToday" runat="server" ControlToValidate="txbContestStartDate" CssClass="failureNotification"
                                 Display="Dynamic" ErrorMessage="Start date must be after today." ValidationGroup="CreateContestValidationGroup" Text="*"
                                 onservervalidate="ValidateStartDate" />
-                        </asp:TableCell></asp:TableRow><asp:TableRow>
+                        </asp:TableCell>
+                    </asp:TableRow>
+
+                    <asp:TableRow>
                         <asp:TableCell>
                             <asp:Label ID="contestEndDateLabel" runat="server" Text="End Date (MM/DD/YYYY)"></asp:Label>
                             <asp:Label ID="contestEndGoalLabel" runat="server" Text="Goal To Reach"></asp:Label>
@@ -111,10 +114,12 @@
                                     Display="Dynamic" ErrorMessage="End date must be after start date." ValidationGroup="CreateContestValidationGroup" Text="*"
                                     onservervalidate="ValidateEndDate" />
                             </asp:Panel>
-
                             <asp:Panel ID="contestModeGoalPanel" runat="server">
                                 <asp:TextBox ID="txbContestEndGoal" runat="server" CssClass="textEntry" Width="300"></asp:TextBox>
                                 <ajaxToolkit:FilteredTextBoxExtender ID="txbContestEndGoalFilter" runat="server" TargetControlID="txbContestEndGoal" FilterType="Numbers" />
+                                 <asp:RequiredFieldValidator ID="contestModeGoalRequired" runat="server" ControlToValidate="txbContestEndGoal" 
+                                    CssClass="failureNotification" ErrorMessage="Contest goal is required." ToolTip="Contest goal is required." 
+                                    ValidationGroup="CreateContestValidationGroup">*</asp:RequiredFieldValidator>
                             </asp:Panel>
                         </asp:TableCell></asp:TableRow><asp:TableRow>
                         <asp:TableCell><asp:Label ID="lblContestSearchable" runat="server" Text="Allow Search" /></asp:TableCell><asp:TableCell><asp:CheckBox ID="chkContestSearchable" runat="server" Checked="True" /></asp:TableCell>

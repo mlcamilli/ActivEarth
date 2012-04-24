@@ -16,6 +16,7 @@ namespace ActivEarth.Competition.Contests
     {
         int contestId;
         User user;
+        bool isValidId;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -27,52 +28,74 @@ namespace ActivEarth.Competition.Contests
             else
             {
                 string contestIdString = Request.QueryString["id"];
-                if (contestIdString != null && int.TryParse(contestIdString, out contestId))
+                
+                Contest contest = contest = null;
+                if(contestIdString != null && int.TryParse(contestIdString, out contestId))
                 {
-                    Contest contest = ContestDAO.GetContestFromContestId(contestId, true, false);
-                    if (contest != null)
-                    {
-                        ContestName.Text = contest.Name;
-                        ContestDescription.Text = contest.Description;
-                        ContestActivityScore.Text = contest.Reward.ToString();
-
-                        if (contest.StartTime > DateTime.Now)
-                        {
-                            btnJoinContest.Visible = 
-                                ((contest.Type == ContestType.Individual) &&
-                                !(TeamDAO.UserCompetingInContest(user.UserID, contestId)));
-                        }
-
-                        if (contest.Mode == ContestEndMode.TimeBased)
-                        {
-                            TimeGraph.PopulateTimeGraph(contest.StartTime, contest.EndCondition.EndTime);
-                            TimeGraph.Visible = true;
-                        }
-                        else
-                        {
-                            GoalGraph.PopulateContestGraph(
-                                (contest.Teams.Count >= 1 ? contest.Teams[0] : null),
-                                (contest.Teams.Count >= 2 ? contest.Teams[1] : null),
-                                (contest.Teams.Count >= 3 ? contest.Teams[2] : null),
-                                TeamDAO.GetTeamFromUserIdAndContestId(user.UserID, contestId, false),
-                                contest.EndCondition.EndValue);
-
-                            GoalGraph.SetGraphLabels(contest.EndCondition.EndValue, contest.FormatString);
-                            GoalGraph.Visible = true;
-                        }
-
-                        Color[] backColors = { Color.FromArgb(34, 139, 34), Color.White };
-                        Color[] textColors = { Color.White, Color.Black };
-                        ContestLeaderBoard.MakeLeaderBoard(10, contest.Teams, backColors, textColors, contest.FormatString);
-                        ContestLeaderBoard.Visible = true;
-                    }
+                    contest = ContestDAO.GetContestFromContestId(contestId, false, false); 
                 }
+
+                isValidId = contest != null;
+                if (!Page.IsPostBack && isValidId)
+                {
+                    LoadDateOnPage();
+                }
+            }
+        }
+
+        private void LoadDateOnPage()
+        {
+            Contest contest = ContestDAO.GetContestFromContestId(contestId, true, false); 
+
+            ContestName.Text = contest.Name;
+            ContestDescription.Text = contest.Description;
+            ContestActivityScore.Text = contest.Reward.ToString();
+
+            if (contest.StartTime > DateTime.Now)
+            {
+                btnJoinContest.Visible =
+                    ((contest.Type == ContestType.Individual) &&
+                        !(TeamDAO.UserCompetingInContest(user.UserID, contestId)));
+
+                ContestSignUpPanel.Visible = true;
+                Color[] backColors = { Color.FromArgb(34, 139, 34), Color.White };
+                Color[] textColors = { Color.White, Color.Black };
+                CurrentTeams.PopulateTeamTable(contest.Teams, backColors, textColors);
+            }
+            else
+            {
+                if (contest.Mode == ContestEndMode.TimeBased)
+                {
+                    TimeGraph.PopulateTimeGraph(contest.StartTime, contest.EndCondition.EndTime);
+                    TimeGraph.Visible = true;
+                }
+                else
+                {
+                    GoalGraph.PopulateContestGraph(
+                        (contest.Teams.Count >= 1 ? contest.Teams[0] : null),
+                        (contest.Teams.Count >= 2 ? contest.Teams[1] : null),
+                        (contest.Teams.Count >= 3 ? contest.Teams[2] : null),
+                        TeamDAO.GetTeamFromUserIdAndContestId(user.UserID, contestId, false),
+                        contest.EndCondition.EndValue);
+
+                    GoalGraph.SetGraphLabels(contest.EndCondition.EndValue, contest.FormatString);
+                    GoalGraph.Visible = true;
+                }
+
+                Color[] backColors = { Color.FromArgb(34, 139, 34), Color.White };
+                Color[] textColors = { Color.White, Color.Black };
+                ContestLeaderBoard.MakeLeaderBoard(10, contest.Teams, backColors, textColors, contest.FormatString);
+                ContestLeaderBoard.Visible = true;
             }
         }
 
         protected void JoinContest(object sender, EventArgs e)
         {
-            ContestManager.AddUser(contestId, user);
+            if(isValidId)
+            {
+                ContestManager.AddUser(contestId, user);
+                LoadDateOnPage();
+            }
         }
     }
 }
