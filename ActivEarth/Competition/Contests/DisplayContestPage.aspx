@@ -16,9 +16,7 @@
         </asp:Panel>
     </div>
     <p>
-        <asp:Label ID="ContestName" runat="server" Text="Contest Name"></asp:Label>
-    </p>
-    <p>
+        <h2><asp:Label ID="ContestName" runat="server" Text="Contest Name"></asp:Label></h2>
         <asp:Label ID="ContestDescription" runat="server" Text="Contest Description"></asp:Label>
     </p>
     <div align="left">
@@ -34,6 +32,8 @@
                 </asp:TableCell>
             </asp:TableRow>
         </asp:Table>
+        <br />
+        <asp:Button ID="btnJoinContest" Text="Join Contest" OnClick="JoinContest" runat="server" Visible="false" />
     </div> 
     
 </asp:Content>

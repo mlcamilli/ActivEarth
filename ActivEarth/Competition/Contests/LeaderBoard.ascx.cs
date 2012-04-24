@@ -48,7 +48,7 @@ namespace ActivEarth.Competition.Contests
                 }
             }
 
-            populateLeaderBoard(format);
+            PopulateLeaderBoard(format);
         }
 
         private void AddRowToLeaderBoard(Color backColor, Color textColor)
@@ -59,7 +59,7 @@ namespace ActivEarth.Competition.Contests
             _displayLeaderBoardRows.Controls.Add(leaderBoardRow);
         }
 
-        private void populateLeaderBoard(string format)
+        private void PopulateLeaderBoard(string format)
         {
             for (int i = 0; i < _numSlots; i++)
             {

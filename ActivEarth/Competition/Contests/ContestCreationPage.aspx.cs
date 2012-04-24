@@ -36,35 +36,37 @@ namespace ActivEarth.Competition.Contests
                         i++;
                     }
                 }
+
+                if (txbContestStartDate.Text.Length == 0)
+                {
+                    contestStartDateCalender.SelectedDate = DateTime.Today.AddDays(1);
+                }
+
+                if (txbContestEndDate.Text.Length == 0)
+                {
+                    contestEndDateCalender.SelectedDate = contestStartDateCalender.SelectedDate;
+                }
+
+                SetModeDisplay();
             }
         }
 
         protected void ddlContestMode_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string mode = ddlContestMode.SelectedValue;
-            if (mode == "Time")
-            {
-                contestModeTimePanel.Visible = true;
-                contestModeGoalPanel.Visible = false;
-            }
-            else
-            {
-                contestModeGoalPanel.Visible = true;
-                contestModeTimePanel.Visible = false;
-            }
+            SetModeDisplay();
         }
 
         protected void ValidateStartDate(object source, ServerValidateEventArgs args)
         {
             DateTime startDate = DateTime.Parse(args.Value);
-            args.IsValid = DateTime.Compare(DateTime.Now, startDate) < 0;
+            args.IsValid = (DateTime.Now < startDate);
         }
 
         protected void ValidateEndDate(object source, ServerValidateEventArgs args)
         {
             DateTime startDate = DateTime.Parse(txbContestStartDate.Text);
             DateTime endDate = DateTime.Parse(args.Value);
-            args.IsValid = DateTime.Compare(startDate, endDate) < 0;
+            args.IsValid = (startDate <= endDate);
         }
 
         protected void CreateContest(object sender, EventArgs e)
@@ -112,6 +114,21 @@ namespace ActivEarth.Competition.Contests
                 }
 
                 Response.Redirect("~/Competition/Contests/DisplayContestPage.aspx?id=" + createdContestId);
+            }
+        }
+
+        private void SetModeDisplay()
+        {
+            string mode = ddlContestMode.SelectedValue;
+            if (mode == "Time")
+            {
+                contestModeTimePanel.Visible = true;
+                contestModeGoalPanel.Visible = false;
+            }
+            else
+            {
+                contestModeGoalPanel.Visible = true;
+                contestModeTimePanel.Visible = false;
             }
         }
     }
