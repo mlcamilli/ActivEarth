@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using ActivEarth.Objects.Competition.Challenges;
 using ActivEarth.Objects.Profile;
+using ActivEarth.Server.Service.Competition;
 using ActivEarth.DAO;
 
 namespace ActivEarth.Competition.Challenges
@@ -21,6 +22,12 @@ namespace ActivEarth.Competition.Challenges
              }
              else
              {
+                 #region ---------- Test Code ----------
+
+                 ChallengeManager.GenerateNewChallenges();
+
+                 #endregion ---------- Test Code ----------
+
                  foreach (Challenge challenge in ChallengeDAO.GetActiveDailyChallenges())
                  {
                      _displayDailyChallenges.AddChallengeToDisplay(challenge);
@@ -44,7 +51,7 @@ namespace ActivEarth.Competition.Challenges
 
 
             //Test code
-            
+            /*
             Challenge daily = new Challenge("Walk this way", "Walk 5 miles", 10, false, new System.DateTime(1,1,1,1,1,1), 1, Statistic.WalkDistance, 5.0f);
             Challenge weekly = new Challenge("Run this way", "Run 5 miles", 50, false, new System.DateTime(1, 1, 1, 1, 1, 1), 7, Statistic.RunDistance, 5.0f);
             Challenge monthly = new Challenge("Bike this way", "Bike 5 miles", 100, false, new System.DateTime(1, 1, 1, 1, 1, 1), 30, Statistic.BikeDistance, 5.0f);
@@ -72,8 +79,8 @@ namespace ActivEarth.Competition.Challenges
             _displayPersistentChallenges.AddChallengeToDisplay(persistent);
             _displayPersistentChallenges.AddChallengeToDisplay(persistent);
             _displayPersistentChallenges.AddChallengeToDisplay(persistent);
-            _displayPersistentChallenges.AddChallengeToDisplay(persistent);
-            //End test code */
+            _displayPersistentChallenges.AddChallengeToDisplay(persistent);*/
+            //End test code
         }
     }
 }

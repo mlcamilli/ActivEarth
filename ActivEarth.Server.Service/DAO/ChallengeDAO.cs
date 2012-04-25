@@ -36,7 +36,8 @@ namespace ActivEarth.DAO
                                 EndTime = c.end_time,
                                 Duration = new TimeSpan(c.duration_days, 0, 0, 0),
                                 StatisticBinding = (Statistic)c.statistic,
-                                IsActive = c.active
+                                IsActive = c.active,
+                                ImagePath = c.image_path
                             }).FirstOrDefault();
 
                 toReturn.FormatString = StatisticInfoDAO.GetStatisticFormatString(toReturn.StatisticBinding);
@@ -70,7 +71,8 @@ namespace ActivEarth.DAO
                                 EndTime = c.end_time,
                                 Duration = new TimeSpan(c.duration_days, 0, 0, 0),
                                 StatisticBinding = (Statistic)c.statistic,
-                                IsActive = c.active
+                                IsActive = c.active,
+                                ImagePath = c.image_path
                             }).ToList();
 
                 foreach (Challenge challenge in toReturn)
@@ -133,7 +135,8 @@ namespace ActivEarth.DAO
                                 EndTime = c.end_time,
                                 Duration = new TimeSpan(c.duration_days, 0, 0, 0),
                                 StatisticBinding = (Statistic)c.statistic,
-                                IsActive = c.active
+                                IsActive = c.active,
+                                ImagePath = c.image_path
                             }).ToList();
 
                 foreach (Challenge challenge in toReturn)
@@ -170,7 +173,8 @@ namespace ActivEarth.DAO
                                 EndTime = c.end_time,
                                 Duration = new TimeSpan(c.duration_days, 0, 0, 0),
                                 StatisticBinding = (Statistic)c.statistic,
-                                IsActive = c.active
+                                IsActive = c.active,
+                                ImagePath = c.image_path
                             }).ToList();
 
                 foreach (Challenge challenge in toReturn)
@@ -220,14 +224,15 @@ namespace ActivEarth.DAO
                             end_time = challenge.EndTime,
                             duration_days = challenge.Duration.Days,
                             statistic = (byte)challenge.StatisticBinding,
-                            active = challenge.IsActive
+                            active = challenge.IsActive,
+                            image_path = challenge.ImagePath
                         };
                     data.ChallengeDataProviders.InsertOnSubmit(challengeData);
                     data.SubmitChanges();
                     return challengeData.id;
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 return 0;
             }
@@ -258,6 +263,7 @@ namespace ActivEarth.DAO
                         dbChallenge.duration_days = challenge.Duration.Days;
                         dbChallenge.statistic = (byte)challenge.StatisticBinding;
                         dbChallenge.active = challenge.IsActive;
+                        dbChallenge.image_path = challenge.ImagePath;
 
                         data.SubmitChanges();
                         return true;
@@ -363,6 +369,60 @@ namespace ActivEarth.DAO
             }
         }
 
+        /// <summary>
+        /// Creates a number of random challenges by reading in from the Challenge_Definitions SQL table.
+        /// </summary>
+        /// <param name="type">Type of challenges desired (Daily/Weekly/Monthly).</param>
+        /// <param name="count">Number of challenges needing to be created.</param>
+        /// <returns></returns>
+        public static List<Challenge> GenerateRandomChallenges(ChallengeType type, int count)
+        {
+            try
+            {
+                using (SqlConnection connection = ConnectionManager.GetConnection())
+                {
+                    List<Challenge> challenges = new List<Challenge>();
+
+                    var data = new ActivEarthDataProvidersDataContext(connection);
+                    List<Challenge> templates = (from c in data.ChallengeDefinitionDataProviders
+                                               where (c.challenge_type == (byte)type && c.persistent == false)
+                                               select new Challenge()
+                                               {
+                                                   IsPersistent = c.persistent,
+                                                   StatisticBinding = (Statistic)c.statistic,
+                                                   Requirement = (float)c.requirement,
+                                                   Reward = c.reward,
+                                                   Description = c.condition_text,
+                                                   Name = (c.name == null ? String.Empty : c.name),
+                                                   ImagePath = c.image_path
+                                               }).ToList();
+
+                    Random rand = new Random();
+
+                    while (challenges.Count < count)
+                    {
+                        int i = rand.Next(templates.Count);
+
+                        if (!challenges.Contains(templates[i]))
+                        {
+                            string formatString = StatisticInfoDAO.GetStatisticFormatString(templates[i].StatisticBinding);
+                            string requirementString = templates[i].Requirement.ToString(formatString);
+
+                            templates[i].Description = String.Format(templates[i].Description, requirementString);
+
+                            challenges.Add(templates[i]);
+                        }
+                    }
+
+                    return challenges;
+                }
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
         #region Private Methods
 
         /// <summary>
@@ -390,7 +450,8 @@ namespace ActivEarth.DAO
                                 EndTime = c.end_time,
                                 Duration = new TimeSpan(c.duration_days, 0, 0, 0),
                                 StatisticBinding = (Statistic)c.statistic,
-                                IsActive = c.active
+                                IsActive = c.active,
+                                ImagePath = c.image_path
                             }).ToList();
 
                 foreach (Challenge challenge in toReturn)
