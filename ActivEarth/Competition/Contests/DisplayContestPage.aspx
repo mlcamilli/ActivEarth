@@ -3,6 +3,7 @@
 <%@ Register src="LeaderBoard.ascx" tagname="LeaderBoard" tagprefix="uc" %>
 <%@ Register src="ContestGoalGraph.ascx" tagname="ContestGoalGraph" tagprefix="uc" %>
 <%@ Register src="ContestTimeGraph.ascx" tagname="ContestTimeGraph" tagprefix="uc" %>
+<%@ Register src="TeamDisplayTable.ascx" tagname="TeamDisplayTable" tagprefix="uc" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>
@@ -16,9 +17,27 @@
         </asp:Panel>
     </div>
     <p>
-        <h2><asp:Label ID="ContestName" runat="server" Text="Contest Name"></asp:Label></h2>
+        <h2><asp:Label ID="ContestName" runat="server" Text="Contest Name"></asp:Label>
+    </h2>
         <asp:Label ID="ContestDescription" runat="server" Text="Contest Description"></asp:Label>
     </p>
+
+    <div align="center">
+        <asp:Panel ID="ContestSignUpPanel" runat="server" Visible="false">
+            <uc:TeamDisplayTable runat="server" ID="CurrentTeams" />
+            <br />
+            <asp:Button ID="btnJoinContest" Text="Join Contest" OnClick="JoinContest" runat="server" Visible="false" />
+        </asp:Panel>
+    </div>
+
+    <div align="left">
+        <asp:Panel ID="ContestCompletePanel" runat="server" Visible="false">
+            <asp:Label ID="ContestCompletedMessage" runat="server" Text="Contest has completed."></asp:Label>
+            <asp:Label ID="ContestRankMessage" runat="server" Text="User rank message."></asp:Label>
+            <asp:Label ID="ContestRewardMessage" runat="server" Text="You were rewarded < > activity score."></asp:Label>
+        </asp:Panel>
+    </div>
+
     <div align="left">
         <asp:Table ID="ContestStatusTable"  runat="server" CellPadding="0" 
             CellSpacing="0">
@@ -32,8 +51,6 @@
                 </asp:TableCell>
             </asp:TableRow>
         </asp:Table>
-        <br />
-        <asp:Button ID="btnJoinContest" Text="Join Contest" OnClick="JoinContest" runat="server" Visible="false" />
-    </div> 
+    </div>
     
 </asp:Content>

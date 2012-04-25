@@ -615,6 +615,32 @@ namespace ActivEarth.Tests.Competition
             }
         }
 
+        /// <summary>
+        /// Tests the assignment of format strings when a challenge is loaded.
+        /// </summary>
+        [TestMethod]
+        public void TestChallengeGenerator()
+        {
+            using (_trans)
+            {
+                Log("Generating Random Challenges");
+                ChallengeManager.GenerateNewChallenges();
+
+                Log("Verifying correct numbers of each type of challenge");
+                Assert.AreEqual(3, ChallengeDAO.GetActiveDailyChallenges().Count);
+                Assert.AreEqual(3, ChallengeDAO.GetActiveWeeklyChallenges().Count);
+                Assert.AreEqual(3, ChallengeDAO.GetActiveMonthlyChallenges().Count);
+
+                Log("Generating Random Challenges again");
+                ChallengeManager.GenerateNewChallenges();
+
+                Log("Verifying no more challenges were created");
+                Assert.AreEqual(3, ChallengeDAO.GetActiveDailyChallenges().Count);
+                Assert.AreEqual(3, ChallengeDAO.GetActiveWeeklyChallenges().Count);
+                Assert.AreEqual(3, ChallengeDAO.GetActiveMonthlyChallenges().Count);
+            }
+        }
+
         #endregion ---------- Test Cases ----------
 
         #region ---------- Utility Methods ----------

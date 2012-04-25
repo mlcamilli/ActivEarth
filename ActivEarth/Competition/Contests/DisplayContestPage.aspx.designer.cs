@@ -58,6 +58,69 @@ namespace ActivEarth.Competition.Contests {
         protected global::System.Web.UI.WebControls.Label ContestDescription;
         
         /// <summary>
+        /// ContestSignUpPanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel ContestSignUpPanel;
+        
+        /// <summary>
+        /// CurrentTeams control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::ActivEarth.Competition.Contests.TeamDisplayTable CurrentTeams;
+        
+        /// <summary>
+        /// btnJoinContest control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnJoinContest;
+        
+        /// <summary>
+        /// ContestCompletePanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel ContestCompletePanel;
+        
+        /// <summary>
+        /// ContestCompletedMessage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label ContestCompletedMessage;
+        
+        /// <summary>
+        /// ContestRankMessage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label ContestRankMessage;
+        
+        /// <summary>
+        /// ContestRewardMessage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label ContestRewardMessage;
+        
+        /// <summary>
         /// ContestStatusTable control.
         /// </summary>
         /// <remarks>
@@ -92,14 +155,5 @@ namespace ActivEarth.Competition.Contests {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::ActivEarth.Competition.Contests.LeaderBoard ContestLeaderBoard;
-        
-        /// <summary>
-        /// btnJoinContest control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnJoinContest;
     }
 }

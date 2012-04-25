@@ -36,9 +36,6 @@ namespace ActivEarth.Server.Service
     partial void InsertUserDataProvider(UserDataProvider instance);
     partial void UpdateUserDataProvider(UserDataProvider instance);
     partial void DeleteUserDataProvider(UserDataProvider instance);
-    partial void InsertChallengeDataProvider(ChallengeDataProvider instance);
-    partial void UpdateChallengeDataProvider(ChallengeDataProvider instance);
-    partial void DeleteChallengeDataProvider(ChallengeDataProvider instance);
     partial void InsertPrivacySettingDataProvider(PrivacySettingDataProvider instance);
     partial void UpdatePrivacySettingDataProvider(PrivacySettingDataProvider instance);
     partial void DeletePrivacySettingDataProvider(PrivacySettingDataProvider instance);
@@ -57,6 +54,12 @@ namespace ActivEarth.Server.Service
     partial void InsertGroupHashtagDataProvider(GroupHashtagDataProvider instance);
     partial void UpdateGroupHashtagDataProvider(GroupHashtagDataProvider instance);
     partial void DeleteGroupHashtagDataProvider(GroupHashtagDataProvider instance);
+    partial void InsertMessageDataProvider(MessageDataProvider instance);
+    partial void UpdateMessageDataProvider(MessageDataProvider instance);
+    partial void DeleteMessageDataProvider(MessageDataProvider instance);
+    partial void InsertGroupContestDataProvider(GroupContestDataProvider instance);
+    partial void UpdateGroupContestDataProvider(GroupContestDataProvider instance);
+    partial void DeleteGroupContestDataProvider(GroupContestDataProvider instance);
     partial void InsertUserStatisticDataProvider(UserStatisticDataProvider instance);
     partial void UpdateUserStatisticDataProvider(UserStatisticDataProvider instance);
     partial void DeleteUserStatisticDataProvider(UserStatisticDataProvider instance);
@@ -75,9 +78,12 @@ namespace ActivEarth.Server.Service
     partial void InsertContestDataProvider(ContestDataProvider instance);
     partial void UpdateContestDataProvider(ContestDataProvider instance);
     partial void DeleteContestDataProvider(ContestDataProvider instance);
-    partial void InsertMessageDataProvider(MessageDataProvider instance);
-    partial void UpdateMessageDataProvider(MessageDataProvider instance);
-    partial void DeleteMessageDataProvider(MessageDataProvider instance);
+    partial void InsertChallengeDataProvider(ChallengeDataProvider instance);
+    partial void UpdateChallengeDataProvider(ChallengeDataProvider instance);
+    partial void DeleteChallengeDataProvider(ChallengeDataProvider instance);
+    partial void InsertChallengeDefinitionDataProvider(ChallengeDefinitionDataProvider instance);
+    partial void UpdateChallengeDefinitionDataProvider(ChallengeDefinitionDataProvider instance);
+    partial void DeleteChallengeDefinitionDataProvider(ChallengeDefinitionDataProvider instance);
     #endregion
 		
 		public ActivEarthDataProvidersDataContext() : 
@@ -123,14 +129,6 @@ namespace ActivEarth.Server.Service
 			get
 			{
 				return this.GetTable<UserDataProvider>();
-			}
-		}
-		
-		public System.Data.Linq.Table<ChallengeDataProvider> ChallengeDataProviders
-		{
-			get
-			{
-				return this.GetTable<ChallengeDataProvider>();
 			}
 		}
 		
@@ -182,6 +180,22 @@ namespace ActivEarth.Server.Service
 			}
 		}
 		
+		public System.Data.Linq.Table<MessageDataProvider> MessageDataProviders
+		{
+			get
+			{
+				return this.GetTable<MessageDataProvider>();
+			}
+		}
+		
+		public System.Data.Linq.Table<GroupContestDataProvider> GroupContestDataProviders
+		{
+			get
+			{
+				return this.GetTable<GroupContestDataProvider>();
+			}
+		}
+		
 		public System.Data.Linq.Table<UserStatisticDataProvider> UserStatisticDataProviders
 		{
 			get
@@ -230,11 +244,19 @@ namespace ActivEarth.Server.Service
 			}
 		}
 		
-		public System.Data.Linq.Table<MessageDataProvider> MessageDataProviders
+		public System.Data.Linq.Table<ChallengeDataProvider> ChallengeDataProviders
 		{
 			get
 			{
-				return this.GetTable<MessageDataProvider>();
+				return this.GetTable<ChallengeDataProvider>();
+			}
+		}
+		
+		public System.Data.Linq.Table<ChallengeDefinitionDataProvider> ChallengeDefinitionDataProviders
+		{
+			get
+			{
+				return this.GetTable<ChallengeDefinitionDataProvider>();
 			}
 		}
 	}
@@ -602,6 +624,8 @@ namespace ActivEarth.Server.Service
 		
 		private EntitySet<GroupDataProvider> _GroupDataProviders;
 		
+		private EntitySet<MessageDataProvider> _messages;
+		
 		private EntitySet<UserStatisticDataProvider> _UserStatisticDataProviders;
 		
 		private EntitySet<ChallengeInitializationDataProvider> _ChallengeInitializationDataProviders;
@@ -611,8 +635,6 @@ namespace ActivEarth.Server.Service
 		private EntitySet<TeamMemberDataProvider> _TeamMemberDataProviders;
 		
 		private EntitySet<ContestDataProvider> _ContestDataProviders;
-		
-		private EntitySet<MessageDataProvider> _MessageDataProviders;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -632,12 +654,12 @@ namespace ActivEarth.Server.Service
 			this._privacy_settings = new EntitySet<PrivacySettingDataProvider>(new Action<PrivacySettingDataProvider>(this.attach_privacy_settings), new Action<PrivacySettingDataProvider>(this.detach_privacy_settings));
 			this._GroupMemberDataProviders = new EntitySet<GroupMemberDataProvider>(new Action<GroupMemberDataProvider>(this.attach_GroupMemberDataProviders), new Action<GroupMemberDataProvider>(this.detach_GroupMemberDataProviders));
 			this._GroupDataProviders = new EntitySet<GroupDataProvider>(new Action<GroupDataProvider>(this.attach_GroupDataProviders), new Action<GroupDataProvider>(this.detach_GroupDataProviders));
+			this._messages = new EntitySet<MessageDataProvider>(new Action<MessageDataProvider>(this.attach_messages), new Action<MessageDataProvider>(this.detach_messages));
 			this._UserStatisticDataProviders = new EntitySet<UserStatisticDataProvider>(new Action<UserStatisticDataProvider>(this.attach_UserStatisticDataProviders), new Action<UserStatisticDataProvider>(this.detach_UserStatisticDataProviders));
 			this._ChallengeInitializationDataProviders = new EntitySet<ChallengeInitializationDataProvider>(new Action<ChallengeInitializationDataProvider>(this.attach_ChallengeInitializationDataProviders), new Action<ChallengeInitializationDataProvider>(this.detach_ChallengeInitializationDataProviders));
 			this._BadgeDataProviders = new EntitySet<BadgeDataProvider>(new Action<BadgeDataProvider>(this.attach_BadgeDataProviders), new Action<BadgeDataProvider>(this.detach_BadgeDataProviders));
 			this._TeamMemberDataProviders = new EntitySet<TeamMemberDataProvider>(new Action<TeamMemberDataProvider>(this.attach_TeamMemberDataProviders), new Action<TeamMemberDataProvider>(this.detach_TeamMemberDataProviders));
 			this._ContestDataProviders = new EntitySet<ContestDataProvider>(new Action<ContestDataProvider>(this.attach_ContestDataProviders), new Action<ContestDataProvider>(this.detach_ContestDataProviders));
-			this._MessageDataProviders = new EntitySet<MessageDataProvider>(new Action<MessageDataProvider>(this.attach_MessageDataProviders), new Action<MessageDataProvider>(this.detach_MessageDataProviders));
 			OnCreated();
 		}
 		
@@ -753,6 +775,19 @@ namespace ActivEarth.Server.Service
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UserDataProvider_MessageDataProvider", Storage="_messages", ThisKey="id", OtherKey="poster_id")]
+		public EntitySet<MessageDataProvider> MessageDataProviders
+		{
+			get
+			{
+				return this._messages;
+			}
+			set
+			{
+				this._messages.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UserDataProvider_UserStatisticDataProvider", Storage="_UserStatisticDataProviders", ThisKey="id", OtherKey="user_id")]
 		public EntitySet<UserStatisticDataProvider> UserStatisticDataProviders
 		{
@@ -815,19 +850,6 @@ namespace ActivEarth.Server.Service
 			set
 			{
 				this._ContestDataProviders.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UserDataProvider_MessageDataProvider", Storage="_MessageDataProviders", ThisKey="id", OtherKey="user_id")]
-		public EntitySet<MessageDataProvider> MessageDataProviders
-		{
-			get
-			{
-				return this._MessageDataProviders;
-			}
-			set
-			{
-				this._MessageDataProviders.Assign(value);
 			}
 		}
 		
@@ -899,6 +921,18 @@ namespace ActivEarth.Server.Service
 			entity.UserDataProvider = null;
 		}
 		
+		private void attach_messages(MessageDataProvider entity)
+		{
+			this.SendPropertyChanging();
+			entity.UserDataProvider = this;
+		}
+		
+		private void detach_messages(MessageDataProvider entity)
+		{
+			this.SendPropertyChanging();
+			entity.UserDataProvider = null;
+		}
+		
 		private void attach_UserStatisticDataProviders(UserStatisticDataProvider entity)
 		{
 			this.SendPropertyChanging();
@@ -957,324 +991,6 @@ namespace ActivEarth.Server.Service
 		{
 			this.SendPropertyChanging();
 			entity.UserDataProvider = null;
-		}
-		
-		private void attach_MessageDataProviders(MessageDataProvider entity)
-		{
-			this.SendPropertyChanging();
-			entity.UserDataProvider = this;
-		}
-		
-		private void detach_MessageDataProviders(MessageDataProvider entity)
-		{
-			this.SendPropertyChanging();
-			entity.UserDataProvider = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.challenges")]
-	public partial class ChallengeDataProvider : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _id;
-		
-		private string _name;
-		
-		private string _description;
-		
-		private int _points;
-		
-		private double _requirement;
-		
-		private bool _persistent;
-		
-		private System.DateTime _end_time;
-		
-		private int _duration_days;
-		
-		private byte _statistic;
-		
-		private bool _active;
-		
-		private EntitySet<ChallengeInitializationDataProvider> _ChallengeInitializationDataProviders;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnidChanging(int value);
-    partial void OnidChanged();
-    partial void OnnameChanging(string value);
-    partial void OnnameChanged();
-    partial void OndescriptionChanging(string value);
-    partial void OndescriptionChanged();
-    partial void OnpointsChanging(int value);
-    partial void OnpointsChanged();
-    partial void OnrequirementChanging(double value);
-    partial void OnrequirementChanged();
-    partial void OnpersistentChanging(bool value);
-    partial void OnpersistentChanged();
-    partial void Onend_timeChanging(System.DateTime value);
-    partial void Onend_timeChanged();
-    partial void Onduration_daysChanging(int value);
-    partial void Onduration_daysChanged();
-    partial void OnstatisticChanging(byte value);
-    partial void OnstatisticChanged();
-    partial void OnactiveChanging(bool value);
-    partial void OnactiveChanged();
-    #endregion
-		
-		public ChallengeDataProvider()
-		{
-			this._ChallengeInitializationDataProviders = new EntitySet<ChallengeInitializationDataProvider>(new Action<ChallengeInitializationDataProvider>(this.attach_ChallengeInitializationDataProviders), new Action<ChallengeInitializationDataProvider>(this.detach_ChallengeInitializationDataProviders));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int id
-		{
-			get
-			{
-				return this._id;
-			}
-			set
-			{
-				if ((this._id != value))
-				{
-					this.OnidChanging(value);
-					this.SendPropertyChanging();
-					this._id = value;
-					this.SendPropertyChanged("id");
-					this.OnidChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string name
-		{
-			get
-			{
-				return this._name;
-			}
-			set
-			{
-				if ((this._name != value))
-				{
-					this.OnnameChanging(value);
-					this.SendPropertyChanging();
-					this._name = value;
-					this.SendPropertyChanged("name");
-					this.OnnameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_description", DbType="Text NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
-		public string description
-		{
-			get
-			{
-				return this._description;
-			}
-			set
-			{
-				if ((this._description != value))
-				{
-					this.OndescriptionChanging(value);
-					this.SendPropertyChanging();
-					this._description = value;
-					this.SendPropertyChanged("description");
-					this.OndescriptionChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_points", DbType="Int NOT NULL")]
-		public int points
-		{
-			get
-			{
-				return this._points;
-			}
-			set
-			{
-				if ((this._points != value))
-				{
-					this.OnpointsChanging(value);
-					this.SendPropertyChanging();
-					this._points = value;
-					this.SendPropertyChanged("points");
-					this.OnpointsChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_requirement", DbType="Float NOT NULL")]
-		public double requirement
-		{
-			get
-			{
-				return this._requirement;
-			}
-			set
-			{
-				if ((this._requirement != value))
-				{
-					this.OnrequirementChanging(value);
-					this.SendPropertyChanging();
-					this._requirement = value;
-					this.SendPropertyChanged("requirement");
-					this.OnrequirementChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_persistent", DbType="Bit NOT NULL")]
-		public bool persistent
-		{
-			get
-			{
-				return this._persistent;
-			}
-			set
-			{
-				if ((this._persistent != value))
-				{
-					this.OnpersistentChanging(value);
-					this.SendPropertyChanging();
-					this._persistent = value;
-					this.SendPropertyChanged("persistent");
-					this.OnpersistentChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_end_time", DbType="DateTime NOT NULL")]
-		public System.DateTime end_time
-		{
-			get
-			{
-				return this._end_time;
-			}
-			set
-			{
-				if ((this._end_time != value))
-				{
-					this.Onend_timeChanging(value);
-					this.SendPropertyChanging();
-					this._end_time = value;
-					this.SendPropertyChanged("end_time");
-					this.Onend_timeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_duration_days", DbType="Int NOT NULL")]
-		public int duration_days
-		{
-			get
-			{
-				return this._duration_days;
-			}
-			set
-			{
-				if ((this._duration_days != value))
-				{
-					this.Onduration_daysChanging(value);
-					this.SendPropertyChanging();
-					this._duration_days = value;
-					this.SendPropertyChanged("duration_days");
-					this.Onduration_daysChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_statistic", DbType="TinyInt NOT NULL")]
-		public byte statistic
-		{
-			get
-			{
-				return this._statistic;
-			}
-			set
-			{
-				if ((this._statistic != value))
-				{
-					this.OnstatisticChanging(value);
-					this.SendPropertyChanging();
-					this._statistic = value;
-					this.SendPropertyChanged("statistic");
-					this.OnstatisticChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_active", DbType="Bit NOT NULL")]
-		public bool active
-		{
-			get
-			{
-				return this._active;
-			}
-			set
-			{
-				if ((this._active != value))
-				{
-					this.OnactiveChanging(value);
-					this.SendPropertyChanging();
-					this._active = value;
-					this.SendPropertyChanged("active");
-					this.OnactiveChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ChallengeDataProvider_ChallengeInitializationDataProvider", Storage="_ChallengeInitializationDataProviders", ThisKey="id", OtherKey="challenge_id")]
-		public EntitySet<ChallengeInitializationDataProvider> ChallengeInitializationDataProviders
-		{
-			get
-			{
-				return this._ChallengeInitializationDataProviders;
-			}
-			set
-			{
-				this._ChallengeInitializationDataProviders.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_ChallengeInitializationDataProviders(ChallengeInitializationDataProvider entity)
-		{
-			this.SendPropertyChanging();
-			entity.ChallengeDataProvider = this;
-		}
-		
-		private void detach_ChallengeInitializationDataProviders(ChallengeInitializationDataProvider entity)
-		{
-			this.SendPropertyChanging();
-			entity.ChallengeDataProvider = null;
 		}
 	}
 	
@@ -2107,9 +1823,11 @@ namespace ActivEarth.Server.Service
 		
 		private EntitySet<GroupHashtagDataProvider> _group_hashtags;
 		
-		private EntitySet<TeamDataProvider> _TeamDataProviders;
+		private EntitySet<MessageDataProvider> _messages;
 		
-		private EntitySet<MessageDataProvider> _MessageDataProviders;
+		private EntitySet<GroupContestDataProvider> _GroupContestDataProviders;
+		
+		private EntitySet<TeamDataProvider> _TeamDataProviders;
 		
 		private EntityRef<UserDataProvider> _UserDataProvider;
 		
@@ -2139,8 +1857,9 @@ namespace ActivEarth.Server.Service
 		{
 			this._GroupMemberDataProviders = new EntitySet<GroupMemberDataProvider>(new Action<GroupMemberDataProvider>(this.attach_GroupMemberDataProviders), new Action<GroupMemberDataProvider>(this.detach_GroupMemberDataProviders));
 			this._group_hashtags = new EntitySet<GroupHashtagDataProvider>(new Action<GroupHashtagDataProvider>(this.attach_group_hashtags), new Action<GroupHashtagDataProvider>(this.detach_group_hashtags));
+			this._messages = new EntitySet<MessageDataProvider>(new Action<MessageDataProvider>(this.attach_messages), new Action<MessageDataProvider>(this.detach_messages));
+			this._GroupContestDataProviders = new EntitySet<GroupContestDataProvider>(new Action<GroupContestDataProvider>(this.attach_GroupContestDataProviders), new Action<GroupContestDataProvider>(this.detach_GroupContestDataProviders));
 			this._TeamDataProviders = new EntitySet<TeamDataProvider>(new Action<TeamDataProvider>(this.attach_TeamDataProviders), new Action<TeamDataProvider>(this.detach_TeamDataProviders));
-			this._MessageDataProviders = new EntitySet<MessageDataProvider>(new Action<MessageDataProvider>(this.attach_MessageDataProviders), new Action<MessageDataProvider>(this.detach_MessageDataProviders));
 			this._UserDataProvider = default(EntityRef<UserDataProvider>);
 			OnCreated();
 		}
@@ -2335,6 +2054,32 @@ namespace ActivEarth.Server.Service
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="GroupDataProvider_MessageDataProvider", Storage="_messages", ThisKey="id", OtherKey="group_id")]
+		public EntitySet<MessageDataProvider> MessageDataProviders
+		{
+			get
+			{
+				return this._messages;
+			}
+			set
+			{
+				this._messages.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="GroupDataProvider_GroupContestDataProvider", Storage="_GroupContestDataProviders", ThisKey="id", OtherKey="group_id")]
+		public EntitySet<GroupContestDataProvider> GroupContestDataProviders
+		{
+			get
+			{
+				return this._GroupContestDataProviders;
+			}
+			set
+			{
+				this._GroupContestDataProviders.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="GroupDataProvider_TeamDataProvider", Storage="_TeamDataProviders", ThisKey="id", OtherKey="group_id")]
 		public EntitySet<TeamDataProvider> TeamDataProviders
 		{
@@ -2345,19 +2090,6 @@ namespace ActivEarth.Server.Service
 			set
 			{
 				this._TeamDataProviders.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="GroupDataProvider_MessageDataProvider", Storage="_MessageDataProviders", ThisKey="id", OtherKey="group_id")]
-		public EntitySet<MessageDataProvider> MessageDataProviders
-		{
-			get
-			{
-				return this._MessageDataProviders;
-			}
-			set
-			{
-				this._MessageDataProviders.Assign(value);
 			}
 		}
 		
@@ -2439,6 +2171,30 @@ namespace ActivEarth.Server.Service
 			entity.GroupDataProvider = null;
 		}
 		
+		private void attach_messages(MessageDataProvider entity)
+		{
+			this.SendPropertyChanging();
+			entity.GroupDataProvider = this;
+		}
+		
+		private void detach_messages(MessageDataProvider entity)
+		{
+			this.SendPropertyChanging();
+			entity.GroupDataProvider = null;
+		}
+		
+		private void attach_GroupContestDataProviders(GroupContestDataProvider entity)
+		{
+			this.SendPropertyChanging();
+			entity.GroupDataProvider = this;
+		}
+		
+		private void detach_GroupContestDataProviders(GroupContestDataProvider entity)
+		{
+			this.SendPropertyChanging();
+			entity.GroupDataProvider = null;
+		}
+		
 		private void attach_TeamDataProviders(TeamDataProvider entity)
 		{
 			this.SendPropertyChanging();
@@ -2446,18 +2202,6 @@ namespace ActivEarth.Server.Service
 		}
 		
 		private void detach_TeamDataProviders(TeamDataProvider entity)
-		{
-			this.SendPropertyChanging();
-			entity.GroupDataProvider = null;
-		}
-		
-		private void attach_MessageDataProviders(MessageDataProvider entity)
-		{
-			this.SendPropertyChanging();
-			entity.GroupDataProvider = this;
-		}
-		
-		private void detach_MessageDataProviders(MessageDataProvider entity)
 		{
 			this.SendPropertyChanging();
 			entity.GroupDataProvider = null;
@@ -2590,6 +2334,534 @@ namespace ActivEarth.Server.Service
 						this._group_id = default(int);
 					}
 					this.SendPropertyChanged("GroupDataProvider");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.messages")]
+	public partial class MessageDataProvider : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id;
+		
+		private int _group_id;
+		
+		private int _poster_id;
+		
+		private string _title;
+		
+		private string _message1;
+		
+		private System.Nullable<int> _add_green_score;
+		
+		private System.Nullable<int> _add_competition_score;
+		
+		private System.Nullable<int> _add_challenge_score;
+		
+		private System.Nullable<int> _add_badge_score;
+		
+		private EntityRef<GroupDataProvider> _GroupDataProvider;
+		
+		private EntityRef<UserDataProvider> _UserDataProvider;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void Ongroup_idChanging(int value);
+    partial void Ongroup_idChanged();
+    partial void Onposter_idChanging(int value);
+    partial void Onposter_idChanged();
+    partial void OntitleChanging(string value);
+    partial void OntitleChanged();
+    partial void OnmessageChanging(string value);
+    partial void OnmessageChanged();
+    partial void Onadd_green_scoreChanging(System.Nullable<int> value);
+    partial void Onadd_green_scoreChanged();
+    partial void Onadd_competition_scoreChanging(System.Nullable<int> value);
+    partial void Onadd_competition_scoreChanged();
+    partial void Onadd_challenge_scoreChanging(System.Nullable<int> value);
+    partial void Onadd_challenge_scoreChanged();
+    partial void Onadd_badge_scoreChanging(System.Nullable<int> value);
+    partial void Onadd_badge_scoreChanged();
+    #endregion
+		
+		public MessageDataProvider()
+		{
+			this._GroupDataProvider = default(EntityRef<GroupDataProvider>);
+			this._UserDataProvider = default(EntityRef<UserDataProvider>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_group_id", DbType="Int NOT NULL")]
+		public int group_id
+		{
+			get
+			{
+				return this._group_id;
+			}
+			set
+			{
+				if ((this._group_id != value))
+				{
+					if (this._GroupDataProvider.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Ongroup_idChanging(value);
+					this.SendPropertyChanging();
+					this._group_id = value;
+					this.SendPropertyChanged("group_id");
+					this.Ongroup_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_poster_id", DbType="Int NOT NULL")]
+		public int poster_id
+		{
+			get
+			{
+				return this._poster_id;
+			}
+			set
+			{
+				if ((this._poster_id != value))
+				{
+					if (this._UserDataProvider.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onposter_idChanging(value);
+					this.SendPropertyChanging();
+					this._poster_id = value;
+					this.SendPropertyChanged("poster_id");
+					this.Onposter_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_title", DbType="VarChar(MAX) NOT NULL", CanBeNull=false)]
+		public string title
+		{
+			get
+			{
+				return this._title;
+			}
+			set
+			{
+				if ((this._title != value))
+				{
+					this.OntitleChanging(value);
+					this.SendPropertyChanging();
+					this._title = value;
+					this.SendPropertyChanged("title");
+					this.OntitleChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_message1", DbType="VarChar(MAX) NOT NULL", CanBeNull=false)]
+		public string message
+		{
+			get
+			{
+				return this._message1;
+			}
+			set
+			{
+				if ((this._message1 != value))
+				{
+					this.OnmessageChanging(value);
+					this.SendPropertyChanging();
+					this._message1 = value;
+					this.SendPropertyChanged("message");
+					this.OnmessageChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_add_green_score", DbType="Int")]
+		public System.Nullable<int> add_green_score
+		{
+			get
+			{
+				return this._add_green_score;
+			}
+			set
+			{
+				if ((this._add_green_score != value))
+				{
+					this.Onadd_green_scoreChanging(value);
+					this.SendPropertyChanging();
+					this._add_green_score = value;
+					this.SendPropertyChanged("add_green_score");
+					this.Onadd_green_scoreChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_add_competition_score", DbType="Int")]
+		public System.Nullable<int> add_competition_score
+		{
+			get
+			{
+				return this._add_competition_score;
+			}
+			set
+			{
+				if ((this._add_competition_score != value))
+				{
+					this.Onadd_competition_scoreChanging(value);
+					this.SendPropertyChanging();
+					this._add_competition_score = value;
+					this.SendPropertyChanged("add_competition_score");
+					this.Onadd_competition_scoreChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_add_challenge_score", DbType="Int")]
+		public System.Nullable<int> add_challenge_score
+		{
+			get
+			{
+				return this._add_challenge_score;
+			}
+			set
+			{
+				if ((this._add_challenge_score != value))
+				{
+					this.Onadd_challenge_scoreChanging(value);
+					this.SendPropertyChanging();
+					this._add_challenge_score = value;
+					this.SendPropertyChanged("add_challenge_score");
+					this.Onadd_challenge_scoreChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_add_badge_score", DbType="Int")]
+		public System.Nullable<int> add_badge_score
+		{
+			get
+			{
+				return this._add_badge_score;
+			}
+			set
+			{
+				if ((this._add_badge_score != value))
+				{
+					this.Onadd_badge_scoreChanging(value);
+					this.SendPropertyChanging();
+					this._add_badge_score = value;
+					this.SendPropertyChanged("add_badge_score");
+					this.Onadd_badge_scoreChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="GroupDataProvider_MessageDataProvider", Storage="_GroupDataProvider", ThisKey="group_id", OtherKey="id", IsForeignKey=true)]
+		public GroupDataProvider GroupDataProvider
+		{
+			get
+			{
+				return this._GroupDataProvider.Entity;
+			}
+			set
+			{
+				GroupDataProvider previousValue = this._GroupDataProvider.Entity;
+				if (((previousValue != value) 
+							|| (this._GroupDataProvider.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._GroupDataProvider.Entity = null;
+						previousValue.MessageDataProviders.Remove(this);
+					}
+					this._GroupDataProvider.Entity = value;
+					if ((value != null))
+					{
+						value.MessageDataProviders.Add(this);
+						this._group_id = value.id;
+					}
+					else
+					{
+						this._group_id = default(int);
+					}
+					this.SendPropertyChanged("GroupDataProvider");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UserDataProvider_MessageDataProvider", Storage="_UserDataProvider", ThisKey="poster_id", OtherKey="id", IsForeignKey=true)]
+		public UserDataProvider UserDataProvider
+		{
+			get
+			{
+				return this._UserDataProvider.Entity;
+			}
+			set
+			{
+				UserDataProvider previousValue = this._UserDataProvider.Entity;
+				if (((previousValue != value) 
+							|| (this._UserDataProvider.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._UserDataProvider.Entity = null;
+						previousValue.MessageDataProviders.Remove(this);
+					}
+					this._UserDataProvider.Entity = value;
+					if ((value != null))
+					{
+						value.MessageDataProviders.Add(this);
+						this._poster_id = value.id;
+					}
+					else
+					{
+						this._poster_id = default(int);
+					}
+					this.SendPropertyChanged("UserDataProvider");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.group_contests")]
+	public partial class GroupContestDataProvider : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id;
+		
+		private int _contest_id;
+		
+		private int _group_id;
+		
+		private EntityRef<GroupDataProvider> _GroupDataProvider;
+		
+		private EntityRef<ContestDataProvider> _ContestDataProvider;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void Oncontest_idChanging(int value);
+    partial void Oncontest_idChanged();
+    partial void Ongroup_idChanging(int value);
+    partial void Ongroup_idChanged();
+    #endregion
+		
+		public GroupContestDataProvider()
+		{
+			this._GroupDataProvider = default(EntityRef<GroupDataProvider>);
+			this._ContestDataProvider = default(EntityRef<ContestDataProvider>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_contest_id", DbType="Int NOT NULL")]
+		public int contest_id
+		{
+			get
+			{
+				return this._contest_id;
+			}
+			set
+			{
+				if ((this._contest_id != value))
+				{
+					if (this._ContestDataProvider.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Oncontest_idChanging(value);
+					this.SendPropertyChanging();
+					this._contest_id = value;
+					this.SendPropertyChanged("contest_id");
+					this.Oncontest_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_group_id", DbType="Int NOT NULL")]
+		public int group_id
+		{
+			get
+			{
+				return this._group_id;
+			}
+			set
+			{
+				if ((this._group_id != value))
+				{
+					if (this._GroupDataProvider.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Ongroup_idChanging(value);
+					this.SendPropertyChanging();
+					this._group_id = value;
+					this.SendPropertyChanged("group_id");
+					this.Ongroup_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="GroupDataProvider_GroupContestDataProvider", Storage="_GroupDataProvider", ThisKey="group_id", OtherKey="id", IsForeignKey=true)]
+		public GroupDataProvider GroupDataProvider
+		{
+			get
+			{
+				return this._GroupDataProvider.Entity;
+			}
+			set
+			{
+				GroupDataProvider previousValue = this._GroupDataProvider.Entity;
+				if (((previousValue != value) 
+							|| (this._GroupDataProvider.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._GroupDataProvider.Entity = null;
+						previousValue.GroupContestDataProviders.Remove(this);
+					}
+					this._GroupDataProvider.Entity = value;
+					if ((value != null))
+					{
+						value.GroupContestDataProviders.Add(this);
+						this._group_id = value.id;
+					}
+					else
+					{
+						this._group_id = default(int);
+					}
+					this.SendPropertyChanged("GroupDataProvider");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ContestDataProvider_GroupContestDataProvider", Storage="_ContestDataProvider", ThisKey="contest_id", OtherKey="id", IsForeignKey=true)]
+		public ContestDataProvider ContestDataProvider
+		{
+			get
+			{
+				return this._ContestDataProvider.Entity;
+			}
+			set
+			{
+				ContestDataProvider previousValue = this._ContestDataProvider.Entity;
+				if (((previousValue != value) 
+							|| (this._ContestDataProvider.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._ContestDataProvider.Entity = null;
+						previousValue.GroupContestDataProviders.Remove(this);
+					}
+					this._ContestDataProvider.Entity = value;
+					if ((value != null))
+					{
+						value.GroupContestDataProviders.Add(this);
+						this._contest_id = value.id;
+					}
+					else
+					{
+						this._contest_id = default(int);
+					}
+					this.SendPropertyChanged("ContestDataProvider");
 				}
 			}
 		}
@@ -2804,9 +3076,9 @@ namespace ActivEarth.Server.Service
 		
 		private double _value;
 		
-		private EntityRef<ChallengeDataProvider> _ChallengeDataProvider;
-		
 		private EntityRef<UserDataProvider> _UserDataProvider;
+		
+		private EntityRef<ChallengeDataProvider> _ChallengeDataProvider;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -2824,8 +3096,8 @@ namespace ActivEarth.Server.Service
 		
 		public ChallengeInitializationDataProvider()
 		{
-			this._ChallengeDataProvider = default(EntityRef<ChallengeDataProvider>);
 			this._UserDataProvider = default(EntityRef<UserDataProvider>);
+			this._ChallengeDataProvider = default(EntityRef<ChallengeDataProvider>);
 			OnCreated();
 		}
 		
@@ -2917,40 +3189,6 @@ namespace ActivEarth.Server.Service
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ChallengeDataProvider_ChallengeInitializationDataProvider", Storage="_ChallengeDataProvider", ThisKey="challenge_id", OtherKey="id", IsForeignKey=true)]
-		public ChallengeDataProvider ChallengeDataProvider
-		{
-			get
-			{
-				return this._ChallengeDataProvider.Entity;
-			}
-			set
-			{
-				ChallengeDataProvider previousValue = this._ChallengeDataProvider.Entity;
-				if (((previousValue != value) 
-							|| (this._ChallengeDataProvider.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._ChallengeDataProvider.Entity = null;
-						previousValue.ChallengeInitializationDataProviders.Remove(this);
-					}
-					this._ChallengeDataProvider.Entity = value;
-					if ((value != null))
-					{
-						value.ChallengeInitializationDataProviders.Add(this);
-						this._challenge_id = value.id;
-					}
-					else
-					{
-						this._challenge_id = default(int);
-					}
-					this.SendPropertyChanged("ChallengeDataProvider");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UserDataProvider_ChallengeInitializationDataProvider", Storage="_UserDataProvider", ThisKey="user_id", OtherKey="id", IsForeignKey=true)]
 		public UserDataProvider UserDataProvider
 		{
@@ -2981,6 +3219,40 @@ namespace ActivEarth.Server.Service
 						this._user_id = default(int);
 					}
 					this.SendPropertyChanged("UserDataProvider");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="challenge_ChallengeInitializationDataProvider", Storage="_ChallengeDataProvider", ThisKey="challenge_id", OtherKey="id", IsForeignKey=true)]
+		public ChallengeDataProvider ChallengeDataProvider
+		{
+			get
+			{
+				return this._ChallengeDataProvider.Entity;
+			}
+			set
+			{
+				ChallengeDataProvider previousValue = this._ChallengeDataProvider.Entity;
+				if (((previousValue != value) 
+							|| (this._ChallengeDataProvider.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._ChallengeDataProvider.Entity = null;
+						previousValue.ChallengeInitializationDataProviders.Remove(this);
+					}
+					this._ChallengeDataProvider.Entity = value;
+					if ((value != null))
+					{
+						value.ChallengeInitializationDataProviders.Add(this);
+						this._challenge_id = value.id;
+					}
+					else
+					{
+						this._challenge_id = default(int);
+					}
+					this.SendPropertyChanged("ChallengeDataProvider");
 				}
 			}
 		}
@@ -3836,6 +4108,8 @@ namespace ActivEarth.Server.Service
 		
 		private int _creator_id;
 		
+		private EntitySet<GroupContestDataProvider> _GroupContestDataProviders;
+		
 		private EntitySet<TeamDataProvider> _TeamDataProviders;
 		
 		private EntitySet<TeamMemberDataProvider> _TeamMemberDataProviders;
@@ -3878,6 +4152,7 @@ namespace ActivEarth.Server.Service
 		
 		public ContestDataProvider()
 		{
+			this._GroupContestDataProviders = new EntitySet<GroupContestDataProvider>(new Action<GroupContestDataProvider>(this.attach_GroupContestDataProviders), new Action<GroupContestDataProvider>(this.detach_GroupContestDataProviders));
 			this._TeamDataProviders = new EntitySet<TeamDataProvider>(new Action<TeamDataProvider>(this.attach_TeamDataProviders), new Action<TeamDataProvider>(this.detach_TeamDataProviders));
 			this._TeamMemberDataProviders = new EntitySet<TeamMemberDataProvider>(new Action<TeamMemberDataProvider>(this.attach_TeamMemberDataProviders), new Action<TeamMemberDataProvider>(this.detach_TeamMemberDataProviders));
 			this._UserDataProvider = default(EntityRef<UserDataProvider>);
@@ -4168,6 +4443,19 @@ namespace ActivEarth.Server.Service
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ContestDataProvider_GroupContestDataProvider", Storage="_GroupContestDataProviders", ThisKey="id", OtherKey="contest_id")]
+		public EntitySet<GroupContestDataProvider> GroupContestDataProviders
+		{
+			get
+			{
+				return this._GroupContestDataProviders;
+			}
+			set
+			{
+				this._GroupContestDataProviders.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ContestDataProvider_TeamDataProvider", Storage="_TeamDataProviders", ThisKey="id", OtherKey="contest_id")]
 		public EntitySet<TeamDataProvider> TeamDataProviders
 		{
@@ -4248,6 +4536,18 @@ namespace ActivEarth.Server.Service
 			}
 		}
 		
+		private void attach_GroupContestDataProviders(GroupContestDataProvider entity)
+		{
+			this.SendPropertyChanging();
+			entity.ContestDataProvider = this;
+		}
+		
+		private void detach_GroupContestDataProviders(GroupContestDataProvider entity)
+		{
+			this.SendPropertyChanging();
+			entity.ContestDataProvider = null;
+		}
+		
 		private void attach_TeamDataProviders(TeamDataProvider entity)
 		{
 			this.SendPropertyChanging();
@@ -4273,29 +4573,35 @@ namespace ActivEarth.Server.Service
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.messages")]
-	public partial class MessageDataProvider : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.challenges")]
+	public partial class ChallengeDataProvider : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
 		private int _id;
 		
-		private int _group_id;
+		private string _name;
 		
-		private int _user_id;
+		private string _description;
 		
-		private string _title;
+		private int _points;
 		
-		private string _message;
+		private double _requirement;
 		
-		private string _date;
+		private bool _persistent;
 		
-		private string _time;
+		private System.DateTime _end_time;
 		
-		private EntityRef<GroupDataProvider> _GroupDataProvider;
+		private int _duration_days;
 		
-		private EntityRef<UserDataProvider> _UserDataProvider;
+		private byte _statistic;
+		
+		private bool _active;
+		
+		private string _image_path;
+		
+		private EntitySet<ChallengeInitializationDataProvider> _ChallengeInitializationDataProviders;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -4303,24 +4609,31 @@ namespace ActivEarth.Server.Service
     partial void OnCreated();
     partial void OnidChanging(int value);
     partial void OnidChanged();
-    partial void Ongroup_idChanging(int value);
-    partial void Ongroup_idChanged();
-    partial void Onuser_idChanging(int value);
-    partial void Onuser_idChanged();
-    partial void OntitleChanging(string value);
-    partial void OntitleChanged();
-    partial void OnmessageChanging(string value);
-    partial void OnmessageChanged();
-    partial void OndateChanging(string value);
-    partial void OndateChanged();
-    partial void OntimeChanging(string value);
-    partial void OntimeChanged();
+    partial void OnnameChanging(string value);
+    partial void OnnameChanged();
+    partial void OndescriptionChanging(string value);
+    partial void OndescriptionChanged();
+    partial void OnpointsChanging(int value);
+    partial void OnpointsChanged();
+    partial void OnrequirementChanging(double value);
+    partial void OnrequirementChanged();
+    partial void OnpersistentChanging(bool value);
+    partial void OnpersistentChanged();
+    partial void Onend_timeChanging(System.DateTime value);
+    partial void Onend_timeChanged();
+    partial void Onduration_daysChanging(int value);
+    partial void Onduration_daysChanged();
+    partial void OnstatisticChanging(byte value);
+    partial void OnstatisticChanged();
+    partial void OnactiveChanging(bool value);
+    partial void OnactiveChanged();
+    partial void Onimage_pathChanging(string value);
+    partial void Onimage_pathChanged();
     #endregion
 		
-		public MessageDataProvider()
+		public ChallengeDataProvider()
 		{
-			this._GroupDataProvider = default(EntityRef<GroupDataProvider>);
-			this._UserDataProvider = default(EntityRef<UserDataProvider>);
+			this._ChallengeInitializationDataProviders = new EntitySet<ChallengeInitializationDataProvider>(new Action<ChallengeInitializationDataProvider>(this.attach_ChallengeInitializationDataProviders), new Action<ChallengeInitializationDataProvider>(this.detach_ChallengeInitializationDataProviders));
 			OnCreated();
 		}
 		
@@ -4344,198 +4657,481 @@ namespace ActivEarth.Server.Service
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_group_id", DbType="Int NOT NULL")]
-		public int group_id
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string name
 		{
 			get
 			{
-				return this._group_id;
+				return this._name;
 			}
 			set
 			{
-				if ((this._group_id != value))
+				if ((this._name != value))
 				{
-					if (this._GroupDataProvider.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.Ongroup_idChanging(value);
+					this.OnnameChanging(value);
 					this.SendPropertyChanging();
-					this._group_id = value;
-					this.SendPropertyChanged("group_id");
-					this.Ongroup_idChanged();
+					this._name = value;
+					this.SendPropertyChanged("name");
+					this.OnnameChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_user_id", DbType="Int NOT NULL")]
-		public int user_id
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_description", DbType="Text NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+		public string description
 		{
 			get
 			{
-				return this._user_id;
+				return this._description;
 			}
 			set
 			{
-				if ((this._user_id != value))
+				if ((this._description != value))
 				{
-					if (this._UserDataProvider.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.Onuser_idChanging(value);
+					this.OndescriptionChanging(value);
 					this.SendPropertyChanging();
-					this._user_id = value;
-					this.SendPropertyChanged("user_id");
-					this.Onuser_idChanged();
+					this._description = value;
+					this.SendPropertyChanged("description");
+					this.OndescriptionChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_title", DbType="VarChar(MAX) NOT NULL", CanBeNull=false)]
-		public string title
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_points", DbType="Int NOT NULL")]
+		public int points
 		{
 			get
 			{
-				return this._title;
+				return this._points;
 			}
 			set
 			{
-				if ((this._title != value))
+				if ((this._points != value))
 				{
-					this.OntitleChanging(value);
+					this.OnpointsChanging(value);
 					this.SendPropertyChanging();
-					this._title = value;
-					this.SendPropertyChanged("title");
-					this.OntitleChanged();
+					this._points = value;
+					this.SendPropertyChanged("points");
+					this.OnpointsChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_message", DbType="VarChar(MAX) NOT NULL", CanBeNull=false)]
-		public string message
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_requirement", DbType="Float NOT NULL")]
+		public double requirement
 		{
 			get
 			{
-				return this._message;
+				return this._requirement;
 			}
 			set
 			{
-				if ((this._message != value))
+				if ((this._requirement != value))
 				{
-					this.OnmessageChanging(value);
+					this.OnrequirementChanging(value);
 					this.SendPropertyChanging();
-					this._message = value;
-					this.SendPropertyChanged("message");
-					this.OnmessageChanged();
+					this._requirement = value;
+					this.SendPropertyChanged("requirement");
+					this.OnrequirementChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_date", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string date
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_persistent", DbType="Bit NOT NULL")]
+		public bool persistent
 		{
 			get
 			{
-				return this._date;
+				return this._persistent;
 			}
 			set
 			{
-				if ((this._date != value))
+				if ((this._persistent != value))
 				{
-					this.OndateChanging(value);
+					this.OnpersistentChanging(value);
 					this.SendPropertyChanging();
-					this._date = value;
-					this.SendPropertyChanged("date");
-					this.OndateChanged();
+					this._persistent = value;
+					this.SendPropertyChanged("persistent");
+					this.OnpersistentChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_time", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string time
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_end_time", DbType="DateTime NOT NULL")]
+		public System.DateTime end_time
 		{
 			get
 			{
-				return this._time;
+				return this._end_time;
 			}
 			set
 			{
-				if ((this._time != value))
+				if ((this._end_time != value))
 				{
-					this.OntimeChanging(value);
+					this.Onend_timeChanging(value);
 					this.SendPropertyChanging();
-					this._time = value;
-					this.SendPropertyChanged("time");
-					this.OntimeChanged();
+					this._end_time = value;
+					this.SendPropertyChanged("end_time");
+					this.Onend_timeChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="GroupDataProvider_MessageDataProvider", Storage="_GroupDataProvider", ThisKey="group_id", OtherKey="id", IsForeignKey=true)]
-		public GroupDataProvider GroupDataProvider
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_duration_days", DbType="Int NOT NULL")]
+		public int duration_days
 		{
 			get
 			{
-				return this._GroupDataProvider.Entity;
+				return this._duration_days;
 			}
 			set
 			{
-				GroupDataProvider previousValue = this._GroupDataProvider.Entity;
-				if (((previousValue != value) 
-							|| (this._GroupDataProvider.HasLoadedOrAssignedValue == false)))
+				if ((this._duration_days != value))
 				{
+					this.Onduration_daysChanging(value);
 					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._GroupDataProvider.Entity = null;
-						previousValue.MessageDataProviders.Remove(this);
-					}
-					this._GroupDataProvider.Entity = value;
-					if ((value != null))
-					{
-						value.MessageDataProviders.Add(this);
-						this._group_id = value.id;
-					}
-					else
-					{
-						this._group_id = default(int);
-					}
-					this.SendPropertyChanged("GroupDataProvider");
+					this._duration_days = value;
+					this.SendPropertyChanged("duration_days");
+					this.Onduration_daysChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UserDataProvider_MessageDataProvider", Storage="_UserDataProvider", ThisKey="user_id", OtherKey="id", IsForeignKey=true)]
-		public UserDataProvider UserDataProvider
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_statistic", DbType="TinyInt NOT NULL")]
+		public byte statistic
 		{
 			get
 			{
-				return this._UserDataProvider.Entity;
+				return this._statistic;
 			}
 			set
 			{
-				UserDataProvider previousValue = this._UserDataProvider.Entity;
-				if (((previousValue != value) 
-							|| (this._UserDataProvider.HasLoadedOrAssignedValue == false)))
+				if ((this._statistic != value))
 				{
+					this.OnstatisticChanging(value);
 					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._UserDataProvider.Entity = null;
-						previousValue.MessageDataProviders.Remove(this);
-					}
-					this._UserDataProvider.Entity = value;
-					if ((value != null))
-					{
-						value.MessageDataProviders.Add(this);
-						this._user_id = value.id;
-					}
-					else
-					{
-						this._user_id = default(int);
-					}
-					this.SendPropertyChanged("UserDataProvider");
+					this._statistic = value;
+					this.SendPropertyChanged("statistic");
+					this.OnstatisticChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_active", DbType="Bit NOT NULL")]
+		public bool active
+		{
+			get
+			{
+				return this._active;
+			}
+			set
+			{
+				if ((this._active != value))
+				{
+					this.OnactiveChanging(value);
+					this.SendPropertyChanging();
+					this._active = value;
+					this.SendPropertyChanged("active");
+					this.OnactiveChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_image_path", DbType="VarChar(75) NOT NULL", CanBeNull=false)]
+		public string image_path
+		{
+			get
+			{
+				return this._image_path;
+			}
+			set
+			{
+				if ((this._image_path != value))
+				{
+					this.Onimage_pathChanging(value);
+					this.SendPropertyChanging();
+					this._image_path = value;
+					this.SendPropertyChanged("image_path");
+					this.Onimage_pathChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="challenge_ChallengeInitializationDataProvider", Storage="_ChallengeInitializationDataProviders", ThisKey="id", OtherKey="challenge_id")]
+		public EntitySet<ChallengeInitializationDataProvider> ChallengeInitializationDataProviders
+		{
+			get
+			{
+				return this._ChallengeInitializationDataProviders;
+			}
+			set
+			{
+				this._ChallengeInitializationDataProviders.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_ChallengeInitializationDataProviders(ChallengeInitializationDataProvider entity)
+		{
+			this.SendPropertyChanging();
+			entity.ChallengeDataProvider = this;
+		}
+		
+		private void detach_ChallengeInitializationDataProviders(ChallengeInitializationDataProvider entity)
+		{
+			this.SendPropertyChanging();
+			entity.ChallengeDataProvider = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.challenge_definitions")]
+	public partial class ChallengeDefinitionDataProvider : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id;
+		
+		private byte _challenge_type;
+		
+		private bool _persistent;
+		
+		private byte _statistic;
+		
+		private double _requirement;
+		
+		private int _reward;
+		
+		private string _condition_text;
+		
+		private string _image_path;
+		
+		private string _name;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void Onchallenge_typeChanging(byte value);
+    partial void Onchallenge_typeChanged();
+    partial void OnpersistentChanging(bool value);
+    partial void OnpersistentChanged();
+    partial void OnstatisticChanging(byte value);
+    partial void OnstatisticChanged();
+    partial void OnrequirementChanging(double value);
+    partial void OnrequirementChanged();
+    partial void OnrewardChanging(int value);
+    partial void OnrewardChanged();
+    partial void Oncondition_textChanging(string value);
+    partial void Oncondition_textChanged();
+    partial void Onimage_pathChanging(string value);
+    partial void Onimage_pathChanged();
+    partial void OnnameChanging(string value);
+    partial void OnnameChanged();
+    #endregion
+		
+		public ChallengeDefinitionDataProvider()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_challenge_type", DbType="TinyInt NOT NULL")]
+		public byte challenge_type
+		{
+			get
+			{
+				return this._challenge_type;
+			}
+			set
+			{
+				if ((this._challenge_type != value))
+				{
+					this.Onchallenge_typeChanging(value);
+					this.SendPropertyChanging();
+					this._challenge_type = value;
+					this.SendPropertyChanged("challenge_type");
+					this.Onchallenge_typeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_persistent", DbType="Bit NOT NULL")]
+		public bool persistent
+		{
+			get
+			{
+				return this._persistent;
+			}
+			set
+			{
+				if ((this._persistent != value))
+				{
+					this.OnpersistentChanging(value);
+					this.SendPropertyChanging();
+					this._persistent = value;
+					this.SendPropertyChanged("persistent");
+					this.OnpersistentChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_statistic", DbType="TinyInt NOT NULL")]
+		public byte statistic
+		{
+			get
+			{
+				return this._statistic;
+			}
+			set
+			{
+				if ((this._statistic != value))
+				{
+					this.OnstatisticChanging(value);
+					this.SendPropertyChanging();
+					this._statistic = value;
+					this.SendPropertyChanged("statistic");
+					this.OnstatisticChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_requirement", DbType="Float NOT NULL")]
+		public double requirement
+		{
+			get
+			{
+				return this._requirement;
+			}
+			set
+			{
+				if ((this._requirement != value))
+				{
+					this.OnrequirementChanging(value);
+					this.SendPropertyChanging();
+					this._requirement = value;
+					this.SendPropertyChanged("requirement");
+					this.OnrequirementChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_reward", DbType="Int NOT NULL")]
+		public int reward
+		{
+			get
+			{
+				return this._reward;
+			}
+			set
+			{
+				if ((this._reward != value))
+				{
+					this.OnrewardChanging(value);
+					this.SendPropertyChanging();
+					this._reward = value;
+					this.SendPropertyChanged("reward");
+					this.OnrewardChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_condition_text", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
+		public string condition_text
+		{
+			get
+			{
+				return this._condition_text;
+			}
+			set
+			{
+				if ((this._condition_text != value))
+				{
+					this.Oncondition_textChanging(value);
+					this.SendPropertyChanging();
+					this._condition_text = value;
+					this.SendPropertyChanged("condition_text");
+					this.Oncondition_textChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_image_path", DbType="VarChar(75) NOT NULL", CanBeNull=false)]
+		public string image_path
+		{
+			get
+			{
+				return this._image_path;
+			}
+			set
+			{
+				if ((this._image_path != value))
+				{
+					this.Onimage_pathChanging(value);
+					this.SendPropertyChanging();
+					this._image_path = value;
+					this.SendPropertyChanged("image_path");
+					this.Onimage_pathChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", DbType="VarChar(30)")]
+		public string name
+		{
+			get
+			{
+				return this._name;
+			}
+			set
+			{
+				if ((this._name != value))
+				{
+					this.OnnameChanging(value);
+					this.SendPropertyChanging();
+					this._name = value;
+					this.SendPropertyChanged("name");
+					this.OnnameChanged();
 				}
 			}
 		}
