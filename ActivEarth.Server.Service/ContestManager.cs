@@ -188,6 +188,8 @@ namespace ActivEarth.Server.Service.Competition
             {
                 string teamName = group.Name;
 
+                group.Contests.Add(contest);
+
                 Team newTeam = new Team
                 {
                     ContestId = contestId,

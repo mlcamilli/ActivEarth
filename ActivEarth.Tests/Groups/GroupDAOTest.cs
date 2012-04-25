@@ -231,19 +231,22 @@ namespace ActivEarth.Tests.Groups
             tags.Add("hashtags");
 
             Group testGroup1 = new Group("Test1", owner, "This is a Group", tags);
-            Message message1 = new Message("HI GUYS", "THIS IS AN AWESOME GROUP", owner);
+            Message message1 = new Message("HI GUYS", "THIS IS AN AWESOME GROUP", owner, "March 16 2012", "12:34:25 PM");
             testGroup1.Post(message1);
             testGroup1.ID = GroupDAO.CreateNewGroup(testGroup1);
 
             Group testGroup2 = new Group("Test2", owner, "This is another Group", tags);
-            Message message2 = new Message("I HATE YOU GUYS", "THIS IS AN AWFUL GROUP", owner);
-            Message message3 = new Message("JUST KIDDING", "I LOVE YOU GUYS", owner);
+            Message message2 = new Message("I HATE YOU GUYS", "THIS IS AN AWFUL GROUP", owner, "March 16 2012", "12:34:25 PM");
+            Message message3 = new Message("JUST KIDDING", "I LOVE YOU GUYS", owner, "March 16 2012", "12:34:25 PM");
             testGroup2.Post(message2);
             testGroup2.Post(message3);
             testGroup2.ID = GroupDAO.CreateNewGroup(testGroup2);
 
             Assert.AreNotEqual(testGroup1.ID, 0);
             Assert.AreNotEqual(testGroup2.ID, 0);
+
+            GroupDAO.UpdateGroup(testGroup1);
+            GroupDAO.UpdateGroup(testGroup2);
 
             Group dbGroup1 = GroupDAO.GetGroupFromGroupId(testGroup1.ID);
             Group dbGroup2 = GroupDAO.GetGroupFromGroupId(testGroup2.ID);
@@ -313,7 +316,7 @@ namespace ActivEarth.Tests.Groups
 
             Group testGroup = new Group("Test1", owner, "This is a Group", tags);
             testGroup.Join(member1);
-            Message message1 = new Message("HI GUYS", "THIS IS AN AWESOME GROUP", owner);
+            Message message1 = new Message("HI GUYS", "THIS IS AN AWESOME GROUP", owner, "March 16 2012", "12:34:25 PM");
             testGroup.Post(message1);
             testGroup.ID = GroupDAO.CreateNewGroup(testGroup);
 
@@ -322,7 +325,7 @@ namespace ActivEarth.Tests.Groups
             testGroup.Join(member2);
             testGroup.HashTags.Add("hashtags");
             testGroup.HashTags.Remove("searchable");
-            Message message2 = new Message("JUST KIDDING", "I HATE YOU GUYS", owner);
+            Message message2 = new Message("JUST KIDDING", "I HATE YOU GUYS", owner, "March 16 2012", "12:34:25 PM");
             testGroup.Post(message2);
             GroupDAO.UpdateGroup(testGroup);
 

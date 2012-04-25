@@ -12,14 +12,14 @@ namespace ActivEarth.DAO
 {
     public class RecentActivityDAO
     {
-        public void GetUserRecentActivity(User user)
+        public static void GetUserRecentActivity(User user)
         {
             try
             {
                 using (SqlConnection connection = ConnectionManager.GetConnection())
                 {
                     var data = new ActivEarthDataProvidersDataContext(connection);
-                    //Update messages table
+                    
                     List<Message> messages = (from m in data.MessageDataProviders
                                               where m.group_id == -1 && m.user_id == user.UserID
                                               select    
@@ -37,7 +37,7 @@ namespace ActivEarth.DAO
             }
         }
 
-        public void GetGroupRecentActivity(Group group)
+        public static void GetGroupRecentActivity(Group group)
         {
             int groupId = group.ID;
 
@@ -46,7 +46,7 @@ namespace ActivEarth.DAO
                 using (SqlConnection connection = ConnectionManager.GetConnection())
                 {
                     var data = new ActivEarthDataProvidersDataContext(connection);
-                    //Update messages table
+                   
                     List<Message> messages = (from m in data.MessageDataProviders
                                               where m.group_id == groupId
                                               select
@@ -65,7 +65,7 @@ namespace ActivEarth.DAO
         }
 
 
-        public bool UpdateUserRecentActivity(User user)
+        public static bool UpdateUserRecentActivity(User user)
         {
             try
             {
@@ -131,7 +131,7 @@ namespace ActivEarth.DAO
             }
         }
 
-        public bool UpdateGroupRecentActivity(Group group)
+        public static bool UpdateGroupRecentActivity(Group group)
         {
             int groupId = group.ID;
             try
