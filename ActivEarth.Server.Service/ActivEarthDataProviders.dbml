@@ -30,22 +30,7 @@
       <Association Name="UserDataProvider_ChallengeInitializationDataProvider" Member="ChallengeInitializationDataProviders" ThisKey="id" OtherKey="user_id" Type="ChallengeInitializationDataProvider" />
       <Association Name="UserDataProvider_BadgeDataProvider" Member="BadgeDataProviders" ThisKey="id" OtherKey="user_id" Type="BadgeDataProvider" />
       <Association Name="UserDataProvider_TeamMemberDataProvider" Member="TeamMemberDataProviders" ThisKey="id" OtherKey="user_id" Type="TeamMemberDataProvider" />
-      <Association Name="UserDataProvider_contest" Member="ContestDataProviders" ThisKey="id" OtherKey="creator_id" Type="ContestDataProvider" />
-    </Type>
-  </Table>
-  <Table Name="dbo.challenges" Member="ChallengeDataProviders">
-    <Type Name="ChallengeDataProvider">
-      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="description" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
-      <Column Name="points" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="requirement" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
-      <Column Name="persistent" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="end_time" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="duration_days" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="statistic" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
-      <Column Name="active" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Association Name="ChallengeDataProvider_ChallengeInitializationDataProvider" Member="ChallengeInitializationDataProviders" ThisKey="id" OtherKey="challenge_id" Type="ChallengeInitializationDataProvider" />
+      <Association Name="UserDataProvider_ContestDataProvider" Member="ContestDataProviders" ThisKey="id" OtherKey="creator_id" Type="ContestDataProvider" />
     </Type>
   </Table>
   <Table Name="dbo.privacy_settings" Member="PrivacySettingDataProviders">
@@ -136,7 +121,7 @@
       <Column Name="contest_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="group_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="GroupDataProvider_GroupContestDataProvider" Member="GroupDataProvider" ThisKey="group_id" OtherKey="id" Type="GroupDataProvider" IsForeignKey="true" />
-      <Association Name="contest_GroupContestDataProvider" Member="ContestDataProvider" ThisKey="contest_id" OtherKey="id" Type="ContestDataProvider" IsForeignKey="true" />
+      <Association Name="ContestDataProvider_GroupContestDataProvider" Member="ContestDataProvider" ThisKey="contest_id" OtherKey="id" Type="ContestDataProvider" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.user_statistics" Member="UserStatisticDataProviders">
@@ -154,8 +139,8 @@
       <Column Name="challenge_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="user_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="value" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
-      <Association Name="ChallengeDataProvider_ChallengeInitializationDataProvider" Member="ChallengeDataProvider" ThisKey="challenge_id" OtherKey="id" Type="ChallengeDataProvider" IsForeignKey="true" />
       <Association Name="UserDataProvider_ChallengeInitializationDataProvider" Member="UserDataProvider" ThisKey="user_id" OtherKey="id" Type="UserDataProvider" IsForeignKey="true" />
+      <Association Name="challenge_ChallengeInitializationDataProvider" Member="ChallengeDataProvider" ThisKey="challenge_id" OtherKey="id" Type="ChallengeDataProvider" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.badges" Member="BadgeDataProviders">
@@ -178,7 +163,7 @@
       <Column Name="group_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="TeamDataProvider_TeamMemberDataProvider" Member="TeamMemberDataProviders" ThisKey="id" OtherKey="team_id" Type="TeamMemberDataProvider" />
       <Association Name="GroupDataProvider_TeamDataProvider" Member="GroupDataProvider" ThisKey="group_id" OtherKey="id" Type="GroupDataProvider" IsForeignKey="true" />
-      <Association Name="contest_TeamDataProvider" Member="ContestDataProvider" ThisKey="contest_id" OtherKey="id" Type="ContestDataProvider" IsForeignKey="true" />
+      <Association Name="ContestDataProvider_TeamDataProvider" Member="ContestDataProvider" ThisKey="contest_id" OtherKey="id" Type="ContestDataProvider" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.team_members" Member="TeamMemberDataProviders">
@@ -191,7 +176,7 @@
       <Column Name="initialized" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Association Name="TeamDataProvider_TeamMemberDataProvider" Member="TeamDataProvider" ThisKey="team_id" OtherKey="id" Type="TeamDataProvider" IsForeignKey="true" />
       <Association Name="UserDataProvider_TeamMemberDataProvider" Member="UserDataProvider" ThisKey="user_id" OtherKey="id" Type="UserDataProvider" IsForeignKey="true" />
-      <Association Name="contest_TeamMemberDataProvider" Member="ContestDataProvider" ThisKey="contest_id" OtherKey="id" Type="ContestDataProvider" IsForeignKey="true" />
+      <Association Name="ContestDataProvider_TeamMemberDataProvider" Member="ContestDataProvider" ThisKey="contest_id" OtherKey="id" Type="ContestDataProvider" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.contests" Member="ContestDataProviders">
@@ -210,10 +195,39 @@
       <Column Name="active" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Column Name="deactivated" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="creator_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="contest_GroupContestDataProvider" Member="GroupContestDataProviders" ThisKey="id" OtherKey="contest_id" Type="GroupContestDataProvider" />
-      <Association Name="contest_TeamDataProvider" Member="TeamDataProviders" ThisKey="id" OtherKey="contest_id" Type="TeamDataProvider" />
-      <Association Name="contest_TeamMemberDataProvider" Member="TeamMemberDataProviders" ThisKey="id" OtherKey="contest_id" Type="TeamMemberDataProvider" />
-      <Association Name="UserDataProvider_contest" Member="UserDataProvider" ThisKey="creator_id" OtherKey="id" Type="UserDataProvider" IsForeignKey="true" />
+      <Association Name="ContestDataProvider_GroupContestDataProvider" Member="GroupContestDataProviders" ThisKey="id" OtherKey="contest_id" Type="GroupContestDataProvider" />
+      <Association Name="ContestDataProvider_TeamDataProvider" Member="TeamDataProviders" ThisKey="id" OtherKey="contest_id" Type="TeamDataProvider" />
+      <Association Name="ContestDataProvider_TeamMemberDataProvider" Member="TeamMemberDataProviders" ThisKey="id" OtherKey="contest_id" Type="TeamMemberDataProvider" />
+      <Association Name="UserDataProvider_ContestDataProvider" Member="UserDataProvider" ThisKey="creator_id" OtherKey="id" Type="UserDataProvider" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.challenges" Member="ChallengeDataProviders">
+    <Type Name="ChallengeDataProvider">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="description" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="points" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="requirement" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="persistent" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="end_time" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="duration_days" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="statistic" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="active" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="image_path" Type="System.String" DbType="VarChar(75) NOT NULL" CanBeNull="false" />
+      <Association Name="challenge_ChallengeInitializationDataProvider" Member="ChallengeInitializationDataProviders" ThisKey="id" OtherKey="challenge_id" Type="ChallengeInitializationDataProvider" />
+    </Type>
+  </Table>
+  <Table Name="dbo.challenge_definitions" Member="ChallengeDefinitionDataProviders">
+    <Type Name="ChallengeDefinitionDataProvider">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="challenge_type" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="persistent" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="statistic" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="requirement" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="reward" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="condition_text" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="image_path" Type="System.String" DbType="VarChar(75) NOT NULL" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
     </Type>
   </Table>
 </Database>
