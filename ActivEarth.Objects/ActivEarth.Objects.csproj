@@ -66,7 +66,6 @@
     <Compile Include="Competition\Contests\Team.cs" />
     <Compile Include="Groups\Group.cs" />
     <Compile Include="Groups\Message.cs" />
-    <Compile Include="Groups\RecentActivity.cs" />
     <Compile Include="Groups\Wall.cs" />
     <Compile Include="Profile\PrivacySetting.cs" />
     <Compile Include="Profile\ProfileVisibility.cs" />
@@ -74,6 +73,9 @@
     <Compile Include="Profile\User.cs" />
     <Compile Include="Profile\UserStatistic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Web.config" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
