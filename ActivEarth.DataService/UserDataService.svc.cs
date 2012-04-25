@@ -6,10 +6,9 @@ using System.Linq;
 using System.ServiceModel.Web;
 using System.Web;
 
-namespace ActivEarth.Server.Service
+namespace ActivEarth.DataService
 {
-    [System.ServiceModel.ServiceBehavior(IncludeExceptionDetailInFaults = true)]
-    public class UserDataService : DataService<UserEntities>
+    public class WcfDataService1 : DataService<UserEntities>
     {
         // This method is called only once to initialize service-wide policies.
         public static void InitializeService(DataServiceConfiguration config)

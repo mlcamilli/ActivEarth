@@ -18,27 +18,27 @@ using System.Runtime.Serialization;
 [assembly: EdmSchemaAttribute()]
 #region EDM Relationship Metadata
 
-[assembly: EdmRelationshipAttribute("UserModel", "FK_badges_user_id", "users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ActivEarth.Server.Service.user), "badges", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ActivEarth.Server.Service.badge), true)]
-[assembly: EdmRelationshipAttribute("UserModel", "FK_challenge_initial_values_challenge_id", "challenges", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ActivEarth.Server.Service.challenge), "challenge_initial_values", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ActivEarth.Server.Service.challenge_initial_values), true)]
-[assembly: EdmRelationshipAttribute("UserModel", "FK_challenge_initial_values_user_id", "users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ActivEarth.Server.Service.user), "challenge_initial_values", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ActivEarth.Server.Service.challenge_initial_values), true)]
-[assembly: EdmRelationshipAttribute("UserModel", "FK_contest_id_group_contests", "contests", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ActivEarth.Server.Service.contest), "group_contests", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ActivEarth.Server.Service.group_contests), true)]
-[assembly: EdmRelationshipAttribute("UserModel", "FK_contests_creator_id", "users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ActivEarth.Server.Service.user), "contests", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ActivEarth.Server.Service.contest), true)]
-[assembly: EdmRelationshipAttribute("UserModel", "FK_group_id_group_contests", "groups", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ActivEarth.Server.Service.group), "group_contests", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ActivEarth.Server.Service.group_contests), true)]
-[assembly: EdmRelationshipAttribute("UserModel", "FK_group_id_group_hashtags", "groups", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ActivEarth.Server.Service.group), "group_hashtags", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ActivEarth.Server.Service.group_hashtags), true)]
-[assembly: EdmRelationshipAttribute("UserModel", "fk_group_id", "groups", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ActivEarth.Server.Service.group), "group_members", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ActivEarth.Server.Service.group_members), true)]
-[assembly: EdmRelationshipAttribute("UserModel", "fk_user_id_groups", "users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ActivEarth.Server.Service.user), "group_members", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ActivEarth.Server.Service.group_members), true)]
-[assembly: EdmRelationshipAttribute("UserModel", "FK_group_id_messages", "groups", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ActivEarth.Server.Service.group), "messages", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ActivEarth.Server.Service.message), true)]
-[assembly: EdmRelationshipAttribute("UserModel", "FK_poster_id_messages", "users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ActivEarth.Server.Service.user), "messages", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ActivEarth.Server.Service.message), true)]
-[assembly: EdmRelationshipAttribute("UserModel", "FK__profile__state__0CBAE877", "users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ActivEarth.Server.Service.user), "profile", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ActivEarth.Server.Service.profile), true)]
-[assembly: EdmRelationshipAttribute("UserModel", "fk_team_id", "teams", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ActivEarth.Server.Service.team), "team_members", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ActivEarth.Server.Service.team_members), true)]
-[assembly: EdmRelationshipAttribute("UserModel", "FK_team_members_team_id", "teams", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ActivEarth.Server.Service.team), "team_members", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ActivEarth.Server.Service.team_members), true)]
-[assembly: EdmRelationshipAttribute("UserModel", "fk_team_members_user_id", "users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ActivEarth.Server.Service.user), "team_members", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ActivEarth.Server.Service.team_members), true)]
-[assembly: EdmRelationshipAttribute("UserModel", "fk_user_id_teams", "users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ActivEarth.Server.Service.user), "team_members", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ActivEarth.Server.Service.team_members), true)]
-[assembly: EdmRelationshipAttribute("UserModel", "FK_statistics_users", "users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ActivEarth.Server.Service.user), "user_statistics", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ActivEarth.Server.Service.user_statistics), true)]
+[assembly: EdmRelationshipAttribute("ActivEarth_DevModel", "FK_badges_user_id", "users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ActivEarth.DataService.user), "badges", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ActivEarth.DataService.badge), true)]
+[assembly: EdmRelationshipAttribute("ActivEarth_DevModel", "FK_challenge_initial_values_challenge_id", "challenges", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ActivEarth.DataService.challenge), "challenge_initial_values", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ActivEarth.DataService.challenge_initial_values), true)]
+[assembly: EdmRelationshipAttribute("ActivEarth_DevModel", "FK_challenge_initial_values_user_id", "users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ActivEarth.DataService.user), "challenge_initial_values", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ActivEarth.DataService.challenge_initial_values), true)]
+[assembly: EdmRelationshipAttribute("ActivEarth_DevModel", "FK_contest_id_group_contests", "contests", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ActivEarth.DataService.contest), "group_contests", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ActivEarth.DataService.group_contests), true)]
+[assembly: EdmRelationshipAttribute("ActivEarth_DevModel", "FK_contests_creator_id", "users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ActivEarth.DataService.user), "contests", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ActivEarth.DataService.contest), true)]
+[assembly: EdmRelationshipAttribute("ActivEarth_DevModel", "FK_group_id_group_contests", "groups", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ActivEarth.DataService.group), "group_contests", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ActivEarth.DataService.group_contests), true)]
+[assembly: EdmRelationshipAttribute("ActivEarth_DevModel", "FK_group_id_group_hashtags", "groups", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ActivEarth.DataService.group), "group_hashtags", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ActivEarth.DataService.group_hashtags), true)]
+[assembly: EdmRelationshipAttribute("ActivEarth_DevModel", "fk_group_id", "groups", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ActivEarth.DataService.group), "group_members", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ActivEarth.DataService.group_members), true)]
+[assembly: EdmRelationshipAttribute("ActivEarth_DevModel", "fk_user_id_groups", "users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ActivEarth.DataService.user), "group_members", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ActivEarth.DataService.group_members), true)]
+[assembly: EdmRelationshipAttribute("ActivEarth_DevModel", "FK_group_id_messages", "groups", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ActivEarth.DataService.group), "messages", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ActivEarth.DataService.message), true)]
+[assembly: EdmRelationshipAttribute("ActivEarth_DevModel", "FK_poster_id_messages", "users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ActivEarth.DataService.user), "messages", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ActivEarth.DataService.message), true)]
+[assembly: EdmRelationshipAttribute("ActivEarth_DevModel", "FK__profile__state__0CBAE877", "users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ActivEarth.DataService.user), "profile", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ActivEarth.DataService.profile), true)]
+[assembly: EdmRelationshipAttribute("ActivEarth_DevModel", "fk_team_id", "teams", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ActivEarth.DataService.team), "team_members", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ActivEarth.DataService.team_members), true)]
+[assembly: EdmRelationshipAttribute("ActivEarth_DevModel", "FK_team_members_team_id", "teams", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ActivEarth.DataService.team), "team_members", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ActivEarth.DataService.team_members), true)]
+[assembly: EdmRelationshipAttribute("ActivEarth_DevModel", "fk_team_members_user_id", "users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ActivEarth.DataService.user), "team_members", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ActivEarth.DataService.team_members), true)]
+[assembly: EdmRelationshipAttribute("ActivEarth_DevModel", "fk_user_id_teams", "users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ActivEarth.DataService.user), "team_members", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ActivEarth.DataService.team_members), true)]
+[assembly: EdmRelationshipAttribute("ActivEarth_DevModel", "FK_statistics_users", "users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ActivEarth.DataService.user), "user_statistics", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ActivEarth.DataService.user_statistics), true)]
 
 #endregion
 
-namespace ActivEarth.Server.Service
+namespace ActivEarth.DataService
 {
     #region Contexts
     
@@ -532,7 +532,7 @@ namespace ActivEarth.Server.Service
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="UserModel", Name="badge")]
+    [EdmEntityTypeAttribute(NamespaceName="ActivEarth_DevModel", Name="badge")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class badge : EntityObject
@@ -694,16 +694,16 @@ namespace ActivEarth.Server.Service
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("UserModel", "FK_badges_user_id", "users")]
+        [EdmRelationshipNavigationPropertyAttribute("ActivEarth_DevModel", "FK_badges_user_id", "users")]
         public user user
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<user>("UserModel.FK_badges_user_id", "users").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<user>("ActivEarth_DevModel.FK_badges_user_id", "users").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<user>("UserModel.FK_badges_user_id", "users").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<user>("ActivEarth_DevModel.FK_badges_user_id", "users").Value = value;
             }
         }
         /// <summary>
@@ -715,13 +715,13 @@ namespace ActivEarth.Server.Service
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<user>("UserModel.FK_badges_user_id", "users");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<user>("ActivEarth_DevModel.FK_badges_user_id", "users");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<user>("UserModel.FK_badges_user_id", "users", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<user>("ActivEarth_DevModel.FK_badges_user_id", "users", value);
                 }
             }
         }
@@ -732,7 +732,7 @@ namespace ActivEarth.Server.Service
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="UserModel", Name="badge_level_info")]
+    [EdmEntityTypeAttribute(NamespaceName="ActivEarth_DevModel", Name="badge_level_info")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class badge_level_info : EntityObject
@@ -917,7 +917,7 @@ namespace ActivEarth.Server.Service
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="UserModel", Name="challenge")]
+    [EdmEntityTypeAttribute(NamespaceName="ActivEarth_DevModel", Name="challenge")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class challenge : EntityObject
@@ -1209,18 +1209,18 @@ namespace ActivEarth.Server.Service
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("UserModel", "FK_challenge_initial_values_challenge_id", "challenge_initial_values")]
+        [EdmRelationshipNavigationPropertyAttribute("ActivEarth_DevModel", "FK_challenge_initial_values_challenge_id", "challenge_initial_values")]
         public EntityCollection<challenge_initial_values> challenge_initial_values
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<challenge_initial_values>("UserModel.FK_challenge_initial_values_challenge_id", "challenge_initial_values");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<challenge_initial_values>("ActivEarth_DevModel.FK_challenge_initial_values_challenge_id", "challenge_initial_values");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<challenge_initial_values>("UserModel.FK_challenge_initial_values_challenge_id", "challenge_initial_values", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<challenge_initial_values>("ActivEarth_DevModel.FK_challenge_initial_values_challenge_id", "challenge_initial_values", value);
                 }
             }
         }
@@ -1231,7 +1231,7 @@ namespace ActivEarth.Server.Service
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="UserModel", Name="challenge_definitions")]
+    [EdmEntityTypeAttribute(NamespaceName="ActivEarth_DevModel", Name="challenge_definitions")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class challenge_definitions : EntityObject
@@ -1466,7 +1466,7 @@ namespace ActivEarth.Server.Service
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="UserModel", Name="challenge_initial_values")]
+    [EdmEntityTypeAttribute(NamespaceName="ActivEarth_DevModel", Name="challenge_initial_values")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class challenge_initial_values : EntityObject
@@ -1602,16 +1602,16 @@ namespace ActivEarth.Server.Service
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("UserModel", "FK_challenge_initial_values_challenge_id", "challenges")]
+        [EdmRelationshipNavigationPropertyAttribute("ActivEarth_DevModel", "FK_challenge_initial_values_challenge_id", "challenges")]
         public challenge challenge
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<challenge>("UserModel.FK_challenge_initial_values_challenge_id", "challenges").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<challenge>("ActivEarth_DevModel.FK_challenge_initial_values_challenge_id", "challenges").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<challenge>("UserModel.FK_challenge_initial_values_challenge_id", "challenges").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<challenge>("ActivEarth_DevModel.FK_challenge_initial_values_challenge_id", "challenges").Value = value;
             }
         }
         /// <summary>
@@ -1623,13 +1623,13 @@ namespace ActivEarth.Server.Service
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<challenge>("UserModel.FK_challenge_initial_values_challenge_id", "challenges");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<challenge>("ActivEarth_DevModel.FK_challenge_initial_values_challenge_id", "challenges");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<challenge>("UserModel.FK_challenge_initial_values_challenge_id", "challenges", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<challenge>("ActivEarth_DevModel.FK_challenge_initial_values_challenge_id", "challenges", value);
                 }
             }
         }
@@ -1640,16 +1640,16 @@ namespace ActivEarth.Server.Service
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("UserModel", "FK_challenge_initial_values_user_id", "users")]
+        [EdmRelationshipNavigationPropertyAttribute("ActivEarth_DevModel", "FK_challenge_initial_values_user_id", "users")]
         public user user
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<user>("UserModel.FK_challenge_initial_values_user_id", "users").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<user>("ActivEarth_DevModel.FK_challenge_initial_values_user_id", "users").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<user>("UserModel.FK_challenge_initial_values_user_id", "users").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<user>("ActivEarth_DevModel.FK_challenge_initial_values_user_id", "users").Value = value;
             }
         }
         /// <summary>
@@ -1661,13 +1661,13 @@ namespace ActivEarth.Server.Service
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<user>("UserModel.FK_challenge_initial_values_user_id", "users");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<user>("ActivEarth_DevModel.FK_challenge_initial_values_user_id", "users");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<user>("UserModel.FK_challenge_initial_values_user_id", "users", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<user>("ActivEarth_DevModel.FK_challenge_initial_values_user_id", "users", value);
                 }
             }
         }
@@ -1678,7 +1678,7 @@ namespace ActivEarth.Server.Service
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="UserModel", Name="contest")]
+    [EdmEntityTypeAttribute(NamespaceName="ActivEarth_DevModel", Name="contest")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class contest : EntityObject
@@ -2068,18 +2068,18 @@ namespace ActivEarth.Server.Service
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("UserModel", "FK_contest_id_group_contests", "group_contests")]
+        [EdmRelationshipNavigationPropertyAttribute("ActivEarth_DevModel", "FK_contest_id_group_contests", "group_contests")]
         public EntityCollection<group_contests> group_contests
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<group_contests>("UserModel.FK_contest_id_group_contests", "group_contests");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<group_contests>("ActivEarth_DevModel.FK_contest_id_group_contests", "group_contests");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<group_contests>("UserModel.FK_contest_id_group_contests", "group_contests", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<group_contests>("ActivEarth_DevModel.FK_contest_id_group_contests", "group_contests", value);
                 }
             }
         }
@@ -2090,16 +2090,16 @@ namespace ActivEarth.Server.Service
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("UserModel", "FK_contests_creator_id", "users")]
+        [EdmRelationshipNavigationPropertyAttribute("ActivEarth_DevModel", "FK_contests_creator_id", "users")]
         public user user
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<user>("UserModel.FK_contests_creator_id", "users").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<user>("ActivEarth_DevModel.FK_contests_creator_id", "users").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<user>("UserModel.FK_contests_creator_id", "users").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<user>("ActivEarth_DevModel.FK_contests_creator_id", "users").Value = value;
             }
         }
         /// <summary>
@@ -2111,13 +2111,13 @@ namespace ActivEarth.Server.Service
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<user>("UserModel.FK_contests_creator_id", "users");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<user>("ActivEarth_DevModel.FK_contests_creator_id", "users");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<user>("UserModel.FK_contests_creator_id", "users", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<user>("ActivEarth_DevModel.FK_contests_creator_id", "users", value);
                 }
             }
         }
@@ -2128,7 +2128,7 @@ namespace ActivEarth.Server.Service
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="UserModel", Name="group")]
+    [EdmEntityTypeAttribute(NamespaceName="ActivEarth_DevModel", Name="group")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class group : EntityObject
@@ -2212,18 +2212,18 @@ namespace ActivEarth.Server.Service
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("UserModel", "FK_group_id_group_contests", "group_contests")]
+        [EdmRelationshipNavigationPropertyAttribute("ActivEarth_DevModel", "FK_group_id_group_contests", "group_contests")]
         public EntityCollection<group_contests> group_contests
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<group_contests>("UserModel.FK_group_id_group_contests", "group_contests");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<group_contests>("ActivEarth_DevModel.FK_group_id_group_contests", "group_contests");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<group_contests>("UserModel.FK_group_id_group_contests", "group_contests", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<group_contests>("ActivEarth_DevModel.FK_group_id_group_contests", "group_contests", value);
                 }
             }
         }
@@ -2234,18 +2234,18 @@ namespace ActivEarth.Server.Service
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("UserModel", "FK_group_id_group_hashtags", "group_hashtags")]
+        [EdmRelationshipNavigationPropertyAttribute("ActivEarth_DevModel", "FK_group_id_group_hashtags", "group_hashtags")]
         public EntityCollection<group_hashtags> group_hashtags
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<group_hashtags>("UserModel.FK_group_id_group_hashtags", "group_hashtags");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<group_hashtags>("ActivEarth_DevModel.FK_group_id_group_hashtags", "group_hashtags");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<group_hashtags>("UserModel.FK_group_id_group_hashtags", "group_hashtags", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<group_hashtags>("ActivEarth_DevModel.FK_group_id_group_hashtags", "group_hashtags", value);
                 }
             }
         }
@@ -2256,18 +2256,18 @@ namespace ActivEarth.Server.Service
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("UserModel", "fk_group_id", "group_members")]
+        [EdmRelationshipNavigationPropertyAttribute("ActivEarth_DevModel", "fk_group_id", "group_members")]
         public EntityCollection<group_members> group_members
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<group_members>("UserModel.fk_group_id", "group_members");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<group_members>("ActivEarth_DevModel.fk_group_id", "group_members");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<group_members>("UserModel.fk_group_id", "group_members", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<group_members>("ActivEarth_DevModel.fk_group_id", "group_members", value);
                 }
             }
         }
@@ -2278,18 +2278,18 @@ namespace ActivEarth.Server.Service
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("UserModel", "FK_group_id_messages", "messages")]
+        [EdmRelationshipNavigationPropertyAttribute("ActivEarth_DevModel", "FK_group_id_messages", "messages")]
         public EntityCollection<message> messages
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<message>("UserModel.FK_group_id_messages", "messages");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<message>("ActivEarth_DevModel.FK_group_id_messages", "messages");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<message>("UserModel.FK_group_id_messages", "messages", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<message>("ActivEarth_DevModel.FK_group_id_messages", "messages", value);
                 }
             }
         }
@@ -2300,7 +2300,7 @@ namespace ActivEarth.Server.Service
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="UserModel", Name="group_contests")]
+    [EdmEntityTypeAttribute(NamespaceName="ActivEarth_DevModel", Name="group_contests")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class group_contests : EntityObject
@@ -2410,16 +2410,16 @@ namespace ActivEarth.Server.Service
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("UserModel", "FK_contest_id_group_contests", "contests")]
+        [EdmRelationshipNavigationPropertyAttribute("ActivEarth_DevModel", "FK_contest_id_group_contests", "contests")]
         public contest contest
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<contest>("UserModel.FK_contest_id_group_contests", "contests").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<contest>("ActivEarth_DevModel.FK_contest_id_group_contests", "contests").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<contest>("UserModel.FK_contest_id_group_contests", "contests").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<contest>("ActivEarth_DevModel.FK_contest_id_group_contests", "contests").Value = value;
             }
         }
         /// <summary>
@@ -2431,13 +2431,13 @@ namespace ActivEarth.Server.Service
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<contest>("UserModel.FK_contest_id_group_contests", "contests");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<contest>("ActivEarth_DevModel.FK_contest_id_group_contests", "contests");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<contest>("UserModel.FK_contest_id_group_contests", "contests", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<contest>("ActivEarth_DevModel.FK_contest_id_group_contests", "contests", value);
                 }
             }
         }
@@ -2448,16 +2448,16 @@ namespace ActivEarth.Server.Service
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("UserModel", "FK_group_id_group_contests", "groups")]
+        [EdmRelationshipNavigationPropertyAttribute("ActivEarth_DevModel", "FK_group_id_group_contests", "groups")]
         public group group
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<group>("UserModel.FK_group_id_group_contests", "groups").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<group>("ActivEarth_DevModel.FK_group_id_group_contests", "groups").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<group>("UserModel.FK_group_id_group_contests", "groups").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<group>("ActivEarth_DevModel.FK_group_id_group_contests", "groups").Value = value;
             }
         }
         /// <summary>
@@ -2469,13 +2469,13 @@ namespace ActivEarth.Server.Service
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<group>("UserModel.FK_group_id_group_contests", "groups");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<group>("ActivEarth_DevModel.FK_group_id_group_contests", "groups");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<group>("UserModel.FK_group_id_group_contests", "groups", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<group>("ActivEarth_DevModel.FK_group_id_group_contests", "groups", value);
                 }
             }
         }
@@ -2486,7 +2486,7 @@ namespace ActivEarth.Server.Service
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="UserModel", Name="group_hashtags")]
+    [EdmEntityTypeAttribute(NamespaceName="ActivEarth_DevModel", Name="group_hashtags")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class group_hashtags : EntityObject
@@ -2596,16 +2596,16 @@ namespace ActivEarth.Server.Service
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("UserModel", "FK_group_id_group_hashtags", "groups")]
+        [EdmRelationshipNavigationPropertyAttribute("ActivEarth_DevModel", "FK_group_id_group_hashtags", "groups")]
         public group group
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<group>("UserModel.FK_group_id_group_hashtags", "groups").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<group>("ActivEarth_DevModel.FK_group_id_group_hashtags", "groups").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<group>("UserModel.FK_group_id_group_hashtags", "groups").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<group>("ActivEarth_DevModel.FK_group_id_group_hashtags", "groups").Value = value;
             }
         }
         /// <summary>
@@ -2617,13 +2617,13 @@ namespace ActivEarth.Server.Service
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<group>("UserModel.FK_group_id_group_hashtags", "groups");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<group>("ActivEarth_DevModel.FK_group_id_group_hashtags", "groups");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<group>("UserModel.FK_group_id_group_hashtags", "groups", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<group>("ActivEarth_DevModel.FK_group_id_group_hashtags", "groups", value);
                 }
             }
         }
@@ -2634,7 +2634,7 @@ namespace ActivEarth.Server.Service
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="UserModel", Name="group_members")]
+    [EdmEntityTypeAttribute(NamespaceName="ActivEarth_DevModel", Name="group_members")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class group_members : EntityObject
@@ -2744,16 +2744,16 @@ namespace ActivEarth.Server.Service
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("UserModel", "fk_group_id", "groups")]
+        [EdmRelationshipNavigationPropertyAttribute("ActivEarth_DevModel", "fk_group_id", "groups")]
         public group group
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<group>("UserModel.fk_group_id", "groups").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<group>("ActivEarth_DevModel.fk_group_id", "groups").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<group>("UserModel.fk_group_id", "groups").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<group>("ActivEarth_DevModel.fk_group_id", "groups").Value = value;
             }
         }
         /// <summary>
@@ -2765,13 +2765,13 @@ namespace ActivEarth.Server.Service
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<group>("UserModel.fk_group_id", "groups");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<group>("ActivEarth_DevModel.fk_group_id", "groups");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<group>("UserModel.fk_group_id", "groups", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<group>("ActivEarth_DevModel.fk_group_id", "groups", value);
                 }
             }
         }
@@ -2782,16 +2782,16 @@ namespace ActivEarth.Server.Service
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("UserModel", "fk_user_id_groups", "users")]
+        [EdmRelationshipNavigationPropertyAttribute("ActivEarth_DevModel", "fk_user_id_groups", "users")]
         public user user
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<user>("UserModel.fk_user_id_groups", "users").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<user>("ActivEarth_DevModel.fk_user_id_groups", "users").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<user>("UserModel.fk_user_id_groups", "users").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<user>("ActivEarth_DevModel.fk_user_id_groups", "users").Value = value;
             }
         }
         /// <summary>
@@ -2803,13 +2803,13 @@ namespace ActivEarth.Server.Service
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<user>("UserModel.fk_user_id_groups", "users");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<user>("ActivEarth_DevModel.fk_user_id_groups", "users");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<user>("UserModel.fk_user_id_groups", "users", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<user>("ActivEarth_DevModel.fk_user_id_groups", "users", value);
                 }
             }
         }
@@ -2820,7 +2820,7 @@ namespace ActivEarth.Server.Service
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="UserModel", Name="message")]
+    [EdmEntityTypeAttribute(NamespaceName="ActivEarth_DevModel", Name="message")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class message : EntityObject
@@ -3078,16 +3078,16 @@ namespace ActivEarth.Server.Service
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("UserModel", "FK_group_id_messages", "groups")]
+        [EdmRelationshipNavigationPropertyAttribute("ActivEarth_DevModel", "FK_group_id_messages", "groups")]
         public group group
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<group>("UserModel.FK_group_id_messages", "groups").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<group>("ActivEarth_DevModel.FK_group_id_messages", "groups").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<group>("UserModel.FK_group_id_messages", "groups").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<group>("ActivEarth_DevModel.FK_group_id_messages", "groups").Value = value;
             }
         }
         /// <summary>
@@ -3099,13 +3099,13 @@ namespace ActivEarth.Server.Service
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<group>("UserModel.FK_group_id_messages", "groups");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<group>("ActivEarth_DevModel.FK_group_id_messages", "groups");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<group>("UserModel.FK_group_id_messages", "groups", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<group>("ActivEarth_DevModel.FK_group_id_messages", "groups", value);
                 }
             }
         }
@@ -3116,16 +3116,16 @@ namespace ActivEarth.Server.Service
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("UserModel", "FK_poster_id_messages", "users")]
+        [EdmRelationshipNavigationPropertyAttribute("ActivEarth_DevModel", "FK_poster_id_messages", "users")]
         public user user
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<user>("UserModel.FK_poster_id_messages", "users").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<user>("ActivEarth_DevModel.FK_poster_id_messages", "users").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<user>("UserModel.FK_poster_id_messages", "users").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<user>("ActivEarth_DevModel.FK_poster_id_messages", "users").Value = value;
             }
         }
         /// <summary>
@@ -3137,13 +3137,13 @@ namespace ActivEarth.Server.Service
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<user>("UserModel.FK_poster_id_messages", "users");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<user>("ActivEarth_DevModel.FK_poster_id_messages", "users");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<user>("UserModel.FK_poster_id_messages", "users", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<user>("ActivEarth_DevModel.FK_poster_id_messages", "users", value);
                 }
             }
         }
@@ -3154,7 +3154,7 @@ namespace ActivEarth.Server.Service
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="UserModel", Name="privacy_settings")]
+    [EdmEntityTypeAttribute(NamespaceName="ActivEarth_DevModel", Name="privacy_settings")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class privacy_settings : EntityObject
@@ -3417,7 +3417,7 @@ namespace ActivEarth.Server.Service
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="UserModel", Name="profile")]
+    [EdmEntityTypeAttribute(NamespaceName="ActivEarth_DevModel", Name="profile")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class profile : EntityObject
@@ -3725,16 +3725,16 @@ namespace ActivEarth.Server.Service
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("UserModel", "FK__profile__state__0CBAE877", "users")]
+        [EdmRelationshipNavigationPropertyAttribute("ActivEarth_DevModel", "FK__profile__state__0CBAE877", "users")]
         public user user
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<user>("UserModel.FK__profile__state__0CBAE877", "users").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<user>("ActivEarth_DevModel.FK__profile__state__0CBAE877", "users").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<user>("UserModel.FK__profile__state__0CBAE877", "users").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<user>("ActivEarth_DevModel.FK__profile__state__0CBAE877", "users").Value = value;
             }
         }
         /// <summary>
@@ -3746,13 +3746,13 @@ namespace ActivEarth.Server.Service
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<user>("UserModel.FK__profile__state__0CBAE877", "users");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<user>("ActivEarth_DevModel.FK__profile__state__0CBAE877", "users");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<user>("UserModel.FK__profile__state__0CBAE877", "users", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<user>("ActivEarth_DevModel.FK__profile__state__0CBAE877", "users", value);
                 }
             }
         }
@@ -3763,7 +3763,7 @@ namespace ActivEarth.Server.Service
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="UserModel", Name="statistic_info")]
+    [EdmEntityTypeAttribute(NamespaceName="ActivEarth_DevModel", Name="statistic_info")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class statistic_info : EntityObject
@@ -3896,7 +3896,7 @@ namespace ActivEarth.Server.Service
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="UserModel", Name="team")]
+    [EdmEntityTypeAttribute(NamespaceName="ActivEarth_DevModel", Name="team")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class team : EntityObject
@@ -3980,18 +3980,18 @@ namespace ActivEarth.Server.Service
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("UserModel", "fk_team_id", "team_members")]
+        [EdmRelationshipNavigationPropertyAttribute("ActivEarth_DevModel", "fk_team_id", "team_members")]
         public EntityCollection<team_members> team_members
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<team_members>("UserModel.fk_team_id", "team_members");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<team_members>("ActivEarth_DevModel.fk_team_id", "team_members");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<team_members>("UserModel.fk_team_id", "team_members", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<team_members>("ActivEarth_DevModel.fk_team_id", "team_members", value);
                 }
             }
         }
@@ -4002,18 +4002,18 @@ namespace ActivEarth.Server.Service
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("UserModel", "FK_team_members_team_id", "team_members")]
+        [EdmRelationshipNavigationPropertyAttribute("ActivEarth_DevModel", "FK_team_members_team_id", "team_members")]
         public EntityCollection<team_members> team_members1
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<team_members>("UserModel.FK_team_members_team_id", "team_members");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<team_members>("ActivEarth_DevModel.FK_team_members_team_id", "team_members");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<team_members>("UserModel.FK_team_members_team_id", "team_members", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<team_members>("ActivEarth_DevModel.FK_team_members_team_id", "team_members", value);
                 }
             }
         }
@@ -4024,7 +4024,7 @@ namespace ActivEarth.Server.Service
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="UserModel", Name="team_members")]
+    [EdmEntityTypeAttribute(NamespaceName="ActivEarth_DevModel", Name="team_members")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class team_members : EntityObject
@@ -4134,16 +4134,16 @@ namespace ActivEarth.Server.Service
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("UserModel", "fk_team_id", "teams")]
+        [EdmRelationshipNavigationPropertyAttribute("ActivEarth_DevModel", "fk_team_id", "teams")]
         public team team
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<team>("UserModel.fk_team_id", "teams").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<team>("ActivEarth_DevModel.fk_team_id", "teams").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<team>("UserModel.fk_team_id", "teams").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<team>("ActivEarth_DevModel.fk_team_id", "teams").Value = value;
             }
         }
         /// <summary>
@@ -4155,13 +4155,13 @@ namespace ActivEarth.Server.Service
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<team>("UserModel.fk_team_id", "teams");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<team>("ActivEarth_DevModel.fk_team_id", "teams");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<team>("UserModel.fk_team_id", "teams", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<team>("ActivEarth_DevModel.fk_team_id", "teams", value);
                 }
             }
         }
@@ -4172,16 +4172,16 @@ namespace ActivEarth.Server.Service
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("UserModel", "FK_team_members_team_id", "teams")]
+        [EdmRelationshipNavigationPropertyAttribute("ActivEarth_DevModel", "FK_team_members_team_id", "teams")]
         public team team1
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<team>("UserModel.FK_team_members_team_id", "teams").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<team>("ActivEarth_DevModel.FK_team_members_team_id", "teams").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<team>("UserModel.FK_team_members_team_id", "teams").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<team>("ActivEarth_DevModel.FK_team_members_team_id", "teams").Value = value;
             }
         }
         /// <summary>
@@ -4193,13 +4193,13 @@ namespace ActivEarth.Server.Service
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<team>("UserModel.FK_team_members_team_id", "teams");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<team>("ActivEarth_DevModel.FK_team_members_team_id", "teams");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<team>("UserModel.FK_team_members_team_id", "teams", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<team>("ActivEarth_DevModel.FK_team_members_team_id", "teams", value);
                 }
             }
         }
@@ -4210,16 +4210,16 @@ namespace ActivEarth.Server.Service
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("UserModel", "fk_team_members_user_id", "users")]
+        [EdmRelationshipNavigationPropertyAttribute("ActivEarth_DevModel", "fk_team_members_user_id", "users")]
         public user user
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<user>("UserModel.fk_team_members_user_id", "users").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<user>("ActivEarth_DevModel.fk_team_members_user_id", "users").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<user>("UserModel.fk_team_members_user_id", "users").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<user>("ActivEarth_DevModel.fk_team_members_user_id", "users").Value = value;
             }
         }
         /// <summary>
@@ -4231,13 +4231,13 @@ namespace ActivEarth.Server.Service
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<user>("UserModel.fk_team_members_user_id", "users");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<user>("ActivEarth_DevModel.fk_team_members_user_id", "users");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<user>("UserModel.fk_team_members_user_id", "users", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<user>("ActivEarth_DevModel.fk_team_members_user_id", "users", value);
                 }
             }
         }
@@ -4248,16 +4248,16 @@ namespace ActivEarth.Server.Service
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("UserModel", "fk_user_id_teams", "users")]
+        [EdmRelationshipNavigationPropertyAttribute("ActivEarth_DevModel", "fk_user_id_teams", "users")]
         public user user1
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<user>("UserModel.fk_user_id_teams", "users").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<user>("ActivEarth_DevModel.fk_user_id_teams", "users").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<user>("UserModel.fk_user_id_teams", "users").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<user>("ActivEarth_DevModel.fk_user_id_teams", "users").Value = value;
             }
         }
         /// <summary>
@@ -4269,13 +4269,13 @@ namespace ActivEarth.Server.Service
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<user>("UserModel.fk_user_id_teams", "users");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<user>("ActivEarth_DevModel.fk_user_id_teams", "users");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<user>("UserModel.fk_user_id_teams", "users", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<user>("ActivEarth_DevModel.fk_user_id_teams", "users", value);
                 }
             }
         }
@@ -4286,7 +4286,7 @@ namespace ActivEarth.Server.Service
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="UserModel", Name="user")]
+    [EdmEntityTypeAttribute(NamespaceName="ActivEarth_DevModel", Name="user")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class user : EntityObject
@@ -4396,18 +4396,18 @@ namespace ActivEarth.Server.Service
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("UserModel", "FK_badges_user_id", "badges")]
+        [EdmRelationshipNavigationPropertyAttribute("ActivEarth_DevModel", "FK_badges_user_id", "badges")]
         public EntityCollection<badge> badges
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<badge>("UserModel.FK_badges_user_id", "badges");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<badge>("ActivEarth_DevModel.FK_badges_user_id", "badges");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<badge>("UserModel.FK_badges_user_id", "badges", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<badge>("ActivEarth_DevModel.FK_badges_user_id", "badges", value);
                 }
             }
         }
@@ -4418,18 +4418,18 @@ namespace ActivEarth.Server.Service
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("UserModel", "FK_challenge_initial_values_user_id", "challenge_initial_values")]
+        [EdmRelationshipNavigationPropertyAttribute("ActivEarth_DevModel", "FK_challenge_initial_values_user_id", "challenge_initial_values")]
         public EntityCollection<challenge_initial_values> challenge_initial_values
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<challenge_initial_values>("UserModel.FK_challenge_initial_values_user_id", "challenge_initial_values");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<challenge_initial_values>("ActivEarth_DevModel.FK_challenge_initial_values_user_id", "challenge_initial_values");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<challenge_initial_values>("UserModel.FK_challenge_initial_values_user_id", "challenge_initial_values", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<challenge_initial_values>("ActivEarth_DevModel.FK_challenge_initial_values_user_id", "challenge_initial_values", value);
                 }
             }
         }
@@ -4440,18 +4440,18 @@ namespace ActivEarth.Server.Service
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("UserModel", "FK_contests_creator_id", "contests")]
+        [EdmRelationshipNavigationPropertyAttribute("ActivEarth_DevModel", "FK_contests_creator_id", "contests")]
         public EntityCollection<contest> contests
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<contest>("UserModel.FK_contests_creator_id", "contests");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<contest>("ActivEarth_DevModel.FK_contests_creator_id", "contests");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<contest>("UserModel.FK_contests_creator_id", "contests", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<contest>("ActivEarth_DevModel.FK_contests_creator_id", "contests", value);
                 }
             }
         }
@@ -4462,18 +4462,18 @@ namespace ActivEarth.Server.Service
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("UserModel", "fk_user_id_groups", "group_members")]
+        [EdmRelationshipNavigationPropertyAttribute("ActivEarth_DevModel", "fk_user_id_groups", "group_members")]
         public EntityCollection<group_members> group_members
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<group_members>("UserModel.fk_user_id_groups", "group_members");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<group_members>("ActivEarth_DevModel.fk_user_id_groups", "group_members");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<group_members>("UserModel.fk_user_id_groups", "group_members", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<group_members>("ActivEarth_DevModel.fk_user_id_groups", "group_members", value);
                 }
             }
         }
@@ -4484,18 +4484,18 @@ namespace ActivEarth.Server.Service
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("UserModel", "FK_poster_id_messages", "messages")]
+        [EdmRelationshipNavigationPropertyAttribute("ActivEarth_DevModel", "FK_poster_id_messages", "messages")]
         public EntityCollection<message> messages
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<message>("UserModel.FK_poster_id_messages", "messages");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<message>("ActivEarth_DevModel.FK_poster_id_messages", "messages");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<message>("UserModel.FK_poster_id_messages", "messages", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<message>("ActivEarth_DevModel.FK_poster_id_messages", "messages", value);
                 }
             }
         }
@@ -4506,18 +4506,18 @@ namespace ActivEarth.Server.Service
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("UserModel", "FK__profile__state__0CBAE877", "profile")]
+        [EdmRelationshipNavigationPropertyAttribute("ActivEarth_DevModel", "FK__profile__state__0CBAE877", "profile")]
         public EntityCollection<profile> profiles
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<profile>("UserModel.FK__profile__state__0CBAE877", "profile");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<profile>("ActivEarth_DevModel.FK__profile__state__0CBAE877", "profile");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<profile>("UserModel.FK__profile__state__0CBAE877", "profile", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<profile>("ActivEarth_DevModel.FK__profile__state__0CBAE877", "profile", value);
                 }
             }
         }
@@ -4528,18 +4528,18 @@ namespace ActivEarth.Server.Service
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("UserModel", "fk_team_members_user_id", "team_members")]
+        [EdmRelationshipNavigationPropertyAttribute("ActivEarth_DevModel", "fk_team_members_user_id", "team_members")]
         public EntityCollection<team_members> team_members
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<team_members>("UserModel.fk_team_members_user_id", "team_members");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<team_members>("ActivEarth_DevModel.fk_team_members_user_id", "team_members");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<team_members>("UserModel.fk_team_members_user_id", "team_members", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<team_members>("ActivEarth_DevModel.fk_team_members_user_id", "team_members", value);
                 }
             }
         }
@@ -4550,18 +4550,18 @@ namespace ActivEarth.Server.Service
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("UserModel", "fk_user_id_teams", "team_members")]
+        [EdmRelationshipNavigationPropertyAttribute("ActivEarth_DevModel", "fk_user_id_teams", "team_members")]
         public EntityCollection<team_members> team_members1
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<team_members>("UserModel.fk_user_id_teams", "team_members");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<team_members>("ActivEarth_DevModel.fk_user_id_teams", "team_members");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<team_members>("UserModel.fk_user_id_teams", "team_members", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<team_members>("ActivEarth_DevModel.fk_user_id_teams", "team_members", value);
                 }
             }
         }
@@ -4572,18 +4572,18 @@ namespace ActivEarth.Server.Service
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("UserModel", "FK_statistics_users", "user_statistics")]
+        [EdmRelationshipNavigationPropertyAttribute("ActivEarth_DevModel", "FK_statistics_users", "user_statistics")]
         public EntityCollection<user_statistics> user_statistics
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<user_statistics>("UserModel.FK_statistics_users", "user_statistics");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<user_statistics>("ActivEarth_DevModel.FK_statistics_users", "user_statistics");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<user_statistics>("UserModel.FK_statistics_users", "user_statistics", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<user_statistics>("ActivEarth_DevModel.FK_statistics_users", "user_statistics", value);
                 }
             }
         }
@@ -4594,7 +4594,7 @@ namespace ActivEarth.Server.Service
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="UserModel", Name="user_statistics")]
+    [EdmEntityTypeAttribute(NamespaceName="ActivEarth_DevModel", Name="user_statistics")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class user_statistics : EntityObject
@@ -4730,16 +4730,16 @@ namespace ActivEarth.Server.Service
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("UserModel", "FK_statistics_users", "users")]
+        [EdmRelationshipNavigationPropertyAttribute("ActivEarth_DevModel", "FK_statistics_users", "users")]
         public user user
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<user>("UserModel.FK_statistics_users", "users").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<user>("ActivEarth_DevModel.FK_statistics_users", "users").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<user>("UserModel.FK_statistics_users", "users").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<user>("ActivEarth_DevModel.FK_statistics_users", "users").Value = value;
             }
         }
         /// <summary>
@@ -4751,13 +4751,13 @@ namespace ActivEarth.Server.Service
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<user>("UserModel.FK_statistics_users", "users");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<user>("ActivEarth_DevModel.FK_statistics_users", "users");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<user>("UserModel.FK_statistics_users", "users", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<user>("ActivEarth_DevModel.FK_statistics_users", "users", value);
                 }
             }
         }
