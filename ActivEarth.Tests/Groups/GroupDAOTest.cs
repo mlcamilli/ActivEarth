@@ -207,6 +207,85 @@ namespace ActivEarth.Tests.Groups
         }
 
         [TestMethod]
+        public void TestGetGroupByName()
+        {
+            var owner = new User
+            {
+                UserName = "owner",
+                Age = 25,
+                City = "Bleaksburg",
+                Email = "whatisthis@idont.even",
+                FirstName = "I.C.",
+                Gender = 'M',
+                Height = 60,
+                LastName = "Poorcode",
+                State = "VA",
+                Weight = 130
+            };
+            var member1 = new User
+            {
+                UserName = "member1",
+                Age = 25,
+                City = "Bleaksburg",
+                Email = "whatisthis@idont.even",
+                FirstName = "I.C.",
+                Gender = 'M',
+                Height = 60,
+                LastName = "Poorcode",
+                State = "VA",
+                Weight = 130
+            };
+            var member2 = new User
+            {
+                UserName = "member2",
+                Age = 25,
+                City = "Bleaksburg",
+                Email = "whatisthis@idont.even",
+                FirstName = "I.C.",
+                Gender = 'M',
+                Height = 60,
+                LastName = "Poorcode",
+                State = "VA",
+                Weight = 130
+            };
+
+            owner.UserID = UserDAO.CreateNewUser(owner, "password");
+            member1.UserID = UserDAO.CreateNewUser(member1, "password");
+            member2.UserID = UserDAO.CreateNewUser(member2, "password");
+
+            List<string> tags1 = new List<string>(); List<string> tags2 = new List<string>();
+            tags1.Add("new"); tags2.Add("new");
+            tags1.Add("searchable"); tags2.Add("searchable");
+            tags2.Add("hashtags");
+
+            Group testGroup1 = new Group("Test1", owner, "This is a Group", tags1);
+            testGroup1.Join(member1);
+            testGroup1.ID = GroupDAO.CreateNewGroup(testGroup1);
+
+            Group testGroup2 = new Group("Test2", owner, "This is another Group", tags2);
+            testGroup2.Join(member2);
+            testGroup2.ID = GroupDAO.CreateNewGroup(testGroup2);
+
+            Assert.AreNotEqual(testGroup1.ID, 0);
+            Assert.AreNotEqual(testGroup2.ID, 0);
+
+            List<Group> taggedGroups = GroupDAO.GetAllGroupsByName("Test2");
+            Assert.AreEqual(taggedGroups.Count, 1);
+            Assert.AreEqual(taggedGroups.First().Name, "Test2");
+            Assert.AreEqual(2, taggedGroups.First().Members.Count);
+            foreach (User u in taggedGroups.First().Members)
+            {
+                Assert.IsNotNull(u);
+                Assert.AreNotEqual("member1", u.UserName);
+            }
+
+            taggedGroups = GroupDAO.GetAllGroupsByName("Test");
+            Assert.AreEqual(taggedGroups.Count, 2);
+            Assert.AreEqual(taggedGroups.First().Name, "Test1");
+            Assert.AreEqual(taggedGroups.Last().Name, "Test2");
+        }
+
+        [TestMethod]
         public void TestGetGroupWall()
         {
             var owner = new User
