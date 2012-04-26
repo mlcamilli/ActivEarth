@@ -50,6 +50,7 @@ namespace ActivEarth.Tests.Competition
                 LastName = "Subject1",
                 City = "St. Louis",
                 State = "MO",
+                Gender = "M",
                 Email = "email1@test.com"
             };
 
@@ -60,6 +61,7 @@ namespace ActivEarth.Tests.Competition
                 LastName = "Subject2",
                 City = "Missoula",
                 State = "MT",
+                Gender = "M",
                 Email = "email1@test.net"
             };
             _user3 = new User
@@ -69,6 +71,7 @@ namespace ActivEarth.Tests.Competition
                 LastName = "Subject3",
                 City = "Oakland",
                 State = "CA",
+                Gender = "F",
                 Email = "email1@test.org"
             };
 
@@ -79,6 +82,7 @@ namespace ActivEarth.Tests.Competition
                 LastName = "Subject4",
                 City = "Albany",
                 State = "NY",
+                Gender = "M",
                 Email = "email1@test.gov"
             };
 

@@ -49,6 +49,7 @@ namespace ActivEarth.Tests.Competition
                 LastName = "Subject1",
                 City = "Montreal",
                 State = "QC",
+                Gender = "M",
                 Email = "email1@test.com"
             };
 
@@ -59,6 +60,7 @@ namespace ActivEarth.Tests.Competition
                 LastName = "Subject2",
                 City = "Vancouver",
                 State = "BC",
+                Gender = "M",
                 Email = "email1@test.net"
             };
 

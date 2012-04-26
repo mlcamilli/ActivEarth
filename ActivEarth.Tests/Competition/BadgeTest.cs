@@ -484,6 +484,7 @@ namespace ActivEarth.Tests.Competition
                 LastName = "Subject79",
                 City = "Boise",
                 State = "ID",
+                Gender = "M",
                 Email = "badgelover@activearth.com"
             };
 
@@ -494,6 +495,7 @@ namespace ActivEarth.Tests.Competition
                 LastName = "Subject26",
                 City = "Chicago",
                 State = "IL",
+                Gender = "F",
                 Email = "badgelovertoo@activearth.com"
             };
 
