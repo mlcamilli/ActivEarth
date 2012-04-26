@@ -169,6 +169,7 @@ namespace ActivEarth.DAO
                     var data = new ActivEarthDataProvidersDataContext(connection);
                     ProfileDataProvider profile =
                         (from p in data.ProfileDataProviders where p.user_id == user.UserID select p).FirstOrDefault();
+
                     if (profile != null)
                     {
                         profile.first_name = user.FirstName;
@@ -181,9 +182,12 @@ namespace ActivEarth.DAO
                         profile.height = user.Height;
                         profile.weight = user.Weight;
                         profile.green_score = user.GreenScore;
-                        profile.activity_score_badges = user.ActivityScore.BadgeScore;
-                        profile.activity_score_challenges = user.ActivityScore.ChallengeScore;
-                        profile.activity_score_contests = user.ActivityScore.ContestScore;
+                        if (user.ActivityScore != null)
+                        {
+                            profile.activity_score_badges = user.ActivityScore.BadgeScore;
+                            profile.activity_score_challenges = user.ActivityScore.ChallengeScore;
+                            profile.activity_score_contests = user.ActivityScore.ContestScore;
+                        }
 
                         RecentActivityDAO.UpdateUserRecentActivity(user);
                         

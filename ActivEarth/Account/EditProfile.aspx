@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="EditProfile.aspx.cs" Inherits="ActivEarth.Account.EditProfile" %>
+﻿<%@ Page Title="Edit Profile" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="EditProfile.aspx.cs" Inherits="ActivEarth.Account.EditProfile" Debug="true" %>
 <asp:Content ID="HeaderContent" runat="server" ContentPlaceHolderID="HeadContent">
 </asp:Content>
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
@@ -45,14 +45,27 @@
                 <td><asp:TextBox runat="server" ID="tbWeight"></asp:TextBox></td>
             </tr>
             <tr>
-                <td><strong><asp:Label ID="pictureLabel" runat="server" Text="Picture"></asp:Label></strong></td>
-                <td><asp:FileUpload ID="pictureFile" runat="server" /></td>
+                <td><strong><asp:Label ID="pictureLabel" runat="server" Text="Photo"></asp:Label></strong></td>
+                <td>
+                    <asp:FileUpload ID="pictureFile" runat="server" />
+                    <asp:RegularExpressionValidator id="pictureValidator" runat="server" 
+                        ErrorMessage="Please select a JPG or PNG image." 
+                        ValidationExpression="^.+(.jpeg|.jpg|.png)$" 
+                        ControlToValidate="pictureFile">
+                    </asp:RegularExpressionValidator>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <asp:CheckBox ID="deletePhoto" runat="server" />
+                    <asp:Label ID="deletePhotoLabel" runat="server" Text="Delete photo"></asp:Label>
+                </td>
             </tr>
             <tr>
                 <td></td>
                 <td><asp:Button runat="server" id="btnSaveChanges" onclick="SaveUserProfile" Text="Save Changes"/></td>
             </tr>
-        <br /><br />
-        
+        </tbody>
     </table>
 </asp:Content>
