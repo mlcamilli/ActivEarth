@@ -168,7 +168,7 @@ first child of the left and right table columns */
     color: #4e5766;
     padding: 8px 0px 0px 0px;
     margin: 0px auto;
-    text-align: center;
+    text-align: left;
 	font-family:"Adobe Garamond Pro Bold", Georgia, "Times New Roman", Times, serif;
     line-height: normal;
 }
