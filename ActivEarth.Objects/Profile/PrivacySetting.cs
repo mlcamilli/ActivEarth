@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Services.Common;
 using System.Linq;
 using System.Web;
 
 namespace ActivEarth.Objects.Profile
 {
+    [DataServiceKey("ID")]
     public class PrivacySetting
     {
 
@@ -13,7 +15,7 @@ namespace ActivEarth.Objects.Profile
         /// <summary>
         /// Field representing the overall visibility of a user's profile.
         /// </summary>
-        public ProfileVisibility ProfileVisibility
+        public int ProfileVisibility
         { 
             get;
             set;

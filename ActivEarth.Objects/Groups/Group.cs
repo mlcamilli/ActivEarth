@@ -134,7 +134,7 @@ namespace ActivEarth.Objects.Groups
 
             this.Members = new List<User>();
             this.Members.Add(owner);
-            owner.Groups.Add(this);
+           
 
             this.HashTags = hashtags;
 
@@ -169,7 +169,7 @@ namespace ActivEarth.Objects.Groups
         public void Join(User newUser)
         {
             this.Members.Add(newUser);
-            newUser.Groups.Add(this);
+            
         }
 
         /// <summary>
@@ -179,7 +179,7 @@ namespace ActivEarth.Objects.Groups
         public void Quit(User quittingUser)
         {
             this.Members.Remove(quittingUser);
-            quittingUser.Groups.Remove(this);
+            
         }
 
         /// <summary>
