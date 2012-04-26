@@ -119,6 +119,7 @@
       <Column Name="score" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
       <Column Name="locked" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Column Name="group_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="bracket" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
       <Association Name="TeamDataProvider_TeamMemberDataProvider" Member="TeamMemberDataProviders" ThisKey="id" OtherKey="team_id" Type="TeamMemberDataProvider" />
       <Association Name="GroupDataProvider_TeamDataProvider" Member="GroupDataProvider" ThisKey="group_id" OtherKey="id" Type="GroupDataProvider" IsForeignKey="true" />
       <Association Name="ContestDataProvider_TeamDataProvider" Member="ContestDataProvider" ThisKey="contest_id" OtherKey="id" Type="ContestDataProvider" IsForeignKey="true" />

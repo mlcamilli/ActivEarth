@@ -2557,6 +2557,8 @@ namespace ActivEarth.Server.Service
 		
 		private System.Nullable<int> _group_id;
 		
+		private byte _bracket;
+		
 		private EntitySet<TeamMemberDataProvider> _TeamMemberDataProviders;
 		
 		private EntityRef<GroupDataProvider> _GroupDataProvider;
@@ -2579,6 +2581,8 @@ namespace ActivEarth.Server.Service
     partial void OnlockedChanged();
     partial void Ongroup_idChanging(System.Nullable<int> value);
     partial void Ongroup_idChanged();
+    partial void OnbracketChanging(byte value);
+    partial void OnbracketChanged();
     #endregion
 		
 		public TeamDataProvider()
@@ -2713,6 +2717,26 @@ namespace ActivEarth.Server.Service
 					this._group_id = value;
 					this.SendPropertyChanged("group_id");
 					this.Ongroup_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_bracket", DbType="TinyInt NOT NULL")]
+		public byte bracket
+		{
+			get
+			{
+				return this._bracket;
+			}
+			set
+			{
+				if ((this._bracket != value))
+				{
+					this.OnbracketChanging(value);
+					this.SendPropertyChanging();
+					this._bracket = value;
+					this.SendPropertyChanged("bracket");
+					this.OnbracketChanged();
 				}
 			}
 		}

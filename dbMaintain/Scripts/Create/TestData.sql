@@ -297,23 +297,23 @@ insert into ActivEarth_Dev.dbo.contests Values ('No I Needed That.', 'Descriptio
 insert into ActivEarth_Dev.dbo.contests Values ('The Doctor', 'Description for The Doctor', 500, 1, null, 9001, CURRENT_TIMESTAMP, 0, 1, 1, 1, null, 1)
 
 /* Teams for Super Awesome Happy Funtime Contest */
-insert into ActivEarth_Dev.dbo.teams Values (1, 'SAHFC Team 1', 0, 0, null)
-insert into ActivEarth_Dev.dbo.teams Values (1, 'SAHFC Team 2', 0, 0, null)
+insert into ActivEarth_Dev.dbo.teams Values (1, 'SAHFC Team 1', 0, 0, 0, null)
+insert into ActivEarth_Dev.dbo.teams Values (1, 'SAHFC Team 2', 0, 0, 0, null)
 
 /* Teams for Space Eyes Contest */
-insert into ActivEarth_Dev.dbo.teams Values (2, 'Space Eyes Team 1', 0, 0, null)
-insert into ActivEarth_Dev.dbo.teams Values (2, 'Space Eyes Team 2', 0, 0, null)
+insert into ActivEarth_Dev.dbo.teams Values (2, 'Space Eyes Team 1', 0, 0, 0, null)
+insert into ActivEarth_Dev.dbo.teams Values (2, 'Space Eyes Team 2', 0, 0, 0, null)
 
 /* Teams for No I Needed That Contest */
-insert into ActivEarth_Dev.dbo.teams Values (3, 'NINT Team 1', 0, 0, null)
-insert into ActivEarth_Dev.dbo.teams Values (3, 'NINT Team 2', 0, 0, null)
-insert into ActivEarth_Dev.dbo.teams Values (3, 'NINT Team 3', 0, 0, null)
+insert into ActivEarth_Dev.dbo.teams Values (3, 'NINT Team 1', 0, 0, 0, null)
+insert into ActivEarth_Dev.dbo.teams Values (3, 'NINT Team 2', 0, 0, 0, null)
+insert into ActivEarth_Dev.dbo.teams Values (3, 'NINT Team 3', 0, 0, 0, null)
 
 /* Teams for The Doctor Contest */
-insert into ActivEarth_Dev.dbo.teams Values (4, 'John Test', 0, 0, null)
-insert into ActivEarth_Dev.dbo.teams Values (4, 'Test Subject1', 0, 0, null)
-insert into ActivEarth_Dev.dbo.teams Values (4, 'Test Subject2', 0, 0, null)
-insert into ActivEarth_Dev.dbo.teams Values (4, 'Mark Talley', 0, 0, null)
+insert into ActivEarth_Dev.dbo.teams Values (4, 'John Test', 0, 0, 0, null)
+insert into ActivEarth_Dev.dbo.teams Values (4, 'Test Subject1', 0, 0, 0, null)
+insert into ActivEarth_Dev.dbo.teams Values (4, 'Test Subject2', 0, 0, 0, null)
+insert into ActivEarth_Dev.dbo.teams Values (4, 'Mark Talley', 0, 0, 0, null)
 
 /* Team members for SAHFC */
 insert into ActivEarth_Dev.dbo.team_members Values (1, 1, 1, 0, 0)
