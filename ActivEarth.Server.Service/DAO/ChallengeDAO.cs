@@ -232,7 +232,7 @@ namespace ActivEarth.DAO
                     return challengeData.id;
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return 0;
             }

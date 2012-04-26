@@ -70,7 +70,6 @@
       <Column Name="badge_score" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="GroupDataProvider_GroupMemberDataProvider" Member="GroupMemberDataProviders" ThisKey="id" OtherKey="group_id" Type="GroupMemberDataProvider" />
       <Association Name="GroupDataProvider_GroupHashtagDataProvider" Member="GroupHashtagDataProviders" Storage="_group_hashtags" ThisKey="id" OtherKey="group_id" Type="GroupHashtagDataProvider" />
-      <Association Name="GroupDataProvider_GroupContestDataProvider" Member="GroupContestDataProviders" ThisKey="id" OtherKey="group_id" Type="GroupContestDataProvider" />
       <Association Name="GroupDataProvider_TeamDataProvider" Member="TeamDataProviders" ThisKey="id" OtherKey="group_id" Type="TeamDataProvider" />
       <Association Name="UserDataProvider_GroupDataProvider" Member="UserDataProvider" ThisKey="owner_id" OtherKey="id" Type="UserDataProvider" IsForeignKey="true" />
     </Type>
@@ -81,15 +80,6 @@
       <Column Name="group_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="hashtag" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Association Name="GroupDataProvider_GroupHashtagDataProvider" Member="GroupDataProvider" ThisKey="group_id" OtherKey="id" Type="GroupDataProvider" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.group_contests" Member="GroupContestDataProviders">
-    <Type Name="GroupContestDataProvider">
-      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="contest_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="group_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="GroupDataProvider_GroupContestDataProvider" Member="GroupDataProvider" ThisKey="group_id" OtherKey="id" Type="GroupDataProvider" IsForeignKey="true" />
-      <Association Name="ContestDataProvider_GroupContestDataProvider" Member="ContestDataProvider" ThisKey="contest_id" OtherKey="id" Type="ContestDataProvider" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.user_statistics" Member="UserStatisticDataProviders">
@@ -163,7 +153,6 @@
       <Column Name="active" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Column Name="deactivated" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="creator_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="ContestDataProvider_GroupContestDataProvider" Member="GroupContestDataProviders" ThisKey="id" OtherKey="contest_id" Type="GroupContestDataProvider" />
       <Association Name="ContestDataProvider_TeamDataProvider" Member="TeamDataProviders" ThisKey="id" OtherKey="contest_id" Type="TeamDataProvider" />
       <Association Name="ContestDataProvider_TeamMemberDataProvider" Member="TeamMemberDataProviders" ThisKey="id" OtherKey="contest_id" Type="TeamMemberDataProvider" />
       <Association Name="UserDataProvider_ContestDataProvider" Member="UserDataProvider" ThisKey="creator_id" OtherKey="id" Type="UserDataProvider" IsForeignKey="true" />
