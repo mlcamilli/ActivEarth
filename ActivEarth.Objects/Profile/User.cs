@@ -29,9 +29,7 @@ namespace ActivEarth.Objects.Profile
 
             _stats = new Dictionary<Statistic, UserStatistic>();
 
-            Badges = new Dictionary<Statistic, Badge>();
-            Contests = new List<Contest>();
-            Groups = new List<Group>();
+            
             Wall = new Wall();
 
             userPrivacySettings = new PrivacySetting();
@@ -111,15 +109,9 @@ namespace ActivEarth.Objects.Profile
 
         public int? Height { get; set; }
 
-        public List<Group> Groups { get; set; }
-
         public int GreenScore { get; set; }
 
-        public ActivityScore ActivityScore { get; set; }
-
-        public Dictionary<Statistic, Badge> Badges { get; set; }
-
-        public List<Contest> Contests { get; set; }
+        //public ActivityScore ActivityScore { get; set; }
 
         public PrivacySetting userPrivacySettings { get; set; }
     }
