@@ -16,6 +16,7 @@ namespace ActivEarth.DataService
         {
             // TODO: set rules to indicate which entity sets and service operations are visible, updatable, etc.
             // Examples:
+            config.UseVerboseErrors = true;
             config.SetEntitySetAccessRule("*", EntitySetRights.AllRead);
             
             // config.SetServiceOperationAccessRule("MyServiceOperation", ServiceOperationRights.All);
