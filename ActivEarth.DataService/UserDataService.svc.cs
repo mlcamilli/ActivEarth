@@ -8,14 +8,17 @@ using System.Web;
 
 namespace ActivEarth.DataService
 {
-    public class WcfDataService1 : DataService<UserEntities>
+    [System.ServiceModel.ServiceBehavior(IncludeExceptionDetailInFaults = true)]   
+    public class WcfDataService1 : DataService<UserContext>
     {
         // This method is called only once to initialize service-wide policies.
         public static void InitializeService(DataServiceConfiguration config)
         {
             // TODO: set rules to indicate which entity sets and service operations are visible, updatable, etc.
             // Examples:
+            config.UseVerboseErrors = true;
             config.SetEntitySetAccessRule("*", EntitySetRights.AllRead);
+            
             // config.SetServiceOperationAccessRule("MyServiceOperation", ServiceOperationRights.All);
             config.DataServiceBehavior.MaxProtocolVersion = DataServiceProtocolVersion.V2;
         }

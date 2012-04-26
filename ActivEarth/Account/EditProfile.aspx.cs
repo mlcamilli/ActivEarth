@@ -45,7 +45,7 @@ namespace ActivEarth.Account
                                UserID = ((User) Session["userDetails"]).UserID,
                                FirstName = tbFirstName.Text,
                                LastName = tbLastName.Text,
-                               Gender = Char.Parse(ddlGender.SelectedValue),
+                               Gender = ddlGender.SelectedValue,
                                Email =  tbEmail.Text,
                                City =  tbCity.Text,
                                State = tbState.Text,

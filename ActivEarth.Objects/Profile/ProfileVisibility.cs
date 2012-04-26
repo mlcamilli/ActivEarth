@@ -7,10 +7,10 @@ namespace ActivEarth.Objects.Profile
 {
     public enum ProfileVisibility
     {
-        All,
-        AllUser,
-        Group,
-        SelectedGroup,
-        None
+        All = 0,
+        AllUser = 1,
+        Group = 2,
+        SelectedGroup = 3,
+        None = 4
     }
 }

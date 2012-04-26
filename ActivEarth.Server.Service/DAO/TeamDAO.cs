@@ -37,7 +37,8 @@ namespace ActivEarth.DAO
                         score = team.Score,
                         contest_id = team.ContestId,
                         locked = team.IsLocked,
-                        group_id = team.GroupId
+                        group_id = team.GroupId,
+                        bracket = team.Bracket
                     };
                     data.TeamDataProviders.InsertOnSubmit(teamData);
                     data.SubmitChanges();
@@ -80,7 +81,8 @@ namespace ActivEarth.DAO
                                 Score = (float)c.score,
                                 IsLocked = c.locked,
                                 GroupId = c.group_id,
-                                ContestId = c.contest_id
+                                ContestId = c.contest_id,
+                                Bracket = c.bracket
                             }).FirstOrDefault();
 
                 if (loadMembers && team != null)
@@ -113,7 +115,8 @@ namespace ActivEarth.DAO
                                             Score = (float)c.score,
                                             IsLocked = c.locked,
                                             GroupId = c.group_id,
-                                            ContestId = c.contest_id
+                                            ContestId = c.contest_id,
+                                            Bracket = c.bracket
                                         }).ToList();
 
                 if (loadMembers)
@@ -203,6 +206,7 @@ namespace ActivEarth.DAO
                         dbTeam.locked = team.IsLocked;
                         dbTeam.group_id = team.GroupId;
                         dbTeam.contest_id = team.ContestId;
+                        dbTeam.bracket = team.Bracket;
 
                         data.SubmitChanges();
                         UpdateTeamMembers(team);

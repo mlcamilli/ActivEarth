@@ -46,7 +46,7 @@ namespace ActivEarth.Tests
                     City = "Bleaksburg",
                     Email = "whatisthis@idont.even",
                     FirstName = "I.C.",
-                    Gender = 'M',
+                    Gender = "M",
                     Height = 60,
                     LastName = "Poorcode",
                     State = "VA",
@@ -68,11 +68,12 @@ namespace ActivEarth.Tests
                 City = "Bleaksburg",
                 Email = "whatisthis@idont.even",
                 FirstName = "I.C.",
-                Gender = 'M',
+                Gender = "M",
                 Height = 60,
                 LastName = "Poorcode",
                 State = "VA",
-                Weight = 130
+                Weight = 130,
+                ActivityScore = new Objects.Competition.ActivityScore(0,0,0)
             };
 
             var user2 = new User
@@ -82,11 +83,12 @@ namespace ActivEarth.Tests
                 City = "Bleaksburg",
                 Email = "whatisthis@idont.even",
                 FirstName = "I.C.",
-                Gender = 'M',
+                Gender = "M",
                 Height = 60,
                 LastName = "Poorcode",
                 State = "VA",
-                Weight = 130
+                Weight = 130,
+                ActivityScore = new Objects.Competition.ActivityScore(0, 0, 0)
             };
 
             user1.UserID = UserDAO.CreateNewUser(user1, "password");

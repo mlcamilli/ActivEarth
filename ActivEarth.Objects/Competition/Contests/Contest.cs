@@ -88,7 +88,7 @@ namespace ActivEarth.Objects.Competition.Contests
         /// List of competing teams in the competition, maintained in sorted order
         /// for reporting standings.
         /// </summary>
-        public List<Contests.Team> Teams
+        public List<Team> Teams
         {
             get;
             set;
