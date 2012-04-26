@@ -10,7 +10,7 @@ namespace ActivEarth.Objects.Groups
         /// <summary>
         /// The Maximum number of messages that should be displayed on the Wall.
         /// </summary>
-        int MAX_MESSAGES = 50;
+        private const int MAX_MESSAGES = 50;
 
         /// <summary>
         /// The List of Messages to display on the Wall.

@@ -139,8 +139,8 @@ namespace ActivEarth.Server.Service.Competition
             Challenge challenge = ChallengeDAO.GetChallengeFromChallengeId(challengeId);
             UserStatistic statistic = UserStatisticDAO.GetStatisticFromUserIdAndStatType(userId, challenge.StatisticBinding);
 
-            string numerator = String.Format(challenge.FormatString, (statistic != null ? statistic.Value : 0));
-            string denominator = String.Format(challenge.FormatString, challenge.Requirement);
+            string numerator = (statistic != null ? statistic.Value : 0).ToString(challenge.FormatString);
+            string denominator = challenge.Requirement.ToString(challenge.FormatString);
 
             return String.Format("{0} / {1}", numerator, denominator);
         }
@@ -155,6 +155,69 @@ namespace ActivEarth.Server.Service.Competition
         public static bool IsComplete(int challengeId, int userId)
         {
             return (ChallengeManager.GetProgress(challengeId, userId) == 100);
+        }
+
+        /// <summary>
+        /// Creates new challenges such that the correct number of each type of challenge (daily, weekly, monthly)
+        /// are active.
+        /// </summary>
+        public static void GenerateNewChallenges()
+        {
+            int numberOfDailyChallenges = 3;
+            int numberOfWeeklyChallenges = 3;
+            int numberOfMonthlyChallenges = 3;
+
+            List<Challenge> dailyChallenges = ChallengeDAO.GetActiveDailyChallenges();
+            List<Challenge> weeklyChallenges = ChallengeDAO.GetActiveWeeklyChallenges();
+            List<Challenge> monthlyChallenges = ChallengeDAO.GetActiveMonthlyChallenges();
+
+            if (dailyChallenges.Count < numberOfDailyChallenges)
+            {
+                List<Challenge> newDailyChallenges =
+                    ChallengeDAO.GenerateRandomChallenges(ChallengeType.Daily, 
+                    numberOfDailyChallenges - dailyChallenges.Count);
+
+                foreach (Challenge newDailyChallenge in newDailyChallenges)
+                {
+                    newDailyChallenge.Duration = new TimeSpan(1, 0, 0, 0);
+                    newDailyChallenge.EndTime = DateTime.Today.Add(newDailyChallenge.Duration);
+                    newDailyChallenge.IsActive = true;
+
+                    ChallengeDAO.CreateNewChallenge(newDailyChallenge);
+                }
+            }
+
+            if (weeklyChallenges.Count < numberOfWeeklyChallenges)
+            {
+                List<Challenge> newWeeklyChallenges = 
+                    ChallengeDAO.GenerateRandomChallenges(ChallengeType.Weekly, 
+                    numberOfWeeklyChallenges - weeklyChallenges.Count);
+
+                foreach (Challenge newWeeklyChallenge in newWeeklyChallenges)
+                {
+                    newWeeklyChallenge.Duration = new TimeSpan(7, 0, 0, 0);
+                    newWeeklyChallenge.EndTime = DateTime.Today.Add(newWeeklyChallenge.Duration).AddDays(-(int)DateTime.Today.DayOfWeek);
+                    newWeeklyChallenge.IsActive = true;
+
+                    ChallengeDAO.CreateNewChallenge(newWeeklyChallenge);
+                }
+            }
+
+            if (monthlyChallenges.Count < numberOfMonthlyChallenges)
+            {
+                List<Challenge> newMonthlyChallenges = 
+                    ChallengeDAO.GenerateRandomChallenges(ChallengeType.Monthly, 
+                    numberOfMonthlyChallenges - monthlyChallenges.Count);
+
+                foreach (Challenge newMonthlyChallenge in newMonthlyChallenges)
+                {
+                    newMonthlyChallenge.Duration = new TimeSpan(DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month), 0, 0, 0);
+                    newMonthlyChallenge.EndTime = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1).Add(newMonthlyChallenge.Duration);
+                    newMonthlyChallenge.IsActive = true;
+
+                    ChallengeDAO.CreateNewChallenge(newMonthlyChallenge);
+                }
+            }
         }
 
         #endregion ---------- Public Methods ----------

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Services.Common;
 using System.Linq;
 using System.Web;
 using ActivEarth.Objects.Profile;
@@ -10,6 +11,7 @@ using ActivEarth.Objects.Competition.Contests;
 
 namespace ActivEarth.Objects.Groups
 {
+    [DataServiceKey("ID")]
     public class Group
     {
 
@@ -132,7 +134,7 @@ namespace ActivEarth.Objects.Groups
 
             this.Members = new List<User>();
             this.Members.Add(owner);
-            owner.Groups.Add(this);
+           
 
             this.HashTags = hashtags;
 
@@ -167,7 +169,7 @@ namespace ActivEarth.Objects.Groups
         public void Join(User newUser)
         {
             this.Members.Add(newUser);
-            newUser.Groups.Add(this);
+            
         }
 
         /// <summary>
@@ -177,7 +179,7 @@ namespace ActivEarth.Objects.Groups
         public void Quit(User quittingUser)
         {
             this.Members.Remove(quittingUser);
-            quittingUser.Groups.Remove(this);
+            
         }
 
         /// <summary>

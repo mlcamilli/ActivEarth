@@ -76,6 +76,15 @@ namespace ActivEarth.Objects.Competition.Contests
             set;
         }
 
+        /// <summary>
+        /// Results bracket currently occupied by the team (None/Bronze/Silver/Gold/Platinum/Diamond).
+        /// </summary>
+        public byte Bracket
+        {
+            get;
+            set;
+        }
+
         #endregion ---------- Public Properties ----------
 
         #region ---------- Constructor ----------

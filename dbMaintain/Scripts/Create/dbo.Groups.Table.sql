@@ -1,7 +1,7 @@
 USE [ActivEarth_Dev]
 GO
 
-/****** Object:  Table [dbo].[groups]    Script Date: 04/10/2012 14:01:09 ******/
+/****** Object:  Table [dbo].[groups]    Script Date: 04/25/2012 15:42:27 ******/
 SET ANSI_NULLS ON
 GO
 

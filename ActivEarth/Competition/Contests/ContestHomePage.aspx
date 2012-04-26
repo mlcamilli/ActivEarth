@@ -18,7 +18,7 @@
                     <asp:Button ID="btnCreateContest" runat="server" Text="Create Contest" OnClick="OpenCreateContestPage" />
                 </asp:TableCell>
                 <asp:TableCell>
-                    <asp:Button ID="btnSearchContests" runat="server" Text="Join Contest" />
+                    <asp:Button ID="btnSearchContests" runat="server" Text="Find Contests" OnClick="OpenFindContestsPage"/>
                 </asp:TableCell>
             </asp:TableRow>
         </asp:Table>

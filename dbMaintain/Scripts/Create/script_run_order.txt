@@ -8,7 +8,6 @@ dbo.Group_Members.Table.sql
 dbo.Group_Hashtags.Table.sql
 dbo.Messages.Table.sql
 dbo.Contests.Table.sql
-dbo.Group_Contests.Table.sql
 dbo.Teams.Table.sql
 dbo.Team_Members.Table.sql
 dbo.Challenges.Table.sql

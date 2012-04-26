@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using ActivEarth.Objects.Competition.Challenges;
+using ActivEarth.Objects.Profile;
 using ActivEarth.Server.Service.Competition;
 
 namespace ActivEarth.Competition.Challenges
@@ -17,20 +18,25 @@ namespace ActivEarth.Competition.Challenges
         /// /// <param name="challenge">The challenge to load into the display.</param>
         public void LoadChallengeIntoDisplay(Challenge challenge)
         {
+            var user = (User)Session["userDetails"];
+            if (user == null)
+            {
+                Response.Redirect("~/Account/Login.aspx");
+            }
+
             _challengeName.Text = challenge.Name;
             _challengeImage.ImageUrl = challenge.ImagePath;
             _activityPointsValue.Text = challenge.Reward.ToString();
             _challengeDescription.Text = challenge.Description;
 
-            _challengeProgressBar.Value = 50; // ChallengeManager.GetProgress(challenge.ID, user.UserID);
-            _challengeProgressNumerical.Text = "0 / 5"; //ChallengeManager.GetFormattedProgress(challenge.ID, user.UserID); 
+            _challengeProgressBar.Value = ChallengeManager.GetProgress(challenge.ID, user.UserID);
+            _challengeProgressNumerical.Text = ChallengeManager.GetFormattedProgress(challenge.ID, user.UserID); 
 
-            /*
+            
             if (ChallengeManager.IsComplete(challenge.ID, user.UserID))
             {
                 _challengeProgressNumerical.Text = "Completed";
             }
-            */
         }
     }
 }

@@ -1,23 +1,56 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Tabs.Master" AutoEventWireup="true" CodeBehind="DisplayContestPage.aspx.cs" Inherits="ActivEarth.Competition.Contests.DisplayContestPage" %>
 
-<%@ Register Assembly="System.Web.DataVisualization, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
-    Namespace="System.Web.UI.DataVisualization.Charting" TagPrefix="asp" %>
-
 <%@ Register src="LeaderBoard.ascx" tagname="LeaderBoard" tagprefix="uc" %>
-
-<%@ Register src="CountdownClock.ascx" tagname="CountdownClock" tagprefix="uc1" %>
-
-<%@ Register src="ContestDisplayTable.ascx" tagname="ContestDisplayTable" tagprefix="uc2" %>
+<%@ Register src="ContestGoalGraph.ascx" tagname="ContestGoalGraph" tagprefix="uc" %>
+<%@ Register src="ContestTimeGraph.ascx" tagname="ContestTimeGraph" tagprefix="uc" %>
+<%@ Register src="TeamDisplayTable.ascx" tagname="TeamDisplayTable" tagprefix="uc" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    
-    <asp:Label ID="_ContestName" runat="server" Text="Contest Name" 
-        Font-Names="Eras Bold ITC" Font-Overline="False" Font-Size="XX-Large" 
-        ForeColor="Black"></asp:Label>
-    <uc:LeaderBoard ID="_leaderBoard" runat="server" />    
-    
-    <uc2:ContestDisplayTable ID="ContestDisplayTable1" runat="server" />
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server"> 
+    <div align="right">
+        <asp:Panel ID="ActivtyScorePanel" runat="server" style="position: relative">
+            <asp:Label ID="ContestActivityScore" runat="server" Text="100" 
+                style="z-index: 1; left: 249px; top: 2px; position: absolute; width: 289px"></asp:Label>
+            <asp:Image ID="_activityScoreImage" runat="server" Height="20px" Width="20px" 
+                ImageUrl="~/Images/Competition/Activity_Score.png"/>
+        </asp:Panel>
+    </div>
+    <p>
+        <h2><asp:Label ID="ContestName" runat="server" Text="Contest Name"></asp:Label>
+    </h2>
+        <asp:Label ID="ContestDescription" runat="server" Text="Contest Description"></asp:Label>
+    </p>
+
+    <div align="center">
+        <asp:Panel ID="ContestSignUpPanel" runat="server" Visible="false">
+            <uc:TeamDisplayTable runat="server" ID="CurrentTeams" />
+            <br />
+            <asp:Button ID="btnJoinContest" Text="Join Contest" OnClick="JoinContest" runat="server" Visible="false" />
+        </asp:Panel>
+    </div>
+
+    <div align="left">
+        <asp:Panel ID="ContestCompletePanel" runat="server" Visible="false">
+            <asp:Label ID="ContestCompletedMessage" runat="server" Text="Contest has completed."></asp:Label>
+            <asp:Label ID="ContestRankMessage" runat="server" Text="User rank message."></asp:Label>
+            <asp:Label ID="ContestRewardMessage" runat="server" Text="You were rewarded < > activity score."></asp:Label>
+        </asp:Panel>
+    </div>
+
+    <div align="left">
+        <asp:Table ID="ContestStatusTable"  runat="server" CellPadding="0" 
+            CellSpacing="0">
+            <asp:TableRow VerticalAlign="Top">
+                <asp:TableCell>
+                    <uc:ContestGoalGraph ID="GoalGraph" runat="server" Visible="False" />
+                    <uc:ContestTimeGraph ID="TimeGraph" runat="server" Visible="False" />
+                </asp:TableCell>               
+                <asp:TableCell>
+                    <uc:LeaderBoard ID="ContestLeaderBoard" runat="server" Visible="False"/>
+                </asp:TableCell>
+            </asp:TableRow>
+        </asp:Table>
+    </div>
     
 </asp:Content>

@@ -476,11 +476,31 @@ namespace ActivEarth.Tests.Competition
         public void TestGetBadgesFromUserId()
         {
             Log("Initializing users");
-            int user1ID = UserDAO.GetUserIdFromUserName("badgetest1");
-            User user1 = UserDAO.GetUserFromUserId(user1ID);
 
-            int user2ID = UserDAO.GetUserIdFromUserName("badgetest2");
-            User user2 = UserDAO.GetUserFromUserId(user2ID);
+            User user1 = new User
+            {
+                UserName = "ILoveBadges",
+                FirstName = "Test",
+                LastName = "Subject79",
+                City = "Boise",
+                State = "ID",
+                Gender = "M",
+                Email = "badgelover@activearth.com"
+            };
+
+            User user2 = new User
+            {
+                UserName = "ILoveBadgesToo",
+                FirstName = "Test",
+                LastName = "Subject26",
+                City = "Chicago",
+                State = "IL",
+                Gender = "F",
+                Email = "badgelovertoo@activearth.com"
+            };
+
+            int user1ID = UserDAO.CreateNewUser(user1, "gesundheit");
+            int user2ID = UserDAO.CreateNewUser(user2, "spatula");
 
             Log("Creating 6 badges for user1");
             BadgeManager.CreateBadge(user1ID, Statistic.Steps);

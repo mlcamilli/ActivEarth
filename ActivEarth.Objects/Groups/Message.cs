@@ -39,16 +39,36 @@ namespace ActivEarth.Objects.Groups
         }
 
         /// <summary>
+        /// The date that the message was posted.
+        /// </summary>
+        public string Date
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// The time that the message was posted.
+        /// </summary>
+        public string Time
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// Creates a Message to be posted on a Group or User's Wall.
         /// </summary>
         /// <param name="title">The title of the Message</param>
         /// <param name="text">The text in the Message</param>
         /// <param name="poster">The User who posted the Message</param>
-        public Message(string title, string text, User poster)
+        public Message(string title, string text, User poster, string date, string time)
         {
             this.Title = title;
             this.Text = text;
             this.Poster = poster;
+            this.Date = date;
+            this.Time = time;
         }
     }
 }

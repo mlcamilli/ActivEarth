@@ -3,8 +3,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
  <html>
     <head id="Head1" runat="server">
-        <title></title>
-        <link href="~/Styles/Site.css" rel="stylesheet" type="text/css" />
+        <title>ActivEarth</title>
+        <link href="~/Styles/Not.css" rel="stylesheet" type="text/css" />
         <asp:ContentPlaceHolder ID="HeadContent" runat="server">
         </asp:ContentPlaceHolder>
     </head>
@@ -13,9 +13,8 @@
         <div class="page">
             <div class="header">
                 <div class="title">
-                    <h1>
-                        ActivEarth
-                    </h1>
+                    <TITLEBANNER>ActivEarth</TITLEBANNER>
+                                           
                 </div>
                 <div class="loginDisplay">
                             <asp:Label runat="server" ID="lblUserLoggedIn"></asp:Label>
