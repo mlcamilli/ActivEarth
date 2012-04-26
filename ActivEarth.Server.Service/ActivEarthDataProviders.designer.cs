@@ -30,9 +30,6 @@ namespace ActivEarth.Server.Service
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
-    partial void InsertProfileDataProvider(ProfileDataProvider instance);
-    partial void UpdateProfileDataProvider(ProfileDataProvider instance);
-    partial void DeleteProfileDataProvider(ProfileDataProvider instance);
     partial void InsertUserDataProvider(UserDataProvider instance);
     partial void UpdateUserDataProvider(UserDataProvider instance);
     partial void DeleteUserDataProvider(UserDataProvider instance);
@@ -84,6 +81,9 @@ namespace ActivEarth.Server.Service
     partial void InsertMessageDataProvider(MessageDataProvider instance);
     partial void UpdateMessageDataProvider(MessageDataProvider instance);
     partial void DeleteMessageDataProvider(MessageDataProvider instance);
+    partial void InsertProfileDataProvider(ProfileDataProvider instance);
+    partial void UpdateProfileDataProvider(ProfileDataProvider instance);
+    partial void DeleteProfileDataProvider(ProfileDataProvider instance);
     #endregion
 		
 		public ActivEarthDataProvidersDataContext() : 
@@ -114,14 +114,6 @@ namespace ActivEarth.Server.Service
 				base(connection, mappingSource)
 		{
 			OnCreated();
-		}
-		
-		public System.Data.Linq.Table<ProfileDataProvider> ProfileDataProviders
-		{
-			get
-			{
-				return this.GetTable<ProfileDataProvider>();
-			}
 		}
 		
 		public System.Data.Linq.Table<UserDataProvider> UserDataProviders
@@ -259,347 +251,12 @@ namespace ActivEarth.Server.Service
 				return this.GetTable<MessageDataProvider>();
 			}
 		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.profile")]
-	public partial class ProfileDataProvider : INotifyPropertyChanging, INotifyPropertyChanged
-	{
 		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _id;
-		
-		private int _user_id;
-		
-		private string _first_name;
-		
-		private string _last_name;
-		
-		private string _email;
-		
-		private char _gender;
-		
-		private string _city;
-		
-		private string _state;
-		
-		private System.Nullable<int> _age;
-		
-		private System.Nullable<int> _height;
-		
-		private System.Nullable<int> _weight;
-		
-		private EntityRef<UserDataProvider> _UserDataProvider;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnidChanging(int value);
-    partial void OnidChanged();
-    partial void Onuser_idChanging(int value);
-    partial void Onuser_idChanged();
-    partial void Onfirst_nameChanging(string value);
-    partial void Onfirst_nameChanged();
-    partial void Onlast_nameChanging(string value);
-    partial void Onlast_nameChanged();
-    partial void OnemailChanging(string value);
-    partial void OnemailChanged();
-    partial void OngenderChanging(char value);
-    partial void OngenderChanged();
-    partial void OncityChanging(string value);
-    partial void OncityChanged();
-    partial void OnstateChanging(string value);
-    partial void OnstateChanged();
-    partial void OnageChanging(System.Nullable<int> value);
-    partial void OnageChanged();
-    partial void OnheightChanging(System.Nullable<int> value);
-    partial void OnheightChanged();
-    partial void OnweightChanging(System.Nullable<int> value);
-    partial void OnweightChanged();
-    #endregion
-		
-		public ProfileDataProvider()
-		{
-			this._UserDataProvider = default(EntityRef<UserDataProvider>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int id
+		public System.Data.Linq.Table<ProfileDataProvider> ProfileDataProviders
 		{
 			get
 			{
-				return this._id;
-			}
-			set
-			{
-				if ((this._id != value))
-				{
-					this.OnidChanging(value);
-					this.SendPropertyChanging();
-					this._id = value;
-					this.SendPropertyChanged("id");
-					this.OnidChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_user_id", DbType="Int NOT NULL")]
-		public int user_id
-		{
-			get
-			{
-				return this._user_id;
-			}
-			set
-			{
-				if ((this._user_id != value))
-				{
-					if (this._UserDataProvider.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.Onuser_idChanging(value);
-					this.SendPropertyChanging();
-					this._user_id = value;
-					this.SendPropertyChanged("user_id");
-					this.Onuser_idChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_first_name", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string first_name
-		{
-			get
-			{
-				return this._first_name;
-			}
-			set
-			{
-				if ((this._first_name != value))
-				{
-					this.Onfirst_nameChanging(value);
-					this.SendPropertyChanging();
-					this._first_name = value;
-					this.SendPropertyChanged("first_name");
-					this.Onfirst_nameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_last_name", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string last_name
-		{
-			get
-			{
-				return this._last_name;
-			}
-			set
-			{
-				if ((this._last_name != value))
-				{
-					this.Onlast_nameChanging(value);
-					this.SendPropertyChanging();
-					this._last_name = value;
-					this.SendPropertyChanged("last_name");
-					this.Onlast_nameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_email", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
-		public string email
-		{
-			get
-			{
-				return this._email;
-			}
-			set
-			{
-				if ((this._email != value))
-				{
-					this.OnemailChanging(value);
-					this.SendPropertyChanging();
-					this._email = value;
-					this.SendPropertyChanged("email");
-					this.OnemailChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_gender", DbType="Char(1) NOT NULL")]
-		public char gender
-		{
-			get
-			{
-				return this._gender;
-			}
-			set
-			{
-				if ((this._gender != value))
-				{
-					this.OngenderChanging(value);
-					this.SendPropertyChanging();
-					this._gender = value;
-					this.SendPropertyChanged("gender");
-					this.OngenderChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_city", DbType="VarChar(50)")]
-		public string city
-		{
-			get
-			{
-				return this._city;
-			}
-			set
-			{
-				if ((this._city != value))
-				{
-					this.OncityChanging(value);
-					this.SendPropertyChanging();
-					this._city = value;
-					this.SendPropertyChanged("city");
-					this.OncityChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_state", DbType="Char(2)")]
-		public string state
-		{
-			get
-			{
-				return this._state;
-			}
-			set
-			{
-				if ((this._state != value))
-				{
-					this.OnstateChanging(value);
-					this.SendPropertyChanging();
-					this._state = value;
-					this.SendPropertyChanged("state");
-					this.OnstateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_age", DbType="Int")]
-		public System.Nullable<int> age
-		{
-			get
-			{
-				return this._age;
-			}
-			set
-			{
-				if ((this._age != value))
-				{
-					this.OnageChanging(value);
-					this.SendPropertyChanging();
-					this._age = value;
-					this.SendPropertyChanged("age");
-					this.OnageChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_height", DbType="Int")]
-		public System.Nullable<int> height
-		{
-			get
-			{
-				return this._height;
-			}
-			set
-			{
-				if ((this._height != value))
-				{
-					this.OnheightChanging(value);
-					this.SendPropertyChanging();
-					this._height = value;
-					this.SendPropertyChanged("height");
-					this.OnheightChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_weight", DbType="Int")]
-		public System.Nullable<int> weight
-		{
-			get
-			{
-				return this._weight;
-			}
-			set
-			{
-				if ((this._weight != value))
-				{
-					this.OnweightChanging(value);
-					this.SendPropertyChanging();
-					this._weight = value;
-					this.SendPropertyChanged("weight");
-					this.OnweightChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UserDataProvider_ProfileDataProvider", Storage="_UserDataProvider", ThisKey="user_id", OtherKey="id", IsForeignKey=true)]
-		public UserDataProvider UserDataProvider
-		{
-			get
-			{
-				return this._UserDataProvider.Entity;
-			}
-			set
-			{
-				UserDataProvider previousValue = this._UserDataProvider.Entity;
-				if (((previousValue != value) 
-							|| (this._UserDataProvider.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._UserDataProvider.Entity = null;
-						previousValue.ProfileDataProviders.Remove(this);
-					}
-					this._UserDataProvider.Entity = value;
-					if ((value != null))
-					{
-						value.ProfileDataProviders.Add(this);
-						this._user_id = value.id;
-					}
-					else
-					{
-						this._user_id = default(int);
-					}
-					this.SendPropertyChanged("UserDataProvider");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+				return this.GetTable<ProfileDataProvider>();
 			}
 		}
 	}
@@ -615,8 +272,6 @@ namespace ActivEarth.Server.Service
 		private string _user_name;
 		
 		private string _password;
-		
-		private EntitySet<ProfileDataProvider> _ProfileDataProviders;
 		
 		private EntitySet<PrivacySettingDataProvider> _privacy_settings;
 		
@@ -636,6 +291,8 @@ namespace ActivEarth.Server.Service
 		
 		private EntitySet<MessageDataProvider> _MessageDataProviders;
 		
+		private EntitySet<ProfileDataProvider> _ProfileDataProviders;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -650,7 +307,6 @@ namespace ActivEarth.Server.Service
 		
 		public UserDataProvider()
 		{
-			this._ProfileDataProviders = new EntitySet<ProfileDataProvider>(new Action<ProfileDataProvider>(this.attach_ProfileDataProviders), new Action<ProfileDataProvider>(this.detach_ProfileDataProviders));
 			this._privacy_settings = new EntitySet<PrivacySettingDataProvider>(new Action<PrivacySettingDataProvider>(this.attach_privacy_settings), new Action<PrivacySettingDataProvider>(this.detach_privacy_settings));
 			this._GroupMemberDataProviders = new EntitySet<GroupMemberDataProvider>(new Action<GroupMemberDataProvider>(this.attach_GroupMemberDataProviders), new Action<GroupMemberDataProvider>(this.detach_GroupMemberDataProviders));
 			this._GroupDataProviders = new EntitySet<GroupDataProvider>(new Action<GroupDataProvider>(this.attach_GroupDataProviders), new Action<GroupDataProvider>(this.detach_GroupDataProviders));
@@ -660,6 +316,7 @@ namespace ActivEarth.Server.Service
 			this._TeamMemberDataProviders = new EntitySet<TeamMemberDataProvider>(new Action<TeamMemberDataProvider>(this.attach_TeamMemberDataProviders), new Action<TeamMemberDataProvider>(this.detach_TeamMemberDataProviders));
 			this._ContestDataProviders = new EntitySet<ContestDataProvider>(new Action<ContestDataProvider>(this.attach_ContestDataProviders), new Action<ContestDataProvider>(this.detach_ContestDataProviders));
 			this._MessageDataProviders = new EntitySet<MessageDataProvider>(new Action<MessageDataProvider>(this.attach_MessageDataProviders), new Action<MessageDataProvider>(this.detach_MessageDataProviders));
+			this._ProfileDataProviders = new EntitySet<ProfileDataProvider>(new Action<ProfileDataProvider>(this.attach_ProfileDataProviders), new Action<ProfileDataProvider>(this.detach_ProfileDataProviders));
 			OnCreated();
 		}
 		
@@ -720,19 +377,6 @@ namespace ActivEarth.Server.Service
 					this.SendPropertyChanged("password");
 					this.OnpasswordChanged();
 				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UserDataProvider_ProfileDataProvider", Storage="_ProfileDataProviders", ThisKey="id", OtherKey="user_id")]
-		public EntitySet<ProfileDataProvider> ProfileDataProviders
-		{
-			get
-			{
-				return this._ProfileDataProviders;
-			}
-			set
-			{
-				this._ProfileDataProviders.Assign(value);
 			}
 		}
 		
@@ -840,7 +484,7 @@ namespace ActivEarth.Server.Service
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UserDataProvider_message", Storage="_MessageDataProviders", ThisKey="id", OtherKey="user_id")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UserDataProvider_MessageDataProvider", Storage="_MessageDataProviders", ThisKey="id", OtherKey="user_id")]
 		public EntitySet<MessageDataProvider> MessageDataProviders
 		{
 			get
@@ -850,6 +494,19 @@ namespace ActivEarth.Server.Service
 			set
 			{
 				this._MessageDataProviders.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UserDataProvider_profile", Storage="_ProfileDataProviders", ThisKey="id", OtherKey="user_id")]
+		public EntitySet<ProfileDataProvider> ProfileDataProviders
+		{
+			get
+			{
+				return this._ProfileDataProviders;
+			}
+			set
+			{
+				this._ProfileDataProviders.Assign(value);
 			}
 		}
 		
@@ -871,18 +528,6 @@ namespace ActivEarth.Server.Service
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-		
-		private void attach_ProfileDataProviders(ProfileDataProvider entity)
-		{
-			this.SendPropertyChanging();
-			entity.UserDataProvider = this;
-		}
-		
-		private void detach_ProfileDataProviders(ProfileDataProvider entity)
-		{
-			this.SendPropertyChanging();
-			entity.UserDataProvider = null;
 		}
 		
 		private void attach_privacy_settings(PrivacySettingDataProvider entity)
@@ -988,6 +633,18 @@ namespace ActivEarth.Server.Service
 		}
 		
 		private void detach_MessageDataProviders(MessageDataProvider entity)
+		{
+			this.SendPropertyChanging();
+			entity.UserDataProvider = null;
+		}
+		
+		private void attach_ProfileDataProviders(ProfileDataProvider entity)
+		{
+			this.SendPropertyChanging();
+			entity.UserDataProvider = this;
+		}
+		
+		private void detach_ProfileDataProviders(ProfileDataProvider entity)
 		{
 			this.SendPropertyChanging();
 			entity.UserDataProvider = null;
@@ -4985,7 +4642,7 @@ namespace ActivEarth.Server.Service
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UserDataProvider_message", Storage="_UserDataProvider", ThisKey="user_id", OtherKey="id", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UserDataProvider_MessageDataProvider", Storage="_UserDataProvider", ThisKey="user_id", OtherKey="id", IsForeignKey=true)]
 		public UserDataProvider UserDataProvider
 		{
 			get
@@ -5008,6 +4665,349 @@ namespace ActivEarth.Server.Service
 					if ((value != null))
 					{
 						value.MessageDataProviders.Add(this);
+						this._user_id = value.id;
+					}
+					else
+					{
+						this._user_id = default(int);
+					}
+					this.SendPropertyChanged("UserDataProvider");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.profile")]
+	public partial class ProfileDataProvider : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id;
+		
+		private int _user_id;
+		
+		private string _first_name;
+		
+		private string _last_name;
+		
+		private string _email;
+		
+		private string _gender;
+		
+		private string _city;
+		
+		private string _state;
+		
+		private System.Nullable<int> _age;
+		
+		private System.Nullable<int> _height;
+		
+		private System.Nullable<int> _weight;
+		
+		private EntityRef<UserDataProvider> _UserDataProvider;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void Onuser_idChanging(int value);
+    partial void Onuser_idChanged();
+    partial void Onfirst_nameChanging(string value);
+    partial void Onfirst_nameChanged();
+    partial void Onlast_nameChanging(string value);
+    partial void Onlast_nameChanged();
+    partial void OnemailChanging(string value);
+    partial void OnemailChanged();
+    partial void OngenderChanging(string value);
+    partial void OngenderChanged();
+    partial void OncityChanging(string value);
+    partial void OncityChanged();
+    partial void OnstateChanging(string value);
+    partial void OnstateChanged();
+    partial void OnageChanging(System.Nullable<int> value);
+    partial void OnageChanged();
+    partial void OnheightChanging(System.Nullable<int> value);
+    partial void OnheightChanged();
+    partial void OnweightChanging(System.Nullable<int> value);
+    partial void OnweightChanged();
+    #endregion
+		
+		public ProfileDataProvider()
+		{
+			this._UserDataProvider = default(EntityRef<UserDataProvider>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_user_id", DbType="Int NOT NULL")]
+		public int user_id
+		{
+			get
+			{
+				return this._user_id;
+			}
+			set
+			{
+				if ((this._user_id != value))
+				{
+					if (this._UserDataProvider.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onuser_idChanging(value);
+					this.SendPropertyChanging();
+					this._user_id = value;
+					this.SendPropertyChanged("user_id");
+					this.Onuser_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_first_name", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string first_name
+		{
+			get
+			{
+				return this._first_name;
+			}
+			set
+			{
+				if ((this._first_name != value))
+				{
+					this.Onfirst_nameChanging(value);
+					this.SendPropertyChanging();
+					this._first_name = value;
+					this.SendPropertyChanged("first_name");
+					this.Onfirst_nameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_last_name", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string last_name
+		{
+			get
+			{
+				return this._last_name;
+			}
+			set
+			{
+				if ((this._last_name != value))
+				{
+					this.Onlast_nameChanging(value);
+					this.SendPropertyChanging();
+					this._last_name = value;
+					this.SendPropertyChanged("last_name");
+					this.Onlast_nameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_email", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
+		public string email
+		{
+			get
+			{
+				return this._email;
+			}
+			set
+			{
+				if ((this._email != value))
+				{
+					this.OnemailChanging(value);
+					this.SendPropertyChanging();
+					this._email = value;
+					this.SendPropertyChanged("email");
+					this.OnemailChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_gender", DbType="VarChar(1) NOT NULL", CanBeNull=false)]
+		public string gender
+		{
+			get
+			{
+				return this._gender;
+			}
+			set
+			{
+				if ((this._gender != value))
+				{
+					this.OngenderChanging(value);
+					this.SendPropertyChanging();
+					this._gender = value;
+					this.SendPropertyChanged("gender");
+					this.OngenderChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_city", DbType="VarChar(50)")]
+		public string city
+		{
+			get
+			{
+				return this._city;
+			}
+			set
+			{
+				if ((this._city != value))
+				{
+					this.OncityChanging(value);
+					this.SendPropertyChanging();
+					this._city = value;
+					this.SendPropertyChanged("city");
+					this.OncityChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_state", DbType="VarChar(2)")]
+		public string state
+		{
+			get
+			{
+				return this._state;
+			}
+			set
+			{
+				if ((this._state != value))
+				{
+					this.OnstateChanging(value);
+					this.SendPropertyChanging();
+					this._state = value;
+					this.SendPropertyChanged("state");
+					this.OnstateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_age", DbType="Int")]
+		public System.Nullable<int> age
+		{
+			get
+			{
+				return this._age;
+			}
+			set
+			{
+				if ((this._age != value))
+				{
+					this.OnageChanging(value);
+					this.SendPropertyChanging();
+					this._age = value;
+					this.SendPropertyChanged("age");
+					this.OnageChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_height", DbType="Int")]
+		public System.Nullable<int> height
+		{
+			get
+			{
+				return this._height;
+			}
+			set
+			{
+				if ((this._height != value))
+				{
+					this.OnheightChanging(value);
+					this.SendPropertyChanging();
+					this._height = value;
+					this.SendPropertyChanged("height");
+					this.OnheightChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_weight", DbType="Int")]
+		public System.Nullable<int> weight
+		{
+			get
+			{
+				return this._weight;
+			}
+			set
+			{
+				if ((this._weight != value))
+				{
+					this.OnweightChanging(value);
+					this.SendPropertyChanging();
+					this._weight = value;
+					this.SendPropertyChanged("weight");
+					this.OnweightChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UserDataProvider_profile", Storage="_UserDataProvider", ThisKey="user_id", OtherKey="id", IsForeignKey=true)]
+		public UserDataProvider UserDataProvider
+		{
+			get
+			{
+				return this._UserDataProvider.Entity;
+			}
+			set
+			{
+				UserDataProvider previousValue = this._UserDataProvider.Entity;
+				if (((previousValue != value) 
+							|| (this._UserDataProvider.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._UserDataProvider.Entity = null;
+						previousValue.ProfileDataProviders.Remove(this);
+					}
+					this._UserDataProvider.Entity = value;
+					if ((value != null))
+					{
+						value.ProfileDataProviders.Add(this);
 						this._user_id = value.id;
 					}
 					else

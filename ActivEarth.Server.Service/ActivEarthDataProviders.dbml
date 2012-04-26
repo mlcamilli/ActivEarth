@@ -1,27 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="ActivEarth_Dev" Class="ActivEarthDataProvidersDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="WebSettings" ConnectionString="Data Source=.;Initial Catalog=ActivEarth_Dev;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="ActivEarth_DevConnectionString" Provider="System.Data.SqlClient" />
-  <Table Name="dbo.profile" Member="ProfileDataProviders">
-    <Type Name="ProfileDataProvider">
-      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="user_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="first_name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="last_name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="email" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
-      <Column Name="gender" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
-      <Column Name="city" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="state" Type="System.String" DbType="Char(2)" CanBeNull="true" />
-      <Column Name="age" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="height" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="weight" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="UserDataProvider_ProfileDataProvider" Member="UserDataProvider" ThisKey="user_id" OtherKey="id" Type="UserDataProvider" IsForeignKey="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.users" Member="UserDataProviders">
     <Type Name="UserDataProvider">
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="user_name" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
       <Column Name="password" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
-      <Association Name="UserDataProvider_ProfileDataProvider" Member="ProfileDataProviders" ThisKey="id" OtherKey="user_id" Type="ProfileDataProvider" />
       <Association Name="UserDataProvider_PrivacySettingDataProvider" Member="PrivacySettingDataProviders" Storage="_privacy_settings" ThisKey="id" OtherKey="user_id" Type="PrivacySettingDataProvider" />
       <Association Name="UserDataProvider_GroupMemberDataProvider" Member="GroupMemberDataProviders" ThisKey="id" OtherKey="user_id" Type="GroupMemberDataProvider" />
       <Association Name="UserDataProvider_GroupDataProvider" Member="GroupDataProviders" ThisKey="id" OtherKey="owner_id" Type="GroupDataProvider" />
@@ -30,7 +13,8 @@
       <Association Name="UserDataProvider_BadgeDataProvider" Member="BadgeDataProviders" ThisKey="id" OtherKey="user_id" Type="BadgeDataProvider" />
       <Association Name="UserDataProvider_TeamMemberDataProvider" Member="TeamMemberDataProviders" ThisKey="id" OtherKey="user_id" Type="TeamMemberDataProvider" />
       <Association Name="UserDataProvider_ContestDataProvider" Member="ContestDataProviders" ThisKey="id" OtherKey="creator_id" Type="ContestDataProvider" />
-      <Association Name="UserDataProvider_message" Member="MessageDataProviders" ThisKey="id" OtherKey="user_id" Type="MessageDataProvider" />
+      <Association Name="UserDataProvider_MessageDataProvider" Member="MessageDataProviders" ThisKey="id" OtherKey="user_id" Type="MessageDataProvider" />
+      <Association Name="UserDataProvider_profile" Member="ProfileDataProviders" ThisKey="id" OtherKey="user_id" Type="ProfileDataProvider" />
     </Type>
   </Table>
   <Table Name="dbo.privacy_settings" Member="PrivacySettingDataProviders">
@@ -223,7 +207,23 @@
       <Column Name="message" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
       <Column Name="date" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="time" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Association Name="UserDataProvider_message" Member="UserDataProvider" ThisKey="user_id" OtherKey="id" Type="UserDataProvider" IsForeignKey="true" />
+      <Association Name="UserDataProvider_MessageDataProvider" Member="UserDataProvider" ThisKey="user_id" OtherKey="id" Type="UserDataProvider" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.profile" Member="ProfileDataProviders">
+    <Type Name="ProfileDataProvider">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="user_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="first_name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="last_name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="email" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="gender" Type="System.String" DbType="VarChar(1) NOT NULL" CanBeNull="false" />
+      <Column Name="city" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="state" Type="System.String" DbType="VarChar(2)" CanBeNull="true" />
+      <Column Name="age" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="height" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="weight" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="UserDataProvider_profile" Member="UserDataProvider" ThisKey="user_id" OtherKey="id" Type="UserDataProvider" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

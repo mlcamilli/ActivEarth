@@ -74,19 +74,19 @@ namespace ActivEarth.Tests.Groups
             var owner = new User
             {
                 UserName = "owner",
-                Age = 25, City = "Bleaksburg", Email = "whatisthis@idont.even", FirstName = "I.C.", Gender = 'M',
+                Age = 25, City = "Bleaksburg", Email = "whatisthis@idont.even", FirstName = "I.C.", Gender = "M",
                 Height = 60, LastName = "Poorcode", State = "VA", Weight = 130
             };
             var member = new User
             {
                 UserName = "member",
-                Age = 25, City = "Bleaksburg", Email = "whatisthis@idont.even", FirstName = "I.C.", Gender = 'M',
+                Age = 25, City = "Bleaksburg", Email = "whatisthis@idont.even", FirstName = "I.C.", Gender = "M",
                 Height = 60, LastName = "Poorcode", State = "VA", Weight = 130
             };
             var notMember = new User
             {
                 UserName = "notMember",
-                Age = 25, City = "Bleaksburg", Email = "whatisthis@idont.even", FirstName = "I.C.", Gender = 'M',
+                Age = 25, City = "Bleaksburg", Email = "whatisthis@idont.even", FirstName = "I.C.", Gender = "M",
                 Height = 60, LastName = "Poorcode", State = "VA", Weight = 130
             };
 
@@ -132,7 +132,7 @@ namespace ActivEarth.Tests.Groups
                 City = "Bleaksburg",
                 Email = "whatisthis@idont.even",
                 FirstName = "I.C.",
-                Gender = 'M',
+                Gender = "M",
                 Height = 60,
                 LastName = "Poorcode",
                 State = "VA",
@@ -145,7 +145,7 @@ namespace ActivEarth.Tests.Groups
                 City = "Bleaksburg",
                 Email = "whatisthis@idont.even",
                 FirstName = "I.C.",
-                Gender = 'M',
+                Gender = "M",
                 Height = 60,
                 LastName = "Poorcode",
                 State = "VA",
@@ -158,7 +158,7 @@ namespace ActivEarth.Tests.Groups
                 City = "Bleaksburg",
                 Email = "whatisthis@idont.even",
                 FirstName = "I.C.",
-                Gender = 'M',
+                Gender = "M",
                 Height = 60,
                 LastName = "Poorcode",
                 State = "VA",
@@ -216,7 +216,7 @@ namespace ActivEarth.Tests.Groups
                 City = "Bleaksburg",
                 Email = "whatisthis@idont.even",
                 FirstName = "I.C.",
-                Gender = 'M',
+                Gender = "M",
                 Height = 60,
                 LastName = "Poorcode",
                 State = "VA",
@@ -229,7 +229,7 @@ namespace ActivEarth.Tests.Groups
                 City = "Bleaksburg",
                 Email = "whatisthis@idont.even",
                 FirstName = "I.C.",
-                Gender = 'M',
+                Gender = "M",
                 Height = 60,
                 LastName = "Poorcode",
                 State = "VA",
@@ -242,7 +242,7 @@ namespace ActivEarth.Tests.Groups
                 City = "Bleaksburg",
                 Email = "whatisthis@idont.even",
                 FirstName = "I.C.",
-                Gender = 'M',
+                Gender = "M",
                 Height = 60,
                 LastName = "Poorcode",
                 State = "VA",
@@ -295,7 +295,7 @@ namespace ActivEarth.Tests.Groups
                 City = "Bleaksburg",
                 Email = "whatisthis@idont.even",
                 FirstName = "I.C.",
-                Gender = 'M',
+                Gender = "M",
                 Height = 60,
                 LastName = "Poorcode",
                 State = "VA",
@@ -352,7 +352,7 @@ namespace ActivEarth.Tests.Groups
                 City = "Bleaksburg",
                 Email = "whatisthis@idont.even",
                 FirstName = "I.C.",
-                Gender = 'M',
+                Gender = "M",
                 Height = 60,
                 LastName = "Poorcode",
                 State = "VA",
@@ -365,7 +365,7 @@ namespace ActivEarth.Tests.Groups
                 City = "Bleaksburg",
                 Email = "whatisthis@idont.even",
                 FirstName = "I.C.",
-                Gender = 'M',
+                Gender = "M",
                 Height = 60,
                 LastName = "Poorcode",
                 State = "VA",
@@ -378,7 +378,7 @@ namespace ActivEarth.Tests.Groups
                 City = "Bleaksburg",
                 Email = "whatisthis@idont.even",
                 FirstName = "I.C.",
-                Gender = 'M',
+                Gender = "M",
                 Height = 60,
                 LastName = "Poorcode",
                 State = "VA",
