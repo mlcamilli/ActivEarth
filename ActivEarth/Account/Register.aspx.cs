@@ -22,7 +22,7 @@ namespace ActivEarth.Account
         {
             if (UserDAO.GetUserFromUserName(txbUserName.Text) == null)
             {
-                var user = new User { UserName = txbUserName.Text, FirstName = txbFirstName.Text, LastName = txbLastName.Text, Gender = Char.Parse(ddlGender.SelectedValue)};
+                var user = new User { UserName = txbUserName.Text, FirstName = txbFirstName.Text, LastName = txbLastName.Text, Gender = (ddlGender.SelectedValue)};
                 UserDAO.CreateNewUser(user, txbPassword.Text);
                 Response.Redirect("RegisterConfirmation.aspx");
             }
