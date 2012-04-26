@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Data.SqlClient;
 using System.Linq;
 using ActivEarth.Objects.Profile;
@@ -15,6 +16,39 @@ namespace ActivEarth.DAO
                 var data = new ActivEarthDataProvidersDataContext(connection);
                 return data.UserDataProviders.FirstOrDefault(u => u.user_name == userName);
             }
+        }
+
+        public static ObservableCollection<User> GetAllUsers()
+        {
+            var allUsers = new ObservableCollection<User>();
+            using (SqlConnection connection = ConnectionManager.GetConnection())
+            {
+                var data = new ActivEarthDataProvidersDataContext(connection);
+                var userData = (from u in data.UserDataProviders
+                                join p in data.ProfileDataProviders on u.id equals p.user_id
+                                select
+                                    new User
+                                        {
+                                            UserName = u.user_name,
+                                            UserID = u.id,
+                                            Email = p.email,
+                                            FirstName = p.first_name,
+                                            LastName = p.last_name,
+                                            City = p.city,
+                                            State = p.state,
+                                            Gender = p.gender,
+                                            ProfileID = p.id,
+                                            Age = p.age,
+                                            Weight = p.weight,
+                                            Height = p.height
+                                        });
+
+                foreach (var user in userData)
+                {
+                    allUsers.Add(user);
+                }
+            }
+            return allUsers;
         }
 
         public static User GetUserFromUserId(int userId)
@@ -93,43 +127,23 @@ namespace ActivEarth.DAO
         {
             try
             {
-
-            
-            using (SqlConnection connection = ConnectionManager.GetConnection())
-            {
-                var data = new ActivEarthDataProvidersDataContext(connection);
-                var userData = new UserDataProvider {password = password, user_name = user.UserName,};
-                data.UserDataProviders.InsertOnSubmit(userData);
-                data.SubmitChanges();
-
-                var profileData = new ProfileDataProvider
+                using (SqlConnection connection = ConnectionManager.GetConnection())
                 {
-                    user_id = userData.id,
-                    email = user.Email,
-                    first_name = user.FirstName,
-                    last_name = user.LastName,
-                    city = user.City,
-                    state = user.State,
-                    gender = user.Gender,
-                    id = user.ProfileID,
-                    age = user.Age,
-                    weight = user.Weight,
-                    height = user.Height
-                };
-                data.ProfileDataProviders.InsertOnSubmit(profileData);
-                data.SubmitChanges();
-                user.ProfileID = profileData.id;
-
-                return userData.id;
-
+                    var data = new ActivEarthDataProvidersDataContext(connection);
+                    var userData = new UserDataProvider { password = password, user_name = user.UserName };
+                    data.UserDataProviders.InsertOnSubmit(userData);
+                    var profileData = new ProfileDataProvider { UserDataProvider = userData, age = -1, city = "", email = user.Email, gender = user.Gender, height = -1, first_name = user.FirstName, last_name = user.LastName, state = "", weight = -1 };
+                    data.ProfileDataProviders.InsertOnSubmit(profileData);
+                    data.SubmitChanges();
+                    return userData.id;
+                }
             }
-            }
-            catch (Exception)
+            catch
             {
-
                 return 0;
             }
         }
+
         public static bool UpdateUserProfile(User user)
         {
             try
