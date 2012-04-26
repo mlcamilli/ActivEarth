@@ -29,7 +29,7 @@ namespace ActivEarth.Objects.Profile
 
             _stats = new Dictionary<Statistic, UserStatistic>();
 
-            Badges = new Dictionary<Statistic, Badge>();
+            Badges = new List<Badge>();
             Contests = new List<Contest>();
             Groups = new List<Group>();
             Wall = new Wall();
@@ -117,7 +117,7 @@ namespace ActivEarth.Objects.Profile
 
         public ActivityScore ActivityScore { get; set; }
 
-        public Dictionary<Statistic, Badge> Badges { get; set; }
+        public List<Badge> Badges { get; set; }
 
         public List<Contest> Contests { get; set; }
 
