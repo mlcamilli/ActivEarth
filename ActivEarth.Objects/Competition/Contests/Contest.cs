@@ -88,7 +88,7 @@ namespace ActivEarth.Objects.Competition.Contests
         /// List of competing teams in the competition, maintained in sorted order
         /// for reporting standings.
         /// </summary>
-        public List<Contests.Team> Teams
+        public List<Team> Teams
         {
             get;
             set;
@@ -139,6 +139,15 @@ namespace ActivEarth.Objects.Competition.Contests
             set;
         }
 
+        /// <summary>
+        /// UserId of the creator of the contest.
+        /// </summary>
+        public int CreatorId
+        {
+            get;
+            set;
+        }
+
 
         #endregion ---------- Public Properties ----------
 
@@ -150,56 +159,6 @@ namespace ActivEarth.Objects.Competition.Contests
         public Contest()
         {
             this.Teams = new List<Team>();
-        }
-
-        /// <summary>
-        /// Creates a new Contest.
-        /// </summary>
-        /// <param name="id">Numeric indentifier for the contest.</param>
-        /// <param name="name">Contest Name.<param>
-        /// <param name="description">Contest Description.</param>
-        /// <param name="reward">Points to be distributed to the winner(s).</param>
-        /// <param name="mode">Contest mode for determining termination.</param>
-        /// <param name="type">Contest type (group or individual)</param>
-        /// <param name="start">Time to start the contest.</param>
-        /// <param name="end">End Conditions to be observed.</param>
-        /// <param name="statistic">Statistic on which the Contest is based.</param>
-        public Contest(string name, string description, int reward,
-            ContestEndMode mode, ContestType type, DateTime start, EndCondition end, 
-            Statistic statistic)
-        {
-            this.Name = name;
-            this.Description = description;
-            this.Reward = reward;
-            this.Mode = mode;
-            this.Type = type;
-            this.StartTime = start;
-            this.EndCondition = end;
-            this.StatisticBinding = statistic;
-            this.IsActive = true;
-
-            this.Teams = new List<Team>();
-        }
-
-        /// <summary>
-        /// Creates a new Contest with predetermined teams.
-        /// </summary>
-        /// <param name="id">Numeric indentifier for the contest.</param>
-        /// <param name="name">Contest Name.<param>
-        /// <param name="description">Contest Description.</param>
-        /// <param name="reward">Points to be distributed to the winner(s).</param>
-        /// <param name="mode">Contest mode for determining termination.</param>
-        /// <param name="type">Contest type (group or individual)</param>
-        /// <param name="start">Time to start the contest.</param>
-        /// <param name="end">End Conditions to be observed.</param>
-        /// <param name="statistic">Statistic on which the Contest is based.</param>
-        /// <param name="teams">Teams participating in the Contest.</param>
-        protected Contest(int id, string name, string description, int reward,
-            ContestEndMode mode, ContestType type, DateTime start, EndCondition end, 
-            Statistic statistic, List<Team> teams)
-            : this(name, description, reward, mode, type, start, end, statistic)
-        {
-            this.Teams = teams;
         }
 
         #endregion ---------- Constructor ----------

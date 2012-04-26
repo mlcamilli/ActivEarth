@@ -4,7 +4,7 @@
  <html>
     <head id="Head1" runat="server">
         <title>ActivEarth</title>
-        <link href="~/Styles/home.css" rel="stylesheet" type="text/css" />
+        <link href="~/Styles/test.css" rel="stylesheet" type="text/css" />
         <asp:ContentPlaceHolder ID="HeadContent" runat="server">
         </asp:ContentPlaceHolder>
 <style type="text/css">

@@ -27,7 +27,10 @@
         </div>
 
         <div class="profileInfo">
-            <div style="width: 150px;height:150px;border:1px solid; margin: 15px 0px 0px 10px;">
+            <div style="width: 150px;height:150px;border:1px solid #333; margin: 15px 0px 0px 10px;">
+                
+                <asp:Image ID="userIconImage" runat="server" />
+                
             </div>
             <h2>
                 <asp:Label runat="server" ID="lblUserName"></asp:Label>

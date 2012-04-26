@@ -12,6 +12,28 @@ namespace ActivEarth.DAO
 {
     public class PrivacySettingDAO
     {
+        public static IEnumerable<PrivacySetting> GetAllPrivacySettings()
+        {
+            using (SqlConnection connection = ConnectionManager.GetConnection())
+            {
+                var data = new ActivEarthDataProvidersDataContext(connection);
+                return (from p in data.PrivacySettingDataProviders
+                        select
+                            new PrivacySetting
+                                {
+                                    ID = p.id,
+                                    Email = p.email,
+                                    Gender = p.gender,
+                                    Age = p.age,
+                                    Height = p.height,
+                                    Weight = p.weight,
+                                    Group = p.groups,
+                                    ProfileVisibility =  p.profile_visibility,
+                                    UserID = p.user_id
+                                });
+            }
+        }
+
         /// <summary>
         /// Retrieves a User's PrivacySetting from the DB based on the user's ID.
         /// </summary>
@@ -35,7 +57,7 @@ namespace ActivEarth.DAO
                                     Height = p.height,
                                     Weight = p.weight,
                                     Group = p.groups,
-                                    ProfileVisibility = (ProfileVisibility)p.profile_visibility,
+                                    ProfileVisibility = p.profile_visibility,
                                     UserID = p.user_id
                                 }).FirstOrDefault();
             }
@@ -70,7 +92,7 @@ namespace ActivEarth.DAO
                                 Height = p.height,
                                 Weight = p.weight,
                                 Group = p.groups,
-                                ProfileVisibility = (ProfileVisibility)p.profile_visibility,
+                                ProfileVisibility = p.profile_visibility,
                                 UserID = p.user_id
                             }).FirstOrDefault();
             }

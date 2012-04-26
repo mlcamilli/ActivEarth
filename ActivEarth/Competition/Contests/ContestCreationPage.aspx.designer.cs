@@ -103,13 +103,31 @@ namespace ActivEarth.Competition.Contests {
         protected global::System.Web.UI.WebControls.DropDownList ddlContestType;
         
         /// <summary>
-        /// statisticMeasuredLabel control.
+        /// contestModeLabel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label statisticMeasuredLabel;
+        protected global::System.Web.UI.WebControls.Label contestModeLabel;
+        
+        /// <summary>
+        /// ddlContestMode control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlContestMode;
+        
+        /// <summary>
+        /// Label1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label1;
         
         /// <summary>
         /// ddlStatisticMeasured control.
@@ -166,31 +184,22 @@ namespace ActivEarth.Competition.Contests {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator contestStartRequired;
         
         /// <summary>
-        /// contestModeLabel control.
+        /// contestStartFormat control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label contestModeLabel;
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator contestStartFormat;
         
         /// <summary>
-        /// ddlContestMode control.
+        /// contestStartAfterToday control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlContestMode;
-        
-        /// <summary>
-        /// contestModeTimePanel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel contestModeTimePanel;
+        protected global::System.Web.UI.WebControls.CustomValidator contestStartAfterToday;
         
         /// <summary>
         /// contestEndDateLabel control.
@@ -200,6 +209,24 @@ namespace ActivEarth.Competition.Contests {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label contestEndDateLabel;
+        
+        /// <summary>
+        /// contestEndGoalLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label contestEndGoalLabel;
+        
+        /// <summary>
+        /// contestModeTimePanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel contestModeTimePanel;
         
         /// <summary>
         /// txbContestEndDate control.
@@ -229,6 +256,33 @@ namespace ActivEarth.Competition.Contests {
         protected global::AjaxControlToolkit.CalendarExtender contestEndDateCalender;
         
         /// <summary>
+        /// contestEndDateRequired control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator contestEndDateRequired;
+        
+        /// <summary>
+        /// contestEndFormat control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator contestEndFormat;
+        
+        /// <summary>
+        /// contestEndsAfterStart control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator contestEndsAfterStart;
+        
+        /// <summary>
         /// contestModeGoalPanel control.
         /// </summary>
         /// <remarks>
@@ -238,15 +292,6 @@ namespace ActivEarth.Competition.Contests {
         protected global::System.Web.UI.WebControls.Panel contestModeGoalPanel;
         
         /// <summary>
-        /// contestEndGoalLabel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label contestEndGoalLabel;
-        
-        /// <summary>
         /// txbContestEndGoal control.
         /// </summary>
         /// <remarks>
@@ -254,6 +299,42 @@ namespace ActivEarth.Competition.Contests {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txbContestEndGoal;
+        
+        /// <summary>
+        /// txbContestEndGoalFilter control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.FilteredTextBoxExtender txbContestEndGoalFilter;
+        
+        /// <summary>
+        /// contestModeGoalRequired control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator contestModeGoalRequired;
+        
+        /// <summary>
+        /// lblContestSearchable control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblContestSearchable;
+        
+        /// <summary>
+        /// chkContestSearchable control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox chkContestSearchable;
         
         /// <summary>
         /// CreateContestButton control.

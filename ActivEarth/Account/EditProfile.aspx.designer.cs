@@ -103,6 +103,51 @@ namespace ActivEarth.Account {
         protected global::System.Web.UI.WebControls.TextBox tbWeight;
         
         /// <summary>
+        /// pictureLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label pictureLabel;
+        
+        /// <summary>
+        /// pictureFile control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FileUpload pictureFile;
+        
+        /// <summary>
+        /// pictureValidator control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator pictureValidator;
+        
+        /// <summary>
+        /// deletePhoto control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox deletePhoto;
+        
+        /// <summary>
+        /// deletePhotoLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label deletePhotoLabel;
+        
+        /// <summary>
         /// btnSaveChanges control.
         /// </summary>
         /// <remarks>

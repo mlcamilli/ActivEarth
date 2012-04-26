@@ -49,6 +49,7 @@ namespace ActivEarth.Tests.Competition
                 LastName = "Subject1",
                 City = "Montreal",
                 State = "QC",
+                Gender = "M",
                 Email = "email1@test.com"
             };
 
@@ -59,6 +60,7 @@ namespace ActivEarth.Tests.Competition
                 LastName = "Subject2",
                 City = "Vancouver",
                 State = "BC",
+                Gender = "M",
                 Email = "email1@test.net"
             };
 
@@ -612,6 +614,32 @@ namespace ActivEarth.Tests.Competition
                 Assert.AreEqual("N0", stepChallenge.FormatString);
                 Assert.AreEqual("C", gasChallenge.FormatString);
 
+            }
+        }
+
+        /// <summary>
+        /// Tests the assignment of format strings when a challenge is loaded.
+        /// </summary>
+        [TestMethod]
+        public void TestChallengeGenerator()
+        {
+            using (_trans)
+            {
+                Log("Generating Random Challenges");
+                ChallengeManager.GenerateNewChallenges();
+
+                Log("Verifying correct numbers of each type of challenge");
+                Assert.AreEqual(3, ChallengeDAO.GetActiveDailyChallenges().Count);
+                Assert.AreEqual(3, ChallengeDAO.GetActiveWeeklyChallenges().Count);
+                Assert.AreEqual(3, ChallengeDAO.GetActiveMonthlyChallenges().Count);
+
+                Log("Generating Random Challenges again");
+                ChallengeManager.GenerateNewChallenges();
+
+                Log("Verifying no more challenges were created");
+                Assert.AreEqual(3, ChallengeDAO.GetActiveDailyChallenges().Count);
+                Assert.AreEqual(3, ChallengeDAO.GetActiveWeeklyChallenges().Count);
+                Assert.AreEqual(3, ChallengeDAO.GetActiveMonthlyChallenges().Count);
             }
         }
 

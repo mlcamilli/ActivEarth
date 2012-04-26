@@ -34,7 +34,14 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Data.Services" />
+    <Reference Include="System.Data.Services.Client" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Web" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -61,6 +68,7 @@
     <Compile Include="ChallengeManager.cs" />
     <Compile Include="ConnectionManager.cs" />
     <Compile Include="ContestManager.cs" />
+    <Compile Include="DAO\RecentActivityDAO.cs" />
     <Compile Include="StatisticManager.cs" />
     <Compile Include="DAO\BadgeDAO.cs" />
     <Compile Include="DAO\BadgeLevelInfoDAO.cs" />

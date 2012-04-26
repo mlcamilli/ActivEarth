@@ -10,6 +10,7 @@ using ActivEarth.Objects.Profile;
 using ActivEarth.Objects.Competition.Contests;
 using ActivEarth.DAO;
 using ActivEarth.Server.Service.Statistics;
+using ActivEarth.Server.Service.Competition;
 
 namespace ActivEarth.Tests.Competition
 {
@@ -49,6 +50,7 @@ namespace ActivEarth.Tests.Competition
                 LastName = "Subject1",
                 City = "St. Louis",
                 State = "MO",
+                Gender = "M",
                 Email = "email1@test.com"
             };
 
@@ -59,6 +61,7 @@ namespace ActivEarth.Tests.Competition
                 LastName = "Subject2",
                 City = "Missoula",
                 State = "MT",
+                Gender = "M",
                 Email = "email1@test.net"
             };
             _user3 = new User
@@ -68,6 +71,7 @@ namespace ActivEarth.Tests.Competition
                 LastName = "Subject3",
                 City = "Oakland",
                 State = "CA",
+                Gender = "F",
                 Email = "email1@test.org"
             };
 
@@ -78,6 +82,7 @@ namespace ActivEarth.Tests.Competition
                 LastName = "Subject4",
                 City = "Albany",
                 State = "NY",
+                Gender = "M",
                 Email = "email1@test.gov"
             };
 
@@ -132,13 +137,13 @@ namespace ActivEarth.Tests.Competition
                 Log("Creating time-based group contest");
                 int id = ContestManager.CreateContest(ContestType.Group, "Test Contest 1",
                     "This is a test time-based contest.", 50, DateTime.Now, DateTime.Now.AddDays(1),
-                    true, Statistic.Steps);
+                    true, Statistic.Steps, _user1.UserID);
 
                 Log("Adding groups to the contest");
                 ContestManager.AddGroup(id, _group1);
                 ContestManager.AddGroup(id, _group2);
 
-                Contest contest = ContestManager.GetContest(id);
+                Contest contest = ContestManager.GetContest(id, true, true);
 
                 Log("Verifying team count");
                 Assert.AreEqual(2, contest.Teams.Count);
@@ -149,7 +154,7 @@ namespace ActivEarth.Tests.Competition
 
                 Log("Locking team initialization");
                 ContestManager.LockContest(id);
-                contest = ContestManager.GetContest(id);
+                contest = ContestManager.GetContest(id, true, false);
 
                 Log("Verifying initial team scores");
                 Assert.AreEqual(0, contest.Teams[0].Score);
@@ -172,17 +177,19 @@ namespace ActivEarth.Tests.Competition
         {
             using (_trans)
             {
+                InitializeTestDBEntries();
+
                 Log("Creating time-based group contest");
                 int timeId = ContestManager.CreateContest(ContestType.Group, "Test Contest 1",
                     "This is a test time-based contest.", 50, DateTime.Now, DateTime.Now.AddDays(1),
-                    true, Statistic.Steps);
-                Contest timedContest = ContestManager.GetContest(timeId);
+                    true, Statistic.Steps, _user1.UserID);
+                Contest timedContest = ContestManager.GetContest(timeId, false, false);
 
                 Log("Creating goal-based individual contest");
                 int goalId = ContestManager.CreateContest(ContestType.Individual, "Test Contest 2",
                     "This is a test goal-based contest.", 50, DateTime.Now, 50000,
-                    true, Statistic.Steps);
-                Contest goalContest = ContestManager.GetContest(goalId);
+                    true, Statistic.Steps, _user1.UserID);
+                Contest goalContest = ContestManager.GetContest(goalId, false, false);
 
                 Log("Verifying time-based contest end mode");
                 Assert.AreEqual(ContestEndMode.TimeBased, timedContest.Mode);
@@ -220,7 +227,7 @@ namespace ActivEarth.Tests.Competition
                 Log("Creating group contest");
                 int id = ContestManager.CreateContest(ContestType.Group, "Test Contest 1",
                     "This is a test time-based contest.", 50, DateTime.Now, DateTime.Now.AddDays(1),
-                    true, Statistic.Steps);
+                    true, Statistic.Steps, _user1.UserID);
 
                 ContestManager.AddGroup(id, _group1);
                 ContestManager.AddGroup(id, _group2);
@@ -234,7 +241,7 @@ namespace ActivEarth.Tests.Competition
                 StatisticManager.SetUserStatistic(_user3.UserID, Statistic.Steps, 50);
                 StatisticManager.SetUserStatistic(_user4.UserID, Statistic.Steps, 50);
 
-                Contest contest = ContestManager.GetContest(id);
+                Contest contest = ContestManager.GetContest(id, true, true);
 
                 Log("Verifying first team is group1");
                 Assert.AreEqual("Group 1", contest.Teams[0].Name);
@@ -248,7 +255,7 @@ namespace ActivEarth.Tests.Competition
                 StatisticManager.SetUserStatistic(_user3.UserID, Statistic.Steps, 300);
                 StatisticManager.SetUserStatistic(_user4.UserID, Statistic.Steps, 300);
 
-                contest = ContestManager.GetContest(id);
+                contest = ContestManager.GetContest(id, true, false);
 
                 Log("Verifying first team is group2");
                 Assert.AreEqual("Group 2", contest.Teams[0].Name);
@@ -283,7 +290,7 @@ namespace ActivEarth.Tests.Competition
                 Log("Creating individual contest");
                 int id = ContestManager.CreateContest(ContestType.Individual, "Test Contest 1",
                     "This is a test time-based contest.", 50, DateTime.Now, DateTime.Now.AddDays(1),
-                    true, Statistic.Steps);
+                    true, Statistic.Steps, _user1.UserID);
 
                 ContestManager.AddUser(id, _user1);
                 ContestManager.AddUser(id, _user2);
@@ -299,7 +306,7 @@ namespace ActivEarth.Tests.Competition
                 StatisticManager.SetUserStatistic(_user3.UserID, Statistic.Steps, 50);
                 StatisticManager.SetUserStatistic(_user4.UserID, Statistic.Steps, 100);
 
-                Contest contest = ContestManager.GetContest(id);
+                Contest contest = ContestManager.GetContest(id, true, true);
 
                 Log("Verifying team order");
                 Assert.IsTrue(contest.Teams[0].ContainsMember(_user4.UserID));
@@ -332,7 +339,7 @@ namespace ActivEarth.Tests.Competition
                 Log("Creating group contest");
                 int id = ContestManager.CreateContest(ContestType.Group, "Test Contest 1",
                     "This is a test time-based contest.", 50, DateTime.Now, DateTime.Now.AddDays(1),
-                    true, Statistic.Steps);
+                    true, Statistic.Steps, _user1.UserID);
 
                 Team team = new Team()
                 {
@@ -363,7 +370,7 @@ namespace ActivEarth.Tests.Competition
                 StatisticManager.SetUserStatistic(_user4.UserID, Statistic.Steps, 200);
 
                 Log("Retrieving Contest from DB");
-                Contest contest = ContestManager.GetContest(id);
+                Contest contest = ContestManager.GetContest(id, true, false);
 
                 Log("Verifying team aggregate score");
                 Assert.AreEqual(200, contest.Teams[0].Score);
@@ -378,19 +385,32 @@ namespace ActivEarth.Tests.Competition
         {
             using (_trans)
             {
+                InitializeTestDBEntries();
+
                 int id;
                 string newName = "New Name";
 
                 Log("Creating contest");
-                Contest contest = new Contest("Test Contest", "This is a test contest",
-                    30, ContestEndMode.GoalBased, ContestType.Group, DateTime.Today,
-                    new EndCondition(500), Statistic.Steps);
+                Contest contest = new Contest()
+                {
+                    Name = "Test Contest1",
+                    Description = "This is a test contest",
+                    Reward = 30,
+                    Mode = ContestEndMode.GoalBased,
+                    Type = ContestType.Group,
+                    StartTime = DateTime.Today,
+                    EndCondition = new EndCondition(500),
+                    IsActive = true,
+                    IsSearchable = true,
+                    StatisticBinding = Statistic.Steps,
+                    CreatorId = _user1.UserID
+                }; 
 
                 Log("Adding contest to the database");
                 Assert.IsTrue((id = ContestDAO.CreateNewContest(contest)) > 0);
 
                 Log("Loading contest from the database");
-                Contest retrieved = ContestDAO.GetContestFromContestId(id);
+                Contest retrieved = ContestDAO.GetContestFromContestId(id, false, false);
 
                 Log("Verifying that a matching contest was found");
                 Assert.IsNotNull(retrieved);
@@ -402,7 +422,7 @@ namespace ActivEarth.Tests.Competition
                 Assert.IsTrue(ContestDAO.UpdateContest(retrieved));
 
                 Log("Reloading contest from the database");
-                Contest retrieved2 = ContestDAO.GetContestFromContestId(id);
+                Contest retrieved2 = ContestDAO.GetContestFromContestId(id, false, false);
 
                 Log("Verifying that a matching contest was found");
                 Assert.IsNotNull(retrieved2);
@@ -421,24 +441,64 @@ namespace ActivEarth.Tests.Competition
         {
             using (_trans)
             {
+                InitializeTestDBEntries();
+
+                Log("Getting pre-existing Contest count");
+                int contestsBefore = ContestDAO.GetActiveContests(false, false).Count;
+
                 Log("Creating contests");
-                Contest contest1 = new Contest("Test Contest1", "This is a test contest",
-                    30, ContestEndMode.GoalBased, ContestType.Group, DateTime.Today,
-                    new EndCondition(500), Statistic.Steps);
-                Contest contest2 = new Contest("Test Contest2", "This is also a test contest",
-                    30, ContestEndMode.GoalBased, ContestType.Group, DateTime.Today,
-                    new EndCondition(500), Statistic.BikeDistance);
-                Contest contest3 = new Contest("Test Contest3", "This is another test contest",
-                    30, ContestEndMode.GoalBased, ContestType.Group, DateTime.Today,
-                    new EndCondition(500), Statistic.RunDistance);
+                Contest contest1 = new Contest()
+                {
+                    Name = "Test Contest1",
+                    Description = "This is a test contest",
+                    Reward = 30,
+                    Mode = ContestEndMode.GoalBased,
+                    Type = ContestType.Group,
+                    StartTime = DateTime.Today,
+                    EndCondition = new EndCondition(500),
+                    IsActive = true,
+                    IsSearchable = true,
+                    StatisticBinding = Statistic.Steps,
+                    CreatorId = _user1.UserID
+                }; 
+                
+                Contest contest2 = new Contest()
+                {
+                    Name = "Test Contest2",
+                    Description = "This is also a test contest",
+                    Reward = 30,
+                    Mode = ContestEndMode.GoalBased,
+                    Type = ContestType.Group,
+                    StartTime = DateTime.Today,
+                    EndCondition = new EndCondition(500),
+                    IsActive = true,
+                    IsSearchable = true,
+                    StatisticBinding = Statistic.BikeDistance,
+                    CreatorId = _user1.UserID
+                }; 
+                
+                Contest contest3 = new Contest()
+                {
+                    Name = "Test Contest3",
+                    Description = "This is another test contest",
+                    Reward = 30,
+                    Mode = ContestEndMode.GoalBased,
+                    Type = ContestType.Group,
+                    StartTime = DateTime.Today,
+                    EndCondition = new EndCondition(500),
+                    IsActive = true,
+                    IsSearchable = true,
+                    StatisticBinding = Statistic.RunDistance,
+                    CreatorId = _user1.UserID
+                };
 
                 Log("Adding contests to DB");
-                ContestDAO.CreateNewContest(contest1);
-                ContestDAO.CreateNewContest(contest2);
-                ContestDAO.CreateNewContest(contest3);
+                int id1 = ContestDAO.CreateNewContest(contest1);
+                int id2 = ContestDAO.CreateNewContest(contest2);
+                int id3 = ContestDAO.CreateNewContest(contest3);
 
                 Log("Verifying that GetAllContests returns three contests");
-                Assert.AreEqual(3, ContestDAO.GetActiveContests().Count);
+                Assert.AreEqual(contestsBefore + 3, ContestDAO.GetActiveContests(false, false).Count);
             }
         }
 
@@ -451,16 +511,29 @@ namespace ActivEarth.Tests.Competition
         {
             using (_trans)
             {
+                InitializeTestDBEntries();
+
                 Log("Creating contests");
-                Contest contest = new Contest("Test Contest1", "This is a test contest",
-                    30, ContestEndMode.GoalBased, ContestType.Group, DateTime.Today,
-                    new EndCondition(500), Statistic.Steps);
+                Contest contest = new Contest()
+                {
+                    Name = "Test Contest1",
+                    Description = "This is a test contest",
+                    Reward = 30,
+                    Mode = ContestEndMode.GoalBased,
+                    Type = ContestType.Group,
+                    StartTime = DateTime.Today,
+                    EndCondition = new EndCondition(500),
+                    IsActive = true,
+                    IsSearchable = true,
+                    StatisticBinding = Statistic.Steps,
+                    CreatorId = _user1.UserID
+                }; 
 
                 Log("Saving to DB");
                 int id = ContestDAO.CreateNewContest(contest);
 
                 Log("Reading back from DB");
-                Contest retrieved = ContestDAO.GetContestFromContestId(id);
+                Contest retrieved = ContestDAO.GetContestFromContestId(id, false, false);
 
                 Log("Verifying the integrity of the contest fields");
                 Assert.AreEqual(contest.Name, retrieved.Name);
@@ -484,9 +557,20 @@ namespace ActivEarth.Tests.Competition
                 InitializeTestDBEntries();
 
                 Log("Creating contest");
-                Contest contest = new Contest("Test Contest1", "This is a test contest",
-                    30, ContestEndMode.GoalBased, ContestType.Group, DateTime.Today,
-                    new EndCondition(500), Statistic.Steps);
+                Contest contest = new Contest()
+                {
+                    Name = "Test Contest1",
+                    Description = "This is a test contest",
+                    Reward = 30,
+                    Mode = ContestEndMode.GoalBased,
+                    Type = ContestType.Group,
+                    StartTime = DateTime.Today,
+                    EndCondition = new EndCondition(500),
+                    IsActive = true,
+                    IsSearchable = true,
+                    StatisticBinding = Statistic.Steps,
+                    CreatorId = _user1.UserID
+                };
 
                 Log("Saving to DB");
                 int id = ContestDAO.CreateNewContest(contest);
@@ -496,7 +580,7 @@ namespace ActivEarth.Tests.Competition
                 ContestManager.AddGroup(id, _group2);
 
                 Log("Reading back from DB");
-                Contest retrieved = ContestDAO.GetContestFromContestId(id);
+                Contest retrieved = ContestDAO.GetContestFromContestId(id, true, true);
 
                 Log("Verifying the correct number of teams");
                 Assert.AreEqual(contest.Teams.Count, retrieved.Teams.Count);
@@ -519,7 +603,7 @@ namespace ActivEarth.Tests.Competition
             using (_trans)
             {
                 Log("Attempting to load contest that doesn't exist");
-                Contest retrieved = ContestDAO.GetContestFromContestId(-1);
+                Contest retrieved = ContestDAO.GetContestFromContestId(-1, false, false);
 
                 Log("Verifying that no contest was loaded and no exception was thrown");
                 Assert.IsNull(retrieved);
@@ -534,16 +618,29 @@ namespace ActivEarth.Tests.Competition
         {
             using (_trans)
             {
+                InitializeTestDBEntries();
+
                 Log("Creating contest");
-                Contest contest = new Contest("Test Contest1", "This is a test contest",
-                    30, ContestEndMode.GoalBased, ContestType.Group, DateTime.Today,
-                    new EndCondition(500), Statistic.Steps);
+                Contest contest = new Contest()
+                {
+                    Name = "Test Contest1",
+                    Description = "This is a test contest",
+                    Reward = 30,
+                    Mode = ContestEndMode.GoalBased,
+                    Type = ContestType.Group,
+                    StartTime = DateTime.Today,
+                    EndCondition = new EndCondition(500),
+                    IsActive = true,
+                    IsSearchable = true,
+                    StatisticBinding = Statistic.Steps,
+                    CreatorId = _user1.UserID
+                };
 
                 Log("Saving to DB");
                 int id = ContestDAO.CreateNewContest(contest);
 
                 Log("Reading back from DB");
-                Contest retrieved = ContestDAO.GetContestFromContestId(id);
+                Contest retrieved = ContestDAO.GetContestFromContestId(id, false, false);
 
                 Log("Verifying that the contest was retrieved");
                 Assert.IsNotNull(retrieved);
@@ -552,7 +649,7 @@ namespace ActivEarth.Tests.Competition
                 Assert.IsTrue(ContestDAO.RemoveContestFromContestId(id));
 
                 Log("Attempting to read contest back from DB");
-                Contest retrieved2 = ContestDAO.GetContestFromContestId(id);
+                Contest retrieved2 = ContestDAO.GetContestFromContestId(id, false, false);
 
                 Log("Verifying that the contest was not found");
                 Assert.IsNull(retrieved2);
@@ -571,7 +668,7 @@ namespace ActivEarth.Tests.Competition
                 int id = -1;
 
                 Log("Attempting to read contest from DB");
-                Contest retrieved2 = ContestDAO.GetContestFromContestId(id);
+                Contest retrieved2 = ContestDAO.GetContestFromContestId(id, false, false);
 
                 Log("Verifying that the contest was not found");
                 Assert.IsNull(retrieved2);
@@ -595,9 +692,20 @@ namespace ActivEarth.Tests.Competition
                 InitializeTestDBEntries();
 
                 Log("Creating contest");
-                Contest contest = new Contest("Test Contest1", "This is a test contest",
-                    30, ContestEndMode.GoalBased, ContestType.Group, DateTime.Today,
-                    new EndCondition(500), Statistic.Steps);
+                Contest contest = new Contest()
+                {
+                    Name = "Test Contest1",
+                    Description = "This is a test contest",
+                    Reward = 30,
+                    Mode = ContestEndMode.GoalBased,
+                    Type = ContestType.Group,
+                    StartTime = DateTime.Today,
+                    EndCondition = new EndCondition(500),
+                    IsActive = true,
+                    IsSearchable = true,
+                    StatisticBinding = Statistic.Steps,
+                    CreatorId = _user1.UserID
+                };
 
                 Log("Saving to DB");
                 int id = ContestDAO.CreateNewContest(contest);
@@ -605,7 +713,7 @@ namespace ActivEarth.Tests.Competition
                 ContestManager.AddGroup(id, _group1);
 
                 Log("Reading back from DB");
-                Contest retrieved = ContestDAO.GetContestFromContestId(id);
+                Contest retrieved = ContestDAO.GetContestFromContestId(id, true, true);
 
                 Log("Verifying that the two added members are found");
                 Assert.IsTrue(retrieved.Teams[0].ContainsMember(_user1.UserID));
@@ -620,7 +728,7 @@ namespace ActivEarth.Tests.Competition
                 ContestDAO.UpdateContest(retrieved);
 
                 Log("Re-loading contest from DB");
-                Contest retrieved2 = ContestDAO.GetContestFromContestId(id);
+                Contest retrieved2 = ContestDAO.GetContestFromContestId(id, true, true);
 
                 Log("Verifying the correct number of teams");
                 Assert.AreEqual(retrieved.Teams.Count, retrieved2.Teams.Count);
@@ -646,9 +754,20 @@ namespace ActivEarth.Tests.Competition
                 InitializeTestDBEntries();
 
                 Log("Creating contest");
-                Contest contest = new Contest("Test Contest1", "This is a test contest",
-                    30, ContestEndMode.GoalBased, ContestType.Group, DateTime.Today,
-                    new EndCondition(500), Statistic.Steps);
+                Contest contest = new Contest()
+                {
+                    Name = "Test Contest1",
+                    Description = "This is a test contest",
+                    Reward = 30,
+                    Mode = ContestEndMode.GoalBased,
+                    Type = ContestType.Group,
+                    StartTime = DateTime.Today,
+                    EndCondition = new EndCondition(500),
+                    IsActive = true,
+                    IsSearchable = true,
+                    StatisticBinding = Statistic.Steps,
+                    CreatorId = _user1.UserID
+                };
 
                 Log("Saving to DB");
                 int id = ContestDAO.CreateNewContest(contest);
@@ -660,16 +779,13 @@ namespace ActivEarth.Tests.Competition
                 ContestManager.LockContest(id);
 
                 Log("Reading back from DB");
-                Contest retrieved = ContestDAO.GetContestFromContestId(id);
-
-                Log("Reading back from DB");
-                Contest retrieved2 = ContestDAO.GetContestFromContestId(id);
+                Contest retrieved = ContestDAO.GetContestFromContestId(id, true, true);
 
                 Log("Verifying that contest participants have been locked");
-                Assert.IsTrue(retrieved2.Teams[0].Members[0].Initialized);
-                Assert.IsTrue(retrieved2.Teams[0].Members[1].Initialized);
-                Assert.IsTrue(retrieved2.Teams[1].Members[0].Initialized);
-                Assert.IsTrue(retrieved2.Teams[1].Members[1].Initialized);
+                Assert.IsTrue(retrieved.Teams[0].Members[0].Initialized);
+                Assert.IsTrue(retrieved.Teams[0].Members[1].Initialized);
+                Assert.IsTrue(retrieved.Teams[1].Members[0].Initialized);
+                Assert.IsTrue(retrieved.Teams[1].Members[1].Initialized);
             }
         }
 
@@ -684,9 +800,20 @@ namespace ActivEarth.Tests.Competition
                 InitializeTestDBEntries();
 
                 Log("Creating contest to put the team in");
-                Contest contest = new Contest("Test Contest1", "This is a test contest",
-                    30, ContestEndMode.GoalBased, ContestType.Group, DateTime.Today,
-                    new EndCondition(500), Statistic.Steps);
+                Contest contest = new Contest()
+                {
+                    Name = "Test Contest1",
+                    Description = "This is a test contest",
+                    Reward = 30,
+                    Mode = ContestEndMode.GoalBased,
+                    Type = ContestType.Group,
+                    StartTime = DateTime.Today,
+                    EndCondition = new EndCondition(500),
+                    IsActive = true,
+                    IsSearchable = true,
+                    StatisticBinding = Statistic.Steps,
+                    CreatorId = _user1.UserID
+                };
 
                 Log("Adding the contest to the DB");
                 int contestId = ContestDAO.CreateNewContest(contest);
@@ -705,8 +832,8 @@ namespace ActivEarth.Tests.Competition
                 int j = TeamDAO.CreateNewTeamMember(_user2.UserID, teamId);
 
                 Log("Retrieving team from DB");
-                Team notFound = TeamDAO.GetTeamFromTeamId(-1);
-                Team retrieved = TeamDAO.GetTeamFromTeamId(teamId);
+                Team notFound = TeamDAO.GetTeamFromTeamId(-1, true);
+                Team retrieved = TeamDAO.GetTeamFromTeamId(teamId, true);
 
                 Assert.IsNull(notFound);
                 Assert.IsNotNull(retrieved);
@@ -723,16 +850,18 @@ namespace ActivEarth.Tests.Competition
         {
             using (_trans)
             {
+                InitializeTestDBEntries();
+
                 Log("Creating contests of different types");
                 int cID1 = ContestManager.CreateContest(ContestType.Group, "Test Contest1",
-                    "This is a test contest", 30, DateTime.Today, 500, true, Statistic.Steps);
+                    "This is a test contest", 30, DateTime.Today, 500, true, Statistic.Steps, _user1.UserID);
 
                 int cID2 = ContestManager.CreateContest(ContestType.Group, "Test Contest2",
-                    "This is a test contest", 30, DateTime.Today, 500, true, Statistic.GasSavings);
+                    "This is a test contest", 30, DateTime.Today, 500, true, Statistic.GasSavings, _user1.UserID);
 
                 Log("Retrieving contests from DB");
-                Contest c1 = ContestManager.GetContest(cID1);
-                Contest c2 = ContestManager.GetContest(cID2);
+                Contest c1 = ContestManager.GetContest(cID1, false, false);
+                Contest c2 = ContestManager.GetContest(cID2, false, false);
 
                 Log("Verifying format strings");
                 Assert.AreEqual("N0", c1.FormatString);
@@ -751,7 +880,7 @@ namespace ActivEarth.Tests.Competition
             using (_trans)
             {
                 Log("Attempting to retrieve non-existent team from DB");
-                Assert.IsNull(TeamDAO.GetTeamFromTeamId(-1));
+                Assert.IsNull(TeamDAO.GetTeamFromTeamId(-1, true));
             }
         }
 
@@ -759,54 +888,56 @@ namespace ActivEarth.Tests.Competition
         /// Tests the retrieval of currently joinable contests from their name.
         /// </summary>
         [TestMethod]
-        public void TestGetJoinableContests()
+        public void TestFindContests()
         {
             using (_trans)
             {
+                InitializeTestDBEntries();
+
                 Log("Creating contests");
-                //Joinable
-                ContestManager.CreateContest(ContestType.Group, "Test",
-                    "This is a test contest", 30, DateTime.Today.AddDays(1), 500, true, Statistic.Steps);
+                //Matches
+                ContestManager.CreateContest(ContestType.Group, "Testlike",
+                    "This is a test contest", 30, DateTime.Today.AddDays(1), 500, true, Statistic.Steps, _user1.UserID);
 
-                //Joinable
-                ContestManager.CreateContest(ContestType.Group, "Test Competition",
-                    "This is a test contest", 30, DateTime.Today.AddDays(1), 500, true, Statistic.GasSavings);
+                //Matches
+                ContestManager.CreateContest(ContestType.Group, "Testlike Competition",
+                    "This is a test contest", 30, DateTime.Today.AddDays(1), 500, true, Statistic.GasSavings, _user1.UserID);
 
-                //Joinable
-                ContestManager.CreateContest(ContestType.Group, "testing again",
-                    "This is a test contest", 30, DateTime.Today.AddDays(1), 500, true, Statistic.GasSavings);
+                //Matches
+                ContestManager.CreateContest(ContestType.Group, "testlikeing again",
+                    "This is a test contest", 30, DateTime.Today.AddDays(1), 500, true, Statistic.GasSavings, _user1.UserID);
 
-                //Not Joinable (already started)
-                ContestManager.CreateContest(ContestType.Group, "My Test Contest",
-                    "This is a test contest", 30, DateTime.Today, 500, true, Statistic.GasSavings);
+                //Matches
+                ContestManager.CreateContest(ContestType.Group, "My Testlike Contest",
+                    "This is a test contest", 30, DateTime.Today, 500, true, Statistic.GasSavings, _user1.UserID);
 
-                //Joinable, but doesn't match the search
+                //Doesn't Match
                 ContestManager.CreateContest(ContestType.Group, "ActivEarth FTW",
-                    "This is a test contest", 30, DateTime.Today.AddDays(1), 500, true, Statistic.GasSavings);
+                    "This is a test contest", 30, DateTime.Today.AddDays(1), 500, true, Statistic.GasSavings, _user1.UserID);
 
-                //Joinable, but not public
-                ContestManager.CreateContest(ContestType.Group, "test contest2",
-                    "This is a test contest", 30, DateTime.Today.AddDays(1), 500, false, Statistic.GasSavings);
+                //Matches, but not public
+                ContestManager.CreateContest(ContestType.Group, "testlike contest2",
+                    "This is a test contest", 30, DateTime.Today.AddDays(1), 500, false, Statistic.GasSavings, _user1.UserID);
 
-                //Joinable
-                ContestManager.CreateContest(ContestType.Group, "this is another test",
-                    "This is a test contest", 30, DateTime.Today.AddDays(1), 500, true, Statistic.GasSavings);
+                //Matches
+                ContestManager.CreateContest(ContestType.Group, "this is another testlike contest",
+                    "This is a test contest", 30, DateTime.Today.AddDays(1), 500, true, Statistic.GasSavings, _user1.UserID);
 
-                Log("Retrieving contest list from DB: Search term: 'test', exact match");
-                List<Contest> listFromTestExact = ContestDAO.GetJoinableContestsFromContestName("test", true);
+                Log("Retrieving contest list from DB: Search term: 'testlike', exact match");
+                List<int> listFromTestExact = ContestDAO.FindContests("testlike", true);
 
-                Log("Retrieving contest list from DB: Search term: 'test', not exact match");
-                List<Contest> listFromTestNotExact = ContestDAO.GetJoinableContestsFromContestName("test", false);
+                Log("Retrieving contest list from DB: Search term: 'testlike', not exact match");
+                List<int> listFromTestNotExact = ContestDAO.FindContests("testlike", false);
 
                 Log("Retrieving contest list from DB: Search term: 'salamanders', not exact match");
-                List<Contest> listFromSalamandersNotExact = ContestDAO.GetJoinableContestsFromContestName("salamanders", false);
+                List<int> listFromSalamandersNotExact = ContestDAO.FindContests("salamanders", false);
 
                 Log("Retrieving contest list from DB: Search term: 'salamanders', exact match");
-                List<Contest> listFromSalamandersExact = ContestDAO.GetJoinableContestsFromContestName("salamanders", true);
+                List<int> listFromSalamandersExact = ContestDAO.FindContests("salamanders", true);
 
                 Log("Verifying returned contest counts");
                 Assert.AreEqual(1, listFromTestExact.Count);
-                Assert.AreEqual(4, listFromTestNotExact.Count);
+                Assert.AreEqual(5, listFromTestNotExact.Count);
                 Assert.AreEqual(0, listFromSalamandersNotExact.Count);
                 Assert.AreEqual(0, listFromSalamandersExact.Count);
             }
@@ -828,13 +959,13 @@ namespace ActivEarth.Tests.Competition
 
                 Log("Creating contests");
                 int id1 = ContestManager.CreateContest(ContestType.Group, c1Name,
-                    "This is a test contest", 30, DateTime.Today.AddDays(1), 500, true, Statistic.Steps);
+                    "This is a test contest", 30, DateTime.Today.AddDays(1), 500, true, Statistic.Steps, _user1.UserID);
 
                 int id2 = ContestManager.CreateContest(ContestType.Group, c2Name,
-                    "This is a test contest", 30, DateTime.Today.AddDays(1), 500, true, Statistic.GasSavings);
+                    "This is a test contest", 30, DateTime.Today.AddDays(1), 500, true, Statistic.GasSavings, _user1.UserID);
 
                 int id3 = ContestManager.CreateContest(ContestType.Group, c3Name,
-                    "This is a test contest", 30, DateTime.Today.AddDays(1), 500, true, Statistic.GasSavings);
+                    "This is a test contest", 30, DateTime.Today.AddDays(1), 500, true, Statistic.GasSavings, _user1.UserID);
 
                 ContestManager.AddGroup(id1, _group1);
                 ContestManager.AddGroup(id2, _group1);
@@ -893,18 +1024,73 @@ namespace ActivEarth.Tests.Competition
 
                 Log("Creating contests");
                 int id1 = ContestManager.CreateContest(ContestType.Group, c1Name,
-                    "This is a test contest", 30, DateTime.Today.AddDays(1), 500, true, Statistic.Steps);
+                    "This is a test contest", 30, DateTime.Today.AddDays(1), 500, true, Statistic.Steps, _user1.UserID);
 
                 int id2 = ContestManager.CreateContest(ContestType.Group, c2Name,
-                    "This is a test contest", 30, DateTime.Today.AddDays(1), 500, true, Statistic.GasSavings);
+                    "This is a test contest", 30, DateTime.Today.AddDays(1), 500, true, Statistic.GasSavings, _user1.UserID);
 
                 int id3 = ContestManager.CreateContest(ContestType.Group, c3Name,
-                    "This is a test contest", 30, DateTime.Today.AddDays(1), 500, true, Statistic.GasSavings);
+                    "This is a test contest", 30, DateTime.Today.AddDays(1), 500, true, Statistic.GasSavings, _user1.UserID);
 
                 Log("Verifying contest name retrieval");
                 Assert.AreEqual(c1Name, ContestDAO.GetContestNameFromContestId(id1));
                 Assert.AreEqual(c2Name, ContestDAO.GetContestNameFromContestId(id2));
                 Assert.AreEqual(c3Name, ContestDAO.GetContestNameFromContestId(id3));
+            }
+        }
+
+        /// <summary>
+        /// Tests the determination of whether or not a user is already entered in a contest.
+        /// </summary>
+        [TestMethod]
+        public void TestContestUserIsCompetingInContest()
+        {
+            using (_trans)
+            {
+                InitializeTestDBEntries();
+
+                Log("Creating contests");
+                int id1 = ContestManager.CreateContest(ContestType.Group, "Contest",
+                    "This is a test contest", 30, DateTime.Today.AddDays(1), 500, true, Statistic.Steps, _user1.UserID);
+
+                int id2 = ContestManager.CreateContest(ContestType.Group, "Contest2",
+                    "This is a test contest", 30, DateTime.Today.AddDays(1), 500, true, Statistic.GasSavings, _user1.UserID);
+
+                ContestManager.AddUser(id1, _user1);
+
+                Log("Verifying contest name retrieval");
+                Assert.IsTrue(ContestManager.UserCompetingInContest(_user1.UserID, id1));
+                Assert.IsFalse(ContestManager.UserCompetingInContest(_user1.UserID, id2));
+            }
+        }
+
+        /// <summary>
+        /// Tests the retrieval of a team from the userId and contestId.
+        /// </summary>
+        [TestMethod]
+        public void TestContestGetTeamFromUserIdAndContestId()
+        {
+            using (_trans)
+            {
+                InitializeTestDBEntries();
+
+                Log("Creating contests");
+                int id1 = ContestManager.CreateContest(ContestType.Group, "Contest",
+                    "This is a test contest", 30, DateTime.Today.AddDays(1), 500, true, Statistic.Steps, _user1.UserID);
+
+                ContestManager.AddUser(id1, _user1);
+
+                Team withMembers = TeamDAO.GetTeamFromUserIdAndContestId(_user1.UserID, id1, true);
+                Team withoutMembers = TeamDAO.GetTeamFromUserIdAndContestId(_user1.UserID, id1, false);
+
+                Log("Verifying retrieved team");
+                Assert.IsNotNull(withMembers);
+                Assert.IsNotNull(withoutMembers);
+
+                Assert.AreEqual(1, withMembers.Members.Count);
+                Assert.AreEqual(0, withoutMembers.Members.Count);
+
+                Assert.AreEqual(_user1.UserID, withMembers.Members.First().UserId);
             }
         }
 

@@ -156,6 +156,7 @@ namespace ActivEarth.Objects.Competition.Challenges
             this.StatisticBinding = statistic;
             this.Requirement = requirement;
             this.IsActive = true;
+            this.ImagePath = String.Empty;
         }
 
         #endregion ---------- Constructor ----------

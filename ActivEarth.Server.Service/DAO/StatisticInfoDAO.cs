@@ -22,9 +22,11 @@ namespace ActivEarth.DAO
             using (SqlConnection connection = ConnectionManager.GetConnection())
             {
                 var data = new ActivEarthDataProvidersDataContext(connection);
-                return (from c in data.StatisticConstantsDataProviders
-                                where c.statistic_id == (byte)stat
-                        select c.name).FirstOrDefault().Trim();
+                string toReturn = (from c in data.StatisticConstantsDataProviders
+                                    where c.statistic_id == (byte)stat
+                                    select c.name).FirstOrDefault();
+
+                return (toReturn != null ? toReturn.Trim() : String.Empty);
             }
         }
 
@@ -38,9 +40,11 @@ namespace ActivEarth.DAO
             using (SqlConnection connection = ConnectionManager.GetConnection())
             {
                 var data = new ActivEarthDataProvidersDataContext(connection);
-                return (from c in data.StatisticConstantsDataProviders
-                                where c.statistic_id == (byte)stat
-                                select c.format_string).FirstOrDefault().Trim();
+                string toReturn = (from c in data.StatisticConstantsDataProviders
+                                    where c.statistic_id == (byte)stat
+                                    select c.format_string).FirstOrDefault();
+
+                return (toReturn != null ? toReturn.Trim() : String.Empty);
             }
         }
     }

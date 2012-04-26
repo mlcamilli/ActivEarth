@@ -44,6 +44,30 @@ namespace ActivEarth.DAO
             }
         }
 
+        public static IEnumerable<Badge> GetAllBadges()
+        {
+            using (SqlConnection connection = ConnectionManager.GetConnection())
+            {
+                var data = new ActivEarthDataProvidersDataContext(connection);
+                var badges = (from c in data.BadgeDataProviders
+                              select new Badge
+                                         {
+                                             ID = c.id,
+                                             UserID = c.user_id,
+                                             StatisticBinding = (Statistic) c.statistic,
+                                             Level = c.badge_level,
+                                             Progress = c.progress
+                                         });
+
+                foreach (var badge in badges)
+                {
+                    LoadExternalBadgeData(badge);
+                }
+
+                return badges.AsEnumerable();
+            }
+        }
+
         /// <summary>
         /// Retrieves a badge matching a provided ID.
         /// </summary>

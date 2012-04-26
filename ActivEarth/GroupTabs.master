@@ -1,0 +1,41 @@
+<%@ Master Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="True" CodeBehind="GroupTabs.master.cs" Inherits="ActivEarth.GroupTabs" %>
+<asp:Content ID="TabsHeader" ContentPlaceHolderID="HeadContent" runat="server">
+    <asp:ContentPlaceHolder ID="HeadContent" runat="server"></asp:ContentPlaceHolder>
+</asp:Content>
+
+<asp:Content ID="Tab" ContentPlaceHolderID="MainContent" runat="server">
+    <div class="clear hideSkiplink">
+        <asp:Menu ID="NavigationMenu" runat="server" CssClass="menu" EnableViewState="false" IncludeStyleBlock="false" Orientation="Horizontal">
+            <Items>
+                <asp:MenuItem NavigateUrl="~/Groups/Groups.aspx" Text="Groups" Value="Groups">
+                </asp:MenuItem>
+                <asp:MenuItem Text="Badges" Value="Badges" 
+                    NavigateUrl="~/Competition/Badges/DisplayBadgesPage.aspx"></asp:MenuItem>
+                <asp:MenuItem NavigateUrl="~/Competition/Challenges/DisplayChallengesPage.aspx" 
+                    Text="Challenges" Value="Challenges"></asp:MenuItem>
+                <asp:MenuItem NavigateUrl="~/Competition/Contests/ContestHomePage.aspx" 
+                    Text="Contest" Value="Contest"></asp:MenuItem>
+            </Items>
+        </asp:Menu>
+        
+
+
+    </div>
+    <div class="clear hideSkiplink">
+        <asp:Menu ID="GroupNavigationMenu" runat="server" CssClass="menu" EnableViewState="false" IncludeStyleBlock="false" Orientation="Horizontal"  OnMenuItemClick="GroupNavigationMenu_MenuItemClick">
+            <Items>
+                <asp:MenuItem Text="Wall" Value="Wall"></asp:MenuItem>
+                <asp:MenuItem Text="Members" Value="Members"></asp:MenuItem>
+                <asp:MenuItem Text="Contests" Value="Contests"></asp:MenuItem>
+     
+            </Items>
+        </asp:Menu>
+        
+
+
+    </div>
+    <div class="tabContent">
+        <asp:ContentPlaceHolder ID="MainContent" runat="server"/>
+    </div>
+    
+</asp:Content>

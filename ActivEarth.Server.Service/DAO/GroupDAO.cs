@@ -41,23 +41,13 @@ namespace ActivEarth.DAO
                     members.Add(UserDAO.GetUserFromUserId(id));
                 }
 
-                List<int> contest_ids = (from c in data.GroupContestDataProviders
-                                         where c.group_id == groupId
-                                         select
-                                             c.contest_id
-                                         ).ToList();
+                List<int> contest_ids = ContestDAO.GetContestIdsFromGroupId(groupId);
 
                 List<Contest> contests = new List<Contest>();
                 foreach (int id in contest_ids)
                 {
-                    contests.Add(ContestDAO.GetContestFromContestId(id));
+                    contests.Add(ContestDAO.GetContestFromContestId(id, true, true));
                 }
-
-                List<Message> messages = (from m in data.MessageDataProviders
-                                          where m.group_id == groupId
-                                          select
-                                              new Message(m.title, m.message, UserDAO.GetUserFromUserId(m.poster_id)) 
-                                          ).ToList();
 
                 Group toReturn = (from g in data.GroupDataProviders
                                   where g.id == groupId
@@ -79,9 +69,7 @@ namespace ActivEarth.DAO
                                                             select
                                                             g.owner_id).FirstOrDefault()));
 
-                foreach(Message message in messages) {
-                    toReturn.Post(message);
-                }
+                RecentActivityDAO.GetGroupRecentActivity(toReturn);
 
                 return toReturn;
             }
@@ -139,6 +127,61 @@ namespace ActivEarth.DAO
             return toReturn;
         }
 
+        /// <summary>
+        /// Retrieves all currently created Groups that have a given Owner.
+        /// </summary>
+        /// <param name="partialName">A string desired to be contained within the Group name</param>
+        /// <returns>All Groups in the database with the given Owner.</returns>
+        public static List<Group> GetAllGroupsByOwner(User owner)
+        {
+            List<Group> ownedGroups = new List<Group>();
+
+            using (SqlConnection connection = ConnectionManager.GetConnection())
+            {
+                var data = new ActivEarthDataProvidersDataContext(connection);
+
+                List<int> groupIds = (from g in data.GroupDataProviders
+                                      where g.owner_id == owner.UserID
+                                      select g.id
+                                      ).ToList();
+
+                foreach (int groupId in groupIds)
+                {
+                    Group group = GetGroupFromGroupId(groupId);
+                    ownedGroups.Add(group);
+                }
+
+                return ownedGroups;
+            }
+        }
+
+        /// <summary>
+        /// Retrieves all currently created Groups that have a name containing the given string.
+        /// </summary>
+        /// <param name="partialName">A string desired to be contained within the Group name</param>
+        /// <returns>All Groups in the database with names containing the given string.</returns>
+        public static List<Group> GetAllGroupsByName(string partialName)
+        {
+            List<Group> namedGroups = new List<Group>();
+
+            using (SqlConnection connection = ConnectionManager.GetConnection())
+            {
+                var data = new ActivEarthDataProvidersDataContext(connection);
+
+                List<int> groupIds = (from g in data.GroupDataProviders
+                                      where g.name.ToLower().Contains(partialName)
+                                      select g.id
+                                      ).ToList();
+
+                foreach (int groupId in groupIds)
+                {
+                    Group group = GetGroupFromGroupId(groupId);
+                    namedGroups.Add(group);
+                }
+
+                return namedGroups;
+            }
+        }
 
         /// <summary>
         /// Retrieves all currently created Groups that are tagged with the given hashtag.
@@ -201,18 +244,6 @@ namespace ActivEarth.DAO
                         data.GroupMemberDataProviders.InsertOnSubmit(memberData);
                     }
 
-                    foreach (Message message in group.Wall.Messages)
-                    {
-                        MessageDataProvider messageData = new MessageDataProvider
-                        {
-                            title = message.Title,
-                            message = message.Text,
-                            poster_id = message.Poster.UserID,
-                            group_id = groupData.id
-                        };
-                        data.MessageDataProviders.InsertOnSubmit(messageData);
-                    }
-
                     foreach (string tag in group.HashTags)
                     {
                         GroupHashtagDataProvider hashtagData = new GroupHashtagDataProvider
@@ -221,16 +252,6 @@ namespace ActivEarth.DAO
                             group_id = groupData.id
                         };
                         data.GroupHashtagDataProviders.InsertOnSubmit(hashtagData);
-                    }
-                    
-                    foreach (Contest contest in group.Contests)
-                    {
-                        var contestData = new GroupContestDataProvider
-                        {
-                            contest_id = contest.ID,
-                            group_id = groupData.id
-                        };
-                        data.GroupContestDataProviders.InsertOnSubmit(contestData);
                     }
 
                     data.SubmitChanges();
@@ -349,97 +370,30 @@ namespace ActivEarth.DAO
                             }
                         }
 
-                        //Update group_contests table
-                        List<GroupContestDataProvider> contests = (from c in data.GroupContestDataProviders
+                        //Update Teams table
+                        List<TeamDataProvider> contests = (from c in data.TeamDataProviders
                                                  where c.group_id == groupId
                                                  select
                                                      c
                                                  ).ToList();
 
-                        foreach (GroupContestDataProvider contestData in contests)
+                        foreach (TeamDataProvider contestData in contests)
                         {
                             bool found = false;
                             foreach (Contest contest in group.Contests)
                             {
-                                if (contestData.id == contest.ID)
+                                if (contestData.contest_id == contest.ID)
                                 {
                                     found = true;
                                 }
                             }
                             if (!found)
                             {
-                                data.GroupContestDataProviders.DeleteOnSubmit(contestData);
+                                data.TeamDataProviders.DeleteOnSubmit(contestData);
                             }
                         }
 
-                        foreach (Contest contest in group.Contests)
-                        {
-                            bool found = false;
-                            foreach (GroupContestDataProvider contestData in contests)
-                            {
-                                if (contestData.id == contest.ID)
-                                {
-                                    found = true;
-                                }
-                            }
-                            if (!found)
-                            {
-                                GroupContestDataProvider contestData = new GroupContestDataProvider
-                                {
-                                    contest_id = contest.ID,
-                                    group_id = groupId
-                                };
-                                data.GroupContestDataProviders.InsertOnSubmit(contestData);
-                            }
-                        }
-
-                        //Update messages table
-                        List<MessageDataProvider> messages = (from m in data.MessageDataProviders
-                                                  where m.group_id == groupId
-                                                  select
-                                                      m
-                                                  ).ToList();
-
-                        foreach (MessageDataProvider messageData in messages)
-                        {
-                            bool found = false;
-                            foreach (Message message in group.Wall.Messages)
-                            {
-                                if (messageData.message == message.Text && messageData.poster_id == message.Poster.UserID
-                                    && messageData.title == message.Title)
-                                {
-                                    found = true;
-                                }
-                            }
-                            if (!found)
-                            {
-                                data.MessageDataProviders.DeleteOnSubmit(messageData);
-                            }
-                        }
-
-                        foreach (Message message in group.Wall.Messages)
-                        {
-                            bool found = false;
-                            foreach (MessageDataProvider messageData in messages)
-                            {
-                                if (messageData.message == message.Text && messageData.poster_id == message.Poster.UserID
-                                    && messageData.title == message.Title)
-                                {
-                                    found = true;
-                                }
-                            }
-                            if (!found)
-                            {
-                                MessageDataProvider messageData = new MessageDataProvider
-                                {
-                                    title = message.Title,
-                                    message = message.Text,
-                                    poster_id = message.Poster.UserID,
-                                    group_id = groupId
-                                };
-                                data.MessageDataProviders.InsertOnSubmit(messageData);
-                            }
-                        }
+                        RecentActivityDAO.UpdateGroupRecentActivity(group);
 
                         data.SubmitChanges();
                         return true;
@@ -501,15 +455,15 @@ namespace ActivEarth.DAO
                         }
 
                         //Delete entires in group_contests table
-                        List<GroupContestDataProvider> contests = (from c in data.GroupContestDataProviders
+                        List<TeamDataProvider> contests = (from c in data.TeamDataProviders
                                                                    where c.group_id == groupId
                                                                    select
                                                                        c
                                                  ).ToList();
 
-                        foreach (GroupContestDataProvider contestData in contests)
+                        foreach (TeamDataProvider contestData in contests)
                         {
-                            data.GroupContestDataProviders.DeleteOnSubmit(contestData);
+                            data.TeamDataProviders.DeleteOnSubmit(contestData);
                         }
                                            
                         //Remove entires in messages table
