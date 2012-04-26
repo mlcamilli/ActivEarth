@@ -67,6 +67,34 @@ namespace ActivEarth.DAO
 
         #region ---------- Contest Retrieval ----------
 
+        public static IEnumerable<Contest> GetAllContests()
+        {
+            using (SqlConnection connection = ConnectionManager.GetConnection())
+            {
+                var data = new ActivEarthDataProvidersDataContext(connection);
+                return (from c in data.ContestDataProviders
+                        select
+                            new Contest
+                                {
+                                    ID = c.id,
+                                    Name = c.name,
+                                    Description = c.description,
+                                    Reward = c.points,
+                                    StartTime = c.start,
+                                    EndCondition =
+                                        ((ContestEndMode) c.end_mode == ContestEndMode.GoalBased
+                                             ? new EndCondition((float) c.end_goal)
+                                             : new EndCondition((DateTime) c.end_time)),
+                                    Mode = (ContestEndMode) c.end_mode,
+                                    Type = (ContestType) c.type,
+                                    StatisticBinding = (Statistic) c.statistic,
+                                    IsActive = c.active,
+                                    DeactivatedTime = c.deactivated,
+                                    CreatorId = c.creator_id
+                                });
+            }
+        }
+
         /// <summary>
         /// Retrieves a Contest from the DB based on its ID.
         /// </summary>
