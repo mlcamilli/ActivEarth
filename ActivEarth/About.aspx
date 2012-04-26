@@ -4,10 +4,9 @@
 <asp:Content ID="HeaderContent" runat="server" ContentPlaceHolderID="HeadContent">
 </asp:Content>
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
-    <h2>
-        About
-    </h2>
-    <p>
-        Put content here.
-    </p>
+     <div class="contentBox">
+        	<div class="contentTitle">About</div>
+          <div class="contentText"><p>Active earth is..... </p><br />
+        <p>Get involved by....</p><br />
+        </div>
 </asp:Content>

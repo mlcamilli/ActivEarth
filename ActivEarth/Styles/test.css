@@ -8,7 +8,7 @@ body
     font-family:"Adobe Garamond Pro Bold", Georgia, "Times New Roman", Times, serif;
     margin: 0px;
     padding: 0px;
-    color: #000000;
+    color: #ffffff;
 }
 
 a:link, a:visited
@@ -49,7 +49,7 @@ h1, h2, h3, h4, h5, h6
 {
     font-family:"Adobe Garamond Pro Bold", Georgia, "Times New Roman", Times, serif;
     font-size: 1.5em;
-    color: #000000;
+    color: #ffffff;
     text-transform: none;
     font-weight: 200;
     margin-bottom: 0px;
@@ -89,25 +89,140 @@ first child of the left and right table columns */
 {
     margin-top: 0px;
 }
+/* DEFAULTS
+----------------------------------------------------------*/
+
+body   
+{
+    background: #ffffff;
+    font-size: .80em;
+    font-family:"Adobe Garamond Pro Bold", Georgia, "Times New Roman", Times, serif;
+    margin: 0px;
+    padding: 0px;
+}
+
+a:link, a:visited
+{
+    font-family:"Adobe Garamond Pro Bold", Georgia, "Times New Roman", Times, serif;
+    color: #1493fa;
+}
+
+a:hover
+{
+    color: #1d60ff;
+    text-decoration: none;
+}
+
+a:active
+{
+    color: #1493fa;
+}
+
+p
+{
+    margin-bottom: 10px;
+    line-height: 1.6em;
+}
 
 
+/* HEADINGS   
+----------------------------------------------------------*/
+TITLEBANNER
+{
+    color: #ffffff;
+    font-size: 7em;
+    padding: 0px 0px 0px 270px;
+    font-family:"Adobe Garamond Pro Bold", Georgia, "Times New Roman", Times, serif;
+    
+}
+
+h1, h2, h3, 
+{
+    font-family:"Adobe Garamond Pro Bold", Georgia, "Times New Roman", Times, serif;
+    font-size: 1.5em;
+    color: #ffffff;
+    text-transform: none;
+    font-weight: 200;
+    margin-bottom: 0px;
+}
+
+h1
+{
+    text-align: center;
+    font-size: 2em;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+}
+
+h2
+{
+    text-align: center;
+    font-size: 1.5em;
+    font-weight: 600;
+}
+
+h3
+{
+    text-align: center;
+    font-size: 1.2em;
+}
+
+
+
+/* this rule styles <h1> and <h2> tags that are the 
+first child of the left and right table columns */
+.rightColumn > h1, .rightColumn > h2, .leftColumn > h1, .leftColumn > h2
+{
+    margin-top: 0px;
+}
+
+
+.contentBox
+{
+width:670px;
+height:auto;
+background-color:#FFFFFF;
+margin-top:30px;
+}
+
+.contentTitle
+{
+text-align:center;
+font-size:19px;
+font-weight: bolder;
+margin-bottom:0px;
+padding-top:18px;
+margin-left:15px;
+margin-top:15px;
+}
+
+.contentText
+{
+font-size:13px;
+line-height:24px;
+margin-left:13px;
+margin-right:13px;
+}
 /* PRIMARY LAYOUT ELEMENTS   
 ----------------------------------------------------------*/
 
 .page
 {
     width: 960px;
-    background-color: #ffffff;
+    /*background-image: "~/Images/Home/background.png";
+     background-repeat:repeat-x;*/
+    background-color: #009933;
     margin: 20px auto 0px auto;
     border: 2px solid #000000;
+   
 }
 
 .header
 {
     position: relative;
     margin: 0px;
-    padding: 6px 0px 26px 0px;
-    background: #009933;
+    padding: 4px 0px 60px 0px;
+    background: #1493fa;
     width: 100%;
 }
 
@@ -123,14 +238,7 @@ first child of the left and right table columns */
     font-size: 2em;
 	
 }
-.profileInfo
-{
-    background-color: #ffffff;
-	width: 180px;
-	float: left;
-	clear:left;
-	margin: 0px 0px 0px 0px;
-}
+
 .main
 {
    	font-family:"Adobe Garamond Pro Bold", Georgia, "Times New Roman", Times, serif;
@@ -145,23 +253,7 @@ first child of the left and right table columns */
     border-width: 1px;
     border-color: #d7d7d7;
 }
-.statInfo
-{
-    background-color: #ffffff;
-	width: 100px;
-	float: left;
-	margin: 0px 0px 0px 0px;
-	padding: 0px 0px 0px 0px;
 
-}
-
-.leftCol
-{
-    padding: 6px 0px;
-    margin: 12px 8px 8px 8px;
-    width: 200px;
-    min-height: auto;
-}
 
 .footer
 {
@@ -171,61 +263,6 @@ first child of the left and right table columns */
     text-align: center;
 	font-family:"Adobe Garamond Pro Bold", Georgia, "Times New Roman", Times, serif;
     line-height: normal;
-}
-
-
-/* TAB MENU   
-----------------------------------------------------------*/
-
-div.hideSkiplink
-{
-    background-color:#ffffff;
-    width:100%;
-}
-
-div.menu
-{
-    padding: 0px 0px 16px 155px;
-}
-
-div.menu ul
-{
-    list-style: none;
-    margin: 0px;
-    padding: 0px;
-    width: auto;
-}
-
-div.menu ul li a, div.menu ul li a:visited
-{
-    background-color: #1493fa;
-    border: 2px #000000 solid;
-    color: #ffffff;
-    display: block;
-    line-height: 1.35em;
-    padding: 4px 20px;
-    text-decoration: none;
-    white-space: nowrap;
-}
-
-div.menu ul li a:hover
-{
-    background-color: #009933;
-    color: #000000;
-    text-decoration: none;
-}
-
-div.menu ul li a:active
-{
-    background-color: #009933;
-    color: #cfdbe6;
-    text-decoration: none;
-}
-
-.tabContent
-{
-	padding: 0px 12px;
-    margin: 12px 8px 8px 8px;
 }
 
 /* Not Logged In   
@@ -299,6 +336,7 @@ input.passwordEntry
 div.accountInfo, div.contestInfo
 {
     width: 42%;
+    
 }
 
 /* MISC  

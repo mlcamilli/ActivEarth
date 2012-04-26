@@ -4,18 +4,33 @@
  <html>
     <head id="Head1" runat="server">
         <title>ActivEarth</title>
-        <link href="~/Styles/Not.css" rel="stylesheet" type="text/css" />
+        <link href="~/Styles/home.css" rel="stylesheet" type="text/css" />
         <asp:ContentPlaceHolder ID="HeadContent" runat="server">
         </asp:ContentPlaceHolder>
+<style type="text/css">
+  .centeredImage
+    {
+    text-align:center;
+    margin-top:0px;
+    margin-bottom:0px;
+    padding:0px;
+    }
+</style>
     </head>
     <body>
         <form id="Form1" runat="server">
         <div class="page">
+        <p class="centeredImage">
+
+         <asp:Image id="Img1" ImageUrl="~/Images/Home/trans_earth.gif" Runat="server"/>
+          </p> 
             <div class="header">
                 <div class="title">
                     <TITLEBANNER>ActivEarth</TITLEBANNER>
-                                           
+                                          
                 </div>
+
+
                 <div class="loginDisplay">
                             <asp:Label runat="server" ID="lblUserLoggedIn"></asp:Label>
                             <asp:HyperLink runat="server" ID="hlLogin" NavigateUrl="~/Account/Login.aspx" Text="Log In"></asp:HyperLink>
@@ -26,6 +41,7 @@
             <div class="mainNotLoggedIn">
                 <asp:ContentPlaceHolder ID="MainContent" runat="server"/>
             </div>
+	       
             <div class="clear">
             </div>
         </div>

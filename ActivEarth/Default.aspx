@@ -7,9 +7,9 @@
     <h2>
         Welcome to ActivEarth <asp:Label runat="server" ID="lblMainUserName"></asp:Label>!
     </h2>
-    <p>
+    <h3>
         This site is currently under construction and will be updated soon. 
-    </p>
+    </h3>
     <asp:HyperLink ID="hlAccessProfile" runat="server" Text="Access Your Profile" NavigateUrl="~/Account/Profile.aspx"></asp:HyperLink><br/>
     <asp:HyperLink ID="hlAbout" runat="server" Text="About" NavigateUrl="~/About.aspx"></asp:HyperLink><br/>
     
