@@ -128,6 +128,34 @@ namespace ActivEarth.DAO
         }
 
         /// <summary>
+        /// Retrieves all currently created Groups that have a given Owner.
+        /// </summary>
+        /// <param name="partialName">A string desired to be contained within the Group name</param>
+        /// <returns>All Groups in the database with the given Owner.</returns>
+        public static List<Group> GetAllGroupsByOwner(User owner)
+        {
+            List<Group> ownedGroups = new List<Group>();
+
+            using (SqlConnection connection = ConnectionManager.GetConnection())
+            {
+                var data = new ActivEarthDataProvidersDataContext(connection);
+
+                List<int> groupIds = (from g in data.GroupDataProviders
+                                      where g.owner_id == owner.UserID
+                                      select g.id
+                                      ).ToList();
+
+                foreach (int groupId in groupIds)
+                {
+                    Group group = GetGroupFromGroupId(groupId);
+                    ownedGroups.Add(group);
+                }
+
+                return ownedGroups;
+            }
+        }
+
+        /// <summary>
         /// Retrieves all currently created Groups that have a name containing the given string.
         /// </summary>
         /// <param name="partialName">A string desired to be contained within the Group name</param>

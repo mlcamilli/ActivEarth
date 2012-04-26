@@ -17,6 +17,7 @@ CREATE TABLE [dbo].[teams](
 	[name] [varchar](50) NOT NULL,
 	[score] [float] NOT NULL,
     [locked] [bit] NOT NULL,
+    [bracket] [tinyint] NOT NULL,
 	[group_id] [int] NULL,
  CONSTRAINT [PK__teams__3213E83F145C0A3F] PRIMARY KEY CLUSTERED 
 (
