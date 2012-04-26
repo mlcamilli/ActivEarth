@@ -4725,6 +4725,16 @@ namespace ActivEarth.Server.Service
 		
 		private System.Nullable<int> _weight;
 		
+		private int _green_score;
+		
+		private int _activity_score_total;
+		
+		private int _activity_score_badges;
+		
+		private int _activity_score_challenges;
+		
+		private int _activity_score_contests;
+		
 		private EntityRef<UserDataProvider> _UserDataProvider;
 		
     #region Extensibility Method Definitions
@@ -4753,6 +4763,16 @@ namespace ActivEarth.Server.Service
     partial void OnheightChanged();
     partial void OnweightChanging(System.Nullable<int> value);
     partial void OnweightChanged();
+    partial void Ongreen_scoreChanging(int value);
+    partial void Ongreen_scoreChanged();
+    partial void Onactivity_score_totalChanging(int value);
+    partial void Onactivity_score_totalChanged();
+    partial void Onactivity_score_badgesChanging(int value);
+    partial void Onactivity_score_badgesChanged();
+    partial void Onactivity_score_challengesChanging(int value);
+    partial void Onactivity_score_challengesChanged();
+    partial void Onactivity_score_contestsChanging(int value);
+    partial void Onactivity_score_contestsChanged();
     #endregion
 		
 		public ProfileDataProvider()
@@ -4981,6 +5001,106 @@ namespace ActivEarth.Server.Service
 					this._weight = value;
 					this.SendPropertyChanged("weight");
 					this.OnweightChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_green_score", DbType="Int NOT NULL")]
+		public int green_score
+		{
+			get
+			{
+				return this._green_score;
+			}
+			set
+			{
+				if ((this._green_score != value))
+				{
+					this.Ongreen_scoreChanging(value);
+					this.SendPropertyChanging();
+					this._green_score = value;
+					this.SendPropertyChanged("green_score");
+					this.Ongreen_scoreChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_activity_score_total", DbType="Int NOT NULL")]
+		public int activity_score_total
+		{
+			get
+			{
+				return this._activity_score_total;
+			}
+			set
+			{
+				if ((this._activity_score_total != value))
+				{
+					this.Onactivity_score_totalChanging(value);
+					this.SendPropertyChanging();
+					this._activity_score_total = value;
+					this.SendPropertyChanged("activity_score_total");
+					this.Onactivity_score_totalChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_activity_score_badges", DbType="Int NOT NULL")]
+		public int activity_score_badges
+		{
+			get
+			{
+				return this._activity_score_badges;
+			}
+			set
+			{
+				if ((this._activity_score_badges != value))
+				{
+					this.Onactivity_score_badgesChanging(value);
+					this.SendPropertyChanging();
+					this._activity_score_badges = value;
+					this.SendPropertyChanged("activity_score_badges");
+					this.Onactivity_score_badgesChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_activity_score_challenges", DbType="Int NOT NULL")]
+		public int activity_score_challenges
+		{
+			get
+			{
+				return this._activity_score_challenges;
+			}
+			set
+			{
+				if ((this._activity_score_challenges != value))
+				{
+					this.Onactivity_score_challengesChanging(value);
+					this.SendPropertyChanging();
+					this._activity_score_challenges = value;
+					this.SendPropertyChanged("activity_score_challenges");
+					this.Onactivity_score_challengesChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_activity_score_contests", DbType="Int NOT NULL")]
+		public int activity_score_contests
+		{
+			get
+			{
+				return this._activity_score_contests;
+			}
+			set
+			{
+				if ((this._activity_score_contests != value))
+				{
+					this.Onactivity_score_contestsChanging(value);
+					this.SendPropertyChanging();
+					this._activity_score_contests = value;
+					this.SendPropertyChanged("activity_score_contests");
+					this.Onactivity_score_contestsChanged();
 				}
 			}
 		}

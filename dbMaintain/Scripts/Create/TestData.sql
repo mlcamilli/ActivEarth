@@ -1,14 +1,14 @@
 insert into ActivEarth_Dev.dbo.users Values ('jtest', 'test123')
-insert into ActivEarth_Dev.dbo.profile Values (1, 'John', 'Test', 'jtest@gmail.com', 'M', 'Derpville', 'VA', 21, 72, 175)
+insert into ActivEarth_Dev.dbo.profile Values (1, 'John', 'Test', 'jtest@gmail.com', 'M', 'Derpville', 'VA', 21, 72, 175, 0, 0, 0, 0, 0)
 
 insert into ActivEarth_Dev.dbo.users Values ('badgetest1', 'password')
-insert into ActivEarth_Dev.dbo.profile Values (2, 'Test', 'Subject1', 'thisisatestaccount@email.com', 'M', 'Denver', 'CO', 21, 72, 175)
+insert into ActivEarth_Dev.dbo.profile Values (2, 'Test', 'Subject1', 'thisisatestaccount@email.com', 'M', 'Denver', 'CO', 21, 72, 175, 0, 0, 0, 0, 0)
 
 insert into ActivEarth_Dev.dbo.users Values ('badgetest2', 'password2')
-insert into ActivEarth_Dev.dbo.profile Values (3, 'Test', 'Subject2', 'anothertestaccount@email.com', 'M', 'St. Louis', 'MO', 26, 72, 175)
+insert into ActivEarth_Dev.dbo.profile Values (3, 'Test', 'Subject2', 'anothertestaccount@email.com', 'M', 'St. Louis', 'MO', 26, 72, 175, 0, 0, 0, 0, 0)
 
 insert into ActivEarth_Dev.dbo.users Values ('mark', 'k')
-insert into ActivEarth_Dev.dbo.profile Values (4, 'Mark', 'Talley', 'yetanothertestaccount@email.com', 'M', 'Topeka', 'KS', 22, 71, 155)
+insert into ActivEarth_Dev.dbo.profile Values (4, 'Mark', 'Talley', 'yetanothertestaccount@email.com', 'M', 'Topeka', 'KS', 22, 71, 155, 0, 0, 0, 0, 0)
 
 /* Statistic-based data (names, etc.) */
 insert into ActivEarth_Dev.dbo.statistic_info Values (0, 'Steps', 'N0')

@@ -111,7 +111,7 @@ namespace ActivEarth.Objects.Profile
 
         public int GreenScore { get; set; }
 
-        //public ActivityScore ActivityScore { get; set; }
+        public ActivityScore ActivityScore { get; set; }
 
         public PrivacySetting userPrivacySettings { get; set; }
     }

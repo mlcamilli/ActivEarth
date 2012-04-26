@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Data.SqlClient;
 using System.Linq;
 using ActivEarth.Objects.Profile;
+using ActivEarth.Objects.Competition;
 using ActivEarth.Server.Service;
 
 namespace ActivEarth.DAO
@@ -40,7 +41,12 @@ namespace ActivEarth.DAO
                                             ProfileID = p.id,
                                             Age = p.age,
                                             Weight = p.weight,
-                                            Height = p.height
+                                            Height = p.height,
+                                            GreenScore = p.green_score,
+                                            ActivityScore = new ActivityScore(
+                                                p.activity_score_badges, 
+                                                p.activity_score_challenges, 
+                                                p.activity_score_contests)
                                         });
 
                 foreach (var user in userData)
@@ -74,7 +80,12 @@ namespace ActivEarth.DAO
                                 ProfileID = p.id,
                                 Age = p.age,
                                 Weight = p.weight,
-                                Height = p.height
+                                Height = p.height,
+                                GreenScore = p.green_score,
+                                ActivityScore = new ActivityScore(
+                                    p.activity_score_badges,
+                                    p.activity_score_challenges,
+                                    p.activity_score_contests)
                                 
                             }).FirstOrDefault();
             }
@@ -113,7 +124,12 @@ namespace ActivEarth.DAO
                                  ProfileID = p.id,
                                  Age = p.age,
                                  Weight = p.weight,
-                                 Height = p.height
+                                 Height = p.height,
+                                 GreenScore = p.green_score,
+                                 ActivityScore = new ActivityScore(
+                                     p.activity_score_badges,
+                                     p.activity_score_challenges,
+                                     p.activity_score_contests)
                              }).FirstOrDefault();
                 if (toReturn != null)
                 {
@@ -132,7 +148,7 @@ namespace ActivEarth.DAO
                     var data = new ActivEarthDataProvidersDataContext(connection);
                     var userData = new UserDataProvider { password = password, user_name = user.UserName };
                     data.UserDataProviders.InsertOnSubmit(userData);
-                    var profileData = new ProfileDataProvider { UserDataProvider = userData, age = -1, city = "", email = user.Email, gender = user.Gender, height = -1, first_name = user.FirstName, last_name = user.LastName, state = "", weight = -1 };
+                    var profileData = new ProfileDataProvider { UserDataProvider = userData, age = -1, city = "", email = user.Email, gender = user.Gender, height = -1, first_name = user.FirstName, last_name = user.LastName, state = "", weight = -1 , green_score = 0, activity_score_total = 0, activity_score_contests = 0, activity_score_challenges = 0, activity_score_badges = 0};
                     data.ProfileDataProviders.InsertOnSubmit(profileData);
                     data.SubmitChanges();
                     return userData.id;
@@ -164,6 +180,10 @@ namespace ActivEarth.DAO
                         profile.age = user.Age;
                         profile.height = user.Height;
                         profile.weight = user.Weight;
+                        profile.green_score = user.GreenScore;
+                        profile.activity_score_badges = user.ActivityScore.BadgeScore;
+                        profile.activity_score_challenges = user.ActivityScore.ChallengeScore;
+                        profile.activity_score_contests = user.ActivityScore.ContestScore;
 
                         RecentActivityDAO.UpdateUserRecentActivity(user);
                         

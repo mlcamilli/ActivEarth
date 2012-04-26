@@ -223,6 +223,11 @@
       <Column Name="age" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="height" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="weight" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="green_score" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="activity_score_total" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="activity_score_badges" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="activity_score_challenges" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="activity_score_contests" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="UserDataProvider_profile" Member="UserDataProvider" ThisKey="user_id" OtherKey="id" Type="UserDataProvider" IsForeignKey="true" />
     </Type>
   </Table>
