@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Services.Common;
 using ActivEarth.Objects.Competition;
 using ActivEarth.Objects.Competition.Badges;
 using ActivEarth.Objects.Competition.Contests;
@@ -7,6 +8,7 @@ using ActivEarth.Objects.Groups;
 
 namespace ActivEarth.Objects.Profile
 {
+    [DataServiceKey("UserID")]
     public class User
     {
         public Wall Wall;

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Services.Common;
 using System.Linq;
 using System.Web;
 using ActivEarth.Objects.Profile;
@@ -10,6 +11,7 @@ using ActivEarth.Objects.Competition.Contests;
 
 namespace ActivEarth.Objects.Groups
 {
+    [DataServiceKey("ID")]
     public class Group
     {
 
