@@ -58,7 +58,8 @@ namespace ActivEarth.Account
             {
                 Session["userDetails"] = UserDAO.GetUserFromUserId(user.UserID);  
                 Response.Redirect("~/Account/Profile.aspx");
-            }else
+            }
+            else
             {
                 Response.Redirect("~/Account/Profile.aspx");    
             }
