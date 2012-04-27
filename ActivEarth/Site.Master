@@ -35,7 +35,7 @@
             <h2>
                 <asp:Label runat="server" ID="lblUserName"></asp:Label><br/>
             </h2>
-            <asp:HyperLink ID="HyperLink1" runat="server" Text="Edit Profile" NavigateUrl="~/Account/EditProfile.aspx"></asp:HyperLink>
+            <asp:HyperLink ID="hlEditProfile" runat="server" Text="Edit Profile" NavigateUrl="~/Account/EditProfile.aspx"></asp:HyperLink>
             
             <h2>Recent Activity:</h2>
         </div>
@@ -46,6 +46,17 @@
             <h2>
                 Statistical Information
             </h2>
+            <p>Steps: <br /><asp:Label class="statData" runat="server" ID="lblStatSteps"></asp:Label></p>
+            <p>Distance Walked: <br /><asp:Label class="statData" runat="server" ID="lblStatWalkDistance"></asp:Label></p>
+            <p>Distance Biked: <br /><asp:Label class="statData" runat="server" ID="lblStatBikeDistance"></asp:Label></p>
+            <p>Distance Ran: <br /><asp:Label class="statData" runat="server" ID="lblStatRunDistance"></asp:Label></p>
+            <p>Gas Money Saved: <br /><asp:Label class="statData" runat="server" ID="lblStatGasSavings"></asp:Label></p>
+            <p>Challenges Completed: <br /><asp:Label class="statData" runat="server" ID="lblStatChallengesCompleted"></asp:Label></p>
+            <p>Total Distance: <br /><asp:Label class="statData" runat="server" ID="lblStatAggregateDistance"></asp:Label></p>
+            <p>Total Time: <br /><asp:Label class="statData" runat="server" ID="lblStatAggregateTime"></asp:Label></p>
+            <p>Time Walking: <br /><asp:Label class="statData" runat="server" ID="lblStatWalkTime"></asp:Label></p>
+            <p>Time Biking: <br /><asp:Label class="statData" runat="server" ID="lblStatBikeTime"></asp:Label></p>
+            <p>Time Running: <br /><asp:Label class="statData" runat="server" ID="lblStatRunTime"></asp:Label></p>
         </div>
         <div class="clear">
         </div>
