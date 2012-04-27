@@ -486,6 +486,8 @@ namespace ActivEarth.Tests.Competition
         {
             using (_trans)
             {
+                int initial = ChallengeDAO.GetActiveChallenges().Count;
+
                 Log("Creating expired challenge");
                 Challenge challenge1 = new Challenge("Test Challenge", "This is a test challenge",
                     30, false, DateTime.Today.AddDays(-1), 1, Statistic.Steps, 500);
@@ -505,7 +507,7 @@ namespace ActivEarth.Tests.Competition
                 ChallengeDAO.CreateNewChallenge(challenge3);
 
                 Log("Verifying that GetActiveChallenges returns two challenges");
-                Assert.AreEqual(2, ChallengeDAO.GetActiveChallenges().Count);
+                Assert.AreEqual(initial + 2, ChallengeDAO.GetActiveChallenges().Count);
             }
         }
 
@@ -517,6 +519,9 @@ namespace ActivEarth.Tests.Competition
         {
             using (_trans)
             {
+                int initialDaily = ChallengeDAO.GetActiveDailyChallenges().Count;
+                int initialWeekly = ChallengeDAO.GetActiveWeeklyChallenges().Count;
+
                 Log("Creating expired challenge");
                 Challenge challenge1 = new Challenge("Test Challenge", "This is a test challenge",
                     30, false, DateTime.Today.AddDays(-1), 1, Statistic.Steps, 500);
@@ -551,10 +556,10 @@ namespace ActivEarth.Tests.Competition
                 ChallengeDAO.CreateNewChallenge(challenge6);
 
                 Log("Verifying that GetActiveDailyChallenges returns two challenges");
-                Assert.AreEqual(2, ChallengeDAO.GetActiveDailyChallenges().Count);
+                Assert.AreEqual(initialDaily + 2, ChallengeDAO.GetActiveDailyChallenges().Count);
 
                 Log("Verifying that GetActiveWeeklyChallenges returns three challenges");
-                Assert.AreEqual(3, ChallengeDAO.GetActiveWeeklyChallenges().Count);
+                Assert.AreEqual(initialWeekly + 3, ChallengeDAO.GetActiveWeeklyChallenges().Count);
             }
         }
 
@@ -566,6 +571,8 @@ namespace ActivEarth.Tests.Competition
         {
             using (_trans)
             {
+                int initial = ChallengeDAO.GetActiveChallenges().Count;
+
                 Log("Creating expired challenge");
                 Challenge challenge1 = new Challenge("Test Challenge", "This is a test challenge",
                     30, false, DateTime.Today.AddDays(-1), 1, Statistic.Steps, 500);
@@ -585,7 +592,7 @@ namespace ActivEarth.Tests.Competition
                 ChallengeDAO.CreateNewChallenge(challenge3);
 
                 Log("Verifying that GetAllChallenges returns three challenges");
-                Assert.AreEqual(3, ChallengeDAO.GetAllChallenges().Count);
+                Assert.AreEqual(initial + 3, ChallengeDAO.GetAllChallenges().Count);
             }
         }
 
