@@ -121,15 +121,6 @@ namespace ActivEarth.Account {
         protected global::System.Web.UI.WebControls.CompareValidator NewPasswordCompare;
         
         /// <summary>
-        /// CancelPushButton control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button CancelPushButton;
-        
-        /// <summary>
         /// ChangePasswordPushButton control.
         /// </summary>
         /// <remarks>
@@ -137,5 +128,14 @@ namespace ActivEarth.Account {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button ChangePasswordPushButton;
+        
+        /// <summary>
+        /// CancelPushButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button CancelPushButton;
     }
 }

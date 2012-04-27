@@ -7,6 +7,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using ActivEarth.Objects;
 using ActivEarth.Objects.Profile;
+using ActivEarth.DAO;
 
 namespace ActivEarth
 {
@@ -29,8 +30,19 @@ namespace ActivEarth
                 lblUserLoggedIn.Text = "Logged in as " + userDetails.UserName;
 
                 lblUserName.Text = userDetails.FirstName + " " + userDetails.LastName;
-                lblCityState.Text = userDetails.City + ", " + userDetails.State;
                 userIconImage.ImageUrl = getUserImageUrl(userDetails, "icon");
+
+                lblStatSteps.Text = userDetails.GetStatistic(Statistic.Steps).ToString() + " steps";
+                lblStatWalkDistance.Text = userDetails.GetStatistic(Statistic.WalkDistance).ToString() + " miles";
+                lblStatBikeDistance.Text = userDetails.GetStatistic(Statistic.BikeDistance).ToString() + " miles";
+                lblStatRunDistance.Text = userDetails.GetStatistic(Statistic.RunDistance).ToString() + " miles";
+                lblStatGasSavings.Text = "$ " + userDetails.GetStatistic(Statistic.GasSavings).ToString();
+                lblStatChallengesCompleted.Text = userDetails.GetStatistic(Statistic.ChallengesCompleted).ToString();
+                lblStatAggregateDistance.Text = userDetails.GetStatistic(Statistic.AggregateDistance).ToString() + " hr";
+                lblStatAggregateTime.Text = userDetails.GetStatistic(Statistic.AggregateTime).ToString() + " hr";
+                lblStatWalkTime.Text = userDetails.GetStatistic(Statistic.WalkTime).ToString() + " hr";
+                lblStatBikeTime.Text = userDetails.GetStatistic(Statistic.BikeTime).ToString() + " hr";
+                lblStatRunTime.Text = userDetails.GetStatistic(Statistic.RunTime).ToString() + " hr";
             }
 
         }
