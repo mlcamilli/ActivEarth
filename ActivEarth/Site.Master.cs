@@ -29,7 +29,7 @@ namespace ActivEarth
                 lblUserLoggedIn.Text = "Logged in as " + userDetails.UserName;
 
                 lblUserName.Text = userDetails.FirstName + " " + userDetails.LastName;
-                lblCityState.Text = userDetails.City + ", " + userDetails.State;
+                
                 userIconImage.ImageUrl = getUserImageUrl(userDetails, "icon");
             }
 
