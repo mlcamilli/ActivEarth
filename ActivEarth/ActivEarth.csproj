@@ -242,6 +242,12 @@
     <Content Include="Images\Competition\Challenges\Time_Walked\Daily.png" />
     <Content Include="Images\Competition\Challenges\Time_Walked\Monthly.png" />
     <Content Include="Images\Competition\Challenges\Time_Walked\Weekly.png" />
+    <Content Include="Images\Competition\Challenges\Total_Distance\Daily.png" />
+    <Content Include="Images\Competition\Challenges\Total_Distance\Monthly.png" />
+    <Content Include="Images\Competition\Challenges\Total_Distance\Weekly.png" />
+    <Content Include="Images\Competition\Challenges\Total_Time\Daily.png" />
+    <Content Include="Images\Competition\Challenges\Total_Time\Monthly.png" />
+    <Content Include="Images\Competition\Challenges\Total_Time\Weekly.png" />
     <Content Include="Images\Competition\Misc\Calender.png" />
     <Content Include="Images\Competition\Misc\LeftArrow.png" />
     <Content Include="Images\Competition\Misc\RightArrow.png" />
