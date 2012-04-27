@@ -136,7 +136,7 @@ first child of the left and right table columns */
    	font-family:"Adobe Garamond Pro Bold", Georgia, "Times New Roman", Times, serif;
     padding: 0px 0px 0px 10px;
     margin: 0px 0px 0px 0px;
-    min-height: 420px;
+    min-height: 650px;
     width: 600px;
     float: left;
     border-left-style: solid;
@@ -148,12 +148,17 @@ first child of the left and right table columns */
 .statInfo
 {
     background-color: #ffffff;
-	width: 100px;
+	width: 130px;
 	float: left;
-	margin: 0px 0px 0px 0px;
+	margin: 0px 0px 0px 15px;
 	padding: 0px 0px 0px 0px;
 
 }
+.statData
+{
+	margin:0px 0px 0px 20px;
+}
+
 
 .leftCol
 {

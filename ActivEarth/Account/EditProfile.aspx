@@ -63,8 +63,9 @@
                 </td>
             </tr>
             <tr>
-                <td></td>
+                
                 <td><asp:Button runat="server" id="btnSaveChanges" onclick="SaveUserProfile" Text="Save Changes"/></td>
+                <td><asp:Button runat="server" id="btnCancel" onclick="CancelSaveUserProfile" Text="Cancel"/></td>
             </tr>
         </tbody>
     </table>

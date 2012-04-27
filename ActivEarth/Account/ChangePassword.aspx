@@ -47,9 +47,9 @@
                     </p>
                 </fieldset>
                 <p class="submitButton">
-                    <asp:Button ID="CancelPushButton" runat="server" CausesValidation="False" CommandName="Cancel" Text="Cancel" OnClick="BtnCancelClick"/>
                     <asp:Button ID="ChangePasswordPushButton" runat="server" CommandName="ChangePassword" Text="Change Password" OnClick="BtnSubmitClick"
                          ValidationGroup="ChangeUserPasswordValidationGroup"/>
+                    <asp:Button ID="CancelPushButton" runat="server" CausesValidation="False" CommandName="Cancel" Text="Cancel" OnClick="BtnCancelClick"/>
                 </p>
             </div>
 </asp:Content>
