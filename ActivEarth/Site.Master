@@ -27,15 +27,16 @@
         </div>
 
         <div class="profileInfo">
-            <div style="width: 150px;height:150px;border:1px solid #333; margin: 15px 0px 0px 10px;">
+            <div style="width: 150px;height:150px;border:1px solid #333; margin: 15px 0px 0px 0px;">
                 
                 <asp:Image ID="userIconImage" runat="server" />
                 
             </div>
             <h2>
-                <asp:Label runat="server" ID="lblUserName"></asp:Label>
+                <asp:Label runat="server" ID="lblUserName"></asp:Label><br/>
             </h2>
-            <p><asp:Label runat="server" ID="lblCityState"></asp:Label></p>
+            <asp:HyperLink ID="HyperLink1" runat="server" Text="Edit Profile" NavigateUrl="~/Account/EditProfile.aspx"></asp:HyperLink>
+            
             <h2>Recent Activity:</h2>
         </div>
         <div class="main">
