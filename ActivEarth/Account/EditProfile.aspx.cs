@@ -40,6 +40,10 @@ namespace ActivEarth.Account
             }
         }
 
+        protected void CancelSaveUserProfile(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Account/Profile.aspx");
+        }
         protected void SaveUserProfile(object sender, EventArgs e)
         {
             
