@@ -10,32 +10,48 @@ namespace ActivEarth.Competition.Contests
 {
     public partial class LeaderBoardRow : System.Web.UI.UserControl
     {
-        public void CreateRowDisplay(Color backColor, Color textColor)
+        public void CreateRowDisplay(Color backColor, Color textColor, int bracket)
         {
-            _position.ForeColor = textColor;
+            if (bracket == 0)
+            {
+                _row.BackImageUrl = "~/Images/Competition/Leaderboard/Diamond.png";
+            }
+            else if (bracket == 1)
+            {
+                _row.BackImageUrl = "~/Images/Competition/Leaderboard/Platinum.png";
+            }
+            else if (bracket == 2)
+            {
+                _row.BackImageUrl = "~/Images/Competition/Leaderboard/Gold.png";
+            }
+            else if (bracket == 3)
+            {
+                _row.BackImageUrl = "~/Images/Competition/Leaderboard/Silver.png";
+            }
+            else 
+            {
+                _row.BackImageUrl = "~/Images/Competition/Leaderboard/Bronze.png";
+            }
+
             _teamName.ForeColor = textColor;
             _currentScore.ForeColor = textColor;
-            _row.BackColor = backColor;
             hideRowText();
         }
 
-        public void setRowText(int position, string team, float score, string format)
+        public void setRowText(string team, float score, string format)
         {
-            _position.Text = position + ".";
             _teamName.Text = team;
             _currentScore.Text = score.ToString(format);
         }
 
         public void hideRowText()
         {
-            _position.Visible = false;
             _teamName.Visible = false;
             _currentScore.Visible = false;
         }
 
         public void displayRowText()
         {
-            _position.Visible = true;
             _teamName.Visible = true;
             _currentScore.Visible = true;
         }

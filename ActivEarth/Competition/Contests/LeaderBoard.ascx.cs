@@ -33,7 +33,7 @@ namespace ActivEarth.Competition.Contests
 
             for (int i = 0; i < slots; i++)
             {
-                AddRowToLeaderBoard(backColors[colorIndex], textColors[textIndex]);
+                AddRowToLeaderBoard(backColors[colorIndex], textColors[textIndex], i);
                 
                 colorIndex++;
                 if (colorIndex == backColors.Length)
@@ -51,10 +51,10 @@ namespace ActivEarth.Competition.Contests
             PopulateLeaderBoard(format);
         }
 
-        private void AddRowToLeaderBoard(Color backColor, Color textColor)
+        private void AddRowToLeaderBoard(Color backColor, Color textColor, int i)
         {
             LeaderBoardRow leaderBoardRow = (LeaderBoardRow)LoadControl("LeaderBoardRow.ascx");
-            leaderBoardRow.CreateRowDisplay(backColor, textColor);
+            leaderBoardRow.CreateRowDisplay(backColor, textColor, i);
             _rows.Add(leaderBoardRow);
             _displayLeaderBoardRows.Controls.Add(leaderBoardRow);
         }
@@ -68,7 +68,7 @@ namespace ActivEarth.Competition.Contests
                 if (i + _displayIndex < _contestTeams.Count)
                 {
                     int position = i + _displayIndex;
-                    leaderBoardRow.setRowText(position + 1, _contestTeams[position].Name, _contestTeams[position].Score, format);
+                    leaderBoardRow.setRowText(_contestTeams[position].Name, _contestTeams[position].Score, format);
                     leaderBoardRow.displayRowText();
                 }
                 else

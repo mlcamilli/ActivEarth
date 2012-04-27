@@ -76,6 +76,15 @@ namespace ActivEarth.Competition.Contests {
         protected global::ActivEarth.Competition.Contests.TeamDisplayTable CurrentTeams;
         
         /// <summary>
+        /// Table1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Table Table1;
+        
+        /// <summary>
         /// btnJoinContest control.
         /// </summary>
         /// <remarks>
@@ -83,6 +92,24 @@ namespace ActivEarth.Competition.Contests {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnJoinContest;
+        
+        /// <summary>
+        /// btnLeaveContest control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnLeaveContest;
+        
+        /// <summary>
+        /// GroupSelection control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList GroupSelection;
         
         /// <summary>
         /// ContestCompletePanel control.

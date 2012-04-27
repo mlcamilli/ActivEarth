@@ -25,8 +25,18 @@
     <div align="center">
         <asp:Panel ID="ContestSignUpPanel" runat="server" Visible="false">
             <uc:TeamDisplayTable runat="server" ID="CurrentTeams" />
-            <br />
-            <asp:Button ID="btnJoinContest" Text="Join Contest" OnClick="JoinContest" runat="server" Visible="false" />
+            <asp:Table ID="Table1"  runat="server" CellPadding="0" 
+                CellSpacing="0">
+                <asp:TableRow VerticalAlign="Middle">
+                    <asp:TableCell>
+                        <asp:Button ID="btnJoinContest" Text="Join Contest" OnClick="JoinContest" runat="server" Visible="false" />
+                        <asp:Button ID="btnLeaveContest" Text="Leave Contest" OnClick="LeaveContest" runat="server" Visible="false" />
+                    </asp:TableCell>               
+                    <asp:TableCell>
+                        <asp:DropDownList ID="GroupSelection" runat="server" Visible="false" />
+                    </asp:TableCell>
+                </asp:TableRow>
+            </asp:Table>
         </asp:Panel>
     </div>
 
