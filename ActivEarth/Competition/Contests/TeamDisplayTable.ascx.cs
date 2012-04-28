@@ -9,6 +9,10 @@ using ActivEarth.Objects.Competition.Contests;
 
 namespace ActivEarth.Competition.Contests
 {
+    /// <summary>
+    /// This class represents a table in which Teams in a contest are
+    /// displayed.
+    /// </summary>
     public partial class TeamDisplayTable : System.Web.UI.UserControl
     {
         protected void Page_Load(object sender, EventArgs e)
@@ -16,6 +20,12 @@ namespace ActivEarth.Competition.Contests
 
         }
 
+        /// <summary>
+        /// Populates the Team table with the team names that are given.
+        /// </summary>
+        /// <param name="teams">The teams to display.</param>
+        /// <param name="backColors">The backcolors to use for rows.</param>
+        /// <param name="textColors">The text colors used for rows.</param>
         public void PopulateTeamTable(List<Team> teams, Color[] backColors, Color[] textColors)
         {
             int colorIndex = 0;
@@ -42,19 +52,32 @@ namespace ActivEarth.Competition.Contests
             }
         }
 
-        private TableRow MakeRowForTable(string contestName, Color backColor, Color textColor)
+        /// <summary>
+        /// Creates a row for the team table.
+        /// </summary>
+        /// <param name="teamName">The name of team to display.</param>
+        /// <param name="backColor">The backcolor of the row.</param>
+        /// <param name="textColor">The text color of the row.</param>
+        /// <returns>A table row for the team table.</returns>
+        private TableRow MakeRowForTable(string teamName, Color backColor, Color textColor)
         {
             TableRow newRow = new TableRow();
             newRow.BackColor = backColor;
-            newRow.Cells.Add(MakeTextCellForRow(contestName, textColor));
+            newRow.Cells.Add(MakeTextCellForRow(teamName, textColor));
             return newRow;
         }
 
-        private TableCell MakeTextCellForRow(string text, Color textColor)
+        /// <summary>
+        /// Creates a new cell for a table with the name of the team.
+        /// </summary>
+        /// <param name="text">The team name to display.</param>
+        /// <param name="textColor">The color of the text for this cell.</param>
+        /// <returns>A table cell for the table.</returns>
+        private TableCell MakeTextCellForRow(string name, Color textColor)
         {
             TableCell newCell = new TableCell();
             Label textLink = new Label();
-            textLink.Text = text;
+            textLink.Text = name;
             textLink.ForeColor = textColor;
             newCell.Controls.Add(textLink);
             return newCell;

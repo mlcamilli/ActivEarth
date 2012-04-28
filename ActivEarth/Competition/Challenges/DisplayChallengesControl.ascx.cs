@@ -8,6 +8,10 @@ using ActivEarth.Objects.Competition.Challenges;
 
 namespace ActivEarth.Competition.Challenges
 {
+    /// <summary>
+    /// This class represents a control that is used to display multiple
+    /// Challenges to a user.
+    /// </summary>
     public partial class DisplayChallengesControl : System.Web.UI.UserControl
     {
         /// <summary>

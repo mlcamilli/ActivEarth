@@ -12,8 +12,17 @@ using ActivEarth.Objects.Competition.Contests;
 
 namespace ActivEarth.Competition.Contests
 {
+    /// <summary>
+    /// This class represents the Contest Home page of the 
+    /// ActivEarth website.
+    /// </summary>
     public partial class ContestHomePage : System.Web.UI.Page
     {
+        /// <summary>
+        /// Loads the page.
+        /// </summary>
+        /// <param name="sender">Object that requested the page load.</param>
+        /// <param name="e">The event arguments.</param>
         protected void Page_Load(object sender, EventArgs e)
         {
             var user = (User)Session["userDetails"];
@@ -59,11 +68,23 @@ namespace ActivEarth.Competition.Contests
             }
         }
 
+        /// <summary>
+        /// Event handler for the Create contest button. Opens the create contest
+        /// page.
+        /// </summary>
+        /// <param name="sender">Object that raised the event.</param>
+        /// <param name="e">The event arguments.</param>
         protected void OpenCreateContestPage(object sender, EventArgs e)
         {
             Response.Redirect("~/Competition/Contests/ContestCreationPage.aspx");
         }
 
+        /// <summary>
+        /// Event handler for the Find contest button. Opens the Find contest
+        /// page.
+        /// </summary>
+        /// <param name="sender">Object that raised the event.</param>
+        /// <param name="e">The event arguments.</param>
         protected void OpenFindContestsPage(object sender, EventArgs e)
         {
             Response.Redirect("~/Competition/Contests/FindContestsPage.aspx");

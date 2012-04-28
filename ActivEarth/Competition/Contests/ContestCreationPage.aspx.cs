@@ -12,10 +12,19 @@ using ActivEarth.DAO;
 
 namespace ActivEarth.Competition.Contests
 {
+    /// <summary>
+    /// This class represents the Contest Creation Page on
+    /// the ActivEarth website.
+    /// </summary>
     public partial class ContestCreationPage : System.Web.UI.Page
     {
         User user;
 
+        /// <summary>
+        /// Loads the page.
+        /// </summary>
+        /// <param name="sender">Object that requested the page load.</param>
+        /// <param name="e">The event arguments.</param>
         protected void Page_Load(object sender, EventArgs e)
         {
             user = (User)Session["userDetails"];
@@ -51,17 +60,36 @@ namespace ActivEarth.Competition.Contests
             }
         }
 
+        /// <summary>
+        /// Index changed event for contest mode selection. 
+        /// Used to update the user fields when the contest mode
+        /// is changed.
+        /// </summary>
+        /// <param name="sender">Object that sent the event</param>
+        /// <param name="e">The event arguments.</param>
         protected void ddlContestMode_SelectedIndexChanged(object sender, EventArgs e)
         {
             SetModeDisplay();
         }
 
+        /// <summary>
+        /// Used to validate that the start date of a contest is after
+        /// the current date.
+        /// </summary>
+        /// <param name="sender">Object that sent the event</param>
+        /// <param name="e">The event arguments.</param>
         protected void ValidateStartDate(object source, ServerValidateEventArgs args)
         {
             DateTime startDate = DateTime.Parse(args.Value);
             args.IsValid = (DateTime.Now < startDate);
         }
 
+        /// <summary>
+        /// Used to validate that the end date of a contest is on or after
+        /// the start date.
+        /// </summary>
+        /// <param name="source"></param>
+        /// <param name="args"></param>
         protected void ValidateEndDate(object source, ServerValidateEventArgs args)
         {
             DateTime startDate = DateTime.Parse(txbContestStartDate.Text);
@@ -69,6 +97,12 @@ namespace ActivEarth.Competition.Contests
             args.IsValid = (startDate <= endDate);
         }
 
+        /// <summary>
+        /// Click event for the Create Contest button. Creates a Contest
+        /// from the user supplied fields.
+        /// </summary>
+        /// <param name="sender">Object that sent the event</param>
+        /// <param name="e">The event arguments.</param>
         protected void CreateContest(object sender, EventArgs e)
         {
             Page.Validate();
@@ -117,6 +151,10 @@ namespace ActivEarth.Competition.Contests
             }
         }
 
+        /// <summary>
+        /// Updates the display on the page to display the correct
+        /// Contest end mode entry.
+        /// </summary>
         private void SetModeDisplay()
         {
             string mode = ddlContestMode.SelectedValue;

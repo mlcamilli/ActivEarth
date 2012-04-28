@@ -9,12 +9,17 @@ using ActivEarth.Server.Service.Competition;
 
 namespace ActivEarth.Competition.Badges
 {
+    /// <summary>
+    /// This class represents a control that is used to display a single
+    /// Badge.
+    /// </summary>
     public partial class DisplayBadgeControl : System.Web.UI.UserControl
     {
         /// <summary>
         /// Loads a Badge's information into the display so it can be seen by the user.
         /// </summary>
-        /// /// <param name="badge">The Badge to load into the display.</param>
+        /// 
+        /// <param name="badge">The Badge to load into the display.</param>
         public void LoadBadgeIntoDisplay(Badge badge)
         {
             _badgeName.Text = badge.Name;
