@@ -10,177 +10,231 @@
 namespace ActivEarth.Competition.Contests {
     
     
-    public partial class DisplayContestPage {
+    public partial class ActivityPointsTable {
         
         /// <summary>
-        /// ContestName control.
+        /// PointsTable control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label ContestName;
+        protected global::System.Web.UI.WebControls.Table PointsTable;
         
         /// <summary>
-        /// ContestDescription control.
+        /// DiamondBracket control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label ContestDescription;
+        protected global::System.Web.UI.WebControls.Panel DiamondBracket;
         
         /// <summary>
-        /// ContestSignUpPanel control.
+        /// DiamondBracketImage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel ContestSignUpPanel;
+        protected global::System.Web.UI.WebControls.Image DiamondBracketImage;
         
         /// <summary>
-        /// NoTeamsMessage control.
+        /// DiamondBracketReward control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label NoTeamsMessage;
+        protected global::System.Web.UI.WebControls.Label DiamondBracketReward;
         
         /// <summary>
-        /// CurrentTeams control.
+        /// DiamondActivityScoreImage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::ActivEarth.Competition.Contests.TeamDisplayTable CurrentTeams;
+        protected global::System.Web.UI.WebControls.Image DiamondActivityScoreImage;
         
         /// <summary>
-        /// SignUpErrorMessage control.
+        /// PlatinumBracket control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label SignUpErrorMessage;
+        protected global::System.Web.UI.WebControls.Panel PlatinumBracket;
         
         /// <summary>
-        /// ContestSignUpControls control.
+        /// PlatinumBracketImage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Table ContestSignUpControls;
+        protected global::System.Web.UI.WebControls.Image PlatinumBracketImage;
         
         /// <summary>
-        /// btnJoinContest control.
+        /// PlatinumBracketReward control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnJoinContest;
+        protected global::System.Web.UI.WebControls.Label PlatinumBracketReward;
         
         /// <summary>
-        /// btnLeaveContest control.
+        /// PlatinumActivityScoreImage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnLeaveContest;
+        protected global::System.Web.UI.WebControls.Image PlatinumActivityScoreImage;
         
         /// <summary>
-        /// GroupSelection control.
+        /// GoldBracket control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList GroupSelection;
+        protected global::System.Web.UI.WebControls.Panel GoldBracket;
         
         /// <summary>
-        /// ContestCompletePanel control.
+        /// GoldBracketImage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel ContestCompletePanel;
+        protected global::System.Web.UI.WebControls.Image GoldBracketImage;
         
         /// <summary>
-        /// ContestCompletedMessage control.
+        /// GoldBracketReward control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label ContestCompletedMessage;
+        protected global::System.Web.UI.WebControls.Label GoldBracketReward;
         
         /// <summary>
-        /// ContestRankMessage control.
+        /// GoldActivityScoreImage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label ContestRankMessage;
+        protected global::System.Web.UI.WebControls.Image GoldActivityScoreImage;
         
         /// <summary>
-        /// ContestRewardMessage control.
+        /// SilverBracket control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label ContestRewardMessage;
+        protected global::System.Web.UI.WebControls.Panel SilverBracket;
         
         /// <summary>
-        /// RewardsTable control.
+        /// SilverBracketImage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::ActivEarth.Competition.Contests.ActivityPointsTable RewardsTable;
+        protected global::System.Web.UI.WebControls.Image SilverBracketImage;
         
         /// <summary>
-        /// ContestStatusTable control.
+        /// SilverBracketReward control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Table ContestStatusTable;
+        protected global::System.Web.UI.WebControls.Label SilverBracketReward;
         
         /// <summary>
-        /// GoalGraph control.
+        /// SiverActivityScoreImage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::ActivEarth.Competition.Contests.ContestGraph GoalGraph;
+        protected global::System.Web.UI.WebControls.Image SiverActivityScoreImage;
         
         /// <summary>
-        /// TimeGraph control.
+        /// BronzeBracket control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::ActivEarth.Competition.Contests.ContestTimeGraph TimeGraph;
+        protected global::System.Web.UI.WebControls.Panel BronzeBracket;
         
         /// <summary>
-        /// ContestLeaderBoard control.
+        /// BronzeBracketImage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::ActivEarth.Competition.Contests.LeaderBoard ContestLeaderBoard;
+        protected global::System.Web.UI.WebControls.Image BronzeBracketImage;
+        
+        /// <summary>
+        /// BronzeBracketReward control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label BronzeBracketReward;
+        
+        /// <summary>
+        /// BronzeActivityScoreImage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image BronzeActivityScoreImage;
+        
+        /// <summary>
+        /// NoneBracket control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel NoneBracket;
+        
+        /// <summary>
+        /// NoneBracketImage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image NoneBracketImage;
+        
+        /// <summary>
+        /// NoneBracketReward control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label NoneBracketReward;
+        
+        /// <summary>
+        /// NoneActivityScoreImage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image NoneActivityScoreImage;
     }
 }

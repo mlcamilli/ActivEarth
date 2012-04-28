@@ -80,6 +80,7 @@
     <Content Include="Competition\Challenges\DisplayChallengeControl.ascx" />
     <Content Include="Competition\Challenges\DisplayChallengesControl.ascx" />
     <Content Include="Competition\Challenges\DisplayChallengesPage.aspx" />
+    <Content Include="Competition\Contests\ContestRewardsTable.ascx" />
     <Content Include="Competition\Contests\ContestCreationPage.aspx" />
     <Content Include="Competition\Contests\ContestDisplayTable.ascx" />
     <Content Include="Competition\Contests\ContestGoalGraph.ascx" />
@@ -247,11 +248,12 @@
     <Content Include="Images\Competition\Challenges\Total_Time\Daily.png" />
     <Content Include="Images\Competition\Challenges\Total_Time\Monthly.png" />
     <Content Include="Images\Competition\Challenges\Total_Time\Weekly.png" />
-    <Content Include="Images\Competition\Leaderboard\Bronze.png" />
-    <Content Include="Images\Competition\Leaderboard\Diamond.png" />
-    <Content Include="Images\Competition\Leaderboard\Gold.png" />
-    <Content Include="Images\Competition\Leaderboard\Platinum.png" />
-    <Content Include="Images\Competition\Leaderboard\Silver.png" />
+    <Content Include="Images\Competition\Contests\BronzeBracket.png" />
+    <Content Include="Images\Competition\Contests\DiamondBracket.png" />
+    <Content Include="Images\Competition\Contests\GoldBracket.png" />
+    <Content Include="Images\Competition\Contests\NoneBracket.png" />
+    <Content Include="Images\Competition\Contests\PlatinumBracket.png" />
+    <Content Include="Images\Competition\Contests\SilverBracket.png" />
     <Content Include="Images\Competition\Misc\Calender.png" />
     <Content Include="Images\Competition\Misc\LeftArrow.png" />
     <Content Include="Images\Competition\Misc\RightArrow.png" />
@@ -371,6 +373,13 @@
     </Compile>
     <Compile Include="Competition\Challenges\DisplayChallengesPage.aspx.designer.cs">
       <DependentUpon>DisplayChallengesPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Competition\Contests\ContestRewardsTable.ascx.cs">
+      <DependentUpon>ContestRewardsTable.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Competition\Contests\ContestRewardsTable.ascx.designer.cs">
+      <DependentUpon>ContestRewardsTable.ascx</DependentUpon>
     </Compile>
     <Compile Include="Competition\Contests\ContestCreationPage.aspx.cs">
       <DependentUpon>ContestCreationPage.aspx</DependentUpon>

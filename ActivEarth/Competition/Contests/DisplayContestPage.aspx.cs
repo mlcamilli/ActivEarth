@@ -55,7 +55,6 @@ namespace ActivEarth.Competition.Contests
 
             ContestName.Text = contest.Name;
             ContestDescription.Text = contest.Description;
-            ContestActivityScore.Text = contest.Reward.ToString();
 
             if (contest.StartTime > DateTime.Now)
             {
@@ -119,6 +118,16 @@ namespace ActivEarth.Competition.Contests
             }
             else
             {
+                RewardsTable.Visible = true;
+                List<float> rewards = new List<float>();
+                rewards.Add(15);
+                rewards.Add(13);
+                rewards.Add(7);
+                rewards.Add(6);
+                rewards.Add(3);
+                rewards.Add(0);
+                RewardsTable.SetRewardValues(rewards);
+
                 if (contest.Mode == ContestEndMode.TimeBased)
                 {
                     TimeGraph.PopulateTimeGraph(contest.StartTime, contest.EndCondition.EndTime);
@@ -138,7 +147,7 @@ namespace ActivEarth.Competition.Contests
                 }
 
                 Color[] backColors = { Color.FromArgb(34, 139, 34), Color.White };
-                Color[] textColors = { Color.Black };
+                Color[] textColors = { Color.White, Color.Black };
                 ContestLeaderBoard.MakeLeaderBoard(5, contest.Teams, backColors, textColors, contest.FormatString);
                 ContestLeaderBoard.Visible = true;
             }

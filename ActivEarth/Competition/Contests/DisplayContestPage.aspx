@@ -4,18 +4,11 @@
 <%@ Register src="ContestGoalGraph.ascx" tagname="ContestGoalGraph" tagprefix="uc" %>
 <%@ Register src="ContestTimeGraph.ascx" tagname="ContestTimeGraph" tagprefix="uc" %>
 <%@ Register src="TeamDisplayTable.ascx" tagname="TeamDisplayTable" tagprefix="uc" %>
+<%@ Register src="ContestRewardsTable.ascx" tagname="ContestRewardsTable" tagprefix="uc" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server"> 
-    <div align="right">
-        <asp:Panel ID="ActivtyScorePanel" runat="server" style="position: relative">
-            <asp:Label ID="ContestActivityScore" runat="server" Text="100" 
-                style="z-index: 1; left: 249px; top: 2px; position: absolute; width: 289px"></asp:Label>
-            <asp:Image ID="ActivityScoreImage" runat="server" Height="20px" Width="20px" 
-                ImageUrl="~/Images/Competition/Activity_Score.png"/>
-        </asp:Panel>
-    </div>
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <h2>
         <asp:Label ID="ContestName" runat="server" Text="Contest Name"></asp:Label>
     </h2>
@@ -50,6 +43,10 @@
             <asp:Label ID="ContestRankMessage" runat="server" Text="User rank message."></asp:Label>
             <asp:Label ID="ContestRewardMessage" runat="server" Text="You were rewarded < > activity score."></asp:Label>
         </asp:Panel>
+    </div>
+
+    <div align="center">
+        <uc:ContestRewardsTable ID="RewardsTable" runat="server" Visible="False" />
     </div>
 
     <div align="left">
