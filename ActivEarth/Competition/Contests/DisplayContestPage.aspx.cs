@@ -80,7 +80,10 @@ namespace ActivEarth.Competition.Contests
                         }
                         else
                         {
-                            //Error Message of some form
+                            SignUpErrorMessage.Text = "This is a group contest. In order to join a group contest, you must "
+                                + "be a group leader of at least one group. If you are part of a group and not the leader, ask your group leader to add "
+                                + "the group to this contest.";
+                            SignUpErrorMessage.Visible = true;
                         }
                     }
                 }
@@ -92,7 +95,27 @@ namespace ActivEarth.Competition.Contests
                 ContestSignUpPanel.Visible = true;
                 Color[] backColors = { Color.FromArgb(34, 139, 34), Color.White };
                 Color[] textColors = { Color.White, Color.Black };
-                CurrentTeams.PopulateTeamTable(contest.Teams, backColors, textColors);
+
+                if (contest.Teams.Count == 0)
+                {
+                    CurrentTeams.Visible = false;
+                    if (contest.Type == ContestType.Group)
+                    {
+                        NoTeamsMessage.Text = "No groups have signed up for this contest.";
+                    }
+                    else
+                    {
+                        NoTeamsMessage.Text = "No one has signed up for this contest.";
+                    }
+
+                    NoTeamsMessage.Visible = true;
+                }
+                else
+                {
+                    CurrentTeams.Visible = true;
+                    NoTeamsMessage.Visible = false;
+                    CurrentTeams.PopulateTeamTable(contest.Teams, backColors, textColors);
+                }
             }
             else
             {

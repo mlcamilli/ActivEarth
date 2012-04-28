@@ -86,7 +86,6 @@
     <Content Include="Competition\Contests\ContestHomePage.aspx" />
     <Content Include="Competition\Contests\ContestTimeGraph.ascx" />
     <Content Include="Competition\Contests\FindContestsPage.aspx" />
-    <Content Include="Competition\Contests\CountdownClock.ascx" />
     <Content Include="Competition\Contests\DisplayContestPage.aspx" />
     <Content Include="Competition\Contests\LeaderBoard.ascx" />
     <Content Include="Competition\Contests\LeaderBoardRow.ascx" />
@@ -414,13 +413,6 @@
     </Compile>
     <Compile Include="Competition\Contests\FindContestsPage.aspx.designer.cs">
       <DependentUpon>FindContestsPage.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Competition\Contests\CountdownClock.ascx.cs">
-      <DependentUpon>CountdownClock.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Competition\Contests\CountdownClock.ascx.designer.cs">
-      <DependentUpon>CountdownClock.ascx</DependentUpon>
     </Compile>
     <Compile Include="Competition\Contests\DisplayContestPage.aspx.cs">
       <DependentUpon>DisplayContestPage.aspx</DependentUpon>

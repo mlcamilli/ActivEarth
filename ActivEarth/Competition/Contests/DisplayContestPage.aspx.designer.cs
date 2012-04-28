@@ -31,13 +31,13 @@ namespace ActivEarth.Competition.Contests {
         protected global::System.Web.UI.WebControls.Label ContestActivityScore;
         
         /// <summary>
-        /// _activityScoreImage control.
+        /// ActivityScoreImage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image _activityScoreImage;
+        protected global::System.Web.UI.WebControls.Image ActivityScoreImage;
         
         /// <summary>
         /// ContestName control.
@@ -67,6 +67,15 @@ namespace ActivEarth.Competition.Contests {
         protected global::System.Web.UI.WebControls.Panel ContestSignUpPanel;
         
         /// <summary>
+        /// NoTeamsMessage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label NoTeamsMessage;
+        
+        /// <summary>
         /// CurrentTeams control.
         /// </summary>
         /// <remarks>
@@ -76,13 +85,22 @@ namespace ActivEarth.Competition.Contests {
         protected global::ActivEarth.Competition.Contests.TeamDisplayTable CurrentTeams;
         
         /// <summary>
-        /// Table1 control.
+        /// SignUpErrorMessage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Table Table1;
+        protected global::System.Web.UI.WebControls.Label SignUpErrorMessage;
+        
+        /// <summary>
+        /// ContestSignUpControls control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Table ContestSignUpControls;
         
         /// <summary>
         /// btnJoinContest control.
