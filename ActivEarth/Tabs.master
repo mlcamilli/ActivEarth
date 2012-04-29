@@ -13,6 +13,7 @@
                     Text="Challenges" Value="Challenges"></asp:MenuItem>
                 <asp:MenuItem NavigateUrl="~/Competition/Contests/ContestHomePage.aspx" 
                     Text="Contest" Value="Contest"></asp:MenuItem>
+                <asp:MenuItem NavigateUrl="~/Groups/Groups.aspx" Text="Groups" Value="Groups"></asp:MenuItem>
             </Items>
         </asp:Menu>
     </div>

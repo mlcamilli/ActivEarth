@@ -69,7 +69,7 @@ namespace ActivEarth.Groups
             HyperLink textLink = new HyperLink();
             textLink.Text = text;
             textLink.ForeColor = textColor;
-            textLink.NavigateUrl = "~/Groups/WallPage.aspx?ID=" + groupId;
+            textLink.NavigateUrl = "~/Groups/GroupDisplay.aspx?ID=" + groupId;
             newCell.Controls.Add(textLink);
             return newCell;
         }   

@@ -5,8 +5,10 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Drawing;
+using ActivEarth;
 using ActivEarth.Account;
 using ActivEarth.Groups;
+using ActivEarth.Objects.Profile;
 using ActivEarth.Objects.Groups;
 
 namespace ActivEarth.Groups
@@ -18,37 +20,39 @@ namespace ActivEarth.Groups
 
         }
         
-        public void PopulateMembersTable(List<ActivEarth.Objects.Profile.User> users, Color[] backColors, Color[] textColors)
+        public void PopulateMembersTable(List<User> users, Color[] backColors, Color[] textColors)
         {
-            int colorIndex = 0;
-            int textIndex = 0;
+            TableRow imageRow = new TableRow();
+            imageRow.BackColor = backColors[0];
+            TableRow nameRow = new TableRow();
+            nameRow.BackColor = backColors[1];
 
-            foreach (ActivEarth.Objects.Profile.User user in users)
+            foreach (User user in users)
             {
-                _usersTable.Rows.Add(MakeRowForTable(user, backColors[colorIndex], textColors[textIndex]));
-
-                colorIndex++;
-                if (colorIndex == backColors.Length)
-                {
-                    colorIndex = 0;
-                }
-
-                textIndex++;
-                if (textIndex == textColors.Length)
-                {
-                    textIndex = 0;
-                }
+                imageRow.Cells.Add(MakeImageCellForRow(user));
+                nameRow.Cells.Add(MakeTextCellForRow(user.UserName, textColors[1]));
             }
+
+
+            _usersTable.Rows.Add(imageRow);
+            _usersTable.Rows.Add(nameRow);
+
+
         }
 
-        private TableRow MakeRowForTable(ActivEarth.Objects.Profile.User user, Color backColor, Color textColor)
-        {        
-            TableRow newRow = new TableRow();
-            newRow.BackColor = backColor;
-            newRow.Cells.Add(MakeTextCellForRow(user.UserName, textColor));
-            newRow.Cells.Add(MakeTextCellForRow(user.City, textColor));
-            newRow.Cells.Add(MakeTextCellForRow(user.GreenScore.ToString(), textColor));
-            return newRow;
+
+        private TableCell MakeImageCellForRow(User user)
+        {
+            
+            TableCell newCell = new TableCell();
+            System.Web.UI.WebControls.Image img = new System.Web.UI.WebControls.Image();
+            img.ImageUrl = getUserImageUrl(user, "icon");
+            img.Height = new Unit(75, UnitType.Pixel);
+            
+            img.Width = new Unit(75, UnitType.Pixel);
+            newCell.Controls.Add(img);
+            return newCell;
+
         }
 
         private TableCell MakeTextCellForRow(string text, Color textColor)
@@ -60,6 +64,33 @@ namespace ActivEarth.Groups
             newCell.Controls.Add(textLabel);
             return newCell;
         }
+
+
+        /// <summary>
+        /// Returns the relative url for an image.
+        /// 
+        /// Current image sizes are:
+        ///     - icon: a 150x150 image for the user's profile
+        /// </summary>
+        /// <param name="user">The user to retrieve the image for.</param>
+        /// <param name="imageSizeName">The name of the image size to retrieve.</param>
+        /// <returns></returns>
+        private string getUserImageUrl(User user, string imageSizeName)
+        {
+            string path = Server.MapPath("~") + "\\Images\\Account\\UserProfile\\" + imageSizeName + "\\";
+            int userImageDir = (user.UserID / 1000);
+            string uploadPath = String.Format("{0}\\{1}\\{2}.png", path, userImageDir, user.UserID);
+
+            if (System.IO.File.Exists(uploadPath))
+            {
+                return String.Format("/Images/Account/UserProfile/{0}/{1}/{2}.png", imageSizeName, userImageDir, user.UserID);
+            }
+            else
+            {
+                return String.Format("/Images/Account/UserProfileDefaults/default_{0}.png", imageSizeName);
+            }
+        }
+
 
    /*     private TableCell MakeControlCellForRow(int groupID)
         {
