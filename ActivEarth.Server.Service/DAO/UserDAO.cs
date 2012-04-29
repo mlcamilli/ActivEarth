@@ -268,9 +268,6 @@ namespace ActivEarth.DAO
             }
         }
 
-<<<<<<< HEAD
-        
-=======
         public static bool AddBadgePoints(int userId, int points)
         {
             try
@@ -315,8 +312,5 @@ namespace ActivEarth.DAO
                 return false;
             }
         }
-
-
->>>>>>> 4654faf6fa99d9b01dcb2dbcdc55599cfe67baa1
     }
 }
