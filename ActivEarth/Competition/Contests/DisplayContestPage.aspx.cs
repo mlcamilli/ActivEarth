@@ -43,88 +43,28 @@ namespace ActivEarth.Competition.Contests
 
 #region Test Code ------------------------------------------------------------------------
 
-ContestDAO.UpdateContestStandings(contestId);
+//ContestDAO.UpdateContestStandings(contestId);
 
 #endregion Test Code ------------------------------------------------------------------------
 
                     isGroup = contest.Type == ContestType.Group;
                     if (!Page.IsPostBack)
                     {
-                        LoadDateOnPage();
+                        LoadDataOnPage();
                     }
                 }
             }
         }
 
-        private void LoadDateOnPage()
+        private void LoadDataOnPage()
         {
-            Contest contest = ContestDAO.GetContestFromContestId(contestId, true, false);
-
+            Contest contest = ContestDAO.GetContestFromContestId(contestId, true, true);
             ContestName.Text = contest.Name;
             ContestDescription.Text = contest.Description;
 
             if (contest.StartTime > DateTime.Now)
             {
-                bool isCompeting = TeamDAO.UserCompetingInContest(user.UserID, contestId);
-                //btnLeaveContest.Visible = !btnJoinContest.Visible;
-
-                if (contest.Type == ContestType.Group)
-                {
-                    if (GroupSelection.Items.Count == 0)
-                    {
-                        List<Group> groups = GroupDAO.GetAllGroupsByOwner(user);
-
-                        foreach (Group group in groups)
-                        {
-                            GroupSelection.Items.Add(group.Name);
-                        }
-
-                        if (groups.Count != 0 && !isCompeting)
-                        {
-                            btnJoinContest.Visible = !isCompeting;
-                            GroupSelection.Visible = true;
-                        }
-                        else
-                        {
-                            SignUpErrorMessage.Text = "This is a group contest. In order to join a group contest, you must "
-                                + "be a group leader of at least one group. If you are part of a group and not the leader, ask your group leader to add "
-                                + "the group to this contest.";
-                            SignUpErrorMessage.Visible = true;
-                        }
-                    }
-                }
-                else
-                {
-                    btnJoinContest.Visible = !isCompeting;
-                }
-
-                ContestSignUpPanel.Visible = true;
-                Color[] backColors = { Color.FromArgb(34, 139, 34), Color.White };
-                Color[] textColors = { Color.White, Color.Black };
-
-                if (contest.Teams.Count == 0)
-                {
-                    CurrentTeams.Visible = false;
-                    if (contest.Type == ContestType.Group)
-                    {
-                        NoTeamsMessage.Text = "No groups have signed up for this contest.";
-                    }
-                    else
-                    {
-                        NoTeamsMessage.Text = "No one has signed up for this contest.";
-                    }
-
-                    NoTeamsMessage.Visible = true;
-                }
-                else
-                {
-                    CurrentTeams.Visible = true;
-                    NoTeamsMessage.Visible = false;
-                    List<Team> teamsToDisplay = ContestManager.GetTeamsToDisplay(
-                        TeamDAO.GetTeamFromUserIdAndContestId(user.UserID, contest.ID, false), contest);
-
-                    CurrentTeams.PopulateTeamTable(teamsToDisplay, backColors, textColors);
-                }
+                LoadContestSignupData(contest);
             }
             else
             {
@@ -159,12 +99,143 @@ ContestDAO.UpdateContestStandings(contestId);
                 Color[] backColors = { Color.FromArgb(34, 139, 34), Color.White };
                 Color[] textColors = { Color.White, Color.Black };
 
-                List<Team> teamsToDisplay = ContestManager.GetTeamsToDisplay(
-                    TeamDAO.GetTeamFromUserIdAndContestId(user.UserID, contest.ID, false), contest);
+                Team usersTeam = TeamDAO.GetTeamFromUserIdAndContestId(user.UserID, contest.ID, false);
+                List<Team> teamsToDisplay = ContestManager.GetTeamsToDisplay(usersTeam, contest);
 
                 ContestLeaderBoard.MakeLeaderBoard(teamsToDisplay, backColors, textColors, contest.FormatString);
                 ContestLeaderBoard.Visible = true;
+
+                /*
+                if (contest.Mode == ContestEndMode.GoalBased)
+                {
+                    if (contest.Teams.Count > 0 && contest.EndCondition.EndValue <= contest.Teams[0].Score)
+                    {
+                        LoadContestCompleteData(contest, usersTeam);
+                    }
+                }
+                else
+                {
+                    if (contest.EndCondition.EndTime <= DateTime.Now)
+                    {
+                        LoadContestCompleteData(contest, usersTeam);
+                    }
+                }
+                 * */
             }
+        }
+
+        private void LoadContestSignupData(Contest contest)
+        {
+            bool isCompeting = TeamDAO.UserCompetingInContest(user.UserID, contestId);
+
+            if (contest.Type == ContestType.Group)
+            {
+                if (!isCompeting)
+                {
+                    if (GroupSelection.Items.Count == 0)
+                    {
+                        List<Group> groups = GroupDAO.GetAllGroupsByOwner(user);
+
+                        foreach (Group group in groups)
+                        {
+                            GroupSelection.Items.Add(group.Name);
+                        }
+
+                        if (groups.Count != 0)
+                        {
+                            btnLeaveContest.Visible = false;
+                            btnJoinContest.Visible = true;
+                            GroupSelection.Visible = true;
+                        }
+                        else
+                        {
+                            SignUpErrorMessage.Text = "This is a group contest. In order to join a group contest, you must "
+                                + "be a group leader of at least one group. If you are part of a group and not the leader, ask your group leader to add "
+                                + "the group to this contest.";
+                            SignUpErrorMessage.Visible = true;
+                        }
+                    }
+                }
+                else
+                {
+                    btnLeaveContest.Visible = true;
+                    btnJoinContest.Visible = false;
+                    GroupSelection.Visible = false;
+                }
+            }
+            else
+            {
+                btnJoinContest.Visible = !isCompeting;
+                btnLeaveContest.Visible = isCompeting;
+            }
+
+            ContestSignUpPanel.Visible = true;
+            Color[] backColors = { Color.FromArgb(34, 139, 34), Color.White };
+            Color[] textColors = { Color.White, Color.Black };
+
+            if (contest.Teams.Count == 0)
+            {
+                CurrentTeamsSignedUp.Visible = false;
+                if (contest.Type == ContestType.Group)
+                {
+                    NoTeamsMessage.Text = "No groups have signed up for this contest.";
+                }
+                else
+                {
+                    NoTeamsMessage.Text = "No one has signed up for this contest.";
+                }
+
+                NoTeamsMessage.Visible = true;
+            }
+            else
+            {
+                CurrentTeamsSignedUp.Visible = true;
+                NoTeamsMessage.Visible = false;
+                CurrentTeamsSignedUp.PopulateTeamTable(contest.Teams, backColors, textColors);
+            }
+        }
+
+        private void LoadContestCompleteData(Contest contest, Team usersTeam)
+        {
+            if (contest.Type == ContestType.Group)
+            {
+                ContestRankMessage.Text = "You finished in the ";
+                ContestRewardMessage.Text = "Your group received ";
+            }
+            else
+            {
+                ContestRankMessage.Text = "Your group finished in the ";
+                ContestRewardMessage.Text = "You received ";
+            }
+
+            List<int> rewards = ContestDAO.CalculateBracketRewards(contest);
+            if (usersTeam.Bracket == (byte)ContestBracket.Bronze)
+            {
+                ContestRankMessage.Text += "Bronze bracket.";
+                ContestRewardMessage.Text += rewards[(int)ContestBracket.Bronze] + " activity points.";
+            }
+            else if (usersTeam.Bracket == (byte)ContestBracket.Silver)
+            {
+                ContestRankMessage.Text += "Silver bracket.";
+                ContestRewardMessage.Text += rewards[(int)ContestBracket.Silver] + " activity points.";
+            }
+            else if (usersTeam.Bracket == (byte)ContestBracket.Gold)
+            {
+                ContestRankMessage.Text += "Gold bracket.";
+                ContestRewardMessage.Text += rewards[(int)ContestBracket.Gold] + " activity points.";
+            }
+            else if (usersTeam.Bracket == (byte)ContestBracket.Platinum)
+            {
+                ContestRankMessage.Text += "Platinum bracket.";
+                ContestRewardMessage.Text += rewards[(int)ContestBracket.Platinum] + " activity points.";
+            }
+            else
+            {
+                ContestRankMessage.Text += "Diamond bracket.";
+                ContestRewardMessage.Text += rewards[(int)ContestBracket.Diamond] + " activity points.";
+            }
+
+            ContestCompletePanel.Visible = true;
         }
 
         protected void JoinContest(object sender, EventArgs e)
@@ -181,7 +252,7 @@ ContestDAO.UpdateContestStandings(contestId);
                     ContestManager.AddUser(contestId, user);
                 }
                 
-                LoadDateOnPage();
+                LoadDataOnPage();
             }
         }
 
@@ -189,9 +260,17 @@ ContestDAO.UpdateContestStandings(contestId);
         {
             if (isValidId)
             {
-                //Team teamToRemove = TeamDAO.GetTeamFromUserIdAndContestId(user.UserID, contestId, true);
-                //ContestManager.RemoveTeam(teamToRemove);
-                //LoadDateOnPage();
+                if (isGroup)
+                {
+                    Team team = TeamDAO.GetTeamFromUserIdAndContestId(user.UserID, contestId, false);
+                    ContestManager.RemoveGroup(contestId, GroupDAO.GetGroupFromGroupId(team.GroupId.Value));
+                }
+                else
+                {
+                    ContestManager.RemoveUser(contestId, user);
+                }
+
+                LoadDataOnPage();
             }
         }
     }

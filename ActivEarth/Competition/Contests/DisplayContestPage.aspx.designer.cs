@@ -49,13 +49,13 @@ namespace ActivEarth.Competition.Contests {
         protected global::System.Web.UI.WebControls.Label NoTeamsMessage;
         
         /// <summary>
-        /// CurrentTeams control.
+        /// CurrentTeamsSignedUp control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::ActivEarth.Competition.Contests.TeamDisplayTable CurrentTeams;
+        protected global::ActivEarth.Competition.Contests.TeamDisplayTable CurrentTeamsSignedUp;
         
         /// <summary>
         /// SignUpErrorMessage control.
