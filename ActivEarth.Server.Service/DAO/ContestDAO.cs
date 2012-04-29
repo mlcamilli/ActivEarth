@@ -406,6 +406,149 @@ namespace ActivEarth.DAO
             }
         }
 
+        /// <summary>
+        /// Updates the scores and bracket assignments for all teams in the contest.
+        /// </summary>
+        /// <param name="contestId">Contest ID to update.</param>
+        public static void UpdateContestStandings(int contestId)
+        {
+            Contest contest = ContestDAO.GetContestFromContestId(contestId, true, false);
+
+            #region Bracket Size Calculation
+
+            int teamsRemaining = contest.Teams.Count;
+
+            List<int> bracketSizes = ContestDAO.CalculateBracketSizes(teamsRemaining);
+
+            #endregion Bracket Size Calculation
+
+            #region Bracket Assignment
+
+            int currentTeamIndex = 0;
+            int currentBracketCount = 0;
+
+            while (currentBracketCount < bracketSizes[(int)ContestBracket.Diamond])
+            {
+                contest.Teams[currentTeamIndex].Bracket = (int)ContestBracket.Diamond;
+                currentBracketCount++;
+                currentTeamIndex++;
+            }
+
+            currentBracketCount = 0;
+
+            while (currentBracketCount < bracketSizes[(int)ContestBracket.Platinum])
+            {
+                contest.Teams[currentTeamIndex].Bracket = (int)ContestBracket.Platinum;
+                currentBracketCount++;
+                currentTeamIndex++;
+            }
+
+            currentBracketCount = 0;
+
+            while (currentBracketCount < bracketSizes[(int)ContestBracket.Gold])
+            {
+                contest.Teams[currentTeamIndex].Bracket = (int)ContestBracket.Gold;
+                currentBracketCount++;
+                currentTeamIndex++;
+            }
+
+            currentBracketCount = 0;
+
+            while (currentBracketCount < bracketSizes[(int)ContestBracket.Silver])
+            {
+                contest.Teams[currentTeamIndex].Bracket = (int)ContestBracket.Silver;
+                currentBracketCount++;
+                currentTeamIndex++;
+            }
+
+            currentBracketCount = 0;
+
+            while (currentBracketCount < bracketSizes[(int)ContestBracket.Bronze])
+            {
+                contest.Teams[currentTeamIndex].Bracket = (int)ContestBracket.Bronze;
+                currentBracketCount++;
+                currentTeamIndex++;
+            }
+
+            #endregion Bracket Assignment
+
+            ContestDAO.UpdateContest(contest);
+        }
+
+        /// <summary>
+        /// Calculates the ActivityScore reward that will be awarded to teams in each bracket.
+        /// </summary>
+        /// <param name="contest">Contest to calculate rewards for.</param>
+        /// <returns>List of bracket rewards, with Bronze occupying position 0, working up to Diamond.</returns>
+        public static List<int> CalculateBracketRewards(Contest contest)
+        {
+            const float DIAMOND_PERCENT_POT = 0.25f;
+            const float PLATINUM_PERCENT_POT = 0.225f;
+            const float GOLD_PERCENT_POT = 0.2f;
+            const float SILVER_PERCENT_POT = 0.175f;
+            const float BRONZE_PERCENT_POT = 0.15f;
+
+            List<int> sizes = ContestDAO.CalculateBracketSizes(contest.Teams.Count);
+
+            int bronzeReward = (int)Math.Round(contest.Reward * BRONZE_PERCENT_POT / sizes[(int)ContestBracket.Bronze]);
+            int silverReward = (int)Math.Round(contest.Reward * SILVER_PERCENT_POT / sizes[(int)ContestBracket.Silver]);
+            int goldReward = (int)Math.Round(contest.Reward * GOLD_PERCENT_POT / sizes[(int)ContestBracket.Gold]);
+            int platinumReward = (int)Math.Round(contest.Reward * PLATINUM_PERCENT_POT / sizes[(int)ContestBracket.Platinum]);
+            int diamondReward = (int)Math.Round(contest.Reward * DIAMOND_PERCENT_POT / sizes[(int)ContestBracket.Diamond]);
+
+            return new List<int> { bronzeReward, silverReward, goldReward, platinumReward, diamondReward };
+        }
+
+        /// <summary>
+        /// Calculates the ActivityScore reward that will be awarded to teams in each bracket.
+        /// </summary>
+        /// <param name="contest">Contest ID to calculate rewards for.</param>
+        /// <returns>List of bracket rewards, with Bronze occupying position 0, working up to Diamond.</returns>
+        public static List<int> CalculateBracketRewards(int contestId)
+        {
+            return ContestDAO.CalculateBracketRewards(ContestDAO.GetContestFromContestId(contestId, true, false));
+        }
+
+        /// <summary>
+        /// Calculates the number of teams qualifying for each reward bracket in a contest.
+        /// </summary>
+        /// <param name="teamCount">Number of teams in the contest.</param>
+        /// <returns>List of bracket sizes, with Bronze occupying position 0, working up to Diamond.</returns>
+        public static List<int> CalculateBracketSizes(int teamCount)
+        {
+            // Percentages of competitors falling into each bracket
+            const float DIAMOND_PERCENT_USERS = 0.03f;
+            const float PLATINUM_PERCENT_USERS = 0.08f;
+            const float GOLD_PERCENT_USERS = 0.15f;
+            const float SILVER_PERCENT_USERS = 0.25f;
+
+            float percentAssigned = 0;
+
+            int diamondCount = (int)Math.Max(Math.Round(DIAMOND_PERCENT_USERS * teamCount), 1);
+            percentAssigned += DIAMOND_PERCENT_USERS;
+            teamCount -= diamondCount;
+
+            int platinumCount = (teamCount > 0 ?
+                (int)Math.Max(Math.Round(PLATINUM_PERCENT_USERS / (1 - percentAssigned) * teamCount), 1) : 0);
+            percentAssigned += PLATINUM_PERCENT_USERS;
+            teamCount -= platinumCount;
+
+            int goldCount = (teamCount > 0 ?
+                (int)Math.Max(Math.Round(GOLD_PERCENT_USERS / (1 - percentAssigned) * teamCount), 1) : 0);
+            percentAssigned += GOLD_PERCENT_USERS;
+            teamCount -= goldCount;
+
+            int silverCount = (teamCount > 0 ?
+                (int)Math.Max(Math.Round(SILVER_PERCENT_USERS / (1 - percentAssigned) * teamCount), 1) : 0);
+            percentAssigned += SILVER_PERCENT_USERS;
+            teamCount -= silverCount;
+
+            int bronzeCount = teamCount;
+
+            return new List<int> { bronzeCount, silverCount, goldCount, platinumCount, diamondCount };
+        }
+        
+
         #endregion ---------- Contest Utilities ----------
 
     }

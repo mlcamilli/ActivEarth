@@ -250,6 +250,7 @@ namespace ActivEarth.DAO
 
                 team.Score = total;
                 TeamDAO.UpdateTeam(team);
+                ContestDAO.UpdateContestStandings(team.ContestId);
             }
         }
 
@@ -507,6 +508,23 @@ namespace ActivEarth.DAO
             float current = (userStat != null ? userStat.Value : 0);
 
             return current - initial;
+        }
+
+        /// <summary>
+        /// Retrieves the number of competitors for a contest.
+        /// </summary>
+        /// <param name="contestId">ID of the contest.</param>
+        /// <returns>Number of people signed up for the contest.</returns>
+        public static int GetCompetitorCount(int contestId)
+        {
+            using (SqlConnection connection = ConnectionManager.GetConnection())
+            {
+                var data = new ActivEarthDataProvidersDataContext(connection);
+                return (from c in data.TeamMemberDataProviders
+                        where c.contest_id == contestId
+                        select c.id).ToList().Count;
+            }
+
         }
 
         #endregion Team Member Utilities

@@ -22,29 +22,34 @@ namespace ActivEarth.Competition.Contests
 
         }
 
-        public void MakeLeaderBoard(int slots, List<Team> teams, Color[] backColors, Color[] textColors, string format)
+        public void MakeLeaderBoard(List<Team> teams, Color[] backColors, Color[] textColors, string format)
         {
-            _numSlots = slots;
+            _numSlots = 0;
             _contestTeams = teams;
-            _rows = new List<LeaderBoardRow>(slots);
+            _rows = new List<LeaderBoardRow>();
 
             int colorIndex = 0;
             int textIndex = 0;
 
-            for (int i = 0; i < slots; i++)
+            foreach (Team team in teams)
             {
-                AddRowToLeaderBoard(backColors[colorIndex], textColors[textIndex], i);
-                
-                colorIndex++;
-                if (colorIndex == backColors.Length)
+                if (team != null)
                 {
-                    colorIndex = 0;
-                }
+                    AddRowToLeaderBoard(backColors[colorIndex], textColors[textIndex], _numSlots);
 
-                textIndex++;
-                if (textIndex == textColors.Length)
-                {
-                    textIndex = 0;
+                    colorIndex++;
+                    if (colorIndex == backColors.Length)
+                    {
+                        colorIndex = 0;
+                    }
+
+                    textIndex++;
+                    if (textIndex == textColors.Length)
+                    {
+                        textIndex = 0;
+                    }
+
+                    _numSlots++;
                 }
             }
 

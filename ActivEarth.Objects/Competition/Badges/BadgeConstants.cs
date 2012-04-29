@@ -109,8 +109,7 @@ namespace ActivEarth.Objects.Competition.Badges
         /// </summary>
         public class GasSavings
         {
-            //Change REQUIRMENTS to correct values
-            public static readonly float[] REQUIREMENTS = { 0, 10.00f, 20.00f, 40.00f, 60.00f, 80.00f, 100.00f, 200.00f, 400.00f, float.PositiveInfinity };
+            public static readonly float[] REQUIREMENTS = { 0, 4.00f, 22.00f, 49.00f, 85.00f, 130.00f, 184.00f, 247.00f, 319.00f, float.PositiveInfinity };
             public static readonly int[] REWARDS = { 0, 50, 100, 250, 400, 650, 800, 1050, 1200, 0 };
             public static readonly string[] IMAGES = {   "~/Images/Competition/Badges/Gas_Savings/None.png",
                                                       "~/Images/Competition/Badges/Gas_Savings/Bronze.png",

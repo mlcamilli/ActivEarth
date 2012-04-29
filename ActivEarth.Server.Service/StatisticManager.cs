@@ -119,7 +119,7 @@ namespace ActivEarth.Server.Service.Statistics
             }
 
             //Update the affected badge
-            //ActivityScoreDAO.AddBadgePoints(userId, BadgeManager.UpdateBadge(userId, statistic));
+            //UserDAO.AddBadgePoints(userId, BadgeManager.UpdateBadge(userId, statistic));
         }
 
         #endregion ---------- Static Methods ----------

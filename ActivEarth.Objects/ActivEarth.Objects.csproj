@@ -60,6 +60,7 @@
     <Compile Include="Competition\Challenges\Challenge.cs" />
     <Compile Include="Competition\Challenges\ChallengeType.cs" />
     <Compile Include="Competition\Contests\Contest.cs" />
+    <Compile Include="Competition\Contests\ContestBracket.cs" />
     <Compile Include="Competition\Contests\ContestEndMode.cs" />
     <Compile Include="Competition\Contests\ContestType.cs" />
     <Compile Include="Competition\Contests\TeamMember.cs" />

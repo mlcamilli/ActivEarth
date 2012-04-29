@@ -289,8 +289,14 @@ namespace ActivEarth.Tests.Competition
 
                 Log("Creating individual contest");
                 int id = ContestManager.CreateContest(ContestType.Individual, "Test Contest 1",
-                    "This is a test time-based contest.", DateTime.Now, DateTime.Now.AddDays(1),
+                    "This is a test time-based contest.", DateTime.Now, DateTime.Now.AddDays(7),
                     true, Statistic.Steps, _user1.UserID);
+
+                Log("Retrieving Contest");
+                Contest contest = ContestManager.GetContest(id, true, true);
+
+                Log("Verifying 0 ActivityScore Reward");
+                Assert.AreEqual(0, contest.Reward);
 
                 ContestManager.AddUser(id, _user1);
                 ContestManager.AddUser(id, _user2);
@@ -306,7 +312,10 @@ namespace ActivEarth.Tests.Competition
                 StatisticManager.SetUserStatistic(_user3.UserID, Statistic.Steps, 50);
                 StatisticManager.SetUserStatistic(_user4.UserID, Statistic.Steps, 100);
 
-                Contest contest = ContestManager.GetContest(id, true, true);
+                contest = ContestManager.GetContest(id, true, true);
+
+                Log(String.Format("Verifying nonzero ActivityScore Reward (Actual = {0})", contest.Reward));
+                Assert.AreNotEqual(0, contest.Reward);
 
                 Log("Verifying team order");
                 Assert.IsTrue(contest.Teams[0].ContainsMember(_user4.UserID));
@@ -395,7 +404,6 @@ namespace ActivEarth.Tests.Competition
                 {
                     Name = "Test Contest1",
                     Description = "This is a test contest",
-                    Reward = 30,
                     Mode = ContestEndMode.GoalBased,
                     Type = ContestType.Group,
                     StartTime = DateTime.Today,
@@ -451,7 +459,6 @@ namespace ActivEarth.Tests.Competition
                 {
                     Name = "Test Contest1",
                     Description = "This is a test contest",
-                    Reward = 30,
                     Mode = ContestEndMode.GoalBased,
                     Type = ContestType.Group,
                     StartTime = DateTime.Today,
@@ -466,7 +473,6 @@ namespace ActivEarth.Tests.Competition
                 {
                     Name = "Test Contest2",
                     Description = "This is also a test contest",
-                    Reward = 30,
                     Mode = ContestEndMode.GoalBased,
                     Type = ContestType.Group,
                     StartTime = DateTime.Today,
@@ -481,7 +487,6 @@ namespace ActivEarth.Tests.Competition
                 {
                     Name = "Test Contest3",
                     Description = "This is another test contest",
-                    Reward = 30,
                     Mode = ContestEndMode.GoalBased,
                     Type = ContestType.Group,
                     StartTime = DateTime.Today,
@@ -518,7 +523,6 @@ namespace ActivEarth.Tests.Competition
                 {
                     Name = "Test Contest1",
                     Description = "This is a test contest",
-                    Reward = 30,
                     Mode = ContestEndMode.GoalBased,
                     Type = ContestType.Group,
                     StartTime = DateTime.Today,
@@ -549,7 +553,6 @@ namespace ActivEarth.Tests.Competition
         /// there are teams associated with the contest.
         /// </summary>
         [TestMethod]
-        [Ignore]
         public void TestGetContestFromContestIdPresentWithTeams()
         {
             using (_trans)
@@ -561,7 +564,6 @@ namespace ActivEarth.Tests.Competition
                 {
                     Name = "Test Contest1",
                     Description = "This is a test contest",
-                    Reward = 30,
                     Mode = ContestEndMode.GoalBased,
                     Type = ContestType.Group,
                     StartTime = DateTime.Today,
@@ -574,22 +576,29 @@ namespace ActivEarth.Tests.Competition
 
                 Log("Saving to DB");
                 int id = ContestDAO.CreateNewContest(contest);
+                
+                Contest retrieved = ContestDAO.GetContestFromContestId(id, false, false);
+
+                Assert.AreEqual(0, retrieved.Reward);
 
                 Log("Adding groups to the contest");
                 ContestManager.AddGroup(id, _group1);
                 ContestManager.AddGroup(id, _group2);
 
                 Log("Reading back from DB");
-                Contest retrieved = ContestDAO.GetContestFromContestId(id, true, true);
+                retrieved = ContestDAO.GetContestFromContestId(id, true, true);
+
+                Log(String.Format("Verifying nonzero reward (Actual = {0})", retrieved.Reward));
+                Assert.AreNotEqual(0, retrieved.Reward);
 
                 Log("Verifying the correct number of teams");
-                Assert.AreEqual(contest.Teams.Count, retrieved.Teams.Count);
+                Assert.AreEqual(2, retrieved.Teams.Count);
 
                 Log("Verifying that each member is found");
-                Assert.IsTrue(retrieved.Teams[0].ContainsMember(_user1.UserID));
-                Assert.IsTrue(retrieved.Teams[0].ContainsMember(_user2.UserID));
-                Assert.IsTrue(retrieved.Teams[1].ContainsMember(_user3.UserID));
-                Assert.IsTrue(retrieved.Teams[1].ContainsMember(_user4.UserID));
+                Assert.IsTrue(retrieved.Teams[0].ContainsMember(_user1.UserID) || retrieved.Teams[1].ContainsMember(_user1.UserID));
+                Assert.IsTrue(retrieved.Teams[0].ContainsMember(_user2.UserID) || retrieved.Teams[1].ContainsMember(_user2.UserID));
+                Assert.IsTrue(retrieved.Teams[1].ContainsMember(_user3.UserID) || retrieved.Teams[0].ContainsMember(_user3.UserID));
+                Assert.IsTrue(retrieved.Teams[1].ContainsMember(_user4.UserID) || retrieved.Teams[0].ContainsMember(_user4.UserID));
             }
         }
 
@@ -625,7 +634,6 @@ namespace ActivEarth.Tests.Competition
                 {
                     Name = "Test Contest1",
                     Description = "This is a test contest",
-                    Reward = 30,
                     Mode = ContestEndMode.GoalBased,
                     Type = ContestType.Group,
                     StartTime = DateTime.Today,
@@ -684,7 +692,6 @@ namespace ActivEarth.Tests.Competition
         /// participating in the contest.
         /// </summary>
         [TestMethod]
-        [Ignore]
         public void TestUpdateContestAddTeamMembers()
         {
             using (_trans)
@@ -696,7 +703,6 @@ namespace ActivEarth.Tests.Competition
                 {
                     Name = "Test Contest1",
                     Description = "This is a test contest",
-                    Reward = 30,
                     Mode = ContestEndMode.GoalBased,
                     Type = ContestType.Group,
                     StartTime = DateTime.Today,
@@ -746,7 +752,6 @@ namespace ActivEarth.Tests.Competition
         /// participant have been locked (e.g., when the contest starts).
         /// </summary>
         [TestMethod]
-        [Ignore]
         public void TestContestLockContest()
         {
             using (_trans)

@@ -40,6 +40,13 @@ namespace ActivEarth.Competition.Contests
                 isValidId = contest != null;
                 if (isValidId)
                 {
+
+#region Test Code ------------------------------------------------------------------------
+
+ContestDAO.UpdateContestStandings(contestId);
+
+#endregion Test Code ------------------------------------------------------------------------
+
                     isGroup = contest.Type == ContestType.Group;
                     if (!Page.IsPostBack)
                     {
@@ -51,7 +58,7 @@ namespace ActivEarth.Competition.Contests
 
         private void LoadDateOnPage()
         {
-            Contest contest = ContestDAO.GetContestFromContestId(contestId, true, false); 
+            Contest contest = ContestDAO.GetContestFromContestId(contestId, true, false);
 
             ContestName.Text = contest.Name;
             ContestDescription.Text = contest.Description;
@@ -113,7 +120,10 @@ namespace ActivEarth.Competition.Contests
                 {
                     CurrentTeams.Visible = true;
                     NoTeamsMessage.Visible = false;
-                    CurrentTeams.PopulateTeamTable(contest.Teams, backColors, textColors);
+                    List<Team> teamsToDisplay = ContestManager.GetTeamsToDisplay(
+                        TeamDAO.GetTeamFromUserIdAndContestId(user.UserID, contest.ID, false), contest);
+
+                    CurrentTeams.PopulateTeamTable(teamsToDisplay, backColors, textColors);
                 }
             }
             else
@@ -148,7 +158,11 @@ namespace ActivEarth.Competition.Contests
 
                 Color[] backColors = { Color.FromArgb(34, 139, 34), Color.White };
                 Color[] textColors = { Color.White, Color.Black };
-                ContestLeaderBoard.MakeLeaderBoard(5, contest.Teams, backColors, textColors, contest.FormatString);
+
+                List<Team> teamsToDisplay = ContestManager.GetTeamsToDisplay(
+                    TeamDAO.GetTeamFromUserIdAndContestId(user.UserID, contest.ID, false), contest);
+
+                ContestLeaderBoard.MakeLeaderBoard(teamsToDisplay, backColors, textColors, contest.FormatString);
                 ContestLeaderBoard.Visible = true;
             }
         }
