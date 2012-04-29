@@ -271,6 +271,39 @@ namespace ActivEarth.Server.Service.Competition
         }
 
         /// <summary>
+        /// Removes a group from a Contest.
+        /// </summary>
+        /// <param name="contestId">ID for the contest the group should be removed from.</param>
+        /// <param name="group">Group to be removed.</param>
+        /// <returns>True on success, false on failure.</returns>
+        public static bool RemoveGroup(int contestId, Group group)
+        {
+            try
+            {
+                int teamId = TeamDAO.GetTeamIdsFromGroupId(group.ID).Where(t => t == contestId).FirstOrDefault();
+
+                if (TeamDAO.RemoveTeam(teamId))
+                {
+                    Contest contest = ContestDAO.GetContestFromContestId(contestId, false, false);
+                    contest.Reward = ContestManager.CalculateContestReward(
+                        ContestManager.CalculateEstimatedLengthInDays(contest),
+                        TeamDAO.GetCompetitorCount(contestId));
+                    ContestDAO.UpdateContest(contest);
+
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
         /// Adds a user to the Contest.
         /// </summary>
         /// <param name="user">User to be added.</param>
@@ -298,14 +331,36 @@ namespace ActivEarth.Server.Service.Competition
         }
 
         /// <summary>
-        /// Removes a team from its associated Contest.
+        /// Adds a user to the Contest.
         /// </summary>
-        /// <param name="team">The team to be removed.</param>
-        public static void RemoveTeam(Team team)
+        /// <param name="user">User to be added.</param>
+        public static bool RemoveUser(int contestId, User user)
         {
-            if (team != null)
+            try
             {
-                TeamDAO.RemoveTeam(team.ID);
+                Team team = TeamDAO.GetTeamFromUserIdAndContestId(user.UserID, contestId, true);
+                if (team == null) return false;
+
+                if (team.Members.Count > 1)
+                {
+                    return TeamDAO.RemoveTeamMemberFromUserIdAndContestId(user.UserID, contestId);
+                }
+                else
+                {
+                    TeamDAO.RemoveTeam(team.ID);
+
+                    Contest contest = ContestDAO.GetContestFromContestId(contestId, false, false);
+                    contest.Reward = ContestManager.CalculateContestReward(
+                        ContestManager.CalculateEstimatedLengthInDays(contest),
+                        TeamDAO.GetCompetitorCount(contestId));
+                    ContestDAO.UpdateContest(contest);
+
+                    return true;
+                }
+            }
+            catch (Exception)
+            {
+                return false;
             }
         }
 

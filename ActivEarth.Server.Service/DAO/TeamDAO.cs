@@ -305,6 +305,8 @@ namespace ActivEarth.DAO
         {
             try
             {
+                TeamDAO.RemoveTeamMembersFromTeamId(teamId);
+
                 using (SqlConnection connection = ConnectionManager.GetConnection())
                 {
                     var data = new ActivEarthDataProvidersDataContext(connection);
@@ -469,6 +471,77 @@ namespace ActivEarth.DAO
         }
 
         #endregion Team Member DB Update
+
+        #region Team Member DB Removal
+
+        /// <summary>
+        /// Removes all team member entries pertaining to a given team.
+        /// </summary>
+        /// <param name="teamId">Team to remove the members from.</param>
+        /// <returns>True on success, false on failure.</returns>
+        public static bool RemoveTeamMembersFromTeamId(int teamId)
+        {
+            try
+            {
+                using (SqlConnection connection = ConnectionManager.GetConnection())
+                {
+                    var data = new ActivEarthDataProvidersDataContext(connection);
+                    var members = (from c in data.TeamMemberDataProviders
+                                  where c.team_id == teamId
+                                  select c).ToList();
+
+                    foreach (TeamMemberDataProvider member in members)
+                    {
+                        data.TeamMemberDataProviders.DeleteOnSubmit(member);
+                        data.SubmitChanges();
+                    }
+                    return true;
+                    
+                }
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Removes a team member DB entry.
+        /// </summary>
+        /// <param name="userId">User to remove.</param>
+        /// <param name="contestId">Contest to remove the user from.</param>
+        /// <returns>True on success, false on failure.</returns>
+        public static bool RemoveTeamMemberFromUserIdAndContestId(int userId, int contestId)
+        {
+            try
+            {
+                using (SqlConnection connection = ConnectionManager.GetConnection())
+                {
+                    var data = new ActivEarthDataProvidersDataContext(connection);
+                    var member = (from c in data.TeamMemberDataProviders
+                                  where c.user_id == userId && c.contest_id == contestId
+                                  select c).FirstOrDefault();
+
+                    if (member != null)
+                    {
+                        data.TeamMemberDataProviders.DeleteOnSubmit(member);
+                        data.SubmitChanges();
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+
+                }
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        #endregion Team Member DB Removal
 
         #region Team Member Utilities
 
