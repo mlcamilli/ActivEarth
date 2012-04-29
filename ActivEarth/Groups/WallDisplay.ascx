@@ -5,6 +5,7 @@
     CellPadding="3" CellSpacing="3" GridLines="Both" BorderWidth="2px" 
     HorizontalAlign="Left">
     <asp:TableHeaderRow>
+        <asp:TableHeaderCell Text=""></asp:TableHeaderCell>
         <asp:TableHeaderCell Text="Poster Name"></asp:TableHeaderCell>
         <asp:TableHeaderCell Text="Title"></asp:TableHeaderCell>
         <asp:TableHeaderCell Text="Text"></asp:TableHeaderCell>

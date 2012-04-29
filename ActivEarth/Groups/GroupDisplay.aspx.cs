@@ -46,7 +46,7 @@ namespace ActivEarth.Groups
                 lblDescription.Text = currentGroup.Description;
 
                 List<ActivEarth.Objects.Profile.User> membersList = currentGroup.Members;
-                Color[] backColors = { Color.FromArgb(75, 108, 158), Color.White };
+                Color[] backColors = { Color.FromArgb(34, 139, 34), Color.White };
                 Color[] textColors = { Color.White, Color.Black };
                 MembersDisplayTable1.PopulateMembersTable(membersList, backColors, textColors);
 

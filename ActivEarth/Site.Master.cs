@@ -62,7 +62,7 @@ namespace ActivEarth
         /// <param name="user">The user to retrieve the image for.</param>
         /// <param name="imageSizeName">The name of the image size to retrieve.</param>
         /// <returns></returns>
-        private string getUserImageUrl(User user, string imageSizeName)
+        public string getUserImageUrl(User user, string imageSizeName)
         {
             string path = Server.MapPath("~") + "\\Images\\Account\\UserProfile\\" + imageSizeName + "\\";
             int userImageDir = (user.UserID / 1000);

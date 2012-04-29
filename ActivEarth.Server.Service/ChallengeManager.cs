@@ -93,15 +93,20 @@ namespace ActivEarth.Server.Service.Competition
         public static void InitializeUser(int challengeId, int userId)
         {
             Statistic statistic = ChallengeDAO.GetStatisticFromChallengeId(challengeId);
-            UserStatistic userStat = UserStatisticDAO.GetStatisticFromUserIdAndStatType(userId, statistic);
 
-            if (userStat == null)
+            if (ChallengeDAO.GetInitializationValue(challengeId, userId) < 0)
             {
-                UserStatisticDAO.CreateNewStatisticForUser(userId, statistic, 0);
-                userStat = UserStatisticDAO.GetStatisticFromUserIdAndStatType(userId, statistic);
-            };
 
-            ChallengeDAO.CreateInitializationEntry(challengeId, userId, userStat.Value);
+                UserStatistic userStat = UserStatisticDAO.GetStatisticFromUserIdAndStatType(userId, statistic);
+
+                if (userStat == null)
+                {
+                    UserStatisticDAO.CreateNewStatisticForUser(userId, statistic, 0);
+                    userStat = UserStatisticDAO.GetStatisticFromUserIdAndStatType(userId, statistic);
+                };
+
+                ChallengeDAO.CreateInitializationEntry(challengeId, userId, userStat.Value);
+            }
         }
 
 

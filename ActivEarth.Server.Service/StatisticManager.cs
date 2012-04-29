@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 
 using ActivEarth.Objects.Profile;
+using ActivEarth.Objects.Competition.Challenges;
 using ActivEarth.Server.Service.Competition;
 
 using ActivEarth.DAO;
@@ -100,26 +101,82 @@ namespace ActivEarth.Server.Service.Statistics
         {
             UserStatistic userStat = UserStatisticDAO.GetStatisticFromUserIdAndStatType(userId, statistic);
 
-            if (userStat != null)
-            {
-                userStat.Value = value;
-                UserStatisticDAO.UpdateUserStatistic(userStat);
-            }
-            else
-            {
-                UserStatisticDAO.CreateNewStatisticForUser(userId, statistic, value);
-            }
+            #region Challenges - Lock User
 
-            //Update the affected contests
-            List<int> teamIds = TeamDAO.GetTeamIdsFromUserId(userId);
+                float oldValue = (userStat == null ? 0 : userStat.Value);
 
-            foreach (int id in teamIds)
-            {
-                TeamDAO.UpdateTeamScore(id);
-            }
+                List<Challenge> challenges = ChallengeDAO.GetActiveChallenges().Where(c => c.StatisticBinding == statistic).ToList();
+                List<Challenge> incompleteChallenges = new List<Challenge>();
 
-            //Update the affected badge
-            //UserDAO.AddBadgePoints(userId, BadgeManager.UpdateBadge(userId, statistic));
+                foreach (Challenge challenge in challenges)
+                {
+                    ChallengeManager.InitializeUser(challenge.ID, userId);
+
+                    if (!ChallengeManager.IsComplete(challenge.ID, userId))
+                    {
+                        incompleteChallenges.Add(challenge);
+                    }
+                }
+
+            #endregion Challenges - Lock User
+
+            #region Update Statistic Value
+
+                if (userStat != null)
+                {
+                    userStat.Value = value;
+                    UserStatisticDAO.UpdateUserStatistic(userStat);
+                }
+                else
+                {
+                    UserStatisticDAO.CreateNewStatisticForUser(userId, statistic, value);
+                }
+
+            #endregion Update Statistic Value
+
+            #region Challenges - Update Completed Challenges
+
+                int newlyCompleted = 0;
+
+                foreach (Challenge challenge in incompleteChallenges)
+                {
+                    if (ChallengeManager.IsComplete(challenge.ID, userId))
+                    {
+                        UserDAO.AddChallengePoints(userId, challenge.Reward);
+                        newlyCompleted++;
+
+                        // Add challenge to user's completed challenge list
+                    }
+                }
+
+                if (newlyCompleted > 0)
+                {
+                    UserStatistic challengesCompleted = UserStatisticDAO.GetStatisticFromUserIdAndStatType(userId, Statistic.ChallengesCompleted);
+                    float oldVal = (challengesCompleted == null ? 0 : challengesCompleted.Value);
+
+                    StatisticManager.SetUserStatistic(userId, Statistic.ChallengesCompleted, oldVal + newlyCompleted);
+                }
+
+            #endregion Challenges - Update Completed Challenges
+
+            #region Contests - Update Standings
+
+                //Update the affected contests
+                List<int> teamIds = TeamDAO.GetTeamIdsFromUserId(userId);
+
+                foreach (int id in teamIds)
+                {
+                    TeamDAO.UpdateTeamScore(id);
+                }
+
+            #endregion Contests - Update Standings
+
+            #region Badges - Update Badge
+
+                //Update the affected badge
+                UserDAO.AddBadgePoints(userId, BadgeManager.UpdateBadge(userId, statistic));
+
+            #endregion Badges - Update Badge
         }
 
         #endregion ---------- Static Methods ----------
