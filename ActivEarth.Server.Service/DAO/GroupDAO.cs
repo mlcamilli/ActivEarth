@@ -169,7 +169,7 @@ namespace ActivEarth.DAO
                 var data = new ActivEarthDataProvidersDataContext(connection);
 
                 List<int> groupIds = (from g in data.GroupDataProviders
-                                      where g.name.ToLower().Contains(partialName)
+                                      where g.name.ToLower().Contains(partialName.ToLower())
                                       select g.id
                                       ).ToList();
 
@@ -197,7 +197,7 @@ namespace ActivEarth.DAO
                 var data = new ActivEarthDataProvidersDataContext(connection);
                 
                 List<int> groupIds = (from h in data.GroupHashtagDataProviders
-                                      where h.hashtag.ToLower().Contains(hashtag)
+                                      where h.hashtag.ToLower().Contains(hashtag.ToLower())
                                       select h.group_id
                                       ).ToList();
 
