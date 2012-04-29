@@ -12,7 +12,7 @@ namespace ActivEarth.Objects.Competition.Badges
         /// </summary>
         public class Steps
         {
-            public static readonly float[] REQUIREMENTS = { 0, 30000, 300000, 900000, 1800000, 2850000, 4050000, 5550000, 7200000, float.PositiveInfinity };
+            public static readonly float[] REQUIREMENTS = { 0, 49000, 259000, 574000, 994000, 1519000, 2149000, 2884000, 3724000, float.PositiveInfinity };
             public static readonly int[] REWARDS = { 0, 50, 100, 250, 400, 650, 800, 1050, 1200, 0 };
             public static readonly string[] IMAGES = {   "~/Images/Competition/Badges/Steps/None.png",
                                                       "~/Images/Competition/Badges/Steps/Bronze.png",
@@ -31,7 +31,7 @@ namespace ActivEarth.Objects.Competition.Badges
         /// </summary>
         public class WalkDistance
         {
-            public static readonly float[] REQUIREMENTS = { 0, 20, 150, 450, 900, 1425, 2025, 2775, 3600, float.PositiveInfinity };
+            public static readonly float[] REQUIREMENTS = { 0, 14, 74, 164, 284, 434, 614, 824, 1064, float.PositiveInfinity };
             public static readonly int[] REWARDS = { 0, 50, 100, 250, 400, 650, 800, 1050, 1200, 0 };
             public static readonly string[] IMAGES = {   "~/Images/Competition/Badges/Distance_Walked/None.png",
                                                       "~/Images/Competition/Badges/Distance_Walked/Bronze.png",
@@ -50,7 +50,7 @@ namespace ActivEarth.Objects.Competition.Badges
         /// </summary>
         public class BikeDistance
         {
-            public static readonly float[] REQUIREMENTS = { 0, 20, 150, 450, 900, 1425, 2025, 2775, 3600, float.PositiveInfinity };
+            public static readonly float[] REQUIREMENTS = { 0, 28, 148, 328, 568, 868, 1228, 1648, 2128, float.PositiveInfinity };
             public static readonly int[] REWARDS = { 0, 50, 100, 250, 400, 650, 800, 1050, 1200, 0 };
             public static readonly string[] IMAGES = {   "~/Images/Competition/Badges/Distance_Biked/None.png",
                                                       "~/Images/Competition/Badges/Distance_Biked/Bronze.png",
@@ -69,7 +69,7 @@ namespace ActivEarth.Objects.Competition.Badges
         /// </summary>
         public class RunDistance
         {
-            public static readonly float[] REQUIREMENTS = { 0, 20, 150, 450, 900, 1425, 2025, 2775, 3600, float.PositiveInfinity };
+            public static readonly float[] REQUIREMENTS = { 0, 7, 37, 82, 142, 217, 307, 412, 532, float.PositiveInfinity };
             public static readonly int[] REWARDS = { 0, 50, 100, 250, 400, 650, 800, 1050, 1200, 0 };
             public static readonly string[] IMAGES = {   "~/Images/Competition/Badges/Distance_Ran/None.png",
                                                       "~/Images/Competition/Badges/Distance_Ran/Bronze.png",
@@ -89,7 +89,7 @@ namespace ActivEarth.Objects.Competition.Badges
         public class Challenges
         {
             //Change REQUIRMENTS to correct values
-            public static readonly float[] REQUIREMENTS = { 0, 1, 5, 15, 30, 45, 65, 90, 120, float.PositiveInfinity };
+            public static readonly float[] REQUIREMENTS = { 0, 7, 37, 82, 142, 217, 307, 412, 532, float.PositiveInfinity };
             public static readonly int[] REWARDS = { 0, 50, 100, 250, 400, 650, 800, 1050, 1200, 0 };
             public static readonly string[] IMAGES = {   "~/Images/Competition/Badges/Challenges_Completed/None.png",
                                                       "~/Images/Competition/Badges/Challenges_Completed/Bronze.png",
