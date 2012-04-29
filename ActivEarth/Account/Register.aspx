@@ -70,7 +70,7 @@
                             </p>    
                         </fieldset>
                   
-                            <asp:Button ID="CreateUserButton" runat="server" CommandName="MoveNext" Text="Create User" 
+                            <asp:Button ID="CreateUserButton" CssClass="Button" runat="server" CommandName="MoveNext" Text="Create User" 
                                  ValidationGroup="RegisterUserValidationGroup" OnClick="CreateUser" />
                       
                     </div>
