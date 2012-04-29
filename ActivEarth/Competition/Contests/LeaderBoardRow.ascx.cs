@@ -10,34 +10,56 @@ namespace ActivEarth.Competition.Contests
 {
     public partial class LeaderBoardRow : System.Web.UI.UserControl
     {
-        public void CreateRowDisplay(Color backColor, Color textColor)
+        public void CreateRowDisplay(Color backColor, Color textColor, int bracket)
         {
-            _position.ForeColor = textColor;
-            _teamName.ForeColor = textColor;
-            _currentScore.ForeColor = textColor;
-            _row.BackColor = backColor;
+            //Test
+            if (bracket == 0)
+            {
+                BracketImage.ImageUrl = "~/Images/Competition/Contests/DiamondBracket.png";
+            }
+            else if (bracket == 1)
+            {
+                BracketImage.ImageUrl = "~/Images/Competition/Contests/PlatinumBracket.png";
+            }
+            else if (bracket == 2)
+            {
+                BracketImage.ImageUrl = "~/Images/Competition/Contests/GoldBracket.png";
+            }
+            else if (bracket == 3)
+            {
+                BracketImage.ImageUrl = "~/Images/Competition/Contests/SilverBracket.png";
+            }
+            else if (bracket == 4)
+            {
+                BracketImage.ImageUrl = "~/Images/Competition/Contests/BronzeBracket.png";
+            }
+            else
+            {
+                BracketImage.ImageUrl = "~/Images/Competition/Contests/NoneBracket.png";
+            }
+
+            Row.BackColor = backColor;
+            TeamName.ForeColor = textColor;
+            CurrentScore.ForeColor = textColor;
             hideRowText();
         }
 
-        public void setRowText(int position, string team, float score, string format)
+        public void setRowText(string team, float score, string format)
         {
-            _position.Text = position + ".";
-            _teamName.Text = team;
-            _currentScore.Text = score.ToString(format);
+            TeamName.Text = team;
+            CurrentScore.Text = score.ToString(format);
         }
 
         public void hideRowText()
         {
-            _position.Visible = false;
-            _teamName.Visible = false;
-            _currentScore.Visible = false;
+            TeamName.Visible = false;
+            CurrentScore.Visible = false;
         }
 
         public void displayRowText()
         {
-            _position.Visible = true;
-            _teamName.Visible = true;
-            _currentScore.Visible = true;
+            TeamName.Visible = true;
+            CurrentScore.Visible = true;
         }
     }
 }

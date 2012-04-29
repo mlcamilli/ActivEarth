@@ -7,6 +7,10 @@ using System.Web.UI.WebControls;
 
 namespace ActivEarth.Competition.Contests
 {
+    /// <summary>
+    /// This class represents a control used to display the time remaining 
+    /// in a contest.
+    /// </summary>
     public partial class ContestTimeGraph : System.Web.UI.UserControl
     {
         protected void Page_Load(object sender, EventArgs e)
@@ -14,6 +18,11 @@ namespace ActivEarth.Competition.Contests
 
         }
 
+        /// <summary>
+        /// Sets the progress time has made in the contest.
+        /// </summary>
+        /// <param name="contestStartDate">The start date of the contest.</param>
+        /// <param name="contestEndDate">The end date of the contest.</param>
         public void PopulateTimeGraph(DateTime contestStartDate, DateTime contestEndDate)
         {
             if(DateTime.Compare(contestEndDate, DateTime.Now) > 0)

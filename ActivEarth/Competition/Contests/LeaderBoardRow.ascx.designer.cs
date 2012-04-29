@@ -13,39 +13,39 @@ namespace ActivEarth.Competition.Contests {
     public partial class LeaderBoardRow {
         
         /// <summary>
-        /// _row control.
+        /// Row control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel _row;
+        protected global::System.Web.UI.WebControls.Panel Row;
         
         /// <summary>
-        /// _position control.
+        /// BracketImage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label _position;
+        protected global::System.Web.UI.WebControls.Image BracketImage;
         
         /// <summary>
-        /// _teamName control.
+        /// TeamName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label _teamName;
+        protected global::System.Web.UI.WebControls.Label TeamName;
         
         /// <summary>
-        /// _currentScore control.
+        /// CurrentScore control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label _currentScore;
+        protected global::System.Web.UI.WebControls.Label CurrentScore;
     }
 }

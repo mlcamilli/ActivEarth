@@ -10,6 +10,10 @@ using ActivEarth.Server.Service.Competition;
 
 namespace ActivEarth.Competition.Challenges
 {
+    /// <summary>
+    /// This class represents a control that is used to display a
+    /// single Challenge.
+    /// </summary>
     public partial class DisplayChallengeControl : System.Web.UI.UserControl
     {
         /// <summary>

@@ -11,8 +11,17 @@ using ActivEarth.Server.Service.Competition;
 
 namespace ActivEarth.Competition.Badges
 {
+    /// <summary>
+    /// This class represents the Badges page on the ActivEarth
+    /// website.
+    /// </summary>
     public partial class DisplayBadgesPage : System.Web.UI.Page
     {
+        /// <summary>
+        /// Loads the Badges page.
+        /// </summary>
+        /// <param name="sender">Object that called the load event.</param>
+        /// <param name="e">Arguments of the event.</param>
         protected void Page_Load(object sender, EventArgs e)
         {
             var user = (User)Session["userDetails"];

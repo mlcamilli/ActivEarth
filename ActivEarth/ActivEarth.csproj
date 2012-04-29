@@ -80,13 +80,13 @@
     <Content Include="Competition\Challenges\DisplayChallengeControl.ascx" />
     <Content Include="Competition\Challenges\DisplayChallengesControl.ascx" />
     <Content Include="Competition\Challenges\DisplayChallengesPage.aspx" />
+    <Content Include="Competition\Contests\ContestRewardsTable.ascx" />
     <Content Include="Competition\Contests\ContestCreationPage.aspx" />
     <Content Include="Competition\Contests\ContestDisplayTable.ascx" />
     <Content Include="Competition\Contests\ContestGoalGraph.ascx" />
     <Content Include="Competition\Contests\ContestHomePage.aspx" />
     <Content Include="Competition\Contests\ContestTimeGraph.ascx" />
     <Content Include="Competition\Contests\FindContestsPage.aspx" />
-    <Content Include="Competition\Contests\CountdownClock.ascx" />
     <Content Include="Competition\Contests\DisplayContestPage.aspx" />
     <Content Include="Competition\Contests\LeaderBoard.ascx" />
     <Content Include="Competition\Contests\LeaderBoardRow.ascx" />
@@ -242,6 +242,18 @@
     <Content Include="Images\Competition\Challenges\Time_Walked\Daily.png" />
     <Content Include="Images\Competition\Challenges\Time_Walked\Monthly.png" />
     <Content Include="Images\Competition\Challenges\Time_Walked\Weekly.png" />
+    <Content Include="Images\Competition\Challenges\Total_Distance\Daily.png" />
+    <Content Include="Images\Competition\Challenges\Total_Distance\Monthly.png" />
+    <Content Include="Images\Competition\Challenges\Total_Distance\Weekly.png" />
+    <Content Include="Images\Competition\Challenges\Total_Time\Daily.png" />
+    <Content Include="Images\Competition\Challenges\Total_Time\Monthly.png" />
+    <Content Include="Images\Competition\Challenges\Total_Time\Weekly.png" />
+    <Content Include="Images\Competition\Contests\BronzeBracket.png" />
+    <Content Include="Images\Competition\Contests\DiamondBracket.png" />
+    <Content Include="Images\Competition\Contests\GoldBracket.png" />
+    <Content Include="Images\Competition\Contests\NoneBracket.png" />
+    <Content Include="Images\Competition\Contests\PlatinumBracket.png" />
+    <Content Include="Images\Competition\Contests\SilverBracket.png" />
     <Content Include="Images\Competition\Misc\Calender.png" />
     <Content Include="Images\Competition\Misc\LeftArrow.png" />
     <Content Include="Images\Competition\Misc\RightArrow.png" />
@@ -362,6 +374,13 @@
     <Compile Include="Competition\Challenges\DisplayChallengesPage.aspx.designer.cs">
       <DependentUpon>DisplayChallengesPage.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Competition\Contests\ContestRewardsTable.ascx.cs">
+      <DependentUpon>ContestRewardsTable.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Competition\Contests\ContestRewardsTable.ascx.designer.cs">
+      <DependentUpon>ContestRewardsTable.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Competition\Contests\ContestCreationPage.aspx.cs">
       <DependentUpon>ContestCreationPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -403,13 +422,6 @@
     </Compile>
     <Compile Include="Competition\Contests\FindContestsPage.aspx.designer.cs">
       <DependentUpon>FindContestsPage.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Competition\Contests\CountdownClock.ascx.cs">
-      <DependentUpon>CountdownClock.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Competition\Contests\CountdownClock.ascx.designer.cs">
-      <DependentUpon>CountdownClock.ascx</DependentUpon>
     </Compile>
     <Compile Include="Competition\Contests\DisplayContestPage.aspx.cs">
       <DependentUpon>DisplayContestPage.aspx</DependentUpon>
