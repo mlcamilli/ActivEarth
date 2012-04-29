@@ -32,21 +32,19 @@ namespace ActivEarth.Server.Service.Competition
         /// <param name="type">Determines whether the contest in Individual or Group-based.</param>
         /// <param name="name">Contest Name.</param>
         /// <param name="description">Contest Description.</param>
-        /// <param name="points">Points to be distributed to the winner(s).</param>
         /// <param name="start">Time to start the contest.</param>
         /// <param name="end">Time to end the contest.</param>
         /// <param name="searchable">True if the Contest can be found by searching (public), false if private.</param>
         /// <param name="statistic">Statistic on which the Contest is based.</param>
         /// <param name="creatorId">UserID of the creator of the contest.</param>
         /// <returns>ID of the newly created Contest.</returns>
-        public static int CreateContest(ContestType type, string name, string description, int points, DateTime start,
+        public static int CreateContest(ContestType type, string name, string description, DateTime start,
             DateTime end, bool searchable, Statistic statistic, int creatorId)
         {
             Contest newContest = new Contest
             {
                 Name = name,
                 Description = description,
-                Reward = points,
                 Mode = ContestEndMode.TimeBased,
                 Type = type,
                 StartTime = start,
@@ -67,21 +65,19 @@ namespace ActivEarth.Server.Service.Competition
         /// <param name="type">Determines whether the contest in Individual or Group-based.</param>
         /// <param name="name">Contest Name.</param>
         /// <param name="description">Contest Description.</param>
-        /// <param name="points">Points to be distributed to the winner(s).</param>
         /// <param name="start">Time to start the contest.</param>
         /// <param name="end">Score at which to end the contest.</param>
         /// <param name="searchable">True if the Contest can be found by searching (public), false if private.</param>
         /// <param name="statistic">Statistic on which the Contest is based.</param>
         /// <param name="creatorId">UserID of the creator of the contest.</param>
         /// <returns>ID of the newly created Contest.</returns>
-        public static int CreateContest(ContestType type, string name, string description, int points, DateTime start,
+        public static int CreateContest(ContestType type, string name, string description, DateTime start,
             float end, bool searchable, Statistic statistic, int creatorId)
         {
             Contest newContest = new Contest
             {
                 Name = name,
                 Description = description,
-                Reward = points,
                 Mode = ContestEndMode.GoalBased,
                 Type = type,
                 StartTime = start,
@@ -113,21 +109,15 @@ namespace ActivEarth.Server.Service.Competition
         /// </summary>
         /// <param name="duration">Duration of the contest.</param>
         /// <param name="statistic">Statistic on which the contest is based.</param>
-        /// <returns></returns>
-        public static int CalculateContestReward(TimeSpan duration, Statistic statistic)
+        /// <returns>Total reward pot for a contest with the given values.</returns>
+        public static int CalculateContestReward(int days, int members, Statistic statistic)
         {
-            return 0;
-        }
+            float membersExponent = 1.03f;
+            float daysCoefficient = 0.7f;
+            float daysInitial = 3;
 
-        /// <summary>
-        /// Calculates the reward for a goal-based contest.
-        /// </summary>
-        /// <param name="goal">Goal value for the contest.</param>
-        /// <param name="statistic">Statistic on which the contest is based.</param>
-        /// <returns></returns>
-        public static int CalculateContestReward(float goal, Statistic statistic)
-        {
-            return 0;
+            return (int)Math.Round(Math.Pow(members, membersExponent) * 
+                ((daysCoefficient * days) + daysInitial));
         }
 
         /// <summary>
@@ -221,7 +211,6 @@ namespace ActivEarth.Server.Service.Competition
             if (!TeamDAO.UserCompetingInContest(user.UserID, contestId))
             {
                 string teamName = String.Format("{0} {1}", user.FirstName, user.LastName);
-                //TODO: Assert that no team with this name exists already
 
                 Team newTeam = new Team
                 {

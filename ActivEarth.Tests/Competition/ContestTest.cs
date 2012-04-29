@@ -136,7 +136,7 @@ namespace ActivEarth.Tests.Competition
 
                 Log("Creating time-based group contest");
                 int id = ContestManager.CreateContest(ContestType.Group, "Test Contest 1",
-                    "This is a test time-based contest.", 50, DateTime.Now, DateTime.Now.AddDays(1),
+                    "This is a test time-based contest.", DateTime.Now, DateTime.Now.AddDays(1),
                     true, Statistic.Steps, _user1.UserID);
 
                 Log("Adding groups to the contest");
@@ -181,13 +181,13 @@ namespace ActivEarth.Tests.Competition
 
                 Log("Creating time-based group contest");
                 int timeId = ContestManager.CreateContest(ContestType.Group, "Test Contest 1",
-                    "This is a test time-based contest.", 50, DateTime.Now, DateTime.Now.AddDays(1),
+                    "This is a test time-based contest.", DateTime.Now, DateTime.Now.AddDays(1),
                     true, Statistic.Steps, _user1.UserID);
                 Contest timedContest = ContestManager.GetContest(timeId, false, false);
 
                 Log("Creating goal-based individual contest");
                 int goalId = ContestManager.CreateContest(ContestType.Individual, "Test Contest 2",
-                    "This is a test goal-based contest.", 50, DateTime.Now, 50000,
+                    "This is a test goal-based contest.", DateTime.Now, 50000,
                     true, Statistic.Steps, _user1.UserID);
                 Contest goalContest = ContestManager.GetContest(goalId, false, false);
 
@@ -226,7 +226,7 @@ namespace ActivEarth.Tests.Competition
 
                 Log("Creating group contest");
                 int id = ContestManager.CreateContest(ContestType.Group, "Test Contest 1",
-                    "This is a test time-based contest.", 50, DateTime.Now, DateTime.Now.AddDays(1),
+                    "This is a test time-based contest.", DateTime.Now, DateTime.Now.AddDays(1),
                     true, Statistic.Steps, _user1.UserID);
 
                 ContestManager.AddGroup(id, _group1);
@@ -289,7 +289,7 @@ namespace ActivEarth.Tests.Competition
 
                 Log("Creating individual contest");
                 int id = ContestManager.CreateContest(ContestType.Individual, "Test Contest 1",
-                    "This is a test time-based contest.", 50, DateTime.Now, DateTime.Now.AddDays(1),
+                    "This is a test time-based contest.", DateTime.Now, DateTime.Now.AddDays(1),
                     true, Statistic.Steps, _user1.UserID);
 
                 ContestManager.AddUser(id, _user1);
@@ -338,7 +338,7 @@ namespace ActivEarth.Tests.Competition
 
                 Log("Creating group contest");
                 int id = ContestManager.CreateContest(ContestType.Group, "Test Contest 1",
-                    "This is a test time-based contest.", 50, DateTime.Now, DateTime.Now.AddDays(1),
+                    "This is a test time-based contest.", DateTime.Now, DateTime.Now.AddDays(1),
                     true, Statistic.Steps, _user1.UserID);
 
                 Team team = new Team()
@@ -854,10 +854,10 @@ namespace ActivEarth.Tests.Competition
 
                 Log("Creating contests of different types");
                 int cID1 = ContestManager.CreateContest(ContestType.Group, "Test Contest1",
-                    "This is a test contest", 30, DateTime.Today, 500, true, Statistic.Steps, _user1.UserID);
+                    "This is a test contest", DateTime.Today, 500, true, Statistic.Steps, _user1.UserID);
 
                 int cID2 = ContestManager.CreateContest(ContestType.Group, "Test Contest2",
-                    "This is a test contest", 30, DateTime.Today, 500, true, Statistic.GasSavings, _user1.UserID);
+                    "This is a test contest", DateTime.Today, 500, true, Statistic.GasSavings, _user1.UserID);
 
                 Log("Retrieving contests from DB");
                 Contest c1 = ContestManager.GetContest(cID1, false, false);
@@ -897,31 +897,31 @@ namespace ActivEarth.Tests.Competition
                 Log("Creating contests");
                 //Matches
                 ContestManager.CreateContest(ContestType.Group, "Testlike",
-                    "This is a test contest", 30, DateTime.Today.AddDays(1), 500, true, Statistic.Steps, _user1.UserID);
+                    "This is a test contest", DateTime.Today.AddDays(1), 500, true, Statistic.Steps, _user1.UserID);
 
                 //Matches
                 ContestManager.CreateContest(ContestType.Group, "Testlike Competition",
-                    "This is a test contest", 30, DateTime.Today.AddDays(1), 500, true, Statistic.GasSavings, _user1.UserID);
+                    "This is a test contest", DateTime.Today.AddDays(1), 500, true, Statistic.GasSavings, _user1.UserID);
 
                 //Matches
                 ContestManager.CreateContest(ContestType.Group, "testlikeing again",
-                    "This is a test contest", 30, DateTime.Today.AddDays(1), 500, true, Statistic.GasSavings, _user1.UserID);
+                    "This is a test contest", DateTime.Today.AddDays(1), 500, true, Statistic.GasSavings, _user1.UserID);
 
                 //Matches
                 ContestManager.CreateContest(ContestType.Group, "My Testlike Contest",
-                    "This is a test contest", 30, DateTime.Today, 500, true, Statistic.GasSavings, _user1.UserID);
+                    "This is a test contest", DateTime.Today, 500, true, Statistic.GasSavings, _user1.UserID);
 
                 //Doesn't Match
                 ContestManager.CreateContest(ContestType.Group, "ActivEarth FTW",
-                    "This is a test contest", 30, DateTime.Today.AddDays(1), 500, true, Statistic.GasSavings, _user1.UserID);
+                    "This is a test contest", DateTime.Today.AddDays(1), 500, true, Statistic.GasSavings, _user1.UserID);
 
                 //Matches, but not public
                 ContestManager.CreateContest(ContestType.Group, "testlike contest2",
-                    "This is a test contest", 30, DateTime.Today.AddDays(1), 500, false, Statistic.GasSavings, _user1.UserID);
+                    "This is a test contest", DateTime.Today.AddDays(1), 500, false, Statistic.GasSavings, _user1.UserID);
 
                 //Matches
                 ContestManager.CreateContest(ContestType.Group, "this is another testlike contest",
-                    "This is a test contest", 30, DateTime.Today.AddDays(1), 500, true, Statistic.GasSavings, _user1.UserID);
+                    "This is a test contest", DateTime.Today.AddDays(1), 500, true, Statistic.GasSavings, _user1.UserID);
 
                 Log("Retrieving contest list from DB: Search term: 'testlike', exact match");
                 List<int> listFromTestExact = ContestDAO.FindContests("testlike", true);
@@ -959,13 +959,13 @@ namespace ActivEarth.Tests.Competition
 
                 Log("Creating contests");
                 int id1 = ContestManager.CreateContest(ContestType.Group, c1Name,
-                    "This is a test contest", 30, DateTime.Today.AddDays(1), 500, true, Statistic.Steps, _user1.UserID);
+                    "This is a test contest", DateTime.Today.AddDays(1), 500, true, Statistic.Steps, _user1.UserID);
 
                 int id2 = ContestManager.CreateContest(ContestType.Group, c2Name,
-                    "This is a test contest", 30, DateTime.Today.AddDays(1), 500, true, Statistic.GasSavings, _user1.UserID);
+                    "This is a test contest", DateTime.Today.AddDays(1), 500, true, Statistic.GasSavings, _user1.UserID);
 
                 int id3 = ContestManager.CreateContest(ContestType.Group, c3Name,
-                    "This is a test contest", 30, DateTime.Today.AddDays(1), 500, true, Statistic.GasSavings, _user1.UserID);
+                    "This is a test contest", DateTime.Today.AddDays(1), 500, true, Statistic.GasSavings, _user1.UserID);
 
                 ContestManager.AddGroup(id1, _group1);
                 ContestManager.AddGroup(id2, _group1);
@@ -1024,13 +1024,13 @@ namespace ActivEarth.Tests.Competition
 
                 Log("Creating contests");
                 int id1 = ContestManager.CreateContest(ContestType.Group, c1Name,
-                    "This is a test contest", 30, DateTime.Today.AddDays(1), 500, true, Statistic.Steps, _user1.UserID);
+                    "This is a test contest", DateTime.Today.AddDays(1), 500, true, Statistic.Steps, _user1.UserID);
 
                 int id2 = ContestManager.CreateContest(ContestType.Group, c2Name,
-                    "This is a test contest", 30, DateTime.Today.AddDays(1), 500, true, Statistic.GasSavings, _user1.UserID);
+                    "This is a test contest", DateTime.Today.AddDays(1), 500, true, Statistic.GasSavings, _user1.UserID);
 
                 int id3 = ContestManager.CreateContest(ContestType.Group, c3Name,
-                    "This is a test contest", 30, DateTime.Today.AddDays(1), 500, true, Statistic.GasSavings, _user1.UserID);
+                    "This is a test contest", DateTime.Today.AddDays(1), 500, true, Statistic.GasSavings, _user1.UserID);
 
                 Log("Verifying contest name retrieval");
                 Assert.AreEqual(c1Name, ContestDAO.GetContestNameFromContestId(id1));
@@ -1051,10 +1051,10 @@ namespace ActivEarth.Tests.Competition
 
                 Log("Creating contests");
                 int id1 = ContestManager.CreateContest(ContestType.Group, "Contest",
-                    "This is a test contest", 30, DateTime.Today.AddDays(1), 500, true, Statistic.Steps, _user1.UserID);
+                    "This is a test contest", DateTime.Today.AddDays(1), 500, true, Statistic.Steps, _user1.UserID);
 
                 int id2 = ContestManager.CreateContest(ContestType.Group, "Contest2",
-                    "This is a test contest", 30, DateTime.Today.AddDays(1), 500, true, Statistic.GasSavings, _user1.UserID);
+                    "This is a test contest", DateTime.Today.AddDays(1), 500, true, Statistic.GasSavings, _user1.UserID);
 
                 ContestManager.AddUser(id1, _user1);
 
@@ -1076,7 +1076,7 @@ namespace ActivEarth.Tests.Competition
 
                 Log("Creating contests");
                 int id1 = ContestManager.CreateContest(ContestType.Group, "Contest",
-                    "This is a test contest", 30, DateTime.Today.AddDays(1), 500, true, Statistic.Steps, _user1.UserID);
+                    "This is a test contest", DateTime.Today.AddDays(1), 500, true, Statistic.Steps, _user1.UserID);
 
                 ContestManager.AddUser(id1, _user1);
 
