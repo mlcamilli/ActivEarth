@@ -122,16 +122,28 @@ namespace ActivEarth.Tests.Competition
             using (_trans)
             {
                 InitializeBadges();
+
+                int initial = _user.ActivityScore.BadgeScore;
+
                 Log("Updating user's step statistic to the bronze badge level");
                 StatisticManager.SetUserStatistic(_id, Statistic.Steps,
                     BadgeConstants.Steps.REQUIREMENTS[BadgeLevels.Bronze]);
 
+                User user2 = UserDAO.GetUserFromUserId(_id);
+
                 Log("Verifying that first update reports bronze badge reward");
-                Assert.AreEqual(BadgeConstants.Steps.REWARDS[BadgeLevels.Bronze],
-                    BadgeManager.UpdateBadge(_id, Statistic.Steps));
+                Assert.AreEqual(initial + BadgeConstants.Steps.REWARDS[BadgeLevels.Bronze],
+                    user2.ActivityScore.BadgeScore);
+
+                Log("Updating user's step statistic to same value");
+                StatisticManager.SetUserStatistic(_id, Statistic.Steps,
+                    BadgeConstants.Steps.REQUIREMENTS[BadgeLevels.Bronze]);
+                
+                user2 = UserDAO.GetUserFromUserId(_id);
 
                 Log("Verifying that second update reports no new activity points");
-                Assert.AreEqual(0, BadgeManager.UpdateBadge(_id, Statistic.Steps));
+                Assert.AreEqual(initial + BadgeConstants.Steps.REWARDS[BadgeLevels.Bronze],
+                    user2.ActivityScore.BadgeScore);
             }
         }
 
@@ -150,15 +162,22 @@ namespace ActivEarth.Tests.Competition
             using (_trans)
             {
                 InitializeBadges();
+
+                int initial = _user.ActivityScore.BadgeScore;
+
                 for (int level = BadgeLevels.Bronze; level <= BadgeLevels.Max; level++)
                 {
                     Log(String.Format("Increasing badge to level {0}", level));
                     StatisticManager.SetUserStatistic(_id, Statistic.Steps,
                         BadgeConstants.Steps.REQUIREMENTS[level]);
 
+                    User user2 = UserDAO.GetUserFromUserId(_id);
+
                     Log("Verifying badge reward on update");
-                    Assert.AreEqual(BadgeConstants.Steps.REWARDS[level],
-                        BadgeManager.UpdateBadge(_id, Statistic.Steps));
+                    Assert.AreEqual(initial + BadgeConstants.Steps.REWARDS[level],
+                        user2.ActivityScore.BadgeScore);
+
+                    initial += BadgeConstants.Steps.REWARDS[level];
                 }
             }
         }
@@ -179,15 +198,22 @@ namespace ActivEarth.Tests.Competition
             using (_trans)
             {
                 InitializeBadges();
+
+                int initial = _user.ActivityScore.BadgeScore;
+
                 for (int level = BadgeLevels.Bronze; level <= BadgeLevels.Max; level += 2)
                 {
                     Log(String.Format("Increasing badge to level {0}", level));
                     StatisticManager.SetUserStatistic(_id, Statistic.Steps,
                         BadgeConstants.Steps.REQUIREMENTS[level]);
 
+                    User user2 = UserDAO.GetUserFromUserId(_id);
+
                     Log("Verifying badge reward on update");
-                    Assert.AreEqual(BadgeConstants.Steps.REWARDS[level] +
-                        BadgeConstants.Steps.REWARDS[level - 1], BadgeManager.UpdateBadge(_id, Statistic.Steps));
+                    Assert.AreEqual(initial + BadgeConstants.Steps.REWARDS[level] + BadgeConstants.Steps.REWARDS[level - 1],
+                        user2.ActivityScore.BadgeScore);
+
+                    initial += BadgeConstants.Steps.REWARDS[level] + BadgeConstants.Steps.REWARDS[level - 1];
                 }
             }
         }
@@ -321,6 +347,9 @@ namespace ActivEarth.Tests.Competition
             using (_trans)
             {
                 InitializeBadges();
+
+                int initial = _user.ActivityScore.BadgeScore;
+
                 Log("Fetching Steps badge");
                 Badge stepBadge = BadgeDAO.GetBadgeFromUserIdAndStatistic(_id, Statistic.Steps);
 
@@ -332,25 +361,20 @@ namespace ActivEarth.Tests.Competition
                     BadgeConstants.Steps.REQUIREMENTS[BadgeLevels.Bronze]);
                 StatisticManager.SetUserStatistic(_id, Statistic.WalkDistance, 
                     BadgeConstants.WalkDistance.REQUIREMENTS[BadgeLevels.Bronze]);
-
-                Log("Verifying step badge reward");
-                Assert.AreEqual(BadgeConstants.Steps.REWARDS[BadgeLevels.Bronze], 
-                    BadgeManager.UpdateBadge(_id, Statistic.Steps));
-
-                Log("Verifying walking badge reward");
-                Assert.AreEqual(BadgeConstants.WalkDistance.REWARDS[BadgeLevels.Bronze], 
-                    BadgeManager.UpdateBadge(_id, Statistic.WalkDistance));
+                
+                User user2 = UserDAO.GetUserFromUserId(_id);
+                int expectedUpdate1 = initial + BadgeConstants.Steps.REWARDS[BadgeLevels.Bronze] + BadgeConstants.WalkDistance.REWARDS[BadgeLevels.Bronze];
+                Log("Verifying badge rewards");
+                Assert.AreEqual(expectedUpdate1, user2.ActivityScore.BadgeScore);
 
                 Log("Increasing step statistic to silver level");
                 StatisticManager.SetUserStatistic(_id, Statistic.Steps, 
                     BadgeConstants.Steps.REQUIREMENTS[BadgeLevels.Silver]);
-
+                
+                user2 = UserDAO.GetUserFromUserId(_id);
                 Log("Verifying no new walking badge points awarded");
-                Assert.AreEqual(0, BadgeManager.UpdateBadge(_id, Statistic.WalkDistance));
-
-                Log("Verifying silver level step badge points awarded");
-                Assert.AreEqual(BadgeConstants.Steps.REWARDS[BadgeLevels.Silver], 
-                    BadgeManager.UpdateBadge(_id, Statistic.Steps));
+                Assert.AreEqual(expectedUpdate1 + BadgeConstants.Steps.REWARDS[BadgeLevels.Silver], 
+                    user2.ActivityScore.BadgeScore);
             }
         }
 

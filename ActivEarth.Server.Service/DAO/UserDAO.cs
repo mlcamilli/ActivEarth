@@ -263,5 +263,52 @@ namespace ActivEarth.DAO
                 return false;
             }
         }
+
+        public static bool AddBadgePoints(int userId, int points)
+        {
+            try
+            {
+                User user = UserDAO.GetUserFromUserId(userId);
+                user.ActivityScore.AddBadgePoints(points);
+                UserDAO.UpdateUserProfile(user);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public static bool AddChallengePoints(int userId, int points)
+        {
+            try
+            {
+                User user = UserDAO.GetUserFromUserId(userId);
+                user.ActivityScore.AddChallengePoints(points);
+                UserDAO.UpdateUserProfile(user);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public static bool AddContestPoints(int userId, int points)
+        {
+            try
+            {
+                User user = UserDAO.GetUserFromUserId(userId);
+                user.ActivityScore.AddContestPoints(points);
+                UserDAO.UpdateUserProfile(user);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+
     }
 }
