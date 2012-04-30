@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -76,6 +76,7 @@
     <Content Include="Account\Register.aspx" />
     <Content Include="Account\Profile.aspx" />
     <Content Include="Account\EditProfile.aspx" />
+    <Content Include="Account\WallDisplay.ascx" />
     <Content Include="Competition\Badges\DisplayBadgesControl.ascx" />
     <Content Include="Competition\Challenges\DisplayChallengeControl.ascx" />
     <Content Include="Competition\Challenges\DisplayChallengesControl.ascx" />
@@ -341,6 +342,13 @@
     </Compile>
     <Compile Include="Account\EditProfile.aspx.designer.cs">
       <DependentUpon>EditProfile.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Account\WallDisplay.ascx.cs">
+      <DependentUpon>WallDisplay.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\WallDisplay.ascx.designer.cs">
+      <DependentUpon>WallDisplay.ascx</DependentUpon>
     </Compile>
     <Compile Include="Competition\Badges\DisplayBadgeControl.ascx.cs">
       <DependentUpon>DisplayBadgeControl.ascx</DependentUpon>

@@ -59,7 +59,7 @@ namespace ActivEarth.Groups
 
                 Group group = new Group(txbGroupName.Text, owner, txbDescription.Text, hashTags);
                 group.ID = GroupDAO.CreateNewGroup(group);
-                string[] dateTime = DateTime.Now.ToString("MM/dd/yyyy h:MMtt").Split(' ');
+                string[] dateTime = DateTime.Now.ToString("MM/dd/yyyy h:mmtt").Split(' ');
                 group.Post(new Message("Created Group", owner.FirstName + " " + owner.LastName + " created the group " + group.Name + "!",
                     owner, dateTime[0], dateTime[1]));
                 GroupDAO.UpdateGroup(group);

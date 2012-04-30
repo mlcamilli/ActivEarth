@@ -8,6 +8,8 @@ using System.Web.UI.WebControls;
 using ActivEarth.Objects;
 using ActivEarth.Objects.Profile;
 using ActivEarth.DAO;
+using System.Drawing;
+using ActivEarth.Objects.Groups;
 
 namespace ActivEarth
 {
@@ -31,6 +33,11 @@ namespace ActivEarth
 
                 lblUserName.Text = userDetails.FirstName + " " + userDetails.LastName;
                 userIconImage.ImageUrl = getUserImageUrl(userDetails, "icon");
+
+                List<Message> messages = userDetails.Wall.Messages;
+                Color[] backColors = {Color.White, Color.FromArgb(34, 139, 34)};
+                Color[] textColors = {Color.Black, Color.White };
+                RecentActivityTable.PopulateMessageTable(messages, backColors, textColors);
 
                 lblStatSteps.Text = userDetails.GetStatistic(Statistic.Steps).ToString() + " steps";
                 lblStatWalkDistance.Text = userDetails.GetStatistic(Statistic.WalkDistance).ToString() + " miles";
@@ -76,6 +83,16 @@ namespace ActivEarth
             {
                 return String.Format("/Images/Account/UserProfileDefaults/default_{0}.png", imageSizeName);
             }
+        }
+
+        protected void PostMessage(object sender, EventArgs e)
+        {
+            User user = (User)Session["userDetails"];
+            
+            string[] dateTime = DateTime.Now.ToString("MM/dd/yyyy h:mmtt").Split(' ');
+            user.Post(new Message(txbTitle.Text, txbMessage.Text, user, dateTime[0], dateTime[1]));
+            UserDAO.UpdateUserProfile(user);
+            Response.Redirect(Request.RawUrl);
         }
     }
 }

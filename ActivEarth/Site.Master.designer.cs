@@ -85,6 +85,42 @@ namespace ActivEarth {
         protected global::System.Web.UI.WebControls.HyperLink hlEditProfile;
         
         /// <summary>
+        /// RecentActivityTable control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::ActivEarth.Account.WallDisplay RecentActivityTable;
+        
+        /// <summary>
+        /// txbTitle control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txbTitle;
+        
+        /// <summary>
+        /// txbMessage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txbMessage;
+        
+        /// <summary>
+        /// PostButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button PostButton;
+        
+        /// <summary>
         /// MainContent control.
         /// </summary>
         /// <remarks>

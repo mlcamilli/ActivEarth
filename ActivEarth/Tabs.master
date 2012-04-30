@@ -7,13 +7,13 @@
     <div class="clear hideSkiplink">
         <asp:Menu ID="NavigationMenu" runat="server" CssClass="menu" EnableViewState="false" IncludeStyleBlock="false" Orientation="Horizontal">
             <Items>
+                <asp:MenuItem NavigateUrl="~/Groups/Groups.aspx" Text="Groups" Value="Groups"></asp:MenuItem>
                 <asp:MenuItem Text="Badges" Value="Badges" 
                     NavigateUrl="~/Competition/Badges/DisplayBadgesPage.aspx"></asp:MenuItem>
                 <asp:MenuItem NavigateUrl="~/Competition/Challenges/DisplayChallengesPage.aspx" 
                     Text="Challenges" Value="Challenges"></asp:MenuItem>
                 <asp:MenuItem NavigateUrl="~/Competition/Contests/ContestHomePage.aspx" 
                     Text="Contest" Value="Contest"></asp:MenuItem>
-                <asp:MenuItem NavigateUrl="~/Groups/Groups.aspx" Text="Groups" Value="Groups"></asp:MenuItem>
             </Items>
         </asp:Menu>
     </div>
