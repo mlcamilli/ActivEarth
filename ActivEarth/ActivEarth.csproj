@@ -93,6 +93,7 @@
     <Content Include="Competition\Contests\LeaderBoardRow.ascx" />
     <Content Include="Competition\Contests\TeamDisplayTable.ascx" />
     <Content Include="Groups\ContestPage.aspx" />
+    <Content Include="Groups\OwnedGroupsDisplayTable.ascx" />
     <Content Include="Groups\EditGroup.aspx" />
     <Content Include="Groups\GroupDisplay.aspx" />
     <Content Include="Groups\Groups.aspx" />
@@ -492,6 +493,13 @@
     </Compile>
     <Compile Include="Groups\ContestPage.aspx.designer.cs">
       <DependentUpon>ContestPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Groups\OwnedGroupsDisplayTable.ascx.cs">
+      <DependentUpon>OwnedGroupsDisplayTable.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Groups\OwnedGroupsDisplayTable.ascx.designer.cs">
+      <DependentUpon>OwnedGroupsDisplayTable.ascx</DependentUpon>
     </Compile>
     <Compile Include="Groups\EditGroup.aspx.cs">
       <DependentUpon>EditGroup.aspx</DependentUpon>
