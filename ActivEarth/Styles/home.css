@@ -131,7 +131,9 @@ margin-right:13px;
     position: relative;
     margin: 0px;
     padding: 4px 0px 60px 0px;
-    background: #1493fa;
+    /*background: #1493fa;*/
+    background: ffffff;
+    
     width: 100%;
 }
 
