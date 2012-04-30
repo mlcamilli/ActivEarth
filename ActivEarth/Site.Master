@@ -1,6 +1,8 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="ActivEarth.SiteMaster" %>
 <%@ Register src="~/Account/WallDisplay.ascx" tagname="RecentActivityTable" tagprefix="uc" %>
 
+<%@ Register src="~/Account/DisplayWeatherControl.ascx" tagname="DisplayWeatherControl" tagprefix="uc1" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head runat="server">
@@ -54,6 +56,12 @@
             <asp:ContentPlaceHolder ID="MainContent" runat="server"/>
         </div>
         <div class="statInfo">
+            <h2>
+                Weather
+            </h2>
+            
+            <uc1:DisplayWeatherControl ID="DisplayWeatherControl1" runat="server" />
+            
             <h2>
                 Statistical Information
             </h2>
