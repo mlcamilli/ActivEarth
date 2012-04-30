@@ -93,17 +93,17 @@ namespace ActivEarth.Groups
 
         protected void EditGroupInformation(object sender, EventArgs e)
         {
+            int groupID = Convert.ToInt32(Request.QueryString["ID"]);
+            Group group = GroupDAO.GetGroupFromGroupId(groupID);
 
-            if (GroupDAO.GetGroupFromName(txbGroupName.Text) == null)
+            Group test = GroupDAO.GetGroupFromName(txbGroupName.Text);
+            if (test == null || test.ID == groupID)
             {
                 List<string> hashTags = lblAllHashTags.Text.Split(',').Select(sValue => sValue.Trim()).ToList();
                 string last = hashTags.Last().TrimEnd('.');
                 hashTags.RemoveAt(hashTags.Count - 1);
                 hashTags.Add(last);
-
-                int groupID = Convert.ToInt32(Request.QueryString["ID"]);
-                Group group = GroupDAO.GetGroupFromGroupId(groupID);
-
+                
                 group.Name = txbGroupName.Text;
                 group.Description = txbDescription.Text;
                 group.HashTags = hashTags;

@@ -41,6 +41,7 @@ namespace ActivEarth.Groups
                     textIndex = 0;
                 }
             }
+            messages.Reverse();
         }
 
         private TableRow MakeRowForTable(ActivEarth.Objects.Groups.Message message, Color backColor, Color textColor)

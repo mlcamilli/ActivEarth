@@ -40,6 +40,7 @@ namespace ActivEarth.Account
                     textIndex = 0;
                 }
             }
+            messages.Reverse();
             _wall.Width = new Unit(80, UnitType.Percentage);
         }
 
