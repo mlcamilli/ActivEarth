@@ -91,7 +91,12 @@ namespace ActivEarth
             
             string[] dateTime = DateTime.Now.ToString("MM/dd/yyyy h:mmtt").Split(' ');
             user.Post(new Message(txbTitle.Text, txbMessage.Text, user, dateTime[0], dateTime[1]));
-            UserDAO.UpdateUserProfile(user);
+            
+            if (UserDAO.UpdateUserProfile(user))
+            {
+                Session["userDetails"] = user;
+            }
+
             Response.Redirect(Request.RawUrl);
         }
     }

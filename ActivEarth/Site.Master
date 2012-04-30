@@ -43,9 +43,9 @@
             <uc:RecentActivityTable ID="RecentActivityTable" runat="server"/>
             </div>
             <div>
-            <asp:TextBox ID="txbTitle" runat="server" Width="80%">Message Title</asp:TextBox>
+            <asp:TextBox ID="txbTitle" runat="server" Width="80%" OnClick="this.value=''" Placeholder="Message Title"></asp:TextBox>
             <br/>
-            <asp:TextBox ID="txbMessage" runat="server" TextMode="MultiLine" Width="80%">Enter a message here...</asp:TextBox>
+            <asp:TextBox ID="txbMessage" runat="server" TextMode="MultiLine" Width="80%" Placeholder="Enter a message here..."></asp:TextBox>
             <br/>
             <asp:Button ID="PostButton" runat="server" OnClick="PostMessage" Text="Post"/>
             </div>
