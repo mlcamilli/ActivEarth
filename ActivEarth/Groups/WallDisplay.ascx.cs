@@ -24,6 +24,7 @@ namespace ActivEarth.Groups
             int colorIndex = 0;
             int textIndex = 0;
 
+            messages.Reverse();
             foreach (ActivEarth.Objects.Groups.Message message in messages)
             {
                 _wall.Rows.Add(MakeRowForTable(message, backColors[colorIndex], textColors[textIndex]));
@@ -48,8 +49,8 @@ namespace ActivEarth.Groups
             newRow.BackColor = backColor;
             newRow.Cells.Add(MakeImageCellForRow(message.Poster));
             newRow.Cells.Add(MakeTextCellForRow(message.Poster.UserName, textColor));
-            newRow.Cells.Add(MakeTextCellForRow(message.Title, textColor));
-            newRow.Cells.Add(MakeTextCellForRow(message.Text, textColor));
+            newRow.Cells.Add(MakeTextCellForRow("<b><u>" + message.Title + "</u></b><br/><br/>" +
+                message.Text + "<br/><br/><br/>" + message.Time + "&nbsp;&nbsp;&nbsp;" + message.Date + "</div>", textColor));
             return newRow;
         }
 

@@ -14,7 +14,7 @@
 
     <uc:GroupsDisplayTable ID="GroupsDisplayTable1" runat="server" />
      
-
+    <asp:Button ID="CreateGroupButton" CssClass="Button" runat="server" Text="Create a New Group" OnClick="CreateGroup" />                          
 
 
     <noframes>

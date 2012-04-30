@@ -9,7 +9,7 @@
                         Use the form below to create a new Group.
                     </p>
                     <p>
-                        Add hashtags so that users will be able to use search those terms to find your Group.
+                        Add hashtags so that users will be able to search those terms to find your Group.
                     </p>
                     <span class="failureNotification">
                         <asp:Literal ID="ErrorMessage" runat="server"></asp:Literal>
@@ -42,12 +42,13 @@
                             <p>
                                 <asp:Label ID="lblHashTags" runat="server" >Hashtags:</asp:Label><br />
                                 <asp:Label ID="lblAllHashTags" runat="server"></asp:Label>
+                                <asp:Button ID="ClearHashTagsButton" CssClass="Button" runat="server" Text="Remove Hashtags" OnClick="RemoveHashTags" />
                             </p>    
                         </fieldset>
                   
                             <asp:Button ID="CreateGroupButton" CssClass="Button" runat="server" CommandName="MoveNext" Text="Create Group" 
                                  ValidationGroup="RegisterGroupValidationGroup" OnClick="CreateNewGroup" />
-                      
+                            <asp:Button ID="CancelButton" CssClass="Button" runat="server" Text="Cancel" OnClick="Cancel" />
                     </div>
                 
           

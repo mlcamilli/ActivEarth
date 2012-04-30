@@ -29,7 +29,7 @@ namespace ActivEarth.Groups
             
             if (Session["userDetails"] == null)
             {
-                Response.Redirect("Login.aspx");
+                Response.Redirect("~/Account/Login.aspx");
 
             }
             else
@@ -42,13 +42,23 @@ namespace ActivEarth.Groups
 
                 List<ActivEarth.Objects.Groups.Group> userGroups = GroupDAO.GetGroupsByUser(this.userID);
 
-                Color[] backColors = { Color.FromArgb(75, 108, 158), Color.White };
+                Color[] backColors = { Color.FromArgb(34, 139, 34), Color.White };
                 Color[] textColors = { Color.White, Color.Black };
                 GroupsDisplayTable1.PopulateGroupsTable(userGroups, backColors, textColors); 
 
 
             }
 
+        }
+
+        protected void CreateGroup(object sender, EventArgs e)
+        {
+            Response.Redirect("/Groups/CreateGroup.aspx");
+        }
+
+        protected void EditGroup(object sender, EventArgs e)
+        {
+            Response.Redirect("/Groups/EditGroup.aspx");
         }
     }
 }

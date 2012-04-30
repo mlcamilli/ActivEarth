@@ -130,6 +130,15 @@ namespace ActivEarth.Groups {
         protected global::System.Web.UI.WebControls.Label lblAllHashTags;
         
         /// <summary>
+        /// ClearHashTagsButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ClearHashTagsButton;
+        
+        /// <summary>
         /// CreateGroupButton control.
         /// </summary>
         /// <remarks>
@@ -137,5 +146,14 @@ namespace ActivEarth.Groups {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button CreateGroupButton;
+        
+        /// <summary>
+        /// CancelButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button CancelButton;
     }
 }

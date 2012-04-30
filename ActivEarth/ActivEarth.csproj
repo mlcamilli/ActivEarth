@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -547,62 +547,6 @@
     </Compile>
     <Compile Include="Groups\CreateGroup.aspx.designer.cs">
       <DependentUpon>CreateGroup.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Groups\ContestPage.aspx.cs">
-      <DependentUpon>ContestPage.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Groups\ContestPage.aspx.designer.cs">
-      <DependentUpon>ContestPage.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Groups\GroupDisplay.aspx.cs">
-      <DependentUpon>GroupDisplay.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Groups\GroupDisplay.aspx.designer.cs">
-      <DependentUpon>GroupDisplay.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Groups\Groups.aspx.cs">
-      <DependentUpon>Groups.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Groups\Groups.aspx.designer.cs">
-      <DependentUpon>Groups.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Groups\GroupsDisplayTable.ascx.cs">
-      <DependentUpon>GroupsDisplayTable.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Groups\GroupsDisplayTable.ascx.designer.cs">
-      <DependentUpon>GroupsDisplayTable.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="Groups\MembersDisplayTable.ascx.cs">
-      <DependentUpon>MembersDisplayTable.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Groups\MembersDisplayTable.ascx.designer.cs">
-      <DependentUpon>MembersDisplayTable.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="Groups\MembersPage.aspx.cs">
-      <DependentUpon>MembersPage.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Groups\MembersPage.aspx.designer.cs">
-      <DependentUpon>MembersPage.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Groups\WallDisplay.ascx.cs">
-      <DependentUpon>WallDisplay.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Groups\WallDisplay.ascx.designer.cs">
-      <DependentUpon>WallDisplay.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="Groups\WallPage.aspx.cs">
-      <DependentUpon>WallPage.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Groups\WallPage.aspx.designer.cs">
-      <DependentUpon>WallPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="GroupTabs.master.cs">
       <DependentUpon>GroupTabs.master</DependentUpon>
