@@ -87,7 +87,7 @@
     <Content Include="Competition\Contests\ContestDisplayTable.ascx" />
     <Content Include="Competition\Contests\ContestGoalGraph.ascx" />
     <Content Include="Competition\Contests\ContestHomePage.aspx" />
-    <Content Include="Competition\Contests\ContestTimeGraph.ascx" />
+    <Content Include="Competition\Contests\ContestProgressGraph.ascx" />
     <Content Include="Competition\Contests\FindContestsPage.aspx" />
     <Content Include="Competition\Contests\DisplayContestPage.aspx" />
     <Content Include="Competition\Contests\LeaderBoard.ascx" />
@@ -436,12 +436,12 @@
     <Compile Include="Competition\Contests\ContestHomePage.aspx.designer.cs">
       <DependentUpon>ContestHomePage.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Competition\Contests\ContestTimeGraph.ascx.cs">
-      <DependentUpon>ContestTimeGraph.ascx</DependentUpon>
+    <Compile Include="Competition\Contests\ContestProgressGraph.ascx.cs">
+      <DependentUpon>ContestProgressGraph.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Competition\Contests\ContestTimeGraph.ascx.designer.cs">
-      <DependentUpon>ContestTimeGraph.ascx</DependentUpon>
+    <Compile Include="Competition\Contests\ContestProgressGraph.ascx.designer.cs">
+      <DependentUpon>ContestProgressGraph.ascx</DependentUpon>
     </Compile>
     <Compile Include="Competition\Contests\FindContestsPage.aspx.cs">
       <DependentUpon>FindContestsPage.aspx</DependentUpon>

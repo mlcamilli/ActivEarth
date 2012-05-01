@@ -11,7 +11,7 @@
         <uc1:DisplayChallengesControl ID="_displayWeeklyChallenges" runat="server" />
         Monthly Challenges
         <uc1:DisplayChallengesControl ID="_displayMonthlyChallenges" runat="server" />
-        Permanent Challenges
+        <!-- Permanent Challenges -->
         <uc1:DisplayChallengesControl ID="_displayPersistentChallenges" runat="server" />
     </div>
 </asp:Content>
