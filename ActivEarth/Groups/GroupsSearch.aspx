@@ -7,8 +7,11 @@
 </asp:Content>
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
     
+    <h2>
+    Search For Groups...
+    </h2>
  <div>
-    <asp:TextBox ID="searchBox" Text="search" runat="server" CssClass="textEntry"></asp:TextBox>
+    <asp:TextBox ID="searchBox" Placeholder="Enter a Group Name or Hashtag here..." runat="server" CssClass="textEntry" OnTextChanged="SearchGroups"></asp:TextBox>
     </div>
     <div>
     <asp:Button ID="SearchButton" Text="Search" runat="server"  OnClick="SearchGroups" />
