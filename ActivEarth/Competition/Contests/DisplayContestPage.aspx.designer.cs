@@ -103,22 +103,13 @@ namespace ActivEarth.Competition.Contests {
         protected global::System.Web.UI.WebControls.DropDownList GroupSelection;
         
         /// <summary>
-        /// GoalGraph control.
+        /// ProgressGraph control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::ActivEarth.Competition.Contests.ContestGraph GoalGraph;
-        
-        /// <summary>
-        /// TimeGraph control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::ActivEarth.Competition.Contests.ContestTimeGraph TimeGraph;
+        protected global::ActivEarth.Competition.Contests.ContestTimeGraph ProgressGraph;
         
         /// <summary>
         /// ContestLeaderBoard control.

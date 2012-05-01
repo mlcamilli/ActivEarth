@@ -70,20 +70,16 @@ ContestDAO.UpdateContestStandings(contestId);
             {
                 if (contest.Mode == ContestEndMode.TimeBased)
                 {
-                    TimeGraph.PopulateTimeGraph(contest.StartTime, contest.EndCondition.EndTime);
-                    TimeGraph.Visible = true;
+                    ProgressGraph.PopulateProgressGraph(contest.StartTime, contest.EndCondition.EndTime);
+                    ProgressGraph.Visible = true;
                 }
                 else
                 {
-                    GoalGraph.PopulateContestGraph(
+                    ProgressGraph.PopulateProgressGraph(
                         (contest.Teams.Count >= 1 ? contest.Teams[0] : null),
-                        (contest.Teams.Count >= 2 ? contest.Teams[1] : null),
-                        (contest.Teams.Count >= 3 ? contest.Teams[2] : null),
-                        TeamDAO.GetTeamFromUserIdAndContestId(user.UserID, contestId, false),
-                        contest.EndCondition.EndValue);
-
-                    GoalGraph.SetGraphLabels(contest.EndCondition.EndValue, contest.FormatString);
-                    GoalGraph.Visible = true;
+                        contest.EndCondition.EndValue,
+                        contest.FormatString);
+                    ProgressGraph.Visible = true;
                 }
 
                 Color[] backColors = { Color.FromArgb(34, 139, 34), Color.White };
