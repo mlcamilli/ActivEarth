@@ -74,7 +74,7 @@ namespace ActivEarth.Groups
             Group group = GroupDAO.GetGroupFromGroupId(groupID);
 
             User user = (User) Session["userDetails"];
-            string[] dateTime = DateTime.Now.ToString("MM/dd/yyyy h:MMtt").Split(' ');
+            string[] dateTime = DateTime.Now.ToString("MM/dd/yyyy h:mmtt").Split(' ');
             group.Post(new Message(txbTitle.Text, txbMessage.Text, user, dateTime[0], dateTime[1]));
             GroupDAO.UpdateGroup(group);
             Response.Redirect(Request.RawUrl);

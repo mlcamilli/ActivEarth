@@ -36,16 +36,14 @@ namespace ActivEarth.Groups
             {
                 var userDetails = (User)Session["userDetails"];
                 this.userID = userDetails.UserID;
-
-                lblUserName.Text = userDetails.UserName;
-
-
-                List<ActivEarth.Objects.Groups.Group> userGroups = GroupDAO.GetGroupsByUser(this.userID);
+                
+                List<Group> userGroups = GroupDAO.GetGroupsByUser(this.userID);
+                List<Group> ownedGroups = GroupDAO.GetAllGroupsByOwner(userDetails);
 
                 Color[] backColors = { Color.FromArgb(34, 139, 34), Color.White };
                 Color[] textColors = { Color.White, Color.Black };
-                GroupsDisplayTable1.PopulateGroupsTable(userGroups, backColors, textColors); 
-
+                GroupsDisplayTable1.PopulateGroupsTable(userGroups, backColors, textColors);
+                OwnedGroupsDisplayTable1.PopulateGroupsTable(ownedGroups, backColors, textColors);
 
             }
 

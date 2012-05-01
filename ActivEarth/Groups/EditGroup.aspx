@@ -3,14 +3,15 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 <h2>
-                        Edit a New Group
+                        Manage Group
                     </h2>
                     <p>
-                        Use the form below to create a new Group.
+                        Use the form below to manage your Group's information.
                     </p>
                     <p>
                         Add hashtags so that users will be able to search those terms to find your Group.
                     </p>
+
                     <span class="failureNotification">
                         <asp:Literal ID="ErrorMessage" runat="server"></asp:Literal>
                     </span>
@@ -46,9 +47,10 @@
                             </p>    
                         </fieldset>
                   
-                            <asp:Button ID="CreateGroupButton" CssClass="Button" runat="server" CommandName="MoveNext" Text="Create Group" 
-                                 ValidationGroup="RegisterGroupValidationGroup" OnClick="CreateNewGroup" />
-                      
+                            <asp:Button ID="EditGroupButton" CssClass="Button" runat="server" CommandName="MoveNext" Text="Edit Group Information" 
+                                 ValidationGroup="RegisterGroupValidationGroup" OnClick="EditGroupInformation" />
+                            <asp:Button ID="DeleteButton" CssClass="Button" runat="server" Text="Delete Group" OnClick="DeleteGroup" />
+                            <asp:Button ID="CancelButton" CssClass="Button" runat="server" Text="Cancel" OnClick="Cancel" />
                     </div>
                 
           

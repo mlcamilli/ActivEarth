@@ -46,7 +46,19 @@ namespace ActivEarth.Account
         }
         protected void SaveUserProfile(object sender, EventArgs e)
         {
-            
+
+            if (tbAge.Text == null)
+            {
+                tbAge.Text = "0";
+            }
+            if (tbHeight.Text == null)
+            {
+                tbHeight.Text = "0";
+            }
+            if (tbWeight.Text == null)
+            {
+                tbWeight.Text = "0";
+            }
 
             var user = new User
                            {
@@ -59,8 +71,8 @@ namespace ActivEarth.Account
                                State = tbState.Text,
                                Age = int.Parse(tbAge.Text),
                                Height = int.Parse(tbHeight.Text),
-                               Weight = int.Parse(tbWeight.Text)
-
+                               Weight = int.Parse(tbWeight.Text),
+                               Wall = ((User)Session["userDetails"]).Wall
                            };
 
             if (pictureFile.HasFile)

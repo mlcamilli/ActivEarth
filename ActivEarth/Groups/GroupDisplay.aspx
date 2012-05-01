@@ -36,9 +36,9 @@
 <br/><br/><br />
 <br/>
 <div>
-<asp:TextBox ID="txbTitle" runat="server">Message Title</asp:TextBox>
+<asp:TextBox ID="txbTitle" runat="server" Placeholder="Message Title"></asp:TextBox>
 <br/>
-<asp:TextBox ID="txbMessage" runat="server" TextMode="MultiLine" Width="90%">Enter a message here...</asp:TextBox>
+<asp:TextBox ID="txbMessage" runat="server" TextMode="MultiLine" Width="90%" Placeholder="Enter a message here..."></asp:TextBox>
 <br/>
 <asp:Button ID="PostButton" runat="server" OnClick="PostMessage" Text="Post"/>
 </div>
