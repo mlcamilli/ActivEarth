@@ -46,6 +46,9 @@ namespace ActivEarth.Competition.Contests
                 contestNames.Add("End test");
                 contestIds.Add(cid);
                 */
+
+
+
                 #endregion ---------- Test Code ----------
 
                 foreach (int id in contestIds)

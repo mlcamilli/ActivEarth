@@ -89,7 +89,6 @@
     <Content Include="Competition\Contests\FindContestsPage.aspx" />
     <Content Include="Competition\Contests\DisplayContestPage.aspx" />
     <Content Include="Competition\Contests\LeaderBoard.ascx" />
-    <Content Include="Competition\Contests\LeaderBoardRow.ascx" />
     <Content Include="Competition\Contests\TeamDisplayTable.ascx" />
     <Content Include="Images\Competition\Badges\Time_Biked\Bronze.png" />
     <Content Include="Images\Competition\Badges\Time_Biked\Diamond.png" />
@@ -436,13 +435,6 @@
     </Compile>
     <Compile Include="Competition\Contests\LeaderBoard.ascx.designer.cs">
       <DependentUpon>LeaderBoard.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="Competition\Contests\LeaderBoardRow.ascx.cs">
-      <DependentUpon>LeaderBoardRow.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Competition\Contests\LeaderBoardRow.ascx.designer.cs">
-      <DependentUpon>LeaderBoardRow.ascx</DependentUpon>
     </Compile>
     <Compile Include="Competition\Contests\TeamDisplayTable.ascx.cs">
       <DependentUpon>TeamDisplayTable.ascx</DependentUpon>

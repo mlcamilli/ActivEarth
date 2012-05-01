@@ -102,25 +102,8 @@ namespace ActivEarth.Competition.Contests
                 Team usersTeam = TeamDAO.GetTeamFromUserIdAndContestId(user.UserID, contest.ID, false);
                 List<Team> teamsToDisplay = ContestManager.GetTeamsToDisplay(usersTeam, contest);
 
-                ContestLeaderBoard.MakeLeaderBoard(teamsToDisplay, backColors, textColors, contest.FormatString);
+                ContestLeaderBoard.PopulateLeaderBoard(teamsToDisplay, backColors, textColors, contest.FormatString);
                 ContestLeaderBoard.Visible = true;
-
-                /*
-                if (contest.Mode == ContestEndMode.GoalBased)
-                {
-                    if (contest.Teams.Count > 0 && contest.EndCondition.EndValue <= contest.Teams[0].Score)
-                    {
-                        LoadContestCompleteData(contest, usersTeam);
-                    }
-                }
-                else
-                {
-                    if (contest.EndCondition.EndTime <= DateTime.Now)
-                    {
-                        LoadContestCompleteData(contest, usersTeam);
-                    }
-                }
-                 * */
             }
         }
 
@@ -193,49 +176,6 @@ namespace ActivEarth.Competition.Contests
                 NoTeamsMessage.Visible = false;
                 CurrentTeamsSignedUp.PopulateTeamTable(contest.Teams, backColors, textColors);
             }
-        }
-
-        private void LoadContestCompleteData(Contest contest, Team usersTeam)
-        {
-            if (contest.Type == ContestType.Group)
-            {
-                ContestRankMessage.Text = "You finished in the ";
-                ContestRewardMessage.Text = "Your group received ";
-            }
-            else
-            {
-                ContestRankMessage.Text = "Your group finished in the ";
-                ContestRewardMessage.Text = "You received ";
-            }
-
-            List<int> rewards = ContestDAO.CalculateBracketRewards(contest);
-            if (usersTeam.Bracket == (byte)ContestBracket.Bronze)
-            {
-                ContestRankMessage.Text += "Bronze bracket.";
-                ContestRewardMessage.Text += rewards[(int)ContestBracket.Bronze] + " activity points.";
-            }
-            else if (usersTeam.Bracket == (byte)ContestBracket.Silver)
-            {
-                ContestRankMessage.Text += "Silver bracket.";
-                ContestRewardMessage.Text += rewards[(int)ContestBracket.Silver] + " activity points.";
-            }
-            else if (usersTeam.Bracket == (byte)ContestBracket.Gold)
-            {
-                ContestRankMessage.Text += "Gold bracket.";
-                ContestRewardMessage.Text += rewards[(int)ContestBracket.Gold] + " activity points.";
-            }
-            else if (usersTeam.Bracket == (byte)ContestBracket.Platinum)
-            {
-                ContestRankMessage.Text += "Platinum bracket.";
-                ContestRewardMessage.Text += rewards[(int)ContestBracket.Platinum] + " activity points.";
-            }
-            else
-            {
-                ContestRankMessage.Text += "Diamond bracket.";
-                ContestRewardMessage.Text += rewards[(int)ContestBracket.Diamond] + " activity points.";
-            }
-
-            ContestCompletePanel.Visible = true;
         }
 
         protected void JoinContest(object sender, EventArgs e)
