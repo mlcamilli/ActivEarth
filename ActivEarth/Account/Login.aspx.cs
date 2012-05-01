@@ -25,7 +25,7 @@ namespace ActivEarth.Account
             }else
             {
                 Session["userDetails"] = userDetails;
-                Response.Redirect("~/Groups/Groups.aspx");
+                Response.Redirect("~/Account/Profile.aspx");
             }
         }
     }
