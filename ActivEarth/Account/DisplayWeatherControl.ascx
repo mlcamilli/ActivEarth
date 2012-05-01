@@ -17,6 +17,7 @@
         style="z-index: 1; left: 5px; top: 8px; position: absolute; height: 40px; width: 40px" 
         Width="40px" />
     <asp:Label ID="TempF" runat="server" 
-        style="z-index: 1; left: 5px; top: 74px; position: absolute; width: 65px;" 
+        style="z-index: 1; left: 5px; top: 74px; position: absolute; width: 85px;" 
         Text="TempF"></asp:Label>
+
 </asp:Panel>

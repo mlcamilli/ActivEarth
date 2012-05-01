@@ -22,12 +22,11 @@ namespace ActivEarth.Objects.Profile
 
             if (xmlConditions.SelectSingleNode("xml_api_reply/weather/problem_cause") != null)
             {
-                //Error handle
+                Panel1.Visible = false;
             }
             else
             {  
                Condition.Text = xmlConditions.SelectSingleNode("/xml_api_reply/weather/current_conditions/condition").Attributes["data"].InnerText;
-               //TempC.Text = xmlConditions.SelectSingleNode("/xml_api_reply/weather/current_conditions/temp_c").Attributes["data"].InnerText;
                TempF.Text = string.Format("{0}°F", xmlConditions.SelectSingleNode("/xml_api_reply/weather/current_conditions/temp_f").Attributes["data"].InnerText);
                Humidity.Text = xmlConditions.SelectSingleNode("/xml_api_reply/weather/current_conditions/humidity").Attributes["data"].InnerText;
                Wind.Text = xmlConditions.SelectSingleNode("/xml_api_reply/weather/current_conditions/wind_condition").Attributes["data"].InnerText;
