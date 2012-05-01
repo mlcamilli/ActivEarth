@@ -28,7 +28,7 @@ namespace ActivEarth.DAO
                                     Height = p.height,
                                     Weight = p.weight,
                                     Group = p.groups,
-                                    ProfileVisibility =  (ProfileVisibility)p.profile_visibility,
+                                    ProfileVisibility =  p.profile_visibility,
                                     UserID = p.user_id
                                 });
             }
@@ -57,7 +57,7 @@ namespace ActivEarth.DAO
                                     Height = p.height,
                                     Weight = p.weight,
                                     Group = p.groups,
-                                    ProfileVisibility = (ProfileVisibility)p.profile_visibility,
+                                    ProfileVisibility = p.profile_visibility,
                                     UserID = p.user_id
                                 }).FirstOrDefault();
             }
@@ -92,7 +92,7 @@ namespace ActivEarth.DAO
                                 Height = p.height,
                                 Weight = p.weight,
                                 Group = p.groups,
-                                ProfileVisibility = (ProfileVisibility)p.profile_visibility,
+                                ProfileVisibility = p.profile_visibility,
                                 UserID = p.user_id
                             }).FirstOrDefault();
             }
