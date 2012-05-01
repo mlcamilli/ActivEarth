@@ -191,8 +191,8 @@ namespace ActivEarth.Server.Service.Competition
 
             return (int)Math.Round(Math.Pow(members, membersExponent) * 
                 ((daysCoefficient * days) + daysInitial));
-        }
-
+        } 
+        
         /// <summary>
         /// Cleans up the contest list, deactivating expired time-based contests and deleting
         /// deactivated contests that have reached the end of their retainment period.
