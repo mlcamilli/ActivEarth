@@ -5,27 +5,28 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Drawing;
-using ActivEarth.Account;
 using ActivEarth.Groups;
 using ActivEarth.Objects.Groups;
+using ActivEarth.Objects.Profile;
 
-namespace ActivEarth.Groups
+namespace ActivEarth.Account
 {
-    public partial class GroupsDisplayTable : System.Web.UI.UserControl
+    public partial class WallDisplay : System.Web.UI.UserControl
     {
         protected void Page_Load(object sender, EventArgs e)
         {
 
         }
         
-        public void PopulateGroupsTable(List<ActivEarth.Objects.Groups.Group> groups, Color[] backColors, Color[] textColors)
+        public void PopulateMessageTable(List<ActivEarth.Objects.Groups.Message> messages, Color[] backColors, Color[] textColors)
         {
             int colorIndex = 0;
             int textIndex = 0;
 
-            foreach (ActivEarth.Objects.Groups.Group group in groups)
+            messages.Reverse();
+            foreach (ActivEarth.Objects.Groups.Message message in messages)
             {
-                _groupsTable.Rows.Add(MakeRowForTable(group, backColors[colorIndex], textColors[textIndex]));
+                _wall.Rows.Add(MakeRowForTable(message, backColors[colorIndex], textColors[textIndex]));
 
                 colorIndex++;
                 if (colorIndex == backColors.Length)
@@ -39,17 +40,16 @@ namespace ActivEarth.Groups
                     textIndex = 0;
                 }
             }
+            messages.Reverse();
+            _wall.Width = new Unit(80, UnitType.Percentage);
         }
 
-        private TableRow MakeRowForTable(ActivEarth.Objects.Groups.Group group, Color backColor, Color textColor)
+        private TableRow MakeRowForTable(ActivEarth.Objects.Groups.Message message, Color backColor, Color textColor)
         {        
             TableRow newRow = new TableRow();
             newRow.BackColor = backColor;
-            newRow.Cells.Add(MakeLinkCellForRow(group.Name, group.ID, textColor));
-            newRow.Cells.Add(MakeTextCellForRow(group.Description, textColor));
-            newRow.Cells.Add(MakeTextCellForRow(group.Owner.UserName, textColor));
-            newRow.Cells.Add(MakeTextCellForRow(group.ActivityScore.TotalScore.ToString(), textColor));
-            newRow.Cells.Add(MakeTextCellForRow(group.GreenScore.ToString(), textColor));  
+            newRow.Cells.Add(MakeTextCellForRow("<b><u>" + message.Title + "</u></b><br/><br/>" +
+                message.Text + "<br/><br/><br/>" + message.Time + "&nbsp;&nbsp;&nbsp;" + message.Date + "</div>", textColor));
             return newRow;
         }
 
@@ -63,18 +63,7 @@ namespace ActivEarth.Groups
             return newCell;
         }
 
-        private TableCell MakeLinkCellForRow(string text, int groupId, Color textColor)
-        {
-            TableCell newCell = new TableCell();
-            HyperLink textLink = new HyperLink();
-            textLink.Text = text;
-            textLink.ForeColor = textColor;
-            textLink.NavigateUrl = "~/Groups/GroupDisplay.aspx?ID=" + groupId;
-            newCell.Controls.Add(textLink);
-            return newCell;
-        }   
-
-/*        private TableCell MakeControlCellForRow(int groupID)
+   /*     private TableCell MakeControlCellForRow(int groupID)
         {
             TableCell newCell = new TableCell();
 
@@ -94,7 +83,7 @@ namespace ActivEarth.Groups
         {
             Button clickedButton = (Button)sender;
             Response.Redirect("~/Groups/GroupDisplay.aspx?ID=" + clickedButton.ID);
-        }*/
+        } */
 
     }
 }

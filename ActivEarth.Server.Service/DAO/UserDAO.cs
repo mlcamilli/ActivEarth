@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using ActivEarth.Objects.Profile;
 using ActivEarth.Objects.Competition;
 using ActivEarth.Server.Service;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
 
 namespace ActivEarth.DAO
 {
@@ -257,6 +261,51 @@ namespace ActivEarth.DAO
                     }
                     return false;
                 }
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public static bool AddBadgePoints(int userId, int points)
+        {
+            try
+            {
+                User user = UserDAO.GetUserFromUserId(userId);
+                user.ActivityScore.AddBadgePoints(points);
+                UserDAO.UpdateUserProfile(user);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public static bool AddChallengePoints(int userId, int points)
+        {
+            try
+            {
+                User user = UserDAO.GetUserFromUserId(userId);
+                user.ActivityScore.AddChallengePoints(points);
+                UserDAO.UpdateUserProfile(user);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public static bool AddContestPoints(int userId, int points)
+        {
+            try
+            {
+                User user = UserDAO.GetUserFromUserId(userId);
+                user.ActivityScore.AddContestPoints(points);
+                UserDAO.UpdateUserProfile(user);
+                return true;
             }
             catch (Exception)
             {

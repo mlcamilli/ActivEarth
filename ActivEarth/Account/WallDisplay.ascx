@@ -1,4 +1,4 @@
-<%@ Control Language="C#" AutoEventWireup="True" CodeBehind="WallDisplay.ascx.cs" Inherits="ActivEarth.Groups.WallDisplay" %>
+<%@ Control Language="C#" AutoEventWireup="True" CodeBehind="WallDisplay.ascx.cs" Inherits="ActivEarth.Account.WallDisplay" %>
 
 <asp:Table ID="_wall" runat="server" BorderStyle="Solid" 
     BorderColor="Black" ForeColor="Black" Font-Names="Georgia" 

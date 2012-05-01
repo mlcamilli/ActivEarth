@@ -148,6 +148,11 @@ namespace ActivEarth.Tests.Competition
                 Log("Verifying team count");
                 Assert.AreEqual(2, contest.Teams.Count);
 
+                Assert.IsTrue(ContestManager.UserCompetingInContest(_user1.UserID, id));
+                Assert.IsTrue(ContestManager.UserCompetingInContest(_user2.UserID, id));
+                Assert.IsTrue(ContestManager.UserCompetingInContest(_user3.UserID, id));
+                Assert.IsTrue(ContestManager.UserCompetingInContest(_user4.UserID, id));
+
                 Log("Verifying number of members per team");
                 Assert.AreEqual(2, contest.Teams[0].Members.Count);
                 Assert.AreEqual(2, contest.Teams[1].Members.Count);

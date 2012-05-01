@@ -14,6 +14,7 @@ using ActivEarth.Account;
 using ActivEarth.Groups;
 using ActivEarth.Objects.Groups;
 using ActivEarth.Objects;
+using ActivEarth.Objects.Competition.Contests;
 using ActivEarth.Server.Service;
 using ActivEarth.Objects.Profile;
 using ActivEarth.Server.Service.Competition;
@@ -44,20 +45,21 @@ namespace ActivEarth.Groups
 
                 lblGroupName.Text = currentGroup.Name;
                 lblDescription.Text = currentGroup.Description;
-
+                
                 Color[] backColors = { Color.FromArgb(75, 108, 158), Color.White };
                 Color[] textColors = { Color.White, Color.Black };
-    
-                List<int> contestIdList = ContestDAO.GetContestIdsFromGroupId(groupID);
+
+                List<Contest> contestList = currentGroup.Contests;
+                List<int>    contestIdList = new List<int>();
                 List<string> contestNameList = new List<string>();
 
-                foreach (int id in contestIdList)
+                foreach (Contest contest in contestList)
                 {
-                    contestNameList.Add(ContestDAO.GetContestNameFromContestId(id));
+                    contestIdList.Add(contest.ID);
+                    contestNameList.Add(contest.Name);
                 }
                 
-                ContestDisplayTable1.PopulateContestTable(contestNameList, contestIdList, backColors, textColors);
-
+                ContestDisplayTable1.PopulateContestTable(contestNameList, contestIdList, backColors, textColors); 
 
 
             }

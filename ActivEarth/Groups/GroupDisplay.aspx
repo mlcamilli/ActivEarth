@@ -14,16 +14,34 @@
 <h3>
     <asp:Label runat="server" ID="lblDescription"></asp:Label>
 </h3>
-
+<br />
+<h2>Members</h2>
 <div class="groupTitle">
-
 <uc:MembersDisplayTable ID="MembersDisplayTable1" runat="server" />
+</div>
 
-<uc1:WallDisplay ID="WallDisplay1" runat="server" />
-
+<br /><br /><br /><br /><br /><br /><br /><br /><br />
+<h2>Contests</h2>
+<div>
 <uc2:ContestDisplayTable ID="ContestDisplayTable1" runat="server" />
-
+<asp:Label runat="server" ID="Label1"></asp:Label>
 </div> 
+
+<br /><br /><br />
+<h2>Recent Activity</h2>
+<div>
+<uc1:WallDisplay ID="WallDisplay1" runat="server" />
+</div>
+<br/><br/><br/><br/><br />
+<br/><br/><br />
+<br/>
+<div>
+<asp:TextBox ID="txbTitle" runat="server" Placeholder="Message Title"></asp:TextBox>
+<br/>
+<asp:TextBox ID="txbMessage" runat="server" TextMode="MultiLine" Width="90%" Placeholder="Enter a message here..."></asp:TextBox>
+<br/>
+<asp:Button ID="PostButton" runat="server" OnClick="PostMessage" Text="Post"/>
+</div>
 
 
 

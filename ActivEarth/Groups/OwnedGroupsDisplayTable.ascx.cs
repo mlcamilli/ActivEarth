@@ -11,7 +11,7 @@ using ActivEarth.Objects.Groups;
 
 namespace ActivEarth.Groups
 {
-    public partial class GroupsDisplayTable : System.Web.UI.UserControl
+    public partial class OwnedGroupsDisplayTable : System.Web.UI.UserControl
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -25,7 +25,7 @@ namespace ActivEarth.Groups
 
             foreach (ActivEarth.Objects.Groups.Group group in groups)
             {
-                _groupsTable.Rows.Add(MakeRowForTable(group, backColors[colorIndex], textColors[textIndex]));
+                _ownedGroupsTable.Rows.Add(MakeRowForTable(group, backColors[colorIndex], textColors[textIndex]));
 
                 colorIndex++;
                 if (colorIndex == backColors.Length)
@@ -47,7 +47,6 @@ namespace ActivEarth.Groups
             newRow.BackColor = backColor;
             newRow.Cells.Add(MakeLinkCellForRow(group.Name, group.ID, textColor));
             newRow.Cells.Add(MakeTextCellForRow(group.Description, textColor));
-            newRow.Cells.Add(MakeTextCellForRow(group.Owner.UserName, textColor));
             newRow.Cells.Add(MakeTextCellForRow(group.ActivityScore.TotalScore.ToString(), textColor));
             newRow.Cells.Add(MakeTextCellForRow(group.GreenScore.ToString(), textColor));  
             return newRow;
@@ -69,7 +68,7 @@ namespace ActivEarth.Groups
             HyperLink textLink = new HyperLink();
             textLink.Text = text;
             textLink.ForeColor = textColor;
-            textLink.NavigateUrl = "~/Groups/GroupDisplay.aspx?ID=" + groupId;
+            textLink.NavigateUrl = "~/Groups/EditGroup.aspx?ID=" + groupId;
             newCell.Controls.Add(textLink);
             return newCell;
         }   

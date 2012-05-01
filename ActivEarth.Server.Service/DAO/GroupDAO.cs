@@ -64,6 +64,11 @@ namespace ActivEarth.DAO
                                       Contests = contests
                                    }).FirstOrDefault();
 
+                if (toReturn == null)
+                {
+                    return null;
+                }
+
                 toReturn.Owner = UserDAO.GetUserFromUserId(((from g in data.GroupDataProviders
                                                             where g.id == groupId
                                                             select
@@ -72,6 +77,31 @@ namespace ActivEarth.DAO
                 RecentActivityDAO.GetGroupRecentActivity(toReturn);
 
                 return toReturn;
+            }
+        }
+
+        /// <summary>
+        /// Retrieves a Group with the given name.
+        /// </summary>
+        /// <param name="partialName">A the desired Group's name.</param>
+        /// <returns>Groups in the database with the given name.</returns>
+        public static Group GetGroupFromName(string name)
+        {
+            using (SqlConnection connection = ConnectionManager.GetConnection())
+            {
+                var data = new ActivEarthDataProvidersDataContext(connection);
+
+                int? groupId = (from g in data.GroupDataProviders
+                                    where g.name.ToLower() == name.ToLower()
+                                    select g.id
+                                    ).FirstOrDefault();
+
+                if (groupId == null)
+                {
+                    return null;
+                }
+
+                return GetGroupFromGroupId((int) groupId);
             }
         }
 
@@ -169,7 +199,7 @@ namespace ActivEarth.DAO
                 var data = new ActivEarthDataProvidersDataContext(connection);
 
                 List<int> groupIds = (from g in data.GroupDataProviders
-                                      where g.name.ToLower().Contains(partialName)
+                                      where g.name.ToLower().Contains(partialName.ToLower())
                                       select g.id
                                       ).ToList();
 
@@ -197,7 +227,7 @@ namespace ActivEarth.DAO
                 var data = new ActivEarthDataProvidersDataContext(connection);
                 
                 List<int> groupIds = (from h in data.GroupHashtagDataProviders
-                                      where h.hashtag.ToLower().Contains(hashtag)
+                                      where h.hashtag.ToLower().Contains(hashtag.ToLower())
                                       select h.group_id
                                       ).ToList();
 

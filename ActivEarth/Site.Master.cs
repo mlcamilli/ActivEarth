@@ -8,6 +8,8 @@ using System.Web.UI.WebControls;
 using ActivEarth.Objects;
 using ActivEarth.Objects.Profile;
 using ActivEarth.DAO;
+using System.Drawing;
+using ActivEarth.Objects.Groups;
 
 namespace ActivEarth
 {
@@ -32,6 +34,11 @@ namespace ActivEarth
                 lblUserName.Text = userDetails.FirstName + " " + userDetails.LastName;
                 userIconImage.ImageUrl = getUserImageUrl(userDetails, "icon");
 
+                List<Message> messages = userDetails.Wall.Messages;
+                Color[] backColors = {Color.White, Color.FromArgb(34, 139, 34)};
+                Color[] textColors = {Color.Black, Color.White };
+                RecentActivityTable.PopulateMessageTable(messages, backColors, textColors);
+
                 lblStatSteps.Text = userDetails.GetStatistic(Statistic.Steps).ToString() + " steps";
                 lblStatWalkDistance.Text = userDetails.GetStatistic(Statistic.WalkDistance).ToString() + " miles";
                 lblStatBikeDistance.Text = userDetails.GetStatistic(Statistic.BikeDistance).ToString() + " miles";
@@ -43,6 +50,7 @@ namespace ActivEarth
                 lblStatWalkTime.Text = userDetails.GetStatistic(Statistic.WalkTime).ToString() + " hr";
                 lblStatBikeTime.Text = userDetails.GetStatistic(Statistic.BikeTime).ToString() + " hr";
                 lblStatRunTime.Text = userDetails.GetStatistic(Statistic.RunTime).ToString() + " hr";
+                DisplayWeatherControl1.GetCurrentConditions(userDetails.City.Replace(' ', '+'));
             }
 
         }
@@ -62,7 +70,7 @@ namespace ActivEarth
         /// <param name="user">The user to retrieve the image for.</param>
         /// <param name="imageSizeName">The name of the image size to retrieve.</param>
         /// <returns></returns>
-        private string getUserImageUrl(User user, string imageSizeName)
+        public string getUserImageUrl(User user, string imageSizeName)
         {
             string path = Server.MapPath("~") + "\\Images\\Account\\UserProfile\\" + imageSizeName + "\\";
             int userImageDir = (user.UserID / 1000);
@@ -76,6 +84,21 @@ namespace ActivEarth
             {
                 return String.Format("/Images/Account/UserProfileDefaults/default_{0}.png", imageSizeName);
             }
+        }
+
+        protected void PostMessage(object sender, EventArgs e)
+        {
+            User user = (User)Session["userDetails"];
+            
+            string[] dateTime = DateTime.Now.ToString("MM/dd/yyyy h:mmtt").Split(' ');
+            user.Post(new Message(txbTitle.Text, txbMessage.Text, user, dateTime[0], dateTime[1]));
+            
+            if (UserDAO.UpdateUserProfile(user))
+            {
+                Session["userDetails"] = user;
+            }
+
+            Response.Redirect(Request.RawUrl);
         }
     }
 }

@@ -30,7 +30,7 @@ namespace ActivEarth.Groups
             
             if (Session["userDetails"] == null)
             {
-                Response.Redirect("Login.aspx");
+                Response.Redirect("~/Account/Login.aspx");
 
             }
             else if (Request.QueryString["ID"] == null)
@@ -46,7 +46,7 @@ namespace ActivEarth.Groups
                 lblDescription.Text = currentGroup.Description;
 
                 List<ActivEarth.Objects.Profile.User> membersList = currentGroup.Members;
-                Color[] backColors = { Color.FromArgb(75, 108, 158), Color.White };
+                Color[] backColors = { Color.FromArgb(34, 139, 34), Color.White };
                 Color[] textColors = { Color.White, Color.Black };
                 MembersDisplayTable1.PopulateMembersTable(membersList, backColors, textColors);
 
@@ -64,11 +64,20 @@ namespace ActivEarth.Groups
                 }
                 
                 ContestDisplayTable1.PopulateContestTable(contestNameList, contestIdList, backColors, textColors);
-
-
-
             }
+        }
 
+
+        protected void PostMessage(object sender, EventArgs e){
+
+            int groupID = Convert.ToInt32(Request.QueryString["ID"]);
+            Group group = GroupDAO.GetGroupFromGroupId(groupID);
+
+            User user = (User) Session["userDetails"];
+            string[] dateTime = DateTime.Now.ToString("MM/dd/yyyy h:mmtt").Split(' ');
+            group.Post(new Message(txbTitle.Text, txbMessage.Text, user, dateTime[0], dateTime[1]));
+            GroupDAO.UpdateGroup(group);
+            Response.Redirect(Request.RawUrl);
         }
     }
 }
