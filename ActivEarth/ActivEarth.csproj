@@ -273,6 +273,7 @@
     <Content Include="Images\Competition\ProgressBar\ProgressBarIndicator.png" />
     <Content Include="Images\Competition\ProgressBar\ProgressBarLeft.png" />
     <Content Include="Images\Competition\ProgressBar\ProgressBarRight.png" />
+    <Content Include="Images\Home\ActivEarthLogo1.gif" />
     <Content Include="Images\Home\background.png" />
     <Content Include="Images\Home\trans_earth.gif" />
     <Content Include="Styles\Not.css" />
