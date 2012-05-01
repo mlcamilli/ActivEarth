@@ -29,7 +29,7 @@ namespace ActivEarth.Groups
             
             if (Session["userDetails"] == null)
             {
-                Response.Redirect("Login.aspx");
+                Response.Redirect("~/Account/Login.aspx");
 
             }
             else if (Request.QueryString["Term"] == null)
@@ -43,8 +43,22 @@ namespace ActivEarth.Groups
 
                 String searchTerm = Request.QueryString["Term"];
 
-                List<ActivEarth.Objects.Groups.Group> searchGroups = GroupDAO.GetAllGroupsByName(searchTerm);
-                searchGroups.Union(GroupDAO.GetAllGroupsByHashTag(searchTerm));
+                List<Group> searchGroups = GroupDAO.GetAllGroupsByName(searchTerm);
+                List<Group> taggedGroups = GroupDAO.GetAllGroupsByHashTag(searchTerm);
+
+                foreach(Group group in taggedGroups){
+                    Boolean found = false;
+
+                    foreach(Group group2 in searchGroups){
+                        if (group.ID == group2.ID)
+                        {
+                            found = true;
+                        }
+                    }
+                    if (!found){
+                        searchGroups.Add(group);
+                    }
+                }
 
                 Color[] backColors = { Color.FromArgb(34, 139, 34), Color.White };
                 Color[] textColors = { Color.White, Color.Black };
