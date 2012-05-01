@@ -88,17 +88,20 @@ namespace ActivEarth
 
         protected void PostMessage(object sender, EventArgs e)
         {
-            User user = (User)Session["userDetails"];
-            
-            string[] dateTime = DateTime.Now.ToString("MM/dd/yyyy h:mmtt").Split(' ');
-            user.Post(new Message(txbTitle.Text, txbMessage.Text, user, dateTime[0], dateTime[1]));
-            
-            if (UserDAO.UpdateUserProfile(user))
+            if (txbTitle.Text != "" && txbMessage.Text != "")
             {
-                Session["userDetails"] = user;
-            }
+                User user = (User)Session["userDetails"];
 
-            Response.Redirect(Request.RawUrl);
+                string[] dateTime = DateTime.Now.ToString("MM/dd/yyyy h:mmtt").Split(' ');
+                user.Post(new Message(txbTitle.Text, txbMessage.Text, user, dateTime[0], dateTime[1]));
+
+                if (UserDAO.UpdateUserProfile(user))
+                {
+                    Session["userDetails"] = user;
+                }
+
+                Response.Redirect(Request.RawUrl);
+            }
         }
     }
 }
