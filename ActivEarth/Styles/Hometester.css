@@ -40,8 +40,16 @@ p
 TITLEBANNER
 {
     color: #ffffff;
-    font-size: 4em;
-    padding: 0px 0px 0px 20px;
+    font-size: 7em;
+    padding: 0px 0px 0px 270px;
+    font-family:"Adobe Garamond Pro Bold", Georgia, "Times New Roman", Times, serif;
+}
+
+SLOGANBANNER
+{
+    color: #ffffff;
+    font-size: 2em;
+    padding: 0px 0px 0px 480px;
     font-family:"Adobe Garamond Pro Bold", Georgia, "Times New Roman", Times, serif;
 }
 
@@ -60,17 +68,21 @@ h1
     font-size: 1.6em;
     padding-bottom: 0px;
     margin-bottom: 0px;
+    text-align: center;
+    font-weight: 600;
 }
 
 h2
 {
     font-size: 1.5em;
     font-weight: 600;
+    text-align: center;
 }
 
 h3
 {
     font-size: 1.2em;
+    text-align: center;
 }
 
 h4
@@ -80,6 +92,7 @@ h4
 
 h5, h6
 {
+    font: 000000;
     font-size: 1em;
 }
 
@@ -125,58 +138,6 @@ p
 }
 
 
-/* HEADINGS   
-----------------------------------------------------------*/
-TITLEBANNER
-{
-    color: #ffffff;
-    font-size: 7em;
-    padding: 0px 0px 0px 270px;
-    font-family:"Adobe Garamond Pro Bold", Georgia, "Times New Roman", Times, serif;
-    
-}
-
-h1, h2, h3, 
-{
-    font-family:"Adobe Garamond Pro Bold", Georgia, "Times New Roman", Times, serif;
-    font-size: 1.5em;
-    color: #ffffff;
-    text-transform: none;
-    font-weight: 200;
-    margin-bottom: 0px;
-}
-
-h1
-{
-    text-align: center;
-    font-size: 2em;
-    padding-bottom: 0px;
-    margin-bottom: 0px;
-}
-
-h2
-{
-    text-align: center;
-    font-size: 1.5em;
-    font-weight: 600;
-}
-
-h3
-{
-    text-align: center;
-    font-size: 1.2em;
-}
-
-
-
-/* this rule styles <h1> and <h2> tags that are the 
-first child of the left and right table columns */
-.rightColumn > h1, .rightColumn > h2, .leftColumn > h1, .leftColumn > h2
-{
-    margin-top: 0px;
-}
-
-
 .contentBox
 {
 width:670px;
@@ -209,8 +170,6 @@ margin-right:13px;
 .page
 {
     width: 960px;
-    /*background-image: "~/Images/Home/background.png";
-     background-repeat:repeat-x;*/
     background-color: #009933;
     margin: 20px auto 0px auto;
     border: 2px solid #000000;
@@ -221,7 +180,16 @@ margin-right:13px;
 {
     position: relative;
     margin: 0px;
-    padding: 4px 0px 60px 0px;
+    padding: 4px 0px 40px 0px;
+    background: #1493fa;
+    width: 100%;
+}
+
+.headerextend
+{
+    position: relative;
+    margin: 0px;
+    padding: 0px 0px 15px 0px;
     background: #1493fa;
     width: 100%;
 }

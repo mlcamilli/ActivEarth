@@ -4,7 +4,7 @@
  <html>
     <head id="Head1" runat="server">
         <title>ActivEarth</title>
-        <link href="~/Styles/test.css" rel="stylesheet" type="text/css" />
+        <link href="~/Styles/Hometester.css" rel="stylesheet" type="text/css" />
         <asp:ContentPlaceHolder ID="HeadContent" runat="server">
         </asp:ContentPlaceHolder>
 <style type="text/css">
@@ -26,18 +26,23 @@
           </p> 
             <div class="header">
                 <div class="title">
-                    <TITLEBANNER>ActivEarth</TITLEBANNER>
-                                          
+                    <TITLEBANNER>ActivEarth</TITLEBANNER>                                           
                 </div>
-
+             
 
                 <div class="loginDisplay">
                             <asp:Label runat="server" ID="lblUserLoggedIn"></asp:Label>
                             <asp:HyperLink runat="server" ID="hlLogin" NavigateUrl="~/Account/Login.aspx" Text="Log In"></asp:HyperLink>
                             <asp:LinkButton runat="server" ID="lbLogOut" OnClick="UserLogOut" Text="Log Out" ></asp:LinkButton>    
                             <asp:HyperLink runat="server" ID="hlRegister" NavigateUrl="~/Account/Register.aspx" Text="Register"></asp:HyperLink>                          
-                </div>        
+                </div>     
+             
             </div>
+
+            <div class="headerextend">
+            <SLOGANBANNER>"Burn Calories, not Carbon"</SLOGANBANNER>  
+            </div>
+
             <div class="mainNotLoggedIn">
                 <asp:ContentPlaceHolder ID="MainContent" runat="server"/>
             </div>

@@ -38,6 +38,16 @@
 <div>
 <uc1:WallDisplay ID="WallDisplay1" runat="server" />
 </div>
+<br/><br/><br/><br/><br />
+<br/><br/><br />
+<br/>
+<div>
+<asp:TextBox ID="txbTitle" runat="server" Placeholder="Message Title"></asp:TextBox>
+<br/>
+<asp:TextBox ID="txbMessage" runat="server" TextMode="MultiLine" Width="90%" Placeholder="Enter a message here..."></asp:TextBox>
+<br/>
+<asp:Button ID="PostButton" runat="server" OnClick="PostMessage" Text="Post"/>
+</div>
 
 <br /><br />
 

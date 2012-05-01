@@ -7,18 +7,18 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ActivEarth.Competition.Contests {
+namespace ActivEarth.Groups {
     
     
-    public partial class LeaderBoard {
+    public partial class OwnedGroupsDisplayTable {
         
         /// <summary>
-        /// LeaderBoardTable control.
+        /// _ownedGroupsTable control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Table LeaderBoardTable;
+        protected global::System.Web.UI.WebControls.Table _ownedGroupsTable;
     }
 }

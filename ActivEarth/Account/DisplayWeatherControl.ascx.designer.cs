@@ -7,45 +7,63 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ActivEarth.Competition.Contests {
+namespace ActivEarth.Objects.Profile {
     
     
-    public partial class LeaderBoardRow {
+    public partial class DisplayWeatherControl {
         
         /// <summary>
-        /// Row control.
+        /// Panel1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel Row;
+        protected global::System.Web.UI.WebControls.Panel Panel1;
         
         /// <summary>
-        /// BracketImage control.
+        /// Wind control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image BracketImage;
+        protected global::System.Web.UI.WebControls.Label Wind;
         
         /// <summary>
-        /// TeamName control.
+        /// Humidity control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label TeamName;
+        protected global::System.Web.UI.WebControls.Label Humidity;
         
         /// <summary>
-        /// CurrentScore control.
+        /// Condition control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label CurrentScore;
+        protected global::System.Web.UI.WebControls.Label Condition;
+        
+        /// <summary>
+        /// ConditionImage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image ConditionImage;
+        
+        /// <summary>
+        /// TempF control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label TempF;
     }
 }

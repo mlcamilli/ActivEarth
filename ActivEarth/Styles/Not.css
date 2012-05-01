@@ -188,10 +188,6 @@ div.hideSkiplink
     width:100%;
 }
 
-/*div.menu
-{
-    padding: 0px 0px 16px 155px;
-}*/
 
 div.menu ul
 {
@@ -367,3 +363,4 @@ div.accountInfo, div.contestInfo
 	 font-family:"Adobe Garamond Pro Bold", Georgia, "Times New Roman", Times, serif;
     padding-right: 10px;
 }
+

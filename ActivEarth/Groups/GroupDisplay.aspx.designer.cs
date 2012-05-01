@@ -40,6 +40,15 @@ namespace ActivEarth.Groups {
         protected global::ActivEarth.Groups.MembersDisplayTable MembersDisplayTable1;
         
         /// <summary>
+        /// hypSeeMore control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink hypSeeMore;
+        
+        /// <summary>
         /// ContestDisplayTable1 control.
         /// </summary>
         /// <remarks>
@@ -65,14 +74,32 @@ namespace ActivEarth.Groups {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::ActivEarth.Groups.WallDisplay WallDisplay1;
-
+        
         /// <summary>
-        /// hypSeeMore control.
+        /// txbTitle control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink hypSeeMore;
+        protected global::System.Web.UI.WebControls.TextBox txbTitle;
+        
+        /// <summary>
+        /// txbMessage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txbMessage;
+        
+        /// <summary>
+        /// PostButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button PostButton;
     }
 }

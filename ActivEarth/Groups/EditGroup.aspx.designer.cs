@@ -7,126 +7,162 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ActivEarth.Competition.Contests {
+namespace ActivEarth.Groups {
     
     
-    public partial class DisplayContestPage {
+    public partial class EditGroup {
         
         /// <summary>
-        /// ContestName control.
+        /// ErrorMessage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label ContestName;
+        protected global::System.Web.UI.WebControls.Literal ErrorMessage;
         
         /// <summary>
-        /// ContestDescription control.
+        /// RegisterGroupValidationSummary control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label ContestDescription;
+        protected global::System.Web.UI.WebControls.ValidationSummary RegisterGroupValidationSummary;
         
         /// <summary>
-        /// ContestSignUpPanel control.
+        /// GroupNameLabel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel ContestSignUpPanel;
+        protected global::System.Web.UI.WebControls.Label GroupNameLabel;
         
         /// <summary>
-        /// NoTeamsMessage control.
+        /// txbGroupName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label NoTeamsMessage;
+        protected global::System.Web.UI.WebControls.TextBox txbGroupName;
         
         /// <summary>
-        /// CurrentTeamsSignedUp control.
+        /// GroupNameRequired control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::ActivEarth.Competition.Contests.TeamDisplayTable CurrentTeamsSignedUp;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator GroupNameRequired;
         
         /// <summary>
-        /// SignUpErrorMessage control.
+        /// DescriptionLabel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label SignUpErrorMessage;
+        protected global::System.Web.UI.WebControls.Label DescriptionLabel;
         
         /// <summary>
-        /// ContestSignUpControls control.
+        /// txbDescription control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Table ContestSignUpControls;
+        protected global::System.Web.UI.WebControls.TextBox txbDescription;
         
         /// <summary>
-        /// btnJoinContest control.
+        /// DescriptionRequired control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnJoinContest;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator DescriptionRequired;
         
         /// <summary>
-        /// btnLeaveContest control.
+        /// lblHashTag control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnLeaveContest;
+        protected global::System.Web.UI.WebControls.Label lblHashTag;
         
         /// <summary>
-        /// GroupSelection control.
+        /// txbHashTag control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList GroupSelection;
+        protected global::System.Web.UI.WebControls.TextBox txbHashTag;
         
         /// <summary>
-        /// GoalGraph control.
+        /// AddHashTagButton control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::ActivEarth.Competition.Contests.ContestGraph GoalGraph;
+        protected global::System.Web.UI.WebControls.Button AddHashTagButton;
         
         /// <summary>
-        /// TimeGraph control.
+        /// lblHashTags control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::ActivEarth.Competition.Contests.ContestTimeGraph TimeGraph;
+        protected global::System.Web.UI.WebControls.Label lblHashTags;
         
         /// <summary>
-        /// ContestLeaderBoard control.
+        /// lblAllHashTags control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::ActivEarth.Competition.Contests.LeaderBoard ContestLeaderBoard;
+        protected global::System.Web.UI.WebControls.Label lblAllHashTags;
+        
+        /// <summary>
+        /// ClearHashTagsButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ClearHashTagsButton;
+        
+        /// <summary>
+        /// EditGroupButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button EditGroupButton;
+        
+        /// <summary>
+        /// DeleteButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button DeleteButton;
+        
+        /// <summary>
+        /// CancelButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button CancelButton;
     }
 }

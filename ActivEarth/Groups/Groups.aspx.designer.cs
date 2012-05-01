@@ -13,15 +13,6 @@ namespace ActivEarth.Groups {
     public partial class Groups {
         
         /// <summary>
-        /// lblUserName control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblUserName;
-        
-        /// <summary>
         /// GroupsDisplayTable1 control.
         /// </summary>
         /// <remarks>
@@ -47,5 +38,23 @@ namespace ActivEarth.Groups {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button SearchButton;
+        
+        /// <summary>
+        /// OwnedGroupsDisplayTable1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::ActivEarth.Groups.OwnedGroupsDisplayTable OwnedGroupsDisplayTable1;
+        
+        /// <summary>
+        /// CreateGroupButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button CreateGroupButton;
     }
 }
