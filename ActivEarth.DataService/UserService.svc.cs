@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
@@ -16,6 +17,11 @@ namespace ActivEarth.DataService
         public User GetUser(string userName, string password)
         {
             return UserDAO.GetUserFromUserNameAndPassword(userName, password);
+        }
+
+        public Collection<User> GetAllUsers()
+        {
+            return UserDAO.GetAllUsers();
         }
     }
 }
