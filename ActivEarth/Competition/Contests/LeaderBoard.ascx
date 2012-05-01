@@ -5,5 +5,6 @@
         <asp:TableHeaderCell Text="Bracket"></asp:TableHeaderCell>
         <asp:TableHeaderCell Text="Team Name"></asp:TableHeaderCell>
         <asp:TableHeaderCell Text="Score"></asp:TableHeaderCell>
+        <asp:TableHeaderCell Text="Reward"></asp:TableHeaderCell>
     </asp:TableHeaderRow>
 </asp:Table>

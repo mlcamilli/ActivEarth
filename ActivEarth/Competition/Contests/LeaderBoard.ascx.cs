@@ -17,7 +17,7 @@ namespace ActivEarth.Competition.Contests
 
         }
 
-        public void PopulateLeaderBoard(List<Team> teams, Color[] backColors, Color[] textColors, string scoreFormat)
+        public void PopulateLeaderBoard(List<Team> teams, Color[] backColors, Color[] textColors, string scoreFormat, List<int> rewards)
         {
             int colorIndex = 0;
             int textIndex = 0;
@@ -26,7 +26,7 @@ namespace ActivEarth.Competition.Contests
             {
                 if (team != null)
                 {
-                    LeaderBoardTable.Rows.Add(MakeRowForTable(team, backColors[colorIndex], textColors[textIndex], scoreFormat));
+                    LeaderBoardTable.Rows.Add(MakeRowForTable(team, backColors[colorIndex], textColors[textIndex], scoreFormat, rewards));
 
                     colorIndex++;
                     if (colorIndex == backColors.Length)
@@ -43,7 +43,7 @@ namespace ActivEarth.Competition.Contests
             }
         }
 
-        private TableRow MakeRowForTable(Team team, Color backColor, Color textColor, string scoreFormat)
+        private TableRow MakeRowForTable(Team team, Color backColor, Color textColor, string scoreFormat, List<int> rewards)
         {
             TableRow newRow = new TableRow();
             newRow.BackColor = backColor;
@@ -51,6 +51,7 @@ namespace ActivEarth.Competition.Contests
             newRow.Cells.Add(MakeBracketCell(team));
             newRow.Cells.Add(MakeTeamCell(team));
             newRow.Cells.Add(MakeScoreCell(team, scoreFormat));
+            newRow.Cells.Add(MakeRewardCell(team, rewards));
             return newRow;
         }
 
@@ -113,6 +114,47 @@ namespace ActivEarth.Competition.Contests
             scoreCell.Controls.Add(scoreLabel);
 
             return scoreCell;
+        }
+
+        private TableCell MakeRewardCell(Team team, List<int> rewards)
+        {
+            TableCell rewardCell = new TableCell();
+            rewardCell.HorizontalAlign = HorizontalAlign.Right;
+            
+            Label rewardLabel = new Label();
+            rewardLabel.Style.Add("margin-right", "5px");
+
+            if (team.Bracket == (int)ContestBracket.Bronze)
+            {
+                rewardLabel.Text = rewards[0].ToString();
+            }
+            else if (team.Bracket == (int)ContestBracket.Silver)
+            {
+                rewardLabel.Text = rewards[1].ToString();
+            }
+            else if (team.Bracket == (int)ContestBracket.Gold)
+            {
+                rewardLabel.Text = rewards[2].ToString();
+            }
+            else if (team.Bracket == (int)ContestBracket.Platinum)
+            {
+                rewardLabel.Text = rewards[3].ToString();
+            }
+            else
+            {
+                rewardLabel.Text = rewards[4].ToString();
+            }
+
+            System.Web.UI.WebControls.Image activityScoreImage = new System.Web.UI.WebControls.Image();
+            activityScoreImage.Width = new Unit("20px");
+            activityScoreImage.Height = new Unit("20px");
+            activityScoreImage.ImageAlign = ImageAlign.Middle;
+            activityScoreImage.ImageUrl = "~/Images/Competition/Activity_Score.png";
+
+            rewardCell.Controls.Add(rewardLabel);
+            rewardCell.Controls.Add(activityScoreImage);
+
+            return rewardCell;
         }
     }
 }

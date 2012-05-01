@@ -103,60 +103,6 @@ namespace ActivEarth.Competition.Contests {
         protected global::System.Web.UI.WebControls.DropDownList GroupSelection;
         
         /// <summary>
-        /// ContestCompletePanel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel ContestCompletePanel;
-        
-        /// <summary>
-        /// ContestCompletedMessage control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label ContestCompletedMessage;
-        
-        /// <summary>
-        /// ContestRankMessage control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label ContestRankMessage;
-        
-        /// <summary>
-        /// ContestRewardMessage control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label ContestRewardMessage;
-        
-        /// <summary>
-        /// RewardsTable control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::ActivEarth.Competition.Contests.ActivityPointsTable RewardsTable;
-        
-        /// <summary>
-        /// ContestStatusTable control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Table ContestStatusTable;
-        
-        /// <summary>
         /// GoalGraph control.
         /// </summary>
         /// <remarks>

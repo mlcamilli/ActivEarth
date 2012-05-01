@@ -43,7 +43,7 @@ namespace ActivEarth.Competition.Contests
 
 #region Test Code ------------------------------------------------------------------------
 
-//ContestDAO.UpdateContestStandings(contestId);
+ContestDAO.UpdateContestStandings(contestId);
 
 #endregion Test Code ------------------------------------------------------------------------
 
@@ -68,16 +68,6 @@ namespace ActivEarth.Competition.Contests
             }
             else
             {
-                RewardsTable.Visible = true;
-                List<float> rewards = new List<float>();
-                rewards.Add(15);
-                rewards.Add(13);
-                rewards.Add(7);
-                rewards.Add(6);
-                rewards.Add(3);
-                rewards.Add(0);
-                RewardsTable.SetRewardValues(rewards);
-
                 if (contest.Mode == ContestEndMode.TimeBased)
                 {
                     TimeGraph.PopulateTimeGraph(contest.StartTime, contest.EndCondition.EndTime);
@@ -101,8 +91,8 @@ namespace ActivEarth.Competition.Contests
 
                 Team usersTeam = TeamDAO.GetTeamFromUserIdAndContestId(user.UserID, contest.ID, false);
                 List<Team> teamsToDisplay = ContestManager.GetTeamsToDisplay(usersTeam, contest);
-
-                ContestLeaderBoard.PopulateLeaderBoard(teamsToDisplay, backColors, textColors, contest.FormatString);
+                List<int> rewards = ContestDAO.CalculateBracketRewards(contest);
+                ContestLeaderBoard.PopulateLeaderBoard(teamsToDisplay, backColors, textColors, contest.FormatString, rewards);
                 ContestLeaderBoard.Visible = true;
             }
         }
