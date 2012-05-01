@@ -20,26 +20,64 @@ namespace ActivEarth.Groups
 
         }
         
-        public void PopulateMembersTable(List<User> users, Color[] backColors, Color[] textColors)
+        
+        public void PopulateMembersTable_Display(List<User> users, Color[] backColors, Color[] textColors)
         {
             TableRow imageRow = new TableRow();
             imageRow.BackColor = backColors[0];
             TableRow nameRow = new TableRow();
             nameRow.BackColor = backColors[1];
 
-            foreach (User user in users)
+            for (int i = 0; i < Math.Min(6, users.Count); i++)
             {
-                imageRow.Cells.Add(MakeImageCellForRow(user));
-                nameRow.Cells.Add(MakeTextCellForRow(user.UserName, textColors[1]));
+
+                imageRow.Cells.Add(MakeImageCellForRow(users.ElementAt(i)));
+                nameRow.Cells.Add(MakeTextCellForRow(users.ElementAt(i).UserName, textColors[1]));
+
             }
 
 
             _usersTable.Rows.Add(imageRow);
             _usersTable.Rows.Add(nameRow);
 
+        }
+
+        public void PopulateMembersTable_SeeAll(List<User> users, Color[] backColors, Color[] textColors)
+        {
+            int colorIndex = 0;
+            int textIndex = 0;
+          
+            foreach (User user in users)
+            {
+                _usersTable.Rows.Add(MakeRowForSeeAllTable(user, backColors[colorIndex], textColors[textIndex]));
+
+                colorIndex++;
+                if (colorIndex == backColors.Length)
+                {
+                    colorIndex = 0;
+                }
+
+                textIndex++;
+                if (textIndex == textColors.Length)
+                {
+                    textIndex = 0;
+                }
+            }
 
         }
 
+
+
+        private TableRow MakeRowForSeeAllTable(User user, Color backColor, Color textColor)
+        {
+            TableRow newRow = new TableRow();
+            newRow.BackColor = backColor;
+            newRow.Cells.Add(MakeImageCellForRow(user));
+            newRow.Cells.Add(MakeTextCellForRow(user.UserName, textColor));
+            return newRow;
+
+
+        }
 
         private TableCell MakeImageCellForRow(User user)
         {

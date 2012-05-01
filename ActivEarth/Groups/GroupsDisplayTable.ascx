@@ -10,5 +10,6 @@
         <asp:TableHeaderCell Text="Owner"></asp:TableHeaderCell>
         <asp:TableHeaderCell Text="Activity Score"></asp:TableHeaderCell>
         <asp:TableHeaderCell Text="Green Score"></asp:TableHeaderCell>
+        <asp:TableHeaderCell Text="Leave or Join?"></asp:TableHeaderCell>
     </asp:TableHeaderRow>
 </asp:Table>

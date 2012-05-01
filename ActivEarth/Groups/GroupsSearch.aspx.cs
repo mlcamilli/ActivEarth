@@ -20,7 +20,7 @@ using ActivEarth.DAO;
 
 namespace ActivEarth.Groups
 {
-    public partial class Groups : System.Web.UI.Page
+    public partial class GroupsSearch : System.Web.UI.Page
     {
         int userID;
 
@@ -32,19 +32,24 @@ namespace ActivEarth.Groups
                 Response.Redirect("Login.aspx");
 
             }
+            else if (Request.QueryString["Term"] == null)
+            {
+                Response.Redirect("~/Groups/Groups.aspx");
+            }
             else
             {
                 var userDetails = (User)Session["userDetails"];
                 this.userID = userDetails.UserID;
 
-                lblUserName.Text = userDetails.UserName;
+                String searchTerm = Request.QueryString["Term"];
 
-
-                List<ActivEarth.Objects.Groups.Group> userGroups = GroupDAO.GetGroupsByUser(this.userID);
+                List<ActivEarth.Objects.Groups.Group> searchGroups = GroupDAO.GetAllGroupsByName(searchTerm);
+                searchGroups.Union(GroupDAO.GetAllGroupsByHashTag(searchTerm));
 
                 Color[] backColors = { Color.FromArgb(34, 139, 34), Color.White };
                 Color[] textColors = { Color.White, Color.Black };
-                GroupsDisplayTable1.PopulateGroupsTable(userGroups, backColors, textColors); 
+               
+                SearchGroupsDisplayTable1.PopulateGroupsTable(searchGroups, backColors, textColors); 
 
 
             }
@@ -53,9 +58,8 @@ namespace ActivEarth.Groups
 
         protected void SearchGroups(object sender, EventArgs e)
         {
-            if(searchBox.Text.Length > 0)
+            if (searchBox.Text.Length > 0)
                 Response.Redirect("GroupsSearch.aspx?Term=" + searchBox.Text);
-
         }
     }
 }

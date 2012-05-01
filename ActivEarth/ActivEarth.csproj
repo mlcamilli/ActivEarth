@@ -95,6 +95,7 @@
     <Content Include="Groups\GroupDisplay.aspx" />
     <Content Include="Groups\Groups.aspx" />
     <Content Include="Groups\GroupsDisplayTable.ascx" />
+    <Content Include="Groups\GroupsSearch.aspx" />
     <Content Include="Groups\MembersDisplayTable.ascx" />
     <Content Include="Groups\MembersPage.aspx" />
     <Content Include="Groups\WallDisplay.ascx" />
@@ -503,6 +504,13 @@
     </Compile>
     <Compile Include="Groups\GroupsDisplayTable.ascx.designer.cs">
       <DependentUpon>GroupsDisplayTable.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Groups\GroupsSearch.aspx.cs">
+      <DependentUpon>GroupsSearch.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Groups\GroupsSearch.aspx.designer.cs">
+      <DependentUpon>GroupsSearch.aspx</DependentUpon>
     </Compile>
     <Compile Include="Groups\MembersDisplayTable.ascx.cs">
       <DependentUpon>MembersDisplayTable.ascx</DependentUpon>

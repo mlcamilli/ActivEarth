@@ -10,25 +10,7 @@
 namespace ActivEarth.Groups {
     
     
-    public partial class Groups {
-        
-        /// <summary>
-        /// lblUserName control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblUserName;
-        
-        /// <summary>
-        /// GroupsDisplayTable1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::ActivEarth.Groups.GroupsDisplayTable GroupsDisplayTable1;
+    public partial class GroupsSearch {
         
         /// <summary>
         /// searchBox control.
@@ -47,5 +29,14 @@ namespace ActivEarth.Groups {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button SearchButton;
+        
+        /// <summary>
+        /// SearchGroupsDisplayTable1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::ActivEarth.Groups.GroupsDisplayTable SearchGroupsDisplayTable1;
     }
 }
