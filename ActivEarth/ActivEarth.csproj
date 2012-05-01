@@ -85,7 +85,6 @@
     <Content Include="Competition\Contests\ContestRewardsTable.ascx" />
     <Content Include="Competition\Contests\ContestCreationPage.aspx" />
     <Content Include="Competition\Contests\ContestDisplayTable.ascx" />
-    <Content Include="Competition\Contests\ContestGoalGraph.ascx" />
     <Content Include="Competition\Contests\ContestHomePage.aspx" />
     <Content Include="Competition\Contests\ContestProgressGraph.ascx" />
     <Content Include="Competition\Contests\FindContestsPage.aspx" />
@@ -421,13 +420,6 @@
     </Compile>
     <Compile Include="Competition\Contests\ContestDisplayTable.ascx.designer.cs">
       <DependentUpon>ContestDisplayTable.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="Competition\Contests\ContestGoalGraph.ascx.cs">
-      <DependentUpon>ContestGoalGraph.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Competition\Contests\ContestGoalGraph.ascx.designer.cs">
-      <DependentUpon>ContestGoalGraph.ascx</DependentUpon>
     </Compile>
     <Compile Include="Competition\Contests\ContestHomePage.aspx.cs">
       <DependentUpon>ContestHomePage.aspx</DependentUpon>
