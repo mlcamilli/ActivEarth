@@ -264,7 +264,6 @@
     <Content Include="Images\Competition\Contests\BronzeBracket.png" />
     <Content Include="Images\Competition\Contests\DiamondBracket.png" />
     <Content Include="Images\Competition\Contests\GoldBracket.png" />
-    <Content Include="Images\Competition\Contests\NoneBracket.png" />
     <Content Include="Images\Competition\Contests\PlatinumBracket.png" />
     <Content Include="Images\Competition\Contests\SilverBracket.png" />
     <Content Include="Images\Competition\Misc\Calender.png" />
