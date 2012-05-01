@@ -10,6 +10,7 @@ using ActivEarth.Objects.Groups;
 namespace ActivEarth.Objects.Profile
 {
     [DataContract]
+    [DataServiceKey()]
     public class User
     {
         [DataMember]

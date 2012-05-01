@@ -15,7 +15,7 @@ namespace ActivEarth.Objects.Profile
         /// <summary>
         /// Field representing the overall visibility of a user's profile.
         /// </summary>
-        public ProfileVisibility ProfileVisibility
+        public int ProfileVisibility
 
         { 
             get;
