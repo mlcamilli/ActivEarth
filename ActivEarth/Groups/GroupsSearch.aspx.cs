@@ -20,7 +20,7 @@ using ActivEarth.DAO;
 
 namespace ActivEarth.Groups
 {
-    public partial class Groups : System.Web.UI.Page
+    public partial class GroupsSearch : System.Web.UI.Page
     {
         int userID;
 
@@ -29,22 +29,28 @@ namespace ActivEarth.Groups
             
             if (Session["userDetails"] == null)
             {
-                Response.Redirect("~/Account/Login.aspx");
+                Response.Redirect("Login.aspx");
 
+            }
+            else if (Request.QueryString["Term"] == null)
+            {
+                Response.Redirect("~/Groups/Groups.aspx");
             }
             else
             {
                 var userDetails = (User)Session["userDetails"];
                 this.userID = userDetails.UserID;
-                
-                List<Group> userGroups = GroupDAO.GetGroupsByUser(this.userID);
-                List<Group> ownedGroups = GroupDAO.GetAllGroupsByOwner(userDetails);
 
+                String searchTerm = Request.QueryString["Term"];
+
+                List<ActivEarth.Objects.Groups.Group> searchGroups = GroupDAO.GetAllGroupsByName(searchTerm);
+                searchGroups.Union(GroupDAO.GetAllGroupsByHashTag(searchTerm));
 
                 Color[] backColors = { Color.FromArgb(34, 139, 34), Color.White };
                 Color[] textColors = { Color.White, Color.Black };
-                GroupsDisplayTable1.PopulateGroupsTable(userGroups, backColors, textColors);
-                OwnedGroupsDisplayTable1.PopulateGroupsTable(ownedGroups, backColors, textColors);
+               
+                SearchGroupsDisplayTable1.PopulateGroupsTable(searchGroups, backColors, textColors); 
+
 
             }
 
@@ -54,16 +60,6 @@ namespace ActivEarth.Groups
         {
             if (searchBox.Text.Length > 0)
                 Response.Redirect("GroupsSearch.aspx?Term=" + searchBox.Text);
-        }
-
-        protected void CreateGroup(object sender, EventArgs e)
-        {
-            Response.Redirect("/Groups/CreateGroup.aspx");
-        }
-
-        protected void EditGroup(object sender, EventArgs e)
-        {
-            Response.Redirect("/Groups/EditGroup.aspx");
         }
     }
 }

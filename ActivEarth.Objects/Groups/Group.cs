@@ -178,8 +178,18 @@ namespace ActivEarth.Objects.Groups
         /// <param name="quittingUser">The User to be removed from the Group.</param>
         public void Quit(User quittingUser)
         {
-            this.Members.Remove(quittingUser);
-            
+            int index = -1;
+            for (int i = 0; i < Members.Count; i++)
+            {
+                if (Members.ElementAt(i).UserID == quittingUser.UserID)
+                {
+                    index = i;
+                    break;
+                }
+            }
+            if(index > -1)
+                this.Members.RemoveAt(index);
+
         }
 
         /// <summary>

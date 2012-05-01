@@ -45,8 +45,8 @@ namespace ActivEarth.Groups
 
                 lblGroupName.Text = currentGroup.Name;
                 lblDescription.Text = currentGroup.Description;
-                
-                Color[] backColors = { Color.FromArgb(75, 108, 158), Color.White };
+
+                Color[] backColors = { Color.FromArgb(34, 139, 34), Color.White };
                 Color[] textColors = { Color.White, Color.Black };
 
                 List<Contest> contestList = currentGroup.Contests;

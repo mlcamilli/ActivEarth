@@ -6,13 +6,17 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Drawing;
 using ActivEarth.Account;
+using ActivEarth.Objects.Profile;
 using ActivEarth.Groups;
 using ActivEarth.Objects.Groups;
+using ActivEarth.DAO;
 
 namespace ActivEarth.Groups
 {
     public partial class GroupsDisplayTable : System.Web.UI.UserControl
     {
+        User userDetails;
+
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -20,6 +24,8 @@ namespace ActivEarth.Groups
         
         public void PopulateGroupsTable(List<ActivEarth.Objects.Groups.Group> groups, Color[] backColors, Color[] textColors)
         {
+            this.userDetails = (User)Session["userDetails"];
+
             int colorIndex = 0;
             int textIndex = 0;
 
@@ -41,6 +47,7 @@ namespace ActivEarth.Groups
             }
         }
 
+
         private TableRow MakeRowForTable(ActivEarth.Objects.Groups.Group group, Color backColor, Color textColor)
         {        
             TableRow newRow = new TableRow();
@@ -49,7 +56,15 @@ namespace ActivEarth.Groups
             newRow.Cells.Add(MakeTextCellForRow(group.Description, textColor));
             newRow.Cells.Add(MakeTextCellForRow(group.Owner.UserName, textColor));
             newRow.Cells.Add(MakeTextCellForRow(group.ActivityScore.TotalScore.ToString(), textColor));
-            newRow.Cells.Add(MakeTextCellForRow(group.GreenScore.ToString(), textColor));  
+            newRow.Cells.Add(MakeTextCellForRow(group.GreenScore.ToString(), textColor));
+            if (MembersContains(group.Members, userDetails))
+            {  
+                newRow.Cells.Add(MakeButtonCellForRow(group.ID, 0));
+            }
+            else
+            {
+                newRow.Cells.Add(MakeButtonCellForRow(group.ID, 1));  
+            }
             return newRow;
         }
 
@@ -72,29 +87,87 @@ namespace ActivEarth.Groups
             textLink.NavigateUrl = "~/Groups/GroupDisplay.aspx?ID=" + groupId;
             newCell.Controls.Add(textLink);
             return newCell;
+        }
+
+        private TableCell MakeJoinCellForRow(int groupId, Color textColor)
+        {
+            TableCell newCell = new TableCell();
+            HyperLink textLink = new HyperLink();
+            textLink.Text = "Click to Join!";
+            textLink.ForeColor = textColor;
+            textLink.NavigateUrl = "Groups.aspx";
+            newCell.Controls.Add(textLink);
+
+            return newCell;
+        }
+
+        private TableCell MakeQuitCellForRow(int groupId, Color textColor)
+        {
+            TableCell newCell = new TableCell();
+            HyperLink textLink = new HyperLink();
+            textLink.Text = "Click to Leave Group";
+            textLink.ForeColor = textColor;
+            textLink.NavigateUrl = "Groups.aspx";
+            newCell.Controls.Add(textLink);
+
+            return newCell;
         }   
 
-/*        private TableCell MakeControlCellForRow(int groupID)
+        private TableCell MakeButtonCellForRow(int groupID, int leaveOrJoin)
         {
             TableCell newCell = new TableCell();
 
             Button b = new Button();
-            b.Text = "To the Group!";
             b.ID = groupID.ToString();
-            b.OnClientClick = "buttonClick";
-            b.Controls.Add(new LiteralControl("buttonClick"));
-            b.Click += new EventHandler(buttonClick);
+
+            if(leaveOrJoin == 0)
+            {
+                b.Text = "Leave the Group";
+                b.Click += new EventHandler(quitClick);
+            }
+            else
+            {
+                b.Text = "Join the Group!";
+                b.Click += new EventHandler(joinClick);
+            }
 
             newCell.Controls.Add(b);
 
             return newCell;
         }
 
-        private void buttonClick(object sender, EventArgs e)
+
+        private void joinClick(object sender, EventArgs e)
         {
             Button clickedButton = (Button)sender;
-            Response.Redirect("~/Groups/GroupDisplay.aspx?ID=" + clickedButton.ID);
-        }*/
+
+            Group currentGroup = GroupDAO.GetGroupFromGroupId(Convert.ToInt32(clickedButton.ID));
+            currentGroup.Join(userDetails);
+            GroupDAO.UpdateGroup(currentGroup);
+
+            Response.Redirect("Groups.aspx");
+        }
+
+        private void quitClick(object sender, EventArgs e)
+        {
+            Button clickedButton = (Button)sender;
+
+            Group currentGroup = GroupDAO.GetGroupFromGroupId(Convert.ToInt32(clickedButton.ID));
+            currentGroup.Quit(userDetails);
+            GroupDAO.UpdateGroup(currentGroup);
+    
+            Response.Redirect("Groups.aspx");
+        }
+
+        private Boolean MembersContains(List<User> members, User user)
+        {
+            foreach (User member in members)
+            {
+                if (member.UserID == userDetails.UserID)
+                    return true;
+            }
+            return false;
+        }
 
     }
 }

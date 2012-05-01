@@ -10,9 +10,9 @@
     <asp:Label runat="server" ID="lblGroupName"></asp:Label>
 </h2>
 <h3>
-    <asp:Label runat="server" ID="lblDescription"></asp:Label>
+    All Users:
 </h3>
-
+<br />
 <div class="groupTitle">
 
 <uc:MembersDisplayTable ID="MembersDisplayTable1" runat="server" />

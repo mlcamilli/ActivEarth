@@ -20,7 +20,12 @@
 <uc:MembersDisplayTable ID="MembersDisplayTable1" runat="server" />
 </div>
 
-<br /><br /><br /><br /><br /><br /><br /><br /><br />
+<br /><br /><br /><br /><br /><br />
+
+<asp:HyperLink ID="hypSeeMore" runat="server" Text="See More"></asp:HyperLink>
+
+<br /><br /><br /><br /><br /><br />
+
 <h2>Contests</h2>
 <div>
 <uc2:ContestDisplayTable ID="ContestDisplayTable1" runat="server" />
@@ -28,6 +33,7 @@
 </div> 
 
 <br /><br /><br />
+
 <h2>Recent Activity</h2>
 <div>
 <uc1:WallDisplay ID="WallDisplay1" runat="server" />
@@ -42,6 +48,8 @@
 <br/>
 <asp:Button ID="PostButton" runat="server" OnClick="PostMessage" Text="Post"/>
 </div>
+
+<br /><br />
 
 
 
