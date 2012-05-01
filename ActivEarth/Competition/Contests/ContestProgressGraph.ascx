@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ContestTimeGraph.ascx.cs" Inherits="ActivEarth.Competition.Contests.ContestTimeGraph" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ContestProgressGraph.ascx.cs" Inherits="ActivEarth.Competition.Contests.ContestTimeGraph" %>
 <%@ Register Assembly="EO.Web" Namespace="EO.Web" TagPrefix="eo" %>
 
 <asp:Panel ID="_DisplayGraph" runat="server"   
@@ -19,5 +19,5 @@
     <asp:Label ID="_StartLabel" runat="server" Text="Start" 
         style="z-index: 1; left: 7px; top: 65px; position: absolute"></asp:Label>
     <asp:Label ID="_EndLabel" runat="server" Text="Finish" 
-        style="z-index: 1; left: 224px; top: 65px; position: absolute"></asp:Label>
+        style="z-index: 1; left: 61px; top: 65px; position: absolute; width: 198px; text-align: right"></asp:Label>
 </asp:Panel>

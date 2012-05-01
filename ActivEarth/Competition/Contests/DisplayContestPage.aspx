@@ -1,9 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Tabs.Master" AutoEventWireup="true" CodeBehind="DisplayContestPage.aspx.cs" Inherits="ActivEarth.Competition.Contests.DisplayContestPage" %>
 
 <%@ Register src="LeaderBoard.ascx" tagname="LeaderBoard" tagprefix="uc" %>
-<%@ Register src="ContestGoalGraph.ascx" tagname="ContestGoalGraph" tagprefix="uc" %>
-<%@ Register src="ContestTimeGraph.ascx" tagname="ContestTimeGraph" tagprefix="uc" %>
 <%@ Register src="TeamDisplayTable.ascx" tagname="TeamDisplayTable" tagprefix="uc" %>
+<%@ Register src="ContestProgressGraph.ascx" tagname="ContestProgressGraph" tagprefix="uc" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>
@@ -37,8 +36,7 @@
     </div>
 
     <div align="center">
-        <uc:ContestGoalGraph ID="GoalGraph" runat="server" Visible="False" />
-        <uc:ContestTimeGraph ID="TimeGraph" runat="server" Visible="False" />
+        <uc:ContestProgressGraph ID="ProgressGraph" runat="server" />
         <uc:LeaderBoard ID="ContestLeaderBoard" runat="server" Visible="False"/>
     </div>
     

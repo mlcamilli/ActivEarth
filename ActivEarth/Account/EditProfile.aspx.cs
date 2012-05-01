@@ -47,15 +47,15 @@ namespace ActivEarth.Account
         protected void SaveUserProfile(object sender, EventArgs e)
         {
 
-            if (tbAge.Text == null)
+            if (tbAge.Text == "")
             {
                 tbAge.Text = "0";
             }
-            if (tbHeight.Text == null)
+            if (tbHeight.Text == "")
             {
                 tbHeight.Text = "0";
             }
-            if (tbWeight.Text == null)
+            if (tbWeight.Text == "")
             {
                 tbWeight.Text = "0";
             }

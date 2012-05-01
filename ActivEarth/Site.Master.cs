@@ -50,7 +50,23 @@ namespace ActivEarth
                 lblStatWalkTime.Text = userDetails.GetStatistic(Statistic.WalkTime).ToString() + " hr";
                 lblStatBikeTime.Text = userDetails.GetStatistic(Statistic.BikeTime).ToString() + " hr";
                 lblStatRunTime.Text = userDetails.GetStatistic(Statistic.RunTime).ToString() + " hr";
-                DisplayWeatherControl1.GetCurrentConditions(userDetails.City.Replace(' ', '+'));
+                if (userDetails.City != "")
+                {
+                    if (DisplayWeatherControl1.GetCurrentConditions(userDetails.City.Replace(' ', '+')))
+                    {
+                        CityNotFound.Text = "";
+                    }
+                    else
+                    {
+                        DisplayWeatherControl1.Visible = false;
+                        CityNotFound.Text = "City was not found.  Please edit the city in your profile information to view Weather updates.";
+                    }
+                }
+                else
+                {
+                    DisplayWeatherControl1.Visible = false ;
+                    CityNotFound.Text = "Please enter a city into your profile information to view Weather updates.";
+                }
             }
 
         }
@@ -88,17 +104,20 @@ namespace ActivEarth
 
         protected void PostMessage(object sender, EventArgs e)
         {
-            User user = (User)Session["userDetails"];
-            
-            string[] dateTime = DateTime.Now.ToString("MM/dd/yyyy h:mmtt").Split(' ');
-            user.Post(new Message(txbTitle.Text, txbMessage.Text, user, dateTime[0], dateTime[1]));
-            
-            if (UserDAO.UpdateUserProfile(user))
+            if (txbTitle.Text != "" && txbMessage.Text != "")
             {
-                Session["userDetails"] = user;
-            }
+                User user = (User)Session["userDetails"];
 
-            Response.Redirect(Request.RawUrl);
+                string[] dateTime = DateTime.Now.ToString("MM/dd/yyyy h:mmtt").Split(' ');
+                user.Post(new Message(txbTitle.Text, txbMessage.Text, user, dateTime[0], dateTime[1]));
+
+                if (UserDAO.UpdateUserProfile(user))
+                {
+                    Session["userDetails"] = user;
+                }
+
+                Response.Redirect(Request.RawUrl);
+            }
         }
     }
 }
