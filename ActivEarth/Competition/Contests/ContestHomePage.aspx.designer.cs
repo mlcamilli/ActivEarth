@@ -13,15 +13,6 @@ namespace ActivEarth.Competition.Contests {
     public partial class ContestHomePage {
         
         /// <summary>
-        /// displayCurrentContests control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::ActivEarth.Competition.Contests.ContestDisplayTable displayCurrentContests;
-        
-        /// <summary>
         /// btnPanel control.
         /// </summary>
         /// <remarks>
@@ -47,5 +38,14 @@ namespace ActivEarth.Competition.Contests {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnSearchContests;
+        
+        /// <summary>
+        /// displayCurrentContests control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::ActivEarth.Competition.Contests.ContestDisplayTable displayCurrentContests;
     }
 }

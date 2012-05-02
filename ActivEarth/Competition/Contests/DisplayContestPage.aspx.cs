@@ -13,6 +13,10 @@ using ActivEarth.Objects.Groups;
 
 namespace ActivEarth.Competition.Contests
 {
+    /// <summary>
+    /// This class represents the display Contest page in the ActivEarth
+    /// website.
+    /// </summary>
     public partial class DisplayContestPage : System.Web.UI.Page
     {
         int contestId;
@@ -20,6 +24,11 @@ namespace ActivEarth.Competition.Contests
         bool isValidId;
         bool isGroup;
 
+        /// <summary>
+        /// Loads the page.
+        /// </summary>
+        /// <param name="sender">Sender of the event.</param>
+        /// <param name="e">The Event Args.</param>
         protected void Page_Load(object sender, EventArgs e)
         {
             user = (User)Session["userDetails"];
@@ -56,6 +65,9 @@ ContestDAO.UpdateContestStandings(contestId);
             }
         }
 
+        /// <summary>
+        /// Loads the content on the page.
+        /// </summary>
         private void LoadDataOnPage()
         {
             Contest contest = ContestDAO.GetContestFromContestId(contestId, true, false);
@@ -135,6 +147,11 @@ ContestDAO.UpdateContestStandings(contestId);
             }
         }
 
+        /// <summary>
+        /// Loads content specific to contest Signup.
+        /// </summary>
+        /// <param name="contest">The contest.</param>
+        /// <param name="isCompeting">Whether the team is currently competeing or not.</param>
         private void LoadContestSignupData(Contest contest, bool isCompeting)
         {
             if (contest.Type == ContestType.Group)
@@ -167,7 +184,20 @@ ContestDAO.UpdateContestStandings(contestId);
                 }
                 else
                 {
-                    btnLeaveContest.Visible = true;
+                    if (contest.Type == ContestType.Group)
+                    {
+                        Team team = TeamDAO.GetTeamFromUserIdAndContestId(user.UserID, contestId, true);
+                        Group group = GroupDAO.GetGroupFromGroupId(team.GroupId.Value);
+                        if (group.Owner.UserID == user.UserID)
+                        {
+                            btnLeaveContest.Visible = true;
+                        }
+                    }
+                    else
+                    {
+                        btnLeaveContest.Visible = true;
+                    }
+
                     btnJoinContest.Visible = false;
                     GroupSelection.Visible = false;
                 }
@@ -204,6 +234,11 @@ ContestDAO.UpdateContestStandings(contestId);
             }
         }
 
+        /// <summary>
+        /// Adds a team to the contest.
+        /// </summary>
+        /// <param name="sender">Sender of the event.</param>
+        /// <param name="e">Event args.</param>
         protected void JoinContest(object sender, EventArgs e)
         {
             if(isValidId)
@@ -222,6 +257,11 @@ ContestDAO.UpdateContestStandings(contestId);
             }
         }
 
+        /// <summary>
+        /// Removes a team from a contest.
+        /// </summary>
+        /// <param name="sender">Sender of the event.</param>
+        /// <param name="e">Event args.</param>
         protected void LeaveContest(object sender, EventArgs e)
         {
             if (isValidId)

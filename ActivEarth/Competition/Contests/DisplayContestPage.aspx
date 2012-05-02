@@ -18,7 +18,6 @@
         <asp:Panel ID="ContestSignUpPanel" runat="server" Visible="false">
             <br />
             <asp:Label runat="server" ID="NoTeamsMessage" Visible="false"></asp:Label>
-            <uc:TeamDisplayTable runat="server" ID="CurrentTeamsSignedUp" Visible="true"/>
             <br />
             <asp:Label runat="server" ID="SignUpErrorMessage" Visible="false"></asp:Label>
             <asp:Table ID="ContestSignUpControls"  runat="server" CellPadding="3" CellSpacing="3">
@@ -32,6 +31,7 @@
                     </asp:TableCell>
                 </asp:TableRow>
             </asp:Table>
+            <uc:TeamDisplayTable runat="server" ID="CurrentTeamsSignedUp" Visible="true"/>
         </asp:Panel>
     </div>
 
