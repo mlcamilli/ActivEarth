@@ -91,6 +91,11 @@ namespace ActivEarth.Groups
             lblAllHashTags.Text = "";
         }
 
+        protected void BootMembers(object sender, EventArgs e)
+        {
+            Response.Redirect("OwnerMembersPage.aspx?ID=" + Request.QueryString["ID"]);
+        }
+
         protected void EditGroupInformation(object sender, EventArgs e)
         {
             int groupID = Convert.ToInt32(Request.QueryString["ID"]);

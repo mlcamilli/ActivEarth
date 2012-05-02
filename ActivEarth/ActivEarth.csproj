@@ -82,16 +82,13 @@
     <Content Include="Competition\Challenges\DisplayChallengeControl.ascx" />
     <Content Include="Competition\Challenges\DisplayChallengesControl.ascx" />
     <Content Include="Competition\Challenges\DisplayChallengesPage.aspx" />
-    <Content Include="Competition\Contests\ContestRewardsTable.ascx" />
     <Content Include="Competition\Contests\ContestCreationPage.aspx" />
     <Content Include="Competition\Contests\ContestDisplayTable.ascx" />
-    <Content Include="Competition\Contests\ContestGoalGraph.ascx" />
     <Content Include="Competition\Contests\ContestHomePage.aspx" />
-    <Content Include="Competition\Contests\ContestTimeGraph.ascx" />
+    <Content Include="Competition\Contests\ContestProgressGraph.ascx" />
     <Content Include="Competition\Contests\FindContestsPage.aspx" />
     <Content Include="Competition\Contests\DisplayContestPage.aspx" />
     <Content Include="Competition\Contests\LeaderBoard.ascx" />
-    <Content Include="Competition\Contests\LeaderBoardRow.ascx" />
     <Content Include="Competition\Contests\TeamDisplayTable.ascx" />
     <Content Include="Groups\ContestPage.aspx" />
     <Content Include="Groups\OwnedGroupsDisplayTable.ascx" />
@@ -99,8 +96,10 @@
     <Content Include="Groups\GroupDisplay.aspx" />
     <Content Include="Groups\Groups.aspx" />
     <Content Include="Groups\GroupsDisplayTable.ascx" />
+    <Content Include="Groups\GroupsSearch.aspx" />
     <Content Include="Groups\MembersDisplayTable.ascx" />
     <Content Include="Groups\MembersPage.aspx" />
+    <Content Include="Groups\OwnerMembersPage.aspx" />
     <Content Include="Groups\WallDisplay.ascx" />
     <Content Include="Groups\WallPage.aspx" />
     <Content Include="Groups\CreateGroup.aspx" />
@@ -264,7 +263,6 @@
     <Content Include="Images\Competition\Contests\BronzeBracket.png" />
     <Content Include="Images\Competition\Contests\DiamondBracket.png" />
     <Content Include="Images\Competition\Contests\GoldBracket.png" />
-    <Content Include="Images\Competition\Contests\NoneBracket.png" />
     <Content Include="Images\Competition\Contests\PlatinumBracket.png" />
     <Content Include="Images\Competition\Contests\SilverBracket.png" />
     <Content Include="Images\Competition\Misc\Calender.png" />
@@ -410,13 +408,6 @@
     <Compile Include="Competition\Challenges\DisplayChallengesPage.aspx.designer.cs">
       <DependentUpon>DisplayChallengesPage.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Competition\Contests\ContestRewardsTable.ascx.cs">
-      <DependentUpon>ContestRewardsTable.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Competition\Contests\ContestRewardsTable.ascx.designer.cs">
-      <DependentUpon>ContestRewardsTable.ascx</DependentUpon>
-    </Compile>
     <Compile Include="Competition\Contests\ContestCreationPage.aspx.cs">
       <DependentUpon>ContestCreationPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -431,13 +422,6 @@
     <Compile Include="Competition\Contests\ContestDisplayTable.ascx.designer.cs">
       <DependentUpon>ContestDisplayTable.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Competition\Contests\ContestGoalGraph.ascx.cs">
-      <DependentUpon>ContestGoalGraph.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Competition\Contests\ContestGoalGraph.ascx.designer.cs">
-      <DependentUpon>ContestGoalGraph.ascx</DependentUpon>
-    </Compile>
     <Compile Include="Competition\Contests\ContestHomePage.aspx.cs">
       <DependentUpon>ContestHomePage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -445,12 +429,12 @@
     <Compile Include="Competition\Contests\ContestHomePage.aspx.designer.cs">
       <DependentUpon>ContestHomePage.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Competition\Contests\ContestTimeGraph.ascx.cs">
-      <DependentUpon>ContestTimeGraph.ascx</DependentUpon>
+    <Compile Include="Competition\Contests\ContestProgressGraph.ascx.cs">
+      <DependentUpon>ContestProgressGraph.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Competition\Contests\ContestTimeGraph.ascx.designer.cs">
-      <DependentUpon>ContestTimeGraph.ascx</DependentUpon>
+    <Compile Include="Competition\Contests\ContestProgressGraph.ascx.designer.cs">
+      <DependentUpon>ContestProgressGraph.ascx</DependentUpon>
     </Compile>
     <Compile Include="Competition\Contests\FindContestsPage.aspx.cs">
       <DependentUpon>FindContestsPage.aspx</DependentUpon>
@@ -472,13 +456,6 @@
     </Compile>
     <Compile Include="Competition\Contests\LeaderBoard.ascx.designer.cs">
       <DependentUpon>LeaderBoard.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="Competition\Contests\LeaderBoardRow.ascx.cs">
-      <DependentUpon>LeaderBoardRow.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Competition\Contests\LeaderBoardRow.ascx.designer.cs">
-      <DependentUpon>LeaderBoardRow.ascx</DependentUpon>
     </Compile>
     <Compile Include="Competition\Contests\TeamDisplayTable.ascx.cs">
       <DependentUpon>TeamDisplayTable.ascx</DependentUpon>
@@ -546,6 +523,13 @@
     <Compile Include="Groups\GroupsDisplayTable.ascx.designer.cs">
       <DependentUpon>GroupsDisplayTable.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Groups\GroupsSearch.aspx.cs">
+      <DependentUpon>GroupsSearch.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Groups\GroupsSearch.aspx.designer.cs">
+      <DependentUpon>GroupsSearch.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Groups\MembersDisplayTable.ascx.cs">
       <DependentUpon>MembersDisplayTable.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -559,6 +543,13 @@
     </Compile>
     <Compile Include="Groups\MembersPage.aspx.designer.cs">
       <DependentUpon>MembersPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Groups\OwnerMembersPage.aspx.cs">
+      <DependentUpon>OwnerMembersPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Groups\OwnerMembersPage.aspx.designer.cs">
+      <DependentUpon>OwnerMembersPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Groups\WallDisplay.ascx.cs">
       <DependentUpon>WallDisplay.ascx</DependentUpon>

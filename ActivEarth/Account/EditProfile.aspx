@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Edit Profile" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="EditProfile.aspx.cs" Inherits="ActivEarth.Account.EditProfile" Debug="true" %>
+﻿<%@ Page Title="Edit Profile" Language="C#" MasterPageFile="~/Tabs.Master" AutoEventWireup="true" CodeBehind="EditProfile.aspx.cs" Inherits="ActivEarth.Account.EditProfile" Debug="true" %>
 <asp:Content ID="HeaderContent" runat="server" ContentPlaceHolderID="HeadContent">
 </asp:Content>
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">

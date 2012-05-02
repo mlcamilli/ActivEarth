@@ -1,4 +1,4 @@
-<%@ Page Title="" Language="C#" MasterPageFile="~/GroupTabs.master" AutoEventWireup="True" CodeBehind="MembersPage.aspx.cs" Inherits="ActivEarth.Groups.MembersPage" %>
+<%@ Page Title="" Language="C#" MasterPageFile="~/Tabs.master" AutoEventWireup="True" CodeBehind="OwnerMembersPage.aspx.cs" Inherits="ActivEarth.Groups.OwnerMembersPage" %>
 
 <%@ Register src="MembersDisplayTable.ascx" tagname="MembersDisplayTable" tagprefix="uc" %>
 
@@ -9,9 +9,7 @@
 <h2>
     <asp:Label runat="server" ID="lblGroupName"></asp:Label>
 </h2>
-<h3>
-    All Users:
-</h3>
+
 <br />
 <div class="groupTitle">
 

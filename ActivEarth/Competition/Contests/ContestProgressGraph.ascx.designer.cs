@@ -10,42 +10,51 @@
 namespace ActivEarth.Competition.Contests {
     
     
-    public partial class LeaderBoardRow {
+    public partial class ContestTimeGraph {
         
         /// <summary>
-        /// Row control.
+        /// _DisplayGraph control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel Row;
+        protected global::System.Web.UI.WebControls.Panel _DisplayGraph;
         
         /// <summary>
-        /// BracketImage control.
+        /// _DisplayProgress control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image BracketImage;
+        protected global::System.Web.UI.WebControls.Panel _DisplayProgress;
         
         /// <summary>
-        /// TeamName control.
+        /// _ContestProgress control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label TeamName;
+        protected global::EO.Web.ProgressBar _ContestProgress;
         
         /// <summary>
-        /// CurrentScore control.
+        /// _StartLabel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label CurrentScore;
+        protected global::System.Web.UI.WebControls.Label _StartLabel;
+        
+        /// <summary>
+        /// _EndLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label _EndLabel;
     }
 }

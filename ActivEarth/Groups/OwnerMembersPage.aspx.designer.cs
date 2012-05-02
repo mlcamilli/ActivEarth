@@ -10,7 +10,7 @@
 namespace ActivEarth.Groups {
     
     
-    public partial class MembersPage {
+    public partial class OwnerMembersPage {
         
         /// <summary>
         /// lblGroupName control.

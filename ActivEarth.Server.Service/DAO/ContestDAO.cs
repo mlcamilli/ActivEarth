@@ -482,19 +482,26 @@ namespace ActivEarth.DAO
         /// <returns>List of bracket rewards, with Bronze occupying position 0, working up to Diamond.</returns>
         public static List<int> CalculateBracketRewards(Contest contest)
         {
-            const float DIAMOND_PERCENT_POT = 0.25f;
-            const float PLATINUM_PERCENT_POT = 0.225f;
-            const float GOLD_PERCENT_POT = 0.2f;
-            const float SILVER_PERCENT_POT = 0.175f;
-            const float BRONZE_PERCENT_POT = 0.15f;
+            const float DIAMOND_POT_ALLOTMENT = 9;
+            const float PLATINUM_POT_ALLOTMENT = 6;
+            const float GOLD_POT_ALLOTMENT = 4;
+            const float SILVER_POT_ALLOTMENT = 2;
+            const float BRONZE_POT_ALLOTMENT = 1;
 
             List<int> sizes = ContestDAO.CalculateBracketSizes(contest.Teams.Count);
 
-            int bronzeReward = (int)Math.Round(contest.Reward * BRONZE_PERCENT_POT / sizes[(int)ContestBracket.Bronze]);
-            int silverReward = (int)Math.Round(contest.Reward * SILVER_PERCENT_POT / sizes[(int)ContestBracket.Silver]);
-            int goldReward = (int)Math.Round(contest.Reward * GOLD_PERCENT_POT / sizes[(int)ContestBracket.Gold]);
-            int platinumReward = (int)Math.Round(contest.Reward * PLATINUM_PERCENT_POT / sizes[(int)ContestBracket.Platinum]);
-            int diamondReward = (int)Math.Round(contest.Reward * DIAMOND_PERCENT_POT / sizes[(int)ContestBracket.Diamond]);
+            float totalAllotments = 0;
+            totalAllotments += DIAMOND_POT_ALLOTMENT * sizes[(int)ContestBracket.Diamond];
+            totalAllotments += PLATINUM_POT_ALLOTMENT * sizes[(int)ContestBracket.Platinum];
+            totalAllotments += GOLD_POT_ALLOTMENT * sizes[(int)ContestBracket.Gold];
+            totalAllotments += SILVER_POT_ALLOTMENT * sizes[(int)ContestBracket.Silver];
+            totalAllotments += BRONZE_POT_ALLOTMENT * sizes[(int)ContestBracket.Bronze];
+
+            int bronzeReward = (int)Math.Round(contest.Reward * BRONZE_POT_ALLOTMENT / totalAllotments);
+            int silverReward = (int)Math.Round(contest.Reward * SILVER_POT_ALLOTMENT / totalAllotments);
+            int goldReward = (int)Math.Round(contest.Reward * GOLD_POT_ALLOTMENT / totalAllotments);
+            int platinumReward = (int)Math.Round(contest.Reward * PLATINUM_POT_ALLOTMENT / totalAllotments);
+            int diamondReward = (int)Math.Round(contest.Reward * DIAMOND_POT_ALLOTMENT / totalAllotments);
 
             return new List<int> { bronzeReward, silverReward, goldReward, platinumReward, diamondReward };
         }
@@ -524,7 +531,8 @@ namespace ActivEarth.DAO
 
             float percentAssigned = 0;
 
-            int diamondCount = (int)Math.Max(Math.Round(DIAMOND_PERCENT_USERS * teamCount), 1);
+            int diamondCount = (teamCount > 0 ? 
+                (int)Math.Max(Math.Round(DIAMOND_PERCENT_USERS * teamCount), 1) : 0);
             percentAssigned += DIAMOND_PERCENT_USERS;
             teamCount -= diamondCount;
 

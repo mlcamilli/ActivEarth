@@ -59,7 +59,7 @@
             <h2>
                 Weather
             </h2>
-            
+            <asp:Label ID="CityNotFound" runat= "server" />
             <uc1:DisplayWeatherControl ID="DisplayWeatherControl1" runat="server" />
             
             <h2>

@@ -49,13 +49,13 @@ namespace ActivEarth.Competition.Contests {
         protected global::System.Web.UI.WebControls.Label NoTeamsMessage;
         
         /// <summary>
-        /// CurrentTeams control.
+        /// CurrentTeamsSignedUp control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::ActivEarth.Competition.Contests.TeamDisplayTable CurrentTeams;
+        protected global::ActivEarth.Competition.Contests.TeamDisplayTable CurrentTeamsSignedUp;
         
         /// <summary>
         /// SignUpErrorMessage control.
@@ -103,76 +103,49 @@ namespace ActivEarth.Competition.Contests {
         protected global::System.Web.UI.WebControls.DropDownList GroupSelection;
         
         /// <summary>
-        /// ContestCompletePanel control.
+        /// ContestStatsTable control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel ContestCompletePanel;
+        protected global::System.Web.UI.WebControls.Table ContestStatsTable;
         
         /// <summary>
-        /// ContestCompletedMessage control.
+        /// TotalTeamsLabel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label ContestCompletedMessage;
+        protected global::System.Web.UI.WebControls.Label TotalTeamsLabel;
         
         /// <summary>
-        /// ContestRankMessage control.
+        /// ProgressGraph control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label ContestRankMessage;
+        protected global::ActivEarth.Competition.Contests.ContestTimeGraph ProgressGraph;
         
         /// <summary>
-        /// ContestRewardMessage control.
+        /// TotalRewardLabel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label ContestRewardMessage;
+        protected global::System.Web.UI.WebControls.Label TotalRewardLabel;
         
         /// <summary>
-        /// RewardsTable control.
+        /// ActivityScoreImage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::ActivEarth.Competition.Contests.ActivityPointsTable RewardsTable;
-        
-        /// <summary>
-        /// ContestStatusTable control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Table ContestStatusTable;
-        
-        /// <summary>
-        /// GoalGraph control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::ActivEarth.Competition.Contests.ContestGraph GoalGraph;
-        
-        /// <summary>
-        /// TimeGraph control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::ActivEarth.Competition.Contests.ContestTimeGraph TimeGraph;
+        protected global::System.Web.UI.WebControls.Image ActivityScoreImage;
         
         /// <summary>
         /// ContestLeaderBoard control.

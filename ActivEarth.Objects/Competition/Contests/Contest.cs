@@ -162,5 +162,25 @@ namespace ActivEarth.Objects.Competition.Contests
         }
 
         #endregion ---------- Constructor ----------
+
+        public string getContestState()
+        {
+            if (StartTime > DateTime.Now)
+            {
+                return "SIGN-UP";
+            }
+
+            if (Mode == ContestEndMode.GoalBased && Teams.Count != 0 && EndCondition.EndValue > Teams[0].Score)
+            {
+                return "STARTED";
+            }
+
+            if (Mode == ContestEndMode.TimeBased && EndCondition.EndTime > DateTime.Now)
+            {
+                return "STARTED";
+            }
+
+            return "FINISHED";
+        }
     }
 }

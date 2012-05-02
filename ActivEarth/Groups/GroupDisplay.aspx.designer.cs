@@ -40,6 +40,15 @@ namespace ActivEarth.Groups {
         protected global::ActivEarth.Groups.MembersDisplayTable MembersDisplayTable1;
         
         /// <summary>
+        /// hypSeeMore control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink hypSeeMore;
+        
+        /// <summary>
         /// ContestDisplayTable1 control.
         /// </summary>
         /// <remarks>

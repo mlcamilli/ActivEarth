@@ -40,6 +40,7 @@ namespace ActivEarth.Groups
                 List<Group> userGroups = GroupDAO.GetGroupsByUser(this.userID);
                 List<Group> ownedGroups = GroupDAO.GetAllGroupsByOwner(userDetails);
 
+
                 Color[] backColors = { Color.FromArgb(34, 139, 34), Color.White };
                 Color[] textColors = { Color.White, Color.Black };
                 GroupsDisplayTable1.PopulateGroupsTable(userGroups, backColors, textColors);
@@ -47,6 +48,12 @@ namespace ActivEarth.Groups
 
             }
 
+        }
+
+        protected void SearchGroups(object sender, EventArgs e)
+        {
+            if (searchBox.Text.Length > 0)
+                Response.Redirect("GroupsSearch.aspx?Term=" + searchBox.Text);
         }
 
         protected void CreateGroup(object sender, EventArgs e)

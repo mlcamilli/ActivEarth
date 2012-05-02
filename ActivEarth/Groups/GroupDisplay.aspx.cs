@@ -44,11 +44,13 @@ namespace ActivEarth.Groups
 
                 lblGroupName.Text = currentGroup.Name;
                 lblDescription.Text = currentGroup.Description;
+                hypSeeMore.NavigateUrl = "~/Groups/MembersPage.aspx?ID=" + groupID;
+
 
                 List<ActivEarth.Objects.Profile.User> membersList = currentGroup.Members;
                 Color[] backColors = { Color.FromArgb(34, 139, 34), Color.White };
                 Color[] textColors = { Color.White, Color.Black };
-                MembersDisplayTable1.PopulateMembersTable(membersList, backColors, textColors);
+                MembersDisplayTable1.PopulateMembersTable_Display(membersList, backColors, textColors);
 
 
                 List<ActivEarth.Objects.Groups.Message> messageList = currentGroup.Wall.Messages;
@@ -73,11 +75,17 @@ namespace ActivEarth.Groups
             int groupID = Convert.ToInt32(Request.QueryString["ID"]);
             Group group = GroupDAO.GetGroupFromGroupId(groupID);
 
-            User user = (User) Session["userDetails"];
-            string[] dateTime = DateTime.Now.ToString("MM/dd/yyyy h:mmtt").Split(' ');
-            group.Post(new Message(txbTitle.Text, txbMessage.Text, user, dateTime[0], dateTime[1]));
-            GroupDAO.UpdateGroup(group);
-            Response.Redirect(Request.RawUrl);
+            if (txbTitle.Text != "" && txbMessage.Text != "")
+            {
+                User user = (User)Session["userDetails"];
+
+                string[] dateTime = DateTime.Now.ToString("MM/dd/yyyy h:mmtt").Split(' ');
+                user.Post(new Message(txbTitle.Text, txbMessage.Text, user, dateTime[0], dateTime[1]));
+
+                group.Post(new Message(txbTitle.Text, txbMessage.Text, user, dateTime[0], dateTime[1]));
+                GroupDAO.UpdateGroup(group);
+                Response.Redirect(Request.RawUrl);
+            }
         }
     }
 }

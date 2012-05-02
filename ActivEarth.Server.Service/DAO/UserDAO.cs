@@ -33,25 +33,25 @@ namespace ActivEarth.DAO
                                 join p in data.ProfileDataProviders on u.id equals p.user_id
                                 select
                                     new User
-                                        {
-                                            UserName = u.user_name,
-                                            UserID = u.id,
-                                            Email = p.email,
-                                            FirstName = p.first_name,
-                                            LastName = p.last_name,
-                                            City = p.city,
-                                            State = p.state,
-                                            Gender = p.gender,
-                                            ProfileID = p.id,
-                                            Age = p.age,
-                                            Weight = p.weight,
-                                            Height = p.height,
-                                            GreenScore = p.green_score,
-                                            ActivityScore = new ActivityScore(
-                                                p.activity_score_badges, 
-                                                p.activity_score_challenges, 
-                                                p.activity_score_contests)
-                                        });
+                                    {
+                                        UserName = u.user_name,
+                                        UserID = u.id,
+                                        Email = p.email,
+                                        FirstName = p.first_name,
+                                        LastName = p.last_name,
+                                        City = p.city,
+                                        State = p.state,
+                                        Gender = p.gender,
+                                        ProfileID = p.id,
+                                        Age = p.age,
+                                        Weight = p.weight,
+                                        Height = p.height,
+                                        GreenScore = p.green_score,
+                                        ActivityScore = new ActivityScore(
+                                            p.activity_score_badges,
+                                            p.activity_score_challenges,
+                                            p.activity_score_contests)
+                                    });
 
                 foreach (var user in userData)
                 {
@@ -68,30 +68,30 @@ namespace ActivEarth.DAO
             {
                 var data = new ActivEarthDataProvidersDataContext(connection);
                 toReturn = (from u in data.UserDataProviders
-                        join p in data.ProfileDataProviders on u.id equals p.user_id
-                        where u.id == userId
-                        select
-                            new User
-                            {
-                                UserName = u.user_name,
-                                UserID = u.id,
-                                Email = p.email,
-                                FirstName = p.first_name,
-                                LastName = p.last_name,
-                                City = p.city,
-                                State = p.state,
-                                Gender = p.gender,
-                                ProfileID = p.id,
-                                Age = p.age,
-                                Weight = p.weight,
-                                Height = p.height,
-                                GreenScore = p.green_score,
-                                ActivityScore = new ActivityScore(
-                                    p.activity_score_badges,
-                                    p.activity_score_challenges,
-                                    p.activity_score_contests)
-                                
-                            }).FirstOrDefault();
+                            join p in data.ProfileDataProviders on u.id equals p.user_id
+                            where u.id == userId
+                            select
+                                new User
+                                {
+                                    UserName = u.user_name,
+                                    UserID = u.id,
+                                    Email = p.email,
+                                    FirstName = p.first_name,
+                                    LastName = p.last_name,
+                                    City = p.city,
+                                    State = p.state,
+                                    Gender = p.gender,
+                                    ProfileID = p.id,
+                                    Age = p.age,
+                                    Weight = p.weight,
+                                    Height = p.height,
+                                    GreenScore = p.green_score,
+                                    ActivityScore = new ActivityScore(
+                                        p.activity_score_badges,
+                                        p.activity_score_challenges,
+                                        p.activity_score_contests)
+
+                                }).FirstOrDefault();
             }
             if (toReturn != null)
             {
@@ -116,25 +116,25 @@ namespace ActivEarth.DAO
                      where u.user_name == userName && u.password == password
                      select
                          new User
-                             {
-                                 UserName = u.user_name,
-                                 UserID = u.id,
-                                 Email = p.email,
-                                 FirstName = p.first_name,
-                                 LastName = p.last_name,
-                                 City = p.city,
-                                 State = p.state,
-                                 Gender = p.gender,
-                                 ProfileID = p.id,
-                                 Age = p.age,
-                                 Weight = p.weight,
-                                 Height = p.height,
-                                 GreenScore = p.green_score,
-                                 ActivityScore = new ActivityScore(
-                                     p.activity_score_badges,
-                                     p.activity_score_challenges,
-                                     p.activity_score_contests)
-                             }).FirstOrDefault();
+                         {
+                             UserName = u.user_name,
+                             UserID = u.id,
+                             Email = p.email,
+                             FirstName = p.first_name,
+                             LastName = p.last_name,
+                             City = p.city,
+                             State = p.state,
+                             Gender = p.gender,
+                             ProfileID = p.id,
+                             Age = p.age,
+                             Weight = p.weight,
+                             Height = p.height,
+                             GreenScore = p.green_score,
+                             ActivityScore = new ActivityScore(
+                                 p.activity_score_badges,
+                                 p.activity_score_challenges,
+                                 p.activity_score_contests)
+                         }).FirstOrDefault();
                 if (toReturn != null)
                 {
                     RecentActivityDAO.GetUserRecentActivity(toReturn);
@@ -152,7 +152,7 @@ namespace ActivEarth.DAO
                     var data = new ActivEarthDataProvidersDataContext(connection);
                     var userData = new UserDataProvider { password = password, user_name = user.UserName };
                     data.UserDataProviders.InsertOnSubmit(userData);
-                    var profileData = new ProfileDataProvider { UserDataProvider = userData, age = -1, city = "", email = user.Email, gender = user.Gender, height = -1, first_name = user.FirstName, last_name = user.LastName, state = "", weight = -1 , green_score = 0, activity_score_total = 0, activity_score_contests = 0, activity_score_challenges = 0, activity_score_badges = 0};
+                    var profileData = new ProfileDataProvider { UserDataProvider = userData, age = -1, city = "", email = user.Email, gender = user.Gender, height = -1, first_name = user.FirstName, last_name = user.LastName, state = "", weight = -1, green_score = 0, activity_score_total = 0, activity_score_contests = 0, activity_score_challenges = 0, activity_score_badges = 0 };
                     data.ProfileDataProviders.InsertOnSubmit(profileData);
                     data.SubmitChanges();
                     return userData.id;
@@ -194,7 +194,7 @@ namespace ActivEarth.DAO
                         }
 
                         RecentActivityDAO.UpdateUserRecentActivity(user);
-                        
+
                         data.SubmitChanges();
                         return true;
                     }
@@ -221,7 +221,7 @@ namespace ActivEarth.DAO
                      select u.id).FirstOrDefault();
             }
 
-            
+
         }
 
         public static bool ConfirmPassword(string password, int userId)
