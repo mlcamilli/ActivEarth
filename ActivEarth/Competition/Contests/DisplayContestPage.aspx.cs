@@ -68,6 +68,9 @@ ContestDAO.UpdateContestStandings(contestId);
             }
             else
             {
+                TotalTeamsLabel.Text = contest.Teams.Count.ToString();
+                TotalRewardLabel.Text = contest.Reward.ToString();
+
                 if (contest.Mode == ContestEndMode.TimeBased)
                 {
                     ProgressGraph.PopulateProgressGraph(contest.StartTime, contest.EndCondition.EndTime);

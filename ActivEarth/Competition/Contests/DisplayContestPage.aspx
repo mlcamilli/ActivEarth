@@ -36,7 +36,26 @@
     </div>
 
     <div align="center">
-        <uc:ContestProgressGraph ID="ProgressGraph" runat="server" />
+        <asp:Table ID="ContestStatsTable"  runat="server" CellPadding="3" CellSpacing="3">
+            <asp:TableHeaderRow BackColor="White">
+                <asp:TableHeaderCell Text="Teams Competing"></asp:TableHeaderCell>
+                <asp:TableHeaderCell Text="Contest Progress"></asp:TableHeaderCell>
+                <asp:TableHeaderCell Text="Total Reward"></asp:TableHeaderCell>
+            </asp:TableHeaderRow>
+            <asp:TableRow VerticalAlign="Top">
+                <asp:TableCell HorizontalAlign="Center">
+                    <asp:Label ID="TotalTeamsLabel" runat="server" Font-Size="Large" />
+                </asp:TableCell>
+                <asp:TableCell HorizontalAlign="Center">
+                    <uc:ContestProgressGraph ID="ProgressGraph" runat="server" />
+                </asp:TableCell>
+                <asp:TableCell HorizontalAlign="Center">
+                    <asp:Label ID="TotalRewardLabel" runat="server" style="margin-right: 5px" />
+                    <asp:Image ID="ActivityScoreImage" runat="server" Height="20px" Width="20px" ImageAlign="Middle" ImageUrl="~/Images/Competition/Activity_Score.png" />
+                </asp:TableCell>
+            </asp:TableRow>
+        </asp:Table>
+        
         <uc:LeaderBoard ID="ContestLeaderBoard" runat="server" Visible="False"/>
     </div>
     

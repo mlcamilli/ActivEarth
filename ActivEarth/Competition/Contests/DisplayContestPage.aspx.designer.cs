@@ -103,6 +103,24 @@ namespace ActivEarth.Competition.Contests {
         protected global::System.Web.UI.WebControls.DropDownList GroupSelection;
         
         /// <summary>
+        /// ContestStatsTable control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Table ContestStatsTable;
+        
+        /// <summary>
+        /// TotalTeamsLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label TotalTeamsLabel;
+        
+        /// <summary>
         /// ProgressGraph control.
         /// </summary>
         /// <remarks>
@@ -110,6 +128,24 @@ namespace ActivEarth.Competition.Contests {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::ActivEarth.Competition.Contests.ContestTimeGraph ProgressGraph;
+        
+        /// <summary>
+        /// TotalRewardLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label TotalRewardLabel;
+        
+        /// <summary>
+        /// ActivityScoreImage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image ActivityScoreImage;
         
         /// <summary>
         /// ContestLeaderBoard control.
