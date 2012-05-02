@@ -53,7 +53,7 @@ SLOGANBANNER
     font-family: Cambria;
 }
 
-h1, h2, h3, h4, h5, h6
+h1, h2, h3, h4, h5, h6, h7
 {
     font-family: Cambria;
     font-size: 1.5em;
@@ -90,10 +90,18 @@ h4
     font-size: 1.1em;
 }
 
-h5, h6
+h5
 {
-    font: 000000;
-    font-size: 1em;
+    color: #000000;
+    text-align: center;
+    font-size: 1.2em;
+}
+h6
+{
+    color: #000000;
+    text-align: center;
+    font-size: 1.5em;
+    font-weight:bolder;
 }
 
 /* this rule styles <h1> and <h2> tags that are the 
@@ -150,6 +158,7 @@ margin-top:30px;
 {
 text-align:center;
 font-size:19px;
+color: Black;
 font-weight: bolder;
 margin-bottom:0px;
 padding-top:18px;
@@ -159,6 +168,7 @@ margin-top:15px;
 
 .contentText
 {
+color: Black;
 font-size:13px;
 line-height:24px;
 margin-left:13px;
