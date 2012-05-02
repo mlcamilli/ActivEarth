@@ -14,7 +14,9 @@ namespace ActivEarth.Groups
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+            if (lblAllHashTags.Text == ""){
+                lblAllHashTags.Text = "[]";
+            }
         }
 
         protected void Cancel(object sender, EventArgs e)
@@ -24,22 +26,22 @@ namespace ActivEarth.Groups
 
         protected void AddHashTag(object sender, EventArgs e)
         {
-            if (!lblAllHashTags.Text.ToLower().Contains(" " + txbHashTag.Text.ToLower() + ",") &&
-                !lblAllHashTags.Text.ToLower().Contains(" " + txbHashTag.Text.ToLower() + ".")) {
-                if (lblAllHashTags.Text == "")
-                {
-                    lblAllHashTags.Text = txbHashTag.Text + ".";
-                }
-                else
-                {
-                    lblAllHashTags.Text = lblAllHashTags.Text.Substring(0, lblAllHashTags.Text.Length - 1) + ", " + txbHashTag.Text + ".";
-                }
+            lblAllHashTags.Text = lblAllHashTags.Text.Substring(1, lblAllHashTags.Text.Length - 2);
+            if (lblAllHashTags.Text == "")
+            {
+                lblAllHashTags.Text = "[" + txbHashTag.Text + "]";
             }
+            else
+            {
+                lblAllHashTags.Text = "[" + lblAllHashTags.Text + ", " + txbHashTag.Text + "]";
+            }
+            
+            txbHashTag.Text = "";
         }
 
         protected void RemoveHashTags(object sender, EventArgs e)
         {
-            lblAllHashTags.Text = "";
+            lblAllHashTags.Text = "[]";
         }
 
         protected void CreateNewGroup(object sender, EventArgs e)
@@ -48,13 +50,8 @@ namespace ActivEarth.Groups
 
             if (GroupDAO.GetGroupFromName(txbGroupName.Text) == null)
             {
-                List<string> hashTags = lblAllHashTags.Text.Split(',').Select(sValue => sValue.Trim()).ToList();
-                string last = hashTags.Last().TrimEnd('.');
-                hashTags.RemoveAt(hashTags.Count - 1);
-                hashTags.Add(last);
-
-
-
+                List<string> hashTags = lblAllHashTags.Text.Substring(1, lblAllHashTags.Text.Length - 2).Split(',').Select(sValue => sValue.Trim()).ToList();
+    
                 User owner = (User) Session["userDetails"];
 
                 Group group = new Group(txbGroupName.Text, owner, txbDescription.Text, hashTags);

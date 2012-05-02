@@ -57,13 +57,21 @@ namespace ActivEarth.Groups
             newRow.Cells.Add(MakeTextCellForRow(group.Owner.UserName, textColor));
             newRow.Cells.Add(MakeTextCellForRow(group.ActivityScore.TotalScore.ToString(), textColor));
             newRow.Cells.Add(MakeTextCellForRow(group.GreenScore.ToString(), textColor));
-            if (MembersContains(group.Members, userDetails))
-            {  
-                newRow.Cells.Add(MakeButtonCellForRow(group.ID, 0));
+
+            if (userDetails.UserID != group.Owner.UserID)
+            {
+                if (MembersContains(group.Members, userDetails))
+                {
+                    newRow.Cells.Add(MakeButtonCellForRow(group.ID, 0));
+                }
+                else
+                {
+                    newRow.Cells.Add(MakeButtonCellForRow(group.ID, 1));
+                }
             }
             else
             {
-                newRow.Cells.Add(MakeButtonCellForRow(group.ID, 1));  
+                newRow.Cells.Add(MakeTextCellForRow("Group Owner", textColor));
             }
             return newRow;
         }

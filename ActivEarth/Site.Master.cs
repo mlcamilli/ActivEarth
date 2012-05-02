@@ -50,7 +50,7 @@ namespace ActivEarth
                 lblStatWalkTime.Text = userDetails.GetStatistic(Statistic.WalkTime).ToString() + " hr";
                 lblStatBikeTime.Text = userDetails.GetStatistic(Statistic.BikeTime).ToString() + " hr";
                 lblStatRunTime.Text = userDetails.GetStatistic(Statistic.RunTime).ToString() + " hr";
-                if (userDetails.City != "")
+                if (userDetails.City != null)
                 {
                     if (DisplayWeatherControl1.GetCurrentConditions(userDetails.City.Replace(' ', '+')))
                     {

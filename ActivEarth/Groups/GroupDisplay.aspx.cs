@@ -44,6 +44,22 @@ namespace ActivEarth.Groups
 
                 lblGroupName.Text = currentGroup.Name;
                 lblDescription.Text = currentGroup.Description;
+                lblHashTags.Text = "[";
+                int i = 0;
+                foreach (string tag in currentGroup.HashTags)
+                {
+                    if (i == 0)
+                    {
+                        lblHashTags.Text = lblHashTags.Text + tag;
+                    }
+                    else
+                    {
+                        lblHashTags.Text = lblHashTags.Text + ", " + tag;
+                    }
+                    i++;
+                }
+                lblHashTags.Text = lblHashTags.Text + "]";
+
                 hypSeeMore.NavigateUrl = "~/Groups/MembersPage.aspx?ID=" + groupID;
 
 
@@ -64,8 +80,18 @@ namespace ActivEarth.Groups
                 {
                     contestNameList.Add(ContestDAO.GetContestNameFromContestId(id));
                 }
-                
-                ContestDisplayTable1.PopulateContestTable(contestNameList, contestIdList, backColors, textColors);
+
+                if (contestNameList.Count > 0)
+                {
+                    ContestDisplayTable1.PopulateContestTable(contestNameList, contestIdList, backColors, textColors);
+                    ContestDisplayTable1.Visible = true;
+                    EmptyContest.Visible = false;
+                }
+                else
+                {
+                    ContestDisplayTable1.Visible = false;
+                    EmptyContest.Visible = true;
+                }
             }
         }
 

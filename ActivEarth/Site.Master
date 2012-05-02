@@ -41,16 +41,18 @@
             <asp:HyperLink ID="hlEditProfile" runat="server" Text="Edit Profile" NavigateUrl="~/Account/EditProfile.aspx"></asp:HyperLink>
             
             <h2>Recent Activity:</h2>
-            <div>
-            <uc:RecentActivityTable ID="RecentActivityTable" runat="server"/>
-            </div>
-            <div>
+
+            <div style="padding-top:5px">
             <asp:TextBox ID="txbTitle" runat="server" Width="80%" OnClick="this.value=''" Placeholder="Message Title"></asp:TextBox>
             <br/>
             <asp:TextBox ID="txbMessage" runat="server" TextMode="MultiLine" Width="80%" Placeholder="Enter a message here..."></asp:TextBox>
             <br/>
             <asp:Button ID="PostButton" runat="server" OnClick="PostMessage" Text="Post"/>
             </div>
+            <div style="clear:both">
+            <uc:RecentActivityTable ID="RecentActivityTable" runat="server"/>
+            </div>
+            
         </div>
         <div class="main">
             <asp:ContentPlaceHolder ID="MainContent" runat="server"/>

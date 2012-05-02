@@ -12,35 +12,30 @@
     <asp:Label runat="server" ID="lblGroupName"></asp:Label>
 </h2>
 <h3>
-    <asp:Label runat="server" ID="lblDescription"></asp:Label>
+    <asp:Label runat="server" ID="lblDescription"></asp:Label><br /><br />
+    <b>Hashtags: </b><asp:Label runat="server" ID="lblHashTags"></asp:Label>
 </h3>
+
+
 <br />
 <h2>Members</h2>
-<div class="groupTitle">
+<div class="groupTitle" style="padding-bottom:5px">
 <uc:MembersDisplayTable ID="MembersDisplayTable1" runat="server" />
 </div>
-
-<br /><br /><br /><br /><br /><br />
-
+<div style="clear:both;padding-bottom:20px">
 <asp:HyperLink ID="hypSeeMore" runat="server" Text="See More"></asp:HyperLink>
+</div>
 
-<br /><br /><br /><br /><br /><br />
 
-<h2>Contests</h2>
 <div>
+<h2>Contests</h2>
 <uc2:ContestDisplayTable ID="ContestDisplayTable1" runat="server" />
-<asp:Label runat="server" ID="Label1"></asp:Label>
+<asp:Label runat="server" ID="EmptyContest" Text="<br/>No active Contests."></asp:Label>
 </div> 
 
 <br /><br /><br />
 
 <h2>Recent Activity</h2>
-<div>
-<uc1:WallDisplay ID="WallDisplay1" runat="server" />
-</div>
-<br/><br/><br/><br/><br />
-<br/><br/><br />
-<br/>
 <div>
 <asp:TextBox ID="txbTitle" runat="server" Placeholder="Message Title"></asp:TextBox>
 <br/>
@@ -48,6 +43,11 @@
 <br/>
 <asp:Button ID="PostButton" runat="server" OnClick="PostMessage" Text="Post"/>
 </div>
+<div style="clear:both">
+<uc1:WallDisplay ID="WallDisplay1" runat="server" />
+</div>
+
+
 
 <br /><br />
 

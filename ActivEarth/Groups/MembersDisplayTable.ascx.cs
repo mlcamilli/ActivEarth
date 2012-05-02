@@ -98,7 +98,16 @@ namespace ActivEarth.Groups
             newRow.BackColor = backColor;
             newRow.Cells.Add(MakeImageCellForRow(user));
             newRow.Cells.Add(MakeTextCellForRow(user.UserName, textColor));
-            newRow.Cells.Add(MakeBootCellForRow(user.UserID));
+
+            User owner = (User)Session["userDetails"];
+            if (owner.UserID == user.UserID)
+            {
+                newRow.Cells.Add(MakeTextCellForRow("Group Owner", textColor));
+            }
+            else
+            {
+                newRow.Cells.Add(MakeBootCellForRow(user.UserID));
+            }
             return newRow;
         }
 
@@ -143,7 +152,7 @@ namespace ActivEarth.Groups
             Button b = new Button();
             b.ID = userId.ToString();
             b.CssClass = "Button";
-            b.Text = "Boot from Group";
+            b.Text = "Remove User From Group";
             b.Click += new EventHandler(bootClick);
 
             newCell.Controls.Add(b);
@@ -159,7 +168,7 @@ namespace ActivEarth.Groups
             currentGroup.Quit(UserDAO.GetUserFromUserId(Convert.ToInt32(clickedButton.ID)));
             GroupDAO.UpdateGroup(currentGroup);
 
-            Response.Redirect("EditGroups.aspx?ID=" + Request.QueryString["ID"]);
+            Response.Redirect("EditGroup.aspx?ID=" + Request.QueryString["ID"]);
         }
 
         /// <summary>
