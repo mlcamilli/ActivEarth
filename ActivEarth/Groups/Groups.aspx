@@ -14,7 +14,7 @@
     <asp:TextBox ID="searchBox" Placeholder="Enter a Group Name or Hashtag here..." runat="server" CssClass="textEntry" width="100%" OnTextChanged="SearchGroups"></asp:TextBox>
     </div>
     <div style="clear:both;padding-bottom:20px">
-    <asp:Button ID="SearchButton" Text="Search" runat="server"  OnClick="SearchGroups" />
+    <asp:Button ID="SearchButton" CssClass="Button" Text="Search" runat="server"  OnClick="SearchGroups" />
     </div>
     
     <div style="clear:both">
