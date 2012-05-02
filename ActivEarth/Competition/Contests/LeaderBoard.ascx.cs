@@ -10,13 +10,20 @@ using ActivEarth.Objects.Competition.Contests;
 
 namespace ActivEarth.Competition.Contests
 {
+    /// <summary>
+    /// This class represents the leaderboard of a contest which
+    /// displays bracket information to the user.
+    /// </summary>
     public partial class LeaderBoard : System.Web.UI.UserControl
     {
-        protected void Page_Load(object sender, EventArgs e)
-        {
-
-        }
-
+        /// <summary>
+        /// Fills the leaderboard with the teams that are passed in.
+        /// </summary>
+        /// <param name="teams">The teams corressponding to the brackets realative to the user.</param>
+        /// <param name="backColors">The backcolors the leaderboard should use.</param>
+        /// <param name="textColors">The text colors the leaderboard should use.</param>
+        /// <param name="scoreFormat">The format of each teams score.</param>
+        /// <param name="rewards">The reward levels of each bracket.</param>
         public void PopulateLeaderBoard(List<Team> teams, Color[] backColors, Color[] textColors, string scoreFormat, List<int> rewards)
         {
             int colorIndex = 0;
@@ -43,6 +50,15 @@ namespace ActivEarth.Competition.Contests
             }
         }
 
+        /// <summary>
+        /// Creates a new row for the leaderboard table.
+        /// </summary>
+        /// <param name="team">The team corressponding to the row.</param>
+        /// <param name="backColor">The backcolor of the row.</param>
+        /// <param name="textColor">The text color of the row.</param>
+        /// <param name="scoreFormat">The score format for the row.</param>
+        /// <param name="rewards">The rewards of each bracket.</param>
+        /// <returns>A new row for the leaderboard table.</returns>
         private TableRow MakeRowForTable(Team team, Color backColor, Color textColor, string scoreFormat, List<int> rewards)
         {
             TableRow newRow = new TableRow();
@@ -55,6 +71,12 @@ namespace ActivEarth.Competition.Contests
             return newRow;
         }
 
+        /// <summary>
+        /// Makes a bracket cell for a row.
+        /// </summary>
+        /// <param name="team">The team corressponding to the row the cell is being
+        /// placed in.</param>
+        /// <returns>The Bracket cell for the row.</returns>
         private TableCell MakeBracketCell(Team team)
         {
             TableCell bracketCell = new TableCell();
@@ -86,11 +108,16 @@ namespace ActivEarth.Competition.Contests
                 bracketImage.ImageUrl = "~/Images/Competition/Contests/DiamondBracket.png";
             }
 
-            bracketCell.Controls.Add(bracketImage);
+            bracketCell.Controls.Add(bracketImage);;
 
             return bracketCell;
         }
 
+        /// <summary>
+        /// Makes a Team cell for the row.
+        /// </summary>
+        /// <param name="team">The name of the team to display.</param>
+        /// <returns>A Table Cell containing the name of the team.</returns>
         private TableCell MakeTeamCell(Team team)
         {
             TableCell teamCell = new TableCell();
@@ -103,6 +130,12 @@ namespace ActivEarth.Competition.Contests
             return teamCell;
         }
 
+        /// <summary>
+        /// Makes a Table Cell containing the team's score.
+        /// </summary>
+        /// <param name="team">The team to get the score from.</param>
+        /// <param name="scoreFormat">The format of the score.</param>
+        /// <returns>A Table Cell containing the score.</returns>
         private TableCell MakeScoreCell(Team team, string scoreFormat)
         {
             TableCell scoreCell = new TableCell();
@@ -116,6 +149,13 @@ namespace ActivEarth.Competition.Contests
             return scoreCell;
         }
 
+        /// <summary>
+        /// Makes a table cell containing the reward the team
+        /// will receive.
+        /// </summary>
+        /// <param name="team">The Team to retrieve the bracket from.</param>
+        /// <param name="rewards">The rewards for each bracket.</param>
+        /// <returns>A Table Cell containing the reward.</returns>
         private TableCell MakeRewardCell(Team team, List<int> rewards)
         {
             TableCell rewardCell = new TableCell();

@@ -12,10 +12,19 @@ using ActivEarth.Objects.Competition.Contests;
 
 namespace ActivEarth.Competition.Contests
 {
+    /// <summary>
+    /// The class represents the find contests page on the 
+    /// ActivEarth website.
+    /// </summary>
     public partial class FindContestsPage : System.Web.UI.Page
     {
         User user;
 
+        /// <summary>
+        /// Loas the page.
+        /// </summary>
+        /// <param name="sender">Object that sent the page request.</param>
+        /// <param name="e">Event arguments.</param>
         protected void Page_Load(object sender, EventArgs e)
         {
             user = (User)Session["userDetails"];
@@ -25,6 +34,12 @@ namespace ActivEarth.Competition.Contests
             }
         }
 
+        /// <summary>
+        /// Queries the database for contest based on the 
+        /// search text.
+        /// </summary>
+        /// <param name="sender">Sender of the event.</param>
+        /// <param name="e">The event arguments.</param>
         protected void ExecuteSearch(object sender, EventArgs e)
         {
             List<int> contestIds = ContestDAO.FindContests(txtSearchText.Text, chkExactMatch.Checked);

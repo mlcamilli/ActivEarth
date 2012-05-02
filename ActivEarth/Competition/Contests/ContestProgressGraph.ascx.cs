@@ -14,11 +14,6 @@ namespace ActivEarth.Competition.Contests
     /// </summary>
     public partial class ContestTimeGraph : System.Web.UI.UserControl
     {
-        protected void Page_Load(object sender, EventArgs e)
-        {
-
-        }
-
         /// <summary>
         /// Sets the progress time has made in the contest.
         /// </summary>
@@ -39,6 +34,12 @@ namespace ActivEarth.Competition.Contests
             }
         }
 
+        /// <summary>
+        /// Sets the prgress towards the goal the top contributor has made.
+        /// </summary>
+        /// <param name="firstPlace">The team in first.</param>
+        /// <param name="goal">The goal of the contest.</param>
+        /// <param name="format">The format string the goal value is.</param>
         public void PopulateProgressGraph(Team firstPlace, float goal, string format)
         {
             _ContestProgress.Value = (firstPlace != null ? (int)((firstPlace.Score / goal) * 100) : 0);

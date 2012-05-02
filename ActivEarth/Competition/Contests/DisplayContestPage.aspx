@@ -36,7 +36,7 @@
     </div>
 
     <div align="center">
-        <asp:Table ID="ContestStatsTable"  runat="server" CellPadding="3" CellSpacing="3">
+        <asp:Table ID="ContestStatsTable"  runat="server" CellPadding="3" CellSpacing="3" Visible="false">
             <asp:TableHeaderRow BackColor="White">
                 <asp:TableHeaderCell Text="Teams Competing"></asp:TableHeaderCell>
                 <asp:TableHeaderCell Text="Contest Progress"></asp:TableHeaderCell>
