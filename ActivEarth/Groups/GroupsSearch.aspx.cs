@@ -41,29 +41,23 @@ namespace ActivEarth.Groups
                 var userDetails = (User)Session["userDetails"];
                 this.userID = userDetails.UserID;
 
-                String searchTerm = Request.QueryString["Term"];
+                String[] terms = Request.QueryString["Term"].Split();
+                List<String> searchTerms = new List<String>(terms);
 
-                List<Group> searchGroups = GroupDAO.GetAllGroupsByName(searchTerm);
-                List<Group> taggedGroups = GroupDAO.GetAllGroupsByHashTag(searchTerm);
+                List<Group> results = new List<Group>();
 
-                foreach(Group group in taggedGroups){
-                    Boolean found = false;
-
-                    foreach(Group group2 in searchGroups){
-                        if (group.ID == group2.ID)
-                        {
-                            found = true;
-                        }
-                    }
-                    if (!found){
-                        searchGroups.Add(group);
-                    }
+                foreach (String searchTerm in searchTerms)
+                {
+                    List<Group> searchGroups = GroupDAO.GetAllGroupsByName(searchTerm);
+                    List<Group> taggedGroups = GroupDAO.GetAllGroupsByHashTag(searchTerm);
+                    ListUnion_NoRepeats(searchGroups, taggedGroups);
+                    ListUnion_NoRepeats(results, searchGroups);
                 }
 
                 Color[] backColors = { Color.FromArgb(34, 139, 34), Color.White };
                 Color[] textColors = { Color.White, Color.Black };
                
-                SearchGroupsDisplayTable1.PopulateGroupsTable(searchGroups, backColors, textColors); 
+                SearchGroupsDisplayTable1.PopulateGroupsTable(results, backColors, textColors); 
 
 
             }
@@ -74,6 +68,28 @@ namespace ActivEarth.Groups
         {
             if (searchBox.Text.Length > 0)
                 Response.Redirect("GroupsSearch.aspx?Term=" + searchBox.Text);
+        }
+
+        protected List<Group> ListUnion_NoRepeats(List<Group> list1, List<Group> list2)
+        {
+            foreach (Group group in list2)
+            {
+                Boolean found = false;
+
+                foreach (Group group2 in list1)
+                {
+                    if (group.ID == group2.ID)
+                    {
+                        found = true;
+                    }
+                }
+                if (!found)
+                {
+                    list1.Add(group);
+                }
+            }
+
+            return list1;
         }
     }
 }

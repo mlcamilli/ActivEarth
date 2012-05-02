@@ -89,29 +89,6 @@ namespace ActivEarth.Groups
             return newCell;
         }
 
-        private TableCell MakeJoinCellForRow(int groupId, Color textColor)
-        {
-            TableCell newCell = new TableCell();
-            HyperLink textLink = new HyperLink();
-            textLink.Text = "Click to Join!";
-            textLink.ForeColor = textColor;
-            textLink.NavigateUrl = "Groups.aspx";
-            newCell.Controls.Add(textLink);
-
-            return newCell;
-        }
-
-        private TableCell MakeQuitCellForRow(int groupId, Color textColor)
-        {
-            TableCell newCell = new TableCell();
-            HyperLink textLink = new HyperLink();
-            textLink.Text = "Click to Leave Group";
-            textLink.ForeColor = textColor;
-            textLink.NavigateUrl = "Groups.aspx";
-            newCell.Controls.Add(textLink);
-
-            return newCell;
-        }   
 
         private TableCell MakeButtonCellForRow(int groupID, int leaveOrJoin)
         {
@@ -119,7 +96,8 @@ namespace ActivEarth.Groups
 
             Button b = new Button();
             b.ID = groupID.ToString();
-
+            b.CssClass = "Button";
+            
             if(leaveOrJoin == 0)
             {
                 b.Text = "Leave the Group";

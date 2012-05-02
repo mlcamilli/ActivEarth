@@ -99,6 +99,7 @@
     <Content Include="Groups\GroupsSearch.aspx" />
     <Content Include="Groups\MembersDisplayTable.ascx" />
     <Content Include="Groups\MembersPage.aspx" />
+    <Content Include="Groups\OwnerMembersPage.aspx" />
     <Content Include="Groups\WallDisplay.ascx" />
     <Content Include="Groups\WallPage.aspx" />
     <Content Include="Groups\CreateGroup.aspx" />
@@ -534,6 +535,13 @@
     </Compile>
     <Compile Include="Groups\MembersPage.aspx.designer.cs">
       <DependentUpon>MembersPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Groups\OwnerMembersPage.aspx.cs">
+      <DependentUpon>OwnerMembersPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Groups\OwnerMembersPage.aspx.designer.cs">
+      <DependentUpon>OwnerMembersPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Groups\WallDisplay.ascx.cs">
       <DependentUpon>WallDisplay.ascx</DependentUpon>
