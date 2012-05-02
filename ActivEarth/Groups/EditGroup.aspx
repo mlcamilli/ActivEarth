@@ -43,8 +43,11 @@
                             <p>
                                 <asp:Label ID="lblHashTags" runat="server" >Hashtags:</asp:Label><br />
                                 <asp:Label ID="lblAllHashTags" runat="server"></asp:Label>
-                                <asp:Button ID="ClearHashTagsButton" CssClass="Button" runat="server" Text="Remove Hashtags" OnClick="RemoveHashTags" />
-                            </p>    
+                                <asp:Button ID="ClearHashTagsButton" CssClass="Button" runat="server" Text="Remove Hashtags" OnClick="RemoveHashTags" />  
+                            </p>  
+                            <p>
+                                <asp:Button ID="BootMembersButton" CssClass="Button" runat="server" Text="Boot Members" OnClick="BootMembers" />  
+                            </p>
                         </fieldset>
                   
                             <asp:Button ID="EditGroupButton" CssClass="Button" runat="server" CommandName="MoveNext" Text="Edit Group Information" 

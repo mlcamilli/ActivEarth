@@ -139,6 +139,15 @@ namespace ActivEarth.Groups {
         protected global::System.Web.UI.WebControls.Button ClearHashTagsButton;
         
         /// <summary>
+        /// BootMembersButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BootMembersButton;
+        
+        /// <summary>
         /// EditGroupButton control.
         /// </summary>
         /// <remarks>
