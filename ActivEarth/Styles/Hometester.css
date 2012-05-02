@@ -5,7 +5,7 @@ body
 {
     background: #b6b7bc;
     font-size: .80em;
-    font-family:"Adobe Garamond Pro Bold", Georgia, "Times New Roman", Times, serif;
+    font-family: Cambria;
     margin: 0px;
     padding: 0px;
     color: #ffffff;
@@ -13,7 +13,7 @@ body
 
 a:link, a:visited
 {
-    font-family:"Adobe Garamond Pro Bold", Georgia, "Times New Roman", Times, serif;
+    font-family: Cambria;
     color: #034af3;
 }
 
@@ -42,7 +42,7 @@ TITLEBANNER
     color: #ffffff;
     font-size: 7em;
     padding: 0px 0px 0px 270px;
-    font-family:"Adobe Garamond Pro Bold", Georgia, "Times New Roman", Times, serif;
+    font-family: Cambria;
 }
 
 SLOGANBANNER
@@ -50,12 +50,12 @@ SLOGANBANNER
     color: #ffffff;
     font-size: 2em;
     padding: 0px 0px 0px 480px;
-    font-family:"Adobe Garamond Pro Bold", Georgia, "Times New Roman", Times, serif;
+    font-family: Cambria;
 }
 
 h1, h2, h3, h4, h5, h6
 {
-    font-family:"Adobe Garamond Pro Bold", Georgia, "Times New Roman", Times, serif;
+    font-family: Cambria;
     font-size: 1.5em;
     color: #ffffff;
     text-transform: none;
@@ -109,14 +109,14 @@ body
 {
     background: #ffffff;
     font-size: .80em;
-    font-family:"Adobe Garamond Pro Bold", Georgia, "Times New Roman", Times, serif;
+    font-family: Cambria;
     margin: 0px;
     padding: 0px;
 }
 
 a:link, a:visited
 {
-    font-family:"Adobe Garamond Pro Bold", Georgia, "Times New Roman", Times, serif;
+    font-family: Cambria;
     color: #1493fa;
 }
 
@@ -180,6 +180,15 @@ margin-right:13px;
 {
     position: relative;
     margin: 0px;
+    padding: 4px 0px 100px 0px;
+    background: #1493fa;
+    width: 100%;
+}
+
+.headermain
+{
+    position: relative;
+    margin: 0px;
     padding: 4px 0px 40px 0px;
     background: #1493fa;
     width: 100%;
@@ -196,7 +205,7 @@ margin-right:13px;
 
 .header h1
 {
-    font-family:"Adobe Garamond Pro Bold", Georgia, "Times New Roman", Times, serif;
+    font-family: Cambria;
     font-weight: 700;
     margin: 0px;
     padding: 0px 0px 0px 20px;
@@ -209,7 +218,7 @@ margin-right:13px;
 
 .main
 {
-   	font-family:"Adobe Garamond Pro Bold", Georgia, "Times New Roman", Times, serif;
+   	font-family: Cambria;
     padding: 0px 0px 0px 10px;
     margin: 0px 0px 0px 0px;
     min-height: 420px;
@@ -229,7 +238,7 @@ margin-right:13px;
     padding: 8px 0px 0px 0px;
     margin: 0px auto;
     text-align: center;
-	font-family:"Adobe Garamond Pro Bold", Georgia, "Times New Roman", Times, serif;
+	font-family: Cambria;
     line-height: normal;
 }
 
@@ -274,7 +283,7 @@ legend
 {
     font-size: 1.1em;
     font-weight: 600;
-	font-family:"Adobe Garamond Pro Bold", Georgia, "Times New Roman", Times, serif;
+	font-family: Cambria;
     padding: 2px 4px 8px 4px;
 }
 
@@ -318,7 +327,7 @@ div.accountInfo, div.contestInfo
 .title
 {
     display: block;
-	font-family:"Adobe Garamond Pro Bold", Georgia, "Times New Roman", Times, serif;
+	font-family: Cambria;
 	color: #ffffff;
 	font-weight: 700px;
     float: left;
@@ -331,7 +340,7 @@ div.accountInfo, div.contestInfo
     font-size: 1.4em;
     display: block;
     text-align: right;
-	font-family:"Adobe Garamond Pro Bold", Georgia, "Times New Roman", Times, serif;
+	font-family: Cambria;
     padding: 0px 10px 26px 0px;
     color: White;
 }
@@ -365,6 +374,6 @@ div.accountInfo, div.contestInfo
 .submitButton
 {
     text-align: right;
-	 font-family:"Adobe Garamond Pro Bold", Georgia, "Times New Roman", Times, serif;
+	 font-family: Cambria;
     padding-right: 10px;
 }

@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="SiteNotLoggedIn.master.cs" Inherits="ActivEarth.SiteNotLoggedIn" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="AboutPage.master.cs" Inherits="ActivEarth.AboutPage" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
  <html>
@@ -24,7 +24,7 @@
 
          <asp:Image id="Img1" ImageUrl="~/Images/Home/trans_earth.gif" Runat="server"/>
           </p> 
-            <div class="headermain">
+            <div class="header">
                 <div class="title">
                     <TITLEBANNER>ActivEarth</TITLEBANNER>                                           
                 </div>
@@ -56,3 +56,4 @@
         </form>
     </body>
 </html>
+
