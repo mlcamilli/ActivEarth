@@ -142,9 +142,11 @@ namespace ActivEarth.Server.Service.Competition
         public static string GetFormattedProgress(int challengeId, int userId)
         {
             Challenge challenge = ChallengeDAO.GetChallengeFromChallengeId(challengeId);
+
+            float initial = ChallengeDAO.GetInitializationValue(challengeId, userId);
             UserStatistic statistic = UserStatisticDAO.GetStatisticFromUserIdAndStatType(userId, challenge.StatisticBinding);
 
-            string numerator = (statistic != null ? statistic.Value : 0).ToString(challenge.FormatString);
+            string numerator = (statistic != null ? Math.Min(challenge.Requirement, statistic.Value - initial) : 0).ToString(challenge.FormatString);
             string denominator = challenge.Requirement.ToString(challenge.FormatString);
 
             return String.Format("{0} / {1}", numerator, denominator);
