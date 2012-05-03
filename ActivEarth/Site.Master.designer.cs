@@ -148,40 +148,31 @@ namespace ActivEarth {
         protected global::ActivEarth.Objects.Profile.DisplayWeatherControl DisplayWeatherControl1;
         
         /// <summary>
-        /// lblStatSteps control.
+        /// lblGreenScore control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblStatSteps;
+        protected global::System.Web.UI.WebControls.Label lblGreenScore;
         
         /// <summary>
-        /// lblStatWalkDistance control.
+        /// lblActivityScore control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblStatWalkDistance;
+        protected global::System.Web.UI.WebControls.Label lblActivityScore;
         
         /// <summary>
-        /// lblStatBikeDistance control.
+        /// _activityScoreImage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblStatBikeDistance;
-        
-        /// <summary>
-        /// lblStatRunDistance control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblStatRunDistance;
+        protected global::System.Web.UI.WebControls.Image _activityScoreImage;
         
         /// <summary>
         /// lblStatGasSavings control.
@@ -191,59 +182,5 @@ namespace ActivEarth {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblStatGasSavings;
-        
-        /// <summary>
-        /// lblStatChallengesCompleted control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblStatChallengesCompleted;
-        
-        /// <summary>
-        /// lblStatAggregateDistance control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblStatAggregateDistance;
-        
-        /// <summary>
-        /// lblStatAggregateTime control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblStatAggregateTime;
-        
-        /// <summary>
-        /// lblStatWalkTime control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblStatWalkTime;
-        
-        /// <summary>
-        /// lblStatBikeTime control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblStatBikeTime;
-        
-        /// <summary>
-        /// lblStatRunTime control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblStatRunTime;
     }
 }
