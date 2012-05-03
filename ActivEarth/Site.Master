@@ -67,17 +67,11 @@
             <h2>
                 Statistical Information
             </h2>
-            <p>Steps: <br /><asp:Label class="statData" runat="server" ID="lblStatSteps"></asp:Label></p>
-            <p>Distance Walked: <br /><asp:Label class="statData" runat="server" ID="lblStatWalkDistance"></asp:Label></p>
-            <p>Distance Biked: <br /><asp:Label class="statData" runat="server" ID="lblStatBikeDistance"></asp:Label></p>
-            <p>Distance Ran: <br /><asp:Label class="statData" runat="server" ID="lblStatRunDistance"></asp:Label></p>
+            <p>Green Score: <br /><asp:Label class="statData" runat="server" ID="lblGreenScore"></asp:Label></p>
+            <p>Activity Score: <br /><asp:Label class="statData" runat="server" ID="lblActivityScore"></asp:Label>
+            <asp:Image ID="_activityScoreImage" runat="server" Height="20px" Width="20px" ImageAlign="Middle" 
+                ImageUrl="~/Images/Competition/Activity_Score.png"/></p>
             <p>Gas Money Saved: <br /><asp:Label class="statData" runat="server" ID="lblStatGasSavings"></asp:Label></p>
-            <p>Challenges Completed: <br /><asp:Label class="statData" runat="server" ID="lblStatChallengesCompleted"></asp:Label></p>
-            <p>Total Distance: <br /><asp:Label class="statData" runat="server" ID="lblStatAggregateDistance"></asp:Label></p>
-            <p>Total Time: <br /><asp:Label class="statData" runat="server" ID="lblStatAggregateTime"></asp:Label></p>
-            <p>Time Walking: <br /><asp:Label class="statData" runat="server" ID="lblStatWalkTime"></asp:Label></p>
-            <p>Time Biking: <br /><asp:Label class="statData" runat="server" ID="lblStatBikeTime"></asp:Label></p>
-            <p>Time Running: <br /><asp:Label class="statData" runat="server" ID="lblStatRunTime"></asp:Label></p>
         </div>
         <div class="clear">
         </div>
