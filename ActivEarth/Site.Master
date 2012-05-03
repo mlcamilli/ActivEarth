@@ -42,10 +42,10 @@
             
             <h2>Recent Activity:</h2>
 
-            <div style="padding-top:5px">
-            <asp:TextBox ID="txbTitle" runat="server" Width="80%" OnClick="this.value=''" Placeholder="Message Title"></asp:TextBox>
+            <div style="border: 1px solid;padding-top:5px;padding-left:10px;width:80%">
+            <asp:TextBox ID="txbTitle" runat="server" Width="85%" OnClick="this.value=''" Placeholder="Message Title"></asp:TextBox>
             <br/>
-            <asp:TextBox ID="txbMessage" runat="server" TextMode="MultiLine" Width="80%" Placeholder="Enter a message here..."></asp:TextBox>
+            <asp:TextBox ID="txbMessage" runat="server" TextMode="MultiLine" Width="85%" Placeholder="Enter a message here..."></asp:TextBox>
             <br/>
             <asp:Button ID="PostButton" runat="server" OnClick="PostMessage" Text="Post"/>
             </div>
