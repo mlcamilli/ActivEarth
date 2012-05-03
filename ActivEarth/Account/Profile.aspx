@@ -3,7 +3,7 @@
 </asp:Content>
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
     <h2>
-        Profile for <asp:Label runat="server" ID="lblUserName"></asp:Label>
+        Welcome to ActivEarth, <asp:Label runat="server" ID="lblUserName"></asp:Label>
     </h2>
     <p>
         <b>First Name:</b> <asp:Label runat="server" ID="lblFirstName"></asp:Label><br/>

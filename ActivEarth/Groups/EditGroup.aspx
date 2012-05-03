@@ -50,7 +50,7 @@
                             </p>
                         </fieldset>
                   
-                            <asp:Button ID="EditGroupButton" CssClass="Button" runat="server" CommandName="MoveNext" Text="Edit Group Information" 
+                            <asp:Button ID="EditGroupButton" CssClass="Button" runat="server" CommandName="MoveNext" Text="Save Changes" 
                                  ValidationGroup="RegisterGroupValidationGroup" OnClick="EditGroupInformation" />
                             <asp:Button ID="DeleteButton" CssClass="Button" runat="server" Text="Delete Group" OnClick="DeleteGroup" />
                             <asp:Button ID="CancelButton" CssClass="Button" runat="server" Text="Cancel" OnClick="Cancel" />

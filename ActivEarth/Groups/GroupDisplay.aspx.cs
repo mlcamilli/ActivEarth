@@ -44,6 +44,8 @@ namespace ActivEarth.Groups
 
                 lblGroupName.Text = currentGroup.Name;
                 lblDescription.Text = currentGroup.Description;
+                lblGreenScore.Text = currentGroup.GreenScore.ToString();
+                lblActivityScore.Text = currentGroup.ActivityScore.TotalScore.ToString();
                 lblHashTags.Text = "[";
                 int i = 0;
                 foreach (string tag in currentGroup.HashTags)
