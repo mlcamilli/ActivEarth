@@ -158,6 +158,8 @@ ContestDAO.UpdateContestStandings(contestId);
             {
                 if (!isCompeting)
                 {
+                    btnLeaveContest.Visible = false;
+
                     if (GroupSelection.Items.Count == 0)
                     {
                         List<Group> groups = GroupDAO.GetAllGroupsByOwner(user);
@@ -166,20 +168,19 @@ ContestDAO.UpdateContestStandings(contestId);
                         {
                             GroupSelection.Items.Add(group.Name);
                         }
+                    }
 
-                        if (groups.Count != 0)
-                        {
-                            btnLeaveContest.Visible = false;
-                            btnJoinContest.Visible = true;
-                            GroupSelection.Visible = true;
-                        }
-                        else
-                        {
-                            SignUpErrorMessage.Text = "This is a group contest. In order to join a group contest, you must "
-                                + "be a group leader of at least one group. If you are part of a group and not the leader, ask your group leader to add "
-                                + "the group to this contest.";
-                            SignUpErrorMessage.Visible = true;
-                        }
+                    if (GroupSelection.Items.Count != 0)
+                    {
+                        btnJoinContest.Visible = true;
+                        GroupSelection.Visible = true;
+                    }
+                    else
+                    {
+                        SignUpErrorMessage.Text = "This is a group contest. In order to join a group contest, you must "
+                            + "be a group leader of at least one group. If you are part of a group and not the leader, ask your group leader to add "
+                            + "the group to this contest.";
+                        SignUpErrorMessage.Visible = true;
                     }
                 }
                 else
@@ -187,10 +188,14 @@ ContestDAO.UpdateContestStandings(contestId);
                     if (contest.Type == ContestType.Group)
                     {
                         Team team = TeamDAO.GetTeamFromUserIdAndContestId(user.UserID, contestId, true);
-                        Group group = GroupDAO.GetGroupFromGroupId(team.GroupId.Value);
+                        Group group = GroupDAO.GetGroupFromGroupId(team.GroupId ?? -1);
                         if (group.Owner.UserID == user.UserID)
                         {
                             btnLeaveContest.Visible = true;
+                        }
+                        else
+                        {
+                            btnLeaveContest.Visible = false;
                         }
                     }
                     else
@@ -269,7 +274,10 @@ ContestDAO.UpdateContestStandings(contestId);
                 if (isGroup)
                 {
                     Team team = TeamDAO.GetTeamFromUserIdAndContestId(user.UserID, contestId, true);
-                    ContestManager.RemoveGroup(contestId, GroupDAO.GetGroupFromName(team.Name));
+                    if (team != null)
+                    {
+                        ContestManager.RemoveGroup(contestId, GroupDAO.GetGroupFromGroupId(team.GroupId ?? -1));
+                    }
                 }
                 else
                 {
