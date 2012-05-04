@@ -180,16 +180,16 @@ namespace ActivEarth.Server.Service.Competition
         /// <summary>
         /// Calculates the reward for a time-based contest.
         /// </summary>
-        /// <param name="duration">Duration of the contest.</param>
-        /// <param name="statistic">Statistic on which the contest is based.</param>
+        /// <param name="days">Duration of the contest, in days.</param>
+        /// <param name="teams">Number of teams competing in the contest.</param>
         /// <returns>Total reward pot for a contest with the given values.</returns>
-        public static int CalculateContestReward(int days, int members)
+        public static int CalculateContestReward(int days, int teams)
         {
             float membersExponent = 1.03f;
             float daysCoefficient = 0.7f;
             float daysInitial = 3;
 
-            return (int)Math.Round(Math.Pow(members, membersExponent) * 
+            return (int)Math.Round(Math.Pow(teams, membersExponent) * 
                 ((daysCoefficient * days) + daysInitial));
         } 
         
@@ -259,7 +259,7 @@ namespace ActivEarth.Server.Service.Competition
 
                 contest.Reward = ContestManager.CalculateContestReward(
                     ContestManager.CalculateEstimatedLengthInDays(contest),
-                    TeamDAO.GetCompetitorCount(contestId));
+                    TeamDAO.GetTeamsFromContestId(contestId, false).Count);
                 ContestDAO.UpdateContest(contest);
 
                 return (teamId > 0);
@@ -287,7 +287,7 @@ namespace ActivEarth.Server.Service.Competition
                     Contest contest = ContestDAO.GetContestFromContestId(contestId, false, false);
                     contest.Reward = ContestManager.CalculateContestReward(
                         ContestManager.CalculateEstimatedLengthInDays(contest),
-                        TeamDAO.GetCompetitorCount(contestId));
+                    TeamDAO.GetTeamsFromContestId(contestId, false).Count);
                     ContestDAO.UpdateContest(contest);
 
                     return true;
@@ -326,7 +326,7 @@ namespace ActivEarth.Server.Service.Competition
             Contest contest = ContestDAO.GetContestFromContestId(contestId, false, false);
             contest.Reward = ContestManager.CalculateContestReward(
                 ContestManager.CalculateEstimatedLengthInDays(contest),
-                TeamDAO.GetCompetitorCount(contestId));
+                    TeamDAO.GetTeamsFromContestId(contestId, false).Count);
             ContestDAO.UpdateContest(contest);
         }
 
@@ -352,7 +352,7 @@ namespace ActivEarth.Server.Service.Competition
                     Contest contest = ContestDAO.GetContestFromContestId(contestId, false, false);
                     contest.Reward = ContestManager.CalculateContestReward(
                         ContestManager.CalculateEstimatedLengthInDays(contest),
-                        TeamDAO.GetCompetitorCount(contestId));
+                    TeamDAO.GetTeamsFromContestId(contestId, false).Count);
                     ContestDAO.UpdateContest(contest);
 
                     return true;
