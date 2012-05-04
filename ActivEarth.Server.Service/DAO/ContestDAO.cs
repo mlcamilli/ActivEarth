@@ -124,6 +124,7 @@ namespace ActivEarth.DAO
                                    Type = (ContestType)c.type,
                                    StatisticBinding = (Statistic)c.statistic,
                                    IsActive = c.active,
+                                   IsSearchable = c.searchable,
                                    DeactivatedTime = c.deactivated,
                                    CreatorId = c.creator_id
                                }).FirstOrDefault();
