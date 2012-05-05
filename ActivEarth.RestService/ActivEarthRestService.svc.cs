@@ -10,7 +10,6 @@ using ActivEarth.Objects.Profile;
 
 namespace ActivEarth.RestService
 {
-    // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "ActivEarthRestService" in code, svc and config file together.
     public class ActivEarthRestService : IActivEarthRestService
     {
         public User GetUserById(string id)
@@ -18,9 +17,21 @@ namespace ActivEarth.RestService
             return UserDAO.GetUserFromUserId(int.Parse(id));
         }
 
+        public User GetUserByUsernameAndPassword(string username, string password)
+        {
+            return UserDAO.GetUserFromUserNameAndPassword(username, password);
+        }
+
         public Collection<User> GetAllUsers()
         {
             return UserDAO.GetAllUsers();
+        }
+
+        public string ChangePassword(string username, string newpassword)
+        {
+            var userId = UserDAO.GetUserIdFromUserName(username);
+            bool success = UserDAO.UpdatePassword(newpassword, userId);
+            return "Password change was " + (success ? "successful." : "unsuccessful.");
         }
     }
 }

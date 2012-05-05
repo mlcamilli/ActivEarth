@@ -21,7 +21,17 @@ namespace ActivEarth.RestService
 
         [OperationContract]
         [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Xml, BodyStyle = WebMessageBodyStyle.Wrapped,
+            UriTemplate = "user/{username}/password/{password}")]
+        User GetUserByUsernameAndPassword(string username, string password);
+
+        [OperationContract]
+        [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Xml, BodyStyle = WebMessageBodyStyle.Wrapped,
             UriTemplate = "users")]
         Collection<User> GetAllUsers();
+
+        [OperationContract]
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Xml, BodyStyle = WebMessageBodyStyle.Wrapped,
+            UriTemplate = "user/{username}/changepw/{newpassword}")]
+        string ChangePassword(string username, string newpassword);
     }
 }
