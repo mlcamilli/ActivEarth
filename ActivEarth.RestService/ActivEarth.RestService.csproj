@@ -71,6 +71,16 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ActivEarth.Objects\ActivEarth.Objects.csproj">
+      <Project>{AA6B79F0-72D0-404C-BA16-9573F1710470}</Project>
+      <Name>ActivEarth.Objects</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ActivEarth.Server.Service\ActivEarth.Server.Data.csproj">
+      <Project>{EA905182-E03B-4A7C-A4C4-84D77BFCEE28}</Project>
+      <Name>ActivEarth.Server.Data</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
   <ProjectExtensions>
