@@ -16,7 +16,7 @@ namespace ActivEarth.RestService
 
         public string XMLData(string id)
         {
-            return "You requsted id: " + id;
+            return "You requested id: " + id;
         }
     }
 }
