@@ -30,8 +30,9 @@ namespace ActivEarth.RestService
         public string ChangePassword(string username, string newpassword)
         {
             var userId = UserDAO.GetUserIdFromUserName(username);
-            bool success = UserDAO.UpdatePassword(newpassword, userId);
-            return "Password change was " + (success ? "successful." : "unsuccessful.");
+            string errorMessage;
+            bool success = UserDAO.UpdatePassword(newpassword, userId, out errorMessage);
+            return "Password change was " + (success ? "successful." : ("unsuccessful. " + errorMessage));
         }
     }
 }
