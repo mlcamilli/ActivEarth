@@ -103,6 +103,7 @@
     <Content Include="Groups\WallDisplay.ascx" />
     <Content Include="Groups\WallPage.aspx" />
     <Content Include="Groups\CreateGroup.aspx" />
+    <Content Include="Images\Competition\Badges\Badge_Templates\None.png" />
     <Content Include="Images\Competition\Badges\Time_Biked\Bronze.png" />
     <Content Include="Images\Competition\Badges\Time_Biked\Diamond.png" />
     <Content Include="Images\Competition\Badges\Time_Biked\Emerald.png" />
