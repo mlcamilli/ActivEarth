@@ -168,7 +168,7 @@ namespace ActivEarth.Groups
             currentGroup.Quit(UserDAO.GetUserFromUserId(Convert.ToInt32(clickedButton.ID)));
             GroupDAO.UpdateGroup(currentGroup);
 
-            Response.Redirect("EditGroup.aspx?ID=" + Request.QueryString["ID"]);
+            Response.Redirect("~/Groups/EditGroup.aspx?ID=" + Request.QueryString["ID"]);
         }
 
         /// <summary>

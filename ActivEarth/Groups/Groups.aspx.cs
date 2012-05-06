@@ -66,17 +66,17 @@ namespace ActivEarth.Groups
         protected void SearchGroups(object sender, EventArgs e)
         {
             if (searchBox.Text.Length > 0)
-                Response.Redirect("GroupsSearch.aspx?Term=" + searchBox.Text);
+                Response.Redirect("~/Groups/GroupsSearch.aspx?Term=" + searchBox.Text);
         }
 
         protected void CreateGroup(object sender, EventArgs e)
         {
-            Response.Redirect("/Groups/CreateGroup.aspx");
+            Response.Redirect("~/Groups/CreateGroup.aspx");
         }
 
         protected void EditGroup(object sender, EventArgs e)
         {
-            Response.Redirect("/Groups/EditGroup.aspx");
+            Response.Redirect("~/Groups/EditGroup.aspx");
         }
     }
 }
