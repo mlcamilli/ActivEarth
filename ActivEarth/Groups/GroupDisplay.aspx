@@ -9,45 +9,46 @@
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
     
 <h2>
-    <asp:Label runat="server" ID="lblGroupName"></asp:Label>
+    <asp:Label runat="server" ID="lblGroupName"></asp:Label>     
 </h2>
 <h3>
-    <asp:Label runat="server" ID="lblDescription"></asp:Label>
+    <asp:Label runat="server" ID="lblDescription"></asp:Label><br /><br />
+    <b>Green Score: </b> <asp:Label runat="server" ID="lblGreenScore" />   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   <b>Activity Score: </b><asp:Label runat="server" ID="lblActivityScore" /><br />
+    <b>Hashtags: </b><asp:Label runat="server" ID="lblHashTags"></asp:Label>
 </h3>
+
+
 <br />
 <h2>Members</h2>
-<div class="groupTitle">
+<div class="groupTitle" style="padding-bottom:5px">
 <uc:MembersDisplayTable ID="MembersDisplayTable1" runat="server" />
 </div>
-
-<br /><br /><br /><br /><br /><br />
-
+<div style="clear:both;padding-bottom:20px">
 <asp:HyperLink ID="hypSeeMore" runat="server" Text="See More"></asp:HyperLink>
+</div>
 
-<br /><br /><br /><br /><br /><br />
 
-<h2>Contests</h2>
 <div>
+<h2>Contests</h2>
 <uc2:ContestDisplayTable ID="ContestDisplayTable1" runat="server" />
-<asp:Label runat="server" ID="Label1"></asp:Label>
+<asp:Label runat="server" ID="EmptyContest" Text="<br/>No active Contests."></asp:Label>
 </div> 
 
 <br /><br /><br />
 
 <h2>Recent Activity</h2>
-<div>
-<uc1:WallDisplay ID="WallDisplay1" runat="server" />
-</div>
-<br/><br/><br/><br/><br />
-<br/><br/><br />
-<br/>
-<div>
+<div style="border: 1px solid;padding-top:5px;padding-left:10px;width:98%">
 <asp:TextBox ID="txbTitle" runat="server" Placeholder="Message Title"></asp:TextBox>
 <br/>
 <asp:TextBox ID="txbMessage" runat="server" TextMode="MultiLine" Width="90%" Placeholder="Enter a message here..."></asp:TextBox>
 <br/>
 <asp:Button ID="PostButton" runat="server" OnClick="PostMessage" Text="Post"/>
 </div>
+<div style="clear:both">
+<uc1:WallDisplay ID="WallDisplay1" runat="server" />
+</div>
+
+
 
 <br /><br />
 

@@ -42,18 +42,16 @@ namespace ActivEarth.Groups
                 {
                     txbDescription.Text = currentGroup.Description;
                 }
-                if (lblAllHashTags.Text == "" && txbHashTag.Text == "")
+                if (lblAllHashTags.Text == "")
                 {
+                    lblAllHashTags.Text = "[]";
                     foreach (string tag in currentGroup.HashTags)
                     {
                         txbHashTag.Text = tag;
                         AddHashTag(null, null);
-                    }
-
-                    txbHashTag.Text = "";
+                    }                  
                 }
 
-                
             }
         }
 
@@ -72,23 +70,22 @@ namespace ActivEarth.Groups
 
         protected void AddHashTag(object sender, EventArgs e)
         {
-            if (!lblAllHashTags.Text.ToLower().Contains(" " + txbHashTag.Text.ToLower() + ",") &&
-                !lblAllHashTags.Text.ToLower().Contains(" " + txbHashTag.Text.ToLower() + "."))
+            lblAllHashTags.Text = lblAllHashTags.Text.Substring(1, lblAllHashTags.Text.Length - 2);
+            if (lblAllHashTags.Text == "")
             {
-                if (lblAllHashTags.Text == "")
-                {
-                    lblAllHashTags.Text = txbHashTag.Text + ".";
-                }
-                else
-                {
-                    lblAllHashTags.Text = lblAllHashTags.Text.Substring(0, lblAllHashTags.Text.Length - 1) + ", " + txbHashTag.Text + ".";
-                }
+                lblAllHashTags.Text = "[" + txbHashTag.Text + "]";
             }
+            else
+            {
+                lblAllHashTags.Text = "[" + lblAllHashTags.Text + ", " + txbHashTag.Text + "]";
+            }
+            
+            txbHashTag.Text = "";
         }
 
         protected void RemoveHashTags(object sender, EventArgs e)
         {
-            lblAllHashTags.Text = "";
+            lblAllHashTags.Text = "[]";
         }
 
         protected void BootMembers(object sender, EventArgs e)
@@ -104,11 +101,8 @@ namespace ActivEarth.Groups
             Group test = GroupDAO.GetGroupFromName(txbGroupName.Text);
             if (test == null || test.ID == groupID)
             {
-                List<string> hashTags = lblAllHashTags.Text.Split(',').Select(sValue => sValue.Trim()).ToList();
-                string last = hashTags.Last().TrimEnd('.');
-                hashTags.RemoveAt(hashTags.Count - 1);
-                hashTags.Add(last);
-                
+                List<string> hashTags = lblAllHashTags.Text.Substring(1, lblAllHashTags.Text.Length - 2).Split(',').Select(sValue => sValue.Trim()).ToList();
+                    
                 group.Name = txbGroupName.Text;
                 group.Description = txbDescription.Text;
                 group.HashTags = hashTags;

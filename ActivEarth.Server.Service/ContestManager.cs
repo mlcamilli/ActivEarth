@@ -280,9 +280,9 @@ namespace ActivEarth.Server.Service.Competition
         {
             try
             {
-                int teamId = TeamDAO.GetTeamIdsFromGroupId(group.ID).Where(t => t == contestId).FirstOrDefault();
+                Team team = TeamDAO.GetTeamsFromContestId(contestId, false).Where(t => t.GroupId == group.ID).FirstOrDefault();
 
-                if (TeamDAO.RemoveTeam(teamId))
+                if (team != null && TeamDAO.RemoveTeam(team.ID))
                 {
                     Contest contest = ContestDAO.GetContestFromContestId(contestId, false, false);
                     contest.Reward = ContestManager.CalculateContestReward(

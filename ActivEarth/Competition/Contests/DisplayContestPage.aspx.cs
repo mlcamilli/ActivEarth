@@ -13,6 +13,10 @@ using ActivEarth.Objects.Groups;
 
 namespace ActivEarth.Competition.Contests
 {
+    /// <summary>
+    /// This class represents the display Contest page in the ActivEarth
+    /// website.
+    /// </summary>
     public partial class DisplayContestPage : System.Web.UI.Page
     {
         int contestId;
@@ -20,6 +24,11 @@ namespace ActivEarth.Competition.Contests
         bool isValidId;
         bool isGroup;
 
+        /// <summary>
+        /// Loads the page.
+        /// </summary>
+        /// <param name="sender">Sender of the event.</param>
+        /// <param name="e">The Event Args.</param>
         protected void Page_Load(object sender, EventArgs e)
         {
             user = (User)Session["userDetails"];
@@ -56,6 +65,9 @@ ContestDAO.UpdateContestStandings(contestId);
             }
         }
 
+        /// <summary>
+        /// Loads the content on the page.
+        /// </summary>
         private void LoadDataOnPage()
         {
             Contest contest = ContestDAO.GetContestFromContestId(contestId, true, false);
@@ -135,12 +147,19 @@ ContestDAO.UpdateContestStandings(contestId);
             }
         }
 
+        /// <summary>
+        /// Loads content specific to contest Signup.
+        /// </summary>
+        /// <param name="contest">The contest.</param>
+        /// <param name="isCompeting">Whether the team is currently competeing or not.</param>
         private void LoadContestSignupData(Contest contest, bool isCompeting)
         {
             if (contest.Type == ContestType.Group)
             {
                 if (!isCompeting)
                 {
+                    btnLeaveContest.Visible = false;
+
                     if (GroupSelection.Items.Count == 0)
                     {
                         List<Group> groups = GroupDAO.GetAllGroupsByOwner(user);
@@ -149,25 +168,41 @@ ContestDAO.UpdateContestStandings(contestId);
                         {
                             GroupSelection.Items.Add(group.Name);
                         }
+                    }
 
-                        if (groups.Count != 0)
-                        {
-                            btnLeaveContest.Visible = false;
-                            btnJoinContest.Visible = true;
-                            GroupSelection.Visible = true;
-                        }
-                        else
-                        {
-                            SignUpErrorMessage.Text = "This is a group contest. In order to join a group contest, you must "
-                                + "be a group leader of at least one group. If you are part of a group and not the leader, ask your group leader to add "
-                                + "the group to this contest.";
-                            SignUpErrorMessage.Visible = true;
-                        }
+                    if (GroupSelection.Items.Count != 0)
+                    {
+                        btnJoinContest.Visible = true;
+                        GroupSelection.Visible = true;
+                    }
+                    else
+                    {
+                        SignUpErrorMessage.Text = "This is a group contest. In order to join a group contest, you must "
+                            + "be a group leader of at least one group. If you are part of a group and not the leader, ask your group leader to add "
+                            + "the group to this contest.";
+                        SignUpErrorMessage.Visible = true;
                     }
                 }
                 else
                 {
-                    btnLeaveContest.Visible = true;
+                    if (contest.Type == ContestType.Group)
+                    {
+                        Team team = TeamDAO.GetTeamFromUserIdAndContestId(user.UserID, contestId, true);
+                        Group group = GroupDAO.GetGroupFromGroupId(team.GroupId ?? -1);
+                        if (group.Owner.UserID == user.UserID)
+                        {
+                            btnLeaveContest.Visible = true;
+                        }
+                        else
+                        {
+                            btnLeaveContest.Visible = false;
+                        }
+                    }
+                    else
+                    {
+                        btnLeaveContest.Visible = true;
+                    }
+
                     btnJoinContest.Visible = false;
                     GroupSelection.Visible = false;
                 }
@@ -204,6 +239,11 @@ ContestDAO.UpdateContestStandings(contestId);
             }
         }
 
+        /// <summary>
+        /// Adds a team to the contest.
+        /// </summary>
+        /// <param name="sender">Sender of the event.</param>
+        /// <param name="e">Event args.</param>
         protected void JoinContest(object sender, EventArgs e)
         {
             if(isValidId)
@@ -222,6 +262,11 @@ ContestDAO.UpdateContestStandings(contestId);
             }
         }
 
+        /// <summary>
+        /// Removes a team from a contest.
+        /// </summary>
+        /// <param name="sender">Sender of the event.</param>
+        /// <param name="e">Event args.</param>
         protected void LeaveContest(object sender, EventArgs e)
         {
             if (isValidId)
@@ -229,7 +274,10 @@ ContestDAO.UpdateContestStandings(contestId);
                 if (isGroup)
                 {
                     Team team = TeamDAO.GetTeamFromUserIdAndContestId(user.UserID, contestId, true);
-                    ContestManager.RemoveGroup(contestId, GroupDAO.GetGroupFromName(team.Name));
+                    if (team != null)
+                    {
+                        ContestManager.RemoveGroup(contestId, GroupDAO.GetGroupFromGroupId(team.GroupId ?? -1));
+                    }
                 }
                 else
                 {

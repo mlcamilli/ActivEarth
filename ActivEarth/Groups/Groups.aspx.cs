@@ -40,11 +40,24 @@ namespace ActivEarth.Groups
                 List<Group> userGroups = GroupDAO.GetGroupsByUser(this.userID);
                 List<Group> ownedGroups = GroupDAO.GetAllGroupsByOwner(userDetails);
 
+                if (userGroups.Count > 0)
+                {
+                    Color[] backColors = { Color.FromArgb(34, 139, 34), Color.White };
+                    Color[] textColors = { Color.White, Color.Black };
+                    GroupsDisplayTable1.PopulateGroupsTable(userGroups, backColors, textColors);
+                    OwnedGroupsDisplayTable1.PopulateGroupsTable(ownedGroups, backColors, textColors);
 
-                Color[] backColors = { Color.FromArgb(34, 139, 34), Color.White };
-                Color[] textColors = { Color.White, Color.Black };
-                GroupsDisplayTable1.PopulateGroupsTable(userGroups, backColors, textColors);
-                OwnedGroupsDisplayTable1.PopulateGroupsTable(ownedGroups, backColors, textColors);
+                    GroupsDisplayTable1.Visible = true;
+                    OwnedGroupsDisplayTable1.Visible = true;
+                    EmptyGroup.Visible = false;
+                }
+                else
+                {
+                    GroupsDisplayTable1.Visible = false;
+                    OwnedGroupsDisplayTable1.Visible = false;
+                    EmptyGroup.Visible = true;
+                }
+                  
 
             }
 

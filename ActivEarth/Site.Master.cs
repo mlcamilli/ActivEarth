@@ -10,6 +10,7 @@ using ActivEarth.Objects.Profile;
 using ActivEarth.DAO;
 using System.Drawing;
 using ActivEarth.Objects.Groups;
+using ActivEarth.Server.Service.Statistics;
 
 namespace ActivEarth
 {
@@ -39,18 +40,13 @@ namespace ActivEarth
                 Color[] textColors = {Color.Black, Color.White };
                 RecentActivityTable.PopulateMessageTable(messages, backColors, textColors);
 
-                lblStatSteps.Text = userDetails.GetStatistic(Statistic.Steps).ToString() + " steps";
-                lblStatWalkDistance.Text = userDetails.GetStatistic(Statistic.WalkDistance).ToString() + " miles";
-                lblStatBikeDistance.Text = userDetails.GetStatistic(Statistic.BikeDistance).ToString() + " miles";
-                lblStatRunDistance.Text = userDetails.GetStatistic(Statistic.RunDistance).ToString() + " miles";
-                lblStatGasSavings.Text = "$ " + userDetails.GetStatistic(Statistic.GasSavings).ToString();
-                lblStatChallengesCompleted.Text = userDetails.GetStatistic(Statistic.ChallengesCompleted).ToString();
-                lblStatAggregateDistance.Text = userDetails.GetStatistic(Statistic.AggregateDistance).ToString() + " hr";
-                lblStatAggregateTime.Text = userDetails.GetStatistic(Statistic.AggregateTime).ToString() + " hr";
-                lblStatWalkTime.Text = userDetails.GetStatistic(Statistic.WalkTime).ToString() + " hr";
-                lblStatBikeTime.Text = userDetails.GetStatistic(Statistic.BikeTime).ToString() + " hr";
-                lblStatRunTime.Text = userDetails.GetStatistic(Statistic.RunTime).ToString() + " hr";
-                if (userDetails.City != "")
+                lblActivityScore.Text = userDetails.ActivityScore.TotalScore.ToString();
+                lblGreenScore.Text = userDetails.GreenScore.ToString();
+                StatisticManager userStat = new StatisticManager(userDetails);
+                lblStatGasSavings.Text = "$ " + userStat.GetUserStatistic(Statistic.GasSavings).Value;
+
+                
+                if (userDetails.City != null)
                 {
                     if (DisplayWeatherControl1.GetCurrentConditions(userDetails.City.Replace(' ', '+')))
                     {

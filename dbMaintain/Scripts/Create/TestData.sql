@@ -473,6 +473,8 @@ insert into ActivEarth_Dev.dbo.team_members Values (6, 49, 13, 0, 1)
 insert into ActivEarth_Dev.dbo.groups Values (5, 'Hokie Nation', 'Let''s go Hokies!', 26, 4650, 3940, 7325)
 insert into ActivEarth_Dev.dbo.groups Values (5, 'Bikers United', 'We love to ride!', 31, 9320, 8631, 12320)
 
+insert into ActivEarth_Dev.dbo.groups Values (8, 'Running All Over The World', 'Come one, come all!', 31, 6130, 6581, 7530)
+
 insert into ActivEarth_Dev.dbo.group_members Values (1, 5)
 insert into ActivEarth_Dev.dbo.group_members Values (1, 10)
 
@@ -481,3 +483,7 @@ insert into ActivEarth_Dev.dbo.group_members Values (2, 6)
 insert into ActivEarth_Dev.dbo.group_members Values (2, 8)
 insert into ActivEarth_Dev.dbo.group_members Values (2, 11)
 insert into ActivEarth_Dev.dbo.group_members Values (2, 12)
+
+insert into ActivEarth_Dev.dbo.group_members Values (3, 5)
+insert into ActivEarth_Dev.dbo.group_members Values (3, 8)
+insert into ActivEarth_Dev.dbo.group_members Values (3, 12)

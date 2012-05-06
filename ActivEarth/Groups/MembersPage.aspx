@@ -1,4 +1,4 @@
-<%@ Page Title="" Language="C#" MasterPageFile="~/GroupTabs.master" AutoEventWireup="True" CodeBehind="MembersPage.aspx.cs" Inherits="ActivEarth.Groups.MembersPage" %>
+<%@ Page Title="" Language="C#" MasterPageFile="~/Tabs.master" AutoEventWireup="True" CodeBehind="MembersPage.aspx.cs" Inherits="ActivEarth.Groups.MembersPage" %>
 
 <%@ Register src="MembersDisplayTable.ascx" tagname="MembersDisplayTable" tagprefix="uc" %>
 

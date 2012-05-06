@@ -24,6 +24,7 @@
     <br/><br/>
     <div>
     <uc:GroupsDisplayTable ID="GroupsDisplayTable1" runat="server" />
+    <asp:Label ID="EmptyGroup" runat="server" Text="You aren't a member of any Groups.  Search for Groups or create your own Group!"/>
     </div>
     </div>
     

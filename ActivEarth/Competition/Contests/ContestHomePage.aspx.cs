@@ -36,21 +36,6 @@ namespace ActivEarth.Competition.Contests
                 List<int> contestIds = ContestDAO.GetContestIdsFromUserId(user.UserID);
                 List<string> contestNames = new List<string>();
 
-                #region ---------- Test Code ----------
-
-                /*
-                int cid = ContestManager.CreateContest(ContestType.Individual, "End Test", "You want 500 dollar.",
-                    new DateTime(2012, 4, 18, 0, 0, 0), 25000, true, Statistic.Steps, user.UserID);
-                ContestManager.AddUser(cid, user);
-                
-                contestNames.Add("End test");
-                contestIds.Add(cid);
-                */
-
-
-
-                #endregion ---------- Test Code ----------
-
                 foreach (int id in contestIds)
                 {
                     contestNames.Add(ContestDAO.GetContestNameFromContestId(id));

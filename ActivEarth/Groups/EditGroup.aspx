@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="EditGroup.aspx.cs" Inherits="ActivEarth.Groups.EditGroup" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Tabs.Master" AutoEventWireup="true" CodeBehind="EditGroup.aspx.cs" Inherits="ActivEarth.Groups.EditGroup" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -46,11 +46,11 @@
                                 <asp:Button ID="ClearHashTagsButton" CssClass="Button" runat="server" Text="Remove Hashtags" OnClick="RemoveHashTags" />  
                             </p>  
                             <p>
-                                <asp:Button ID="BootMembersButton" CssClass="Button" runat="server" Text="Boot Members" OnClick="BootMembers" />  
+                                <asp:Button ID="BootMembersButton" CssClass="Button" runat="server" Text="Manage Group Members" OnClick="BootMembers" />  
                             </p>
                         </fieldset>
                   
-                            <asp:Button ID="EditGroupButton" CssClass="Button" runat="server" CommandName="MoveNext" Text="Edit Group Information" 
+                            <asp:Button ID="EditGroupButton" CssClass="Button" runat="server" CommandName="MoveNext" Text="Save Changes" 
                                  ValidationGroup="RegisterGroupValidationGroup" OnClick="EditGroupInformation" />
                             <asp:Button ID="DeleteButton" CssClass="Button" runat="server" Text="Delete Group" OnClick="DeleteGroup" />
                             <asp:Button ID="CancelButton" CssClass="Button" runat="server" Text="Cancel" OnClick="Cancel" />
