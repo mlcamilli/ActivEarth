@@ -307,8 +307,14 @@ div.accountInfo, div.contestInfo
 
 .submitButton
 {
-    text-align: right;
-	 font-family:"Adobe Garamond Pro Bold", Georgia, "Times New Roman", Times, serif;
+     text-align: right;
+	font-family: Cambria;
+	font-size:medium;
+	font-weight: bolder;
+	background-color: #1493fa;
+	border-style: solid;
+	border-width: 1;
+	border-color: White;
     padding-right: 10px;
 }
 
