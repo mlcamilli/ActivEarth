@@ -243,8 +243,9 @@ namespace ActivEarth.DAO
             }
         }
 
-        public static bool UpdatePassword(string password, int userId)
+        public static bool UpdatePassword(string password, int userId, out string errorMessage)
         {
+            errorMessage = null;
             try
             {
                 using (SqlConnection connection = ConnectionManager.GetConnection())
@@ -262,8 +263,9 @@ namespace ActivEarth.DAO
                     return false;
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                errorMessage = e.ToString();
                 return false;
             }
         }

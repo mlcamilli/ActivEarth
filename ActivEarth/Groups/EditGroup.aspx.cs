@@ -90,7 +90,7 @@ namespace ActivEarth.Groups
 
         protected void BootMembers(object sender, EventArgs e)
         {
-            Response.Redirect("OwnerMembersPage.aspx?ID=" + Request.QueryString["ID"]);
+            Response.Redirect("~/Groups/OwnerMembersPage.aspx?ID=" + Request.QueryString["ID"]);
         }
 
         protected void EditGroupInformation(object sender, EventArgs e)
