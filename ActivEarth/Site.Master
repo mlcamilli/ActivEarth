@@ -8,7 +8,7 @@
 <head runat="server">
     <title>ActivEarth</title>
  
-     <link href="~/Styles/Not.css" rel="stylesheet" type="text/css" />
+     <link href="~/Styles/LoggedIn.css" rel="stylesheet" type="text/css" />
     <asp:ContentPlaceHolder ID="HeadContent" runat="server">
     </asp:ContentPlaceHolder>
 </head>

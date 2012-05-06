@@ -4,7 +4,7 @@
  <html>
     <head id="Head1" runat="server">
         <title>ActivEarth</title>
-        <link href="~/Styles/Hometester.css" rel="stylesheet" type="text/css" />
+        <link href="~/Styles/NotLoggedIn.css" rel="stylesheet" type="text/css" />
         <asp:ContentPlaceHolder ID="HeadContent" runat="server">
         </asp:ContentPlaceHolder>
 <style type="text/css">
@@ -40,7 +40,7 @@
             </div>
 
             <div class="headerextend">
-            <SLOGANBANNER>"Burn Calories, not Carbon"</SLOGANBANNER>  
+            <SLOGANBANNER>Burn Calories, not Carbon</SLOGANBANNER>  
             </div>
 
             <div class="mainNotLoggedIn">

@@ -1,18 +1,30 @@
-﻿/* DEFAULTS
+﻿/*This CSS style sheet is used once a user has logged in*/
+
+/*HEADING WITH ACTIVEARTH*/
+TITLEBANNER
+{
+    color: #ffffff;
+    font-size: 4em;
+    padding: 0px 0px 0px 20px;
+    font-family: Cambria;
+}
+
+/* DEFAULTS
 ----------------------------------------------------------*/
 
 body   
 {
     background: #b6b7bc;
     font-size: .80em;
-    font-family: "Lucida Handwriting";
+    font-family: Cambria;
     margin: 0px;
     padding: 0px;
-    color: #696969;
+    color: #000000;
 }
 
 a:link, a:visited
 {
+    font-family: Cambria;
     color: #034af3;
 }
 
@@ -36,12 +48,11 @@ p
 
 /* HEADINGS   
 ----------------------------------------------------------*/
-
 h1, h2, h3, h4, h5, h6
 {
-    font-family: "Lucida Handwriting";
+    font-family: Cambria;
     font-size: 1.5em;
-    color: #ffffff;
+    color: #000000;
     text-transform: none;
     font-weight: 200;
     margin-bottom: 0px;
@@ -52,31 +63,26 @@ h1
     font-size: 1.6em;
     padding-bottom: 0px;
     margin-bottom: 0px;
-	font-family: "Lucida Handwriting";
 }
 
 h2
 {
     font-size: 1.5em;
     font-weight: 600;
-	font-family: "Lucida Handwriting";
 }
 
 h3
 {
-   font-family: "Lucida Handwriting";
     font-size: 1.2em;
 }
 
 h4
 {
-	   font-family: "Lucida Handwriting";
     font-size: 1.1em;
 }
 
 h5, h6
 {
-	   font-family: "Lucida Handwriting";
     font-size: 1em;
 }
 
@@ -94,23 +100,23 @@ first child of the left and right table columns */
 .page
 {
     width: 960px;
-    background-color: black;
+    background-color: #ffffff;
     margin: 20px auto 0px auto;
-    border: 1px solid #496077;
+    border: 2px solid #000000;
 }
 
 .header
 {
     position: relative;
     margin: 0px;
-    padding: 0px 0px 12px 0px;
-    background: #4b6c9e;
+    padding: 6px 0px 26px 0px;
+    background: #009933;
     width: 100%;
 }
 
 .header h1
 {
-    font-family: "Lucida Handwriting";
+    font-family: Cambria;
     font-weight: 700;
     margin: 0px;
     padding: 0px 0px 0px 20px;
@@ -122,17 +128,18 @@ first child of the left and right table columns */
 }
 .profileInfo
 {
+    background-color: #ffffff;
 	width: 180px;
 	float: left;
 	clear:left;
-	margin: 0px 0px 0px 10px;
+	margin: 0px 0px 0px 15px;
 }
 .main
 {
-    font-family: "Lucida Handwriting";
-    padding: 0px;
-    margin: 0px;
-    min-height: 420px;
+   	font-family: Cambria;
+    padding: 0px 0px 0px 10px;
+    margin: 0px 0px 0px 0px;
+    min-height: 900px;
     width: 600px;
     float: left;
     border-left-style: solid;
@@ -143,18 +150,25 @@ first child of the left and right table columns */
 }
 .statInfo
 {
-	width: 100px;
+    background-color: #ffffff;
+	width: 130px;
 	float: left;
-	margin: 0px 0px 0px 10px;
+	margin: 0px 0px 0px 15px;
+	padding: 0px 0px 0px 0px;
 
 }
+.statData
+{
+	margin:0px 0px 0px 20px;
+}
+
 
 .leftCol
 {
     padding: 6px 0px;
     margin: 12px 8px 8px 8px;
     width: 200px;
-    min-height: 200px;
+    min-height: auto;
 }
 
 .footer
@@ -162,8 +176,8 @@ first child of the left and right table columns */
     color: #4e5766;
     padding: 8px 0px 0px 0px;
     margin: 0px auto;
-    text-align: center;
-	   font-family: "Lucida Handwriting";
+    text-align: left;
+	font-family: Cambria;
     line-height: normal;
 }
 
@@ -177,10 +191,6 @@ div.hideSkiplink
     width:100%;
 }
 
-div.menu
-{
-    padding: 4px 0px 4px 8px;
-}
 
 div.menu ul
 {
@@ -193,8 +203,8 @@ div.menu ul
 div.menu ul li a, div.menu ul li a:visited
 {
     background-color: #1493fa;
-    border: 3px #FFBF00 solid;
-    color: #FFBF00;
+    border: 2px #000000 solid;
+    color: #ffffff;
     display: block;
     line-height: 1.35em;
     padding: 4px 20px;
@@ -204,14 +214,14 @@ div.menu ul li a, div.menu ul li a:visited
 
 div.menu ul li a:hover
 {
-    background-color: #76ed87;
+    background-color: #009933;
     color: #000000;
     text-decoration: none;
 }
 
 div.menu ul li a:active
 {
-    background-color: #76ed87;
+    background-color: #009933;
     color: #cfdbe6;
     text-decoration: none;
 }
@@ -263,7 +273,7 @@ legend
 {
     font-size: 1.1em;
     font-weight: 600;
-	   font-family: "Lucida Handwriting";
+	font-family: Cambria;
     padding: 2px 4px 8px 4px;
 }
 
@@ -306,10 +316,9 @@ div.accountInfo, div.contestInfo
 .title
 {
     display: block;
-	/*font-family:"Adobe Garamond Pro Bold", Georgia, "Times New Roman", Times, serif;*/
-	font-family: "Lucida Handwriting";
+	font-family:Cambria;
 	color: #ffffff;
-	font-weight: 700px;
+	font-weight: 700;
     float: left;
     text-align: left;
     width: auto;
@@ -317,12 +326,11 @@ div.accountInfo, div.contestInfo
 
 .loginDisplay
 {
-    font-size: 1.1em;
+    font-size: 1.4em;
     display: block;
     text-align: right;
-    font-family: "Lucida Handwriting";
-	/*font-family:"Adobe Garamond Pro Bold", Georgia, "Times New Roman", Times, serif;*/
-    padding: 10px;
+	font-family: Cambria;
+    padding: 0px 10px 26px 0px;
     color: White;
 }
 
@@ -354,7 +362,16 @@ div.accountInfo, div.contestInfo
 
 .submitButton
 {
-    text-align: right;
-	font-family: "Lucida Handwriting";
+      text-align: right;
+	font-family: Cambria;
+	font-size:medium;
+	font-weight: bolder;
+	background-color: #1493fa;
+	border-style: solid;
+	border-width: 1;
+	border-color: White;
     padding-right: 10px;
 }
+
+
+
