@@ -40,7 +40,7 @@ namespace ActivEarth.Competition.Contests
         /// <param name="firstPlace">The team in first.</param>
         /// <param name="goal">The goal of the contest.</param>
         /// <param name="format">The format string the goal value is.</param>
-        public void PopulateProgressGraph(Team firstPlace, float goal, string format)
+        public void PopulateProgressGraph(ContestTeam firstPlace, float goal, string format)
         {
             _ContestProgress.Value = (firstPlace != null ? (int)((firstPlace.Score / goal) * 100) : 0);
             _StartLabel.Text = 0.ToString(format);

@@ -71,7 +71,7 @@ ContestDAO.UpdateContestStandings(contestId);
         private void LoadDataOnPage()
         {
             Contest contest = ContestDAO.GetContestFromContestId(contestId, true, false);
-            string contestState = contest.getContestState();
+            string contestState = contest.GetContestState();
             bool isCompeting = TeamDAO.UserCompetingInContest(user.UserID, contestId);
 
             ContestName.Text = contest.Name;
@@ -89,20 +89,20 @@ ContestDAO.UpdateContestStandings(contestId);
 
                 if (contest.Mode == ContestEndMode.TimeBased)
                 {
-                    ProgressGraph.PopulateProgressGraph(contest.StartTime, contest.EndCondition.EndTime);
+                    ProgressGraph.PopulateProgressGraph(contest.StartTime, contest.EndTime.Value);
                 }
                 else
                 {
                     ProgressGraph.PopulateProgressGraph(
                         (contest.Teams.Count >= 1 ? contest.Teams[0] : null),
-                        contest.EndCondition.EndValue,
+                        contest.EndValue.Value,
                         contest.FormatString);
                 }
 
                 if (isCompeting)
                 {
-                    Team usersTeam = TeamDAO.GetTeamFromUserIdAndContestId(user.UserID, contest.ID, false);
-                    List<Team> teamsToDisplay = ContestManager.GetTeamsToDisplay(usersTeam, contest);
+                    ContestTeam usersTeam = TeamDAO.GetTeamFromUserIdAndContestId(user.UserID, contest.ID, false);
+                    List<ContestTeam> teamsToDisplay = ContestManager.GetTeamsToDisplay(usersTeam, contest);
                     Color[] backColors = { Color.FromArgb(34, 139, 34), Color.White };
                     Color[] textColors = { Color.White, Color.Black };
                     List<int> rewards = ContestDAO.CalculateBracketRewards(contest);
@@ -187,7 +187,7 @@ ContestDAO.UpdateContestStandings(contestId);
                 {
                     if (contest.Type == ContestType.Group)
                     {
-                        Team team = TeamDAO.GetTeamFromUserIdAndContestId(user.UserID, contestId, true);
+                        ContestTeam team = TeamDAO.GetTeamFromUserIdAndContestId(user.UserID, contestId, true);
                         Group group = GroupDAO.GetGroupFromGroupId(team.GroupId ?? -1);
                         if (group.Owner.UserID == user.UserID)
                         {
@@ -273,7 +273,7 @@ ContestDAO.UpdateContestStandings(contestId);
             {
                 if (isGroup)
                 {
-                    Team team = TeamDAO.GetTeamFromUserIdAndContestId(user.UserID, contestId, true);
+                    ContestTeam team = TeamDAO.GetTeamFromUserIdAndContestId(user.UserID, contestId, true);
                     if (team != null)
                     {
                         ContestManager.RemoveGroup(contestId, GroupDAO.GetGroupFromGroupId(team.GroupId ?? -1));

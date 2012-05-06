@@ -125,6 +125,10 @@ namespace ActivEarth.Tests.Groups
         [TestMethod]
         public void TestGetGroupByHashtag()
         {
+            string testTag = "GroupTest123";
+            int initialTagged = GroupDAO.GetAllGroupsByHashTag(testTag).Count;
+            int initialTotal = GroupDAO.GetAllGroups().Count;
+
             var owner = new User
             {
                 UserName = "owner",
@@ -170,7 +174,7 @@ namespace ActivEarth.Tests.Groups
             member2.UserID = UserDAO.CreateNewUser(member2, "password");
 
             List<string> tags1 = new List<string>(); List<string> tags2 = new List<string>();
-            tags1.Add("new"); tags2.Add("new");
+            tags1.Add(testTag); tags2.Add(testTag);
             tags1.Add("searchable"); tags2.Add("searchable");
                               tags2.Add("hashtags");
 
@@ -195,15 +199,13 @@ namespace ActivEarth.Tests.Groups
                 Assert.AreNotEqual("member1", u.UserName);
             }
 
-            taggedGroups = GroupDAO.GetAllGroupsByHashTag("new");
-            Assert.AreEqual(taggedGroups.Count, 2);
+            taggedGroups = GroupDAO.GetAllGroupsByHashTag(testTag);
+            Assert.AreEqual(taggedGroups.Count, initialTagged + 2);
             Assert.AreEqual(taggedGroups.First().Name, "Test1");
             Assert.AreEqual(taggedGroups.Last().Name, "Test2");
 
             List<Group> allGroups = GroupDAO.GetAllGroups();
-            Assert.AreEqual(allGroups.Count, 2);
-            Assert.AreEqual(allGroups.First().Name, "Test1");
-            Assert.AreEqual(allGroups.Last().Name, "Test2");
+            Assert.AreEqual(allGroups.Count, initialTotal + 2);
         }
 
         [TestMethod]

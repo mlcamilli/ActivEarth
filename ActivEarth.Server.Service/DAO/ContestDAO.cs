@@ -32,10 +32,10 @@ namespace ActivEarth.DAO
                     {
                         name = contest.Name,
                         description = contest.Description,
-                        points = contest.Reward,
+                        reward = contest.Reward,
                         end_mode = (byte)contest.Mode,
-                        end_goal = contest.EndCondition.EndValue,
-                        end_time = contest.EndCondition.EndTime,
+                        end_goal = contest.EndValue,
+                        end_time = contest.EndTime,
                         start = contest.StartTime,
                         type = (byte)contest.Type,
                         statistic = (byte)contest.StatisticBinding,
@@ -50,7 +50,7 @@ namespace ActivEarth.DAO
                     id = contestData.id;
                 }
 
-                foreach (Team team in contest.Teams)
+                foreach (ContestTeam team in contest.Teams)
                 {
                     TeamDAO.CreateNewTeam(team);
                 }
@@ -79,12 +79,10 @@ namespace ActivEarth.DAO
                                     ID = c.id,
                                     Name = c.name,
                                     Description = c.description,
-                                    Reward = c.points,
+                                    Reward = c.reward,
                                     StartTime = c.start,
-                                    EndCondition =
-                                        ((ContestEndMode) c.end_mode == ContestEndMode.GoalBased
-                                             ? new EndCondition((float) c.end_goal)
-                                             : new EndCondition((DateTime) c.end_time)),
+                                    EndValue =(float?)c.end_goal,
+                                    EndTime = c.end_time,
                                     Mode = (ContestEndMode) c.end_mode,
                                     Type = (ContestType) c.type,
                                     StatisticBinding = (Statistic) c.statistic,
@@ -114,12 +112,10 @@ namespace ActivEarth.DAO
                                    ID = c.id,
                                    Name = c.name,
                                    Description = c.description,
-                                   Reward = c.points,
+                                   Reward = c.reward,
                                    StartTime = c.start,
-                                   EndCondition =
-                                       ((ContestEndMode)c.end_mode == ContestEndMode.GoalBased ?
-                                           new EndCondition((float)c.end_goal) :
-                                           new EndCondition((DateTime)c.end_time)),
+                                   EndValue = (float?)c.end_goal,
+                                   EndTime = c.end_time,
                                    Mode = (ContestEndMode)c.end_mode,
                                    Type = (ContestType)c.type,
                                    StatisticBinding = (Statistic)c.statistic,
@@ -135,7 +131,7 @@ namespace ActivEarth.DAO
                 if (loadTeams)
                 {
                     contest.Teams = TeamDAO.GetTeamsFromContestId(contest.ID, loadTeamMembers);
-                    contest.Teams.Sort(delegate(Team t1, Team t2) { return t2.Score.CompareTo(t1.Score); });
+                    contest.Teams.Sort(delegate(ContestTeam t1, ContestTeam t2) { return t2.Score.CompareTo(t1.Score); });
                 }
                 contest.FormatString = StatisticInfoDAO.GetStatisticFormatString(contest.StatisticBinding);
             }
@@ -161,12 +157,10 @@ namespace ActivEarth.DAO
                                     ID = c.id,
                                     Name = c.name,
                                     Description = c.description,
-                                    Reward = c.points,
+                                    Reward = c.reward,
                                     StartTime = c.start,
-                                    EndCondition =
-                                        ((ContestEndMode)c.end_mode == ContestEndMode.GoalBased ?
-                                            new EndCondition((float)c.end_goal) :
-                                            new EndCondition((DateTime)c.end_time)),
+                                    EndValue = (float?)c.end_goal,
+                                    EndTime = c.end_time,
                                     Mode = (ContestEndMode)c.end_mode,
                                     Type = (ContestType)c.type,
                                     StatisticBinding = (Statistic)c.statistic,
@@ -182,7 +176,7 @@ namespace ActivEarth.DAO
                         if (loadTeams)
                         {
                             contest.Teams = TeamDAO.GetTeamsFromContestId(contest.ID, loadTeamMembers);
-                            contest.Teams.Sort(delegate(Team t1, Team t2) { return t2.Score.CompareTo(t1.Score); });
+                            contest.Teams.Sort(delegate(ContestTeam t1, ContestTeam t2) { return t2.Score.CompareTo(t1.Score); });
                         }
 
                         contest.FormatString = StatisticInfoDAO.GetStatisticFormatString(contest.StatisticBinding);
@@ -235,10 +229,10 @@ namespace ActivEarth.DAO
                     {
                         dbContest.name = contest.Name;
                         dbContest.description = contest.Description;
-                        dbContest.points = contest.Reward;
+                        dbContest.reward = contest.Reward;
                         dbContest.end_mode = (byte)contest.Mode;
-                        dbContest.end_goal = contest.EndCondition.EndValue;
-                        dbContest.end_time = contest.EndCondition.EndTime;
+                        dbContest.end_goal = contest.EndValue;
+                        dbContest.end_time = contest.EndTime;
                         dbContest.start = contest.StartTime;
                         dbContest.type = (byte)contest.Type;
                         dbContest.statistic = (byte)contest.StatisticBinding;
@@ -257,7 +251,7 @@ namespace ActivEarth.DAO
 
                 if (contest != null)
                 {
-                    foreach (Team team in contest.Teams)
+                    foreach (ContestTeam team in contest.Teams)
                     {
                         TeamDAO.UpdateTeam(team);
                     }

@@ -64,9 +64,8 @@
     <Compile Include="Competition\Contests\ContestBracket.cs" />
     <Compile Include="Competition\Contests\ContestEndMode.cs" />
     <Compile Include="Competition\Contests\ContestType.cs" />
-    <Compile Include="Competition\Contests\TeamMember.cs" />
-    <Compile Include="Competition\Contests\EndCondition.cs" />
-    <Compile Include="Competition\Contests\Team.cs" />
+    <Compile Include="Competition\Contests\ContestTeamMember.cs" />
+    <Compile Include="Competition\Contests\ContestTeam.cs" />
     <Compile Include="Groups\Group.cs" />
     <Compile Include="Groups\Message.cs" />
     <Compile Include="Groups\Wall.cs" />

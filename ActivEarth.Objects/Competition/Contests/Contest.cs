@@ -75,10 +75,18 @@ namespace ActivEarth.Objects.Competition.Contests
         }
 
         /// <summary>
-        /// Conditions under which the contest will end (can represent either a duration
-        /// or a goal score to be attained).
+        /// Goal target for a goal-based contest.
         /// </summary>
-        public EndCondition EndCondition
+        public float? EndValue
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// End time for a time-based contest.
+        /// </summary>
+        public DateTime? EndTime
         {
             get;
             set;
@@ -88,7 +96,7 @@ namespace ActivEarth.Objects.Competition.Contests
         /// List of competing teams in the competition, maintained in sorted order
         /// for reporting standings.
         /// </summary>
-        public List<Team> Teams
+        public List<ContestTeam> Teams
         {
             get;
             set;
@@ -158,24 +166,24 @@ namespace ActivEarth.Objects.Competition.Contests
         /// </summary>
         public Contest()
         {
-            this.Teams = new List<Team>();
+            this.Teams = new List<ContestTeam>();
         }
 
         #endregion ---------- Constructor ----------
 
-        public string getContestState()
+        public string GetContestState()
         {
             if (StartTime > DateTime.Now)
             {
                 return "SIGN-UP";
             }
 
-            if (Mode == ContestEndMode.GoalBased && Teams.Count != 0 && EndCondition.EndValue > Teams[0].Score)
+            if (Mode == ContestEndMode.GoalBased && Teams.Count != 0 && this.EndValue > Teams[0].Score)
             {
                 return "STARTED";
             }
 
-            if (Mode == ContestEndMode.TimeBased && EndCondition.EndTime > DateTime.Now)
+            if (Mode == ContestEndMode.TimeBased && this.EndTime > DateTime.Now)
             {
                 return "STARTED";
             }

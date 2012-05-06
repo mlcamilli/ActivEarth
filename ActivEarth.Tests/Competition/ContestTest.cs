@@ -355,7 +355,7 @@ namespace ActivEarth.Tests.Competition
                     "This is a test time-based contest.", DateTime.Now, DateTime.Now.AddDays(1),
                     true, Statistic.Steps, _user1.UserID);
 
-                Team team = new Team()
+                ContestTeam team = new ContestTeam()
                 {
                     Name = "Team1",
                     ContestId = id
@@ -412,7 +412,7 @@ namespace ActivEarth.Tests.Competition
                     Mode = ContestEndMode.GoalBased,
                     Type = ContestType.Group,
                     StartTime = DateTime.Today,
-                    EndCondition = new EndCondition(500),
+                    EndValue = 500,
                     IsActive = true,
                     IsSearchable = true,
                     StatisticBinding = Statistic.Steps,
@@ -467,7 +467,7 @@ namespace ActivEarth.Tests.Competition
                     Mode = ContestEndMode.GoalBased,
                     Type = ContestType.Group,
                     StartTime = DateTime.Today,
-                    EndCondition = new EndCondition(500),
+                    EndValue = 500,
                     IsActive = true,
                     IsSearchable = true,
                     StatisticBinding = Statistic.Steps,
@@ -481,7 +481,7 @@ namespace ActivEarth.Tests.Competition
                     Mode = ContestEndMode.GoalBased,
                     Type = ContestType.Group,
                     StartTime = DateTime.Today,
-                    EndCondition = new EndCondition(500),
+                    EndValue = 500,
                     IsActive = true,
                     IsSearchable = true,
                     StatisticBinding = Statistic.BikeDistance,
@@ -495,7 +495,7 @@ namespace ActivEarth.Tests.Competition
                     Mode = ContestEndMode.GoalBased,
                     Type = ContestType.Group,
                     StartTime = DateTime.Today,
-                    EndCondition = new EndCondition(500),
+                    EndValue = 500,
                     IsActive = true,
                     IsSearchable = true,
                     StatisticBinding = Statistic.RunDistance,
@@ -531,7 +531,7 @@ namespace ActivEarth.Tests.Competition
                     Mode = ContestEndMode.GoalBased,
                     Type = ContestType.Group,
                     StartTime = DateTime.Today,
-                    EndCondition = new EndCondition(500),
+                    EndValue = 500,
                     IsActive = true,
                     IsSearchable = true,
                     StatisticBinding = Statistic.Steps,
@@ -572,7 +572,7 @@ namespace ActivEarth.Tests.Competition
                     Mode = ContestEndMode.GoalBased,
                     Type = ContestType.Group,
                     StartTime = DateTime.Today,
-                    EndCondition = new EndCondition(500),
+                    EndValue = 500,
                     IsActive = true,
                     IsSearchable = true,
                     StatisticBinding = Statistic.Steps,
@@ -642,7 +642,7 @@ namespace ActivEarth.Tests.Competition
                     Mode = ContestEndMode.GoalBased,
                     Type = ContestType.Group,
                     StartTime = DateTime.Today,
-                    EndCondition = new EndCondition(500),
+                    EndValue = 500,
                     IsActive = true,
                     IsSearchable = true,
                     StatisticBinding = Statistic.Steps,
@@ -711,7 +711,7 @@ namespace ActivEarth.Tests.Competition
                     Mode = ContestEndMode.GoalBased,
                     Type = ContestType.Group,
                     StartTime = DateTime.Today,
-                    EndCondition = new EndCondition(500),
+                    EndValue = 500,
                     IsActive = true,
                     IsSearchable = true,
                     StatisticBinding = Statistic.Steps,
@@ -733,8 +733,8 @@ namespace ActivEarth.Tests.Competition
                 Assert.IsFalse(retrieved.Teams[0].ContainsMember(_user4.UserID));
 
                 Log("Adding two more members to the team");
-                retrieved.Teams[0].Members.Add(new TeamMember() { UserId = _user3.UserID });
-                retrieved.Teams[0].Members.Add(new TeamMember() { UserId = _user4.UserID });
+                retrieved.Teams[0].Members.Add(new ContestTeamMember() { UserId = _user3.UserID });
+                retrieved.Teams[0].Members.Add(new ContestTeamMember() { UserId = _user4.UserID });
 
                 ContestDAO.UpdateContest(retrieved);
 
@@ -772,7 +772,7 @@ namespace ActivEarth.Tests.Competition
                     Mode = ContestEndMode.GoalBased,
                     Type = ContestType.Group,
                     StartTime = DateTime.Today,
-                    EndCondition = new EndCondition(500),
+                    EndValue = 500,
                     IsActive = true,
                     IsSearchable = true,
                     StatisticBinding = Statistic.Steps,
@@ -818,7 +818,7 @@ namespace ActivEarth.Tests.Competition
                     Mode = ContestEndMode.GoalBased,
                     Type = ContestType.Group,
                     StartTime = DateTime.Today,
-                    EndCondition = new EndCondition(500),
+                    EndValue = 500,
                     IsActive = true,
                     IsSearchable = true,
                     StatisticBinding = Statistic.Steps,
@@ -829,7 +829,7 @@ namespace ActivEarth.Tests.Competition
                 int contestId = ContestDAO.CreateNewContest(contest);
 
                 Log("Creating team");
-                Team team = new Team()
+                ContestTeam team = new ContestTeam()
                 {
                     ContestId = contestId,
                     Name = "Test Team"
@@ -842,8 +842,8 @@ namespace ActivEarth.Tests.Competition
                 int j = TeamDAO.CreateNewTeamMember(_user2.UserID, teamId);
 
                 Log("Retrieving team from DB");
-                Team notFound = TeamDAO.GetTeamFromTeamId(-1, true);
-                Team retrieved = TeamDAO.GetTeamFromTeamId(teamId, true);
+                ContestTeam notFound = TeamDAO.GetTeamFromTeamId(-1, true);
+                ContestTeam retrieved = TeamDAO.GetTeamFromTeamId(teamId, true);
 
                 Assert.IsNull(notFound);
                 Assert.IsNotNull(retrieved);
@@ -1090,8 +1090,8 @@ namespace ActivEarth.Tests.Competition
 
                 ContestManager.AddUser(id1, _user1);
 
-                Team withMembers = TeamDAO.GetTeamFromUserIdAndContestId(_user1.UserID, id1, true);
-                Team withoutMembers = TeamDAO.GetTeamFromUserIdAndContestId(_user1.UserID, id1, false);
+                ContestTeam withMembers = TeamDAO.GetTeamFromUserIdAndContestId(_user1.UserID, id1, true);
+                ContestTeam withoutMembers = TeamDAO.GetTeamFromUserIdAndContestId(_user1.UserID, id1, false);
 
                 Log("Verifying retrieved team");
                 Assert.IsNotNull(withMembers);

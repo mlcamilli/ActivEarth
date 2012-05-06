@@ -1,7 +1,7 @@
 USE [ActivEarth_Dev]
 GO
 
-/****** Object:  Table [dbo].[challenges]    Script Date: 04/25/2012 00:55:57 ******/
+/****** Object:  Table [dbo].[challenges]    Script Date: 05/06/2012 14:51:20 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -13,9 +13,9 @@ GO
 
 CREATE TABLE [dbo].[challenges](
 	[id] [int] IDENTITY(1,1) NOT NULL,
-	[name] [varchar](50) NOT NULL,
-	[description] [text] NOT NULL,
-	[points] [int] NOT NULL,
+	[name] [varchar](30) NOT NULL,
+	[description] [varchar](100) NOT NULL,
+	[reward] [int] NOT NULL,
 	[requirement] [float] NOT NULL,
 	[persistent] [bit] NOT NULL,
 	[end_time] [datetime] NOT NULL,
@@ -27,7 +27,7 @@ CREATE TABLE [dbo].[challenges](
 (
 	[id] ASC
 )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
-) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+) ON [PRIMARY]
 
 GO
 

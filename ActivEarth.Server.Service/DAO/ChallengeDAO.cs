@@ -30,7 +30,7 @@ namespace ActivEarth.DAO
                                 ID = c.id,
                                 Name = c.name,
                                 Description = c.description,
-                                Reward = c.points,
+                                Reward = c.reward,
                                 Requirement = (float)c.requirement,
                                 IsPersistent = c.persistent,
                                 EndTime = c.end_time,
@@ -65,7 +65,7 @@ namespace ActivEarth.DAO
                                 ID = c.id,
                                 Name = c.name,
                                 Description = c.description,
-                                Reward = c.points,
+                                Reward = c.reward,
                                 Requirement = (float)c.requirement,
                                 IsPersistent = c.persistent,
                                 EndTime = c.end_time,
@@ -129,7 +129,7 @@ namespace ActivEarth.DAO
                                 ID = c.id,
                                 Name = c.name,
                                 Description = c.description,
-                                Reward = c.points,
+                                Reward = c.reward,
                                 Requirement = (float)c.requirement,
                                 IsPersistent = c.persistent,
                                 EndTime = c.end_time,
@@ -167,7 +167,7 @@ namespace ActivEarth.DAO
                                 ID = c.id,
                                 Name = c.name,
                                 Description = c.description,
-                                Reward = c.points,
+                                Reward = c.reward,
                                 Requirement = (float)c.requirement,
                                 IsPersistent = c.persistent,
                                 EndTime = c.end_time,
@@ -218,7 +218,7 @@ namespace ActivEarth.DAO
                         {
                             name = challenge.Name,
                             description = challenge.Description,
-                            points = challenge.Reward,
+                            reward = challenge.Reward,
                             requirement = challenge.Requirement,
                             persistent = challenge.IsPersistent,
                             end_time = challenge.EndTime,
@@ -256,7 +256,7 @@ namespace ActivEarth.DAO
                     {
                         dbChallenge.name = challenge.Name;
                         dbChallenge.description = challenge.Description;
-                        dbChallenge.points = challenge.Reward;
+                        dbChallenge.reward = challenge.Reward;
                         dbChallenge.requirement = challenge.Requirement;
                         dbChallenge.persistent = challenge.IsPersistent;
                         dbChallenge.end_time = challenge.EndTime;
@@ -392,7 +392,7 @@ namespace ActivEarth.DAO
                                                    StatisticBinding = (Statistic)c.statistic,
                                                    Requirement = (float)c.requirement,
                                                    Reward = c.reward,
-                                                   Description = c.condition_text,
+                                                   Description = c.description,
                                                    Name = (c.name == null ? String.Empty : c.name),
                                                    ImagePath = c.image_path
                                                }).ToList();
@@ -444,7 +444,7 @@ namespace ActivEarth.DAO
                                 ID = c.id,
                                 Name = c.name,
                                 Description = c.description,
-                                Reward = c.points,
+                                Reward = c.reward,
                                 Requirement = (float)c.requirement,
                                 IsPersistent = c.persistent,
                                 EndTime = c.end_time,

@@ -8,7 +8,7 @@ namespace ActivEarth.Objects.Competition.Contests
     /// Wrapper class for Users for use with Contests.  Allows for the calculation of
     /// score contributions since the beginning of a contest.
     /// </summary>
-    public class TeamMember
+    public class ContestTeamMember
     {
         #region ---------- Public Properties ----------
 
@@ -46,7 +46,7 @@ namespace ActivEarth.Objects.Competition.Contests
         /// <summary>
         /// Empty constructor for restoring from DB.
         /// </summary>
-        public TeamMember()
+        public ContestTeamMember()
         {
             this.Initialized = false;
             this.InitialScore = 0;

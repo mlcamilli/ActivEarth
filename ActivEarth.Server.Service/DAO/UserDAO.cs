@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
@@ -97,8 +98,9 @@ namespace ActivEarth.DAO
             {
                 RecentActivityDAO.GetUserRecentActivity(toReturn);
                 toReturn.userPrivacySettings = PrivacySettingDAO.GetPrivacySettingFromUserId(toReturn.UserID);
+                List<UserStatistic> list = UserStatisticDAO.GetAllStatisticsByUserId(toReturn.UserID);
                 toReturn.SetStatisticsDict(
-                    UserStatisticDAO.GetAllStatisticsByUserId(toReturn.UserID).ToDictionary(k => k.Statistic, e => e));
+                    list.ToDictionary(k => k.Statistic, e => e));
             }
 
             return toReturn;
@@ -279,7 +281,7 @@ namespace ActivEarth.DAO
                 UserDAO.UpdateUserProfile(user);
                 return true;
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 return false;
             }

@@ -486,7 +486,7 @@ namespace ActivEarth.Server.Service
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UserDataProvider_profile", Storage="_ProfileDataProviders", ThisKey="id", OtherKey="user_id")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UserDataProvider_ProfileDataProvider", Storage="_ProfileDataProviders", ThisKey="id", OtherKey="user_id")]
 		public EntitySet<ProfileDataProvider> ProfileDataProviders
 		{
 			get
@@ -3210,8 +3210,8 @@ namespace ActivEarth.Server.Service
     partial void OnnameChanged();
     partial void OndescriptionChanging(string value);
     partial void OndescriptionChanged();
-    partial void OnpointsChanging(int value);
-    partial void OnpointsChanged();
+    partial void OnrewardChanging(int value);
+    partial void OnrewardChanged();
     partial void Onend_modeChanging(byte value);
     partial void Onend_modeChanged();
     partial void Onend_timeChanging(System.Nullable<System.DateTime> value);
@@ -3303,7 +3303,7 @@ namespace ActivEarth.Server.Service
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_points", DbType="Int NOT NULL")]
-		public int points
+		public int reward
 		{
 			get
 			{
@@ -3313,11 +3313,11 @@ namespace ActivEarth.Server.Service
 			{
 				if ((this._points != value))
 				{
-					this.OnpointsChanging(value);
+					this.OnrewardChanging(value);
 					this.SendPropertyChanging();
 					this._points = value;
-					this.SendPropertyChanged("points");
-					this.OnpointsChanged();
+					this.SendPropertyChanged("reward");
+					this.OnrewardChanged();
 				}
 			}
 		}
@@ -3671,8 +3671,8 @@ namespace ActivEarth.Server.Service
     partial void OnnameChanged();
     partial void OndescriptionChanging(string value);
     partial void OndescriptionChanged();
-    partial void OnpointsChanging(int value);
-    partial void OnpointsChanged();
+    partial void OnrewardChanging(int value);
+    partial void OnrewardChanged();
     partial void OnrequirementChanging(double value);
     partial void OnrequirementChanged();
     partial void OnpersistentChanging(bool value);
@@ -3756,7 +3756,7 @@ namespace ActivEarth.Server.Service
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_points", DbType="Int NOT NULL")]
-		public int points
+		public int reward
 		{
 			get
 			{
@@ -3766,11 +3766,11 @@ namespace ActivEarth.Server.Service
 			{
 				if ((this._points != value))
 				{
-					this.OnpointsChanging(value);
+					this.OnrewardChanging(value);
 					this.SendPropertyChanging();
 					this._points = value;
-					this.SendPropertyChanged("points");
-					this.OnpointsChanged();
+					this.SendPropertyChanged("reward");
+					this.OnrewardChanged();
 				}
 			}
 		}
@@ -4001,8 +4001,8 @@ namespace ActivEarth.Server.Service
     partial void OnrequirementChanged();
     partial void OnrewardChanging(int value);
     partial void OnrewardChanged();
-    partial void Oncondition_textChanging(string value);
-    partial void Oncondition_textChanged();
+    partial void OndescriptionChanging(string value);
+    partial void OndescriptionChanged();
     partial void Onimage_pathChanging(string value);
     partial void Onimage_pathChanged();
     partial void OnnameChanging(string value);
@@ -4135,7 +4135,7 @@ namespace ActivEarth.Server.Service
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_condition_text", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
-		public string condition_text
+		public string description
 		{
 			get
 			{
@@ -4145,11 +4145,11 @@ namespace ActivEarth.Server.Service
 			{
 				if ((this._condition_text != value))
 				{
-					this.Oncondition_textChanging(value);
+					this.OndescriptionChanging(value);
 					this.SendPropertyChanging();
 					this._condition_text = value;
-					this.SendPropertyChanged("condition_text");
-					this.Oncondition_textChanged();
+					this.SendPropertyChanged("description");
+					this.OndescriptionChanged();
 				}
 			}
 		}
@@ -4870,7 +4870,7 @@ namespace ActivEarth.Server.Service
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UserDataProvider_profile", Storage="_UserDataProvider", ThisKey="user_id", OtherKey="id", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UserDataProvider_ProfileDataProvider", Storage="_UserDataProvider", ThisKey="user_id", OtherKey="id", IsForeignKey=true)]
 		public UserDataProvider UserDataProvider
 		{
 			get

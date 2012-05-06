@@ -48,7 +48,7 @@ namespace ActivEarth.Server.Service.Competition
                 Mode = ContestEndMode.TimeBased,
                 Type = type,
                 StartTime = start,
-                EndCondition = new EndCondition(end),
+                EndTime = end,
                 StatisticBinding = statistic,
                 IsSearchable = searchable,
                 IsActive = true,
@@ -81,7 +81,7 @@ namespace ActivEarth.Server.Service.Competition
                 Mode = ContestEndMode.GoalBased,
                 Type = type,
                 StartTime = start,
-                EndCondition = new EndCondition(end),
+                EndValue = end,
                 StatisticBinding = statistic,
                 IsSearchable = searchable,
                 DeactivatedTime = null,
@@ -115,10 +115,10 @@ namespace ActivEarth.Server.Service.Competition
         /// <param name="userTeam">Team that the current user is on.</param>
         /// <param name="contest">Contest to be analyzed.</param>
         /// <returns>List of teams to display in the contest standings table.</returns>
-        public static List<Team> GetTeamsToDisplay(Team userTeam, Contest contest)
+        public static List<ContestTeam> GetTeamsToDisplay(ContestTeam userTeam, Contest contest)
         {
             int userBracket;
-            List<Team> toDisplay = new List<Team>();
+            List<ContestTeam> toDisplay = new List<ContestTeam>();
 
             if (userTeam == null)
             {
@@ -129,11 +129,11 @@ namespace ActivEarth.Server.Service.Competition
                 userBracket = userTeam.Bracket;
             }
 
-            List<Team> diamond = contest.Teams.Where(t => t.Bracket == (int)ContestBracket.Diamond).ToList();
-            List<Team> platinum = contest.Teams.Where(t => t.Bracket == (int)ContestBracket.Platinum).ToList();
-            List<Team> gold = contest.Teams.Where(t => t.Bracket == (int)ContestBracket.Gold).ToList();
-            List<Team> silver = contest.Teams.Where(t => t.Bracket == (int)ContestBracket.Silver).ToList();
-            List<Team> bronze = contest.Teams.Where(t => t.Bracket == (int)ContestBracket.Bronze).ToList();
+            List<ContestTeam> diamond = contest.Teams.Where(t => t.Bracket == (int)ContestBracket.Diamond).ToList();
+            List<ContestTeam> platinum = contest.Teams.Where(t => t.Bracket == (int)ContestBracket.Platinum).ToList();
+            List<ContestTeam> gold = contest.Teams.Where(t => t.Bracket == (int)ContestBracket.Gold).ToList();
+            List<ContestTeam> silver = contest.Teams.Where(t => t.Bracket == (int)ContestBracket.Silver).ToList();
+            List<ContestTeam> bronze = contest.Teams.Where(t => t.Bracket == (int)ContestBracket.Bronze).ToList();
 
             if ((int)ContestBracket.Diamond > userBracket)
                 { toDisplay.Add(diamond.LastOrDefault()); }
@@ -201,7 +201,7 @@ namespace ActivEarth.Server.Service.Competition
         {
             foreach (Contest contest in ContestDAO.GetActiveContests(false, false))
             {
-                if (contest.EndCondition.EndTime <= DateTime.Now)
+                if (contest.EndTime <= DateTime.Now)
                 {
                     //Distribute Activity Score rewards
                     throw new NotImplementedException("Distribution of Contest rewards not yet implemented");
@@ -221,9 +221,9 @@ namespace ActivEarth.Server.Service.Competition
         /// </summary>
         public static void LockContest(int contestId)
         {
-            List<Team> teams = TeamDAO.GetTeamsFromContestId(contestId, true);
+            List<ContestTeam> teams = TeamDAO.GetTeamsFromContestId(contestId, true);
 
-            foreach (Team team in teams)
+            foreach (ContestTeam team in teams)
             {
                 TeamDAO.LockTeam(team);
             }
@@ -243,7 +243,7 @@ namespace ActivEarth.Server.Service.Competition
             {
                 string teamName = group.Name;
 
-                Team newTeam = new Team
+                ContestTeam newTeam = new ContestTeam
                 {
                     ContestId = contestId,
                     Name = teamName,
@@ -280,7 +280,7 @@ namespace ActivEarth.Server.Service.Competition
         {
             try
             {
-                Team team = TeamDAO.GetTeamsFromContestId(contestId, false).Where(t => t.GroupId == group.ID).FirstOrDefault();
+                ContestTeam team = TeamDAO.GetTeamsFromContestId(contestId, false).Where(t => t.GroupId == group.ID).FirstOrDefault();
 
                 if (team != null && TeamDAO.RemoveTeam(team.ID))
                 {
@@ -313,7 +313,7 @@ namespace ActivEarth.Server.Service.Competition
             {
                 string teamName = String.Format("{0} {1}", user.FirstName, user.LastName);
 
-                Team newTeam = new Team
+                ContestTeam newTeam = new ContestTeam
                 {
                     ContestId = contestId,
                     Name = teamName
@@ -338,7 +338,7 @@ namespace ActivEarth.Server.Service.Competition
         {
             try
             {
-                Team team = TeamDAO.GetTeamFromUserIdAndContestId(user.UserID, contestId, true);
+                ContestTeam team = TeamDAO.GetTeamFromUserIdAndContestId(user.UserID, contestId, true);
                 if (team == null) return false;
 
                 if (team.Members.Count > 1)
@@ -393,12 +393,12 @@ namespace ActivEarth.Server.Service.Competition
         {
             if (contest.Mode == ContestEndMode.TimeBased)
             {
-                return contest.EndCondition.EndTime.Subtract(contest.StartTime).Days;
+                return contest.EndTime.Value.Subtract(contest.StartTime).Days;
             }
             else // ContestEndMode.GoalBased
             {
                 List<float> expectedPerDay = new List<float> { 7000, 2, 4, 1, 0.6f, 1, 7, 1.25f, 0.5f, 0.5f, 0.25f  };
-                return (int)Math.Round(contest.EndCondition.EndValue / expectedPerDay[(int)contest.StatisticBinding]);
+                return (int)Math.Round(contest.EndValue.Value / expectedPerDay[(int)contest.StatisticBinding]);
             }
         }
 

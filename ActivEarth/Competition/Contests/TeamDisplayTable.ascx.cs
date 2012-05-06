@@ -26,13 +26,13 @@ namespace ActivEarth.Competition.Contests
         /// <param name="teams">The teams to display.</param>
         /// <param name="backColors">The backcolors to use for rows.</param>
         /// <param name="textColors">The text colors used for rows.</param>
-        public void PopulateTeamTable(List<Team> teams, Color[] backColors, Color[] textColors)
+        public void PopulateTeamTable(List<ContestTeam> teams, Color[] backColors, Color[] textColors)
         {
             int colorIndex = 0;
             int textIndex = 0;
             int idIndex = 0;
 
-            foreach (Team team in teams)
+            foreach (ContestTeam team in teams)
             {
                 TeamTable.Rows.Add(MakeRowForTable(team.Name, backColors[colorIndex], textColors[textIndex]));
 

@@ -9,7 +9,7 @@ namespace ActivEarth.Objects.Competition.Contests
     /// <summary>
     /// A team of participants, to be used in Contests.
     /// </summary>
-    public class Team
+    public class ContestTeam
     {
         #region ---------- Public Properties ----------
 
@@ -43,7 +43,7 @@ namespace ActivEarth.Objects.Competition.Contests
         /// <summary>
         /// The members who make up the team.
         /// </summary>
-        public List<TeamMember> Members
+        public List<ContestTeamMember> Members
         {
             get;
             set;
@@ -92,9 +92,9 @@ namespace ActivEarth.Objects.Competition.Contests
         /// <summary>
         /// Empty constructor for restoring from DB.
         /// </summary>
-        public Team()
+        public ContestTeam()
         {
-            this.Members = new List<TeamMember>();
+            this.Members = new List<ContestTeamMember>();
             this.Score = 0;
         }
 
@@ -109,11 +109,11 @@ namespace ActivEarth.Objects.Competition.Contests
         /// <returns>True if the user is a member of the team.</returns>
         public bool ContainsMember(int userId)
         {
-            var query = from TeamMember cUser in this.Members
+            var query = from ContestTeamMember cUser in this.Members
                         where cUser.UserId == userId
                         select cUser;
 
-            foreach (TeamMember cUser in query)
+            foreach (ContestTeamMember cUser in query)
             {
                 return true;
             }

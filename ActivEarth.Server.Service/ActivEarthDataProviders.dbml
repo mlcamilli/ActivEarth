@@ -14,7 +14,7 @@
       <Association Name="UserDataProvider_TeamMemberDataProvider" Member="TeamMemberDataProviders" ThisKey="id" OtherKey="user_id" Type="TeamMemberDataProvider" />
       <Association Name="UserDataProvider_ContestDataProvider" Member="ContestDataProviders" ThisKey="id" OtherKey="creator_id" Type="ContestDataProvider" />
       <Association Name="UserDataProvider_MessageDataProvider" Member="MessageDataProviders" ThisKey="id" OtherKey="user_id" Type="MessageDataProvider" />
-      <Association Name="UserDataProvider_profile" Member="ProfileDataProviders" ThisKey="id" OtherKey="user_id" Type="ProfileDataProvider" />
+      <Association Name="UserDataProvider_ProfileDataProvider" Member="ProfileDataProviders" ThisKey="id" OtherKey="user_id" Type="ProfileDataProvider" />
     </Type>
   </Table>
   <Table Name="dbo.privacy_settings" Member="PrivacySettingDataProviders">
@@ -143,7 +143,7 @@
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="description" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
-      <Column Name="points" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="reward" Storage="_points" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="end_mode" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
       <Column Name="end_time" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="end_goal" Type="System.Double" DbType="Float" CanBeNull="true" />
@@ -164,7 +164,7 @@
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="description" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
-      <Column Name="points" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="reward" Storage="_points" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="requirement" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
       <Column Name="persistent" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Column Name="end_time" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
@@ -183,7 +183,7 @@
       <Column Name="statistic" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
       <Column Name="requirement" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
       <Column Name="reward" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="condition_text" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="description" Storage="_condition_text" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
       <Column Name="image_path" Type="System.String" DbType="VarChar(75) NOT NULL" CanBeNull="false" />
       <Column Name="name" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
     </Type>
@@ -218,7 +218,7 @@
       <Column Name="activity_score_badges" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="activity_score_challenges" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="activity_score_contests" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="UserDataProvider_profile" Member="UserDataProvider" ThisKey="user_id" OtherKey="id" Type="UserDataProvider" IsForeignKey="true" />
+      <Association Name="UserDataProvider_ProfileDataProvider" Member="UserDataProvider" ThisKey="user_id" OtherKey="id" Type="UserDataProvider" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>
