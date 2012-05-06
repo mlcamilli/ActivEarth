@@ -103,6 +103,7 @@
     <Content Include="Groups\WallDisplay.ascx" />
     <Content Include="Groups\WallPage.aspx" />
     <Content Include="Groups\CreateGroup.aspx" />
+    <Content Include="Images\Competition\Badges\Badge_Templates\None.png" />
     <Content Include="Images\Competition\Badges\Time_Biked\Bronze.png" />
     <Content Include="Images\Competition\Badges\Time_Biked\Diamond.png" />
     <Content Include="Images\Competition\Badges\Time_Biked\Emerald.png" />
@@ -276,15 +277,14 @@
     <Content Include="Images\Home\background.png" />
     <Content Include="Images\Home\logotree.gif" />
     <Content Include="Images\Home\trans_earth.gif" />
-    <Content Include="Styles\Not.css" />
+    <Content Include="Styles\LoggedIn.css" />
+    <Content Include="Styles\NotLoggedIn.css" />
     <Content Include="Styles\page.css" />
-    <Content Include="Styles\Site.css" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\jquery-1.4.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.4.1.js" />
     <Content Include="Scripts\jquery-1.4.1.min.js" />
-    <Content Include="Styles\home.css" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -587,13 +587,6 @@
     <Compile Include="Site.Master.designer.cs">
       <DependentUpon>Site.Master</DependentUpon>
     </Compile>
-    <Compile Include="Home.Master.cs">
-      <DependentUpon>Home.Master</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Home.Master.designer.cs">
-      <DependentUpon>Home.Master</DependentUpon>
-    </Compile>
     <Compile Include="SiteNotLoggedIn.Master.cs">
       <DependentUpon>SiteNotLoggedIn.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -631,9 +624,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="SiteNotLoggedIn.Master" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Home.Master" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="GroupTabs.master" />
