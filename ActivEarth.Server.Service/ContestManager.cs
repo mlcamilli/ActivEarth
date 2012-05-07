@@ -234,7 +234,6 @@ namespace ActivEarth.Server.Service.Competition
                 }
             }
 
-            //Distribute Activity Score rewards
             contest.IsActive = false;
             contest.DeactivatedTime = DateTime.Now;
             ContestDAO.UpdateContest(contest);
