@@ -203,16 +203,38 @@ namespace ActivEarth.Server.Service.Competition
             {
                 if (contest.EndTime <= DateTime.Now)
                 {
-                    //Distribute Activity Score rewards
-                    throw new NotImplementedException("Distribution of Contest rewards not yet implemented");
-
-                    contest.IsActive = false;
-                    contest.DeactivatedTime = DateTime.Now;
-                    ContestDAO.UpdateContest(contest);
+                    ContestManager.DistributeContestReward(contest.ID);
                 }
             }
 
             ContestDAO.RemoveOldContests();
+        }
+
+        /// <summary>
+        /// Distributes the ActivityScore reward for a contest and deactivates it.
+        /// </summary>
+        /// <param name="contestId">ID of the contest to process.</param>
+        public static void DistributeContestReward(int contestId)
+        {
+            Contest contest = ContestDAO.GetContestFromContestId(contestId, true, true);
+            List<int> rewardsByBracket = ContestDAO.CalculateBracketRewards(contest);
+
+            foreach (ContestTeam team in contest.Teams)
+            {
+                float maxScore = team.Members.Max(m => m.Score);
+
+                foreach (ContestTeamMember member in team.Members)
+                {
+                    int reward = (maxScore == 0 ? 0 :
+                        (int)Math.Round(rewardsByBracket[team.Bracket] * (member.Score / maxScore)));
+                    UserDAO.AddContestPoints(member.UserId, reward);
+                }
+            }
+
+            //Distribute Activity Score rewards
+            contest.IsActive = false;
+            contest.DeactivatedTime = DateTime.Now;
+            ContestDAO.UpdateContest(contest);
         }
 
         /// <summary>

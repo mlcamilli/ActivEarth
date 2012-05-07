@@ -6,6 +6,7 @@ using ActivEarth.Objects.Profile;
 using ActivEarth.Objects.Competition;
 using ActivEarth.Objects.Competition.Contests;
 using ActivEarth.Server.Service;
+using ActivEarth.Server.Service.Competition;
 using ActivEarth.Server.Service.Statistics;
 
 namespace ActivEarth.DAO
@@ -237,6 +238,7 @@ namespace ActivEarth.DAO
         public static void UpdateTeamScore(int teamId)
         {
             ContestTeam team = TeamDAO.GetTeamFromTeamId(teamId, true);
+            Contest contest = ContestDAO.GetContestFromContestId(team.ContestId, false, false);
 
             if (team.IsLocked)
             {
@@ -252,6 +254,14 @@ namespace ActivEarth.DAO
                 team.Score = total;
                 TeamDAO.UpdateTeam(team);
                 ContestDAO.UpdateContestStandings(team.ContestId);
+
+                if (contest.Mode == ContestEndMode.GoalBased)
+                {
+                    if (team.Score >= contest.EndValue)
+                    {
+                        ContestManager.DistributeContestReward(team.ContestId);
+                    }
+                }
             }
         }
 

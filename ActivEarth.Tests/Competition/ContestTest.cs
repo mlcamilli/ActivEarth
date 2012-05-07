@@ -1104,6 +1104,132 @@ namespace ActivEarth.Tests.Competition
             }
         }
 
+        /// <summary>
+        /// Tests the distribution of ActivityScore at the end of the individual contest.
+        /// </summary>
+        [TestMethod]
+        public void TestContestDistributeRewardIndividualContest()
+        {
+            using (_trans)
+            {
+                InitializeTestDBEntries();
+
+                Log("Creating test contest");
+                int contestId = ContestManager.CreateContest(ContestType.Individual, "Contest",
+                    "This is a test contest", DateTime.Today.AddDays(-31), DateTime.Today, true, Statistic.Steps, _user1.UserID);
+
+                Log("Adding users to the contest");
+                ContestManager.AddUser(contestId, _user1);
+                ContestManager.AddUser(contestId, _user2);
+                ContestManager.AddUser(contestId, _user3);
+                ContestManager.AddUser(contestId, _user4);
+
+                Log("Locking the contest");
+                ContestManager.LockContest(contestId);
+
+                Log("Setting users' step statistics");
+                StatisticManager.SetUserStatistic(_user1.UserID, Statistic.Steps, 100);
+                StatisticManager.SetUserStatistic(_user2.UserID, Statistic.Steps, 200);
+                StatisticManager.SetUserStatistic(_user3.UserID, Statistic.Steps, 300);
+                StatisticManager.SetUserStatistic(_user4.UserID, Statistic.Steps, 400);
+
+                Log("Cleaning up contests");
+                ContestManager.CleanUp();
+
+                Log("Reloading users");
+                _user1 = UserDAO.GetUserFromUserId(_user1.UserID);
+                _user2 = UserDAO.GetUserFromUserId(_user2.UserID);
+                _user3 = UserDAO.GetUserFromUserId(_user3.UserID);
+                _user4 = UserDAO.GetUserFromUserId(_user4.UserID);
+
+                Log("Verifying that higher-bracket users receive more ActivityScore");
+                Assert.IsTrue(_user4.ActivityScore.ContestScore > _user3.ActivityScore.ContestScore);
+                Assert.IsTrue(_user3.ActivityScore.ContestScore > _user2.ActivityScore.ContestScore);
+                Assert.IsTrue(_user2.ActivityScore.ContestScore > _user1.ActivityScore.ContestScore);
+            }
+        }
+
+        /// <summary>
+        /// Tests the distribution of ActivityScore at the end of the group contest.
+        /// </summary>
+        [TestMethod]
+        public void TestContestDistributeRewardGroupContest()
+        {
+            using (_trans)
+            {
+                InitializeTestDBEntries();
+
+                Log("Creating test contest");
+                int contestId = ContestManager.CreateContest(ContestType.Group, "Contest",
+                    "This is a test contest", DateTime.Today.AddDays(-31), DateTime.Today, true, Statistic.Steps, _user1.UserID);
+
+                Log("Adding users to the contest");
+                ContestManager.AddGroup(contestId, _group1);
+                ContestManager.AddGroup(contestId, _group2);
+
+                Log("Locking the contest");
+                ContestManager.LockContest(contestId);
+
+                Log("Setting users' step statistics");
+                StatisticManager.SetUserStatistic(_user1.UserID, Statistic.Steps, 100);
+                StatisticManager.SetUserStatistic(_user2.UserID, Statistic.Steps, 200);
+                StatisticManager.SetUserStatistic(_user3.UserID, Statistic.Steps, 300);
+                StatisticManager.SetUserStatistic(_user4.UserID, Statistic.Steps, 400);
+
+                Log("Cleaning up contests");
+                ContestManager.CleanUp();
+
+                Log("Reloading users");
+                _user1 = UserDAO.GetUserFromUserId(_user1.UserID);
+                _user2 = UserDAO.GetUserFromUserId(_user2.UserID);
+                _user3 = UserDAO.GetUserFromUserId(_user3.UserID);
+                _user4 = UserDAO.GetUserFromUserId(_user4.UserID);
+
+                Log("Verifying that higher-scoring teammates receive more ActivityScore");
+                Assert.IsTrue(_user4.ActivityScore.ContestScore > _user3.ActivityScore.ContestScore);
+                Assert.IsTrue(_user2.ActivityScore.ContestScore > _user1.ActivityScore.ContestScore);
+            }
+        }
+
+        /// <summary>
+        /// Tests the termination of a goal-based contest.
+        /// </summary>
+        [TestMethod]
+        public void TestContestTerminationGoalBased()
+        {
+            using (_trans)
+            {
+                InitializeTestDBEntries();
+
+                Log("Creating test contest");
+                int contestId = ContestManager.CreateContest(ContestType.Individual, "Contest",
+                    "This is a test contest", DateTime.Today.AddDays(-31), 350, true, Statistic.Steps, _user1.UserID);
+
+                Log("Adding users to the contest");
+                ContestManager.AddUser(contestId, _user1);
+                ContestManager.AddUser(contestId, _user2);
+                ContestManager.AddUser(contestId, _user3);
+                ContestManager.AddUser(contestId, _user4);
+
+                Log("Locking the contest");
+                ContestManager.LockContest(contestId);
+
+                Log("Setting users' step statistics");
+                StatisticManager.SetUserStatistic(_user1.UserID, Statistic.Steps, 100);
+                StatisticManager.SetUserStatistic(_user2.UserID, Statistic.Steps, 200);
+                StatisticManager.SetUserStatistic(_user3.UserID, Statistic.Steps, 300);
+                StatisticManager.SetUserStatistic(_user4.UserID, Statistic.Steps, 400);
+
+                Log("Reloading Contest");
+                Contest contest = ContestDAO.GetContestFromContestId(contestId, false, false);
+
+                Log("Verifying that the contest was deactivated");
+                Assert.IsFalse(contest.IsActive);
+            }
+        }
+
+
+
         #endregion ---------- Test Cases ----------
 
         #region ---------- Utility Methods ----------

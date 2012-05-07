@@ -473,7 +473,7 @@ namespace ActivEarth.DAO
         /// <summary>
         /// Calculates the ActivityScore reward that will be awarded to teams in each bracket.
         /// </summary>
-        /// <param name="contest">Contest to calculate rewards for.</param>
+        /// <param name="contest">Contest to calculate rewards for. Must have teams loaded.</param>
         /// <returns>List of bracket rewards, with Bronze occupying position 0, working up to Diamond.</returns>
         public static List<int> CalculateBracketRewards(Contest contest)
         {
