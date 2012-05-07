@@ -39,7 +39,8 @@ namespace ActivEarth.DAO
                                 StartLongitude = c.start_longitude,
                                 StartTime = c.start_time,
                                 Steps = c.steps,
-                                Type = c.type
+                                Type = c.type,
+                                UserId = c.user_id
                             }).ToList();
             }
         }
@@ -49,37 +50,47 @@ namespace ActivEarth.DAO
         /// </summary>
         /// <param name="route">Route to add to the database.</param>
         /// <returns>Primary Key (ID) of the newly added Route.</returns>
-        public static int AddNewRoute(Route route)
+        public static int AddNewRoute(Route route, out string errorMessage)
         {
-            using (SqlConnection connection = ConnectionManager.GetConnection())
+            try
             {
-                var data = new ActivEarthDataProvidersDataContext(connection);
-                var routeData = new ActiveRouteDataProvider
+                using (SqlConnection connection = ConnectionManager.GetConnection())
                 {
-                    gmt_offset = route.GMTOffset,
-                    distance = route.Distance,
-                    end_latitude = route.EndLatitude,
-                    end_longitude = route.EndLongitude,
-                    end_time = route.EndTime,
-                    mode = route.Mode,
-                    points = route.Points,
-                    start_latitude = route.StartLatitude,
-                    start_longitude = route.StartLongitude,
-                    start_time = route.StartTime,
-                    steps = route.Steps,
-                    type = route.Type,
-                    user_id = route.UserId
-                };
+                    errorMessage = String.Empty;
 
-                data.ActiveRouteDataProviders.InsertOnSubmit(routeData);
-                data.SubmitChanges();
+                    var data = new ActivEarthDataProvidersDataContext(connection);
+                    var routeData = new ActiveRouteDataProvider
+                    {
+                        gmt_offset = route.GMTOffset,
+                        distance = route.Distance,
+                        end_latitude = route.EndLatitude,
+                        end_longitude = route.EndLongitude,
+                        end_time = route.EndTime,
+                        mode = route.Mode,
+                        points = route.Points,
+                        start_latitude = route.StartLatitude,
+                        start_longitude = route.StartLongitude,
+                        start_time = route.StartTime,
+                        steps = route.Steps,
+                        type = route.Type,
+                        user_id = route.UserId
+                    };
 
-                if (routeData.id > 0)
-                {
-                    ActiveRouteDAO.ProcessRoute(route);
+                    data.ActiveRouteDataProviders.InsertOnSubmit(routeData);
+                    data.SubmitChanges();
+
+                    if (routeData.id > 0)
+                    {
+                        ActiveRouteDAO.ProcessRoute(route);
+                    }
+
+                    return routeData.id;
                 }
-
-                return routeData.id;
+            }
+            catch (Exception e)
+            {
+                errorMessage = e.Message;
+                return 0;
             }
         }
 

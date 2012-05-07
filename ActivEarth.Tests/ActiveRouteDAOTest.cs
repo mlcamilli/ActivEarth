@@ -107,7 +107,8 @@ namespace ActivEarth.Tests
                 };
 
                 Log("Adding route");
-                ActiveRouteDAO.AddNewRoute(route);
+                string errorMessage;
+                ActiveRouteDAO.AddNewRoute(route, out errorMessage);
 
                 Log("Verifying that statistics updated");
                 Assert.AreEqual(709, UserStatisticDAO.GetStatisticFromUserIdAndStatType(_user1.UserID, Statistic.Steps).Value);
