@@ -34,6 +34,7 @@ namespace ActivEarth.Objects.Profile
 
             
             Wall = new Wall();
+            ActivityScore = new ActivityScore();
 
             userPrivacySettings = new PrivacySetting();
         }
