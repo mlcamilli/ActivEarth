@@ -16,12 +16,21 @@ namespace ActivEarth.Groups
 {
     public partial class MembersDisplayTable : System.Web.UI.UserControl
     {
+        /// <summary>
+        /// This is a component, so no work is required when it loads.  The population of the table
+        /// is handled by the page ASP.
+        /// </summary>
         protected void Page_Load(object sender, EventArgs e)
         {
 
         }
-        
-        
+
+        /// <summary>
+        /// Formats the preview table of Users on the Group Page based on the given list of Users and colors.
+        /// </summary>
+        /// <param name="users">The list of users to display in the table</param>
+        /// <param name="backColors">The list of alternating background colors to display in the table</param>
+        /// <param name="textColors">The list of alternating text colors to display in the table</param>
         public void PopulateMembersTable_Display(List<User> users, Color[] backColors, Color[] textColors)
         {
             TableRow imageRow = new TableRow();
@@ -43,6 +52,12 @@ namespace ActivEarth.Groups
 
         }
 
+        /// <summary>
+        /// Formats the table of all Users in the Group based on the given list of Users and colors.
+        /// </summary>
+        /// <param name="users">The list of users to display in the table</param>
+        /// <param name="backColors">The list of alternating background colors to display in the table</param>
+        /// <param name="textColors">The list of alternating text colors to display in the table</param>
         public void PopulateMembersTable_SeeAll(List<User> users, Color[] backColors, Color[] textColors)
         {
             int colorIndex = 0;
@@ -67,6 +82,12 @@ namespace ActivEarth.Groups
 
         }
 
+        /// <summary>
+        /// Formats the table of all Users in the Group with the option to remove users for the Owner of the group.
+        /// </summary>
+        /// <param name="users">The list of users to display in the table</param>
+        /// <param name="backColors">The list of alternating background colors to display in the table</param>
+        /// <param name="textColors">The list of alternating text colors to display in the table</param>
         public void PopulateMembersTable_Owner(List<User> users, Color[] backColors, Color[] textColors)
         {
             int colorIndex = 0;
@@ -91,7 +112,12 @@ namespace ActivEarth.Groups
 
         }
 
-
+        /// <summary>
+        /// Formats a single row for the Owner's table containing the given User.
+        /// </summary>
+        /// <param name="user">The User to display in the row</param>
+        /// <param name="backColor">The background color to display in the row</param>
+        /// <param name="textColor">The text color to display in the row</param>
         private TableRow MakeRowForOwnerTable(User user, Color backColor, Color textColor)
         {
             TableRow newRow = new TableRow();
@@ -111,7 +137,12 @@ namespace ActivEarth.Groups
             return newRow;
         }
 
-
+        /// <summary>
+        /// Formats a single row for the table of all Users containing the given User.
+        /// </summary>
+        /// <param name="user">The User to display in the row</param>
+        /// <param name="backColor">The background color to display in the row</param>
+        /// <param name="textColor">The text color to display in the row</param>
         private TableRow MakeRowForSeeAllTable(User user, Color backColor, Color textColor)
         {
             TableRow newRow = new TableRow();
@@ -121,6 +152,10 @@ namespace ActivEarth.Groups
             return newRow;
         }
 
+        /// <summary>
+        /// Formats a cell to add to the row containing the given User's picture.
+        /// </summary>
+        /// <param name="User">The User whose image should be displayed in the cell</param>
         private TableCell MakeImageCellForRow(User user)
         {
             
@@ -135,6 +170,11 @@ namespace ActivEarth.Groups
 
         }
 
+        /// <summary>
+        /// Formats a cell to add to the row containing the given text.
+        /// </summary>
+        /// <param name="text">The messages to display in the row</param>
+        /// <param name="textColors">The text color to display in the cell</param>
         private TableCell MakeTextCellForRow(string text, Color textColor)
         {
             TableCell newCell = new TableCell();
@@ -145,6 +185,10 @@ namespace ActivEarth.Groups
             return newCell;
         }
 
+        /// <summary>
+        /// Formats a cell to add to the row with a button allowing the Owner to remove the User from the Group.
+        /// </summary>
+        /// <param name="userId">The User ID of the User to remove from the Group</param>
         private TableCell MakeBootCellForRow(int userId)
         {
             TableCell newCell = new TableCell();
@@ -160,6 +204,9 @@ namespace ActivEarth.Groups
             return newCell;
         }
 
+        /// <summary>
+        /// Method called when a Remove User Button is clicked allowing the Owner to remove the User from the Group.
+        /// </summary>
         private void bootClick(object sender, EventArgs e)
         {
             Button clickedButton = (Button)sender;
