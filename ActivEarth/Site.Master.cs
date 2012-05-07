@@ -19,17 +19,11 @@ namespace ActivEarth
     /// </summary>
     public partial class SiteMaster : System.Web.UI.MasterPage
     {
+     
         /// <summary>
-<<<<<<< HEAD
-        /// Load the page
-        /// </summary>
-        /// <param name="sender">Object that requested the page load.</param>
-        /// <param name="e">The event arguments.</param>
-=======
         /// Prepares the display of the User's Image, Name, Recent Activity, Weather information, and Statistics
         /// when the page loads.
         /// </summary>
->>>>>>> 5e28b2b29a16993fcb3516eef7f898502c498b1d
         protected void Page_Load(object sender, EventArgs e)
         {
             // if user is not logged in 
@@ -81,18 +75,11 @@ namespace ActivEarth
             }
 
         }
-        
+       
         /// <summary>
-<<<<<<< HEAD
-        /// Log out the current user
-        /// </summary>
-        /// <param name="sender">Object that requested the page load</param>
-        /// <param name="e">The event arguments.</param>
-=======
         /// Method called when the User clicks the Log Out link.  Removes the Users session information 
         /// and redirects to the Home Page.
         /// </summary>
->>>>>>> 5e28b2b29a16993fcb3516eef7f898502c498b1d
         protected void UserLogOut(object sender, EventArgs e)
         {
             Session["userDetails"] = null;
