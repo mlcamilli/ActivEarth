@@ -1,7 +1,7 @@
 USE [ActivEarth_Dev]
 GO
 
-/****** Object:  Table [dbo].[active_routes]    Script Date: 05/06/2012 21:02:22 ******/
+/****** Object:  Table [dbo].[active_routes]    Script Date: 05/07/2012 00:30:27 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -14,6 +14,7 @@ GO
 CREATE TABLE [dbo].[active_routes](
 	[id] [int] IDENTITY(1,1) NOT NULL,
 	[user_id] [int] NOT NULL,
+	[gmt_offset] [int] NOT NULL,
 	[distance] [float] NOT NULL,
 	[end_latitude] [float] NOT NULL,
 	[end_longitude] [float] NOT NULL,
