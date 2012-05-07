@@ -24,7 +24,11 @@ namespace ActivEarth.Groups
 {
     public partial class GroupDisplay : System.Web.UI.Page
     {
-
+        /// <summary>
+        /// Prepares the Group name, Group description, list of Hashtags, Green score and Activity Score, 
+        /// preview User table, Contests table, and Group Wall table to display when the page loads.  Redirects 
+        /// the user if they have not signed in or if a Group ID has not been provided.
+        /// </summary>
         protected void Page_Load(object sender, EventArgs e)
         {
             
@@ -97,7 +101,10 @@ namespace ActivEarth.Groups
             }
         }
 
-
+        /// <summary>
+        /// Method called when the Post Button is clicked.  Adds a Message to the Group Wall using the text in txbTitle
+        /// and txbMessage and including a time stamp.
+        /// </summary>
         protected void PostMessage(object sender, EventArgs e){
 
             int groupID = Convert.ToInt32(Request.QueryString["ID"]);

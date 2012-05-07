@@ -12,6 +12,10 @@ namespace ActivEarth.DAO
 {
     public class RecentActivityDAO
     {
+        /// <summary>
+        /// Adds a User's the list of Recent Acitivity Messages stored in the Database to the User's Wall.
+        /// </summary>
+        /// <param name="user">The User for which to retrieve Recent Activity Messages</param>
         public static void GetUserRecentActivity(User user)
         {
             try
@@ -37,6 +41,10 @@ namespace ActivEarth.DAO
             }
         }
 
+        /// <summary>
+        /// Adds a Group's the list of Recent Acitivity Messages stored in the Database to the Group's Wall.
+        /// </summary>
+        /// <param name="group">The Group for which to retrieve Recent Activity Messages</param>
         public static void GetGroupRecentActivity(Group group)
         {
             int groupId = group.ID;
@@ -64,7 +72,10 @@ namespace ActivEarth.DAO
             }
         }
 
-
+        /// <summary>
+        /// Updates a User's the list of Recent Acitivity Messages in the Database.
+        /// </summary>
+        /// <param name="user">The User for which to update Recent Activity Messages</param>
         public static bool UpdateUserRecentActivity(User user)
         {
             try
@@ -131,6 +142,10 @@ namespace ActivEarth.DAO
             }
         }
 
+        /// <summary>
+        /// Updates a Group's the list of Recent Acitivity Messages in the Database.
+        /// </summary>
+        /// <param name="group">The Group for which to update Recent Activity Messages</param>
         public static bool UpdateGroupRecentActivity(Group group)
         {
             int groupId = group.ID;

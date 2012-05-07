@@ -31,7 +31,7 @@ namespace ActivEarth.Groups
             
             if (Session["userDetails"] == null)
             {
-                Response.Redirect("Login.aspx");
+                Response.Redirect("~/Account/Login.aspx");
 
             }
             else if (Request.QueryString["ID"] == null)

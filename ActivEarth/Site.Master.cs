@@ -16,6 +16,10 @@ namespace ActivEarth
 {
     public partial class SiteMaster : System.Web.UI.MasterPage
     {
+        /// <summary>
+        /// Prepares the display of the User's Image, Name, Recent Activity, Weather information, and Statistics
+        /// when the page loads.
+        /// </summary>
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["userDetails"] == null)
@@ -67,6 +71,10 @@ namespace ActivEarth
 
         }
         
+        /// <summary>
+        /// Method called when the User clicks the Log Out link.  Removes the Users session information 
+        /// and redirects to the Home Page.
+        /// </summary>
         protected void UserLogOut(object sender, EventArgs e)
         {
             Session["userDetails"] = null;
@@ -98,6 +106,10 @@ namespace ActivEarth
             }
         }
 
+        /// <summary>
+        /// Method called when the Post Button is clicked.  Adds a Message to the User's Recent Activity using the text in txbTitle
+        /// and txbMessage and including a time stamp.
+        /// </summary>
         protected void PostMessage(object sender, EventArgs e)
         {
             if (txbTitle.Text != "" && txbMessage.Text != "")
