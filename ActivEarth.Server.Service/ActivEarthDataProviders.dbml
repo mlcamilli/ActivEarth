@@ -15,6 +15,7 @@
       <Association Name="UserDataProvider_MessageDataProvider" Member="MessageDataProviders" ThisKey="id" OtherKey="user_id" Type="MessageDataProvider" />
       <Association Name="UserDataProvider_ProfileDataProvider" Member="ProfileDataProviders" ThisKey="id" OtherKey="user_id" Type="ProfileDataProvider" />
       <Association Name="UserDataProvider_team_member" Member="TeamMemberDataProviders" ThisKey="id" OtherKey="user_id" Type="TeamMemberDataProvider" />
+      <Association Name="UserDataProvider_active_route" Member="ActiveRouteDataProviders" ThisKey="id" OtherKey="user_id" Type="ActiveRouteDataProvider" />
     </Type>
   </Table>
   <Table Name="dbo.privacy_settings" Member="PrivacySettingDataProviders">
@@ -220,6 +221,24 @@
       <Association Name="ContestDataProvider_team_member" Member="ContestDataProvider" ThisKey="contest_id" OtherKey="id" Type="ContestDataProvider" IsForeignKey="true" />
       <Association Name="TeamDataProvider_team_member" Member="TeamDataProvider" ThisKey="team_id" OtherKey="id" Type="TeamDataProvider" IsForeignKey="true" />
       <Association Name="UserDataProvider_team_member" Member="UserDataProvider" ThisKey="user_id" OtherKey="id" Type="UserDataProvider" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.active_routes" Member="ActiveRouteDataProviders">
+    <Type Name="ActiveRouteDataProvider">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="user_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="distance" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="end_latitude" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="end_longitude" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="end_time" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="mode" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="points" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="start_latitude" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="start_longitude" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="start_time" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="steps" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="type" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Association Name="UserDataProvider_active_route" Member="UserDataProvider" ThisKey="user_id" OtherKey="id" Type="UserDataProvider" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>
