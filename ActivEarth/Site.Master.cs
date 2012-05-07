@@ -14,14 +14,19 @@ using ActivEarth.Server.Service.Statistics;
 
 namespace ActivEarth
 {
+    /// <summary>
+    /// This class represent the Site Master page, used after user logged in.
+    /// </summary>
     public partial class SiteMaster : System.Web.UI.MasterPage
     {
+     
         /// <summary>
         /// Prepares the display of the User's Image, Name, Recent Activity, Weather information, and Statistics
         /// when the page loads.
         /// </summary>
         protected void Page_Load(object sender, EventArgs e)
         {
+            // if user is not logged in 
             if (Session["userDetails"] == null)
             {
                 lbLogOut.Visible = false;
@@ -70,7 +75,7 @@ namespace ActivEarth
             }
 
         }
-        
+       
         /// <summary>
         /// Method called when the User clicks the Log Out link.  Removes the Users session information 
         /// and redirects to the Home Page.

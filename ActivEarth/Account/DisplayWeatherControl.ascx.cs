@@ -14,7 +14,11 @@ namespace ActivEarth.Objects.Profile
         {  
 
         }
-
+        /// <summary>
+        /// Get weather information base on location
+        /// </summary>
+        /// <param name="location">The location</param>
+        /// <returns>true if success</returns>
         public bool GetCurrentConditions(string location)
         {
             XmlDocument xmlConditions = new XmlDocument();

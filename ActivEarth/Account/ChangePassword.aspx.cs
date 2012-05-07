@@ -12,6 +12,11 @@ namespace ActivEarth.Account
 {
     public partial class ChangePassword : System.Web.UI.Page
     {
+        /// <summary>
+        /// Load the page
+        /// </summary>
+        /// <param name="sender">Object that requested the page load.</param>
+        /// <param name="e">The event arguments.</param>
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["userDetails"] == null)
@@ -20,11 +25,21 @@ namespace ActivEarth.Account
             }
         }
 
+        /// <summary>
+        /// Cancel Button click
+        /// </summary>
+        /// <param name="sender">Object that requested the page load.</param>
+        /// <param name="e">The event arguments.</param>
         protected void BtnCancelClick(object sender, EventArgs e)
         {
             Response.Redirect("~/Account/Profile.aspx");
         }
 
+        /// <summary>
+        /// Submit Button Click
+        /// </summary>
+        /// <param name="sender">Object that requested the page load.</param>
+        /// <param name="e">The event arguments.</param>
         protected void BtnSubmitClick(object sender, EventArgs e)
         {
             if (NewPassword.Text.Length < 6 || NewPassword.Text.Length > 20)

@@ -14,6 +14,12 @@ namespace ActivEarth.Account
         {
          
         }
+
+        /// <summary>
+        /// Login to the website
+        /// </summary>
+        /// <param name="sender">Object that requested the page load</param>
+        /// <param name="e">The event arguments.</param>
         protected void LoginUser(object sender, EventArgs e)
         {
             var userDetails = UserDAO.GetUserFromUserNameAndPassword(tbUserName.Text, tbPassword.Text);
