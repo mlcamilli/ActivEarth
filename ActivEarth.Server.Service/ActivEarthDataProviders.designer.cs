@@ -63,9 +63,6 @@ namespace ActivEarth.Server.Service
     partial void InsertTeamDataProvider(TeamDataProvider instance);
     partial void UpdateTeamDataProvider(TeamDataProvider instance);
     partial void DeleteTeamDataProvider(TeamDataProvider instance);
-    partial void InsertTeamMemberDataProvider(TeamMemberDataProvider instance);
-    partial void UpdateTeamMemberDataProvider(TeamMemberDataProvider instance);
-    partial void DeleteTeamMemberDataProvider(TeamMemberDataProvider instance);
     partial void InsertContestDataProvider(ContestDataProvider instance);
     partial void UpdateContestDataProvider(ContestDataProvider instance);
     partial void DeleteContestDataProvider(ContestDataProvider instance);
@@ -81,6 +78,9 @@ namespace ActivEarth.Server.Service
     partial void InsertProfileDataProvider(ProfileDataProvider instance);
     partial void UpdateProfileDataProvider(ProfileDataProvider instance);
     partial void DeleteProfileDataProvider(ProfileDataProvider instance);
+    partial void InsertTeamMemberDataProvider(TeamMemberDataProvider instance);
+    partial void UpdateTeamMemberDataProvider(TeamMemberDataProvider instance);
+    partial void DeleteTeamMemberDataProvider(TeamMemberDataProvider instance);
     #endregion
 		
 		public ActivEarthDataProvidersDataContext() : 
@@ -201,14 +201,6 @@ namespace ActivEarth.Server.Service
 			}
 		}
 		
-		public System.Data.Linq.Table<TeamMemberDataProvider> TeamMemberDataProviders
-		{
-			get
-			{
-				return this.GetTable<TeamMemberDataProvider>();
-			}
-		}
-		
 		public System.Data.Linq.Table<ContestDataProvider> ContestDataProviders
 		{
 			get
@@ -248,6 +240,14 @@ namespace ActivEarth.Server.Service
 				return this.GetTable<ProfileDataProvider>();
 			}
 		}
+		
+		public System.Data.Linq.Table<TeamMemberDataProvider> TeamMemberDataProviders
+		{
+			get
+			{
+				return this.GetTable<TeamMemberDataProvider>();
+			}
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.users")]
@@ -274,13 +274,13 @@ namespace ActivEarth.Server.Service
 		
 		private EntitySet<BadgeDataProvider> _BadgeDataProviders;
 		
-		private EntitySet<TeamMemberDataProvider> _TeamMemberDataProviders;
-		
 		private EntitySet<ContestDataProvider> _ContestDataProviders;
 		
 		private EntitySet<MessageDataProvider> _MessageDataProviders;
 		
 		private EntitySet<ProfileDataProvider> _ProfileDataProviders;
+		
+		private EntitySet<TeamMemberDataProvider> _TeamMemberDataProviders;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -302,10 +302,10 @@ namespace ActivEarth.Server.Service
 			this._UserStatisticDataProviders = new EntitySet<UserStatisticDataProvider>(new Action<UserStatisticDataProvider>(this.attach_UserStatisticDataProviders), new Action<UserStatisticDataProvider>(this.detach_UserStatisticDataProviders));
 			this._ChallengeInitializationDataProviders = new EntitySet<ChallengeInitializationDataProvider>(new Action<ChallengeInitializationDataProvider>(this.attach_ChallengeInitializationDataProviders), new Action<ChallengeInitializationDataProvider>(this.detach_ChallengeInitializationDataProviders));
 			this._BadgeDataProviders = new EntitySet<BadgeDataProvider>(new Action<BadgeDataProvider>(this.attach_BadgeDataProviders), new Action<BadgeDataProvider>(this.detach_BadgeDataProviders));
-			this._TeamMemberDataProviders = new EntitySet<TeamMemberDataProvider>(new Action<TeamMemberDataProvider>(this.attach_TeamMemberDataProviders), new Action<TeamMemberDataProvider>(this.detach_TeamMemberDataProviders));
 			this._ContestDataProviders = new EntitySet<ContestDataProvider>(new Action<ContestDataProvider>(this.attach_ContestDataProviders), new Action<ContestDataProvider>(this.detach_ContestDataProviders));
 			this._MessageDataProviders = new EntitySet<MessageDataProvider>(new Action<MessageDataProvider>(this.attach_MessageDataProviders), new Action<MessageDataProvider>(this.detach_MessageDataProviders));
 			this._ProfileDataProviders = new EntitySet<ProfileDataProvider>(new Action<ProfileDataProvider>(this.attach_ProfileDataProviders), new Action<ProfileDataProvider>(this.detach_ProfileDataProviders));
+			this._TeamMemberDataProviders = new EntitySet<TeamMemberDataProvider>(new Action<TeamMemberDataProvider>(this.attach_TeamMemberDataProviders), new Action<TeamMemberDataProvider>(this.detach_TeamMemberDataProviders));
 			OnCreated();
 		}
 		
@@ -447,19 +447,6 @@ namespace ActivEarth.Server.Service
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UserDataProvider_TeamMemberDataProvider", Storage="_TeamMemberDataProviders", ThisKey="id", OtherKey="user_id")]
-		public EntitySet<TeamMemberDataProvider> TeamMemberDataProviders
-		{
-			get
-			{
-				return this._TeamMemberDataProviders;
-			}
-			set
-			{
-				this._TeamMemberDataProviders.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UserDataProvider_ContestDataProvider", Storage="_ContestDataProviders", ThisKey="id", OtherKey="creator_id")]
 		public EntitySet<ContestDataProvider> ContestDataProviders
 		{
@@ -496,6 +483,19 @@ namespace ActivEarth.Server.Service
 			set
 			{
 				this._ProfileDataProviders.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UserDataProvider_team_member", Storage="_TeamMemberDataProviders", ThisKey="id", OtherKey="user_id")]
+		public EntitySet<TeamMemberDataProvider> TeamMemberDataProviders
+		{
+			get
+			{
+				return this._TeamMemberDataProviders;
+			}
+			set
+			{
+				this._TeamMemberDataProviders.Assign(value);
 			}
 		}
 		
@@ -591,18 +591,6 @@ namespace ActivEarth.Server.Service
 			entity.UserDataProvider = null;
 		}
 		
-		private void attach_TeamMemberDataProviders(TeamMemberDataProvider entity)
-		{
-			this.SendPropertyChanging();
-			entity.UserDataProvider = this;
-		}
-		
-		private void detach_TeamMemberDataProviders(TeamMemberDataProvider entity)
-		{
-			this.SendPropertyChanging();
-			entity.UserDataProvider = null;
-		}
-		
 		private void attach_ContestDataProviders(ContestDataProvider entity)
 		{
 			this.SendPropertyChanging();
@@ -634,6 +622,18 @@ namespace ActivEarth.Server.Service
 		}
 		
 		private void detach_ProfileDataProviders(ProfileDataProvider entity)
+		{
+			this.SendPropertyChanging();
+			entity.UserDataProvider = null;
+		}
+		
+		private void attach_TeamMemberDataProviders(TeamMemberDataProvider entity)
+		{
+			this.SendPropertyChanging();
+			entity.UserDataProvider = this;
+		}
+		
+		private void detach_TeamMemberDataProviders(TeamMemberDataProvider entity)
 		{
 			this.SendPropertyChanging();
 			entity.UserDataProvider = null;
@@ -2741,7 +2741,7 @@ namespace ActivEarth.Server.Service
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TeamDataProvider_TeamMemberDataProvider", Storage="_TeamMemberDataProviders", ThisKey="id", OtherKey="team_id")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TeamDataProvider_team_member", Storage="_TeamMemberDataProviders", ThisKey="id", OtherKey="team_id")]
 		public EntitySet<TeamMemberDataProvider> TeamMemberDataProviders
 		{
 			get
@@ -2852,311 +2852,6 @@ namespace ActivEarth.Server.Service
 		{
 			this.SendPropertyChanging();
 			entity.TeamDataProvider = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.team_members")]
-	public partial class TeamMemberDataProvider : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _id;
-		
-		private int _contest_id;
-		
-		private int _team_id;
-		
-		private int _user_id;
-		
-		private double _initial_score;
-		
-		private bool _initialized;
-		
-		private EntityRef<TeamDataProvider> _TeamDataProvider;
-		
-		private EntityRef<UserDataProvider> _UserDataProvider;
-		
-		private EntityRef<ContestDataProvider> _ContestDataProvider;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnidChanging(int value);
-    partial void OnidChanged();
-    partial void Oncontest_idChanging(int value);
-    partial void Oncontest_idChanged();
-    partial void Onteam_idChanging(int value);
-    partial void Onteam_idChanged();
-    partial void Onuser_idChanging(int value);
-    partial void Onuser_idChanged();
-    partial void Oninitial_scoreChanging(double value);
-    partial void Oninitial_scoreChanged();
-    partial void OninitializedChanging(bool value);
-    partial void OninitializedChanged();
-    #endregion
-		
-		public TeamMemberDataProvider()
-		{
-			this._TeamDataProvider = default(EntityRef<TeamDataProvider>);
-			this._UserDataProvider = default(EntityRef<UserDataProvider>);
-			this._ContestDataProvider = default(EntityRef<ContestDataProvider>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int id
-		{
-			get
-			{
-				return this._id;
-			}
-			set
-			{
-				if ((this._id != value))
-				{
-					this.OnidChanging(value);
-					this.SendPropertyChanging();
-					this._id = value;
-					this.SendPropertyChanged("id");
-					this.OnidChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_contest_id", DbType="Int NOT NULL")]
-		public int contest_id
-		{
-			get
-			{
-				return this._contest_id;
-			}
-			set
-			{
-				if ((this._contest_id != value))
-				{
-					if (this._ContestDataProvider.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.Oncontest_idChanging(value);
-					this.SendPropertyChanging();
-					this._contest_id = value;
-					this.SendPropertyChanged("contest_id");
-					this.Oncontest_idChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_team_id", DbType="Int NOT NULL")]
-		public int team_id
-		{
-			get
-			{
-				return this._team_id;
-			}
-			set
-			{
-				if ((this._team_id != value))
-				{
-					if (this._TeamDataProvider.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.Onteam_idChanging(value);
-					this.SendPropertyChanging();
-					this._team_id = value;
-					this.SendPropertyChanged("team_id");
-					this.Onteam_idChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_user_id", DbType="Int NOT NULL")]
-		public int user_id
-		{
-			get
-			{
-				return this._user_id;
-			}
-			set
-			{
-				if ((this._user_id != value))
-				{
-					if (this._UserDataProvider.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.Onuser_idChanging(value);
-					this.SendPropertyChanging();
-					this._user_id = value;
-					this.SendPropertyChanged("user_id");
-					this.Onuser_idChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_initial_score", DbType="Float NOT NULL")]
-		public double initial_score
-		{
-			get
-			{
-				return this._initial_score;
-			}
-			set
-			{
-				if ((this._initial_score != value))
-				{
-					this.Oninitial_scoreChanging(value);
-					this.SendPropertyChanging();
-					this._initial_score = value;
-					this.SendPropertyChanged("initial_score");
-					this.Oninitial_scoreChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_initialized", DbType="Bit NOT NULL")]
-		public bool initialized
-		{
-			get
-			{
-				return this._initialized;
-			}
-			set
-			{
-				if ((this._initialized != value))
-				{
-					this.OninitializedChanging(value);
-					this.SendPropertyChanging();
-					this._initialized = value;
-					this.SendPropertyChanged("initialized");
-					this.OninitializedChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TeamDataProvider_TeamMemberDataProvider", Storage="_TeamDataProvider", ThisKey="team_id", OtherKey="id", IsForeignKey=true)]
-		public TeamDataProvider TeamDataProvider
-		{
-			get
-			{
-				return this._TeamDataProvider.Entity;
-			}
-			set
-			{
-				TeamDataProvider previousValue = this._TeamDataProvider.Entity;
-				if (((previousValue != value) 
-							|| (this._TeamDataProvider.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._TeamDataProvider.Entity = null;
-						previousValue.TeamMemberDataProviders.Remove(this);
-					}
-					this._TeamDataProvider.Entity = value;
-					if ((value != null))
-					{
-						value.TeamMemberDataProviders.Add(this);
-						this._team_id = value.id;
-					}
-					else
-					{
-						this._team_id = default(int);
-					}
-					this.SendPropertyChanged("TeamDataProvider");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UserDataProvider_TeamMemberDataProvider", Storage="_UserDataProvider", ThisKey="user_id", OtherKey="id", IsForeignKey=true)]
-		public UserDataProvider UserDataProvider
-		{
-			get
-			{
-				return this._UserDataProvider.Entity;
-			}
-			set
-			{
-				UserDataProvider previousValue = this._UserDataProvider.Entity;
-				if (((previousValue != value) 
-							|| (this._UserDataProvider.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._UserDataProvider.Entity = null;
-						previousValue.TeamMemberDataProviders.Remove(this);
-					}
-					this._UserDataProvider.Entity = value;
-					if ((value != null))
-					{
-						value.TeamMemberDataProviders.Add(this);
-						this._user_id = value.id;
-					}
-					else
-					{
-						this._user_id = default(int);
-					}
-					this.SendPropertyChanged("UserDataProvider");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ContestDataProvider_TeamMemberDataProvider", Storage="_ContestDataProvider", ThisKey="contest_id", OtherKey="id", IsForeignKey=true)]
-		public ContestDataProvider ContestDataProvider
-		{
-			get
-			{
-				return this._ContestDataProvider.Entity;
-			}
-			set
-			{
-				ContestDataProvider previousValue = this._ContestDataProvider.Entity;
-				if (((previousValue != value) 
-							|| (this._ContestDataProvider.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._ContestDataProvider.Entity = null;
-						previousValue.TeamMemberDataProviders.Remove(this);
-					}
-					this._ContestDataProvider.Entity = value;
-					if ((value != null))
-					{
-						value.TeamMemberDataProviders.Add(this);
-						this._contest_id = value.id;
-					}
-					else
-					{
-						this._contest_id = default(int);
-					}
-					this.SendPropertyChanged("ContestDataProvider");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
 		}
 	}
 	
@@ -3539,7 +3234,7 @@ namespace ActivEarth.Server.Service
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ContestDataProvider_TeamMemberDataProvider", Storage="_TeamMemberDataProviders", ThisKey="id", OtherKey="contest_id")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ContestDataProvider_team_member", Storage="_TeamMemberDataProviders", ThisKey="id", OtherKey="contest_id")]
 		public EntitySet<TeamMemberDataProvider> TeamMemberDataProviders
 		{
 			get
@@ -4893,6 +4588,335 @@ namespace ActivEarth.Server.Service
 					if ((value != null))
 					{
 						value.ProfileDataProviders.Add(this);
+						this._user_id = value.id;
+					}
+					else
+					{
+						this._user_id = default(int);
+					}
+					this.SendPropertyChanged("UserDataProvider");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.team_members")]
+	public partial class TeamMemberDataProvider : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id;
+		
+		private int _contest_id;
+		
+		private int _team_id;
+		
+		private int _user_id;
+		
+		private double _score;
+		
+		private double _initial_score;
+		
+		private bool _initialized;
+		
+		private EntityRef<ContestDataProvider> _ContestDataProvider;
+		
+		private EntityRef<TeamDataProvider> _TeamDataProvider;
+		
+		private EntityRef<UserDataProvider> _UserDataProvider;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void Oncontest_idChanging(int value);
+    partial void Oncontest_idChanged();
+    partial void Onteam_idChanging(int value);
+    partial void Onteam_idChanged();
+    partial void Onuser_idChanging(int value);
+    partial void Onuser_idChanged();
+    partial void OnscoreChanging(double value);
+    partial void OnscoreChanged();
+    partial void Oninitial_scoreChanging(double value);
+    partial void Oninitial_scoreChanged();
+    partial void OninitializedChanging(bool value);
+    partial void OninitializedChanged();
+    #endregion
+		
+		public TeamMemberDataProvider()
+		{
+			this._ContestDataProvider = default(EntityRef<ContestDataProvider>);
+			this._TeamDataProvider = default(EntityRef<TeamDataProvider>);
+			this._UserDataProvider = default(EntityRef<UserDataProvider>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_contest_id", DbType="Int NOT NULL")]
+		public int contest_id
+		{
+			get
+			{
+				return this._contest_id;
+			}
+			set
+			{
+				if ((this._contest_id != value))
+				{
+					if (this._ContestDataProvider.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Oncontest_idChanging(value);
+					this.SendPropertyChanging();
+					this._contest_id = value;
+					this.SendPropertyChanged("contest_id");
+					this.Oncontest_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_team_id", DbType="Int NOT NULL")]
+		public int team_id
+		{
+			get
+			{
+				return this._team_id;
+			}
+			set
+			{
+				if ((this._team_id != value))
+				{
+					if (this._TeamDataProvider.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onteam_idChanging(value);
+					this.SendPropertyChanging();
+					this._team_id = value;
+					this.SendPropertyChanged("team_id");
+					this.Onteam_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_user_id", DbType="Int NOT NULL")]
+		public int user_id
+		{
+			get
+			{
+				return this._user_id;
+			}
+			set
+			{
+				if ((this._user_id != value))
+				{
+					if (this._UserDataProvider.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onuser_idChanging(value);
+					this.SendPropertyChanging();
+					this._user_id = value;
+					this.SendPropertyChanged("user_id");
+					this.Onuser_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_score", DbType="Float NOT NULL")]
+		public double score
+		{
+			get
+			{
+				return this._score;
+			}
+			set
+			{
+				if ((this._score != value))
+				{
+					this.OnscoreChanging(value);
+					this.SendPropertyChanging();
+					this._score = value;
+					this.SendPropertyChanged("score");
+					this.OnscoreChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_initial_score", DbType="Float NOT NULL")]
+		public double initial_score
+		{
+			get
+			{
+				return this._initial_score;
+			}
+			set
+			{
+				if ((this._initial_score != value))
+				{
+					this.Oninitial_scoreChanging(value);
+					this.SendPropertyChanging();
+					this._initial_score = value;
+					this.SendPropertyChanged("initial_score");
+					this.Oninitial_scoreChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_initialized", DbType="Bit NOT NULL")]
+		public bool initialized
+		{
+			get
+			{
+				return this._initialized;
+			}
+			set
+			{
+				if ((this._initialized != value))
+				{
+					this.OninitializedChanging(value);
+					this.SendPropertyChanging();
+					this._initialized = value;
+					this.SendPropertyChanged("initialized");
+					this.OninitializedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ContestDataProvider_team_member", Storage="_ContestDataProvider", ThisKey="contest_id", OtherKey="id", IsForeignKey=true)]
+		public ContestDataProvider ContestDataProvider
+		{
+			get
+			{
+				return this._ContestDataProvider.Entity;
+			}
+			set
+			{
+				ContestDataProvider previousValue = this._ContestDataProvider.Entity;
+				if (((previousValue != value) 
+							|| (this._ContestDataProvider.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._ContestDataProvider.Entity = null;
+						previousValue.TeamMemberDataProviders.Remove(this);
+					}
+					this._ContestDataProvider.Entity = value;
+					if ((value != null))
+					{
+						value.TeamMemberDataProviders.Add(this);
+						this._contest_id = value.id;
+					}
+					else
+					{
+						this._contest_id = default(int);
+					}
+					this.SendPropertyChanged("ContestDataProvider");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TeamDataProvider_team_member", Storage="_TeamDataProvider", ThisKey="team_id", OtherKey="id", IsForeignKey=true)]
+		public TeamDataProvider TeamDataProvider
+		{
+			get
+			{
+				return this._TeamDataProvider.Entity;
+			}
+			set
+			{
+				TeamDataProvider previousValue = this._TeamDataProvider.Entity;
+				if (((previousValue != value) 
+							|| (this._TeamDataProvider.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._TeamDataProvider.Entity = null;
+						previousValue.TeamMemberDataProviders.Remove(this);
+					}
+					this._TeamDataProvider.Entity = value;
+					if ((value != null))
+					{
+						value.TeamMemberDataProviders.Add(this);
+						this._team_id = value.id;
+					}
+					else
+					{
+						this._team_id = default(int);
+					}
+					this.SendPropertyChanged("TeamDataProvider");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UserDataProvider_team_member", Storage="_UserDataProvider", ThisKey="user_id", OtherKey="id", IsForeignKey=true)]
+		public UserDataProvider UserDataProvider
+		{
+			get
+			{
+				return this._UserDataProvider.Entity;
+			}
+			set
+			{
+				UserDataProvider previousValue = this._UserDataProvider.Entity;
+				if (((previousValue != value) 
+							|| (this._UserDataProvider.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._UserDataProvider.Entity = null;
+						previousValue.TeamMemberDataProviders.Remove(this);
+					}
+					this._UserDataProvider.Entity = value;
+					if ((value != null))
+					{
+						value.TeamMemberDataProviders.Add(this);
 						this._user_id = value.id;
 					}
 					else

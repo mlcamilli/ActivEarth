@@ -22,6 +22,15 @@ namespace ActivEarth.Objects.Competition.Contests
         }
 
         /// <summary>
+        /// The score currently contributed by the user.
+        /// </summary>
+        public float Score
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// The score held by the user when the contest begins.
         /// </summary>
         public float InitialScore

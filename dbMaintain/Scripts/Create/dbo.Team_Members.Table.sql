@@ -13,6 +13,7 @@ CREATE TABLE [dbo].[team_members](
 	[contest_id] [int] NOT NULL,
 	[team_id] [int] NOT NULL,
 	[user_id] [int] NOT NULL,
+    [score] [float] NOT NULL,
 	[initial_score] [float] NOT NULL,
 	[initialized] [bit] NOT NULL,
  CONSTRAINT [PK__team_mem__3213E83F182C9B23] PRIMARY KEY CLUSTERED 

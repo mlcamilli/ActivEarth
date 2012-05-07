@@ -245,7 +245,8 @@ namespace ActivEarth.DAO
 
                 foreach (ContestTeamMember member in team.Members)
                 {
-                    total += TeamDAO.CalculateUserScore(member.UserId, member.InitialScore, statistic);
+                    member.Score = TeamDAO.CalculateUserScore(member.UserId, member.InitialScore, statistic);
+                    total += member.Score;
                 }
 
                 team.Score = total;
@@ -357,6 +358,7 @@ namespace ActivEarth.DAO
                         contest_id = contestId,
                         team_id = teamId,
                         user_id = teamMember.UserId,
+                        score = teamMember.Score,
                         initialized = teamMember.Initialized,
                         initial_score = teamMember.InitialScore
                     };
@@ -413,6 +415,7 @@ namespace ActivEarth.DAO
                         select
                             new ContestTeamMember
                             {
+                                Score = (float)c.score,
                                 Initialized = c.initialized,
                                 InitialScore = (float)c.initial_score,
                                 UserId = c.user_id
@@ -441,12 +444,13 @@ namespace ActivEarth.DAO
                     {
                         var data = new ActivEarthDataProvidersDataContext(connection);
 
-                        TeamMemberDataProvider dbUser =
+                        var dbUser =
                             (from u in data.TeamMemberDataProviders
                              where u.team_id == team.ID && u.user_id == user.UserId
                              select u).FirstOrDefault();
                         if (dbUser != null)
                         {
+                            dbUser.score = user.Score;
                             dbUser.initial_score = user.InitialScore;
                             dbUser.initialized = user.Initialized;
 
@@ -464,7 +468,7 @@ namespace ActivEarth.DAO
 
                 return true;
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 return false;
             }
