@@ -14,10 +14,19 @@ using ActivEarth.Server.Service.Statistics;
 
 namespace ActivEarth
 {
+    /// <summary>
+    /// This class represent the Site Master page, used after user logged in.
+    /// </summary>
     public partial class SiteMaster : System.Web.UI.MasterPage
     {
+        /// <summary>
+        /// Load the page
+        /// </summary>
+        /// <param name="sender">Object that requested the page load.</param>
+        /// <param name="e">The event arguments.</param>
         protected void Page_Load(object sender, EventArgs e)
         {
+            // if user is not logged in 
             if (Session["userDetails"] == null)
             {
                 lbLogOut.Visible = false;
@@ -67,6 +76,11 @@ namespace ActivEarth
 
         }
         
+        /// <summary>
+        /// Log out the current user
+        /// </summary>
+        /// <param name="sender">Object that requested the page load</param>
+        /// <param name="e">The event arguments.</param>
         protected void UserLogOut(object sender, EventArgs e)
         {
             Session["userDetails"] = null;

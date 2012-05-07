@@ -14,6 +14,11 @@ namespace ActivEarth.Account
 {
     public partial class EditProfile : System.Web.UI.Page
     {
+        /// <summary>
+        /// Load the page
+        /// </summary>
+        /// <param name="sender">Object that requested the page load</param>
+        /// <param name="e">The event arguments.</param>
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
@@ -40,10 +45,21 @@ namespace ActivEarth.Account
             }
         }
 
+        /// <summary>
+        /// Cancel button click
+        /// </summary>
+        /// <param name="sender">Object that requested the page load</param>
+        /// <param name="e">The event arguments.</param>
         protected void CancelSaveUserProfile(object sender, EventArgs e)
         {
             Response.Redirect("~/Account/Profile.aspx");
         }
+
+        /// <summary>
+        /// Save button click
+        /// </summary>
+        /// <param name="sender">Object that requested the page load</param>
+        /// <param name="e">The event arguments.</param>
         protected void SaveUserProfile(object sender, EventArgs e)
         {
 
@@ -259,7 +275,10 @@ namespace ActivEarth.Account
                 }
             }
         }
-
+        /// <summary>
+        /// Delete profile photo
+        /// </summary>
+        /// <param name="user">The user which to delete photo from</param>
         private void deletePhotos(User user)
         {
             string[] newPhotoSizes = {"icon"};
