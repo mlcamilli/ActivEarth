@@ -221,13 +221,16 @@ namespace ActivEarth.Server.Service.Competition
 
             foreach (ContestTeam team in contest.Teams)
             {
-                float maxScore = team.Members.Max(m => m.Score);
-
-                foreach (ContestTeamMember member in team.Members)
+                if (team.Members.Count > 0)
                 {
-                    int reward = (maxScore == 0 ? 0 :
-                        (int)Math.Round(rewardsByBracket[team.Bracket] * (member.Score / maxScore)));
-                    UserDAO.AddContestPoints(member.UserId, reward);
+                    float maxScore = team.Members.Max(m => m.Score);
+
+                    foreach (ContestTeamMember member in team.Members)
+                    {
+                        int reward = (maxScore == 0 ? 0 :
+                            (int)Math.Round(rewardsByBracket[team.Bracket] * (member.Score / maxScore)));
+                        UserDAO.AddContestPoints(member.UserId, reward);
+                    }
                 }
             }
 

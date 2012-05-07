@@ -281,7 +281,7 @@ namespace ActivEarth.DAO
                 UserDAO.UpdateUserProfile(user);
                 return true;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return false;
             }

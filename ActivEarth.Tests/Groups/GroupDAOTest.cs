@@ -18,7 +18,6 @@ namespace ActivEarth.Tests.Groups
     {
 
         private TransactionScope _trans;
-        private TestContext testContextInstance;
 
         /// <summary>
         ///Gets or sets the test context which provides

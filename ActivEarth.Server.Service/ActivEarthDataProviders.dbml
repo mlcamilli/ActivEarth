@@ -84,7 +84,7 @@
   </Table>
   <Table Name="dbo.user_statistics" Member="UserStatisticDataProviders">
     <Type Name="UserStatisticDataProvider">
-      <Column Name="id" AutoSync="Never" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="user_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="statistic_type" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
       <Column Name="value" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
