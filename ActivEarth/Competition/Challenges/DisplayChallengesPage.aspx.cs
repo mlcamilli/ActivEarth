@@ -31,28 +31,22 @@ namespace ActivEarth.Competition.Challenges
              }
              else
              {
-                 #region ---------- Test Code ----------
-
-                 ChallengeManager.GenerateNewChallenges();
-
-                 #endregion ---------- Test Code ----------
-
-                 foreach (Challenge challenge in ChallengeDAO.GetActiveDailyChallenges())
+                 foreach (Challenge challenge in ChallengeDAO.GetActiveDailyChallenges(user.UserID))
                  {
                      _displayDailyChallenges.AddChallengeToDisplay(challenge);
                  }
 
-                 foreach (Challenge challenge in ChallengeDAO.GetActiveWeeklyChallenges())
+                 foreach (Challenge challenge in ChallengeDAO.GetActiveWeeklyChallenges(user.UserID))
                  {
                      _displayWeeklyChallenges.AddChallengeToDisplay(challenge);
                  }
 
-                 foreach (Challenge challenge in ChallengeDAO.GetActiveMonthlyChallenges())
+                 foreach (Challenge challenge in ChallengeDAO.GetActiveMonthlyChallenges(user.UserID))
                  {
                      _displayMonthlyChallenges.AddChallengeToDisplay(challenge);
                  }
 
-                 foreach (Challenge challenge in ChallengeDAO.GetActivePersistentChallenges())
+                 foreach (Challenge challenge in ChallengeDAO.GetActivePersistentChallenges(user.UserID))
                  {
                      _displayPersistentChallenges.AddChallengeToDisplay(challenge);
                  }

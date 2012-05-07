@@ -1,7 +1,7 @@
 USE [ActivEarth_Dev]
 GO
 
-/****** Object:  Table [dbo].[challenge_definitions]    Script Date: 04/25/2012 00:58:05 ******/
+/****** Object:  Table [dbo].[challenge_definitions]    Script Date: 05/06/2012 14:59:05 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -18,7 +18,7 @@ CREATE TABLE [dbo].[challenge_definitions](
 	[statistic] [tinyint] NOT NULL,
 	[requirement] [float] NOT NULL,
 	[reward] [int] NOT NULL,
-	[condition_text] [varchar](100) NOT NULL,
+	[description] [varchar](100) NOT NULL,
 	[image_path] [varchar](75) NOT NULL,
 	[name] [varchar](30) NULL,
  CONSTRAINT [PK_challenge_definitions] PRIMARY KEY CLUSTERED 

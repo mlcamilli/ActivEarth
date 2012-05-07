@@ -64,14 +64,14 @@
     <Compile Include="Competition\Contests\ContestBracket.cs" />
     <Compile Include="Competition\Contests\ContestEndMode.cs" />
     <Compile Include="Competition\Contests\ContestType.cs" />
-    <Compile Include="Competition\Contests\TeamMember.cs" />
-    <Compile Include="Competition\Contests\EndCondition.cs" />
-    <Compile Include="Competition\Contests\Team.cs" />
+    <Compile Include="Competition\Contests\ContestTeamMember.cs" />
+    <Compile Include="Competition\Contests\ContestTeam.cs" />
     <Compile Include="Groups\Group.cs" />
     <Compile Include="Groups\Message.cs" />
     <Compile Include="Groups\Wall.cs" />
     <Compile Include="Profile\PrivacySetting.cs" />
     <Compile Include="Profile\ProfileVisibility.cs" />
+    <Compile Include="Profile\Route.cs" />
     <Compile Include="Profile\Statistic.cs" />
     <Compile Include="Profile\User.cs" />
     <Compile Include="Profile\UserStatistic.cs" />

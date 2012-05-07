@@ -120,6 +120,15 @@ namespace ActivEarth.Objects.Competition.Challenges
             set;
         }
 
+        /// <summary>
+        /// Loaded with the progress of a specific user for use in a progress bar.
+        /// </summary>
+        public int Progress
+        {
+            get;
+            set;
+        }
+
         #endregion ---------- Public Properties ----------
 
         #region ---------- Constructor ----------

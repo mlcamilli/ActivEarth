@@ -24,12 +24,12 @@ namespace ActivEarth.Competition.Contests
         /// <param name="textColors">The text colors the leaderboard should use.</param>
         /// <param name="scoreFormat">The format of each teams score.</param>
         /// <param name="rewards">The reward levels of each bracket.</param>
-        public void PopulateLeaderBoard(List<Team> teams, Color[] backColors, Color[] textColors, string scoreFormat, List<int> rewards)
+        public void PopulateLeaderBoard(List<ContestTeam> teams, Color[] backColors, Color[] textColors, string scoreFormat, List<int> rewards)
         {
             int colorIndex = 0;
             int textIndex = 0;
 
-            foreach (Team team in teams)
+            foreach (ContestTeam team in teams)
             {
                 if (team != null)
                 {
@@ -59,7 +59,7 @@ namespace ActivEarth.Competition.Contests
         /// <param name="scoreFormat">The score format for the row.</param>
         /// <param name="rewards">The rewards of each bracket.</param>
         /// <returns>A new row for the leaderboard table.</returns>
-        private TableRow MakeRowForTable(Team team, Color backColor, Color textColor, string scoreFormat, List<int> rewards)
+        private TableRow MakeRowForTable(ContestTeam team, Color backColor, Color textColor, string scoreFormat, List<int> rewards)
         {
             TableRow newRow = new TableRow();
             newRow.BackColor = backColor;
@@ -77,7 +77,7 @@ namespace ActivEarth.Competition.Contests
         /// <param name="team">The team corressponding to the row the cell is being
         /// placed in.</param>
         /// <returns>The Bracket cell for the row.</returns>
-        private TableCell MakeBracketCell(Team team)
+        private TableCell MakeBracketCell(ContestTeam team)
         {
             TableCell bracketCell = new TableCell();
             bracketCell.HorizontalAlign = HorizontalAlign.Center;
@@ -118,7 +118,7 @@ namespace ActivEarth.Competition.Contests
         /// </summary>
         /// <param name="team">The name of the team to display.</param>
         /// <returns>A Table Cell containing the name of the team.</returns>
-        private TableCell MakeTeamCell(Team team)
+        private TableCell MakeTeamCell(ContestTeam team)
         {
             TableCell teamCell = new TableCell();
 
@@ -136,7 +136,7 @@ namespace ActivEarth.Competition.Contests
         /// <param name="team">The team to get the score from.</param>
         /// <param name="scoreFormat">The format of the score.</param>
         /// <returns>A Table Cell containing the score.</returns>
-        private TableCell MakeScoreCell(Team team, string scoreFormat)
+        private TableCell MakeScoreCell(ContestTeam team, string scoreFormat)
         {
             TableCell scoreCell = new TableCell();
             scoreCell.HorizontalAlign = HorizontalAlign.Right;
@@ -156,7 +156,7 @@ namespace ActivEarth.Competition.Contests
         /// <param name="team">The Team to retrieve the bracket from.</param>
         /// <param name="rewards">The rewards for each bracket.</param>
         /// <returns>A Table Cell containing the reward.</returns>
-        private TableCell MakeRewardCell(Team team, List<int> rewards)
+        private TableCell MakeRewardCell(ContestTeam team, List<int> rewards)
         {
             TableCell rewardCell = new TableCell();
             rewardCell.HorizontalAlign = HorizontalAlign.Right;

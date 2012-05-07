@@ -1,7 +1,7 @@
 USE [ActivEarth_Dev]
 GO
 
-/****** Object:  Table [dbo].[contests]    Script Date: 04/20/2012 22:06:07 ******/
+/****** Object:  Table [dbo].[contests]    Script Date: 05/06/2012 15:25:10 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -15,7 +15,7 @@ CREATE TABLE [dbo].[contests](
 	[id] [int] IDENTITY(1,1) NOT NULL,
 	[name] [varchar](50) NOT NULL,
 	[description] [text] NOT NULL,
-	[points] [int] NOT NULL,
+	[reward] [int] NOT NULL,
 	[end_mode] [tinyint] NOT NULL,
 	[end_time] [datetime] NULL,
 	[end_goal] [float] NULL,

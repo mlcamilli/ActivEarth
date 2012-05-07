@@ -6,6 +6,7 @@ using ActivEarth.Objects.Profile;
 using ActivEarth.Objects.Competition;
 using ActivEarth.Objects.Competition.Contests;
 using ActivEarth.Server.Service;
+using ActivEarth.Server.Service.Competition;
 using ActivEarth.Server.Service.Statistics;
 
 namespace ActivEarth.DAO
@@ -22,7 +23,7 @@ namespace ActivEarth.DAO
         /// </summary>
         /// <param name="team">Team object to add to the DB.</param>
         /// <returns>ID of the created team on success, 0 on failure.</returns>
-        public static int CreateNewTeam(Team team)
+        public static int CreateNewTeam(ContestTeam team)
         {
             try
             {
@@ -66,15 +67,15 @@ namespace ActivEarth.DAO
         /// <param name="teamId">Identifier of the team to retrieve.</param>
         /// <param name="loadMembers">Indicates whether or not the team member list should be populated.</param>
         /// <returns>Team specified by the provided ID.</returns>
-        public static Team GetTeamFromTeamId(int teamId, bool loadMembers)
+        public static ContestTeam GetTeamFromTeamId(int teamId, bool loadMembers)
         {
             using (SqlConnection connection = ConnectionManager.GetConnection())
             {
                 var data = new ActivEarthDataProvidersDataContext(connection);
-                Team team = (from c in data.TeamDataProviders
+                ContestTeam team = (from c in data.TeamDataProviders
                         where c.id == teamId
                         select
-                            new Team
+                            new ContestTeam
                             {
                                 ID = c.id,
                                 Name = c.name,
@@ -100,15 +101,15 @@ namespace ActivEarth.DAO
         /// <param name="contestId">ID of the contest to load teams for.</param>
         /// <param name="loadMembers">Indicates whether or not the team member lists should be populated.</param>
         /// <returns>All teams currently participating in the contest specified by the given ID.</returns>
-        public static List<Team> GetTeamsFromContestId(int contestId, bool loadMembers)
+        public static List<ContestTeam> GetTeamsFromContestId(int contestId, bool loadMembers)
         {
             using (SqlConnection connection = ConnectionManager.GetConnection())
             {
                 var data = new ActivEarthDataProvidersDataContext(connection);
-                List<Team> teams =  (from c in data.TeamDataProviders
+                List<ContestTeam> teams =  (from c in data.TeamDataProviders
                                     where c.contest_id == contestId
                                     select
-                                        new Team
+                                        new ContestTeam
                                         {
                                             ID = c.id,
                                             Name = c.name,
@@ -121,7 +122,7 @@ namespace ActivEarth.DAO
 
                 if (loadMembers)
                 {
-                    foreach (Team team in teams)
+                    foreach (ContestTeam team in teams)
                     {
                         team.Members = GetTeamMembersFromTeamId(team.ID);
                     }
@@ -138,7 +139,7 @@ namespace ActivEarth.DAO
         /// <param name="contestId">ID of the contest to match the team to.</param>
         /// <param name="loadMembers">Indicates whether or not the team member lists should be populated.</param>
         /// <returns>Team containing the given member from the given contest.</returns>
-        public static Team GetTeamFromUserIdAndContestId(int userId, int contestId, bool loadMembers)
+        public static ContestTeam GetTeamFromUserIdAndContestId(int userId, int contestId, bool loadMembers)
         {
             using (SqlConnection connection = ConnectionManager.GetConnection())
             {
@@ -190,7 +191,7 @@ namespace ActivEarth.DAO
         /// </summary>
         /// <param name="team">Team whose record needs updating.</param>
         /// <returns>True on success, false on failure.</returns>
-        public static bool UpdateTeam(Team team)
+        public static bool UpdateTeam(ContestTeam team)
         {
             try
             {
@@ -236,21 +237,31 @@ namespace ActivEarth.DAO
         /// <param name="statistic"></param>
         public static void UpdateTeamScore(int teamId)
         {
-            Team team = TeamDAO.GetTeamFromTeamId(teamId, true);
+            ContestTeam team = TeamDAO.GetTeamFromTeamId(teamId, true);
+            Contest contest = ContestDAO.GetContestFromContestId(team.ContestId, false, false);
 
             if (team.IsLocked)
             {
                 Statistic statistic = ContestDAO.GetStatisticFromContestId(team.ContestId);
                 float total = 0;
 
-                foreach (TeamMember member in team.Members)
+                foreach (ContestTeamMember member in team.Members)
                 {
-                    total += TeamDAO.CalculateUserScore(member.UserId, member.InitialScore, statistic);
+                    member.Score = TeamDAO.CalculateUserScore(member.UserId, member.InitialScore, statistic);
+                    total += member.Score;
                 }
 
                 team.Score = total;
                 TeamDAO.UpdateTeam(team);
                 ContestDAO.UpdateContestStandings(team.ContestId);
+
+                if (contest.Mode == ContestEndMode.GoalBased)
+                {
+                    if (team.Score >= contest.EndValue)
+                    {
+                        ContestManager.DistributeContestReward(team.ContestId);
+                    }
+                }
             }
         }
 
@@ -261,11 +272,11 @@ namespace ActivEarth.DAO
         /// Sets the initialized flag to true, allowing the calculation of
         /// delta scores.
         /// </summary>
-        public static void LockTeam(Team team)
+        public static void LockTeam(ContestTeam team)
         {
             Statistic statistic = ContestDAO.GetStatisticFromContestId(team.ContestId);
 
-            foreach (TeamMember user in team.Members)
+            foreach (ContestTeamMember user in team.Members)
             {
                 UserStatistic userStat = UserStatisticDAO.GetStatisticFromUserIdAndStatType(user.UserId, statistic);
                 user.InitialScore = (userStat != null ? userStat.Value : 0);
@@ -341,7 +352,7 @@ namespace ActivEarth.DAO
         /// <param name="teamMember">Member to be added to the DB.</param>
         /// <param name="teamId">Team ID that the member should be added to.</param>
         /// <returns>ID of the newly added Team Member entry on success, 0 on failure.</returns>
-        public static int CreateNewTeamMember(TeamMember teamMember, int teamId)
+        public static int CreateNewTeamMember(ContestTeamMember teamMember, int teamId)
         {
             try
             {
@@ -357,6 +368,7 @@ namespace ActivEarth.DAO
                         contest_id = contestId,
                         team_id = teamId,
                         user_id = teamMember.UserId,
+                        score = teamMember.Score,
                         initialized = teamMember.Initialized,
                         initial_score = teamMember.InitialScore
                     };
@@ -381,7 +393,7 @@ namespace ActivEarth.DAO
         {
             try
             {
-                TeamMember member = new TeamMember()
+                ContestTeamMember member = new ContestTeamMember()
                 {
                     UserId = userId
                 };
@@ -403,7 +415,7 @@ namespace ActivEarth.DAO
         /// </summary>
         /// <param name="teamId">Team ID to retrieve the members for.</param>
         /// <returns>List of team members for the provided team ID.</returns>
-        public static List<TeamMember> GetTeamMembersFromTeamId(int teamId)
+        public static List<ContestTeamMember> GetTeamMembersFromTeamId(int teamId)
         {
             using (SqlConnection connection = ConnectionManager.GetConnection())
             {
@@ -411,8 +423,9 @@ namespace ActivEarth.DAO
                 return (from c in data.TeamMemberDataProviders
                         where c.team_id == teamId
                         select
-                            new TeamMember
+                            new ContestTeamMember
                             {
+                                Score = (float)c.score,
                                 Initialized = c.initialized,
                                 InitialScore = (float)c.initial_score,
                                 UserId = c.user_id
@@ -430,23 +443,24 @@ namespace ActivEarth.DAO
         /// </summary>
         /// <param name="team">Team whose members must be updated.</param>
         /// <returns>True on success, false on failure.</returns>
-        public static bool UpdateTeamMembers(Team team)
+        public static bool UpdateTeamMembers(ContestTeam team)
         {
             try
             {
-                foreach (TeamMember user in team.Members)
+                foreach (ContestTeamMember user in team.Members)
                 {
 
                     using (SqlConnection connection = ConnectionManager.GetConnection())
                     {
                         var data = new ActivEarthDataProvidersDataContext(connection);
 
-                        TeamMemberDataProvider dbUser =
+                        var dbUser =
                             (from u in data.TeamMemberDataProviders
                              where u.team_id == team.ID && u.user_id == user.UserId
                              select u).FirstOrDefault();
                         if (dbUser != null)
                         {
+                            dbUser.score = user.Score;
                             dbUser.initial_score = user.InitialScore;
                             dbUser.initialized = user.Initialized;
 

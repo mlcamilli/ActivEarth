@@ -66,14 +66,16 @@ namespace ActivEarth.Server.Service.Statistics
             if (_userStatisticMap.ContainsKey(statToSet))
             {
                 _userStatisticMap[statToSet].Value = val;
-                UserStatisticDAO.UpdateUserStatistic(_userStatisticMap[statToSet]);
+                //UserStatisticDAO.UpdateUserStatistic(_userStatisticMap[statToSet]);
+                StatisticManager.SetUserStatistic(_user.UserID, statToSet, val);
             }
             else
             {
                 UserStatistic userStatistic = new UserStatistic(statToSet, val);
-                int userStatisticId = UserStatisticDAO.CreateNewStatisticForUser(_user.UserID, statToSet, val);
+                int userStatisticId = UserStatisticDAO.CreateNewStatisticForUser(_user.UserID, statToSet, 0);
                 userStatistic.UserStatisticID = userStatisticId;
                 _userStatisticMap[statToSet] = userStatistic;
+                StatisticManager.SetUserStatistic(_user.UserID, statToSet, val);
             }
         }
 
@@ -100,6 +102,12 @@ namespace ActivEarth.Server.Service.Statistics
         public static void SetUserStatistic(int userId, Statistic statistic, float value)
         {
             UserStatistic userStat = UserStatisticDAO.GetStatisticFromUserIdAndStatType(userId, statistic);
+
+            if (userStat == null)
+            {
+                UserStatisticDAO.CreateNewStatisticForUser(userId, statistic, 0);
+                userStat = UserStatisticDAO.GetStatisticFromUserIdAndStatType(userId, statistic);
+            }
 
             #region Challenges - Lock User
 

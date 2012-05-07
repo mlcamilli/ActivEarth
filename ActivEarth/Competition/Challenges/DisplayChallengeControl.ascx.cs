@@ -33,7 +33,7 @@ namespace ActivEarth.Competition.Challenges
             _activityPointsValue.Text = challenge.Reward.ToString();
             _challengeDescription.Text = challenge.Description;
 
-            _challengeProgressBar.Value = ChallengeManager.GetProgress(challenge.ID, user.UserID);
+            _challengeProgressBar.Value = challenge.Progress;
             _challengeProgressNumerical.Text = ChallengeManager.GetFormattedProgress(challenge.ID, user.UserID); 
 
             
