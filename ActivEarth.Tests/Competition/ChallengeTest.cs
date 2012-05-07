@@ -227,6 +227,10 @@ namespace ActivEarth.Tests.Competition
 
                 Log("Verifying User2 has completed the Challenge");
                 Assert.IsTrue(ChallengeManager.IsComplete(challengeId, _user2.UserID));
+
+                Log("Verifying User2 has completed the Challenge - Loading challenge with userId");
+                Challenge challengeLoaded = ChallengeManager.GetChallenge(challengeId, _user1.UserID);
+                Assert.AreEqual(100, challengeLoaded.Progress);
             }
         }
 

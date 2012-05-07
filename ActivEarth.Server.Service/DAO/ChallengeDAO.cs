@@ -7,6 +7,7 @@ using ActivEarth.Objects.Profile;
 using ActivEarth.Objects.Competition;
 using ActivEarth.Objects.Competition.Challenges;
 using ActivEarth.Server.Service;
+using ActivEarth.Server.Service.Competition;
 
 namespace ActivEarth.DAO
 {
@@ -16,8 +17,9 @@ namespace ActivEarth.DAO
         /// Retrieves a Challenge from the DB based on its ID.
         /// </summary>
         /// <param name="challengeId">Identifier of the challenge to retrieve.</param>
+        /// <param name="userId">Optional. UserID to load challenge progress from.</param>
         /// <returns>Challenge specified by the provided ID.</returns>
-        public static Challenge GetChallengeFromChallengeId(int challengeId)
+        public static Challenge GetChallengeFromChallengeId(int challengeId, int userId = 0)
         {
             using (SqlConnection connection = ConnectionManager.GetConnection())
             {
@@ -40,6 +42,7 @@ namespace ActivEarth.DAO
                                 ImagePath = c.image_path
                             }).FirstOrDefault();
 
+                toReturn.Progress = (userId > 0 ? ChallengeManager.GetProgress(toReturn.ID, userId) : 0);
                 toReturn.FormatString = StatisticInfoDAO.GetStatisticFormatString(toReturn.StatisticBinding);
 
                 return toReturn;
@@ -49,8 +52,9 @@ namespace ActivEarth.DAO
         /// <summary>
         /// Retrieves all currently active challenges.
         /// </summary>
+        /// <param name="userId">Optional. UserID to load challenge progress from.</param>
         /// <returns>All challenges currently marked as active.</returns>
-        public static List<Challenge> GetActiveChallenges()
+        public static List<Challenge> GetActiveChallenges(int userId = 0)
         {
             List<Challenge> toReturn;
 
@@ -77,6 +81,7 @@ namespace ActivEarth.DAO
 
                 foreach (Challenge challenge in toReturn)
                 {
+                    challenge.Progress = (userId > 0 ? ChallengeManager.GetProgress(challenge.ID, userId) : 0);
                     challenge.FormatString = StatisticInfoDAO.GetStatisticFormatString(challenge.StatisticBinding);
                 }
 
@@ -87,35 +92,38 @@ namespace ActivEarth.DAO
         /// <summary>
         /// Retrieves all currently active daily challenges.
         /// </summary>
+        /// <param name="userId">Optional. UserID to load challenge progress from.</param>
         /// <returns>All daily challenges currently marked as active.</returns>
-        public static List<Challenge> GetActiveDailyChallenges()
+        public static List<Challenge> GetActiveDailyChallenges(int userId = 0)
         {
-            return GetActiveChallengesByDuration(1);
+            return GetActiveChallengesByDuration(1, userId);
         }
 
         /// <summary>
         /// Retrieves all currently active weekly challenges.
         /// </summary>
+        /// <param name="userId">Optional. UserID to load challenge progress from.</param>
         /// <returns>All weekly challenges currently marked as active.</returns>
-        public static List<Challenge> GetActiveWeeklyChallenges()
+        public static List<Challenge> GetActiveWeeklyChallenges(int userId = 0)
         {
-            return GetActiveChallengesByDuration(7);
+            return GetActiveChallengesByDuration(7, userId);
         }
 
         /// <summary>
         /// Retrieves all currently active monthly challenges.
         /// </summary>
+        /// <param name="userId">Optional. UserID to load challenge progress from.</param>
         /// <returns>All monthly challenges currently marked as active.</returns>
-        public static List<Challenge> GetActiveMonthlyChallenges()
+        public static List<Challenge> GetActiveMonthlyChallenges(int userId = 0)
         {
-            return GetActiveChallengesByDuration(DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month));
+            return GetActiveChallengesByDuration(DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month), userId);
         }
 
         /// <summary>
         /// Retrieves all currently active persistent challenges.
         /// </summary>
         /// <returns>All persistent challenges currently marked as active.</returns>
-        public static List<Challenge> GetActivePersistentChallenges()
+        public static List<Challenge> GetActivePersistentChallenges(int userId = 0)
         {
             List<Challenge> toReturn;
             using (SqlConnection connection = ConnectionManager.GetConnection())
@@ -141,6 +149,7 @@ namespace ActivEarth.DAO
 
                 foreach (Challenge challenge in toReturn)
                 {
+                    challenge.Progress = (userId > 0 ? ChallengeManager.GetProgress(challenge.ID, userId) : 0);
                     challenge.FormatString = StatisticInfoDAO.GetStatisticFormatString(challenge.StatisticBinding);
                 }
 
@@ -428,8 +437,10 @@ namespace ActivEarth.DAO
         /// <summary>
         /// Retrieves all currently active challenges of a given length.
         /// </summary>
-        /// <returns>Duration of the challenge in days.</returns>
-        private static List<Challenge> GetActiveChallengesByDuration(int days)
+        /// <param name="days">Duration of the challenge in days.</param>
+        /// <param name="userId">Optional. UserID to load progress from.</param>
+        /// <returns>List of active challenges with the specified duration.</returns>
+        private static List<Challenge> GetActiveChallengesByDuration(int days, int userId = 0)
         {
             List<Challenge> toReturn;
 
@@ -456,6 +467,7 @@ namespace ActivEarth.DAO
 
                 foreach (Challenge challenge in toReturn)
                 {
+                    challenge.Progress = (userId > 0 ? ChallengeManager.GetProgress(challenge.ID, userId) : 0);
                     challenge.FormatString = StatisticInfoDAO.GetStatisticFormatString(challenge.StatisticBinding);
                 }
 

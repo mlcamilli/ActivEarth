@@ -500,7 +500,7 @@ namespace ActivEarth.Server.Service
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UserDataProvider_team_member", Storage="_TeamMemberDataProviders", ThisKey="id", OtherKey="user_id")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UserDataProvider_TeamMemberDataProvider", Storage="_TeamMemberDataProviders", ThisKey="id", OtherKey="user_id")]
 		public EntitySet<TeamMemberDataProvider> TeamMemberDataProviders
 		{
 			get
@@ -2780,7 +2780,7 @@ namespace ActivEarth.Server.Service
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TeamDataProvider_team_member", Storage="_TeamMemberDataProviders", ThisKey="id", OtherKey="team_id")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TeamDataProvider_TeamMemberDataProvider", Storage="_TeamMemberDataProviders", ThisKey="id", OtherKey="team_id")]
 		public EntitySet<TeamMemberDataProvider> TeamMemberDataProviders
 		{
 			get
@@ -3273,7 +3273,7 @@ namespace ActivEarth.Server.Service
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ContestDataProvider_team_member", Storage="_TeamMemberDataProviders", ThisKey="id", OtherKey="contest_id")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ContestDataProvider_TeamMemberDataProvider", Storage="_TeamMemberDataProviders", ThisKey="id", OtherKey="contest_id")]
 		public EntitySet<TeamMemberDataProvider> TeamMemberDataProviders
 		{
 			get
@@ -4865,7 +4865,7 @@ namespace ActivEarth.Server.Service
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ContestDataProvider_team_member", Storage="_ContestDataProvider", ThisKey="contest_id", OtherKey="id", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ContestDataProvider_TeamMemberDataProvider", Storage="_ContestDataProvider", ThisKey="contest_id", OtherKey="id", IsForeignKey=true)]
 		public ContestDataProvider ContestDataProvider
 		{
 			get
@@ -4899,7 +4899,7 @@ namespace ActivEarth.Server.Service
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TeamDataProvider_team_member", Storage="_TeamDataProvider", ThisKey="team_id", OtherKey="id", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TeamDataProvider_TeamMemberDataProvider", Storage="_TeamDataProvider", ThisKey="team_id", OtherKey="id", IsForeignKey=true)]
 		public TeamDataProvider TeamDataProvider
 		{
 			get
@@ -4933,7 +4933,7 @@ namespace ActivEarth.Server.Service
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UserDataProvider_team_member", Storage="_UserDataProvider", ThisKey="user_id", OtherKey="id", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UserDataProvider_TeamMemberDataProvider", Storage="_UserDataProvider", ThisKey="user_id", OtherKey="id", IsForeignKey=true)]
 		public UserDataProvider UserDataProvider
 		{
 			get
@@ -4998,6 +4998,8 @@ namespace ActivEarth.Server.Service
 		
 		private int _user_id;
 		
+		private int _gmt_offset;
+		
 		private double _distance;
 		
 		private double _end_latitude;
@@ -5030,6 +5032,8 @@ namespace ActivEarth.Server.Service
     partial void OnidChanged();
     partial void Onuser_idChanging(int value);
     partial void Onuser_idChanged();
+    partial void Ongmt_offsetChanging(int value);
+    partial void Ongmt_offsetChanged();
     partial void OndistanceChanging(double value);
     partial void OndistanceChanged();
     partial void Onend_latitudeChanging(double value);
@@ -5100,6 +5104,26 @@ namespace ActivEarth.Server.Service
 					this._user_id = value;
 					this.SendPropertyChanged("user_id");
 					this.Onuser_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_gmt_offset", DbType="Int NOT NULL")]
+		public int gmt_offset
+		{
+			get
+			{
+				return this._gmt_offset;
+			}
+			set
+			{
+				if ((this._gmt_offset != value))
+				{
+					this.Ongmt_offsetChanging(value);
+					this.SendPropertyChanging();
+					this._gmt_offset = value;
+					this.SendPropertyChanged("gmt_offset");
+					this.Ongmt_offsetChanged();
 				}
 			}
 		}

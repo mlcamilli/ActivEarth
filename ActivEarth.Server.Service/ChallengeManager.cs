@@ -54,10 +54,11 @@ namespace ActivEarth.Server.Service.Competition
         /// </summary>
         /// <param name="id">ID of the Challenge to be retrieved.</param>
         /// false to search only active challenges.</param>
+        /// <param name="userId">Optional. UserID to load progress from.</param>
         /// <returns>Challenge with ID matching the provided ID, null if no match is found.</returns>
-        public static Challenge GetChallenge(int id)
+        public static Challenge GetChallenge(int id, int userId = 0)
         {
-            return ChallengeDAO.GetChallengeFromChallengeId(id);
+            return ChallengeDAO.GetChallengeFromChallengeId(id, userId);
         }
 
         /// <summary>
