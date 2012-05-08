@@ -7,6 +7,7 @@ using System.ServiceModel;
 using System.Text;
 using System.Xml.Linq;
 using ActivEarth.DAO;
+using ActivEarth.Objects.Competition;
 using ActivEarth.Objects.Competition.Badges;
 using ActivEarth.Objects.Competition.Challenges;
 using ActivEarth.Objects.Competition.Contests;
@@ -130,6 +131,56 @@ namespace ActivEarth.RestService
             catch (Exception e)
             {
                 return String.Format("Route addition was unsuccessful. Reason: {0}", e.Message);
+            }
+        }
+
+        public string ProcessUser(string id, XElement input)
+        {
+            try
+            {
+                User user = new User()
+                {
+                    FirstName = input.Element("FirstName").ToString(),
+                    LastName = input.Element("LastName").ToString(),
+                    UserName = input.Element("UserName").ToString(),
+                    Email = input.Element("Email").ToString(),
+                    Gender = input.Element("Gender").ToString(),
+                    GreenScore = int.Parse(input.Element("Gender").Value),
+                    Height = int.Parse(input.Element("Height").Value),
+                    PrivacySettingID = int.Parse(input.Element("PrivacySettingID").Value),
+                    ProfileID = int.Parse(input.Element("ProfileID").Value),
+                    State = input.Element("State").ToString(),
+                    UserID = int.Parse(input.Element("UserID").Value),
+                    userPrivacySettings = new PrivacySetting()
+                                              {
+                                                  Age = bool.Parse(input.Element("userPrivacySetting").Element("Age").Value),
+                                                  Email = bool.Parse(input.Element("userPrivacySetting").Element("Email").Value),
+                                                  Gender = bool.Parse(input.Element("userPrivacySetting").Element("Gender").Value),
+                                                  Group = bool.Parse(input.Element("userPrivacySetting").Element("Group").Value),
+                                                  Height = bool.Parse(input.Element("userPrivacySetting").Element("Height").Value),
+                                                  ID = int.Parse(input.Element("userPrivacySetting").Element("ID").Value),
+                                                  Location = bool.Parse(input.Element("userPrivacySetting").Element("Location").Value),
+                                                  ProfileVisibility = int.Parse(input.Element("userPrivacySetting").Element("ProfileVisibility").Value),
+                                                  User = null,
+                                                  UserID = int.Parse(input.Element("userPrivacySetting").Element("UserID").Value),
+                                                  Weight = bool.Parse(input.Element("userPrivacySetting").Element("Weight").Value)
+
+                                              },
+                   ActivityScore = UserDAO.GetUserFromUserId(int.Parse(input.Element("UserID").Value)).ActivityScore,//input.Element("ActivityScore").Value
+                   Wall = UserDAO.GetUserFromUserId(int.Parse(input.Element("UserID").Value)).Wall,//input.Element("Wall")
+                   
+                   
+                
+                };
+                
+
+                bool userSuccessful = UserDAO.UpdateUserProfile(user);
+
+                return "User update was " + (userSuccessful ? "successful." : ("unsuccessful."));
+            }
+            catch (Exception e)
+            {
+                return String.Format("User update was unsuccessful. Reason: {0}", e.Message);
             }
         }
     }
