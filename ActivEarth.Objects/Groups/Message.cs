@@ -1,18 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Web;
 
 using ActivEarth.Objects.Profile;
 
 namespace ActivEarth.Objects.Groups
 {
+    [DataContract]
     public class Message
     {
         /// <summary>
         /// The title of the Message.
         /// </summary>
-
+        [DataMember]
         public string Title
         {
             get;
@@ -23,6 +25,7 @@ namespace ActivEarth.Objects.Groups
         /// The text that should be displayed in the message.
         /// </summary>
         /// 
+        [DataMember]
         public string Text
         {
             get;
@@ -38,9 +41,12 @@ namespace ActivEarth.Objects.Groups
             set;
         }
 
+        public string PosterName { get; set; }
+
         /// <summary>
         /// The date that the message was posted.
         /// </summary>
+        [DataMember]
         public string Date
         {
             get;
@@ -50,6 +56,7 @@ namespace ActivEarth.Objects.Groups
         /// <summary>
         /// The time that the message was posted.
         /// </summary>
+        [DataMember]
         public string Time
         {
             get;
@@ -69,6 +76,7 @@ namespace ActivEarth.Objects.Groups
             this.Poster = poster;
             this.Date = date;
             this.Time = time;
+            this.PosterName = poster.UserName;
         }
     }
 }
