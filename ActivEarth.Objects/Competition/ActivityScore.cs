@@ -1,6 +1,9 @@
 ﻿
+using System.Runtime.Serialization;
+
 namespace ActivEarth.Objects.Competition
 {
+    [DataContract]
     public class ActivityScore
     {
         #region ---------- Public Properties ----------
@@ -8,6 +11,7 @@ namespace ActivEarth.Objects.Competition
         /// <summary>
         /// Aggregate score from all three categories.
         /// </summary>
+        [DataMember]
         public int TotalScore
         {
             get;
@@ -17,6 +21,7 @@ namespace ActivEarth.Objects.Competition
         /// <summary>
         /// Activity Score contributed by completed Challenges.
         /// </summary>
+        [DataMember]
         public int ChallengeScore
         {
             get;
@@ -26,6 +31,7 @@ namespace ActivEarth.Objects.Competition
         /// <summary>
         /// Activity Score contributed by completed Contests.
         /// </summary>
+        [DataMember]
         public int ContestScore
         {
             get;
@@ -35,6 +41,7 @@ namespace ActivEarth.Objects.Competition
         /// <summary>
         /// Activity Score contributed by earned Badges.
         /// </summary>
+        [DataMember]
         public int BadgeScore
         {
             get;

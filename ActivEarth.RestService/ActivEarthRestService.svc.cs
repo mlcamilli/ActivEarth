@@ -165,14 +165,19 @@ namespace ActivEarth.RestService
                                                   UserID = int.Parse(input.Element("userPrivacySetting").Element("UserID").Value),
                                                   Weight = bool.Parse(input.Element("userPrivacySetting").Element("Weight").Value)
 
-                                              },
-                   ActivityScore = UserDAO.GetUserFromUserId(int.Parse(input.Element("UserID").Value)).ActivityScore,//input.Element("ActivityScore").Value
-                   Wall = UserDAO.GetUserFromUserId(int.Parse(input.Element("UserID").Value)).Wall,//input.Element("Wall")
-                   
-                   
-                
+                                              }
                 };
-                
+
+                var badgeScore = int.Parse(input.Element("ActivityScore").Element("BadgeScore").Value);
+                var challengeScore = int.Parse(input.Element("ActivityScore").Element("ChallengeScore").Value);
+                var contestScore = int.Parse(input.Element("ActivityScore").Element("ContestScore").Value);
+
+                user.ActivityScore = new ActivityScore(badgeScore, challengeScore, contestScore);
+
+                user.Wall = new Wall
+                                {
+                                    
+                                };
 
                 bool userSuccessful = UserDAO.UpdateUserProfile(user);
 
