@@ -107,18 +107,18 @@ namespace ActivEarth.RestService
             {
                 Route route = new Route()
                 {
-                    GMTOffset = int.Parse(input.Element("GMT offset").Value),
-                    Distance = double.Parse(input.Element("distance").Value),
-                    EndLatitude = double.Parse(input.Element("end point latitude").Value),
-                    EndLongitude = double.Parse(input.Element("end point longitude").Value),
-                    EndTime = DateTime.Parse(input.Element("end time").Value),
-                    Mode = input.Element("mode").Value,
-                    Points = input.Element("points").Value,
-                    StartLatitude = double.Parse(input.Element("start point latitude").Value),
-                    StartLongitude = double.Parse(input.Element("start point longitude").Value),
-                    StartTime = DateTime.Parse(input.Element("start time").Value),
-                    Steps = int.Parse(input.Element("steps").Value),
-                    Type = input.Element("type").Value,
+                    GMTOffset = int.Parse(input.Element("GMTOffset").Value),
+                    Distance = double.Parse(input.Element("Distance").Value),
+                    EndLatitude = double.Parse(input.Element("EndLatitude").Value),
+                    EndLongitude = double.Parse(input.Element("EndLongitude").Value),
+                    EndTime = DateTime.Parse(input.Element("EndTime").Value),
+                    Mode = input.Element("Mode").Value,
+                    Points = input.Element("Points").Value,
+                    StartLatitude = double.Parse(input.Element("StartLatitude").Value),
+                    StartLongitude = double.Parse(input.Element("StartLongitude").Value),
+                    StartTime = DateTime.Parse(input.Element("StartTime").Value),
+                    Steps = int.Parse(input.Element("Steps").Value),
+                    Type = input.Element("Type").Value,
                     UserId = int.Parse(id)
                 };
                 string errorMessage;
