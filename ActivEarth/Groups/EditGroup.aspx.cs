@@ -12,6 +12,11 @@ namespace ActivEarth.Groups
 {
     public partial class EditGroup : System.Web.UI.Page
     {
+        /// <summary>
+        /// Populates the text fields on the page with the Group's current information when the page loads.  
+        /// Redirects if the User is not logged in, the ID of the Group was not provided, or if the User is
+        /// not the Owner of the Group.
+        /// </summary>
         protected void Page_Load(object sender, EventArgs e)
         {
             if(Session["userDetails"] == null)
@@ -55,12 +60,20 @@ namespace ActivEarth.Groups
             }
         }
 
+        /// <summary>
+        /// Method called when the Cancel Button is clicked.  Redirects the user
+        /// back to the Groups page.
+        /// </summary>
         protected void Cancel(object sender, EventArgs e)
         {
 
             Response.Redirect("~/Groups/Groups.aspx");
         }
 
+        /// <summary>
+        /// Method called when the Delete Group Button is clicked.  Removes the Group from
+        /// the Database and Redirects the user back to the Groups page.
+        /// </summary>
         protected void DeleteGroup(object sender, EventArgs e)
         {
             int groupID = Convert.ToInt32(Request.QueryString["ID"]);
@@ -68,6 +81,10 @@ namespace ActivEarth.Groups
             Response.Redirect("~/Groups/Groups.aspx");
         }
 
+        /// <summary>
+        /// Method called when the Add Hashtag Button is clicked.  Adds the text in txbHashTag
+        /// to the list of Hashtags and clears the text in txbHashtag.
+        /// </summary>
         protected void AddHashTag(object sender, EventArgs e)
         {
             lblAllHashTags.Text = lblAllHashTags.Text.Substring(1, lblAllHashTags.Text.Length - 2);
@@ -83,16 +100,27 @@ namespace ActivEarth.Groups
             txbHashTag.Text = "";
         }
 
+        /// <summary>
+        /// Method called when the Remove Hashtags Button is clicked.  Clears the list of Hashtags.
+        /// </summary>
         protected void RemoveHashTags(object sender, EventArgs e)
         {
             lblAllHashTags.Text = "[]";
         }
 
+        /// <summary>
+        /// Method called when the Manage Group Members Button is clicked.  Redirects the Owner to the 
+        /// Manage Group Members Page.
+        /// </summary>
         protected void BootMembers(object sender, EventArgs e)
         {
             Response.Redirect("~/Groups/OwnerMembersPage.aspx?ID=" + Request.QueryString["ID"]);
         }
 
+        /// <summary>
+        /// Method called when the Save Group Information Button is clicked.  Pulls information from the text boxes on the page
+        /// and updates the group information in the Database.
+        /// </summary>
         protected void EditGroupInformation(object sender, EventArgs e)
         {
             int groupID = Convert.ToInt32(Request.QueryString["ID"]);

@@ -24,6 +24,10 @@ namespace ActivEarth.Groups
     {
         int userID;
 
+        /// <summary>
+        /// Prepares the Groups table and Owned Groups table when the page loads.  Redirects the user
+        /// if they have not signed in.
+        /// </summary>
         protected void Page_Load(object sender, EventArgs e)
         {
             
@@ -63,20 +67,22 @@ namespace ActivEarth.Groups
 
         }
 
+        /// <summary>
+        /// Method called when the Search Button is clicked.  Redirects the User to the Search Groups page using the 
+        /// Text in the searchBox as the search terms.
+        /// </summary>
         protected void SearchGroups(object sender, EventArgs e)
         {
             if (searchBox.Text.Length > 0)
                 Response.Redirect("~/Groups/GroupsSearch.aspx?Term=" + searchBox.Text);
         }
 
+        /// <summary>
+        /// Method called when the Create Group Button is clicked.  Redirects the User to the Create Group page.
+        /// </summary>
         protected void CreateGroup(object sender, EventArgs e)
         {
             Response.Redirect("~/Groups/CreateGroup.aspx");
-        }
-
-        protected void EditGroup(object sender, EventArgs e)
-        {
-            Response.Redirect("~/Groups/EditGroup.aspx");
         }
     }
 }

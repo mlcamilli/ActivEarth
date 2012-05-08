@@ -18,7 +18,11 @@ namespace ActivEarth.Account
         {
             
         }
-
+        /// <summary>
+        /// Create a new weather.
+        /// </summary>
+        /// <param name="sender">Object that requested the page load</param>
+        /// <param name="e">The event arguments.</param>
         protected void CreateUser(object sender, EventArgs e)
         {
             if (UserDAO.GetUserFromUserName(txbUserName.Text) == null)

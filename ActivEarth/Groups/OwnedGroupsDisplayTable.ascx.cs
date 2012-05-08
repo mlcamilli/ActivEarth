@@ -13,11 +13,21 @@ namespace ActivEarth.Groups
 {
     public partial class OwnedGroupsDisplayTable : System.Web.UI.UserControl
     {
+        /// <summary>
+        /// This is a component, so no work is required when it loads.  The population of the table
+        /// is handled by the page ASP.
+        /// </summary>
         protected void Page_Load(object sender, EventArgs e)
         {
 
         }
-        
+
+        /// <summary>
+        /// Formats the table of Groups based on the given list of Groups and colors.
+        /// </summary>
+        /// <param name="messages">The list of Groups to display in the table</param>
+        /// <param name="backColors">The list of alternating background colors to display in the table</param>
+        /// <param name="textColors">The list of alternating text colors to display in the table</param>
         public void PopulateGroupsTable(List<ActivEarth.Objects.Groups.Group> groups, Color[] backColors, Color[] textColors)
         {
             int colorIndex = 0;
@@ -41,6 +51,12 @@ namespace ActivEarth.Groups
             }
         }
 
+        /// <summary>
+        /// Formats a single row to the table with the given Group's information.
+        /// </summary>
+        /// <param name="group">The group to display in the row</param>
+        /// <param name="backColor">The background color to display in the row</param>
+        /// <param name="textColor">The text color to display in the row</param>
         private TableRow MakeRowForTable(ActivEarth.Objects.Groups.Group group, Color backColor, Color textColor)
         {        
             TableRow newRow = new TableRow();
@@ -52,6 +68,11 @@ namespace ActivEarth.Groups
             return newRow;
         }
 
+        /// <summary>
+        /// Formats a cell to add to the row containing the given text.
+        /// </summary>
+        /// <param name="text">The messages to display in the row</param>
+        /// <param name="textColors">The text color to display in the cell</param>
         private TableCell MakeTextCellForRow(string text, Color textColor)
         {
             TableCell newCell = new TableCell();
@@ -62,6 +83,12 @@ namespace ActivEarth.Groups
             return newCell;
         }
 
+        /// <summary>
+        /// Formats a cell to add to the row containing the given text linking to the given Group ID.
+        /// </summary>
+        /// <param name="text">The messages to display in the link</param>
+        /// <param name="groupId">The ID of the Group this cell should link to the edit page of</param>
+        /// <param name="textColors">The text color to display in the cell</param>
         private TableCell MakeLinkCellForRow(string text, int groupId, Color textColor)
         {
             TableCell newCell = new TableCell();

@@ -24,6 +24,10 @@ namespace ActivEarth.Groups
     {
         int userID;
 
+        /// <summary>
+        /// Prepares the relevant group table to display when the page loads.  Redirects the user
+        /// if they have not signed in or if a search term has not been provided.
+        /// </summary>
         protected void Page_Load(object sender, EventArgs e)
         {
             
@@ -64,12 +68,23 @@ namespace ActivEarth.Groups
 
         }
 
+        /// <summary>
+        /// Method called when the Search button is clicked.  Redirects the user
+        /// to a new Search page using the text in the searchBox as the search term.
+        /// </summary>
         protected void SearchGroups(object sender, EventArgs e)
         {
             if (searchBox.Text.Length > 0)
                 Response.Redirect("~/Groups/GroupsSearch.aspx?Term=" + searchBox.Text);
         }
 
+        /// <summary>
+        /// Returns the Union of the two List of Groups, with no repeating Groups.  Each search term is separately queried
+        /// and this method combines those lists.
+        /// </summary>
+        /// <param name="list1">The list of Groups for the first search term</param>
+        /// <param name="list2">The list of Groups for the second search term</param>
+        /// <returns>The union of the two lists</returns>
         protected List<Group> ListUnion_NoRepeats(List<Group> list1, List<Group> list2)
         {
             foreach (Group group in list2)

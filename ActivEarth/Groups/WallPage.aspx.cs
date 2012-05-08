@@ -24,7 +24,10 @@ namespace ActivEarth.Groups
 {
     public partial class WallPage : System.Web.UI.Page
     {
-
+        /// <summary>
+        /// Prepares the wall table to display when the page loads.  Redirects the user
+        /// if they have not signed in or if a Group ID has not been provided.
+        /// </summary>
         protected void Page_Load(object sender, EventArgs e)
         {
             
