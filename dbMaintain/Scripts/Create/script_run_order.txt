@@ -16,4 +16,6 @@ dbo.Challenge_Initial_Values.Table.sql
 dbo.Privacy_Settings.Table.sql
 dbo.UserStatistics.Table.sql
 dbo.Active_Routes.Table.sql
+dbo.Carpools.Table.sql
+dbo.Recycling_Centers.Table.sql
 TestData.sql
