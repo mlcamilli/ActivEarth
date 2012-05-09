@@ -26,8 +26,8 @@ namespace ActivEarth.DAO
                     
                     List<Message> messages = (from m in data.MessageDataProviders
                                               where m.group_id == -1 && m.user_id == user.UserID
-                                              select    
-                                              new Message(m.title, m.message, user, m.date, m.time)
+                                              select
+                                              new Message(m.title, m.message, UserDAO.GetUserFromUserId(m.user_id), m.date, m.time)
                                          ).ToList();
 
                     foreach (Message message in messages)

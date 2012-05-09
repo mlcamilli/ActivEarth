@@ -7,6 +7,7 @@ using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
 using System.Xml.Linq;
+using ActivEarth.Objects;
 using ActivEarth.Objects.Profile;
 using ActivEarth.Objects.Groups;
 using ActivEarth.Objects.Competition.Badges;
@@ -25,6 +26,11 @@ namespace ActivEarth.RestService
         User GetUserById(string id);
 
         [OperationContract]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Xml, BodyStyle = WebMessageBodyStyle.Bare,
+            UriTemplate = "user/{id}")]
+        string ProcessUser(string id, XElement input);
+
+        [OperationContract]
         [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Xml, BodyStyle = WebMessageBodyStyle.Wrapped,
             UriTemplate = "user/{username}/password/{password}")]
         User GetUserByUsernameAndPassword(string username, string password);
@@ -40,47 +46,47 @@ namespace ActivEarth.RestService
         string ChangePassword(string username, string newpassword);
         
         [OperationContract]
-        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Xml, BodyStyle = WebMessageBodyStyle.Bare,
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Xml, BodyStyle = WebMessageBodyStyle.Wrapped,
             UriTemplate = "user/{id}/contests")]
         Collection<Contest> GetContestsFromUserId(string id);
 
         [OperationContract]
-        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Xml, BodyStyle = WebMessageBodyStyle.Bare,
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Xml, BodyStyle = WebMessageBodyStyle.Wrapped,
             UriTemplate = "contest/{id}")]
         Contest GetContestFromContestId(string id);
 
         [OperationContract]
-        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Xml, BodyStyle = WebMessageBodyStyle.Bare,
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Xml, BodyStyle = WebMessageBodyStyle.Wrapped,
             UriTemplate = "user/{id}/challenges")]
         Collection<Challenge> GetActiveChallenges(string id);
 
         [OperationContract]
-        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Xml, BodyStyle = WebMessageBodyStyle.Bare,
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Xml, BodyStyle = WebMessageBodyStyle.Wrapped,
             UriTemplate = "user/{id}/badges")]
         Collection<Badge> GetBadgesFromUserId(string id);
 
         [OperationContract]
-        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Xml, BodyStyle = WebMessageBodyStyle.Bare,
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Xml, BodyStyle = WebMessageBodyStyle.Wrapped,
             UriTemplate = "contest/find/{search}/exact/{exactMatch}")]
         Collection<Contest> FindContests(string search, string exactMatch);
 
         [OperationContract]
-        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Xml, BodyStyle = WebMessageBodyStyle.Bare,
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Xml, BodyStyle = WebMessageBodyStyle.Wrapped,
             UriTemplate = "user/{id}/groups")]
         Collection<Group> GetGroupsFromUserId(string id);
 
         [OperationContract]
-        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Xml, BodyStyle = WebMessageBodyStyle.Bare,
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Xml, BodyStyle = WebMessageBodyStyle.Wrapped,
             UriTemplate = "group/find/{search}")]
         Collection<Group> FindGroups(string search);
 
         [OperationContract]
-        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Xml, BodyStyle = WebMessageBodyStyle.Bare,
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Xml, BodyStyle = WebMessageBodyStyle.Wrapped,
             UriTemplate = "group/{id}")]
         Group GetGroupById(string id);
 
         [OperationContract]
-        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Xml, BodyStyle = WebMessageBodyStyle.Bare,
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Xml, BodyStyle = WebMessageBodyStyle.Wrapped,
             UriTemplate = "user/{id}/routes")]
         Collection<Route> GetRoutesById(string id);
 
@@ -88,5 +94,25 @@ namespace ActivEarth.RestService
         [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Xml, BodyStyle = WebMessageBodyStyle.Bare,
             UriTemplate = "user/{id}/routes")]
         string ProcessRoute(string id, XElement input);
+
+        [OperationContract]
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Xml, BodyStyle = WebMessageBodyStyle.Wrapped,
+            UriTemplate = "carpools")]
+        Collection<Carpool> GetCarpools();
+
+        [OperationContract]
+        [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Xml, BodyStyle = WebMessageBodyStyle.Bare,
+            UriTemplate = "carpools")]
+        string AddCarpool(XElement input);
+
+        [OperationContract]
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Xml, BodyStyle = WebMessageBodyStyle.Wrapped,
+            UriTemplate = "recycling")]
+        Collection<RecycleCenter> GetRecyclingCenters();
+
+        [OperationContract]
+        [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Xml, BodyStyle = WebMessageBodyStyle.Bare,
+            UriTemplate = "recycling")]
+        string AddRecyclingCenter(XElement input);
     }
 }

@@ -360,9 +360,7 @@ insert into ActivEarth_Dev.dbo.team_members Values (4, 9, 2, 0, 0, 0)
 insert into ActivEarth_Dev.dbo.team_members Values (4, 10, 3, 0, 0, 0)
 insert into ActivEarth_Dev.dbo.team_members Values (4, 11, 4, 0, 0, 0)
 
-
 /* ActivEarth Demo Data */
-
 insert into ActivEarth_Dev.dbo.users Values ('sfrank1', 'password')
 insert into ActivEarth_Dev.dbo.users Values ('tthrift', 'password')
 insert into ActivEarth_Dev.dbo.users Values ('rfincher', 'password')

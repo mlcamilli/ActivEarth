@@ -1,20 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Web;
 
 namespace ActivEarth.Objects.Groups
 {
+    [DataContract]
     public class Wall
     {
         /// <summary>
         /// The Maximum number of messages that should be displayed on the Wall.
         /// </summary>
+        [DataMember]
         private const int MAX_MESSAGES = 50;
 
         /// <summary>
         /// The List of Messages to display on the Wall.
         /// </summary>
+        [DataMember]
         public List<Message> Messages
         {
             get;
