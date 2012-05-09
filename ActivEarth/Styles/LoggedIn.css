@@ -212,7 +212,7 @@ div.menu ul li a, div.menu ul li a:visited
     white-space: nowrap;
 }
 
-div.menu ul li a:hover
+div.menu ul li a:hover, div.menu ul li a.selected
 {
     background-color: #009933;
     color: #000000;
