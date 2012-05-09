@@ -26,6 +26,11 @@ namespace ActivEarth.RestService
         User GetUserById(string id);
 
         [OperationContract]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Xml, BodyStyle = WebMessageBodyStyle.Bare,
+            UriTemplate = "user/{id}")]
+        string ProcessUser(string id, XElement input);
+
+        [OperationContract]
         [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Xml, BodyStyle = WebMessageBodyStyle.Wrapped,
             UriTemplate = "user/{username}/password/{password}")]
         User GetUserByUsernameAndPassword(string username, string password);
