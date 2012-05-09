@@ -7,6 +7,7 @@ using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
 using System.Xml.Linq;
+using ActivEarth.Objects;
 using ActivEarth.Objects.Profile;
 using ActivEarth.Objects.Groups;
 using ActivEarth.Objects.Competition.Badges;
@@ -88,5 +89,25 @@ namespace ActivEarth.RestService
         [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Xml, BodyStyle = WebMessageBodyStyle.Bare,
             UriTemplate = "user/{id}/routes")]
         string ProcessRoute(string id, XElement input);
+
+        [OperationContract]
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Xml, BodyStyle = WebMessageBodyStyle.Wrapped,
+            UriTemplate = "carpools")]
+        Collection<Carpool> GetCarpools();
+
+        [OperationContract]
+        [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Xml, BodyStyle = WebMessageBodyStyle.Bare,
+            UriTemplate = "carpools")]
+        string AddCarpool(XElement input);
+
+        [OperationContract]
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Xml, BodyStyle = WebMessageBodyStyle.Wrapped,
+            UriTemplate = "recycling")]
+        Collection<RecycleCenter> GetRecyclingCenters();
+
+        [OperationContract]
+        [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Xml, BodyStyle = WebMessageBodyStyle.Bare,
+            UriTemplate = "recycling")]
+        string AddRecyclingCenter(XElement input);
     }
 }

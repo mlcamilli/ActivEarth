@@ -15,7 +15,9 @@
       <Association Name="UserDataProvider_MessageDataProvider" Member="MessageDataProviders" ThisKey="id" OtherKey="user_id" Type="MessageDataProvider" />
       <Association Name="UserDataProvider_ProfileDataProvider" Member="ProfileDataProviders" ThisKey="id" OtherKey="user_id" Type="ProfileDataProvider" />
       <Association Name="UserDataProvider_TeamMemberDataProvider" Member="TeamMemberDataProviders" ThisKey="id" OtherKey="user_id" Type="TeamMemberDataProvider" />
-      <Association Name="UserDataProvider_active_route" Member="ActiveRouteDataProviders" ThisKey="id" OtherKey="user_id" Type="ActiveRouteDataProvider" />
+      <Association Name="UserDataProvider_ActiveRouteDataProvider" Member="ActiveRouteDataProviders" ThisKey="id" OtherKey="user_id" Type="ActiveRouteDataProvider" />
+      <Association Name="UserDataProvider_recycling_center" Member="RecyclingCenterDataProviders" ThisKey="id" OtherKey="user_id" Type="RecyclingCenterDataProvider" />
+      <Association Name="UserDataProvider_carpool" Member="CarpoolDataProviders" ThisKey="id" OtherKey="user_id" Type="CarpoolDataProvider" />
     </Type>
   </Table>
   <Table Name="dbo.privacy_settings" Member="PrivacySettingDataProviders">
@@ -239,7 +241,40 @@
       <Column Name="start_time" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="steps" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="type" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
-      <Association Name="UserDataProvider_active_route" Member="UserDataProvider" ThisKey="user_id" OtherKey="id" Type="UserDataProvider" IsForeignKey="true" />
+      <Association Name="UserDataProvider_ActiveRouteDataProvider" Member="UserDataProvider" ThisKey="user_id" OtherKey="id" Type="UserDataProvider" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.recycling_centers" Member="RecyclingCenterDataProviders">
+    <Type Name="RecyclingCenterDataProvider">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="user_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="location" Type="System.String" DbType="VarChar(160) NOT NULL" CanBeNull="false" />
+      <Column Name="comments" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="automotive" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="electronics" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="construction" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="batteries" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="garden" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="glass" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="hazardous" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="household" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="metal" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="paint" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="paper" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="plastic" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="UserDataProvider_recycling_center" Member="UserDataProvider" ThisKey="user_id" OtherKey="id" Type="UserDataProvider" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.carpools" Member="CarpoolDataProviders">
+    <Type Name="CarpoolDataProvider">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="user_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="start" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="destination" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="time" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="seats_available" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="comments" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Association Name="UserDataProvider_carpool" Member="UserDataProvider" ThisKey="user_id" OtherKey="id" Type="UserDataProvider" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

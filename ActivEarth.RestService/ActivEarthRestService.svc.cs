@@ -7,6 +7,7 @@ using System.ServiceModel;
 using System.Text;
 using System.Xml.Linq;
 using ActivEarth.DAO;
+using ActivEarth.Objects;
 using ActivEarth.Objects.Competition;
 using ActivEarth.Objects.Competition.Badges;
 using ActivEarth.Objects.Competition.Challenges;
@@ -186,6 +187,76 @@ namespace ActivEarth.RestService
             catch (Exception e)
             {
                 return String.Format("User update was unsuccessful. Reason: {0}", e.Message);
+            }
+        }
+
+        public Collection<Carpool> GetCarpools()
+        {
+            return new Collection<Carpool>(CarpoolDAO.GetCarpools());
+        }
+
+        public string AddCarpool(XElement input)
+        {
+
+            try
+            {
+                Carpool carpool = new Carpool()
+                {
+                    Start = input.Element("Start").Value,
+                    Destination = input.Element("Destination").Value,
+                    SeatsAvailable = byte.Parse(input.Element("SeatsAvailable").Value),
+                    Time = input.Element("Time").Value,
+                    Comments = input.Element("Comments").Value,
+                    UserId = int.Parse(input.Element("UserId").Value)
+                };
+                string errorMessage;
+
+                int carpoolId = CarpoolDAO.AddCarpool(carpool, out errorMessage);
+
+                return "Carpool addition was " + (carpoolId > 0 ? "successful." : ("unsuccessful. Reason: " + errorMessage));
+            }
+            catch (Exception e)
+            {
+                return String.Format("Carpool addition was unsuccessful. Reason: {0}", e.Message);
+            }
+        }
+
+        public Collection<RecycleCenter> GetRecyclingCenters()
+        {
+            return new Collection<RecycleCenter>(RecyclingDAO.GetRecyclingCenters());
+        }
+
+        public string AddRecyclingCenter(XElement input)
+        {
+            try
+            {
+                RecycleCenter center = new RecycleCenter()
+                {
+                    Location = input.Element("Location").Value,
+                    Comments = input.Element("Comments").Value,
+                    Automotive = bool.Parse(input.Element("Automotive").Value),
+                    Electronics = bool.Parse(input.Element("Electronics").Value),
+                    Construction = bool.Parse(input.Element("Construction").Value),
+                    Batteries = bool.Parse(input.Element("Batteries").Value),
+                    Garden = bool.Parse(input.Element("Garden").Value),
+                    Glass = bool.Parse(input.Element("Glass").Value),
+                    Hazardous = bool.Parse(input.Element("Hazardous").Value),
+                    Household = bool.Parse(input.Element("Household").Value),
+                    Metal = bool.Parse(input.Element("Metal").Value),
+                    Paint = bool.Parse(input.Element("Paint").Value),
+                    Paper = bool.Parse(input.Element("Paper").Value),
+                    Plastic = bool.Parse(input.Element("Plastic").Value),
+                    UserId = int.Parse(input.Element("UserId").Value)
+                };
+                string errorMessage;
+
+                int recycleId = RecyclingDAO.AddRecycleCenter(center, out errorMessage);
+
+                return "Recycling Center addition was " + (recycleId > 0 ? "successful." : ("unsuccessful. Reason: " + errorMessage));
+            }
+            catch (Exception e)
+            {
+                return String.Format("Recycling Center addition was unsuccessful. Reason: {0}", e.Message);
             }
         }
     }

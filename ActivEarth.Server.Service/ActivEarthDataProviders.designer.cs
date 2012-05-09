@@ -84,6 +84,12 @@ namespace ActivEarth.Server.Service
     partial void InsertActiveRouteDataProvider(ActiveRouteDataProvider instance);
     partial void UpdateActiveRouteDataProvider(ActiveRouteDataProvider instance);
     partial void DeleteActiveRouteDataProvider(ActiveRouteDataProvider instance);
+    partial void InsertRecyclingCenterDataProvider(RecyclingCenterDataProvider instance);
+    partial void UpdateRecyclingCenterDataProvider(RecyclingCenterDataProvider instance);
+    partial void DeleteRecyclingCenterDataProvider(RecyclingCenterDataProvider instance);
+    partial void InsertCarpoolDataProvider(CarpoolDataProvider instance);
+    partial void UpdateCarpoolDataProvider(CarpoolDataProvider instance);
+    partial void DeleteCarpoolDataProvider(CarpoolDataProvider instance);
     #endregion
 		
 		public ActivEarthDataProvidersDataContext() : 
@@ -259,6 +265,22 @@ namespace ActivEarth.Server.Service
 				return this.GetTable<ActiveRouteDataProvider>();
 			}
 		}
+		
+		public System.Data.Linq.Table<RecyclingCenterDataProvider> RecyclingCenterDataProviders
+		{
+			get
+			{
+				return this.GetTable<RecyclingCenterDataProvider>();
+			}
+		}
+		
+		public System.Data.Linq.Table<CarpoolDataProvider> CarpoolDataProviders
+		{
+			get
+			{
+				return this.GetTable<CarpoolDataProvider>();
+			}
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.users")]
@@ -295,6 +317,10 @@ namespace ActivEarth.Server.Service
 		
 		private EntitySet<ActiveRouteDataProvider> _ActiveRouteDataProviders;
 		
+		private EntitySet<RecyclingCenterDataProvider> _RecyclingCenterDataProviders;
+		
+		private EntitySet<CarpoolDataProvider> _CarpoolDataProviders;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -320,6 +346,8 @@ namespace ActivEarth.Server.Service
 			this._ProfileDataProviders = new EntitySet<ProfileDataProvider>(new Action<ProfileDataProvider>(this.attach_ProfileDataProviders), new Action<ProfileDataProvider>(this.detach_ProfileDataProviders));
 			this._TeamMemberDataProviders = new EntitySet<TeamMemberDataProvider>(new Action<TeamMemberDataProvider>(this.attach_TeamMemberDataProviders), new Action<TeamMemberDataProvider>(this.detach_TeamMemberDataProviders));
 			this._ActiveRouteDataProviders = new EntitySet<ActiveRouteDataProvider>(new Action<ActiveRouteDataProvider>(this.attach_ActiveRouteDataProviders), new Action<ActiveRouteDataProvider>(this.detach_ActiveRouteDataProviders));
+			this._RecyclingCenterDataProviders = new EntitySet<RecyclingCenterDataProvider>(new Action<RecyclingCenterDataProvider>(this.attach_RecyclingCenterDataProviders), new Action<RecyclingCenterDataProvider>(this.detach_RecyclingCenterDataProviders));
+			this._CarpoolDataProviders = new EntitySet<CarpoolDataProvider>(new Action<CarpoolDataProvider>(this.attach_CarpoolDataProviders), new Action<CarpoolDataProvider>(this.detach_CarpoolDataProviders));
 			OnCreated();
 		}
 		
@@ -513,7 +541,7 @@ namespace ActivEarth.Server.Service
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UserDataProvider_active_route", Storage="_ActiveRouteDataProviders", ThisKey="id", OtherKey="user_id")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UserDataProvider_ActiveRouteDataProvider", Storage="_ActiveRouteDataProviders", ThisKey="id", OtherKey="user_id")]
 		public EntitySet<ActiveRouteDataProvider> ActiveRouteDataProviders
 		{
 			get
@@ -523,6 +551,32 @@ namespace ActivEarth.Server.Service
 			set
 			{
 				this._ActiveRouteDataProviders.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UserDataProvider_recycling_center", Storage="_RecyclingCenterDataProviders", ThisKey="id", OtherKey="user_id")]
+		public EntitySet<RecyclingCenterDataProvider> RecyclingCenterDataProviders
+		{
+			get
+			{
+				return this._RecyclingCenterDataProviders;
+			}
+			set
+			{
+				this._RecyclingCenterDataProviders.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UserDataProvider_carpool", Storage="_CarpoolDataProviders", ThisKey="id", OtherKey="user_id")]
+		public EntitySet<CarpoolDataProvider> CarpoolDataProviders
+		{
+			get
+			{
+				return this._CarpoolDataProviders;
+			}
+			set
+			{
+				this._CarpoolDataProviders.Assign(value);
 			}
 		}
 		
@@ -673,6 +727,30 @@ namespace ActivEarth.Server.Service
 		}
 		
 		private void detach_ActiveRouteDataProviders(ActiveRouteDataProvider entity)
+		{
+			this.SendPropertyChanging();
+			entity.UserDataProvider = null;
+		}
+		
+		private void attach_RecyclingCenterDataProviders(RecyclingCenterDataProvider entity)
+		{
+			this.SendPropertyChanging();
+			entity.UserDataProvider = this;
+		}
+		
+		private void detach_RecyclingCenterDataProviders(RecyclingCenterDataProvider entity)
+		{
+			this.SendPropertyChanging();
+			entity.UserDataProvider = null;
+		}
+		
+		private void attach_CarpoolDataProviders(CarpoolDataProvider entity)
+		{
+			this.SendPropertyChanging();
+			entity.UserDataProvider = this;
+		}
+		
+		private void detach_CarpoolDataProviders(CarpoolDataProvider entity)
 		{
 			this.SendPropertyChanging();
 			entity.UserDataProvider = null;
@@ -5348,7 +5426,7 @@ namespace ActivEarth.Server.Service
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UserDataProvider_active_route", Storage="_UserDataProvider", ThisKey="user_id", OtherKey="id", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UserDataProvider_ActiveRouteDataProvider", Storage="_UserDataProvider", ThisKey="user_id", OtherKey="id", IsForeignKey=true)]
 		public UserDataProvider UserDataProvider
 		{
 			get
@@ -5371,6 +5449,716 @@ namespace ActivEarth.Server.Service
 					if ((value != null))
 					{
 						value.ActiveRouteDataProviders.Add(this);
+						this._user_id = value.id;
+					}
+					else
+					{
+						this._user_id = default(int);
+					}
+					this.SendPropertyChanged("UserDataProvider");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.recycling_centers")]
+	public partial class RecyclingCenterDataProvider : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id;
+		
+		private int _user_id;
+		
+		private string _location;
+		
+		private string _comments;
+		
+		private bool _automotive;
+		
+		private bool _electronics;
+		
+		private bool _construction;
+		
+		private bool _batteries;
+		
+		private bool _garden;
+		
+		private bool _glass;
+		
+		private bool _hazardous;
+		
+		private bool _household;
+		
+		private bool _metal;
+		
+		private bool _paint;
+		
+		private bool _paper;
+		
+		private bool _plastic;
+		
+		private EntityRef<UserDataProvider> _UserDataProvider;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void Onuser_idChanging(int value);
+    partial void Onuser_idChanged();
+    partial void OnlocationChanging(string value);
+    partial void OnlocationChanged();
+    partial void OncommentsChanging(string value);
+    partial void OncommentsChanged();
+    partial void OnautomotiveChanging(bool value);
+    partial void OnautomotiveChanged();
+    partial void OnelectronicsChanging(bool value);
+    partial void OnelectronicsChanged();
+    partial void OnconstructionChanging(bool value);
+    partial void OnconstructionChanged();
+    partial void OnbatteriesChanging(bool value);
+    partial void OnbatteriesChanged();
+    partial void OngardenChanging(bool value);
+    partial void OngardenChanged();
+    partial void OnglassChanging(bool value);
+    partial void OnglassChanged();
+    partial void OnhazardousChanging(bool value);
+    partial void OnhazardousChanged();
+    partial void OnhouseholdChanging(bool value);
+    partial void OnhouseholdChanged();
+    partial void OnmetalChanging(bool value);
+    partial void OnmetalChanged();
+    partial void OnpaintChanging(bool value);
+    partial void OnpaintChanged();
+    partial void OnpaperChanging(bool value);
+    partial void OnpaperChanged();
+    partial void OnplasticChanging(bool value);
+    partial void OnplasticChanged();
+    #endregion
+		
+		public RecyclingCenterDataProvider()
+		{
+			this._UserDataProvider = default(EntityRef<UserDataProvider>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_user_id", DbType="Int NOT NULL")]
+		public int user_id
+		{
+			get
+			{
+				return this._user_id;
+			}
+			set
+			{
+				if ((this._user_id != value))
+				{
+					if (this._UserDataProvider.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onuser_idChanging(value);
+					this.SendPropertyChanging();
+					this._user_id = value;
+					this.SendPropertyChanged("user_id");
+					this.Onuser_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_location", DbType="VarChar(160) NOT NULL", CanBeNull=false)]
+		public string location
+		{
+			get
+			{
+				return this._location;
+			}
+			set
+			{
+				if ((this._location != value))
+				{
+					this.OnlocationChanging(value);
+					this.SendPropertyChanging();
+					this._location = value;
+					this.SendPropertyChanged("location");
+					this.OnlocationChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_comments", DbType="Text NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+		public string comments
+		{
+			get
+			{
+				return this._comments;
+			}
+			set
+			{
+				if ((this._comments != value))
+				{
+					this.OncommentsChanging(value);
+					this.SendPropertyChanging();
+					this._comments = value;
+					this.SendPropertyChanged("comments");
+					this.OncommentsChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_automotive", DbType="Bit NOT NULL")]
+		public bool automotive
+		{
+			get
+			{
+				return this._automotive;
+			}
+			set
+			{
+				if ((this._automotive != value))
+				{
+					this.OnautomotiveChanging(value);
+					this.SendPropertyChanging();
+					this._automotive = value;
+					this.SendPropertyChanged("automotive");
+					this.OnautomotiveChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_electronics", DbType="Bit NOT NULL")]
+		public bool electronics
+		{
+			get
+			{
+				return this._electronics;
+			}
+			set
+			{
+				if ((this._electronics != value))
+				{
+					this.OnelectronicsChanging(value);
+					this.SendPropertyChanging();
+					this._electronics = value;
+					this.SendPropertyChanged("electronics");
+					this.OnelectronicsChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_construction", DbType="Bit NOT NULL")]
+		public bool construction
+		{
+			get
+			{
+				return this._construction;
+			}
+			set
+			{
+				if ((this._construction != value))
+				{
+					this.OnconstructionChanging(value);
+					this.SendPropertyChanging();
+					this._construction = value;
+					this.SendPropertyChanged("construction");
+					this.OnconstructionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_batteries", DbType="Bit NOT NULL")]
+		public bool batteries
+		{
+			get
+			{
+				return this._batteries;
+			}
+			set
+			{
+				if ((this._batteries != value))
+				{
+					this.OnbatteriesChanging(value);
+					this.SendPropertyChanging();
+					this._batteries = value;
+					this.SendPropertyChanged("batteries");
+					this.OnbatteriesChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_garden", DbType="Bit NOT NULL")]
+		public bool garden
+		{
+			get
+			{
+				return this._garden;
+			}
+			set
+			{
+				if ((this._garden != value))
+				{
+					this.OngardenChanging(value);
+					this.SendPropertyChanging();
+					this._garden = value;
+					this.SendPropertyChanged("garden");
+					this.OngardenChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_glass", DbType="Bit NOT NULL")]
+		public bool glass
+		{
+			get
+			{
+				return this._glass;
+			}
+			set
+			{
+				if ((this._glass != value))
+				{
+					this.OnglassChanging(value);
+					this.SendPropertyChanging();
+					this._glass = value;
+					this.SendPropertyChanged("glass");
+					this.OnglassChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_hazardous", DbType="Bit NOT NULL")]
+		public bool hazardous
+		{
+			get
+			{
+				return this._hazardous;
+			}
+			set
+			{
+				if ((this._hazardous != value))
+				{
+					this.OnhazardousChanging(value);
+					this.SendPropertyChanging();
+					this._hazardous = value;
+					this.SendPropertyChanged("hazardous");
+					this.OnhazardousChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_household", DbType="Bit NOT NULL")]
+		public bool household
+		{
+			get
+			{
+				return this._household;
+			}
+			set
+			{
+				if ((this._household != value))
+				{
+					this.OnhouseholdChanging(value);
+					this.SendPropertyChanging();
+					this._household = value;
+					this.SendPropertyChanged("household");
+					this.OnhouseholdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_metal", DbType="Bit NOT NULL")]
+		public bool metal
+		{
+			get
+			{
+				return this._metal;
+			}
+			set
+			{
+				if ((this._metal != value))
+				{
+					this.OnmetalChanging(value);
+					this.SendPropertyChanging();
+					this._metal = value;
+					this.SendPropertyChanged("metal");
+					this.OnmetalChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_paint", DbType="Bit NOT NULL")]
+		public bool paint
+		{
+			get
+			{
+				return this._paint;
+			}
+			set
+			{
+				if ((this._paint != value))
+				{
+					this.OnpaintChanging(value);
+					this.SendPropertyChanging();
+					this._paint = value;
+					this.SendPropertyChanged("paint");
+					this.OnpaintChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_paper", DbType="Bit NOT NULL")]
+		public bool paper
+		{
+			get
+			{
+				return this._paper;
+			}
+			set
+			{
+				if ((this._paper != value))
+				{
+					this.OnpaperChanging(value);
+					this.SendPropertyChanging();
+					this._paper = value;
+					this.SendPropertyChanged("paper");
+					this.OnpaperChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_plastic", DbType="Bit NOT NULL")]
+		public bool plastic
+		{
+			get
+			{
+				return this._plastic;
+			}
+			set
+			{
+				if ((this._plastic != value))
+				{
+					this.OnplasticChanging(value);
+					this.SendPropertyChanging();
+					this._plastic = value;
+					this.SendPropertyChanged("plastic");
+					this.OnplasticChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UserDataProvider_recycling_center", Storage="_UserDataProvider", ThisKey="user_id", OtherKey="id", IsForeignKey=true)]
+		public UserDataProvider UserDataProvider
+		{
+			get
+			{
+				return this._UserDataProvider.Entity;
+			}
+			set
+			{
+				UserDataProvider previousValue = this._UserDataProvider.Entity;
+				if (((previousValue != value) 
+							|| (this._UserDataProvider.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._UserDataProvider.Entity = null;
+						previousValue.RecyclingCenterDataProviders.Remove(this);
+					}
+					this._UserDataProvider.Entity = value;
+					if ((value != null))
+					{
+						value.RecyclingCenterDataProviders.Add(this);
+						this._user_id = value.id;
+					}
+					else
+					{
+						this._user_id = default(int);
+					}
+					this.SendPropertyChanged("UserDataProvider");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.carpools")]
+	public partial class CarpoolDataProvider : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id;
+		
+		private int _user_id;
+		
+		private string _start;
+		
+		private string _destination;
+		
+		private string _time;
+		
+		private byte _seats_available;
+		
+		private string _comments;
+		
+		private EntityRef<UserDataProvider> _UserDataProvider;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void Onuser_idChanging(int value);
+    partial void Onuser_idChanged();
+    partial void OnstartChanging(string value);
+    partial void OnstartChanged();
+    partial void OndestinationChanging(string value);
+    partial void OndestinationChanged();
+    partial void OntimeChanging(string value);
+    partial void OntimeChanged();
+    partial void Onseats_availableChanging(byte value);
+    partial void Onseats_availableChanged();
+    partial void OncommentsChanging(string value);
+    partial void OncommentsChanged();
+    #endregion
+		
+		public CarpoolDataProvider()
+		{
+			this._UserDataProvider = default(EntityRef<UserDataProvider>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_user_id", DbType="Int NOT NULL")]
+		public int user_id
+		{
+			get
+			{
+				return this._user_id;
+			}
+			set
+			{
+				if ((this._user_id != value))
+				{
+					if (this._UserDataProvider.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onuser_idChanging(value);
+					this.SendPropertyChanging();
+					this._user_id = value;
+					this.SendPropertyChanged("user_id");
+					this.Onuser_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_start", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
+		public string start
+		{
+			get
+			{
+				return this._start;
+			}
+			set
+			{
+				if ((this._start != value))
+				{
+					this.OnstartChanging(value);
+					this.SendPropertyChanging();
+					this._start = value;
+					this.SendPropertyChanged("start");
+					this.OnstartChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_destination", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
+		public string destination
+		{
+			get
+			{
+				return this._destination;
+			}
+			set
+			{
+				if ((this._destination != value))
+				{
+					this.OndestinationChanging(value);
+					this.SendPropertyChanging();
+					this._destination = value;
+					this.SendPropertyChanged("destination");
+					this.OndestinationChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_time", DbType="VarChar(20) NOT NULL", CanBeNull=false)]
+		public string time
+		{
+			get
+			{
+				return this._time;
+			}
+			set
+			{
+				if ((this._time != value))
+				{
+					this.OntimeChanging(value);
+					this.SendPropertyChanging();
+					this._time = value;
+					this.SendPropertyChanged("time");
+					this.OntimeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_seats_available", DbType="TinyInt NOT NULL")]
+		public byte seats_available
+		{
+			get
+			{
+				return this._seats_available;
+			}
+			set
+			{
+				if ((this._seats_available != value))
+				{
+					this.Onseats_availableChanging(value);
+					this.SendPropertyChanging();
+					this._seats_available = value;
+					this.SendPropertyChanged("seats_available");
+					this.Onseats_availableChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_comments", DbType="Text NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+		public string comments
+		{
+			get
+			{
+				return this._comments;
+			}
+			set
+			{
+				if ((this._comments != value))
+				{
+					this.OncommentsChanging(value);
+					this.SendPropertyChanging();
+					this._comments = value;
+					this.SendPropertyChanged("comments");
+					this.OncommentsChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UserDataProvider_carpool", Storage="_UserDataProvider", ThisKey="user_id", OtherKey="id", IsForeignKey=true)]
+		public UserDataProvider UserDataProvider
+		{
+			get
+			{
+				return this._UserDataProvider.Entity;
+			}
+			set
+			{
+				UserDataProvider previousValue = this._UserDataProvider.Entity;
+				if (((previousValue != value) 
+							|| (this._UserDataProvider.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._UserDataProvider.Entity = null;
+						previousValue.CarpoolDataProviders.Remove(this);
+					}
+					this._UserDataProvider.Entity = value;
+					if ((value != null))
+					{
+						value.CarpoolDataProviders.Add(this);
 						this._user_id = value.id;
 					}
 					else
