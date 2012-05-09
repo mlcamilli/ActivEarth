@@ -24,7 +24,7 @@ namespace ActivEarth.Objects.Profile
             XmlDocument xmlConditions = new XmlDocument();
             xmlConditions.Load(string.Format("http://www.google.com/ig/api?weather={0}", location));
 
-            if (xmlConditions == null && xmlConditions.SelectSingleNode("xml_api_reply/weather/problem_cause") != null)
+            if (xmlConditions == null || xmlConditions.SelectSingleNode("xml_api_reply/weather/problem_cause") != null)
             {
                 return false;
             }
