@@ -171,6 +171,11 @@ namespace ActivEarth.Objects.Competition.Contests
 
         #endregion ---------- Constructor ----------
 
+        /// <summary>
+        /// Evaluates the current status of the contest.
+        /// </summary>
+        /// <returns>String indicating whether the contest is in the signup phase, 
+        /// has begun, or has finished.</returns>
         public string GetContestState()
         {
             if (StartTime > DateTime.Now)

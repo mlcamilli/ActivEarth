@@ -153,20 +153,20 @@ namespace ActivEarth.RestService
                     State = input.Element("State").ToString(),
                     UserID = int.Parse(input.Element("UserID").Value),
                     userPrivacySettings = new PrivacySetting()
-                                              {
-                                                  Age = bool.Parse(input.Element("userPrivacySetting").Element("Age").Value),
-                                                  Email = bool.Parse(input.Element("userPrivacySetting").Element("Email").Value),
-                                                  Gender = bool.Parse(input.Element("userPrivacySetting").Element("Gender").Value),
-                                                  Group = bool.Parse(input.Element("userPrivacySetting").Element("Group").Value),
-                                                  Height = bool.Parse(input.Element("userPrivacySetting").Element("Height").Value),
-                                                  ID = int.Parse(input.Element("userPrivacySetting").Element("ID").Value),
-                                                  Location = bool.Parse(input.Element("userPrivacySetting").Element("Location").Value),
-                                                  ProfileVisibility = int.Parse(input.Element("userPrivacySetting").Element("ProfileVisibility").Value),
-                                                  User = null,
-                                                  UserID = int.Parse(input.Element("userPrivacySetting").Element("UserID").Value),
-                                                  Weight = bool.Parse(input.Element("userPrivacySetting").Element("Weight").Value)
+                        {
+                            Age = bool.Parse(input.Element("userPrivacySetting").Element("Age").Value),
+                            Email = bool.Parse(input.Element("userPrivacySetting").Element("Email").Value),
+                            Gender = bool.Parse(input.Element("userPrivacySetting").Element("Gender").Value),
+                            Group = bool.Parse(input.Element("userPrivacySetting").Element("Group").Value),
+                            Height = bool.Parse(input.Element("userPrivacySetting").Element("Height").Value),
+                            ID = int.Parse(input.Element("userPrivacySetting").Element("ID").Value),
+                            Location = bool.Parse(input.Element("userPrivacySetting").Element("Location").Value),
+                            ProfileVisibility = int.Parse(input.Element("userPrivacySetting").Element("ProfileVisibility").Value),
+                            User = null,
+                            UserID = int.Parse(input.Element("userPrivacySetting").Element("UserID").Value),
+                            Weight = bool.Parse(input.Element("userPrivacySetting").Element("Weight").Value)
 
-                                              }
+                        }
                 };
 
                 var badgeScore = int.Parse(input.Element("ActivityScore").Element("BadgeScore").Value);
